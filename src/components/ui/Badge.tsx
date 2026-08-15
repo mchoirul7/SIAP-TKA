@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 
-type Tone = "neutral" | "free" | "premium" | "info";
+type Tone = "neutral" | "success" | "voucher" | "info";
 
 const tones: Record<Tone, string> = {
   neutral: "bg-slate-100 text-slate-700",
-  free: "bg-emerald-50 text-emerald-800 ring-1 ring-inset ring-emerald-200",
-  premium: "bg-brand-50 text-brand-800 ring-1 ring-inset ring-brand-200",
+  success: "bg-emerald-50 text-emerald-800 ring-1 ring-inset ring-emerald-200",
+  voucher: "bg-brand-50 text-brand-800 ring-1 ring-inset ring-brand-200",
   info: "bg-brand-800 text-white",
 };
 

@@ -10,7 +10,7 @@ export default function NotFound() {
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
           Tautan mungkin sudah berubah atau salah ketik. Silakan kembali ke beranda untuk memulai
-          dari simulasi gratis.
+          dari pilihan seri mapel.
         </p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <Link

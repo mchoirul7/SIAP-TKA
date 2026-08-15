@@ -33,7 +33,7 @@ export function PracticeRunner({
 
   useEffect(() => {
     if (!mounted) return;
-    if (!isUnlocked(pkg.slug, pkg.isPremium)) {
+    if (!isUnlocked(pkg)) {
       router.replace(`/latihan/${pkg.slug}`);
       return;
     }
@@ -43,7 +43,7 @@ export function PracticeRunner({
     }
     setAnswers(attempt?.answers ?? {});
     setReady(true);
-  }, [mounted, isUnlocked, pkg.slug, pkg.isPremium, router]);
+  }, [mounted, isUnlocked, pkg, pkg.slug, router]);
 
   const question = questions[currentIndex];
   const answeredCount = questions.filter((item) => isAnswered(item, answers[item.id])).length;

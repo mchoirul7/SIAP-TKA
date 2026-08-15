@@ -2,21 +2,20 @@
 
 Proyek: `dscjpbjevotvycbnzcjd`. Semua dijalankan lewat **SQL Editor** di dashboard.
 
-Seluruh berkas di bawah sudah diuji dengan menjalankannya pada Postgres sungguhan
-(PGlite/WASM) — bukan sekadar diperiksa manual. Hasilnya: 90 soal, 4 paket, 13 bacaan,
-5 mata pelajaran masuk tanpa galat.
+Seluruh berkas di bawah disusun idempoten agar aman dijalankan ulang saat konten
+atau product voucher berubah.
 
 ## Urutan
 
 | # | Berkas | Isi |
 | --- | --- | --- |
-| 1 | `migrations/0001_content.sql` | seluruh tabel, RLS, fungsi `redeem_voucher` |
-| 2 | `seed/tka-matematika-sma.sql` | 20 soal, 17 capaian, 43 gambar |
-| 3 | `seed/tka-bahasa-indonesia-sma.sql` | 20 soal, 4 capaian, 6 bacaan |
-| 4 | `seed/tka-bahasa-inggris-sma.sql` | 20 soal, 4 capaian, 7 bacaan |
-| 5 | `seed/0002_seed_content.sql` | paket TKA Matematika SD, 30 soal |
+| 1 | `migrations/0001_content.sql` | tabel konten dasar, RLS awal, fungsi voucher lama |
+| 2 | `migrations/0002_series_entitlements.sql` | seri, product voucher per mapel, RPC voucher baru |
+| 3 | `seed/tka-matematika-sma.sql` | 20 soal, 17 capaian, 43 gambar |
+| 4 | `seed/tka-bahasa-indonesia-sma.sql` | 20 soal, 4 capaian, 6 bacaan |
+| 5 | `seed/tka-bahasa-inggris-sma.sql` | 20 soal, 4 capaian, 7 bacaan |
 
-Berkas 2–5 berdiri sendiri dan **aman dijalankan berulang** (`on conflict do update`),
+Berkas seed berdiri sendiri dan **aman dijalankan berulang** (`on conflict do update`),
 jadi memperbarui satu paket cukup menjalankan ulang berkasnya sendiri.
 
 ## Menambah paket baru
@@ -41,6 +40,20 @@ done
 
 Gambar sengaja **tidak** disimpan di Supabase Storage — lihat
 [`docs/supabase-migration.md`](../docs/supabase-migration.md) bagian 2b.
+
+## Membuat kode voucher
+
+Satu kode voucher diarahkan ke satu `products.slug`:
+
+```sql
+insert into public.vouchers (code, label, is_active, max_redemptions)
+values ('KODE-UNIK-PEMBELI', 'Matematika SMA - Seri Bulan Kemerdekaan', true, 1);
+
+insert into public.voucher_products (code, product_id)
+select 'KODE-UNIK-PEMBELI', id
+from public.products
+where slug = 'matematika-sma-bulan-kemerdekaan';
+```
 
 ## Yang dilakukan importer secara otomatis
 

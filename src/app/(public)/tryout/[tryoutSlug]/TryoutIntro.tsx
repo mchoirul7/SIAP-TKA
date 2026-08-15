@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { StatCard } from "@/components/ui/StatCard";
+import { useVoucherDialog } from "@/components/VoucherDialog";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
+import { useEntitlements } from "@/hooks/useEntitlements";
 import { startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
@@ -19,6 +21,8 @@ const gradeOptions = ["Kelas 4", "Kelas 5", "Kelas 6", "Lainnya"];
 
 export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectName: string }) {
   const { navigate, isPending } = useNavigate();
+  const { openVoucher } = useVoucherDialog();
+  const { mounted: entitlementsMounted, isUnlocked } = useEntitlements();
   const [mounted, setMounted] = useState(false);
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(gradeOptions[1]);
@@ -37,10 +41,21 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
 
   const hasUnfinishedAttempt = Boolean(attempt && !attempt.submittedAt);
   const hasFinishedAttempt = Boolean(attempt?.submittedAt);
+  const unlocked = entitlementsMounted && isUnlocked(tryout);
+  const voucherOptions = {
+    packageTitle: tryout.title,
+    successHref: `/tryout/${tryout.slug}`,
+    requiredAccessKey: tryout.accessKey,
+    requiredLabel: `${subjectName} - ${tryout.seriesTitle}`,
+  };
 
   const persistProfile = () => writeProfile({ name: name.trim(), grade });
 
   const handleStart = () => {
+    if (!unlocked) {
+      openVoucher(voucherOptions);
+      return;
+    }
     if (name.trim().length < 2) {
       setNameError("Isi nama terlebih dahulu agar hasil mudah dikenali.");
       return;
@@ -51,10 +66,18 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
   };
 
   const handleContinue = () => {
+    if (!unlocked) {
+      openVoucher(voucherOptions);
+      return;
+    }
     navigate(`/tryout/${tryout.slug}/attempt`);
   };
 
   const handleRestart = () => {
+    if (!unlocked) {
+      openVoucher(voucherOptions);
+      return;
+    }
     persistProfile();
     startAttempt(tryout);
     navigate(`/tryout/${tryout.slug}/attempt`);
@@ -73,10 +96,10 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Badge tone="free">Gratis</Badge>
+            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
             <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
               <Icon name="cap" className="h-4 w-4 text-brand-600" />
-              {subjectName} · Jenjang {tryout.level}
+              {subjectName} · {tryout.seriesTitle} · Jenjang {tryout.level}
             </span>
           </div>
 
@@ -109,8 +132,8 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
             <StatCard
               icon="star"
               tone="emerald"
-              label="Biaya"
-              value="Gratis"
+              label="Akses"
+              value={unlocked ? "Terbuka" : "Voucher"}
               valueClassName="text-lg"
             />
           </div>
@@ -150,8 +173,28 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
         {/* Panel mulai */}
         <div className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
-            {!mounted ? (
+            {!mounted || !entitlementsMounted ? (
               <div className="h-64 animate-pulse rounded-2xl bg-brand-100/70" aria-hidden="true" />
+            ) : !unlocked ? (
+              <>
+                <IconBadge name="lock" tone="brand" size="lg" />
+                <p className="eyebrow mt-4">Konten Voucher</p>
+                <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
+                  Masukkan voucher seri untuk membuka tryout ini.
+                </h2>
+                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+                  Satu kode voucher membuka semua tryout dan latihan {subjectName} dalam{" "}
+                  {tryout.seriesTitle}.
+                </p>
+                <Button
+                  size="lg"
+                  className="mt-6 w-full"
+                  onClick={() => openVoucher(voucherOptions)}
+                >
+                  <Icon name="ticket" className="h-5 w-5" />
+                  Masukkan Voucher
+                </Button>
+              </>
             ) : hasUnfinishedAttempt ? (
               <>
                 <IconBadge name="hourglass" tone="amber" size="lg" />

@@ -108,9 +108,13 @@ minimal dua kunci, soal `category` wajib punya `categories` dan `statements`.
 Baris yang bentuknya salah ditolak basis data, bukan baru ketahuan saat dirender.
 
 **Paket** — tryout dan latihan memakai **satu tabel `packages`** yang dibedakan
-kolom `kind`, karena berkas JSON sumbernya memang satu bentuk yang sama. Dua tabel
-terpisah hanya menggandakan kolom dan memaksa importer bercabang. Kolom yang hanya
-relevan pada salah satu jenis dibiarkan kosong pada jenis lainnya.
+kolom `kind`, karena berkas JSON sumbernya memang satu bentuk yang sama. Semua
+package menempel ke `subject_id` dan `series_id`; kombinasi itulah unit jualan
+voucher.
+
+**Seri dan produk voucher** — `content_series` menyimpan seri seperti
+`bulan-kemerdekaan`, sedangkan `products` menyimpan kombinasi mata pelajaran +
+seri. Satu product membuka seluruh `packages` pada kombinasi itu.
 
 **Urutan soal** — `package_questions` menyimpan kolom `position` dengan
 `unique (package_id, position)`. Urutan soal adalah bagian dari paket, bukan
@@ -130,18 +134,18 @@ pembanding, bukan sebagai penentu jawaban.
 
 ## 4. Voucher: satu-satunya yang wajib dibaca saat runtime
 
-Sekarang kode `TKA-DEMO-2026` ada di `src/lib/site.ts`, yang artinya **ikut
-terkirim di dalam bundel JavaScript** dan bisa dibaca siapa saja yang membuka
-devtools. Ini alasan paling kuat memindahkan voucher ke server, terlepas dari
-soal penyimpanan.
+Voucher sekarang ditebus lewat server, bukan divalidasi di bundle JavaScript.
+Ini penting karena kode voucher tidak boleh bisa dibaca dari devtools.
 
 Rancangannya:
 
-- tabel `vouchers` dan `voucher_packages` **tidak punya kebijakan RLS untuk
-  select**, jadi anon tidak bisa membacanya sama sekali
-- penukaran lewat fungsi `redeem_voucher(p_code)` yang `security definer`
-- fungsi itu mengembalikan **hanya daftar slug paket**, lalu hasilnya disimpan di
-  perangkat pengguna seperti sekarang
+- tabel `vouchers`, `voucher_products`, dan relasi voucher lama `voucher_packages`
+  **tidak punya kebijakan RLS untuk select**, jadi anon tidak bisa membacanya sama
+  sekali
+- penukaran lewat route `POST /api/voucher/redeem`, lalu fungsi
+  `redeem_voucher(p_code)` yang `security definer`
+- fungsi itu mengembalikan `subject_slug`, `series_slug`, dan daftar slug package
+  dalam product tersebut; perangkat menyimpan entitlement `subjectSlug:seriesSlug`
 - `redemption_count` hanya cacah agregat — tidak ada kolom yang mencatat siapa
 
 Biayanya satu permintaan kecil per penukaran voucher. Tidak berpengaruh pada
@@ -221,41 +225,28 @@ produk, tapi ini keputusan Anda.
 
 ## 7. Cara menjalankan
 
-**Yang tidak bisa saya lakukan sendiri.** Kunci yang Anda berikan
-(`sb_publishable_...`) adalah kunci publik. Saya sudah memastikan ke proyek Anda:
-kuncinya valid dan PostgREST menjawab, belum ada tabel apa pun di skema `public`,
-dan belum ada bucket storage. Tapi kunci publishable **tidak bisa menjalankan
-DDL** — Supabase menjawab `"Only secret API keys can be used for this endpoint"`,
-dan PostgREST memang tidak mengeksekusi `create table` sama sekali.
+Migrasi dasar ada di [`supabase/migrations/0001_content.sql`](../supabase/migrations/0001_content.sql).
+Lapisan seri mapel dan product voucher ada di
+[`supabase/migrations/0002_series_entitlements.sql`](../supabase/migrations/0002_series_entitlements.sql).
 
-Jadi berkasnya saya siapkan, Anda yang menjalankan:
+Urutan untuk lingkungan baru:
 
-1. buka **SQL Editor** di dashboard Supabase
-2. jalankan [`supabase/migrations/0001_content.sql`](../supabase/migrations/0001_content.sql)
-3. jalankan berkas paket satu per satu — masing-masing berdiri sendiri dan aman
-   dijalankan ulang:
-   - [`tka-matematika-sma.sql`](../supabase/seed/tka-matematika-sma.sql)
-   - [`tka-bahasa-indonesia-sma.sql`](../supabase/seed/tka-bahasa-indonesia-sma.sql)
-   - [`tka-bahasa-inggris-sma.sql`](../supabase/seed/tka-bahasa-inggris-sma.sql)
-   - [`0002_seed_content.sql`](../supabase/seed/0002_seed_content.sql) untuk paket TKA SD
-4. hapus `demoVoucherCode` dari `src/lib/site.ts` agar kodenya tidak lagi ikut
-   di bundel
+1. jalankan migrasi `0001_content.sql`
+2. jalankan migrasi `0002_series_entitlements.sql`
+3. jalankan seed paket yang diperlukan dari folder [`supabase/seed`](../supabase/seed)
+4. pastikan `ENTITLEMENT_COOKIE_SECRET` diset di environment deployment
+
+Menambah voucher baru dilakukan dengan membuat baris di `vouchers`, lalu
+menghubungkannya ke product seri mapel di `voucher_products`. Contoh ada di
+[`supabase/README.md`](../supabase/README.md).
 
 Berkas paket dihasilkan oleh [`scripts/import-package.mjs`](../scripts/import-package.mjs)
-(`node scripts/import-package.mjs`). Keterangan yang tidak ada di dalam JSON — jenjang,
-nama mata pelajaran, judul, dan durasi — diisi lewat daftar `PACKAGES` di dalam skrip
-itu. Menambah paket baru cukup menambah satu entri di sana.
+(`node scripts/import-package.mjs`). Keterangan yang tidak ada di dalam JSON
+diisi lewat daftar `PACKAGES` di dalam skrip itu. Menambah paket baru cukup
+menambah satu entri di sana.
 
 Seed dibuat idempoten (`on conflict do update`), jadi aman dijalankan ulang
 setiap kali bank soal berubah.
-
-Kalau Anda ingin saya yang menjalankan dan memverifikasinya langsung, yang
-dibutuhkan adalah **Personal Access Token** Supabase (untuk Management API) atau
-**connection string** basis datanya. Keduanya rahasia — kirim hanya bila Anda
-memang ingin saya berjalan sejauh itu.
-
-Seed dihasilkan ulang dengan skrip konversi dari `src/data`, sehingga selama masa
-peralihan berkas TS tetap menjadi sumber kebenaran dan Supabase menyusul.
 
 ## 8. Data lain yang bisa menyusul
 

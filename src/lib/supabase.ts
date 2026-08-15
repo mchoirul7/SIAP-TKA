@@ -3,10 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 /**
  * Klien Supabase untuk membaca konten.
  *
- * Hanya dipakai di sisi server (server component dan generateStaticParams), dan
- * dijalankan saat `next build`. Dengan begitu halaman tetap statis, egress
- * Supabase saat pengguna membuka halaman praktis nol, dan Supabase tidak pernah
- * menjadi titik gagal ketika seseorang sedang mengerjakan ujian.
+ * Dipakai di sisi server. Halaman katalog/detail memakai data ini saat build,
+ * sedangkan route konten terkunci membacanya saat request agar cookie voucher
+ * dapat diperiksa sebelum soal dikirim.
  *
  * Kuncinya publishable: hanya bisa membaca, dan hanya paket yang sudah terbit
  * karena dibatasi kebijakan RLS.

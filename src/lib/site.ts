@@ -3,7 +3,6 @@ export const site = {
   name: "Siap TKA",
   tagline: "Platform latihan dan simulasi TKA dari rumah",
   valueProposition:
-    "Coba simulasi TKA dari rumah, lihat bagian yang perlu diperkuat, lalu latihan lebih terarah.",
-  secondaryMessage: "Bukan hanya tahu nilainya. Tahu harus memperbaiki dari mana.",
-  demoVoucherCode: "TKA-DEMO-2026",
+    "Beli satu seri mapel, kerjakan tryout dan latihan TKA dari rumah, lalu lihat bagian yang perlu diperkuat.",
+  secondaryMessage: "Satu voucher membuka satu mapel dalam satu seri.",
 } as const;

@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getUnlockedPackageSlugs } from "@/services/entitlement-service";
+import type { ContentEntitlement } from "@/data/types";
+import { contentAccessKey, hasContentAccess } from "@/lib/entitlements";
+import { getUnlockedPackageSlugs, getUnlockedSeriesKeys } from "@/services/entitlement-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 
 /**
@@ -10,12 +12,20 @@ import { subscribeToStorage } from "@/storage/local-storage";
  */
 export function useEntitlements() {
   const [mounted, setMounted] = useState(false);
+  const [unlockedSeriesKeys, setUnlockedSeriesKeys] = useState<string[]>([]);
   const [unlockedSlugs, setUnlockedSlugs] = useState<string[]>([]);
 
   useEffect(() => {
     // Menjaga identitas array tetap sama bila isinya tidak berubah, supaya efek
     // di komponen lain tidak ikut berjalan setiap kali storage disentuh.
-    const sync = () =>
+    const sync = () => {
+      setUnlockedSeriesKeys((current) => {
+        const next = getUnlockedSeriesKeys();
+        if (current.length === next.length && current.every((key, i) => key === next[i])) {
+          return current;
+        }
+        return next;
+      });
       setUnlockedSlugs((current) => {
         const next = getUnlockedPackageSlugs();
         if (current.length === next.length && current.every((slug, i) => slug === next[i])) {
@@ -23,15 +33,22 @@ export function useEntitlements() {
         }
         return next;
       });
+    };
     sync();
     setMounted(true);
     return subscribeToStorage(sync);
   }, []);
 
   const isUnlocked = useCallback(
-    (slug: string, isPremium: boolean) => !isPremium || unlockedSlugs.includes(slug),
-    [unlockedSlugs],
+    (content: ContentEntitlement & { slug: string }) =>
+      hasContentAccess(content, unlockedSeriesKeys) || unlockedSlugs.includes(content.slug),
+    [unlockedSeriesKeys, unlockedSlugs],
   );
 
-  return { mounted, unlockedSlugs, isUnlocked };
+  const isSeriesUnlocked = useCallback(
+    (content: ContentEntitlement) => unlockedSeriesKeys.includes(contentAccessKey(content)),
+    [unlockedSeriesKeys],
+  );
+
+  return { mounted, unlockedSeriesKeys, unlockedSlugs, isUnlocked, isSeriesUnlocked };
 }

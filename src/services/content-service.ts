@@ -1,6 +1,7 @@
 import type {
   Concept,
   ConceptPrerequisite,
+  ContentSeries,
   EducationLevel,
   Misconception,
   PracticePackage,
@@ -22,8 +23,8 @@ import { supabase } from "@/lib/supabase";
  * klien Supabase ikut masuk ke bundel peramban. Halaman mengambil datanya di
  * server lalu mengopernya sebagai props.
  *
- * Seluruh pembacaan terjadi saat `next build`, sehingga hasilnya ikut ter-render
- * statis dan tidak ada permintaan ke Supabase saat pengguna membuka halaman.
+ * Halaman katalog/detail membaca konten saat `next build`. Route yang berisi
+ * konten terkunci sengaja dynamic agar bisa memeriksa cookie voucher di server.
  */
 
 // ------------------------------------------------------------- bentuk baris
@@ -34,6 +35,13 @@ interface SubjectRow {
   name: string;
   short_name: string | null;
   level: EducationLevel;
+  description: string | null;
+}
+
+interface ContentSeriesRow {
+  id: string;
+  slug: string;
+  title: string;
   description: string | null;
 }
 
@@ -83,6 +91,7 @@ interface PackageRow {
   slug: string;
   title: string;
   subject_id: string;
+  series_id: string | null;
   level: EducationLevel;
   description: string | null;
   summary: string | null;
@@ -93,7 +102,6 @@ interface PackageRow {
   difficulty_range: string | null;
   skills: string[] | null;
   instructions: string[] | null;
-  is_premium: boolean;
   sort_order: number;
 }
 
@@ -128,6 +136,14 @@ interface QuestionRow {
     | null;
 }
 
+interface PackageAccess {
+  subjectSlug: string;
+  seriesId: string;
+  seriesSlug: string;
+  seriesTitle: string;
+  accessKey: string;
+}
+
 // ------------------------------------------------------------------ helper
 
 /** Melempar dengan pesan yang jelas supaya build gagal keras, bukan diam-diam kosong. */
@@ -144,6 +160,15 @@ function toSubject(row: SubjectRow): Subject {
     name: row.name,
     shortName: row.short_name ?? row.name,
     level: row.level,
+    description: row.description ?? "",
+  };
+}
+
+function toSeries(row: ContentSeriesRow): ContentSeries {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
     description: row.description ?? "",
   };
 }
@@ -185,8 +210,9 @@ function toMisconception(row: MisconceptionRow): Misconception {
   };
 }
 
-function toTryout(row: PackageRow, questionIds: string[]): Tryout {
+function toTryout(row: PackageRow, questionIds: string[], access: PackageAccess): Tryout {
   return {
+    ...access,
     id: row.id,
     slug: row.slug,
     title: row.title,
@@ -205,6 +231,7 @@ function toPracticePackage(
   row: PackageRow,
   questionIds: string[],
   questionTaxonomy: Map<string, QuestionTaxonomyRow>,
+  access: PackageAccess,
 ): PracticePackage {
   const taxonomy = questionIds
     .map((questionId) => questionTaxonomy.get(questionId))
@@ -215,6 +242,7 @@ function toPracticePackage(
   const subtopicIds = [...new Set(taxonomy.flatMap((item) => (item.subtopic_id ? [item.subtopic_id] : [])))];
 
   return {
+    ...access,
     id: row.id,
     slug: row.slug,
     title: row.title,
@@ -229,7 +257,29 @@ function toPracticePackage(
     estimatedMinutes: row.estimated_minutes ?? row.duration_minutes ?? Math.max(1, questionIds.length * 2),
     skills: row.skills ?? [],
     questionIds,
-    isPremium: row.is_premium,
+  };
+}
+
+function packageAccess(
+  row: PackageRow,
+  subjects: Map<string, Subject>,
+  series: Map<string, ContentSeries>,
+): PackageAccess {
+  const subject = subjects.get(row.subject_id);
+  const foundSeries = row.series_id ? series.get(row.series_id) : undefined;
+  const fallbackSeries = foundSeries ?? {
+    id: row.series_id ?? "ser-bulan-kemerdekaan",
+    slug: "bulan-kemerdekaan",
+    title: "Seri Bulan Kemerdekaan",
+    description: "",
+  };
+  const subjectSlug = subject?.slug ?? row.subject_id;
+  return {
+    subjectSlug,
+    seriesId: fallbackSeries.id,
+    seriesSlug: fallbackSeries.slug,
+    seriesTitle: fallbackSeries.title,
+    accessKey: `${subjectSlug}:${fallbackSeries.slug}`,
   };
 }
 
@@ -300,6 +350,18 @@ export async function getSubjectBySlug(slug: string): Promise<Subject | null> {
   return subjects.find((subject) => subject.slug === slug) ?? null;
 }
 
+export async function getSeries(): Promise<ContentSeries[]> {
+  const rows = unwrap(
+    await supabase
+      .from("content_series")
+      .select("id, slug, title, description")
+      .eq("is_active", true)
+      .order("sort_order"),
+    "seri konten",
+  ) as ContentSeriesRow[];
+  return rows.map(toSeries);
+}
+
 export async function getTopics(): Promise<Topic[]> {
   const rows = unwrap(
     await supabase.from("topics").select("id, subject_id, slug, name").order("sort_order"),
@@ -365,7 +427,7 @@ export async function getConceptPrerequisites(): Promise<ConceptPrerequisite[]> 
 }
 
 const PACKAGE_COLUMNS =
-  "id, kind, slug, title, subject_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, is_premium, sort_order";
+  "id, kind, slug, title, subject_id, series_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, sort_order";
 
 /** Urutan soal ikut `position`, karena urutan adalah bagian dari paketnya. */
 async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[]>> {
@@ -426,13 +488,19 @@ async function questionsForIds(questionIds: string[]): Promise<Question[]> {
 }
 
 export async function getTryouts(): Promise<Tryout[]> {
-  const rows = unwrap(
-    await supabase.from("packages").select(PACKAGE_COLUMNS).eq("kind", "tryout").order("sort_order"),
-    "paket tryout",
-  ) as PackageRow[];
+  const [rows, subjects, series] = await Promise.all([
+    unwrap(
+      await supabase.from("packages").select(PACKAGE_COLUMNS).eq("kind", "tryout").order("sort_order"),
+      "paket tryout",
+    ) as PackageRow[],
+    getSubjects(),
+    getSeries(),
+  ]);
+  const subjectById = new Map(subjects.map((subject) => [subject.id, subject]));
+  const seriesById = new Map(series.map((item) => [item.id, item]));
 
   const ids = await questionIdsFor(rows.map((row) => row.id));
-  return rows.map((row) => toTryout(row, ids.get(row.id) ?? []));
+  return rows.map((row) => toTryout(row, ids.get(row.id) ?? [], packageAccess(row, subjectById, seriesById)));
 }
 
 export async function getTryoutBySlug(slug: string): Promise<Tryout | null> {
@@ -448,21 +516,34 @@ export async function getQuestionsForTryout(slug: string): Promise<Question[]> {
 }
 
 export async function getPracticePackages(): Promise<PracticePackage[]> {
-  const rows = unwrap(
-    await supabase
-      .from("packages")
-      .select(PACKAGE_COLUMNS)
-      .eq("kind", "latihan")
-      .eq("is_published", true)
-      .order("sort_order"),
-    "paket latihan",
-  ) as PackageRow[];
+  const [rows, subjects, series] = await Promise.all([
+    unwrap(
+      await supabase
+        .from("packages")
+        .select(PACKAGE_COLUMNS)
+        .eq("kind", "latihan")
+        .eq("is_published", true)
+        .order("sort_order"),
+      "paket latihan",
+    ) as PackageRow[],
+    getSubjects(),
+    getSeries(),
+  ]);
+  const subjectById = new Map(subjects.map((subject) => [subject.id, subject]));
+  const seriesById = new Map(series.map((item) => [item.id, item]));
 
   const idsByPackage = await questionIdsFor(rows.map((row) => row.id));
   const allQuestionIds = [...new Set([...idsByPackage.values()].flat())];
   const questionTaxonomy = await questionTaxonomyFor(allQuestionIds);
 
-  return rows.map((row) => toPracticePackage(row, idsByPackage.get(row.id) ?? [], questionTaxonomy));
+  return rows.map((row) =>
+    toPracticePackage(
+      row,
+      idsByPackage.get(row.id) ?? [],
+      questionTaxonomy,
+      packageAccess(row, subjectById, seriesById),
+    ),
+  );
 }
 
 export async function getAnalysisCatalog(): Promise<AnalysisCatalog> {

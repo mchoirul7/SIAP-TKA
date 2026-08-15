@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getPracticePackageBySlug,
-  getPracticePackages,
   getQuestionsForPackage,
 } from "@/services/content-service";
+import { hasServerContentAccess } from "@/lib/server-entitlements";
 import { PracticeRunner } from "./PracticeRunner";
 
 interface PageProps {
@@ -16,15 +16,13 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export async function generateStaticParams() {
-  const packages = await getPracticePackages();
-  return packages.map((pkg) => ({ slug: pkg.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function PracticeRunnerPage({ params }: PageProps) {
   const { slug } = await params;
   const pkg = await getPracticePackageBySlug(slug);
   if (!pkg) notFound();
+  if (!(await hasServerContentAccess(pkg))) redirect(`/latihan/${pkg.slug}`);
 
   return <PracticeRunner pkg={pkg} questions={await getQuestionsForPackage(slug)} />;
 }

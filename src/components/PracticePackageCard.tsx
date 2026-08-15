@@ -34,8 +34,8 @@ export function PracticePackageCard({
   className?: string;
 }) {
   const { mounted, isUnlocked } = useEntitlements();
-  const unlocked = mounted && isUnlocked(pkg.slug, pkg.isPremium);
-  const locked = pkg.isPremium && !unlocked;
+  const unlocked = mounted && isUnlocked(pkg);
+  const locked = !unlocked;
   const accent = theme?.accent ?? "brand";
 
   return (
@@ -54,7 +54,7 @@ export function PracticePackageCard({
         icon={theme?.icon}
         label={order ? `Langkah ${order} · Latihan` : "Latihan"}
         title={pkg.title}
-        subtitle={locked ? "Dibuka dengan kode voucher" : "Latihan online dan pembahasan"}
+        subtitle={locked ? `${pkg.seriesTitle} - dibuka dengan voucher` : "Latihan online dan pembahasan"}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -64,14 +64,10 @@ export function PracticePackageCard({
               {pkg.title}
             </Link>
           </h3>
-          {pkg.isPremium ? (
-            unlocked ? (
-              <Badge tone="free">Terbuka</Badge>
-            ) : (
-              <Badge tone="premium">Premium</Badge>
-            )
+          {unlocked ? (
+            <Badge tone="success">Terbuka</Badge>
           ) : (
-            <Badge tone="free">Gratis</Badge>
+            <Badge tone="voucher">Voucher</Badge>
           )}
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -15,13 +16,15 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { site } from "@/lib/site";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
   /** Paket yang sedang dilihat pengguna, dipakai untuk tautan setelah berhasil. */
   packageSlug?: string;
   packageTitle?: string;
+  successHref?: string;
+  requiredAccessKey?: string;
+  requiredLabel?: string;
 }
 
 interface VoucherContextValue {
@@ -39,10 +42,12 @@ export function useVoucherDialog(): VoucherContextValue {
 }
 
 export function VoucherProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<OpenOptions>({});
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRedeemed, setIsRedeemed] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
@@ -73,19 +78,36 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
     };
   }, [isOpen, close]);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const result = redeemVoucher(code);
+    setIsSubmitting(true);
+    const result = await redeemVoucher(code);
+    setIsSubmitting(false);
     if (!result.ok) {
       setError(result.message);
       return;
     }
+
+    const unlocksCurrentContent =
+      !options.requiredAccessKey ||
+      result.unlockedSeriesKeys.includes(options.requiredAccessKey) ||
+      (options.packageSlug ? result.unlockedPackageSlugs.includes(options.packageSlug) : false);
+
+    if (!unlocksCurrentContent) {
+      setError(
+        `Voucher valid, tapi bukan untuk ${options.requiredLabel ?? "seri konten ini"}. Gunakan voucher seri yang sesuai.`,
+      );
+      setIsRedeemed(false);
+      return;
+    }
+
     setError(null);
     setIsRedeemed(true);
+    router.refresh();
   };
 
   const value = useMemo(() => ({ openVoucher }), [openVoucher]);
-  const successHref = options.packageSlug ? `/latihan/${options.packageSlug}` : "/latihan";
+  const successHref = options.successHref ?? (options.packageSlug ? `/latihan/${options.packageSlug}` : "/latihan");
 
   return (
     <VoucherContext.Provider value={value}>
@@ -112,8 +134,8 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   {options.packageTitle
-                    ? `Paket ${options.packageTitle} sudah terbuka, bersama paket latihan Matematika SD lainnya.`
-                    : "Seluruh paket latihan Matematika SD kini terbuka di perangkat ini."}
+                    ? `Paket ${options.packageTitle} sudah terbuka bersama semua tryout dan latihan dalam seri mapel yang sama.`
+                    : "Seri mapel dari voucher ini sudah terbuka di perangkat ini."}
                 </p>
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row">
                   <Link
@@ -122,7 +144,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
                   >
                     <Icon name="layers" className="h-5 w-5" />
-                    Buka Paket Latihan
+                    Buka Konten
                   </Link>
                   <Button variant="secondary" onClick={close} className="sm:w-auto">
                     Tutup
@@ -136,8 +158,8 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                   Masukkan Voucher
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Kode voucher diberikan bersama paket latihan yang dibeli. Satu kode membuka
-                  latihan online dan pembahasan.
+                  Kode voucher membuka satu mata pelajaran dalam satu seri, termasuk tryout,
+                  latihan online, hasil, dan pembahasan.
                 </p>
 
                 <div className="mt-5">
@@ -168,15 +190,14 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Untuk mencoba prototype ini, gunakan kode{" "}
-                      <span className="font-semibold text-slate-700">{site.demoVoucherCode}</span>.
+                      Gunakan kode yang diterima setelah membeli seri mapel.
                     </p>
                   )}
                 </div>
 
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
-                  <Button type="submit" className="sm:flex-1">
-                    <Icon name="unlock" className="h-5 w-5" />
+                  <Button type="submit" className="sm:flex-1" loading={isSubmitting}>
+                    {isSubmitting ? null : <Icon name="unlock" className="h-5 w-5" />}
                     Gunakan Voucher
                   </Button>
                   <Button variant="secondary" onClick={close}>

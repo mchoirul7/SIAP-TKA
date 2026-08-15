@@ -17,6 +17,13 @@ const DOWNLOADS = process.env.SOAL_DIR ?? "C:/Users/mchoi/Downloads";
 const IMAGE_BASE = "https://pusmendik.kemendikdasmen.go.id";
 const OUT_DIR = path.join(process.cwd(), "supabase", "seed");
 
+const DEFAULT_SERIES = {
+  id: "ser-bulan-kemerdekaan",
+  slug: "bulan-kemerdekaan",
+  title: "Seri Bulan Kemerdekaan",
+  description: "Seri soal tematik bulan kemerdekaan.",
+};
+
 /** Keterangan paket yang tidak ada di dalam berkas JSON. */
 const PACKAGES = [
   {
@@ -167,6 +174,8 @@ function convert(config) {
 
   const subjectId = `sub-${config.subject.slug}`;
   const packageId = `pkg-${config.slug}`;
+  const series = config.series ?? DEFAULT_SERIES;
+  const productId = `prd-${config.subject.slug}-${series.slug}`;
   const warnings = [];
   const images = new Set();
   const out = [];
@@ -273,6 +282,12 @@ function convert(config) {
   say("-- Mata pelajaran");
   say(
     `insert into public.subjects (id, slug, name, short_name, level) values (${q(subjectId)}, ${q(config.subject.slug)}, ${q(config.subject.name)}, ${q(config.subject.shortName)}, ${q(config.level)}) on conflict (id) do update set slug = excluded.slug, name = excluded.name, short_name = excluded.short_name, level = excluded.level;`,
+  );
+  say(
+    `insert into public.content_series (id, slug, title, description, is_active, sort_order) values (${q(series.id)}, ${q(series.slug)}, ${q(series.title)}, ${q(series.description)}, true, 0) on conflict (id) do update set slug = excluded.slug, title = excluded.title, description = excluded.description, is_active = excluded.is_active, sort_order = excluded.sort_order;`,
+  );
+  say(
+    `insert into public.products (id, slug, title, subject_id, series_id, description, is_active, sort_order) values (${q(productId)}, ${q(`${config.subject.slug}-${series.slug}`)}, ${q(`${config.subject.shortName} - ${series.title}`)}, ${q(subjectId)}, ${q(series.id)}, ${q(`Membuka semua tryout dan latihan ${config.subject.shortName} dalam ${series.title}.`)}, true, 0) on conflict (id) do update set slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, series_id = excluded.series_id, description = excluded.description, is_active = excluded.is_active, sort_order = excluded.sort_order;`,
   );
   say();
 
@@ -399,7 +414,7 @@ function convert(config) {
   // --- paket ---
   say("-- Paket");
   say(
-    `insert into public.packages (id, kind, slug, title, subject_id, level, description, variant, variant_label, duration_minutes, is_published, sort_order, source_id, source_file) values (${q(packageId)}, ${q(config.kind)}, ${q(config.slug)}, ${q(config.title)}, ${q(subjectId)}, ${q(config.level)}, ${q(config.description ?? null)}, ${q(config.variant)}, ${q(config.variantLabel)}, ${config.durationMinutes ?? "null"}, true, 0, ${q(doc.sumber ?? config.file)}, ${q(config.file)}) on conflict (id) do update set kind = excluded.kind, slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, level = excluded.level, description = excluded.description, variant = excluded.variant, variant_label = excluded.variant_label, duration_minutes = excluded.duration_minutes, is_published = excluded.is_published, source_id = excluded.source_id, source_file = excluded.source_file, imported_at = now();`,
+    `insert into public.packages (id, kind, slug, title, subject_id, series_id, level, description, variant, variant_label, duration_minutes, is_premium, is_published, sort_order, source_id, source_file) values (${q(packageId)}, ${q(config.kind)}, ${q(config.slug)}, ${q(config.title)}, ${q(subjectId)}, ${q(series.id)}, ${q(config.level)}, ${q(config.description ?? null)}, ${q(config.variant)}, ${q(config.variantLabel)}, ${config.durationMinutes ?? "null"}, true, true, 0, ${q(doc.sumber ?? config.file)}, ${q(config.file)}) on conflict (id) do update set kind = excluded.kind, slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, series_id = excluded.series_id, level = excluded.level, description = excluded.description, variant = excluded.variant, variant_label = excluded.variant_label, duration_minutes = excluded.duration_minutes, is_premium = excluded.is_premium, is_published = excluded.is_published, source_id = excluded.source_id, source_file = excluded.source_file, imported_at = now();`,
   );
   say(`delete from public.package_questions where package_id = ${q(packageId)};`);
   questionIds.forEach((qid, i) => {

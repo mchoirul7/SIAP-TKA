@@ -6,7 +6,7 @@ import { useVoucherDialog } from "@/components/VoucherDialog";
 
 export function VoucherPrompt({
   title = "Sudah punya kode voucher?",
-  description = "Masukkan kode untuk membuka latihan online dan pembahasan pada seluruh paket premium.",
+  description = "Masukkan kode untuk membuka tryout, latihan online, hasil, dan pembahasan pada seri mapel yang dibeli.",
   packageSlug,
   packageTitle,
   buttonLabel = "Masukkan Voucher",

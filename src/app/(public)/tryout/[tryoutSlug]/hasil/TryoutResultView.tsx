@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { QuestionLabels } from "@/components/QuestionLabels";
@@ -16,6 +17,7 @@ import type { Question, Tryout } from "@/data/types";
 import { formatDate, formatDuration } from "@/lib/format";
 import { buildTryoutNarrative } from "@/lib/narrative";
 import type { AnalysisCatalog } from "@/lib/scoring";
+import { useEntitlements } from "@/hooks/useEntitlements";
 import { getTryoutResult, type TryoutResult } from "@/services/tryout-service";
 import { readProfile } from "@/storage/profile-storage";
 
@@ -31,11 +33,18 @@ export function TryoutResultView({
   /** Penanda tiap soal. Baru disiapkan untuk simulasi Matematika. */
   questionLabels?: Record<string, QuestionLabel>;
 }) {
+  const router = useRouter();
+  const { mounted, isUnlocked } = useEntitlements();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<TryoutResult | null>(null);
   const [studentName, setStudentName] = useState("");
 
   useEffect(() => {
+    if (!mounted) return;
+    if (!isUnlocked(tryout)) {
+      router.replace(`/tryout/${tryout.slug}`);
+      return;
+    }
     const stored = getTryoutResult(tryout, questions, catalog);
     if (!stored) {
       setState("empty");
@@ -44,7 +53,7 @@ export function TryoutResultView({
     setResult(stored);
     setStudentName(readProfile()?.name ?? "");
     setState("ready");
-  }, [tryout, questions, catalog]);
+  }, [mounted, isUnlocked, tryout, tryout.slug, questions, catalog, router]);
 
   if (state === "loading") {
     return (

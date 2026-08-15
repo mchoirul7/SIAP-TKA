@@ -22,6 +22,21 @@ export interface Subject {
   description: string;
 }
 
+export interface ContentSeries {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export interface ContentEntitlement {
+  subjectSlug: string;
+  seriesId: string;
+  seriesSlug: string;
+  seriesTitle: string;
+  accessKey: string;
+}
+
 export interface Topic {
   id: string;
   subjectId: string;
@@ -118,7 +133,7 @@ export type AnswerMap = Record<string, AnswerValue>;
 /** Jenis tryout yang tersedia untuk satu mata pelajaran. */
 export type TryoutVariant = "resmi" | "simulasi" | "singkat";
 
-export interface Tryout {
+export interface Tryout extends ContentEntitlement {
   id: string;
   slug: string;
   title: string;
@@ -133,7 +148,7 @@ export interface Tryout {
   instructions: string[];
 }
 
-export interface PracticePackage {
+export interface PracticePackage extends ContentEntitlement {
   id: string;
   slug: string;
   title: string;
@@ -153,7 +168,6 @@ export interface PracticePackage {
   estimatedMinutes: number;
   skills: string[];
   questionIds: string[];
-  isPremium: boolean;
 }
 
 export interface Misconception {

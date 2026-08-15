@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { CoverArt, type CoverTone } from "@/components/CoverArt";
 import { Badge } from "@/components/ui/Badge";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
+import { useEntitlements } from "@/hooks/useEntitlements";
 
 export function TryoutCard({
   tryout,
@@ -14,6 +17,10 @@ export function TryoutCard({
   tone?: CoverTone;
   className?: string;
 }) {
+  const { mounted, isUnlocked } = useEntitlements();
+  const unlocked = mounted && isUnlocked(tryout);
+  const locked = !unlocked;
+
   return (
     <article
       className={[
@@ -29,7 +36,7 @@ export function TryoutCard({
         tone={tone}
         label={tryout.variantLabel}
         title={tryout.title}
-        subtitle="Gratis, tanpa akun, hasil langsung"
+        subtitle={locked ? `${tryout.seriesTitle} - dibuka dengan voucher` : "Tryout dan hasil terbuka"}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -39,7 +46,7 @@ export function TryoutCard({
               {tryout.title}
             </Link>
           </h3>
-          <Badge tone="free">Gratis</Badge>
+          {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
         </div>
 
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">
@@ -70,8 +77,8 @@ export function TryoutCard({
             className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-sm font-bold text-white transition-opacity hover:opacity-90"
           >
             <LinkPending />
-            <Icon name="play" className="h-4 w-4" strokeWidth={2.2} />
-            Coba Sekarang
+            <Icon name={locked ? "lock" : "play"} className="h-4 w-4" strokeWidth={2.2} />
+            {locked ? "Buka Tryout" : "Mulai Tryout"}
           </Link>
         </div>
       </div>

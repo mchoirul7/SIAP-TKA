@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getAnalysisCatalog,
   getPracticePackageBySlug,
-  getPracticePackages,
   getQuestionsForPackage,
   getSubjects,
 } from "@/services/content-service";
 import { buildQuestionLabels } from "@/lib/question-labels";
+import { hasServerContentAccess } from "@/lib/server-entitlements";
 import { isMathSubject } from "@/lib/subject-theme";
 import { ExplanationView } from "./ExplanationView";
 
@@ -20,15 +20,13 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export async function generateStaticParams() {
-  const packages = await getPracticePackages();
-  return packages.map((pkg) => ({ slug: pkg.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ExplanationPage({ params }: PageProps) {
   const { slug } = await params;
   const pkg = await getPracticePackageBySlug(slug);
   if (!pkg) notFound();
+  if (!(await hasServerContentAccess(pkg))) redirect(`/latihan/${pkg.slug}`);
 
   const [questions, subjects] = await Promise.all([getQuestionsForPackage(slug), getSubjects()]);
   const subject = subjects.find((item) => item.id === pkg.subjectId);

@@ -34,12 +34,14 @@ Question {
 }
 
 Tryout    { id, slug, title, subjectId, level, description,
-            durationMinutes, questionIds, instructions[] }
+            durationMinutes, questionIds, instructions[],
+            subjectSlug, seriesSlug, seriesTitle, accessKey }
 
 PracticePackage {
   id, slug, title, subjectId, topicId, subtopicId,
   summary, description, level, difficultyRange, estimatedMinutes,
-  skills[], questionIds, isPremium, pdfUrl?
+  skills[], questionIds,
+  subjectSlug, seriesSlug, seriesTitle, accessKey
 }
 
 Misconception { id, label, description, insight }
@@ -57,7 +59,7 @@ Catatan penting: **hanya `single choice`** yang diimplementasikan.
   Keliling dan Luas, Volume Bangun Ruang, Penyajian Data, Rata-rata
 - 25 soal tryout + 30 soal latihan = 55 soal
 - 1 tryout (25 soal, 50 menit)
-- 5 paket latihan (4 premium, 1 gratis)
+- Paket tryout dan latihan dibuka dengan voucher seri mapel
 - 8 misconception, 6 prasyarat subtopik
 
 ## Skenario demo (`seedAttempt.ts`)
@@ -87,7 +89,7 @@ Halaman **tidak** meng-import `src/data/*` secara langsung. Semua lewat `src/ser
 getTryouts()  getTryoutBySlug()  getQuestionsForTryout()
 startAttempt()  saveAnswer()  toggleMark()  submitTryout()  getTryoutResult()
 getPracticePackages()  getPracticePackageBySlug()  getQuestionsForPackage()
-redeemVoucher()  isPackageUnlocked()  getUnlockedPackages()
+redeemVoucher()  isContentUnlocked()  getUnlockedSeriesKeys()
 ```
 
 Saat Supabase masuk, isi fungsi-fungsi ini diganti; signature-nya tetap.
@@ -101,7 +103,7 @@ Prefix `siaptka:` — lihat `src/storage/storage-keys.ts`.
 | `siaptka:profile` | nama & kelas siswa |
 | `siaptka:tryout-attempt:<slug>` | startedAt, answers, marked, integrity, submittedAt |
 | `siaptka:practice-attempt:<slug>` | answers, startedAt, finishedAt |
-| `siaptka:entitlements` | unlockedPackages, kode voucher, waktu redeem |
+| `siaptka:entitlements` | unlockedSeriesKeys, unlockedPackages legacy, kode voucher, waktu redeem |
 
 Seluruh akses melalui `src/storage/*` (SSR-safe, try/catch, versi schema),
 tidak pernah memanggil `localStorage` langsung dari komponen.

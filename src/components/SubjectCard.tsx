@@ -38,7 +38,7 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
           <h3 className="text-[17px] font-bold leading-snug tracking-tight text-ink-900">
             {subject.shortName}
           </h3>
-          {isAvailable ? <Badge tone="free">Tersedia</Badge> : <Badge tone="neutral">Segera</Badge>}
+          {isAvailable ? <Badge tone="success">Tersedia</Badge> : <Badge tone="neutral">Segera</Badge>}
         </div>
 
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">

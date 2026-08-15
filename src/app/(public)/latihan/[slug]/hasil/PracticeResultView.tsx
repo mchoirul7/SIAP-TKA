@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { ResultStatus } from "@/components/ResultStatus";
@@ -10,6 +11,7 @@ import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { StatCard } from "@/components/ui/StatCard";
 import { useNavigate } from "@/components/NavigationProgress";
+import { useEntitlements } from "@/hooks/useEntitlements";
 import type { PracticePackage, Question } from "@/data/types";
 import { formatDuration } from "@/lib/format";
 import { buildPracticeNarrative } from "@/lib/narrative";
@@ -30,11 +32,18 @@ export function PracticeResultView({
   questions: Question[];
   catalog: AnalysisCatalog;
 }) {
+  const router = useRouter();
   const { navigate, isPending } = useNavigate();
+  const { mounted, isUnlocked } = useEntitlements();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<PracticeResult | null>(null);
 
   useEffect(() => {
+    if (!mounted) return;
+    if (!isUnlocked(pkg)) {
+      router.replace(`/latihan/${pkg.slug}`);
+      return;
+    }
     const stored = getPracticeResult(pkg, questions, catalog);
     if (!stored) {
       setState("empty");
@@ -42,7 +51,7 @@ export function PracticeResultView({
     }
     setResult(stored);
     setState("ready");
-  }, [pkg, questions, catalog]);
+  }, [mounted, isUnlocked, pkg, pkg.slug, questions, catalog, router]);
 
   const handleRepeat = () => {
     resetPractice(pkg.slug);

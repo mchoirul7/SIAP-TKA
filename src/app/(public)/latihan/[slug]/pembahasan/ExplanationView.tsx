@@ -60,13 +60,13 @@ export function ExplanationView({
 
   useEffect(() => {
     if (!mounted) return;
-    if (!isUnlocked(pkg.slug, pkg.isPremium)) {
+    if (!isUnlocked(pkg)) {
       router.replace(`/latihan/${pkg.slug}`);
       return;
     }
     setAnswers(getPracticeAttempt(pkg.slug)?.answers ?? {});
     setReady(true);
-  }, [mounted, isUnlocked, pkg.slug, pkg.isPremium, router]);
+  }, [mounted, isUnlocked, pkg, pkg.slug, router]);
 
   if (!ready) {
     return (

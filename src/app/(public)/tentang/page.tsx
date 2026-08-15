@@ -107,9 +107,8 @@ export default function AboutPage() {
             Catatan versi prototype
           </h2>
           <p className="mt-2 text-[15px] leading-relaxed text-amber-900">
-            Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Bank soal masih
-            berupa contoh, voucher menggunakan kode demo, dan seluruh hasil tersimpan di perangkat
-            ini saja sehingga tidak berpindah antarperangkat.
+            Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Voucher membuka
+            satu mapel dalam satu seri, dan hasil pengerjaan tetap tersimpan di perangkat ini saja.
           </p>
         </section>
 
@@ -118,7 +117,7 @@ export default function AboutPage() {
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="/tryout" size="lg">
             <Icon name="play" className="h-5 w-5" />
-            Mulai Tryout Gratis
+            Lihat Tryout
           </ButtonLink>
           <ButtonLink href="/latihan" variant="secondary" size="lg">
             <Icon name="layers" className="h-5 w-5" />

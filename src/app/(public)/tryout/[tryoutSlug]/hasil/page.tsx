@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getAnalysisCatalog,
   getQuestionsForTryout,
   getSubjects,
   getTryoutBySlug,
-  getTryouts,
 } from "@/services/content-service";
 import { buildQuestionLabels } from "@/lib/question-labels";
+import { hasServerContentAccess } from "@/lib/server-entitlements";
 import { isMathSubject } from "@/lib/subject-theme";
 import { TryoutResultView } from "./TryoutResultView";
 
@@ -20,15 +20,13 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export async function generateStaticParams() {
-  const tryouts = await getTryouts();
-  return tryouts.map((tryout) => ({ tryoutSlug: tryout.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function TryoutResultPage({ params }: PageProps) {
   const { tryoutSlug } = await params;
   const tryout = await getTryoutBySlug(tryoutSlug);
   if (!tryout) notFound();
+  if (!(await hasServerContentAccess(tryout))) redirect(`/tryout/${tryout.slug}`);
 
   // Soal diambil di server; perhitungan hasilnya tetap di perangkat pengguna.
   const [questions, catalog, subjects] = await Promise.all([

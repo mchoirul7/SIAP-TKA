@@ -32,6 +32,13 @@ const { subtopicPrerequisites, conceptPrerequisites } = await load("prerequisite
 const { practicePackages } = await load("practicePackages.ts");
 const { tryouts } = await load("tryouts.ts");
 
+const DEFAULT_SERIES = {
+  id: "ser-bulan-kemerdekaan",
+  slug: "bulan-kemerdekaan",
+  title: "Seri Bulan Kemerdekaan",
+  description: "Seri soal tematik bulan kemerdekaan.",
+};
+
 // ---------------------------------------------------------------- helpers
 const q = (value) => {
   if (value === undefined || value === null) return "null";
@@ -59,6 +66,12 @@ subjects.forEach((s, i) => {
     `insert into public.subjects (id, slug, name, short_name, level, description, sort_order) values (${q(s.id)}, ${q(s.slug)}, ${q(s.name)}, ${q(s.shortName)}, ${q(s.level)}, ${q(s.description)}, ${i}) on conflict (id) do update set slug = excluded.slug, name = excluded.name, short_name = excluded.short_name, level = excluded.level, description = excluded.description, sort_order = excluded.sort_order;`,
   );
 });
+say();
+
+say("-- Seri konten");
+say(
+  `insert into public.content_series (id, slug, title, description, is_active, sort_order) values (${q(DEFAULT_SERIES.id)}, ${q(DEFAULT_SERIES.slug)}, ${q(DEFAULT_SERIES.title)}, ${q(DEFAULT_SERIES.description)}, true, 0) on conflict (id) do update set slug = excluded.slug, title = excluded.title, description = excluded.description, is_active = excluded.is_active, sort_order = excluded.sort_order;`,
+);
 say();
 
 say("-- Topik");
@@ -124,9 +137,30 @@ say();
 // --------------------------------------------------------------- tryout
 say("-- Paket: tryout dan latihan memakai satu tabel");
 
-function emitPackage(pkg, kind, index) {
+const subjectById = new Map(subjects.map((subject) => [subject.id, subject]));
+const allPackages = [...tryouts, ...practicePackages];
+const productKeys = new Set();
+
+say("-- Produk voucher per mapel dan seri");
+allPackages.forEach((pkg, index) => {
+  const subject = subjectById.get(pkg.subjectId);
+  if (!subject) return;
+  const seriesId = pkg.seriesId ?? DEFAULT_SERIES.id;
+  const seriesSlug = pkg.seriesSlug ?? DEFAULT_SERIES.slug;
+  const seriesTitle = pkg.seriesTitle ?? DEFAULT_SERIES.title;
+  const key = `${pkg.subjectId}:${seriesId}`;
+  if (productKeys.has(key)) return;
+  productKeys.add(key);
   say(
-    `insert into public.packages (id, kind, slug, title, subject_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, is_premium, is_published, sort_order, source_id, source_file) values (${q(pkg.id)}, ${q(kind)}, ${q(pkg.slug)}, ${q(pkg.title)}, ${q(pkg.subjectId)}, ${q(pkg.level)}, ${q(pkg.description)}, ${q(pkg.summary)}, ${q(pkg.variant)}, ${q(pkg.variantLabel)}, ${pkg.durationMinutes ?? "null"}, ${pkg.estimatedMinutes ?? "null"}, ${q(pkg.difficultyRange)}, ${textArray(pkg.skills) === "null" ? "'{}'" : textArray(pkg.skills)}, ${textArray(pkg.instructions) === "null" ? "'{}'" : textArray(pkg.instructions)}, ${Boolean(pkg.isPremium)}, true, ${index}, ${q(pkg.id)}, 'src/data') on conflict (id) do update set kind = excluded.kind, slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, level = excluded.level, description = excluded.description, summary = excluded.summary, variant = excluded.variant, variant_label = excluded.variant_label, duration_minutes = excluded.duration_minutes, estimated_minutes = excluded.estimated_minutes, difficulty_range = excluded.difficulty_range, skills = excluded.skills, instructions = excluded.instructions, is_premium = excluded.is_premium, is_published = excluded.is_published, sort_order = excluded.sort_order;`,
+    `insert into public.products (id, slug, title, subject_id, series_id, description, is_active, sort_order) values (${q(`prd-${subject.slug}-${seriesSlug}`)}, ${q(`${subject.slug}-${seriesSlug}`)}, ${q(`${subject.shortName} - ${seriesTitle}`)}, ${q(pkg.subjectId)}, ${q(seriesId)}, ${q(`Membuka semua tryout dan latihan ${subject.shortName} dalam ${seriesTitle}.`)}, true, ${index}) on conflict (id) do update set slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, series_id = excluded.series_id, description = excluded.description, is_active = excluded.is_active, sort_order = excluded.sort_order;`,
+  );
+});
+say();
+
+function emitPackage(pkg, kind, index) {
+  const seriesId = pkg.seriesId ?? DEFAULT_SERIES.id;
+  say(
+    `insert into public.packages (id, kind, slug, title, subject_id, series_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, is_premium, is_published, sort_order, source_id, source_file) values (${q(pkg.id)}, ${q(kind)}, ${q(pkg.slug)}, ${q(pkg.title)}, ${q(pkg.subjectId)}, ${q(seriesId)}, ${q(pkg.level)}, ${q(pkg.description)}, ${q(pkg.summary)}, ${q(pkg.variant)}, ${q(pkg.variantLabel)}, ${pkg.durationMinutes ?? "null"}, ${pkg.estimatedMinutes ?? "null"}, ${q(pkg.difficultyRange)}, ${textArray(pkg.skills) === "null" ? "'{}'" : textArray(pkg.skills)}, ${textArray(pkg.instructions) === "null" ? "'{}'" : textArray(pkg.instructions)}, true, true, ${index}, ${q(pkg.id)}, 'src/data') on conflict (id) do update set kind = excluded.kind, slug = excluded.slug, title = excluded.title, subject_id = excluded.subject_id, series_id = excluded.series_id, level = excluded.level, description = excluded.description, summary = excluded.summary, variant = excluded.variant, variant_label = excluded.variant_label, duration_minutes = excluded.duration_minutes, estimated_minutes = excluded.estimated_minutes, difficulty_range = excluded.difficulty_range, skills = excluded.skills, instructions = excluded.instructions, is_premium = excluded.is_premium, is_published = excluded.is_published, sort_order = excluded.sort_order;`,
   );
   say(`delete from public.package_questions where package_id = ${q(pkg.id)};`);
   pkg.questionIds.forEach((questionId, position) => {
@@ -140,19 +174,6 @@ tryouts.forEach((t, i) => emitPackage(t, "tryout", i));
 practicePackages.forEach((p, i) => emitPackage(p, "latihan", tryouts.length + i));
 say();
 
-// -------------------------------------------------------------- voucher
-say("-- Voucher demo. Kodenya tidak lagi ikut terkirim di bundel JavaScript.");
-say(
-  `insert into public.vouchers (code, label, is_active, max_redemptions) values ('TKA-DEMO-2026', 'Kode demo prototype', true, null) on conflict (code) do update set label = excluded.label, is_active = excluded.is_active;`,
-);
-practicePackages
-  .filter((p) => p.isPremium)
-  .forEach((p) => {
-    say(
-      `insert into public.voucher_packages (code, package_id) values ('TKA-DEMO-2026', ${q(p.id)}) on conflict do nothing;`,
-    );
-  });
-say();
 say("commit;");
 say();
 

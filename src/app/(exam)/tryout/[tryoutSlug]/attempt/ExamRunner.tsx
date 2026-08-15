@@ -10,6 +10,7 @@ import { IconBadge } from "@/components/ui/IconBadge";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
+import { useEntitlements } from "@/hooks/useEntitlements";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { formatClock } from "@/lib/format";
 import {
@@ -28,6 +29,7 @@ const LEAVE_MESSAGE =
 
 export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Question[] }) {
   const { navigate, isPending } = useNavigate();
+  const { mounted, isUnlocked } = useEntitlements();
   const [attempt, setAttempt] = useState<TryoutAttempt | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "redirecting">("loading");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,6 +46,12 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
 
   // ------------------------------------------------------ memuat attempt
   useEffect(() => {
+    if (!mounted) return;
+    if (!isUnlocked(tryout)) {
+      setStatus("redirecting");
+      navigate(`/tryout/${tryout.slug}`, { replace: true });
+      return;
+    }
     const existing = getAttempt(tryout.slug);
     if (!existing) {
       setStatus("redirecting");
@@ -58,7 +66,7 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
     setAttempt(existing);
     setStudentName(readProfile()?.name ?? "");
     setStatus("ready");
-  }, [navigate, tryout.slug]);
+  }, [mounted, isUnlocked, navigate, tryout, tryout.slug]);
 
   const finish = useCallback(() => {
     if (hasSubmittedRef.current) return;

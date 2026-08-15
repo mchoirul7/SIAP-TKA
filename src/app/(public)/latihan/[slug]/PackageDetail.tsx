@@ -39,7 +39,7 @@ export function PackageDetail({
     return subscribeToStorage(sync);
   }, [pkg.slug]);
 
-  const unlocked = mounted && isUnlocked(pkg.slug, pkg.isPremium);
+  const unlocked = mounted && isUnlocked(pkg);
 
   return (
     <div className="container-page py-12 sm:py-14">
@@ -54,17 +54,9 @@ export function PackageDetail({
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            {pkg.isPremium ? (
-              unlocked ? (
-                <Badge tone="free">Terbuka</Badge>
-              ) : (
-                <Badge tone="premium">Premium</Badge>
-              )
-            ) : (
-              <Badge tone="free">Gratis</Badge>
-            )}
+            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
             <span className="text-sm text-slate-500">
-              {subjectName} · {topicName}
+              {subjectName} · {pkg.seriesTitle} · {topicName}
             </span>
           </div>
 
@@ -143,11 +135,10 @@ export function PackageDetail({
           ) : unlocked ? (
             <div className="rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 shadow-card">
               <IconBadge name="unlock" tone="emerald" size="lg" />
-              <h2 className="mt-4 text-lg font-extrabold tracking-tight">
-                {pkg.isPremium ? "Paket sudah terbuka" : "Paket contoh gratis"}
-              </h2>
+              <h2 className="mt-4 text-lg font-extrabold tracking-tight">Paket sudah terbuka</h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                Latihan online dan pembahasan tersedia untuk paket ini.
+                Voucher seri {pkg.seriesTitle} membuka latihan, tryout, hasil, dan pembahasan
+                untuk mapel ini.
               </p>
 
               <div className="mt-6 space-y-2">
@@ -177,16 +168,17 @@ export function PackageDetail({
           ) : (
             <div className="rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
               <IconBadge name="lock" tone="brand" size="lg" />
-              <p className="eyebrow mt-4">Paket Premium</p>
+              <p className="eyebrow mt-4">Konten Voucher</p>
               <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                Masukkan voucher untuk membuka latihan ini.
+                Masukkan voucher seri untuk membuka latihan ini.
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-700">
-                Satu kode voucher membuka latihan online beserta pembahasannya.
+                Satu kode voucher membuka semua latihan dan tryout {subjectName} dalam{" "}
+                {pkg.seriesTitle}.
               </p>
 
               <ul className="mt-5 space-y-2 text-[15px] text-slate-700">
-                {["Latihan online", "Pembahasan setiap soal", "Dapat dikerjakan ulang"].map((item) => (
+                {["Latihan online", "Tryout seri ini", "Pembahasan setiap soal"].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <Icon
                       name="check"
@@ -200,7 +192,14 @@ export function PackageDetail({
 
               <button
                 type="button"
-                onClick={() => openVoucher({ packageSlug: pkg.slug, packageTitle: pkg.title })}
+                onClick={() =>
+                  openVoucher({
+                    packageSlug: pkg.slug,
+                    packageTitle: pkg.title,
+                    requiredAccessKey: pkg.accessKey,
+                    requiredLabel: `${subjectName} - ${pkg.seriesTitle}`,
+                  })
+                }
                 className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-800 px-4 text-base font-bold text-white transition-opacity hover:opacity-90"
               >
                 <Icon name="ticket" className="h-5 w-5" />
@@ -208,11 +207,8 @@ export function PackageDetail({
               </button>
 
               <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                Belum punya voucher? Kerjakan{" "}
-                <Link href="/tryout" className="link-underline">
-                  simulasi gratis
-                </Link>{" "}
-                terlebih dahulu untuk melihat paket mana yang paling dibutuhkan.
+                Belum punya voucher? Pilih seri mapel yang ingin dibeli, lalu gunakan kode yang
+                diberikan untuk membuka seluruh kontennya.
               </p>
             </div>
           )}
