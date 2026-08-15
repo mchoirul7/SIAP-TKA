@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-slate-800 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-ink-900;
+    text-wrap: balance;
+  }
+
+  /* Fokus terlihat jelas di seluruh elemen interaktif. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+
+  ::selection {
+    @apply bg-brand-100 text-ink-900;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .container-reading {
+    @apply mx-auto w-full max-w-3xl px-5 sm:px-6;
+  }
+
+  /* Teks soal dan stimulus: sedikit lebih besar dan lega agar nyaman dibaca. */
+  .question-text {
+    @apply text-[17px] leading-[1.7] text-slate-900 sm:text-lg;
+  }
+
+  .stimulus-text {
+    @apply whitespace-pre-line text-[15.5px] leading-[1.75] text-slate-700 sm:text-base;
+  }
+
+  /* Isi soal hasil impor: HTML terbatas dengan gambar rumus yang sebaris teks. */
+  .rich-text > p + p,
+  .rich-text > ul,
+  .rich-text > ol {
+    @apply mt-3;
+  }
+
+  .rich-text ul {
+    @apply list-disc space-y-1 pl-5;
+  }
+
+  .rich-text ol {
+    @apply list-decimal space-y-1 pl-5;
+  }
+
+  .rich-text strong {
+    @apply font-semibold text-ink-900;
+  }
+
+  .rich-text img {
+    @apply inline-block h-auto max-w-full align-middle;
+  }
+
+  /* Gambar besar (diagram, denah) diberi ruang sendiri. */
+  .rich-text p > img:only-child {
+    @apply my-2 block;
+  }
+
+  .link-underline {
+    @apply text-brand-700 underline decoration-brand-300 underline-offset-4 transition-colors hover:text-ink-900 hover:decoration-brand-600;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-brand-600;
+  }
+
+  /* Bilah kemajuan perpindahan halaman: bergerak terus, tanpa perlu tahu persentase. */
+  .nav-progress-bar {
+    animation: nav-progress 1.1s ease-in-out infinite;
+  }
+
+  @keyframes nav-progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

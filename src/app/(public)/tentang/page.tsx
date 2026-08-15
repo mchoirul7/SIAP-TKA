@@ -1,0 +1,110 @@
+import type { Metadata } from "next";
+import { LocalDataNotice } from "@/components/LocalDataNotice";
+import { ButtonLink } from "@/components/ui/Button";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Tentang",
+  description:
+    "Tentang Siap TKA: cara kerja simulasi, cara hasil disusun, dan batasan versi prototype.",
+};
+
+export default function AboutPage() {
+  return (
+    <div className="container-page py-12 sm:py-14">
+      <div className="max-w-3xl">
+        <SectionHeader
+          as="h1"
+          eyebrow="Tentang"
+          title={`Tentang ${site.name}`}
+          description={site.valueProposition}
+        />
+
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold tracking-tight">Mengapa dibuat</h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+            Menjelang ujian, banyak keluarga memiliki masalah yang sama: nilai latihan sudah
+            terlihat, tetapi tidak jelas apa yang harus diperbaiki. Skor 68 tidak memberi tahu
+            apakah kesulitannya ada pada pecahan, geometri, atau justru pada materi dasar yang
+            terlewat beberapa tahun sebelumnya.
+          </p>
+          <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+            {site.name} mencoba menjawab pertanyaan berikutnya: setelah tahu nilainya, harus mulai
+            dari mana.
+          </p>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold tracking-tight">Cara hasil disusun</h2>
+          <ol className="mt-4 space-y-5">
+            {[
+              {
+                title: "Setiap soal terhubung ke konsep",
+                body: "Soal tidak hanya dikelompokkan per mata pelajaran, tetapi sampai ke tingkat subtopik dan konsep, sehingga hasilnya cukup rinci untuk ditindaklanjuti.",
+              },
+              {
+                title: "Sebagian konsep punya prasyarat",
+                body: "Operasi pecahan bertumpu pada pecahan senilai. Bila keduanya lemah, yang disarankan lebih dulu adalah prasyaratnya, bukan materi yang terlihat di permukaan.",
+              },
+              {
+                title: "Pilihan jawaban ikut dibaca",
+                body: "Beberapa pilihan yang keliru mewakili cara berpikir tertentu. Bila pola yang sama muncul berulang, hal itu dirangkum dengan bahasa yang hati-hati sebagai bahan diskusi, bukan sebagai label untuk anak.",
+              },
+            ].map((item, index) => (
+              <li key={item.title} className="flex gap-4">
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-brand-200 bg-brand-50 text-sm font-semibold tabular-nums text-brand-800">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 className="font-semibold text-ink-900">{item.title}</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-slate-600">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold tracking-tight">Yang tidak dilakukan</h2>
+          <ul className="mt-4 space-y-2.5">
+            {[
+              "Tidak ada riwayat pengerjaan yang dikumpulkan. Hasil tersimpan di perangkat yang dipakai, tidak dikirim ke mana pun, dan dapat dihapus kapan saja lewat tombol di bawah halaman ini.",
+              "Tidak ada peringkat dan tidak ada perbandingan dengan siswa lain.",
+              "Tidak ada poin, lencana, atau rentetan harian yang membuat belajar berubah menjadi kejar-kejaran.",
+              "Tidak ada janji nilai tertentu. Simulasi hanya alat bantu untuk melihat posisi saat ini.",
+            ].map((item) => (
+              <li key={item} className="flex gap-3 text-[15px] leading-relaxed text-slate-700">
+                <span
+                  aria-hidden="true"
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-12 rounded-lg border border-slate-200 bg-slate-50 p-6">
+          <h2 className="text-lg font-semibold tracking-tight">Catatan versi prototype</h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+            Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Bank soal masih
+            berupa contoh, voucher menggunakan kode demo, dan seluruh hasil tersimpan di perangkat
+            ini saja sehingga tidak berpindah antarperangkat.
+          </p>
+        </section>
+
+        <LocalDataNotice />
+
+        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="/tryout" size="lg">
+            Mulai Tryout Gratis
+          </ButtonLink>
+          <ButtonLink href="/latihan" variant="secondary" size="lg">
+            Lihat Paket Latihan
+          </ButtonLink>
+        </div>
+      </div>
+    </div>
+  );
+}
