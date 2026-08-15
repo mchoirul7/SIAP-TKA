@@ -1,10 +1,15 @@
+import { MASTERY_THRESHOLD } from "@/lib/scoring";
 import type { MisconceptionSignal, PracticeAnalysis, TryoutAnalysis } from "@/lib/scoring";
 
 /**
- * Hasil ujian diringkas menjadi satu narasi saja: materi apa yang harus
- * dipelajari lebih dulu, dan mengapa. Rincian per topik, per subtopik, dan
- * pola jawaban sengaja tidak ditampilkan agar tidak ada yang perlu ditafsirkan
- * sendiri oleh orang tua.
+ * Hasil diringkas menjadi satu paragraf: apa yang perlu dipelajari lebih dulu,
+ * dan kenapa.
+ *
+ * Kalimatnya sengaja dibuat sederhana dan menyapa siswa langsung ("kamu"),
+ * karena halaman ini dibaca siswa sendiri. Istilah teknis seperti "ketepatan",
+ * "prasyarat", atau "akurasi" diganti dengan kalimat sehari-hari, dan angka
+ * ditulis sebagai "benar 3 dari 5 soal" — bukan persen — supaya langsung
+ * terbayang. Rincian per konsep ditampilkan terpisah sebagai kartu.
  */
 export interface StudyNarrative {
   headline: string;
@@ -18,13 +23,11 @@ function joinList(items: string[]): string {
   return `${items.slice(0, -1).join(", ")} dan ${items[items.length - 1]}`;
 }
 
-function misconceptionNote(signals: MisconceptionSignal[]): string {
-  if (signals.length === 0) return "";
-  const [first, second] = signals;
-  return (
-    ` Pola jawaban yang ikut terlihat: ${first.insight}` +
-    (second ? ` Pola lain yang perlu diperhatikan: ${second.insight}` : "")
-  );
+/** Satu kalimat tambahan tentang pola jawaban yang sering keliru. */
+export function misconceptionNote(signals: MisconceptionSignal[]): string {
+  const first = signals[0];
+  if (!first) return "";
+  return ` Yang paling sering keliru: ${first.insight}`;
 }
 
 export function buildTryoutNarrative(
@@ -33,16 +36,27 @@ export function buildTryoutNarrative(
   options: { hasRecommendedPackages?: boolean } = {},
 ): StudyNarrative {
   const closing = options.hasRecommendedPackages
-    ? " Paket latihan di bawah sudah disusun mengikuti urutan tersebut."
+    ? " Paket latihan di bawah sudah diurutkan sesuai itu, jadi tinggal dikerjakan dari yang paling atas."
     : "";
 
   if (analysis.priorities.length === 0) {
+    // Nilai masih rendah tetapi materinya belum terpetakan: jangan mengaku semuanya beres.
+    if (analysis.score < MASTERY_THRESHOLD) {
+      return {
+        headline: "Baca ulang soal yang belum tepat",
+        body:
+          `Kamu benar ${analysis.correctCount} dari ${analysis.totalQuestions} soal. ` +
+          "Rincian materinya belum tersedia untuk simulasi ini, jadi mulailah dari soal yang " +
+          "jawabannya masih keliru dan pelajari pembahasannya satu per satu.",
+        isAllClear: false,
+      };
+    }
+
     return {
-      headline: "Semua materi pada simulasi ini sudah dikuasai",
+      headline: "Semua materi di simulasi ini sudah kamu kuasai",
       body:
-        "Tidak ada materi dengan ketepatan di bawah 80% pada simulasi ini. " +
-        "Langkah berikutnya adalah melanjutkan latihan ke tingkat kesulitan yang lebih tinggi, " +
-        "bukan mengulang materi yang sama.",
+        "Tidak ada materi yang perlu diulang dari simulasi ini. " +
+        "Langkah berikutnya: coba soal yang lebih sulit, bukan mengulang materi yang sama.",
       isAllClear: true,
     };
   }
@@ -50,19 +64,19 @@ export function buildTryoutNarrative(
   const advice = analysis.prerequisiteAdvice;
   const [first, ...rest] = analysis.priorities;
 
-  // Bila materi prasyaratnya ikut lemah, prasyarat itu yang didahulukan.
+  // Bila materi dasarnya ikut lemah, materi dasar itu yang dikerjakan lebih dulu.
   if (advice) {
     const laterNames = joinList(
       analysis.priorities.filter((item) => item.id !== advice.subtopicId).map((item) => item.name),
     );
 
     return {
-      headline: `Mulai belajar dari ${advice.name}`,
+      headline: `Mulai dari ${advice.name}`,
       body:
-        `${advice.name} menjadi dasar untuk ${joinList(advice.supports)}, ` +
-        `dan pada simulasi ini ketepatannya baru ${advice.accuracy}%. ${advice.reason} ` +
-        `Karena itu bagian ini dikuatkan lebih dulu` +
-        (laterNames ? `, baru dilanjutkan ke ${laterNames}.` : ".") +
+        `${advice.name} adalah bekal untuk ${joinList(advice.supports)}. ` +
+        `Di simulasi ini bagian itu baru benar ${advice.correct} dari ${advice.total} soal. ` +
+        `${advice.reason} Jadi kuatkan bagian ini dulu` +
+        (laterNames ? `, baru lanjut ke ${laterNames}.` : ".") +
         closing,
       isAllClear: false,
     };
@@ -71,38 +85,56 @@ export function buildTryoutNarrative(
   const laterNames = joinList(rest.map((item) => item.name));
 
   return {
-    headline: `Mulai belajar dari ${first.name}`,
+    headline: `Mulai dari ${first.name}`,
     body:
-      `Pada simulasi ini, ${first.name} baru tepat ${first.correct} dari ${first.total} soal ` +
-      `(${first.accuracy}%) — bagian terlemah dibanding materi lain yang diujikan. ` +
-      `${first.description} Perkuat bagian ini lebih dulu` +
-      (laterNames ? `, baru dilanjutkan ke ${laterNames}.` : ".") +
+      `Di simulasi ini kamu benar ${first.correct} dari ${first.total} soal ${first.name} — ` +
+      `paling sedikit dibanding materi lain. Kuatkan bagian ini dulu` +
+      (laterNames ? `, baru lanjut ke ${laterNames}.` : ".") +
       closing,
     isAllClear: false,
   };
 }
 
-export function buildPracticeNarrative(analysis: PracticeAnalysis): StudyNarrative {
+export function buildPracticeNarrative(
+  analysis: PracticeAnalysis,
+  options: { hasRecommendedPackages?: boolean } = {},
+): StudyNarrative {
   if (analysis.conceptsToReview.length === 0) {
+    // Nilai masih rendah tetapi materinya belum terpetakan: jangan mengaku semuanya beres.
+    if (analysis.score < MASTERY_THRESHOLD) {
+      return {
+        headline: "Baca ulang soal yang belum tepat",
+        body:
+          `Kamu benar ${analysis.correctCount} dari ${analysis.totalQuestions} soal. ` +
+          "Rincian materinya belum tersedia untuk paket ini, jadi buka pembahasan dan pelajari " +
+          "soal yang jawabannya masih keliru, lalu kerjakan ulang paketnya.",
+        isAllClear: false,
+      };
+    }
+
     return {
-      headline: "Seluruh konsep pada paket ini sudah kuat",
+      headline: "Semua materi di paket ini sudah kamu kuasai",
       body:
-        "Tidak ada konsep dengan ketepatan di bawah 80% pada latihan ini. " +
-        "Latihan dapat dilanjutkan ke paket berikutnya.",
+        "Tidak ada materi yang perlu diulang dari latihan ini. " +
+        "Lanjut saja ke paket berikutnya.",
       isAllClear: true,
     };
   }
 
   const [first, ...rest] = analysis.conceptsToReview;
   const laterNames = joinList(rest.map((item) => item.name));
+  const closing = options.hasRecommendedPackages
+    ? " Paket latihan di bawah bisa dipakai untuk berlatih lagi."
+    : "";
 
   return {
-    headline: `Ulangi bagian ${first.name}`,
+    headline: `Pelajari lagi ${first.name}`,
     body:
-      `Pada latihan ini, ${first.name} baru tepat ${first.correct} dari ${first.total} soal ` +
-      `(${first.accuracy}%)` +
-      (laterNames ? `, diikuti ${laterNames}.` : ".") +
-      " Baca pembahasannya lebih dulu, lalu kerjakan ulang paket ini untuk melihat perubahannya.",
+      `Di latihan ini kamu benar ${first.correct} dari ${first.total} soal ${first.name}` +
+      (laterNames ? `, lalu ${laterNames}.` : ".") +
+      misconceptionNote(first.misconceptions) +
+      " Baca pembahasannya dulu, lalu kerjakan ulang paket ini dan bandingkan hasilnya." +
+      closing,
     isAllClear: false,
   };
 }

@@ -140,6 +140,12 @@ export interface PracticePackage {
   subjectId: string;
   topicId: string;
   subtopicId: string;
+  /**
+   * Seluruh subtopik yang tersentuh soal di paket ini. Dipakai untuk mencocokkan
+   * paket dengan materi yang lemah pada halaman hasil; `subtopicId` sendiri hanya
+   * mewakili subtopik soal pertama.
+   */
+  subtopicIds?: string[];
   summary: string;
   description: string;
   level: EducationLevel;

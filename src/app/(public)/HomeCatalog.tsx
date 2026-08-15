@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { SubjectCard } from "@/components/SubjectCard";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
 import type { EducationLevel } from "@/data/types";
 import type { SubjectSummary } from "@/services/content-service";
 import { readLevel, writeLevel } from "@/storage/level-storage";
@@ -47,7 +49,8 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
   return (
     <div className="container-page pb-16">
       <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-[28px]">
+        <h2 className="flex items-center gap-2.5 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-[28px]">
+          <IconBadge name="cap" tone="brand" size="md" />
           Untuk Jenjang Studi
         </h2>
         <LevelSwitcher value={level} available={availableLevels} onChange={chooseLevel} />
@@ -55,10 +58,7 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
 
       <section className="mt-7">
         <h3 className="flex items-center gap-2 text-[17px] font-bold tracking-tight text-ink-900">
-          <span
-            aria-hidden="true"
-            className="inline-block h-4 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600"
-          />
+          <Icon name="book" className="h-5 w-5 text-brand-600" strokeWidth={2} />
           Pilih mata pelajaran
         </h3>
         <p className="mt-1 text-sm text-slate-600">
@@ -67,14 +67,15 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
         </p>
 
         {levelSummaries.length === 0 ? (
-          <p className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center text-sm text-slate-500">
+          <p className="mt-4 flex items-center justify-center gap-2 rounded-2xl border border-dashed border-brand-300 bg-brand-50/60 px-5 py-8 text-center text-sm text-slate-600">
+            <Icon name="hourglass" className="h-4 w-4 text-brand-500" />
             Mata pelajaran untuk jenjang ini sedang disiapkan.
           </p>
         ) : (
           <ul className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {levelSummaries.map((summary, index) => (
+            {levelSummaries.map((summary) => (
               <li key={summary.subject.id}>
-                <SubjectCard summary={summary} tone={index % 2 === 0 ? "orange" : "rust"} />
+                <SubjectCard summary={summary} />
               </li>
             ))}
           </ul>

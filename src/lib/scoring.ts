@@ -47,6 +47,9 @@ export interface PrerequisiteAdvice {
   subtopicId: string;
   name: string;
   accuracy: number;
+  /** Jumlah soal benar dan total soal materi ini, untuk kalimat "benar 2 dari 6 soal". */
+  correct: number;
+  total: number;
   /** Nama subtopik prioritas yang bertumpu pada materi ini. */
   supports: string[];
   reason: string;
@@ -57,6 +60,28 @@ export interface MisconceptionSignal {
   label: string;
   insight: string;
   count: number;
+}
+
+/**
+ * Satu materi yang perlu dipelajari lagi, lengkap dengan penjelasan singkat dan
+ * pola keliru yang muncul pada jawabannya. Dipakai halaman hasil untuk
+ * menjelaskan *apa* yang harus dipelajari, bukan sekadar angka benar-salah.
+ *
+ * Rinciannya diambil dari tingkat terdalam yang tersedia di katalog: konsep bila
+ * soalnya sudah ditandai konsep, kalau belum turun ke subtopik. Soal yang belum
+ * ditandai keduanya tidak dimunculkan, supaya tidak ada kartu tanpa nama.
+ */
+export interface ConceptFocus extends MasteryBucket {
+  /** Asal rincian: `konsep` (paling rinci) atau `subtopik`. */
+  level: "konsep" | "subtopik";
+  /** Penjelasan singkat dari katalog. */
+  description: string;
+  /** Materi induk: subtopik untuk konsep, topik untuk subtopik. */
+  parentName: string;
+  /** Subtopik pemilik, dipakai untuk mencari paket latihan lanjutan. */
+  subtopicId: string;
+  /** Miskonsepsi yang tersentuh pada soal-soal materi ini. */
+  misconceptions: MisconceptionSignal[];
 }
 
 export interface AnalysisCatalog {
@@ -85,6 +110,8 @@ export interface TryoutAnalysis {
   priorities: PriorityItem[];
   prerequisiteAdvice: PrerequisiteAdvice | null;
   misconceptionSignals: MisconceptionSignal[];
+  /** Konsep yang perlu dipelajari, dengan penjelasan dan pola kelirunya. */
+  conceptFocus: ConceptFocus[];
   recommendedPackageSlugs: string[];
 }
 
@@ -216,6 +243,8 @@ function buildPrerequisiteAdvice(
     subtopicId,
     name: bucket.name,
     accuracy: bucket.accuracy,
+    correct: bucket.correct,
+    total: bucket.total,
     supports: entry.supports,
     reason: entry.reason,
   };
@@ -243,6 +272,118 @@ function buildMisconceptionSignals(
       if (!misconception) return [];
       return [{ id, label: misconception.label, insight: misconception.insight, count }];
     });
+}
+
+interface FocusKey {
+  id: string;
+  level: ConceptFocus["level"];
+  name: string;
+  description: string;
+  parentName: string;
+  subtopicId: string;
+}
+
+/**
+ * Materi milik sebuah soal, diambil dari tingkat terdalam yang dikenali katalog.
+ * Mengembalikan `null` bila soal belum ditandai konsep maupun subtopik — soal
+ * seperti itu tetap ikut dinilai, hanya tidak muncul di rincian materi.
+ */
+function focusKeyFor(
+  question: Question,
+  resolved: ReturnType<typeof resolveCatalog>,
+): FocusKey | null {
+  const concept = resolved.conceptById.get(question.conceptId);
+  if (concept) {
+    const subtopic = resolved.subtopicById.get(concept.subtopicId);
+    return {
+      id: `konsep:${concept.id}`,
+      level: "konsep",
+      name: concept.name,
+      description: concept.description,
+      parentName: subtopic?.name ?? "",
+      subtopicId: concept.subtopicId,
+    };
+  }
+
+  const subtopic = resolved.subtopicById.get(question.subtopicId);
+  if (subtopic) {
+    const topic = resolved.topicById.get(subtopic.topicId);
+    return {
+      id: `subtopik:${subtopic.id}`,
+      level: "subtopik",
+      name: subtopic.name,
+      description: subtopic.description,
+      parentName: topic?.name ?? "",
+      subtopicId: subtopic.id,
+    };
+  }
+
+  return null;
+}
+
+/**
+ * Rincian materi beserta hasilnya, diurutkan dari yang paling sedikit benar.
+ * Setiap butir membawa penjelasannya sendiri dan pola keliru yang muncul,
+ * sehingga halaman hasil tidak perlu menghitung apa pun lagi.
+ */
+function buildStudyFocus(
+  questions: Question[],
+  answers: AnswerMap,
+  resolved: ReturnType<typeof resolveCatalog>,
+): ConceptFocus[] {
+  const groups = new Map<string, { key: FocusKey; questions: Question[] }>();
+
+  for (const question of questions) {
+    const key = focusKeyFor(question, resolved);
+    if (!key) continue;
+    const entry = groups.get(key.id) ?? { key, questions: [] };
+    entry.questions.push(question);
+    groups.set(key.id, entry);
+  }
+
+  return [...groups.values()]
+    .map(({ key, questions: group }) => {
+      const correct = group.filter((question) => isCorrect(question, answers[question.id])).length;
+      const answered = group.filter((question) =>
+        isAnswered(question, answers[question.id]),
+      ).length;
+      const accuracy = Math.round((correct / group.length) * 100);
+
+      return {
+        id: key.id,
+        name: key.name,
+        level: key.level,
+        description: key.description,
+        parentName: key.parentName,
+        subtopicId: key.subtopicId,
+        total: group.length,
+        answered,
+        correct,
+        accuracy,
+        status: statusFromAccuracy(accuracy),
+        // Satu kali muncul sudah cukup: pada satu materi, pola keliru jarang berulang.
+        misconceptions: buildMisconceptionSignals(group, answers, resolved.misconceptionById, 1),
+      };
+    })
+    .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total);
+}
+
+/**
+ * Paket latihan untuk sederet subtopik, tanpa pengulangan dan searah urutannya.
+ * Paket dianggap cocok bila salah satu soalnya berada di subtopik tersebut,
+ * bukan hanya bila subtopik utamanya sama.
+ */
+function packagesForSubtopics(subtopicIds: string[], packages: PracticePackage[]): string[] {
+  const coverage = (pkg: PracticePackage) =>
+    pkg.subtopicIds?.length ? pkg.subtopicIds : [pkg.subtopicId];
+
+  const slugs: string[] = [];
+  for (const subtopicId of subtopicIds) {
+    for (const pkg of packages.filter((item) => coverage(item).includes(subtopicId))) {
+      if (!slugs.includes(pkg.slug)) slugs.push(pkg.slug);
+    }
+  }
+  return slugs;
 }
 
 export function analyzeTryout(
@@ -289,7 +430,10 @@ export function analyzeTryoutWithCatalog(
   const bySubtopicId = new Map(bySubtopic.map((bucket) => [bucket.id, bucket]));
 
   const priorities: PriorityItem[] = bySubtopic
-    .filter((bucket) => bucket.accuracy < MASTERY_THRESHOLD)
+    // Subtopik yang tidak dikenali katalog dilewati agar tidak muncul sebagai nama kosong.
+    .filter(
+      (bucket) => bucket.accuracy < MASTERY_THRESHOLD && resolved.subtopicById.has(bucket.id),
+    )
     .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total)
     .slice(0, 3)
     .map((bucket) => {
@@ -313,13 +457,10 @@ export function analyzeTryoutWithCatalog(
     ...(prerequisiteAdvice ? [prerequisiteAdvice.subtopicId] : []),
     ...priorities.map((p) => p.id),
   ];
-  const recommendedPackageSlugs: string[] = [];
-  for (const subtopicId of orderedSubtopicIds) {
-    const pkg = resolved.practicePackages.find((p) => p.subtopicId === subtopicId);
-    if (pkg && !recommendedPackageSlugs.includes(pkg.slug)) {
-      recommendedPackageSlugs.push(pkg.slug);
-    }
-  }
+  const recommendedPackageSlugs = packagesForSubtopics(
+    orderedSubtopicIds,
+    resolved.practicePackages,
+  ).slice(0, 6);
 
   return {
     totalQuestions,
@@ -340,6 +481,9 @@ export function analyzeTryoutWithCatalog(
       answers,
       resolved.misconceptionById,
     ),
+    conceptFocus: buildStudyFocus(questions, answers, resolved)
+      .filter((focus) => focus.accuracy < MASTERY_THRESHOLD)
+      .slice(0, 4),
     recommendedPackageSlugs,
   };
 }
@@ -351,9 +495,12 @@ export interface PracticeAnalysis {
   unansweredCount: number;
   score: number;
   status: MasteryStatus;
-  conceptsToReview: MasteryBucket[];
+  /** Konsep yang perlu dipelajari lagi, sudah berisi penjelasan dan pola kelirunya. */
+  conceptsToReview: ConceptFocus[];
   strongConcepts: MasteryBucket[];
   misconceptionSignals: MisconceptionSignal[];
+  /** Paket latihan lanjutan untuk konsep-konsep yang masih lemah. */
+  recommendedPackageSlugs: string[];
 }
 
 export function analyzePractice(
@@ -376,10 +523,10 @@ export function analyzePracticeWithCatalog(
   const unansweredCount = totalQuestions - answeredCount;
   const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
 
-  const byConcept = toBuckets(
-    tallyBy(questions, answers, (q) => q.conceptId),
-    (id) => resolved.conceptById.get(id)?.name ?? id,
-  );
+  const focus = buildStudyFocus(questions, answers, resolved);
+  const conceptsToReview = focus
+    .filter((item) => item.accuracy < MASTERY_THRESHOLD)
+    .slice(0, 5);
 
   return {
     totalQuestions,
@@ -388,15 +535,18 @@ export function analyzePracticeWithCatalog(
     unansweredCount,
     score,
     status: statusFromAccuracy(score),
-    conceptsToReview: byConcept
-      .filter((bucket) => bucket.accuracy < MASTERY_THRESHOLD)
-      .sort((a, b) => a.accuracy - b.accuracy),
-    strongConcepts: byConcept.filter((bucket) => bucket.accuracy >= MASTERY_THRESHOLD),
+    conceptsToReview,
+    strongConcepts: focus.filter((item) => item.accuracy >= MASTERY_THRESHOLD),
     misconceptionSignals: buildMisconceptionSignals(
       questions,
       answers,
       resolved.misconceptionById,
       1,
     ),
+    // Latihan lanjutan diambil dari subtopik pemilik konsep yang masih lemah.
+    recommendedPackageSlugs: packagesForSubtopics(
+      conceptsToReview.map((concept) => concept.subtopicId).filter(Boolean),
+      resolved.practicePackages,
+    ).slice(0, 6),
   };
 }

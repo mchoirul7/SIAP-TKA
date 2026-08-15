@@ -206,9 +206,13 @@ function toPracticePackage(
   questionIds: string[],
   questionTaxonomy: Map<string, QuestionTaxonomyRow>,
 ): PracticePackage {
-  const firstQuestion = questionIds
+  const taxonomy = questionIds
     .map((questionId) => questionTaxonomy.get(questionId))
-    .find((question): question is QuestionTaxonomyRow => Boolean(question));
+    .filter((question): question is QuestionTaxonomyRow => Boolean(question));
+  const firstQuestion = taxonomy[0];
+  // Satu paket bisa menyentuh beberapa subtopik; semuanya dicatat agar halaman
+  // hasil dapat menyarankan paket ini untuk materi mana pun yang masih lemah.
+  const subtopicIds = [...new Set(taxonomy.flatMap((item) => (item.subtopic_id ? [item.subtopic_id] : [])))];
 
   return {
     id: row.id,
@@ -217,6 +221,7 @@ function toPracticePackage(
     subjectId: row.subject_id,
     topicId: firstQuestion?.topic_id ?? row.subject_id,
     subtopicId: firstQuestion?.subtopic_id ?? firstQuestion?.topic_id ?? row.subject_id,
+    subtopicIds,
     summary: row.summary ?? row.description ?? "",
     description: row.description ?? row.summary ?? "",
     level: row.level,

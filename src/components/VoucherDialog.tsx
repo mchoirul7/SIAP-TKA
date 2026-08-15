@@ -13,6 +13,8 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { site } from "@/lib/site";
 import { redeemVoucher } from "@/services/entitlement-service";
 
@@ -104,7 +106,8 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
           >
             {isRedeemed ? (
               <div>
-                <h2 id={titleId} className="text-xl font-semibold tracking-tight">
+                <IconBadge name="unlock" tone="emerald" size="lg" />
+                <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
                   Voucher berhasil digunakan.
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
@@ -116,8 +119,9 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                   <Link
                     href={successHref}
                     onClick={close}
-                    className="inline-flex h-11 flex-1 items-center justify-center rounded-lg bg-brand-800 px-4 text-[15px] font-semibold text-white transition-colors hover:bg-brand-900"
+                    className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
                   >
+                    <Icon name="layers" className="h-5 w-5" />
                     Buka Paket Latihan
                   </Link>
                   <Button variant="secondary" onClick={close} className="sm:w-auto">
@@ -127,7 +131,8 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <h2 id={titleId} className="text-xl font-semibold tracking-tight">
+                <IconBadge name="ticket" tone="brand" size="lg" />
+                <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
                   Masukkan Voucher
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
@@ -171,6 +176,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
 
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
                   <Button type="submit" className="sm:flex-1">
+                    <Icon name="unlock" className="h-5 w-5" />
                     Gunakan Voucher
                   </Button>
                   <Button variant="secondary" onClick={close}>

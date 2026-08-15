@@ -28,8 +28,11 @@ export function QuestionNavigator({
             "relative flex h-10 w-full items-center justify-center rounded-md border text-sm font-semibold tabular-nums transition-colors",
           ];
 
+          // Hijau untuk yang sudah dijawab: warnanya sama dengan penanda benar di pembahasan.
           if (item.answered) {
-            classes.push("border-brand-700 bg-brand-800 text-white hover:bg-brand-900");
+            classes.push(
+              "border-emerald-600 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white hover:opacity-90",
+            );
           } else {
             classes.push("border-slate-300 bg-white text-slate-600 hover:border-brand-400");
           }
@@ -63,7 +66,10 @@ export function QuestionNavigator({
 
       <dl className="mt-4 space-y-2 text-xs text-slate-600">
         <div className="flex items-center gap-2">
-          <span aria-hidden="true" className="h-4 w-4 rounded border border-brand-700 bg-brand-800" />
+          <span
+            aria-hidden="true"
+            className="h-4 w-4 rounded border border-emerald-600 bg-gradient-to-br from-emerald-500 to-emerald-600"
+          />
           <dt className="sr-only">Keterangan</dt>
           <dd>Sudah dijawab</dd>
         </div>

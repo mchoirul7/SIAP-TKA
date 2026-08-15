@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 import { useVoucherDialog } from "@/components/VoucherDialog";
 import { site } from "@/lib/site";
 
@@ -39,8 +40,9 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => openVoucher()}
-            className="inline-flex h-10 shrink-0 items-center rounded-lg border border-slate-300 px-3.5 text-sm font-semibold text-brand-800 transition-colors hover:border-brand-400 hover:bg-brand-50"
+            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 px-3.5 text-sm font-semibold text-brand-800 transition-colors hover:border-brand-400 hover:bg-brand-50"
           >
+            <Icon name="ticket" className="h-4 w-4" strokeWidth={2} />
             {/* Layar sempit memakai label pendek agar tidak mendorong nama produk. */}
             <span className="sm:hidden">Voucher</span>
             <span className="hidden sm:inline">Saya Punya Voucher</span>

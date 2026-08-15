@@ -1,9 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ConceptFocusList } from "@/components/ConceptFocusList";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { ResultStatus } from "@/components/ResultStatus";
+import { ScoreRing } from "@/components/ScoreRing";
 import { ButtonLink } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
+import { StatCard } from "@/components/ui/StatCard";
 import type { Question, Tryout } from "@/data/types";
 import { formatDate, formatDuration } from "@/lib/format";
 import { buildTryoutNarrative } from "@/lib/narrative";
@@ -38,7 +43,10 @@ export function TryoutResultView({
   if (state === "loading") {
     return (
       <div className="container-page py-20">
-        <p className="text-sm text-slate-500">Menyiapkan hasil…</p>
+        <p className="flex items-center gap-2 text-sm text-slate-500">
+          <Icon name="hourglass" className="h-4 w-4" />
+          Menyiapkan hasil…
+        </p>
       </div>
     );
   }
@@ -47,16 +55,19 @@ export function TryoutResultView({
     return (
       <div className="container-page py-16">
         <div className="mx-auto max-w-lg text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Belum ada hasil simulasi</h1>
+          <IconBadge name="flag" tone="brand" size="lg" className="mx-auto" />
+          <h1 className="mt-5 text-2xl font-extrabold tracking-tight">Belum ada hasil simulasi</h1>
           <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
             Hasil akan muncul di halaman ini setelah simulasi dikerjakan dan dikirim. Hasil
             tersimpan di perangkat ini.
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink href={`/tryout/${tryout.slug}`} size="lg">
+              <Icon name="play" className="h-5 w-5" />
               Mulai Simulasi
             </ButtonLink>
             <ButtonLink href="/latihan" variant="secondary" size="lg">
+              <Icon name="layers" className="h-5 w-5" />
               Lihat Paket Latihan
             </ButtonLink>
           </div>
@@ -74,94 +85,155 @@ export function TryoutResultView({
   const narrative = buildTryoutNarrative(analysis, {
     hasRecommendedPackages: recommendedPackages.length > 0,
   });
+  const total = questions.length || 1;
+  const accuracy = Math.round((analysis.correctCount / total) * 100);
 
   return (
-    <div className="container-page py-12 sm:py-14">
-      {/* Ringkasan utama */}
+    <div className="container-page py-10 sm:py-12">
       <header>
-        <p className="eyebrow">Hasil Simulasi TKA</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{tryout.title}</h1>
-        <p className="mt-2 text-[15px] text-slate-600">
-          {studentName ? `${studentName} · ` : ""}
-          {attempt.submittedAt ? formatDate(attempt.submittedAt) : ""}
+        <p className="eyebrow flex items-center gap-1.5">
+          <Icon name="medal" className="h-4 w-4" />
+          Hasil Simulasi TKA
+        </p>
+        <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">{tryout.title}</h1>
+        <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-slate-600">
+          {studentName ? (
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="cap" className="h-4 w-4 text-brand-600" />
+              {studentName}
+            </span>
+          ) : null}
+          {attempt.submittedAt ? (
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="clock" className="h-4 w-4 text-brand-600" />
+              {formatDate(attempt.submittedAt)}
+            </span>
+          ) : null}
         </p>
       </header>
 
-      <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6 sm:p-8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="text-sm text-slate-500">Skor</p>
-            <p className="mt-1 flex items-baseline gap-2">
-              <span className="text-5xl font-semibold tabular-nums text-ink-900 sm:text-6xl">
-                {analysis.score}
-              </span>
-              <span className="text-lg text-slate-500">/ 100</span>
+      {/* Kartu skor: warna gelap agar jelas berbeda dari kartu hasil latihan. */}
+      <section className="relative isolate mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-ink-700 via-ink-900 to-brand-900 p-6 shadow-float sm:p-8">
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full text-white/10"
+          viewBox="0 0 400 96"
+          preserveAspectRatio="none"
+          fill="currentColor"
+        >
+          <path d="M0 46c60-34 120 26 200 8s140-44 200-14v56H0z" />
+        </svg>
+
+        <div className="relative z-10 flex flex-wrap items-center gap-6 sm:gap-8">
+          <ScoreRing value={analysis.score} />
+
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">
+              Skor simulasi
             </p>
-          </div>
-          <div className="flex flex-col items-start gap-2">
-            <span className="text-sm text-slate-500">Status keseluruhan</span>
-            <ResultStatus status={analysis.status} className="px-3 py-1.5 text-sm" />
+            <p className="mt-1 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+              {analysis.score >= 80
+                ? "Hasil yang keren! 🏆"
+                : analysis.score >= 60
+                  ? "Sudah di jalur yang tepat 💪"
+                  : "Masih banyak yang bisa dikejar 🚀"}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-white/80">
+              {analysis.correctCount} dari {questions.length} soal dijawab benar — ketepatan{" "}
+              {accuracy}%.
+            </p>
+            <div className="mt-4">
+              <ResultStatus
+                status={analysis.status}
+                appearance="solid"
+                className="px-3 py-1.5 text-sm"
+              />
+            </div>
           </div>
         </div>
-
-        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-slate-200 pt-6 sm:grid-cols-4">
-          <div>
-            <dt className="text-sm text-slate-500">Benar</dt>
-            <dd className="mt-0.5 text-xl font-semibold tabular-nums text-ink-900">
-              {analysis.correctCount}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-slate-500">Salah</dt>
-            <dd className="mt-0.5 text-xl font-semibold tabular-nums text-ink-900">
-              {analysis.wrongCount}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-slate-500">Tidak dijawab</dt>
-            <dd className="mt-0.5 text-xl font-semibold tabular-nums text-ink-900">
-              {analysis.unansweredCount}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-slate-500">Waktu pengerjaan</dt>
-            <dd className="mt-0.5 text-xl font-semibold tabular-nums text-ink-900">
-              {formatDuration(elapsedSeconds)}
-            </dd>
-          </div>
-        </dl>
-
-        {leftPageCount > 0 ? (
-          <p className="mt-6 border-t border-slate-200 pt-5 text-sm leading-relaxed text-slate-500">
-            Catatan: halaman ujian tercatat ditinggalkan {leftPageCount} kali. Hasil tetap dihitung
-            penuh; catatan ini hanya membantu menilai seberapa mandiri simulasi dikerjakan.
-          </p>
-        ) : null}
       </section>
+
+      <section className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <StatCard icon="check" tone="emerald" label="Benar" value={analysis.correctCount} />
+        <StatCard icon="close" tone="rose" label="Salah" value={analysis.wrongCount} />
+        <StatCard icon="minus" tone="slate" label="Kosong" value={analysis.unansweredCount} />
+        <StatCard
+          icon="clock"
+          tone="sky"
+          label="Waktu"
+          value={formatDuration(elapsedSeconds)}
+          valueClassName="text-xl"
+        />
+      </section>
+
+      {leftPageCount > 0 ? (
+        <p className="mt-4 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900">
+          <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+          <span>
+            Halaman ujian tercatat ditinggalkan {leftPageCount} kali. Hasil tetap dihitung penuh;
+            catatan ini hanya membantu menilai seberapa mandiri simulasi dikerjakan.
+          </span>
+        </p>
+      ) : null}
 
       {/* Satu narasi: materi apa yang harus dipelajari lebih dulu. */}
-      <section className="mt-12">
+      <section className="mt-8">
         <div
           className={[
-            "rounded-2xl border p-6 sm:p-8",
+            "rounded-3xl border p-6 shadow-card sm:p-8",
             narrative.isAllClear
-              ? "border-emerald-200 bg-emerald-50"
-              : "border-brand-200 bg-gradient-to-br from-brand-50 to-white",
+              ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
+              : "border-violet-200 bg-gradient-to-br from-violet-50 to-white",
           ].join(" ")}
         >
-          <p className="eyebrow">Yang perlu dipelajari lebih dulu</p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
-            {narrative.headline}
-          </h2>
-          <p className="mt-3 max-w-2xl text-[15px] leading-[1.75] text-slate-700">
-            {narrative.body}
-          </p>
+          <div className="flex items-start gap-4">
+            <IconBadge
+              name={narrative.isAllClear ? "trophy" : "compass"}
+              tone={narrative.isAllClear ? "emerald" : "violet"}
+              size="lg"
+            />
+            <div className="min-w-0">
+              <p
+                className={`text-xs font-bold uppercase tracking-[0.12em] ${
+                  narrative.isAllClear ? "text-emerald-700" : "text-violet-700"
+                }`}
+              >
+                Yang perlu dipelajari lebih dulu
+              </p>
+              <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
+                {narrative.headline}
+              </h2>
+              <p className="mt-2.5 max-w-2xl text-[15px] leading-[1.75] text-slate-700">
+                {narrative.body}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Rincian: konsep apa yang perlu dipelajari, lengkap dengan pola kelirunya. */}
+      {analysis.conceptFocus.length > 0 ? (
+        <section className="mt-12">
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="book" tone="sky" size="md" />
+            Yang perlu kamu pelajari
+          </h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+            Diurutkan dari yang paling sedikit benar. Mulai dari nomor satu, ya.
+          </p>
+          <ConceptFocusList concepts={analysis.conceptFocus} />
+        </section>
+      ) : null}
 
       {recommendedPackages.length > 0 ? (
         <section className="mt-12">
-          <h2 className="text-xl font-semibold tracking-tight">Latihan yang disarankan</h2>
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="target" tone="brand" size="md" />
+            Paket yang perlu dicoba
+          </h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+            Paket ini melatih materi yang tadi paling sering keliru. Kerjakan dari yang paling atas.
+          </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {recommendedPackages.map((pkg, index) => (
               <li key={pkg.id}>
@@ -177,17 +249,23 @@ export function TryoutResultView({
         </section>
       ) : null}
 
-
       {/* Langkah berikutnya */}
-      <section className="mt-14 rounded-lg border border-slate-200 bg-slate-50 p-6 sm:p-8">
-        <h2 className="text-xl font-semibold tracking-tight">Langkah berikutnya</h2>
-        <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+      <section className="mt-14 rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card sm:p-8">
+        <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+          <IconBadge name="bolt" tone="brand" size="sm" />
+          Langkah berikutnya
+        </h2>
+        <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-slate-600">
           Hasil ini tersimpan di perangkat ini dan dapat dibuka lagi lewat tautan yang sama.
           Simulasi boleh diulang kapan saja untuk melihat perubahan setelah latihan.
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/latihan">Lihat Paket Latihan</ButtonLink>
+          <ButtonLink href="/latihan">
+            <Icon name="layers" className="h-5 w-5" />
+            Lihat Paket Latihan
+          </ButtonLink>
           <ButtonLink href={`/tryout/${tryout.slug}`} variant="secondary">
+            <Icon name="refresh" className="h-5 w-5" />
             Ulangi Simulasi
           </ButtonLink>
         </div>

@@ -17,7 +17,7 @@ export function SiteFooter() {
               <span className="font-semibold tracking-tight text-ink-900">{site.name}</span>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              {site.tagline}. Simulasi dapat dikerjakan gratis, dan hasilnya menunjukkan bagian
+              {site.tagline}. Simulasi latihan dan tryout TKA dan hasilnya menunjukkan bagian
               mana yang sebaiknya diperkuat lebih dulu.
             </p>
           </div>
@@ -35,10 +35,6 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-8 border-t border-slate-200 pt-6 text-xs leading-relaxed text-slate-500">
-          Versi prototype. Data soal, hasil, dan voucher masih bersifat contoh dan tersimpan di
-          perangkat ini saja. {site.name} bukan bagian dari penyelenggara ujian resmi.
-        </p>
       </div>
     </footer>
   );

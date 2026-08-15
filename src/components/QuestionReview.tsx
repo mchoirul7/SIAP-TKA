@@ -1,6 +1,7 @@
 "use client";
 
 import { QuestionOption } from "@/components/QuestionOption";
+import { Icon } from "@/components/ui/Icon";
 import { RichText } from "@/components/RichText";
 import type { AnswerValue, Question } from "@/data/types";
 import { categoryAssignments, selectedKeys } from "@/lib/answers";
@@ -96,15 +97,28 @@ function CategoryReview({
             </div>
 
             <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <span className="font-semibold text-emerald-800">
+              <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-800">
+                <Icon name="check" className="h-4 w-4 text-emerald-600" strokeWidth={2.4} />
                 Jawaban benar: {labelOf(statement.correctCategoryKey)}
               </span>
               {chosen ? (
-                <span className={isRight ? "text-emerald-700" : "text-rose-700"}>
+                <span
+                  className={`inline-flex items-center gap-1.5 ${
+                    isRight ? "text-emerald-700" : "text-rose-700"
+                  }`}
+                >
+                  <Icon
+                    name={isRight ? "check" : "close"}
+                    className="h-4 w-4"
+                    strokeWidth={2.4}
+                  />
                   Jawabanmu: {labelOf(chosen)}
                 </span>
               ) : (
-                <span className="text-slate-500">Belum dijawab</span>
+                <span className="inline-flex items-center gap-1.5 text-slate-500">
+                  <Icon name="minus" className="h-4 w-4" strokeWidth={2.4} />
+                  Belum dijawab
+                </span>
               )}
             </p>
           </li>

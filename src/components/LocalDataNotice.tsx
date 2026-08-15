@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { clearLocalData } from "@/services/local-data-service";
 
 /**
@@ -20,7 +21,10 @@ export function LocalDataNotice() {
 
   return (
     <section className="mt-14 border-t border-slate-200 pt-8">
-      <h2 className="text-lg font-semibold tracking-tight">Data di perangkat ini</h2>
+      <h2 className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight">
+        <IconBadge name="shield-check" tone="sky" size="sm" />
+        Data di perangkat ini
+      </h2>
       <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
         Pengerjaan tidak disimpan sebagai riwayat dan tidak dikirim ke mana pun. Yang tersimpan
         hanya keadaan yang sedang berjalan di peramban ini: nama dan kelas, jawaban simulasi yang

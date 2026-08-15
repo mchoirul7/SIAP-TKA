@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CoverArt, type CoverTone } from "@/components/CoverArt";
 import { Badge } from "@/components/ui/Badge";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 
@@ -46,27 +47,33 @@ export function TryoutCard({
         </p>
 
         <ul className="mt-3 flex flex-wrap gap-1.5">
-          {[
-            `${tryout.questionIds.length} soal`,
-            `${tryout.durationMinutes} menit`,
-            `Jenjang ${tryout.level}`,
-          ].map((tag) => (
+          {(
+            [
+              { icon: "list-check", text: `${tryout.questionIds.length} soal`, tone: "bg-brand-50 text-brand-800 ring-brand-100" },
+              { icon: "hourglass", text: `${tryout.durationMinutes} menit`, tone: "bg-rose-50 text-rose-800 ring-rose-100" },
+              { icon: "cap", text: `Jenjang ${tryout.level}`, tone: "bg-sky-50 text-sky-800 ring-sky-100" },
+            ] satisfies { icon: IconName; text: string; tone: string }[]
+          ).map((tag) => (
             <li
-              key={tag}
-              className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-800 ring-1 ring-inset ring-brand-100"
+              key={tag.text}
+              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${tag.tone}`}
             >
-              {tag}
+              <Icon name={tag.icon} className="h-3.5 w-3.5" />
+              {tag.text}
             </li>
           ))}
         </ul>
 
-        <Link
-          href={`/tryout/${tryout.slug}`}
-          className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-sm font-bold text-white transition-opacity hover:opacity-90"
-        >
-          <LinkPending />
-          Coba Sekarang
-        </Link>
+        <div className="mt-auto pt-4">
+          <Link
+            href={`/tryout/${tryout.slug}`}
+            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-sm font-bold text-white transition-opacity hover:opacity-90"
+          >
+            <LinkPending />
+            <Icon name="play" className="h-4 w-4" strokeWidth={2.2} />
+            Coba Sekarang
+          </Link>
+        </div>
       </div>
     </article>
   );

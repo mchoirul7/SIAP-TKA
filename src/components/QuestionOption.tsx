@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@/components/ui/Icon";
 import { RichText } from "@/components/RichText";
 
 export type OptionState = "default" | "correct" | "chosen-wrong" | "muted";
@@ -121,8 +122,33 @@ export function QuestionOption({
             {text}
           </span>
         )}
-        {note ? <span className="mt-1 block text-sm text-slate-600">{note}</span> : null}
+        {note ? (
+          <span
+            className={[
+              "mt-1 block text-sm font-medium",
+              state === "correct"
+                ? "text-emerald-700"
+                : state === "chosen-wrong"
+                  ? "text-rose-700"
+                  : "text-slate-600",
+            ].join(" ")}
+          >
+            {note}
+          </span>
+        ) : null}
       </span>
+
+      {/* Penanda hasil di ujung baris: warna saja tidak cukup, bentuknya ikut membedakan. */}
+      {state === "correct" || state === "chosen-wrong" ? (
+        <Icon
+          name={state === "correct" ? "check" : "close"}
+          className={[
+            "mt-0.5 h-5 w-5 shrink-0",
+            state === "correct" ? "text-emerald-600" : "text-rose-600",
+          ].join(" ")}
+          strokeWidth={2.4}
+        />
+      ) : null}
     </label>
   );
 }

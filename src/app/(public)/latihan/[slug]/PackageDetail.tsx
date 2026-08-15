@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
+import { StatCard } from "@/components/ui/StatCard";
 import { useVoucherDialog } from "@/components/VoucherDialog";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
@@ -42,8 +45,12 @@ export function PackageDetail({
     <div className="container-page py-12 sm:py-14">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
         <div>
-          <Link href="/latihan" className="text-sm text-slate-500 hover:text-brand-800">
-            ← Kembali ke paket latihan
+          <Link
+            href="/latihan"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-800"
+          >
+            <Icon name="arrow-left" className="h-4 w-4" />
+            Kembali ke paket latihan
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -61,38 +68,55 @@ export function PackageDetail({
             </span>
           </div>
 
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{pkg.title}</h1>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{pkg.title}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{pkg.description}</p>
 
-          <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-y border-slate-200 py-6 sm:grid-cols-4">
-            <div>
-              <dt className="text-sm text-slate-500">Jumlah soal</dt>
-              <dd className="mt-0.5 text-lg font-semibold tabular-nums text-ink-900">
-                {pkg.questionIds.length}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Perkiraan waktu</dt>
-              <dd className="mt-0.5 text-lg font-semibold tabular-nums text-ink-900">
-                ± {pkg.estimatedMinutes} menit
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Tingkat</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-ink-900">{pkg.difficultyRange}</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Subtopik</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-ink-900">{subtopicName}</dd>
-            </div>
-          </dl>
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            <StatCard
+              icon="list-check"
+              tone="brand"
+              label="Jumlah soal"
+              value={pkg.questionIds.length}
+            />
+            <StatCard
+              icon="clock"
+              tone="sky"
+              label="Perkiraan waktu"
+              value={`± ${pkg.estimatedMinutes} menit`}
+              valueClassName="text-lg"
+            />
+            <StatCard
+              icon="chart"
+              tone="violet"
+              label="Tingkat"
+              value={pkg.difficultyRange}
+              valueClassName="text-lg"
+            />
+            <StatCard
+              icon="compass"
+              tone="amber"
+              label="Subtopik"
+              value={subtopicName}
+              valueClassName="text-base leading-snug"
+            />
+          </div>
 
           <section className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight">Yang akan dilatih</h2>
-            <ul className="mt-4 space-y-2.5">
+            <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+              <IconBadge name="target" tone="emerald" size="sm" />
+              Yang akan dilatih
+            </h2>
+            <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
               {pkg.skills.map((skill) => (
-                <li key={skill} className="flex gap-3 text-[15px] leading-relaxed text-slate-700">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />
+                <li
+                  key={skill}
+                  className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/60 p-3.5 text-[15px] leading-relaxed text-slate-700"
+                >
+                  <Icon
+                    name="check"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600"
+                    strokeWidth={2.4}
+                  />
                   <span>{skill}</span>
                 </li>
               ))}
@@ -100,8 +124,11 @@ export function PackageDetail({
           </section>
 
           <section className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight">Cara mengerjakan</h2>
-            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+            <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+              <IconBadge name="bulb" tone="violet" size="sm" />
+              Cara mengerjakan
+            </h2>
+            <p className="mt-4 max-w-2xl rounded-2xl border border-violet-200 bg-violet-50/60 p-4 text-[15px] leading-relaxed text-slate-700">
               Latihan tidak memakai waktu ketat seperti simulasi. Kerjakan soal satu per satu,
               lalu lihat skor dan konsep yang perlu diulang di akhir. Pembahasan setiap soal dapat
               dibuka setelah latihan selesai.
@@ -114,8 +141,9 @@ export function PackageDetail({
           {!mounted ? (
             <div className="h-56 animate-pulse rounded-lg bg-slate-100" aria-hidden="true" />
           ) : unlocked ? (
-            <div className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="text-lg font-semibold tracking-tight">
+            <div className="rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 shadow-card">
+              <IconBadge name="unlock" tone="emerald" size="lg" />
+              <h2 className="mt-4 text-lg font-extrabold tracking-tight">
                 {pkg.isPremium ? "Paket sudah terbuka" : "Paket contoh gratis"}
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
@@ -124,6 +152,7 @@ export function PackageDetail({
 
               <div className="mt-6 space-y-2">
                 <ButtonLink href={`/latihan/${pkg.slug}/kerjakan`} size="lg" className="w-full">
+                  <Icon name="play" className="h-5 w-5" />
                   {hasStartedAttempt && !hasFinishedAttempt ? "Lanjutkan Latihan" : "Mulai Latihan Online"}
                 </ButtonLink>
                 <ButtonLink
@@ -131,13 +160,14 @@ export function PackageDetail({
                   variant="secondary"
                   className="w-full"
                 >
+                  <Icon name="book" className="h-5 w-5" />
                   Lihat Pembahasan
                 </ButtonLink>
               </div>
 
               {hasFinishedAttempt ? (
-                <p className="mt-5 border-t border-slate-200 pt-4 text-sm text-slate-600">
-                  Latihan ini pernah diselesaikan.{" "}
+                <p className="mt-5 flex items-center gap-2 border-t border-emerald-200 pt-4 text-sm text-slate-600">
+                  <Icon name="chart" className="h-4 w-4 shrink-0 text-emerald-600" />
                   <Link href={`/latihan/${pkg.slug}/hasil`} className="link-underline font-semibold">
                     Lihat hasil terakhir
                   </Link>
@@ -145,9 +175,10 @@ export function PackageDetail({
               ) : null}
             </div>
           ) : (
-            <div className="rounded-lg border border-brand-200 bg-brand-50 p-6">
-              <p className="eyebrow">Paket Premium</p>
-              <h2 className="mt-2 text-lg font-semibold tracking-tight">
+            <div className="rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
+              <IconBadge name="lock" tone="brand" size="lg" />
+              <p className="eyebrow mt-4">Paket Premium</p>
+              <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
                 Masukkan voucher untuk membuka latihan ini.
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-700">
@@ -156,10 +187,11 @@ export function PackageDetail({
 
               <ul className="mt-5 space-y-2 text-[15px] text-slate-700">
                 {["Latihan online", "Pembahasan setiap soal", "Dapat dikerjakan ulang"].map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"
+                  <li key={item} className="flex items-start gap-2.5">
+                    <Icon
+                      name="check"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brand-600"
+                      strokeWidth={2.4}
                     />
                     <span>{item}</span>
                   </li>
@@ -169,8 +201,9 @@ export function PackageDetail({
               <button
                 type="button"
                 onClick={() => openVoucher({ packageSlug: pkg.slug, packageTitle: pkg.title })}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-lg bg-brand-800 px-4 text-base font-semibold text-white transition-colors hover:bg-brand-900"
+                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-800 px-4 text-base font-bold text-white transition-opacity hover:opacity-90"
               >
+                <Icon name="ticket" className="h-5 w-5" />
                 Masukkan Voucher
               </button>
 

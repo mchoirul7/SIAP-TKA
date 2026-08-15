@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { LocalDataNotice } from "@/components/LocalDataNotice";
 import { ButtonLink } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { site } from "@/lib/site";
 
@@ -17,12 +19,16 @@ export default function AboutPage() {
         <SectionHeader
           as="h1"
           eyebrow="Tentang"
+          icon="compass"
           title={`Tentang ${site.name}`}
           description={site.valueProposition}
         />
 
         <section className="mt-12">
-          <h2 className="text-xl font-semibold tracking-tight">Mengapa dibuat</h2>
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="bulb" tone="violet" size="sm" />
+            Mengapa dibuat
+          </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
             Menjelang ujian, banyak keluarga memiliki masalah yang sama: nilai latihan sudah
             terlihat, tetapi tidak jelas apa yang harus diperbaiki. Skor 68 tidak memberi tahu
@@ -36,7 +42,10 @@ export default function AboutPage() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-xl font-semibold tracking-tight">Cara hasil disusun</h2>
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="layers" tone="brand" size="sm" />
+            Cara hasil disusun
+          </h2>
           <ol className="mt-4 space-y-5">
             {[
               {
@@ -53,7 +62,10 @@ export default function AboutPage() {
               },
             ].map((item, index) => (
               <li key={item.title} className="flex gap-4">
-                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-brand-200 bg-brand-50 text-sm font-semibold tabular-nums text-brand-800">
+                <span
+                  aria-hidden="true"
+                  className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold tabular-nums text-white shadow-card"
+                >
                   {index + 1}
                 </span>
                 <div>
@@ -66,7 +78,10 @@ export default function AboutPage() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-xl font-semibold tracking-tight">Yang tidak dilakukan</h2>
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="shield-check" tone="emerald" size="sm" />
+            Yang tidak dilakukan
+          </h2>
           <ul className="mt-4 space-y-2.5">
             {[
               "Tidak ada riwayat pengerjaan yang dikumpulkan. Hasil tersimpan di perangkat yang dipakai, tidak dikirim ke mana pun, dan dapat dihapus kapan saja lewat tombol di bawah halaman ini.",
@@ -75,9 +90,10 @@ export default function AboutPage() {
               "Tidak ada janji nilai tertentu. Simulasi hanya alat bantu untuk melihat posisi saat ini.",
             ].map((item) => (
               <li key={item} className="flex gap-3 text-[15px] leading-relaxed text-slate-700">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"
+                <Icon
+                  name="close"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-rose-500"
+                  strokeWidth={2.4}
                 />
                 <span>{item}</span>
               </li>
@@ -85,9 +101,12 @@ export default function AboutPage() {
           </ul>
         </section>
 
-        <section className="mt-12 rounded-lg border border-slate-200 bg-slate-50 p-6">
-          <h2 className="text-lg font-semibold tracking-tight">Catatan versi prototype</h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+        <section className="mt-12 rounded-3xl border border-amber-200 bg-amber-50 p-6">
+          <h2 className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight">
+            <IconBadge name="info" tone="amber" size="sm" />
+            Catatan versi prototype
+          </h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-amber-900">
             Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Bank soal masih
             berupa contoh, voucher menggunakan kode demo, dan seluruh hasil tersimpan di perangkat
             ini saja sehingga tidak berpindah antarperangkat.
@@ -98,9 +117,11 @@ export default function AboutPage() {
 
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="/tryout" size="lg">
+            <Icon name="play" className="h-5 w-5" />
             Mulai Tryout Gratis
           </ButtonLink>
           <ButtonLink href="/latihan" variant="secondary" size="lg">
+            <Icon name="layers" className="h-5 w-5" />
             Lihat Paket Latihan
           </ButtonLink>
         </div>

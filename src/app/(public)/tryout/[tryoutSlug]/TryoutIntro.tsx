@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
+import { StatCard } from "@/components/ui/StatCard";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
@@ -61,51 +64,72 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
     <div className="container-page py-12 sm:py-14">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
         <div>
-          <Link href="/tryout" className="text-sm text-slate-500 hover:text-brand-800">
-            ← Kembali ke daftar tryout
+          <Link
+            href="/tryout"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-800"
+          >
+            <Icon name="arrow-left" className="h-4 w-4" />
+            Kembali ke daftar tryout
           </Link>
 
-          <div className="mt-5 flex items-center gap-3">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             <Badge tone="free">Gratis</Badge>
-            <span className="text-sm text-slate-500">
+            <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
+              <Icon name="cap" className="h-4 w-4 text-brand-600" />
               {subjectName} · Jenjang {tryout.level}
             </span>
           </div>
 
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{tryout.title}</h1>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{tryout.title}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
             {tryout.description}
           </p>
 
-          <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-y border-slate-200 py-6 sm:grid-cols-4">
-            <div>
-              <dt className="text-sm text-slate-500">Jumlah soal</dt>
-              <dd className="mt-0.5 text-lg font-semibold tabular-nums text-ink-900">
-                {tryout.questionIds.length}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Durasi</dt>
-              <dd className="mt-0.5 text-lg font-semibold tabular-nums text-ink-900">
-                {tryout.durationMinutes} menit
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Bentuk soal</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-ink-900">Pilihan ganda</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-slate-500">Biaya</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-ink-900">Gratis</dd>
-            </div>
-          </dl>
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            <StatCard
+              icon="list-check"
+              tone="brand"
+              label="Jumlah soal"
+              value={tryout.questionIds.length}
+            />
+            <StatCard
+              icon="hourglass"
+              tone="rose"
+              label="Durasi"
+              value={`${tryout.durationMinutes} menit`}
+              valueClassName="text-lg"
+            />
+            <StatCard
+              icon="note"
+              tone="violet"
+              label="Bentuk soal"
+              value="Pilihan ganda"
+              valueClassName="text-lg"
+            />
+            <StatCard
+              icon="star"
+              tone="emerald"
+              label="Biaya"
+              value="Gratis"
+              valueClassName="text-lg"
+            />
+          </div>
 
           <section className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight">Petunjuk pengerjaan</h2>
-            <ol className="mt-4 space-y-3">
+            <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+              <IconBadge name="list-check" tone="sky" size="sm" />
+              Petunjuk pengerjaan
+            </h2>
+            <ol className="mt-4 space-y-2.5">
               {tryout.instructions.map((instruction, index) => (
-                <li key={instruction} className="flex gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded border border-slate-300 text-xs font-semibold tabular-nums text-slate-600">
+                <li
+                  key={instruction}
+                  className="flex gap-3 rounded-2xl border border-sky-200 bg-sky-50/50 p-3.5"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-sky-600 text-xs font-extrabold tabular-nums text-white"
+                  >
                     {index + 1}
                   </span>
                   <span className="text-[15px] leading-relaxed text-slate-700">{instruction}</span>
@@ -114,36 +138,47 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
             </ol>
           </section>
 
-          <p className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600 lg:hidden">
-            Untuk pengalaman simulasi terbaik, gunakan laptop atau komputer. Simulasi tetap dapat
-            dikerjakan dari ponsel.
+          <p className="mt-8 flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900 lg:hidden">
+            <Icon name="info" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+            <span>
+              Untuk pengalaman simulasi terbaik, gunakan laptop atau komputer. Simulasi tetap dapat
+              dikerjakan dari ponsel.
+            </span>
           </p>
         </div>
 
         {/* Panel mulai */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-lg border border-slate-200 bg-white p-6">
+          <div className="rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
             {!mounted ? (
-              <div className="h-64 animate-pulse rounded bg-slate-100" aria-hidden="true" />
+              <div className="h-64 animate-pulse rounded-2xl bg-brand-100/70" aria-hidden="true" />
             ) : hasUnfinishedAttempt ? (
               <>
-                <h2 className="text-lg font-semibold tracking-tight">Simulasi belum selesai</h2>
+                <IconBadge name="hourglass" tone="amber" size="lg" />
+                <h2 className="mt-4 text-lg font-extrabold tracking-tight">
+                  Simulasi belum selesai
+                </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   Ada pengerjaan yang belum diselesaikan. Waktu tetap berjalan sejak simulasi
                   dimulai.
                 </p>
                 <div className="mt-6 space-y-2">
                   <Button size="lg" className="w-full" loading={isPending} onClick={handleContinue}>
+                    {isPending ? null : <Icon name="play" className="h-5 w-5" />}
                     Lanjutkan Tryout
                   </Button>
                   <Button variant="secondary" className="w-full" loading={isPending} onClick={handleRestart}>
+                    {isPending ? null : <Icon name="refresh" className="h-5 w-5" />}
                     Mulai Ulang dari Awal
                   </Button>
                 </div>
               </>
             ) : hasFinishedAttempt ? (
               <>
-                <h2 className="text-lg font-semibold tracking-tight">Simulasi sudah dikerjakan</h2>
+                <IconBadge name="medal" tone="emerald" size="lg" />
+                <h2 className="mt-4 text-lg font-extrabold tracking-tight">
+                  Simulasi sudah dikerjakan
+                </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   Terakhir dikerjakan{" "}
                   {attempt?.submittedAt ? formatDate(attempt.submittedAt) : ""}. Hasilnya masih
@@ -156,16 +191,19 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                     onClick={() => navigate(`/tryout/${tryout.slug}/hasil`)}
                     loading={isPending}
                   >
+                    {isPending ? null : <Icon name="chart" className="h-5 w-5" />}
                     Lihat Hasil
                   </Button>
                   <Button variant="secondary" className="w-full" loading={isPending} onClick={handleRestart}>
+                    {isPending ? null : <Icon name="refresh" className="h-5 w-5" />}
                     Ulangi Simulasi
                   </Button>
                 </div>
               </>
             ) : (
               <>
-                <h2 className="text-lg font-semibold tracking-tight">Sebelum mulai</h2>
+                <IconBadge name="cap" tone="brand" size="lg" />
+                <h2 className="mt-4 text-lg font-extrabold tracking-tight">Sebelum mulai</h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   Nama dan kelas dipakai untuk menandai hasil di perangkat ini saja.
                 </p>
@@ -215,9 +253,11 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                 </div>
 
                 <Button size="lg" className="mt-6 w-full" loading={isPending} onClick={handleStart}>
+                  {isPending ? null : <Icon name="play" className="h-5 w-5" />}
                   Mulai Tryout
                 </Button>
-                <p className="mt-3 text-center text-sm text-slate-500">
+                <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-sm text-slate-500">
+                  <Icon name="clock" className="h-4 w-4 text-brand-500" />
                   Waktu mulai berjalan setelah tombol ditekan.
                 </p>
               </>

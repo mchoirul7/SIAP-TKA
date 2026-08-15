@@ -5,6 +5,8 @@ import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
 import { Toast } from "@/components/Toast";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
@@ -193,18 +195,20 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
             role="timer"
             aria-live="off"
           >
+            <Icon name="clock" className="mr-1.5 h-4 w-4" />
             <span className="sr-only">Sisa waktu </span>
             {formatClock(remainingSeconds)}
           </div>
 
           <Button size="sm" onClick={() => setIsSubmitOpen(true)} className="shrink-0">
+            <Icon name="flag" className="h-4 w-4" />
             Selesai
           </Button>
         </div>
 
-        <div className="h-1 w-full bg-slate-100">
+        <div className="h-1.5 w-full bg-slate-100">
           <div
-            className="h-full bg-brand-700 transition-[width] duration-300"
+            className="h-full bg-gradient-to-r from-brand-400 to-brand-600 transition-[width] duration-300"
             style={{ width: `${(answeredCount / questions.length) * 100}%` }}
           />
         </div>
@@ -213,20 +217,31 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:gap-10">
         {/* Area soal */}
         <main className="min-w-0 flex-1">
-          <article className="rounded-lg border border-slate-200 bg-white p-5 sm:p-7">
+          <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-card sm:p-7">
             <div className="flex items-center justify-between gap-4">
-              <h1 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
+              <h1 className="flex items-center gap-2.5 text-sm font-bold tracking-tight text-ink-900">
+                <span
+                  aria-hidden="true"
+                  className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold tabular-nums text-white shadow-card"
+                >
+                  {currentIndex + 1}
+                </span>
                 Soal {currentIndex + 1}
               </h1>
               {markedIds.has(question.id) ? (
-                <span className="inline-flex items-center rounded bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200">
+                  <Icon name="flag" className="h-4 w-4" strokeWidth={2.2} />
                   Ditandai ragu-ragu
                 </span>
               ) : null}
             </div>
 
             {question.stimulus ? (
-              <div className="mt-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+              <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
+                  <Icon name="note" className="h-4 w-4" />
+                  Bacaan
+                </p>
                 {question.contentFormat === "html" ? (
                   <RichText html={question.stimulus} className="stimulus-text" />
                 ) : (
@@ -250,26 +265,35 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
               onClick={() => goTo(currentIndex - 1)}
               disabled={currentIndex === 0}
             >
+              <Icon name="arrow-left" className="h-5 w-5" />
               Sebelumnya
             </Button>
             <Button
               variant={markedIds.has(question.id) ? "primary" : "secondary"}
               onClick={() => handleToggleMark(question.id)}
             >
+              <Icon name="flag" className="h-5 w-5" />
               {markedIds.has(question.id) ? "Hapus Tanda Ragu" : "Tandai Ragu-ragu"}
             </Button>
             <div className="ml-auto flex items-center gap-2.5">
               <button
                 type="button"
                 onClick={() => setIsNavigatorOpen(true)}
-                className="inline-flex h-11 items-center rounded-lg border border-slate-300 bg-white px-4 text-[15px] font-semibold text-brand-800 lg:hidden"
+                className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 text-[15px] font-semibold text-brand-800 lg:hidden"
               >
+                <Icon name="list-check" className="h-5 w-5" />
                 Daftar Soal
               </button>
               {currentIndex === questions.length - 1 ? (
-                <Button onClick={() => setIsSubmitOpen(true)}>Selesai Ujian</Button>
+                <Button onClick={() => setIsSubmitOpen(true)}>
+                  <Icon name="flag" className="h-5 w-5" />
+                  Selesai Ujian
+                </Button>
               ) : (
-                <Button onClick={() => goTo(currentIndex + 1)}>Selanjutnya</Button>
+                <Button onClick={() => goTo(currentIndex + 1)}>
+                  Selanjutnya
+                  <Icon name="arrow-right" className="h-5 w-5" />
+                </Button>
               )}
             </div>
           </div>
@@ -277,8 +301,11 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
 
         {/* Navigator desktop */}
         <aside className="hidden w-64 shrink-0 lg:block">
-          <div className="sticky top-24 rounded-lg border border-slate-200 bg-white p-5">
-            <h2 className="text-sm font-semibold text-ink-900">Daftar Soal</h2>
+          <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
+            <h2 className="flex items-center gap-2 text-sm font-bold text-ink-900">
+              <Icon name="list-check" className="h-4 w-4 text-brand-600" strokeWidth={2.2} />
+              Daftar Soal
+            </h2>
             <p className="mt-1 text-xs tabular-nums text-slate-500">
               {answeredCount} dijawab · {markedCount} ditandai
             </p>
@@ -294,6 +321,7 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
               className="mt-5 w-full"
               onClick={() => setIsSubmitOpen(true)}
             >
+              <Icon name="flag" className="h-5 w-5" />
               Selesai Ujian
             </Button>
           </div>
@@ -315,7 +343,10 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
             className="absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-xl border-t border-slate-200 bg-white p-5"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-semibold text-ink-900">Daftar Soal</h2>
+              <h2 className="flex items-center gap-2 text-base font-bold text-ink-900">
+                <Icon name="list-check" className="h-5 w-5 text-brand-600" strokeWidth={2.2} />
+                Daftar Soal
+              </h2>
               <button
                 type="button"
                 onClick={() => setIsNavigatorOpen(false)}
@@ -348,39 +379,54 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
             aria-labelledby="submit-title"
             className="relative w-full max-w-md rounded-t-xl border border-slate-200 bg-white p-6 shadow-raised sm:rounded-xl"
           >
-            <h2 id="submit-title" className="text-xl font-semibold tracking-tight">
+            <IconBadge name="flag" tone="brand" size="lg" />
+            <h2 id="submit-title" className="mt-4 text-xl font-extrabold tracking-tight">
               Selesaikan Tryout?
             </h2>
             <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
               Setelah dikirim, jawaban tidak dapat diubah dan hasil langsung ditampilkan.
             </p>
 
-            <dl className="mt-5 divide-y divide-slate-200 border-y border-slate-200 text-[15px]">
-              <div className="flex justify-between py-2.5">
-                <dt className="text-slate-600">Jumlah soal</dt>
-                <dd className="font-semibold tabular-nums text-ink-900">{questions.length} soal</dd>
+            <dl className="mt-5 space-y-2 text-[15px]">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3.5 py-2.5">
+                <dt className="flex items-center gap-2 text-slate-600">
+                  <Icon name="list-check" className="h-4 w-4 text-slate-500" />
+                  Jumlah soal
+                </dt>
+                <dd className="font-bold tabular-nums text-ink-900">{questions.length} soal</dd>
               </div>
-              <div className="flex justify-between py-2.5">
-                <dt className="text-slate-600">Sudah dijawab</dt>
-                <dd className="font-semibold tabular-nums text-ink-900">{answeredCount} soal</dd>
+              <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2.5">
+                <dt className="flex items-center gap-2 text-emerald-800">
+                  <Icon name="check" className="h-4 w-4 text-emerald-600" strokeWidth={2.2} />
+                  Sudah dijawab
+                </dt>
+                <dd className="font-bold tabular-nums text-emerald-800">{answeredCount} soal</dd>
               </div>
-              <div className="flex justify-between py-2.5">
-                <dt className="text-slate-600">Belum dijawab</dt>
-                <dd className="font-semibold tabular-nums text-ink-900">
+              <div className="flex items-center justify-between rounded-xl bg-rose-50 px-3.5 py-2.5">
+                <dt className="flex items-center gap-2 text-rose-800">
+                  <Icon name="minus" className="h-4 w-4 text-rose-600" strokeWidth={2.2} />
+                  Belum dijawab
+                </dt>
+                <dd className="font-bold tabular-nums text-rose-800">
                   {questions.length - answeredCount} soal
                 </dd>
               </div>
-              <div className="flex justify-between py-2.5">
-                <dt className="text-slate-600">Ditandai ragu-ragu</dt>
-                <dd className="font-semibold tabular-nums text-ink-900">{markedCount} soal</dd>
+              <div className="flex items-center justify-between rounded-xl bg-amber-50 px-3.5 py-2.5">
+                <dt className="flex items-center gap-2 text-amber-900">
+                  <Icon name="flag" className="h-4 w-4 text-amber-600" strokeWidth={2.2} />
+                  Ditandai ragu-ragu
+                </dt>
+                <dd className="font-bold tabular-nums text-amber-900">{markedCount} soal</dd>
               </div>
             </dl>
 
             <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
               <Button className="sm:flex-1" loading={isPending} onClick={finish}>
+                {isPending ? null : <Icon name="check" className="h-5 w-5" strokeWidth={2.2} />}
                 Submit Tryout
               </Button>
               <Button variant="secondary" onClick={() => setIsSubmitOpen(false)}>
+                <Icon name="arrow-left" className="h-5 w-5" />
                 Kembali Mengerjakan
               </Button>
             </div>

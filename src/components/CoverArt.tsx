@@ -1,3 +1,4 @@
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { site } from "@/lib/site";
 
 /**
@@ -5,7 +6,19 @@ import { site } from "@/lib/site";
  * Dibuat sepenuhnya dengan CSS dan SVG sehingga tidak memerlukan berkas gambar.
  */
 
-export type CoverTone = "orange" | "amber" | "rust" | "sunset" | "gold" | "ink";
+export type CoverTone =
+  | "orange"
+  | "amber"
+  | "rust"
+  | "sunset"
+  | "gold"
+  | "ink"
+  /** Warna mata pelajaran: sengaja keluar dari keluarga oranye agar tiap mapel mudah dibedakan. */
+  | "violet"
+  | "sky"
+  | "emerald"
+  | "rose"
+  | "honey";
 
 const toneGradient: Record<CoverTone, string> = {
   orange: "from-brand-500 via-brand-600 to-brand-700",
@@ -15,6 +28,11 @@ const toneGradient: Record<CoverTone, string> = {
   gold: "from-yellow-400 via-brand-500 to-brand-700",
   /** Dipakai kartu tryout, supaya jelas berbeda dari kartu paket latihan. */
   ink: "from-ink-700 via-ink-900 to-brand-900",
+  violet: "from-violet-500 via-violet-600 to-indigo-700",
+  sky: "from-sky-400 via-sky-600 to-indigo-700",
+  emerald: "from-emerald-400 via-emerald-600 to-teal-700",
+  rose: "from-rose-400 via-rose-600 to-pink-700",
+  honey: "from-yellow-400 via-amber-500 to-amber-700",
 };
 
 export function CoverArt({
@@ -22,6 +40,7 @@ export function CoverArt({
   title,
   subtitle,
   tone = "orange",
+  icon,
   className = "",
 }: {
   /** Penanda kecil di atas judul, misalnya "SIMULASI" atau "LATIHAN". */
@@ -29,6 +48,8 @@ export function CoverArt({
   title: string;
   subtitle?: string;
   tone?: CoverTone;
+  /** Ikon khas mata pelajaran, ditampilkan sebagai keping di sebelah penanda. */
+  icon?: IconName;
   className?: string;
 }) {
   return (
@@ -74,7 +95,17 @@ export function CoverArt({
       </svg>
 
       <div className="relative z-10">
-        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">{label}</p>
+        <div className="flex items-center gap-2">
+          {icon ? (
+            <span
+              aria-hidden="true"
+              className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/20 text-white ring-1 ring-inset ring-white/30"
+            >
+              <Icon name={icon} className="h-4 w-4" strokeWidth={2} />
+            </span>
+          ) : null}
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">{label}</p>
+        </div>
         <p className="mt-1 text-xl font-bold leading-tight text-white drop-shadow-sm sm:text-[22px]">
           {title}
         </p>
