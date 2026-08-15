@@ -1,13 +1,18 @@
 import type {
+  Concept,
+  ConceptPrerequisite,
   EducationLevel,
+  Misconception,
   PracticePackage,
   Question,
   QuestionOption,
   Subject,
   Subtopic,
+  SubtopicPrerequisite,
   Tryout,
   Topic,
 } from "@/data/types";
+import type { AnalysisCatalog } from "@/lib/scoring";
 import { supabase } from "@/lib/supabase";
 
 /**
@@ -45,6 +50,31 @@ interface SubtopicRow {
   slug: string | null;
   name: string;
   description: string | null;
+}
+
+interface ConceptRow {
+  id: string;
+  subtopic_id: string;
+  name: string;
+  description: string | null;
+}
+
+interface MisconceptionRow {
+  id: string;
+  label: string;
+  description: string;
+  insight: string;
+}
+
+interface SubtopicPrerequisiteRow {
+  subtopic_id: string;
+  requires_subtopic_id: string;
+  reason: string;
+}
+
+interface ConceptPrerequisiteRow {
+  concept_id: string;
+  requires_concept_id: string;
 }
 
 interface PackageRow {
@@ -134,6 +164,24 @@ function toSubtopic(row: SubtopicRow): Subtopic {
     slug: row.slug ?? row.id,
     name: row.name,
     description: row.description ?? "",
+  };
+}
+
+function toConcept(row: ConceptRow): Concept {
+  return {
+    id: row.id,
+    subtopicId: row.subtopic_id,
+    name: row.name,
+    description: row.description ?? "",
+  };
+}
+
+function toMisconception(row: MisconceptionRow): Misconception {
+  return {
+    id: row.id,
+    label: row.label,
+    description: row.description,
+    insight: row.insight,
   };
 }
 
@@ -263,6 +311,54 @@ export async function getSubtopics(): Promise<Subtopic[]> {
   return rows.map(toSubtopic);
 }
 
+export async function getConcepts(): Promise<Concept[]> {
+  const rows = unwrap(
+    await supabase
+      .from("concepts")
+      .select("id, subtopic_id, name, description")
+      .order("sort_order"),
+    "konsep",
+  ) as ConceptRow[];
+  return rows.map(toConcept);
+}
+
+export async function getMisconceptions(): Promise<Misconception[]> {
+  const rows = unwrap(
+    await supabase.from("misconceptions").select("id, label, description, insight"),
+    "miskonsepsi",
+  ) as MisconceptionRow[];
+  return rows.map(toMisconception);
+}
+
+export async function getSubtopicPrerequisites(): Promise<SubtopicPrerequisite[]> {
+  const rows = unwrap(
+    await supabase
+      .from("subtopic_prerequisites")
+      .select("subtopic_id, requires_subtopic_id, reason"),
+    "prasyarat subtopik",
+  ) as SubtopicPrerequisiteRow[];
+
+  return rows.map((row) => ({
+    subtopicId: row.subtopic_id,
+    requiresSubtopicId: row.requires_subtopic_id,
+    reason: row.reason,
+  }));
+}
+
+export async function getConceptPrerequisites(): Promise<ConceptPrerequisite[]> {
+  const rows = unwrap(
+    await supabase
+      .from("concept_prerequisites")
+      .select("concept_id, requires_concept_id"),
+    "prasyarat konsep",
+  ) as ConceptPrerequisiteRow[];
+
+  return rows.map((row) => ({
+    conceptId: row.concept_id,
+    requiresConceptId: row.requires_concept_id,
+  }));
+}
+
 const PACKAGE_COLUMNS =
   "id, kind, slug, title, subject_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, is_premium, sort_order";
 
@@ -362,6 +458,36 @@ export async function getPracticePackages(): Promise<PracticePackage[]> {
   const questionTaxonomy = await questionTaxonomyFor(allQuestionIds);
 
   return rows.map((row) => toPracticePackage(row, idsByPackage.get(row.id) ?? [], questionTaxonomy));
+}
+
+export async function getAnalysisCatalog(): Promise<AnalysisCatalog> {
+  const [
+    topicRows,
+    subtopicRows,
+    conceptRows,
+    misconceptionRows,
+    subtopicPrerequisiteRows,
+    conceptPrerequisiteRows,
+    packages,
+  ] = await Promise.all([
+    getTopics(),
+    getSubtopics(),
+    getConcepts(),
+    getMisconceptions(),
+    getSubtopicPrerequisites(),
+    getConceptPrerequisites(),
+    getPracticePackages(),
+  ]);
+
+  return {
+    topics: topicRows,
+    subtopics: subtopicRows,
+    concepts: conceptRows,
+    misconceptions: misconceptionRows,
+    subtopicPrerequisites: subtopicPrerequisiteRows,
+    conceptPrerequisites: conceptPrerequisiteRows,
+    practicePackages: packages,
+  };
 }
 
 export async function getPracticePackageBySlug(slug: string): Promise<PracticePackage | null> {

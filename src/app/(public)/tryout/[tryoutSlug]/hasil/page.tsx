@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getQuestionsForTryout, getTryoutBySlug, getTryouts } from "@/services/content-service";
+import {
+  getAnalysisCatalog,
+  getQuestionsForTryout,
+  getTryoutBySlug,
+  getTryouts,
+} from "@/services/content-service";
 import { TryoutResultView } from "./TryoutResultView";
 
 interface PageProps {
@@ -23,6 +28,10 @@ export default async function TryoutResultPage({ params }: PageProps) {
   if (!tryout) notFound();
 
   // Soal diambil di server; perhitungan hasilnya tetap di perangkat pengguna.
-  const questions = await getQuestionsForTryout(tryoutSlug);
-  return <TryoutResultView tryout={tryout} questions={questions} />;
+  const [questions, catalog] = await Promise.all([
+    getQuestionsForTryout(tryoutSlug),
+    getAnalysisCatalog(),
+  ]);
+
+  return <TryoutResultView tryout={tryout} questions={questions} catalog={catalog} />;
 }

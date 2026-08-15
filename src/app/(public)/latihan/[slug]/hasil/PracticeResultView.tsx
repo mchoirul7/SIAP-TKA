@@ -7,6 +7,7 @@ import { useNavigate } from "@/components/NavigationProgress";
 import type { PracticePackage, Question } from "@/data/types";
 import { formatDuration } from "@/lib/format";
 import { buildPracticeNarrative } from "@/lib/narrative";
+import type { AnalysisCatalog } from "@/lib/scoring";
 import {
   getPracticeResult,
   resetPractice,
@@ -17,23 +18,25 @@ import {
 export function PracticeResultView({
   pkg,
   questions,
+  catalog,
 }: {
   pkg: PracticePackage;
   questions: Question[];
+  catalog: AnalysisCatalog;
 }) {
   const { navigate, isPending } = useNavigate();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<PracticeResult | null>(null);
 
   useEffect(() => {
-    const stored = getPracticeResult(pkg, questions);
+    const stored = getPracticeResult(pkg, questions, catalog);
     if (!stored) {
       setState("empty");
       return;
     }
     setResult(stored);
     setState("ready");
-  }, [pkg, questions]);
+  }, [pkg, questions, catalog]);
 
   const handleRepeat = () => {
     resetPractice(pkg.slug);

@@ -1,4 +1,4 @@
-import type { PracticeAnalysis, TryoutAnalysis } from "@/lib/scoring";
+import type { MisconceptionSignal, PracticeAnalysis, TryoutAnalysis } from "@/lib/scoring";
 
 /**
  * Hasil ujian diringkas menjadi satu narasi saja: materi apa yang harus
@@ -16,6 +16,15 @@ export interface StudyNarrative {
 function joinList(items: string[]): string {
   if (items.length <= 1) return items[0] ?? "";
   return `${items.slice(0, -1).join(", ")} dan ${items[items.length - 1]}`;
+}
+
+function misconceptionNote(signals: MisconceptionSignal[]): string {
+  if (signals.length === 0) return "";
+  const [first, second] = signals;
+  return (
+    ` Pola jawaban yang ikut terlihat: ${first.insight}` +
+    (second ? ` Pola lain yang perlu diperhatikan: ${second.insight}` : "")
+  );
 }
 
 export function buildTryoutNarrative(

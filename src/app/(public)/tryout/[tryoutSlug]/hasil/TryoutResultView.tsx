@@ -1,27 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { ResultStatus } from "@/components/ResultStatus";
 import { ButtonLink } from "@/components/ui/Button";
 import type { Question, Tryout } from "@/data/types";
 import { formatDate, formatDuration } from "@/lib/format";
 import { buildTryoutNarrative } from "@/lib/narrative";
+import type { AnalysisCatalog } from "@/lib/scoring";
 import { getTryoutResult, type TryoutResult } from "@/services/tryout-service";
 import { readProfile } from "@/storage/profile-storage";
 
 export function TryoutResultView({
   tryout,
   questions,
+  catalog,
 }: {
   tryout: Tryout;
   questions: Question[];
+  catalog: AnalysisCatalog;
 }) {
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<TryoutResult | null>(null);
   const [studentName, setStudentName] = useState("");
 
   useEffect(() => {
-    const stored = getTryoutResult(tryout, questions);
+    const stored = getTryoutResult(tryout, questions, catalog);
     if (!stored) {
       setState("empty");
       return;
@@ -29,7 +33,7 @@ export function TryoutResultView({
     setResult(stored);
     setStudentName(readProfile()?.name ?? "");
     setState("ready");
-  }, [tryout, questions]);
+  }, [tryout, questions, catalog]);
 
   if (state === "loading") {
     return (
@@ -63,7 +67,13 @@ export function TryoutResultView({
 
   const { analysis, attempt, elapsedSeconds } = result;
   const leftPageCount = attempt.integrity.tabSwitchCount;
-  const narrative = buildTryoutNarrative(analysis);
+  const recommendedPackages = analysis.recommendedPackageSlugs.flatMap((slug) => {
+    const pkg = catalog.practicePackages?.find((item) => item.slug === slug);
+    return pkg ? [pkg] : [];
+  });
+  const narrative = buildTryoutNarrative(analysis, {
+    hasRecommendedPackages: recommendedPackages.length > 0,
+  });
 
   return (
     <div className="container-page py-12 sm:py-14">
@@ -148,6 +158,24 @@ export function TryoutResultView({
           </p>
         </div>
       </section>
+
+      {recommendedPackages.length > 0 ? (
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold tracking-tight">Latihan yang disarankan</h2>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {recommendedPackages.map((pkg, index) => (
+              <li key={pkg.id}>
+                <PracticePackageCard
+                  pkg={pkg}
+                  order={index + 1}
+                  toneIndex={index}
+                  note="Disarankan dari materi yang paling perlu diperkuat pada hasil simulasi ini."
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
 
       {/* Langkah berikutnya */}

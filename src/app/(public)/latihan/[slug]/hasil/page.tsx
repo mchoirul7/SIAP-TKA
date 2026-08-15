@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
+  getAnalysisCatalog,
   getPracticePackageBySlug,
   getPracticePackages,
   getQuestionsForPackage,
@@ -26,5 +27,10 @@ export default async function PracticeResultPage({ params }: PageProps) {
   const pkg = await getPracticePackageBySlug(slug);
   if (!pkg) notFound();
 
-  return <PracticeResultView pkg={pkg} questions={await getQuestionsForPackage(slug)} />;
+  const [questions, catalog] = await Promise.all([
+    getQuestionsForPackage(slug),
+    getAnalysisCatalog(),
+  ]);
+
+  return <PracticeResultView pkg={pkg} questions={questions} catalog={catalog} />;
 }

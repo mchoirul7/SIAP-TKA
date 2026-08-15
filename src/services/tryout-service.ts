@@ -1,5 +1,5 @@
 import type { AnswerValue, Question, Tryout } from "@/data/types";
-import { analyzeTryout, type TryoutAnalysis } from "@/lib/scoring";
+import { analyzeTryout, type AnalysisCatalog, type TryoutAnalysis } from "@/lib/scoring";
 import {
   clearTryoutAttempt,
   emptyIntegrity,
@@ -99,7 +99,11 @@ export interface TryoutResult {
 }
 
 /** Menghitung hasil dari attempt di perangkat, memakai soal yang dioper halaman. */
-export function getTryoutResult(tryout: Tryout, questions: Question[]): TryoutResult | null {
+export function getTryoutResult(
+  tryout: Tryout,
+  questions: Question[],
+  catalog?: AnalysisCatalog,
+): TryoutResult | null {
   const attempt = readTryoutAttempt(tryout.slug);
   if (!attempt || !attempt.submittedAt) return null;
 
@@ -111,7 +115,7 @@ export function getTryoutResult(tryout: Tryout, questions: Question[]): TryoutRe
   return {
     tryout,
     attempt,
-    analysis: analyzeTryout(questions, attempt.answers),
+    analysis: analyzeTryout(questions, attempt.answers, catalog),
     elapsedSeconds: Math.max(0, cappedElapsed),
   };
 }

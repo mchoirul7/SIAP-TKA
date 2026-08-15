@@ -3,7 +3,18 @@ import { misconceptions } from "@/data/misconceptions";
 import { practicePackages } from "@/data/practicePackages";
 import { subtopicPrerequisites } from "@/data/prerequisites";
 import { subtopics, topics } from "@/data/subjects";
-import type { AnswerMap, AnswerValue, Question } from "@/data/types";
+import type {
+  AnswerMap,
+  AnswerValue,
+  Concept,
+  ConceptPrerequisite,
+  Misconception,
+  PracticePackage,
+  Question,
+  Subtopic,
+  SubtopicPrerequisite,
+  Topic,
+} from "@/data/types";
 import { isAnswered, isCorrectAnswer, misconceptionIdsFor } from "@/lib/answers";
 
 /**
@@ -48,6 +59,16 @@ export interface MisconceptionSignal {
   count: number;
 }
 
+export interface AnalysisCatalog {
+  topics?: Topic[];
+  subtopics?: Subtopic[];
+  concepts?: Concept[];
+  misconceptions?: Misconception[];
+  subtopicPrerequisites?: SubtopicPrerequisite[];
+  conceptPrerequisites?: ConceptPrerequisite[];
+  practicePackages?: PracticePackage[];
+}
+
 export interface TryoutAnalysis {
   totalQuestions: number;
   answeredCount: number;
@@ -80,16 +101,34 @@ export function isCorrect(question: Question, answer: AnswerValue | undefined): 
   return isCorrectAnswer(question, answer);
 }
 
-const topicById = new Map(topics.map((t) => [t.id, t]));
-const subtopicById = new Map(subtopics.map((s) => [s.id, s]));
-const conceptById = new Map(concepts.map((c) => [c.id, c]));
-const misconceptionById = new Map(misconceptions.map((m) => [m.id, m]));
-
 const difficultyLabel: Record<string, string> = {
   dasar: "Dasar",
   menengah: "Menengah",
   lanjut: "Lanjut",
 };
+
+function resolveCatalog(catalog: AnalysisCatalog = {}) {
+  const topicList = catalog.topics ?? topics;
+  const subtopicList = catalog.subtopics ?? subtopics;
+  const conceptList = catalog.concepts ?? concepts;
+  const misconceptionList = catalog.misconceptions ?? misconceptions;
+
+  return {
+    topics: topicList,
+    subtopics: subtopicList,
+    concepts: conceptList,
+    misconceptions: misconceptionList,
+    subtopicPrerequisites: catalog.subtopicPrerequisites ?? subtopicPrerequisites,
+    conceptPrerequisites: catalog.conceptPrerequisites ?? [],
+    practicePackages: catalog.practicePackages ?? practicePackages,
+    topicById: new Map(topicList.map((topic) => [topic.id, topic])),
+    subtopicById: new Map(subtopicList.map((subtopic) => [subtopic.id, subtopic])),
+    conceptById: new Map(conceptList.map((concept) => [concept.id, concept])),
+    misconceptionById: new Map(
+      misconceptionList.map((misconception) => [misconception.id, misconception]),
+    ),
+  };
+}
 
 interface Tally {
   total: number;
@@ -141,12 +180,13 @@ function toBuckets(
 function buildPrerequisiteAdvice(
   priorities: PriorityItem[],
   bySubtopicId: Map<string, MasteryBucket>,
+  prerequisites: SubtopicPrerequisite[],
 ): PrerequisiteAdvice | null {
   const priorityIds = new Set(priorities.map((p) => p.id));
   const candidates = new Map<string, { supports: string[]; reason: string }>();
 
   for (const priority of priorities) {
-    const rules = subtopicPrerequisites.filter((rule) => rule.subtopicId === priority.id);
+    const rules = prerequisites.filter((rule) => rule.subtopicId === priority.id);
     for (const rule of rules) {
       const prerequisiteBucket = bySubtopicId.get(rule.requiresSubtopicId);
       // Hanya disarankan bila prasyaratnya ikut diujikan dan hasilnya belum kuat.
@@ -184,6 +224,7 @@ function buildPrerequisiteAdvice(
 function buildMisconceptionSignals(
   questions: Question[],
   answers: AnswerMap,
+  misconceptionById: Map<string, Misconception>,
   minimumOccurrence = 2,
 ): MisconceptionSignal[] {
   const counts = new Map<string, number>();
@@ -204,7 +245,20 @@ function buildMisconceptionSignals(
     });
 }
 
-export function analyzeTryout(questions: Question[], answers: AnswerMap): TryoutAnalysis {
+export function analyzeTryout(
+  questions: Question[],
+  answers: AnswerMap,
+  catalog?: AnalysisCatalog,
+): TryoutAnalysis {
+  return analyzeTryoutWithCatalog(questions, answers, catalog);
+}
+
+export function analyzeTryoutWithCatalog(
+  questions: Question[],
+  answers: AnswerMap,
+  catalog?: AnalysisCatalog,
+): TryoutAnalysis {
+  const resolved = resolveCatalog(catalog);
   const totalQuestions = questions.length;
   const answeredCount = questions.filter((q) => isAnswered(q, answers[q.id])).length;
   const correctCount = questions.filter((q) => isCorrect(q, answers[q.id])).length;
@@ -214,17 +268,17 @@ export function analyzeTryout(questions: Question[], answers: AnswerMap): Tryout
 
   const byTopic = toBuckets(
     tallyBy(questions, answers, (q) => q.topicId),
-    (id) => topicById.get(id)?.name ?? id,
-    topics.map((t) => t.id),
+    (id) => resolved.topicById.get(id)?.name ?? id,
+    resolved.topics.map((t) => t.id),
   );
   const bySubtopic = toBuckets(
     tallyBy(questions, answers, (q) => q.subtopicId),
-    (id) => subtopicById.get(id)?.name ?? id,
-    subtopics.map((s) => s.id),
+    (id) => resolved.subtopicById.get(id)?.name ?? id,
+    resolved.subtopics.map((s) => s.id),
   );
   const byConcept = toBuckets(
     tallyBy(questions, answers, (q) => q.conceptId),
-    (id) => conceptById.get(id)?.name ?? id,
+    (id) => resolved.conceptById.get(id)?.name ?? id,
   );
   const byDifficulty = toBuckets(
     tallyBy(questions, answers, (q) => q.difficulty),
@@ -239,8 +293,8 @@ export function analyzeTryout(questions: Question[], answers: AnswerMap): Tryout
     .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total)
     .slice(0, 3)
     .map((bucket) => {
-      const subtopic = subtopicById.get(bucket.id);
-      const topic = subtopic ? topicById.get(subtopic.topicId) : undefined;
+      const subtopic = resolved.subtopicById.get(bucket.id);
+      const topic = subtopic ? resolved.topicById.get(subtopic.topicId) : undefined;
       return {
         ...bucket,
         topicName: topic?.name ?? "",
@@ -248,7 +302,11 @@ export function analyzeTryout(questions: Question[], answers: AnswerMap): Tryout
       };
     });
 
-  const prerequisiteAdvice = buildPrerequisiteAdvice(priorities, bySubtopicId);
+  const prerequisiteAdvice = buildPrerequisiteAdvice(
+    priorities,
+    bySubtopicId,
+    resolved.subtopicPrerequisites,
+  );
 
   // Paket yang disarankan mengikuti urutan prioritas; prasyarat didahulukan bila ada.
   const orderedSubtopicIds = [
@@ -257,7 +315,7 @@ export function analyzeTryout(questions: Question[], answers: AnswerMap): Tryout
   ];
   const recommendedPackageSlugs: string[] = [];
   for (const subtopicId of orderedSubtopicIds) {
-    const pkg = practicePackages.find((p) => p.subtopicId === subtopicId);
+    const pkg = resolved.practicePackages.find((p) => p.subtopicId === subtopicId);
     if (pkg && !recommendedPackageSlugs.includes(pkg.slug)) {
       recommendedPackageSlugs.push(pkg.slug);
     }
@@ -277,7 +335,11 @@ export function analyzeTryout(questions: Question[], answers: AnswerMap): Tryout
     byDifficulty,
     priorities,
     prerequisiteAdvice,
-    misconceptionSignals: buildMisconceptionSignals(questions, answers),
+    misconceptionSignals: buildMisconceptionSignals(
+      questions,
+      answers,
+      resolved.misconceptionById,
+    ),
     recommendedPackageSlugs,
   };
 }
@@ -291,9 +353,23 @@ export interface PracticeAnalysis {
   status: MasteryStatus;
   conceptsToReview: MasteryBucket[];
   strongConcepts: MasteryBucket[];
+  misconceptionSignals: MisconceptionSignal[];
 }
 
-export function analyzePractice(questions: Question[], answers: AnswerMap): PracticeAnalysis {
+export function analyzePractice(
+  questions: Question[],
+  answers: AnswerMap,
+  catalog?: AnalysisCatalog,
+): PracticeAnalysis {
+  return analyzePracticeWithCatalog(questions, answers, catalog);
+}
+
+export function analyzePracticeWithCatalog(
+  questions: Question[],
+  answers: AnswerMap,
+  catalog?: AnalysisCatalog,
+): PracticeAnalysis {
+  const resolved = resolveCatalog(catalog);
   const totalQuestions = questions.length;
   const correctCount = questions.filter((q) => isCorrect(q, answers[q.id])).length;
   const answeredCount = questions.filter((q) => isAnswered(q, answers[q.id])).length;
@@ -302,7 +378,7 @@ export function analyzePractice(questions: Question[], answers: AnswerMap): Prac
 
   const byConcept = toBuckets(
     tallyBy(questions, answers, (q) => q.conceptId),
-    (id) => conceptById.get(id)?.name ?? id,
+    (id) => resolved.conceptById.get(id)?.name ?? id,
   );
 
   return {
@@ -316,5 +392,11 @@ export function analyzePractice(questions: Question[], answers: AnswerMap): Prac
       .filter((bucket) => bucket.accuracy < MASTERY_THRESHOLD)
       .sort((a, b) => a.accuracy - b.accuracy),
     strongConcepts: byConcept.filter((bucket) => bucket.accuracy >= MASTERY_THRESHOLD),
+    misconceptionSignals: buildMisconceptionSignals(
+      questions,
+      answers,
+      resolved.misconceptionById,
+      1,
+    ),
   };
 }

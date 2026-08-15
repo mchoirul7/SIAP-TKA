@@ -1,5 +1,5 @@
 import type { AnswerValue, PracticePackage, Question } from "@/data/types";
-import { analyzePractice, type PracticeAnalysis } from "@/lib/scoring";
+import { analyzePractice, type AnalysisCatalog, type PracticeAnalysis } from "@/lib/scoring";
 import {
   clearPracticeAttempt,
   readPracticeAttempt,
@@ -56,13 +56,17 @@ export interface PracticeResult {
   elapsedSeconds: number;
 }
 
-export function getPracticeResult(pkg: PracticePackage, questions: Question[]): PracticeResult | null {
+export function getPracticeResult(
+  pkg: PracticePackage,
+  questions: Question[],
+  catalog?: AnalysisCatalog,
+): PracticeResult | null {
   const attempt = readPracticeAttempt(pkg.slug);
   if (!pkg || !attempt || !attempt.finishedAt) return null;
   return {
     pkg,
     attempt,
-    analysis: analyzePractice(questions, attempt.answers),
+    analysis: analyzePractice(questions, attempt.answers, catalog),
     elapsedSeconds: Math.max(0, Math.round((attempt.finishedAt - attempt.startedAt) / 1000)),
   };
 }
