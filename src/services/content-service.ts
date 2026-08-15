@@ -1,9 +1,12 @@
 import type {
   EducationLevel,
+  PracticePackage,
   Question,
   QuestionOption,
   Subject,
+  Subtopic,
   Tryout,
+  Topic,
 } from "@/data/types";
 import { supabase } from "@/lib/supabase";
 
@@ -29,6 +32,21 @@ interface SubjectRow {
   description: string | null;
 }
 
+interface TopicRow {
+  id: string;
+  subject_id: string;
+  slug: string | null;
+  name: string;
+}
+
+interface SubtopicRow {
+  id: string;
+  topic_id: string;
+  slug: string | null;
+  name: string;
+  description: string | null;
+}
+
 interface PackageRow {
   id: string;
   kind: "tryout" | "latihan";
@@ -37,11 +55,22 @@ interface PackageRow {
   subject_id: string;
   level: EducationLevel;
   description: string | null;
+  summary: string | null;
   variant: string | null;
   variant_label: string | null;
   duration_minutes: number | null;
+  estimated_minutes: number | null;
+  difficulty_range: string | null;
+  skills: string[] | null;
   instructions: string[] | null;
+  is_premium: boolean;
   sort_order: number;
+}
+
+interface QuestionTaxonomyRow {
+  id: string;
+  topic_id: string;
+  subtopic_id: string | null;
 }
 
 interface QuestionRow {
@@ -89,6 +118,25 @@ function toSubject(row: SubjectRow): Subject {
   };
 }
 
+function toTopic(row: TopicRow): Topic {
+  return {
+    id: row.id,
+    subjectId: row.subject_id,
+    slug: row.slug ?? row.id,
+    name: row.name,
+  };
+}
+
+function toSubtopic(row: SubtopicRow): Subtopic {
+  return {
+    id: row.id,
+    topicId: row.topic_id,
+    slug: row.slug ?? row.id,
+    name: row.name,
+    description: row.description ?? "",
+  };
+}
+
 function toTryout(row: PackageRow, questionIds: string[]): Tryout {
   return {
     id: row.id,
@@ -102,6 +150,33 @@ function toTryout(row: PackageRow, questionIds: string[]): Tryout {
     durationMinutes: row.duration_minutes ?? 90,
     questionIds,
     instructions: row.instructions ?? [],
+  };
+}
+
+function toPracticePackage(
+  row: PackageRow,
+  questionIds: string[],
+  questionTaxonomy: Map<string, QuestionTaxonomyRow>,
+): PracticePackage {
+  const firstQuestion = questionIds
+    .map((questionId) => questionTaxonomy.get(questionId))
+    .find((question): question is QuestionTaxonomyRow => Boolean(question));
+
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    subjectId: row.subject_id,
+    topicId: firstQuestion?.topic_id ?? row.subject_id,
+    subtopicId: firstQuestion?.subtopic_id ?? firstQuestion?.topic_id ?? row.subject_id,
+    summary: row.summary ?? row.description ?? "",
+    description: row.description ?? row.summary ?? "",
+    level: row.level,
+    difficultyRange: row.difficulty_range ?? "campuran",
+    estimatedMinutes: row.estimated_minutes ?? row.duration_minutes ?? Math.max(1, questionIds.length * 2),
+    skills: row.skills ?? [],
+    questionIds,
+    isPremium: row.is_premium,
   };
 }
 
@@ -172,8 +247,24 @@ export async function getSubjectBySlug(slug: string): Promise<Subject | null> {
   return subjects.find((subject) => subject.slug === slug) ?? null;
 }
 
+export async function getTopics(): Promise<Topic[]> {
+  const rows = unwrap(
+    await supabase.from("topics").select("id, subject_id, slug, name").order("sort_order"),
+    "topik",
+  ) as TopicRow[];
+  return rows.map(toTopic);
+}
+
+export async function getSubtopics(): Promise<Subtopic[]> {
+  const rows = unwrap(
+    await supabase.from("subtopics").select("id, topic_id, slug, name, description").order("sort_order"),
+    "subtopik",
+  ) as SubtopicRow[];
+  return rows.map(toSubtopic);
+}
+
 const PACKAGE_COLUMNS =
-  "id, kind, slug, title, subject_id, level, description, variant, variant_label, duration_minutes, instructions, sort_order";
+  "id, kind, slug, title, subject_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, is_premium, sort_order";
 
 /** Urutan soal ikut `position`, karena urutan adalah bagian dari paketnya. */
 async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[]>> {
@@ -196,6 +287,43 @@ async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[
   return map;
 }
 
+async function questionTaxonomyFor(questionIds: string[]): Promise<Map<string, QuestionTaxonomyRow>> {
+  if (questionIds.length === 0) return new Map();
+
+  const rows = unwrap(
+    await supabase.from("questions").select("id, topic_id, subtopic_id").in("id", questionIds),
+    "taksonomi soal",
+  ) as QuestionTaxonomyRow[];
+
+  return new Map(rows.map((row) => [row.id, row]));
+}
+
+async function questionsForIds(questionIds: string[]): Promise<Question[]> {
+  if (questionIds.length === 0) return [];
+
+  const rows = unwrap(
+    await supabase.from("questions").select("*").in("id", questionIds),
+    "soal",
+  ) as QuestionRow[];
+
+  const passageIds = [...new Set(rows.map((row) => row.passage_id).filter(Boolean))] as string[];
+  const passageHtml = new Map<string, string>();
+  if (passageIds.length > 0) {
+    const passages = unwrap(
+      await supabase.from("passages").select("id, body_html").in("id", passageIds),
+      "bacaan",
+    ) as { id: string; body_html: string }[];
+    for (const passage of passages) passageHtml.set(passage.id, passage.body_html);
+  }
+
+  const byId = new Map(rows.map((row) => [row.id, toQuestion(row, passageHtml)]));
+  // Urutan mengikuti paket, bukan urutan baris yang dikembalikan basis data.
+  return questionIds.flatMap((id) => {
+    const question = byId.get(id);
+    return question ? [question] : [];
+  });
+}
+
 export async function getTryouts(): Promise<Tryout[]> {
   const rows = unwrap(
     await supabase.from("packages").select(PACKAGE_COLUMNS).eq("kind", "tryout").order("sort_order"),
@@ -213,29 +341,71 @@ export async function getTryoutBySlug(slug: string): Promise<Tryout | null> {
 
 export async function getQuestionsForTryout(slug: string): Promise<Question[]> {
   const tryout = await getTryoutBySlug(slug);
-  if (!tryout || tryout.questionIds.length === 0) return [];
+  if (!tryout) return [];
 
+  return questionsForIds(tryout.questionIds);
+}
+
+export async function getPracticePackages(): Promise<PracticePackage[]> {
   const rows = unwrap(
-    await supabase.from("questions").select("*").in("id", tryout.questionIds),
-    "soal",
-  ) as QuestionRow[];
+    await supabase
+      .from("packages")
+      .select(PACKAGE_COLUMNS)
+      .eq("kind", "latihan")
+      .eq("is_published", true)
+      .order("sort_order"),
+    "paket latihan",
+  ) as PackageRow[];
 
-  const passageIds = [...new Set(rows.map((row) => row.passage_id).filter(Boolean))] as string[];
-  const passageHtml = new Map<string, string>();
-  if (passageIds.length > 0) {
-    const passages = unwrap(
-      await supabase.from("passages").select("id, body_html").in("id", passageIds),
-      "bacaan",
-    ) as { id: string; body_html: string }[];
-    for (const passage of passages) passageHtml.set(passage.id, passage.body_html);
+  const idsByPackage = await questionIdsFor(rows.map((row) => row.id));
+  const allQuestionIds = [...new Set([...idsByPackage.values()].flat())];
+  const questionTaxonomy = await questionTaxonomyFor(allQuestionIds);
+
+  return rows.map((row) => toPracticePackage(row, idsByPackage.get(row.id) ?? [], questionTaxonomy));
+}
+
+export async function getPracticePackageBySlug(slug: string): Promise<PracticePackage | null> {
+  const packages = await getPracticePackages();
+  return packages.find((pkg) => pkg.slug === slug) ?? null;
+}
+
+export async function getQuestionsForPackage(slug: string): Promise<Question[]> {
+  const pkg = await getPracticePackageBySlug(slug);
+  if (!pkg) return [];
+
+  return questionsForIds(pkg.questionIds);
+}
+
+export interface PracticeTopicGroup {
+  topic: Topic;
+  packages: PracticePackage[];
+}
+
+export async function getPracticePackagesGroupedByTopic(): Promise<PracticeTopicGroup[]> {
+  const [topics, packages] = await Promise.all([getTopics(), getPracticePackages()]);
+  const groups = topics
+    .map((topic) => ({
+      topic,
+      packages: packages.filter((pkg) => pkg.topicId === topic.id),
+    }))
+    .filter((group) => group.packages.length > 0);
+
+  const groupedTopicIds = new Set(groups.map((group) => group.topic.id));
+  for (const pkg of packages) {
+    if (groupedTopicIds.has(pkg.topicId)) continue;
+    groups.push({
+      topic: {
+        id: pkg.topicId,
+        subjectId: pkg.subjectId,
+        slug: pkg.topicId,
+        name: pkg.topicId,
+      },
+      packages: packages.filter((item) => item.topicId === pkg.topicId),
+    });
+    groupedTopicIds.add(pkg.topicId);
   }
 
-  const byId = new Map(rows.map((row) => [row.id, toQuestion(row, passageHtml)]));
-  // Urutan mengikuti paket, bukan urutan baris yang dikembalikan basis data.
-  return tryout.questionIds.flatMap((id) => {
-    const question = byId.get(id);
-    return question ? [question] : [];
-  });
+  return groups;
 }
 
 export interface SubjectSummary {
@@ -247,14 +417,19 @@ export interface SubjectSummary {
 
 /** Ringkasan per mata pelajaran untuk kartu di halaman depan. */
 export async function getSubjectSummaries(): Promise<SubjectSummary[]> {
-  const [subjects, tryouts] = await Promise.all([getSubjects(), getTryouts()]);
+  const [subjects, tryouts, packages] = await Promise.all([
+    getSubjects(),
+    getTryouts(),
+    getPracticePackages(),
+  ]);
   return subjects.map((subject) => {
     const tryoutCount = tryouts.filter((tryout) => tryout.subjectId === subject.id).length;
+    const packageCount = packages.filter((pkg) => pkg.subjectId === subject.id).length;
     return {
       subject,
-      packageCount: 0,
+      packageCount,
       tryoutCount,
-      isAvailable: tryoutCount > 0,
+      isAvailable: tryoutCount > 0 || packageCount > 0,
     };
   });
 }

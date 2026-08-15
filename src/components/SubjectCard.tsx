@@ -48,7 +48,7 @@ export function SubjectCard({
           ].join(" ")}
         >
           {isAvailable ? <LinkPending /> : null}
-          {isAvailable ? "Lihat Materi" : "Belum Tersedia"}
+          {isAvailable ? "Lihat Paket Soal" : "Belum Tersedia"}
         </span>
       </div>
     </>

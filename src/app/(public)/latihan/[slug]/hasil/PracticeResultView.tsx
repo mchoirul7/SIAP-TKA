@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ResultStatus } from "@/components/ResultStatus";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { useNavigate } from "@/components/NavigationProgress";
-import type { PracticePackage } from "@/data/types";
+import type { PracticePackage, Question } from "@/data/types";
 import { formatDuration } from "@/lib/format";
 import { buildPracticeNarrative } from "@/lib/narrative";
 import {
@@ -14,20 +14,26 @@ import {
   type PracticeResult,
 } from "@/services/practice-service";
 
-export function PracticeResultView({ pkg }: { pkg: PracticePackage }) {
+export function PracticeResultView({
+  pkg,
+  questions,
+}: {
+  pkg: PracticePackage;
+  questions: Question[];
+}) {
   const { navigate, isPending } = useNavigate();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<PracticeResult | null>(null);
 
   useEffect(() => {
-    const stored = getPracticeResult(pkg.slug);
+    const stored = getPracticeResult(pkg, questions);
     if (!stored) {
       setState("empty");
       return;
     }
     setResult(stored);
     setState("ready");
-  }, [pkg.slug]);
+  }, [pkg, questions]);
 
   const handleRepeat = () => {
     resetPractice(pkg.slug);

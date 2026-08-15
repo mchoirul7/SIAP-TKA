@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { VoucherPrompt } from "@/components/VoucherPrompt";
-import { getPracticePackagesGroupedByTopic } from "@/services/practice-service";
+import { getPracticePackagesGroupedByTopic } from "@/services/content-service";
 
 export const metadata: Metadata = {
-  title: "Paket Latihan",
+  title: "Paket Soal Latihan",
   description:
-    "Paket latihan Matematika SD per subtopik, dikerjakan online beserta pembahasannya.",
+    "Paket soal latihan, dikerjakan online beserta pembahasannya.",
 };
 
-export default function PracticeCatalogPage() {
-  const groups = getPracticePackagesGroupedByTopic();
+export default async function PracticeCatalogPage() {
+  const groups = await getPracticePackagesGroupedByTopic();
 
   return (
     <div className="container-page py-12 sm:py-14">
       <SectionHeader
         as="h1"
-        title="Paket Latihan"
+        title="Paket Soal Latihan"
         description="Setiap paket fokus pada satu subtopik agar dapat diselesaikan dalam satu kali duduk. Paket premium mencakup latihan online dan pembahasan setiap soal."
       />
 

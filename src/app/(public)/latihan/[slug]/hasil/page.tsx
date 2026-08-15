@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPracticePackageBySlug, getPracticePackages } from "@/services/practice-service";
+import {
+  getPracticePackageBySlug,
+  getPracticePackages,
+  getQuestionsForPackage,
+} from "@/services/content-service";
 import { PracticeResultView } from "./PracticeResultView";
 
 interface PageProps {
@@ -12,14 +16,15 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export function generateStaticParams() {
-  return getPracticePackages().map((pkg) => ({ slug: pkg.slug }));
+export async function generateStaticParams() {
+  const packages = await getPracticePackages();
+  return packages.map((pkg) => ({ slug: pkg.slug }));
 }
 
 export default async function PracticeResultPage({ params }: PageProps) {
   const { slug } = await params;
-  const pkg = getPracticePackageBySlug(slug);
+  const pkg = await getPracticePackageBySlug(slug);
   if (!pkg) notFound();
 
-  return <PracticeResultView pkg={pkg} />;
+  return <PracticeResultView pkg={pkg} questions={await getQuestionsForPackage(slug)} />;
 }

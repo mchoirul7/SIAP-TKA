@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { TryoutCard } from "@/components/TryoutCard";
-import { getSubjectBySlug, getSubjects, getTryouts } from "@/services/content-service";
+import {
+  getPracticePackages,
+  getSubjectBySlug,
+  getSubjects,
+  getTryouts,
+} from "@/services/content-service";
 
 export async function generateStaticParams() {
   const subjects = await getSubjects();
@@ -29,8 +35,9 @@ export default async function SubjectPage({
   const subject = await getSubjectBySlug(subjectSlug);
   if (!subject) notFound();
 
-  const tryouts = await getTryouts();
+  const [tryouts, packages] = await Promise.all([getTryouts(), getPracticePackages()]);
   const subjectTryouts = tryouts.filter((tryout) => tryout.subjectId === subject.id);
+  const subjectPackages = packages.filter((pkg) => pkg.subjectId === subject.id);
 
   return (
     <div className="container-page py-10 sm:py-12">
@@ -54,8 +61,31 @@ export default async function SubjectPage({
         ) : null}
       </header>
 
-      {/* Tryout: warna kartu sengaja dibedakan dari paket latihan. */}
       <section className="mt-10">
+        <h2 className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-ink-900">
+          <span
+            aria-hidden="true"
+            className="inline-block h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600"
+          />
+          Paket Soal Latihan
+        </h2>
+        {subjectPackages.length === 0 ? (
+          <p className="mt-5 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center text-sm leading-relaxed text-slate-500">
+            Paket latihan untuk mata pelajaran ini sedang disiapkan.
+          </p>
+        ) : (
+          <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {subjectPackages.map((pkg, index) => (
+              <li key={pkg.id}>
+                <PracticePackageCard pkg={pkg} toneIndex={index} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* Tryout: warna kartu sengaja dibedakan dari paket latihan. */}
+      <section className="mt-14">
         <h2 className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-ink-900">
           <span
             aria-hidden="true"
@@ -81,21 +111,6 @@ export default async function SubjectPage({
             ))}
           </ul>
         )}
-      </section>
-
-      {/* Paket latihan menyusul setelah paketnya dimasukkan ke Supabase. */}
-      <section className="mt-14">
-        <h2 className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-ink-900">
-          <span
-            aria-hidden="true"
-            className="inline-block h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600"
-          />
-          Paket latihan per materi
-        </h2>
-        <p className="mt-5 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center text-sm leading-relaxed text-slate-500">
-          Paket latihan untuk mata pelajaran ini sedang disiapkan. Paket akan muncul di sini begitu
-          dimasukkan sebagai paket berjenis latihan.
-        </p>
       </section>
     </div>
   );
