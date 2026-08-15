@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
+import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { formatClock } from "@/lib/format";
 import {
   getAttempt,
@@ -36,6 +37,8 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
   const hasSubmittedRef = useRef(false);
 
   const totalSeconds = tryout.durationMinutes * 60;
+
+  usePrefetchQuestionImages(questions, currentIndex);
 
   // ------------------------------------------------------ memuat attempt
   useEffect(() => {

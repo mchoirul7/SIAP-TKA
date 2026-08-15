@@ -8,29 +8,32 @@ import type { SubjectSummary } from "@/services/content-service";
 import { readLevel, writeLevel } from "@/storage/level-storage";
 
 const ALL_LEVELS: EducationLevel[] = ["SD", "SMP", "SMA"];
+const DEFAULT_LEVEL: EducationLevel = "SMA";
 
 /**
  * Katalog halaman depan.
  *
- * Kunjungan pertama menanyakan jenjang lebih dulu, lalu pilihannya disimpan di
- * perangkat. Setelah itu yang tampil adalah mata pelajaran pada jenjang tersebut;
- * paket latihan dan tryout dibuka dari halaman mata pelajaran.
+ * Tidak ada layar pemilihan jenjang di depan: halaman langsung menampilkan mata
+ * pelajaran SMA. Jenjang tetap dapat diganti lewat pemilih di sebelah judul, dan
+ * pilihannya disimpan di perangkat untuk kunjungan berikutnya.
  */
 export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
   const countByLevel = (target: EducationLevel) =>
     summaries.filter((item) => item.subject.level === target).length;
+
   // Hanya jenjang yang sudah punya mata pelajaran yang dapat dipilih.
   const availableLevels = ALL_LEVELS.filter((option) => countByLevel(option) > 0);
+  const initialLevel =
+    countByLevel(DEFAULT_LEVEL) > 0 ? DEFAULT_LEVEL : (availableLevels[0] ?? DEFAULT_LEVEL);
 
-  const [level, setLevel] = useState<EducationLevel | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // Dimulai dari jenjang bawaan supaya isinya langsung tampil pada render pertama,
+  // tanpa kerangka kosong yang berkedip. Pilihan tersimpan menyusul di efek.
+  const [level, setLevel] = useState<EducationLevel>(initialLevel);
 
   useEffect(() => {
-    // Pilihan lama diabaikan bila jenjangnya kini tidak tersedia, supaya pengguna
-    // tidak terjebak pada halaman kosong.
     const stored = readLevel();
-    setLevel(stored && countByLevel(stored) > 0 ? stored : null);
-    setMounted(true);
+    // Pilihan lama diabaikan bila jenjangnya kini tidak ada isinya.
+    if (stored && stored !== initialLevel && countByLevel(stored) > 0) setLevel(stored);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -38,22 +41,6 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
     writeLevel(next);
     setLevel(next);
   };
-
-  if (!mounted) {
-    return (
-      <div className="container-page pb-16">
-        <div className="h-56 animate-pulse rounded-2xl bg-white/70" aria-hidden="true" />
-      </div>
-    );
-  }
-
-  if (!level) {
-    return (
-      <div className="container-page pb-16">
-        <LevelPicker onChoose={chooseLevel} countByLevel={countByLevel} />
-      </div>
-    );
-  }
 
   const levelSummaries = summaries.filter((item) => item.subject.level === level);
 
@@ -94,60 +81,5 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
         )}
       </section>
     </div>
-  );
-}
-
-/** Pertanyaan pembuka pada kunjungan pertama. Semua jenjang dapat dipilih. */
-function LevelPicker({
-  onChoose,
-  countByLevel,
-}: {
-  onChoose: (level: EducationLevel) => void;
-  countByLevel: (level: EducationLevel) => number;
-}) {
-  return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-float sm:p-8">
-      <h2 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-[28px]">
-        Pilih jenjang studi dulu
-      </h2>
-      <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-slate-600">
-        Kami tampilkan mata pelajaran, paket latihan, dan tryout yang sesuai jenjangnya. Pilihan ini
-        tersimpan di perangkat ini dan bisa diganti kapan saja.
-      </p>
-
-      <ul className="mt-6 grid gap-3 sm:grid-cols-3">
-        {ALL_LEVELS.map((option) => {
-          const count = countByLevel(option);
-          const isAvailable = count > 0;
-          return (
-            <li key={option}>
-              <button
-                type="button"
-                disabled={!isAvailable}
-                onClick={() => onChoose(option)}
-                className={[
-                  "flex w-full flex-col items-start gap-1 rounded-xl border-2 p-4 text-left transition-colors",
-                  isAvailable
-                    ? "border-brand-200 bg-brand-50/60 hover:border-brand-500 hover:bg-brand-50"
-                    : "cursor-not-allowed border-slate-200 bg-slate-50",
-                ].join(" ")}
-              >
-                <span
-                  className={[
-                    "text-xl font-extrabold tracking-tight",
-                    isAvailable ? "text-ink-900" : "text-slate-400",
-                  ].join(" ")}
-                >
-                  {option}
-                </span>
-                <span className="text-xs font-semibold text-slate-500">
-                  {isAvailable ? `${count} mata pelajaran` : "Segera hadir"}
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
   );
 }

@@ -20,7 +20,12 @@ function sanitizeAttributes(tag: string, attributes: string): string {
     if (name.toLowerCase() === "src" && !value.startsWith("/")) return "";
     kept.push(`${name.toLowerCase()}="${value}"`);
   }
-  return kept.length ? ` ${kept.join(" ")}` : "";
+  if (kept.length === 0) return "";
+
+  // Gambar dimuat saat mendekati layar dan diuraikan di luar utas utama, supaya
+  // teks soal tidak tertahan menunggu gambar yang belum terlihat.
+  kept.push('loading="lazy"', 'decoding="async"');
+  return ` ${kept.join(" ")}`;
 }
 
 export function sanitizeHtml(html: string): string {
