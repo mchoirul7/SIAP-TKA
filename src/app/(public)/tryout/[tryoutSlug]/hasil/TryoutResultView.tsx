@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
+import { QuestionLabels } from "@/components/QuestionLabels";
+import { isAnswered, isCorrectAnswer } from "@/lib/answers";
+import type { QuestionLabel } from "@/lib/question-labels";
 import { ResultStatus } from "@/components/ResultStatus";
 import { ScoreRing } from "@/components/ScoreRing";
 import { ButtonLink } from "@/components/ui/Button";
@@ -20,10 +23,13 @@ export function TryoutResultView({
   tryout,
   questions,
   catalog,
+  questionLabels,
 }: {
   tryout: Tryout;
   questions: Question[];
   catalog: AnalysisCatalog;
+  /** Penanda tiap soal. Baru disiapkan untuk simulasi Matematika. */
+  questionLabels?: Record<string, QuestionLabel>;
 }) {
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<TryoutResult | null>(null);
@@ -222,6 +228,60 @@ export function TryoutResultView({
             Diurutkan dari yang paling sedikit benar. Mulai dari nomor satu, ya.
           </p>
           <ConceptFocusList concepts={analysis.conceptFocus} />
+        </section>
+      ) : null}
+
+      {/* Rincian per soal: penanda soal ditampilkan apa adanya agar pola kelemahan terbaca. */}
+      {questionLabels ? (
+        <section className="mt-12">
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="list-check" tone="violet" size="md" />
+            Rincian tiap soal
+          </h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+            Penanda tiap soal ditampilkan agar terlihat pola kelemahannya — bukan hanya soal mana
+            yang keliru, tetapi soal seperti apa.
+          </p>
+
+          <ol className="mt-5 space-y-3">
+            {questions.map((question, index) => {
+              const userAnswer = attempt.answers[question.id];
+              const answered = isAnswered(question, userAnswer);
+              const correct = isCorrectAnswer(question, userAnswer);
+              const mark = !answered
+                ? { icon: "minus" as const, tone: "bg-slate-100 text-slate-600", text: "Kosong" }
+                : correct
+                  ? { icon: "check" as const, tone: "bg-emerald-100 text-emerald-800", text: "Benar" }
+                  : { icon: "close" as const, tone: "bg-rose-100 text-rose-800", text: "Salah" };
+
+              return (
+                <li
+                  key={question.id}
+                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card"
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-sm font-extrabold tabular-nums text-slate-700"
+                    >
+                      {index + 1}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${mark.tone}`}
+                    >
+                      <Icon name={mark.icon} className="h-4 w-4" strokeWidth={2.2} />
+                      {mark.text}
+                    </span>
+                  </div>
+                  <QuestionLabels
+                    label={questionLabels[question.id]}
+                    className="mt-3"
+                    showCompetency={false}
+                  />
+                </li>
+              );
+            })}
+          </ol>
         </section>
       ) : null}
 

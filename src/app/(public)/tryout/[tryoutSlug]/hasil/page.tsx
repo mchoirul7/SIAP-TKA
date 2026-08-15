@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 import {
   getAnalysisCatalog,
   getQuestionsForTryout,
+  getSubjects,
   getTryoutBySlug,
   getTryouts,
 } from "@/services/content-service";
+import { buildQuestionLabels } from "@/lib/question-labels";
+import { isMathSubject } from "@/lib/subject-theme";
 import { TryoutResultView } from "./TryoutResultView";
 
 interface PageProps {
@@ -28,10 +31,25 @@ export default async function TryoutResultPage({ params }: PageProps) {
   if (!tryout) notFound();
 
   // Soal diambil di server; perhitungan hasilnya tetap di perangkat pengguna.
-  const [questions, catalog] = await Promise.all([
+  const [questions, catalog, subjects] = await Promise.all([
     getQuestionsForTryout(tryoutSlug),
     getAnalysisCatalog(),
+    getSubjects(),
   ]);
 
-  return <TryoutResultView tryout={tryout} questions={questions} catalog={catalog} />;
+  // Label diagnostik baru disiapkan untuk Matematika; mata pelajaran lain
+  // penandaannya belum lengkap sehingga kepingnya akan setengah kosong.
+  const subject = subjects.find((item) => item.id === tryout.subjectId);
+  const questionLabels = isMathSubject(subject)
+    ? buildQuestionLabels(questions, catalog)
+    : undefined;
+
+  return (
+    <TryoutResultView
+      tryout={tryout}
+      questions={questions}
+      catalog={catalog}
+      questionLabels={questionLabels}
+    />
+  );
 }

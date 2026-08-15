@@ -56,6 +56,15 @@ function stableIndex(key: string, size: number): number {
   return total % size;
 }
 
+/**
+ * Mata pelajaran Matematika. Dipakai untuk memutuskan apakah label diagnostik
+ * ditampilkan, karena baru soal Matematika yang penandaannya lengkap.
+ */
+export function isMathSubject(subject: { slug?: string; name?: string } | null | undefined): boolean {
+  if (!subject) return false;
+  return /matematika|math/.test(`${subject.slug ?? ""} ${subject.name ?? ""}`.toLowerCase());
+}
+
 export function getSubjectTheme(subject: { slug?: string; name?: string }): SubjectTheme {
   const key = `${subject.slug ?? ""} ${subject.name ?? ""}`.toLowerCase();
 

@@ -1,4 +1,18 @@
+import type { Difficulty, ReasoningType } from "@/data/types";
 import type { MasteryStatus } from "./scoring";
+
+/** Label penanda soal. Dipakai analisis maupun label diagnostik di halaman soal. */
+export const difficultyLabel: Record<Difficulty, string> = {
+  dasar: "Dasar",
+  menengah: "Menengah",
+  lanjut: "Lanjut",
+};
+
+export const reasoningLabel: Record<ReasoningType, string> = {
+  pemahaman: "Pemahaman",
+  penerapan: "Penerapan",
+  penalaran: "Penalaran",
+};
 
 /** 754 -> "12:34" ; dipakai timer ujian. */
 export function formatClock(totalSeconds: number): string {

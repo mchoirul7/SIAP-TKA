@@ -16,6 +16,7 @@ import type {
   Topic,
 } from "@/data/types";
 import { isAnswered, isCorrectAnswer, misconceptionIdsFor } from "@/lib/answers";
+import { difficultyLabel } from "@/lib/format";
 
 /**
  * Seluruh perhitungan hasil dikumpulkan di file ini sebagai fungsi murni
@@ -127,12 +128,6 @@ export function statusFromAccuracy(accuracy: number): MasteryStatus {
 export function isCorrect(question: Question, answer: AnswerValue | undefined): boolean {
   return isCorrectAnswer(question, answer);
 }
-
-const difficultyLabel: Record<string, string> = {
-  dasar: "Dasar",
-  menengah: "Menengah",
-  lanjut: "Lanjut",
-};
 
 function resolveCatalog(catalog: AnalysisCatalog = {}) {
   const topicList = catalog.topics ?? topics;
@@ -423,7 +418,7 @@ export function analyzeTryoutWithCatalog(
   );
   const byDifficulty = toBuckets(
     tallyBy(questions, answers, (q) => q.difficulty),
-    (id) => difficultyLabel[id] ?? id,
+    (id) => difficultyLabel[id as keyof typeof difficultyLabel] ?? id,
     ["dasar", "menengah", "lanjut"],
   );
 

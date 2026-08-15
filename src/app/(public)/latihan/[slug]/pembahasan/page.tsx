@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
+  getAnalysisCatalog,
   getPracticePackageBySlug,
   getPracticePackages,
   getQuestionsForPackage,
+  getSubjects,
 } from "@/services/content-service";
+import { buildQuestionLabels } from "@/lib/question-labels";
+import { isMathSubject } from "@/lib/subject-theme";
 import { ExplanationView } from "./ExplanationView";
 
 interface PageProps {
@@ -26,5 +30,14 @@ export default async function ExplanationPage({ params }: PageProps) {
   const pkg = await getPracticePackageBySlug(slug);
   if (!pkg) notFound();
 
-  return <ExplanationView pkg={pkg} questions={await getQuestionsForPackage(slug)} />;
+  const [questions, subjects] = await Promise.all([getQuestionsForPackage(slug), getSubjects()]);
+  const subject = subjects.find((item) => item.id === pkg.subjectId);
+
+  // Label diagnostik baru disiapkan untuk Matematika; mata pelajaran lain
+  // penandaannya belum lengkap sehingga kepingnya akan setengah kosong.
+  const labels = isMathSubject(subject)
+    ? buildQuestionLabels(questions, await getAnalysisCatalog())
+    : undefined;
+
+  return <ExplanationView pkg={pkg} questions={questions} questionLabels={labels} />;
 }

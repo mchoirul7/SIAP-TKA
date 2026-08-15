@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { QuestionLabels } from "@/components/QuestionLabels";
 import { QuestionReview } from "@/components/QuestionReview";
 import { ButtonLink } from "@/components/ui/Button";
+import type { QuestionLabel } from "@/lib/question-labels";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import type { AnswerMap, PracticePackage, Question } from "@/data/types";
@@ -44,9 +46,12 @@ const reviewTone: Record<"correct" | "wrong" | "skipped", {
 export function ExplanationView({
   pkg,
   questions,
+  questionLabels,
 }: {
   pkg: PracticePackage;
   questions: Question[];
+  /** Penanda tiap soal. Baru disiapkan untuk paket Matematika. */
+  questionLabels?: Record<string, QuestionLabel>;
 }) {
   const router = useRouter();
   const { mounted, isUnlocked } = useEntitlements();
@@ -126,6 +131,8 @@ export function ExplanationView({
                   {view.label}
                 </span>
               </div>
+
+              <QuestionLabels label={questionLabels?.[question.id]} className="mt-3" />
 
               {question.stimulus ? (
                 <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
