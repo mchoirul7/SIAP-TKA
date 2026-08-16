@@ -157,6 +157,14 @@ export function TryoutResultView({
               {analysis.correctCount} dari {questions.length} soal dijawab benar — ketepatan{" "}
               {accuracy}%.
             </p>
+            {/* Nilai soal tetap utuh; bagian yang sudah tepat disebut terpisah supaya
+                pekerjaan yang benar sebagian tidak hilang dari pandangan. */}
+            {analysis.hasPartialCredit ? (
+              <p className="mt-1.5 text-sm leading-relaxed text-white/80">
+                Dihitung per bagian, {analysis.partsCorrect} dari {analysis.partsTotal} pernyataan
+                dan pilihan sudah tepat.
+              </p>
+            ) : null}
             <div className="mt-4">
               <ResultStatus
                 status={analysis.status}

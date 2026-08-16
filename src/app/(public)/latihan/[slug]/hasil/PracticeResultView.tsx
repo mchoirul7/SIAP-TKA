@@ -108,6 +108,15 @@ export function PracticeResultView({
     hasRecommendedPackages: recommendedPackages.length > 0,
   });
 
+  // Pola keliru sudah tampil di kartu konsep; di sini hanya sisanya, supaya
+  // tidak ada kalimat yang terbaca dua kali.
+  const shownInConceptCards = new Set(
+    analysis.conceptsToReview.flatMap((concept) => concept.misconceptions.map((item) => item.id)),
+  );
+  const otherSignals = analysis.misconceptionSignals.filter(
+    (signal) => !shownInConceptCards.has(signal.id),
+  );
+
   return (
     <div className="container-reading py-10 sm:py-12">
       <p className="eyebrow flex items-center gap-1.5">
@@ -146,6 +155,14 @@ export function PracticeResultView({
               {analysis.correctCount} dari {questions.length} soal dijawab benar — ketepatan{" "}
               {accuracy}%.
             </p>
+            {/* Nilai soal tetap utuh; bagian yang sudah tepat disebut terpisah supaya
+                pekerjaan yang benar sebagian tidak hilang dari pandangan. */}
+            {analysis.hasPartialCredit ? (
+              <p className="mt-1.5 text-sm leading-relaxed text-white/85">
+                Dihitung per bagian, {analysis.partsCorrect} dari {analysis.partsTotal} pernyataan
+                dan pilihan sudah tepat.
+              </p>
+            ) : null}
             <div className="mt-4">
               <ResultStatus
                 status={analysis.status}
@@ -171,6 +188,41 @@ export function PracticeResultView({
         />
       </section>
 
+      {/* Satu narasi: materi apa yang harus dipelajari lebih dulu. */}
+      <section className="mt-8">
+        <div
+          className={[
+            "rounded-3xl border p-6 shadow-card sm:p-8",
+            narrative.isAllClear
+              ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
+              : "border-violet-200 bg-gradient-to-br from-violet-50 to-white",
+          ].join(" ")}
+        >
+          <div className="flex items-start gap-4">
+            <IconBadge
+              name={narrative.isAllClear ? "trophy" : "compass"}
+              tone={narrative.isAllClear ? "emerald" : "violet"}
+              size="lg"
+            />
+            <div className="min-w-0">
+              <p
+                className={`text-xs font-bold uppercase tracking-[0.12em] ${
+                  narrative.isAllClear ? "text-emerald-700" : "text-violet-700"
+                }`}
+              >
+                Yang perlu dipelajari lebih dulu
+              </p>
+              <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
+                {narrative.headline}
+              </h2>
+              <p className="mt-2.5 max-w-2xl text-[15px] leading-[1.75] text-slate-700">
+                {narrative.body}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Rincian: konsep apa yang perlu dipelajari, lengkap dengan pola kelirunya. */}
       {analysis.conceptsToReview.length > 0 ? (
         <section className="mt-10">
@@ -182,6 +234,39 @@ export function PracticeResultView({
             Diurutkan dari yang paling sedikit benar. Mulai dari nomor satu, ya.
           </p>
           <ConceptFocusList concepts={analysis.conceptsToReview} />
+        </section>
+      ) : null}
+
+      {/* Pola keliru yang belum tercakup kartu konsep di atas. */}
+      {otherSignals.length > 0 ? (
+        <section className="mt-8">
+          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+            <IconBadge name="alert" tone="amber" size="md" />
+            Pola jawaban yang perlu diluruskan
+          </h2>
+          <ul className="mt-5 space-y-3">
+            {otherSignals.map((signal) => (
+              <li
+                key={signal.id}
+                className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5"
+              >
+                <p className="text-[15px] font-semibold leading-relaxed text-ink-900">
+                  {signal.label}
+                  {signal.count > 1 ? (
+                    <span className="ml-1.5 font-normal text-amber-800">
+                      (muncul {signal.count}×)
+                    </span>
+                  ) : null}
+                </p>
+                <p className="mt-1 text-[15px] leading-relaxed text-slate-700">{signal.insight}</p>
+                {signal.questionNumbers.length > 0 ? (
+                  <p className="mt-1.5 text-sm text-amber-900">
+                    Terbaca pada soal nomor {signal.questionNumbers.join(", ")}.
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

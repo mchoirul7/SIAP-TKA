@@ -71,10 +71,22 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
               </p>
               <ProgressBar
                 className="mt-2"
-                value={concept.accuracy}
+                value={concept.mastery}
                 barClassName={statusBarClass[concept.status]}
-                label={`Ketepatan ${concept.name}`}
+                label={`Penguasaan ${concept.name}`}
               />
+              {/* Soal Benar/Salah dan jawaban ganda dinilai utuh, tetapi bagian yang
+                  sudah tepat tetap dicatat supaya penguasaan tidak terbaca nol. */}
+              {concept.hasPartialCredit ? (
+                <p className="mt-2 text-sm text-slate-600">
+                  Dihitung per bagian,{" "}
+                  <span className="font-semibold text-slate-700">
+                    {concept.partsCorrect} dari {concept.partsTotal} pernyataan dan pilihan
+                  </span>{" "}
+                  sudah tepat ({concept.mastery}%). Nilai soalnya utuh, jadi soal yang baru benar
+                  sebagian belum terhitung.
+                </p>
+              ) : null}
             </div>
 
             {concept.description ? (
@@ -112,6 +124,11 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
                   <p className="mt-1 text-[15px] leading-relaxed text-slate-700">
                     {signal.insight}
                   </p>
+                  {signal.questionNumbers.length > 0 ? (
+                    <p className="mt-1.5 text-sm text-amber-900">
+                      Terbaca pada soal nomor {signal.questionNumbers.join(", ")}.
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ))}

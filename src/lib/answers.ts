@@ -74,6 +74,52 @@ export function isCorrectAnswer(question: Question, answer: AnswerValue | undefi
   }
 }
 
+/**
+ * Kebenaran per bagian sebuah soal.
+ *
+ * Nilai ujian tetap utuh (lihat `isCorrectAnswer`), tetapi analisis penguasaan
+ * perlu tahu *seberapa banyak* yang sudah tepat: pada soal Benar/Salah, dua dari
+ * tiga pernyataan yang tepat bukan hal yang sama dengan nol.
+ */
+export interface AnswerParts {
+  /** Banyak bagian yang dinilai pada soal ini. */
+  total: number;
+  /** Bagian yang sudah tepat, 0..total. */
+  correct: number;
+}
+
+/**
+ * - `single`   : satu bagian, tepat atau tidak.
+ * - `mcma`     : bagiannya sebanyak kunci jawaban. Pengecoh yang ikut dipilih
+ *                mengurangi perolehan, supaya mencentang semua pilihan tidak
+ *                terbaca sebagai penguasaan.
+ * - `category` : satu bagian per pernyataan; pernyataan kosong dihitung keliru.
+ */
+export function answerParts(question: Question, answer: AnswerValue | undefined): AnswerParts {
+  switch (question.type) {
+    case "single":
+      return { total: 1, correct: isCorrectAnswer(question, answer) ? 1 : 0 };
+
+    case "mcma": {
+      const total = Math.max(1, question.correctAnswers.length);
+      if (!answer || answer.type !== "mcma" || answer.keys.length === 0) return { total, correct: 0 };
+      const expected = new Set(question.correctAnswers);
+      const hit = answer.keys.filter((key) => expected.has(key)).length;
+      const miss = answer.keys.filter((key) => !expected.has(key)).length;
+      return { total, correct: Math.max(0, Math.min(total, hit - miss)) };
+    }
+
+    case "category": {
+      const total = Math.max(1, question.statements.length);
+      const assignments = categoryAssignments(answer);
+      const correct = question.statements.filter(
+        (statement) => assignments[statement.id] === statement.correctCategoryKey,
+      ).length;
+      return { total, correct };
+    }
+  }
+}
+
 /** Menyalakan atau mematikan satu pilihan pada soal jawaban ganda. */
 export function toggleMcmaKey(answer: AnswerValue | undefined, optionKey: string): AnswerValue {
   const keys = answer?.type === "mcma" ? answer.keys : [];

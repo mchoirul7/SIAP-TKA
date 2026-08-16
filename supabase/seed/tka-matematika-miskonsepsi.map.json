@@ -1,0 +1,398 @@
+{
+  "_readme": [
+    "Penandaan miskonsepsi untuk pengecoh soal Matematika SMA.",
+    "",
+    "Setiap paket latihan sudah memiliki katalog miskonsepsi sendiri di tabel",
+    "public.misconceptions, tetapi pengecohnya belum pernah dihubungkan ke katalog",
+    "itu — akibatnya halaman hasil hanya bisa menyebut persentase materi, bukan pola",
+    "kelirunya. Berkas ini yang menghubungkan keduanya.",
+    "",
+    "Bentuk: questionPrefix + nomor soal -> { kunci pengecoh atau id pernyataan: nomor miskonsepsi }.",
+    "Nomor miskonsepsi dilengkapi menjadi `mis-<misGroup>-<nnn>`.",
+    "",
+    "Aturan penandaan:",
+    "- Soal pilihan ganda: hanya pengecoh yang ditandai, kunci jawaban tidak.",
+    "- Soal jawaban ganda: hanya pilihan di luar kunci; penanda muncul saat pengecoh dicentang.",
+    "- Soal Benar/Salah: setiap pernyataan boleh ditandai; penanda muncul saat pernyataan itu salah dikelompokkan.",
+    "- Pengecoh yang kelirunya tidak terbaca dari pembahasan sengaja dibiarkan kosong,",
+    "  supaya tidak ada pola keliru yang dilaporkan tanpa dasar.",
+    "",
+    "Jalankan `node scripts/generate-misconception-tags.mjs` untuk menghasilkan berkas SQL-nya."
+  ],
+  "packages": [
+    {
+      "slug": "bilangan-real-jenis-dan-sifat-bilangan",
+      "questionPrefix": "tka-matematika-bilreal-jsb-auth-",
+      "misGroup": "bilreal-jsb",
+      "questions": {
+        "001": { "A": 2, "B": 2, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2 },
+        "003": { "A": 5, "B": 1, "D": 5, "E": 5 },
+        "004": { "E": 4 },
+        "005": { "A": 1, "B": 5, "C": 5 },
+        "006": { "A": 6, "C": 6, "D": 6, "E": 6 },
+        "007": { "A": 4, "B": 7, "D": 3, "E": 3 },
+        "008": { "D": 3, "E": 3 },
+        "009": { "A": 5, "B": 1, "C": 2 },
+        "010": { "A": 5, "C": 5, "D": 5 }
+      }
+    },
+    {
+      "slug": "operasi-dan-sifat-bilangan-real",
+      "questionPrefix": "tka-matematika-obr-auth-",
+      "misGroup": "bilreal-op",
+      "questions": {
+        "001": { "A": 1, "B": 1, "D": 1, "E": 1 },
+        "002": { "C": 3, "D": 2 },
+        "003": { "A": 4, "C": 4, "D": 4, "E": 4 },
+        "004": { "A": 6, "B": 6 },
+        "005": {},
+        "006": { "D": 8, "E": 5 },
+        "007": { "A": 10, "B": 10, "D": 10, "E": 10 },
+        "008": { "A": 2, "B": 3, "C": 4 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 7, "B": 7, "C": 7, "E": 7 }
+      }
+    },
+    {
+      "slug": "sistem-persamaan-linear-multivariabel",
+      "questionPrefix": "tka-matematika-splmv-auth-",
+      "misGroup": "splmv",
+      "questions": {
+        "001": { "A": 1, "C": 5, "D": 3, "E": 5 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "C": 3, "E": 3 },
+        "004": { "A": 8, "B": 8, "C": 2, "E": 2 },
+        "005": { "A": 2, "B": 2, "D": 2, "E": 2 },
+        "006": { "D": 6, "E": 5 },
+        "007": { "A": 3, "B": 3, "C": 3, "E": 3 },
+        "008": { "A": 4, "B": 3, "C": 5, "D": 5 },
+        "009": { "A": 9, "B": 9, "D": 7, "E": 9 },
+        "010": { "A": 10, "B": 10, "C": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "sistem-pertidaksamaan-linear-multivariabel",
+      "questionPrefix": "tka-matematika-sptlmv-auth-",
+      "misGroup": "sptlmv",
+      "questions": {
+        "001": { "A": 7, "B": 3, "D": 7, "E": 3 },
+        "002": { "A": 1, "B": 6, "C": 1, "D": 3 },
+        "003": { "A": 7, "C": 2, "D": 2, "E": 2 },
+        "004": { "B": 4, "C": 4, "D": 4, "E": 4 },
+        "005": { "A": 7, "B": 7, "C": 7, "E": 8 },
+        "006": { "E": 7 },
+        "007": { "B": 10, "C": 10, "D": 10, "E": 10 },
+        "008": { "A": 5, "B": 5, "C": 5, "D": 7 },
+        "009": { "A": 9, "B": 9, "D": 9, "E": 9 },
+        "010": { "A": 2, "B": 2, "C": 2, "E": 8 }
+      }
+    },
+    {
+      "slug": "program-linear",
+      "questionPrefix": "tka-matematika-proglin-auth-",
+      "misGroup": "proglin",
+      "questions": {
+        "001": { "A": 6, "B": 6, "C": 6, "E": 3 },
+        "002": { "A": 2, "B": 2, "C": 1, "D": 1 },
+        "003": { "A": 6, "B": 6, "D": 6, "E": 3 },
+        "004": { "A": 5, "C": 5, "D": 5, "E": 6 },
+        "005": { "A": 6, "C": 3, "D": 3, "E": 3 },
+        "006": { "A": 7, "D": 6 },
+        "007": { "A": 8, "B": 8, "C": 6, "E": 6 },
+        "008": { "A": 7, "B": 7, "C": 7, "D": 7 },
+        "009": { "B": 2, "C": 2, "D": 5, "E": 1 },
+        "010": { "A": 10, "B": 10, "C": 10, "E": 3 }
+      }
+    },
+    {
+      "slug": "domain-range-representasi-fungsi",
+      "questionPrefix": "tka-matematika-fungrep-auth-",
+      "misGroup": "fungrep",
+      "questions": {
+        "001": { "A": 1, "C": 2, "D": 2, "E": 1 },
+        "002": { "A": 1, "B": 2, "C": 1, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 7, "C": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "C": 5, "E": 5 },
+        "006": { "D": 6, "E": 6 },
+        "007": { "B": 1, "C": 7, "D": 7, "E": 10 },
+        "008": { "A": 5, "B": 8, "C": 8, "D": 8 },
+        "009": { "B": 6, "C": 6, "D": 9, "E": 6 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "invers-fungsi-dan-representasinya",
+      "questionPrefix": "tka-matematika-invers-auth-",
+      "misGroup": "invers",
+      "questions": {
+        "001": { "A": 3, "C": 1, "D": 4, "E": 1 },
+        "002": { "A": 2, "B": 8, "C": 2, "D": 8 },
+        "003": { "A": 4, "C": 4, "D": 1, "E": 4 },
+        "004": { "A": 4, "B": 4, "C": 10, "E": 9 },
+        "005": { "A": 5, "B": 5, "C": 5, "E": 5 },
+        "006": { "C": 2, "D": 2 },
+        "007": { "B": 7, "C": 4, "D": 4, "E": 1 },
+        "008": { "A": 3, "B": 5, "C": 6, "D": 5 },
+        "009": { "A": 4, "B": 4, "D": 4, "E": 4 },
+        "010": { "B": 4, "C": 3, "D": 1, "E": 4 }
+      }
+    },
+    {
+      "slug": "fungsi-komposisi-dan-representasinya",
+      "questionPrefix": "tka-matematika-komposisi-auth-",
+      "misGroup": "komposisi",
+      "questions": {
+        "001": { "A": 2, "B": 2, "D": 1, "E": 2 },
+        "002": { "A": 1, "B": 4, "C": 5, "D": 2 },
+        "003": { "B": 1, "C": 3, "D": 3, "E": 2 },
+        "004": { "A": 6, "C": 8, "D": 1, "E": 8 },
+        "005": { "A": 6, "B": 6, "C": 1, "E": 8 },
+        "006": { "C": 4, "E": 1 },
+        "007": { "A": 3, "B": 5, "D": 5, "E": 5 },
+        "008": { "A": 6, "B": 6, "C": 6, "D": 8 },
+        "009": { "A": 7, "C": 7, "D": 2, "E": 2 },
+        "010": { "A": 9, "B": 9, "C": 9, "D": 9 }
+      }
+    },
+    {
+      "slug": "barisan-dan-deret-aritmetika",
+      "questionPrefix": "tka-matematika-aritmetika-auth-",
+      "misGroup": "aritmetika",
+      "questions": {
+        "001": { "A": 1, "C": 2, "D": 1, "E": 2 },
+        "002": { "A": 2, "B": 2, "C": 1, "D": 1 },
+        "003": { "A": 2, "B": 2, "D": 2, "E": 2 },
+        "004": { "A": 2, "B": 2, "C": 2, "E": 5 },
+        "005": { "A": 2, "C": 2, "D": 2, "E": 2 },
+        "006": { "D": 2 },
+        "007": { "A": 2, "C": 2, "D": 3, "E": 3 },
+        "008": { "A": 2, "B": 4, "C": 7, "D": 7 },
+        "009": { "A": 8, "B": 8, "D": 8, "E": 9 },
+        "010": { "A": 10, "B": 10, "C": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "barisan-dan-deret-geometri",
+      "questionPrefix": "tka-matematika-geometri-auth-",
+      "misGroup": "geometri",
+      "questions": {
+        "001": { "A": 10, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 1, "D": 1 },
+        "003": { "A": 2, "B": 3, "D": 2, "E": 2 },
+        "004": { "A": 3, "B": 4, "C": 4, "E": 4 },
+        "005": { "A": 3, "B": 3, "D": 4, "E": 5 },
+        "006": { "D": 2 },
+        "007": { "A": 6, "B": 2, "C": 6, "E": 2 },
+        "008": { "A": 7, "B": 9, "C": 8, "D": 7 },
+        "009": { "A": 8, "B": 8, "C": 8, "E": 9 },
+        "010": { "A": 10, "B": 10, "C": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "aturan-pencacahan",
+      "questionPrefix": "tka-matematika-cacah-auth-",
+      "misGroup": "cacah",
+      "questions": {
+        "001": { "B": 1, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 6, "D": 2 },
+        "003": { "A": 3, "C": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "C": 4, "D": 4 },
+        "005": { "A": 5, "C": 5, "D": 5, "E": 4 },
+        "006": { "D": 2 },
+        "007": { "A": 7, "B": 7, "C": 7, "E": 7 },
+        "008": { "A": 1, "B": 3, "C": 2, "D": 5 },
+        "009": { "A": 9, "B": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "transformasi-geometri-dari-titik",
+      "questionPrefix": "tka-matematika-trans-auth-",
+      "misGroup": "trans",
+      "questions": {
+        "001": { "B": 1, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 3 },
+        "003": { "A": 3, "C": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "C": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "C": 5, "D": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "A": 7, "B": 7, "C": 7, "E": 7 },
+        "008": { "A": 8, "B": 4, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "B": 10, "C": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "keliling-dan-luas-bangun-datar",
+      "questionPrefix": "tka-matematika-luas-auth-",
+      "misGroup": "luas",
+      "questions": {
+        "001": { "A": 1, "B": 1, "C": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "C": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "D": 6, "E": 6 },
+        "007": { "B": 7, "C": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "volume-dan-luas-permukaan-bangun-ruang",
+      "questionPrefix": "tka-matematika-volsurf-auth-",
+      "misGroup": "volsurf",
+      "questions": {
+        "001": { "A": 1, "B": 1, "C": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "C": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "C": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "B": 7, "C": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "B": 9, "C": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "perbandingan-trigonometri",
+      "questionPrefix": "tka-matematika-trig-auth-",
+      "misGroup": "trig",
+      "questions": {
+        "001": { "A": 1, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "C": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "C": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "C": 5, "E": 5 },
+        "006": { "E": 6 },
+        "007": { "A": 7, "B": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "penyajian-data",
+      "questionPrefix": "tka-matematika-sajidata-auth-",
+      "misGroup": "sajidata",
+      "questions": {
+        "001": { "A": 1, "B": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "A": 7, "B": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "B": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "C": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "ukuran-pemusatan-dan-penyebaran-data",
+      "questionPrefix": "tka-matematika-statdata-auth-",
+      "misGroup": "statdata",
+      "questions": {
+        "001": { "A": 1, "B": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "C": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "A": 7, "B": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "B": 9, "C": 9, "E": 9 },
+        "010": { "A": 10, "C": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "jarak-dua-objek-geometri",
+      "questionPrefix": "tka-matematika-jarak-auth-",
+      "misGroup": "jarak",
+      "questions": {
+        "001": { "A": 1, "B": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "C": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "A": 7, "B": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "teorema-pythagoras",
+      "questionPrefix": "tka-matematika-pyth-auth-",
+      "misGroup": "pyth",
+      "questions": {
+        "001": { "A": 1, "B": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "C": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "C": 6, "E": 6 },
+        "007": { "A": 7, "C": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "hubungan-dua-sudut-dua-garis-dua-bidang",
+      "questionPrefix": "tka-matematika-sgb-auth-",
+      "misGroup": "sgb",
+      "questions": {
+        "001": { "A": 1, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 3, "B": 4, "C": 3, "D": 3 },
+        "003": { "A": 2, "B": 2, "D": 2, "E": 2 },
+        "004": { "A": 4, "B": 3, "C": 4, "D": 4 },
+        "005": { "A": 5, "B": 5, "D": 5, "E": 5 },
+        "006": { "E": 7 },
+        "007": { "A": 8, "B": 8, "D": 8, "E": 8 },
+        "008": { "A": 7, "B": 7, "C": 6, "D": 8 },
+        "009": { "B": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "C": 10, "D": 10, "E": 10 }
+      }
+    },
+    {
+      "slug": "hubungan-objek-geometri-bangun-datar-ruang",
+      "questionPrefix": "tka-matematika-objgeo-auth-",
+      "misGroup": "objgeo",
+      "questions": {
+        "001": { "A": 1, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 3, "B": 3, "C": 4, "D": 3 },
+        "003": { "A": 5, "C": 5, "D": 5, "E": 5 },
+        "004": { "A": 7, "C": 7, "D": 7, "E": 7 },
+        "005": { "A": 9, "B": 9, "D": 9, "E": 9 },
+        "006": { "E": 5 },
+        "007": { "B": 3, "C": 3, "D": 3, "E": 3 },
+        "008": { "A": 6, "B": 6, "C": 5, "D": 6 },
+        "009": { "A": 8, "C": 8, "D": 8, "E": 8 },
+        "010": { "A": 7, "C": 7, "D": 10, "E": 7 }
+      }
+    },
+    {
+      "slug": "kesebangunan-dan-kekongruenan-bangun-datar",
+      "questionPrefix": "tka-matematika-simkong-auth-",
+      "misGroup": "simkong",
+      "questions": {
+        "001": { "B": 2, "C": 1, "D": 1, "E": 1 },
+        "002": { "A": 2, "B": 2, "C": 2, "D": 2 },
+        "003": { "A": 3, "B": 3, "D": 3, "E": 3 },
+        "004": { "A": 4, "B": 4, "D": 4, "E": 4 },
+        "005": { "A": 5, "C": 5, "D": 5, "E": 5 },
+        "006": { "D": 6 },
+        "007": { "A": 7, "C": 7, "D": 7, "E": 7 },
+        "008": { "A": 8, "B": 8, "C": 8, "D": 8 },
+        "009": { "A": 9, "C": 9, "D": 9, "E": 9 },
+        "010": { "A": 10, "B": 10, "D": 10, "E": 10 }
+      }
+    }
+  ]
+}

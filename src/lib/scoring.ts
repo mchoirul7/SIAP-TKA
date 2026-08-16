@@ -15,7 +15,7 @@ import type {
   SubtopicPrerequisite,
   Topic,
 } from "@/data/types";
-import { isAnswered, isCorrectAnswer, misconceptionIdsFor } from "@/lib/answers";
+import { answerParts, isAnswered, isCorrectAnswer, misconceptionIdsFor } from "@/lib/answers";
 import { difficultyLabel } from "@/lib/format";
 
 /**
@@ -36,6 +36,21 @@ export interface MasteryBucket {
   correct: number;
   /** 0–100, dibulatkan. Soal kosong dihitung sebagai belum tepat. */
   accuracy: number;
+  /**
+   * Bagian yang tepat dan banyaknya bagian yang dinilai — pernyataan pada soal
+   * Benar/Salah, kunci pada soal jawaban ganda, satu bagian pada pilihan ganda
+   * biasa. Skor ujian tetap utuh; angka ini khusus untuk membaca penguasaan.
+   */
+  partsCorrect: number;
+  partsTotal: number;
+  /** 0–100 dari perolehan per bagian. Inilah dasar `status`, bukan `accuracy`. */
+  mastery: number;
+  /**
+   * Benar bila soal utuh dan bagian memberi gambaran berbeda, misalnya nol soal
+   * tepat padahal separuh pernyataannya sudah benar. Dipakai halaman hasil untuk
+   * menjelaskan dua angka yang tidak sama.
+   */
+  hasPartialCredit: boolean;
   status: MasteryStatus;
 }
 
@@ -61,6 +76,8 @@ export interface MisconceptionSignal {
   label: string;
   insight: string;
   count: number;
+  /** Nomor soal tempat pola ini muncul, mengikuti urutan paket. */
+  questionNumbers: number[];
 }
 
 /**
@@ -104,6 +121,11 @@ export interface TryoutAnalysis {
   /** 0–100 */
   score: number;
   status: MasteryStatus;
+  /** Perolehan per bagian untuk seluruh paket; skor tetap dihitung per soal utuh. */
+  partsCorrect: number;
+  partsTotal: number;
+  /** Benar bila skor per soal dan perolehan per bagian memang berbeda jauh. */
+  hasPartialCredit: boolean;
   byTopic: MasteryBucket[];
   bySubtopic: MasteryBucket[];
   byConcept: MasteryBucket[];
@@ -156,6 +178,22 @@ interface Tally {
   total: number;
   answered: number;
   correct: number;
+  partsCorrect: number;
+  partsTotal: number;
+}
+
+function tallyOf(questions: Question[], answers: AnswerMap): Tally {
+  const tally: Tally = { total: 0, answered: 0, correct: 0, partsCorrect: 0, partsTotal: 0 };
+  for (const question of questions) {
+    const answer = answers[question.id];
+    const parts = answerParts(question, answer);
+    tally.total += 1;
+    if (isAnswered(question, answer)) tally.answered += 1;
+    if (isCorrect(question, answer)) tally.correct += 1;
+    tally.partsCorrect += parts.correct;
+    tally.partsTotal += parts.total;
+  }
+  return tally;
 }
 
 function tallyBy(
@@ -163,16 +201,40 @@ function tallyBy(
   answers: AnswerMap,
   keyOf: (question: Question) => string,
 ): Map<string, Tally> {
-  const result = new Map<string, Tally>();
+  const grouped = new Map<string, Question[]>();
   for (const question of questions) {
     const key = keyOf(question);
-    const entry = result.get(key) ?? { total: 0, answered: 0, correct: 0 };
-    entry.total += 1;
-    if (isAnswered(question, answers[question.id])) entry.answered += 1;
-    if (isCorrect(question, answers[question.id])) entry.correct += 1;
-    result.set(key, entry);
+    const list = grouped.get(key) ?? [];
+    list.push(question);
+    grouped.set(key, list);
   }
-  return result;
+  return new Map([...grouped].map(([key, group]) => [key, tallyOf(group, answers)]));
+}
+
+/**
+ * Satu materi beserta hasilnya. Dua angka dihitung berdampingan: `accuracy`
+ * mengikuti aturan ujian (soal utuh), `mastery` mengikuti bagian yang tepat.
+ * Status penguasaan memakai `mastery` supaya pekerjaan yang sudah benar
+ * sebagian tidak terbaca sebagai nol sama sekali.
+ */
+function toBucket(id: string, name: string, tally: Tally): MasteryBucket {
+  const accuracy = tally.total === 0 ? 0 : Math.round((tally.correct / tally.total) * 100);
+  const mastery = tally.partsTotal === 0 ? 0 : Math.round((tally.partsCorrect / tally.partsTotal) * 100);
+
+  return {
+    id,
+    name,
+    total: tally.total,
+    answered: tally.answered,
+    correct: tally.correct,
+    accuracy,
+    partsCorrect: tally.partsCorrect,
+    partsTotal: tally.partsTotal,
+    mastery,
+    // Selisih kecil karena pembulatan tidak perlu dijelaskan ke siswa.
+    hasPartialCredit: tally.partsTotal > tally.total && Math.abs(mastery - accuracy) >= 5,
+    status: statusFromAccuracy(mastery),
+  };
 }
 
 function toBuckets(
@@ -180,19 +242,7 @@ function toBuckets(
   nameOf: (id: string) => string,
   order?: string[],
 ): MasteryBucket[] {
-  const buckets: MasteryBucket[] = [];
-  for (const [id, tally] of tallies) {
-    const accuracy = tally.total === 0 ? 0 : Math.round((tally.correct / tally.total) * 100);
-    buckets.push({
-      id,
-      name: nameOf(id),
-      total: tally.total,
-      answered: tally.answered,
-      correct: tally.correct,
-      accuracy,
-      status: statusFromAccuracy(accuracy),
-    });
-  }
+  const buckets = [...tallies].map(([id, tally]) => toBucket(id, nameOf(id), tally));
   if (order) {
     buckets.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
   }
@@ -212,7 +262,7 @@ function buildPrerequisiteAdvice(
     for (const rule of rules) {
       const prerequisiteBucket = bySubtopicId.get(rule.requiresSubtopicId);
       // Hanya disarankan bila prasyaratnya ikut diujikan dan hasilnya belum kuat.
-      if (!prerequisiteBucket || prerequisiteBucket.accuracy >= MASTERY_THRESHOLD) continue;
+      if (!prerequisiteBucket || prerequisiteBucket.mastery >= MASTERY_THRESHOLD) continue;
       if (priorityIds.has(rule.requiresSubtopicId) === false && prerequisiteBucket.status === "cukup") {
         continue;
       }
@@ -227,7 +277,7 @@ function buildPrerequisiteAdvice(
   const ranked = [...candidates.entries()].sort((a, b) => {
     const supportDiff = b[1].supports.length - a[1].supports.length;
     if (supportDiff !== 0) return supportDiff;
-    return (bySubtopicId.get(a[0])?.accuracy ?? 0) - (bySubtopicId.get(b[0])?.accuracy ?? 0);
+    return (bySubtopicId.get(a[0])?.mastery ?? 0) - (bySubtopicId.get(b[0])?.mastery ?? 0);
   });
 
   const [subtopicId, entry] = ranked[0];
@@ -245,28 +295,61 @@ function buildPrerequisiteAdvice(
   };
 }
 
+interface SignalOptions {
+  /** Berapa kali sebuah pola harus muncul sebelum dilaporkan. */
+  minimumOccurrence?: number;
+  /** Banyak pola yang ditampilkan. */
+  limit?: number;
+  /** questionId -> nomor soal pada paket, untuk menunjuk soalnya. */
+  numberOf?: Map<string, number>;
+}
+
+/**
+ * Pola keliru yang terbaca dari jawaban.
+ *
+ * Satu soal dapat memunculkan lebih dari satu pola: pada soal jawaban ganda dan
+ * Benar/Salah penilaiannya per bagian, sehingga pengecoh yang dicentang dan
+ * pernyataan yang salah kelompok masing-masing dicatat.
+ */
 function buildMisconceptionSignals(
   questions: Question[],
   answers: AnswerMap,
   misconceptionById: Map<string, Misconception>,
-  minimumOccurrence = 2,
+  { minimumOccurrence = 2, limit = 4, numberOf }: SignalOptions = {},
 ): MisconceptionSignal[] {
-  const counts = new Map<string, number>();
+  const counts = new Map<string, { count: number; numbers: Set<number> }>();
   for (const question of questions) {
     for (const id of misconceptionIdsFor(question, answers[question.id])) {
-      counts.set(id, (counts.get(id) ?? 0) + 1);
+      const entry = counts.get(id) ?? { count: 0, numbers: new Set<number>() };
+      entry.count += 1;
+      const number = numberOf?.get(question.id);
+      if (number) entry.numbers.add(number);
+      counts.set(id, entry);
     }
   }
 
   return [...counts.entries()]
-    .filter(([, count]) => count >= minimumOccurrence)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 2)
-    .flatMap(([id, count]) => {
+    .filter(([, entry]) => entry.count >= minimumOccurrence)
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, limit)
+    .flatMap(([id, entry]) => {
       const misconception = misconceptionById.get(id);
       if (!misconception) return [];
-      return [{ id, label: misconception.label, insight: misconception.insight, count }];
+      return [
+        {
+          id,
+          label: misconception.label,
+          insight: misconception.insight,
+          count: entry.count,
+          questionNumbers: [...entry.numbers].sort((a, b) => a - b),
+        },
+      ];
     });
+}
+
+/** Nomor soal mengikuti urutan paket, sama dengan yang terlihat di halaman pembahasan. */
+function questionNumbers(questions: Question[]): Map<string, number> {
+  return new Map(questions.map((question, index) => [question.id, index + 1]));
 }
 
 interface FocusKey {
@@ -327,6 +410,7 @@ function buildStudyFocus(
   resolved: ReturnType<typeof resolveCatalog>,
 ): ConceptFocus[] {
   const groups = new Map<string, { key: FocusKey; questions: Question[] }>();
+  const numberOf = questionNumbers(questions);
 
   for (const question of questions) {
     const key = focusKeyFor(question, resolved);
@@ -337,30 +421,20 @@ function buildStudyFocus(
   }
 
   return [...groups.values()]
-    .map(({ key, questions: group }) => {
-      const correct = group.filter((question) => isCorrect(question, answers[question.id])).length;
-      const answered = group.filter((question) =>
-        isAnswered(question, answers[question.id]),
-      ).length;
-      const accuracy = Math.round((correct / group.length) * 100);
-
-      return {
-        id: key.id,
-        name: key.name,
-        level: key.level,
-        description: key.description,
-        parentName: key.parentName,
-        subtopicId: key.subtopicId,
-        total: group.length,
-        answered,
-        correct,
-        accuracy,
-        status: statusFromAccuracy(accuracy),
-        // Satu kali muncul sudah cukup: pada satu materi, pola keliru jarang berulang.
-        misconceptions: buildMisconceptionSignals(group, answers, resolved.misconceptionById, 1),
-      };
-    })
-    .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total);
+    .map(({ key, questions: group }) => ({
+      ...toBucket(key.id, key.name, tallyOf(group, answers)),
+      level: key.level,
+      description: key.description,
+      parentName: key.parentName,
+      subtopicId: key.subtopicId,
+      // Satu kali muncul sudah cukup: pada satu materi, pola keliru jarang berulang.
+      misconceptions: buildMisconceptionSignals(group, answers, resolved.misconceptionById, {
+        minimumOccurrence: 1,
+        limit: 5,
+        numberOf,
+      }),
+    }))
+    .sort((a, b) => a.mastery - b.mastery || b.total - a.total);
 }
 
 /**
@@ -395,12 +469,15 @@ export function analyzeTryoutWithCatalog(
   catalog?: AnalysisCatalog,
 ): TryoutAnalysis {
   const resolved = resolveCatalog(catalog);
-  const totalQuestions = questions.length;
-  const answeredCount = questions.filter((q) => isAnswered(q, answers[q.id])).length;
-  const correctCount = questions.filter((q) => isCorrect(q, answers[q.id])).length;
+  const overall = tallyOf(questions, answers);
+  const totalQuestions = overall.total;
+  const answeredCount = overall.answered;
+  const correctCount = overall.correct;
   const unansweredCount = totalQuestions - answeredCount;
   const wrongCount = totalQuestions - correctCount - unansweredCount;
   const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
+  const partsScore =
+    overall.partsTotal === 0 ? 0 : Math.round((overall.partsCorrect / overall.partsTotal) * 100);
 
   const byTopic = toBuckets(
     tallyBy(questions, answers, (q) => q.topicId),
@@ -427,9 +504,9 @@ export function analyzeTryoutWithCatalog(
   const priorities: PriorityItem[] = bySubtopic
     // Subtopik yang tidak dikenali katalog dilewati agar tidak muncul sebagai nama kosong.
     .filter(
-      (bucket) => bucket.accuracy < MASTERY_THRESHOLD && resolved.subtopicById.has(bucket.id),
+      (bucket) => bucket.mastery < MASTERY_THRESHOLD && resolved.subtopicById.has(bucket.id),
     )
-    .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total)
+    .sort((a, b) => a.mastery - b.mastery || b.total - a.total)
     .slice(0, 3)
     .map((bucket) => {
       const subtopic = resolved.subtopicById.get(bucket.id);
@@ -465,19 +542,22 @@ export function analyzeTryoutWithCatalog(
     unansweredCount,
     score,
     status: statusFromAccuracy(score),
+    partsCorrect: overall.partsCorrect,
+    partsTotal: overall.partsTotal,
+    hasPartialCredit: overall.partsTotal > totalQuestions && Math.abs(partsScore - score) >= 5,
     byTopic,
     bySubtopic,
     byConcept,
     byDifficulty,
     priorities,
     prerequisiteAdvice,
-    misconceptionSignals: buildMisconceptionSignals(
-      questions,
-      answers,
-      resolved.misconceptionById,
-    ),
+    misconceptionSignals: buildMisconceptionSignals(questions, answers, resolved.misconceptionById, {
+      minimumOccurrence: 2,
+      limit: 5,
+      numberOf: questionNumbers(questions),
+    }),
     conceptFocus: buildStudyFocus(questions, answers, resolved)
-      .filter((focus) => focus.accuracy < MASTERY_THRESHOLD)
+      .filter((focus) => focus.mastery < MASTERY_THRESHOLD)
       .slice(0, 4),
     recommendedPackageSlugs,
   };
@@ -490,6 +570,14 @@ export interface PracticeAnalysis {
   unansweredCount: number;
   score: number;
   status: MasteryStatus;
+  /**
+   * Perolehan per bagian untuk seluruh paket. Skor tetap dihitung per soal utuh;
+   * angka ini yang menunjukkan pekerjaan yang sudah benar sebagian.
+   */
+  partsCorrect: number;
+  partsTotal: number;
+  /** Benar bila skor per soal dan perolehan per bagian memang berbeda jauh. */
+  hasPartialCredit: boolean;
   /** Konsep yang perlu dipelajari lagi, sudah berisi penjelasan dan pola kelirunya. */
   conceptsToReview: ConceptFocus[];
   strongConcepts: MasteryBucket[];
@@ -512,15 +600,17 @@ export function analyzePracticeWithCatalog(
   catalog?: AnalysisCatalog,
 ): PracticeAnalysis {
   const resolved = resolveCatalog(catalog);
-  const totalQuestions = questions.length;
-  const correctCount = questions.filter((q) => isCorrect(q, answers[q.id])).length;
-  const answeredCount = questions.filter((q) => isAnswered(q, answers[q.id])).length;
-  const unansweredCount = totalQuestions - answeredCount;
+  const overall = tallyOf(questions, answers);
+  const totalQuestions = overall.total;
+  const correctCount = overall.correct;
+  const unansweredCount = totalQuestions - overall.answered;
   const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
+  const partsScore =
+    overall.partsTotal === 0 ? 0 : Math.round((overall.partsCorrect / overall.partsTotal) * 100);
 
   const focus = buildStudyFocus(questions, answers, resolved);
   const conceptsToReview = focus
-    .filter((item) => item.accuracy < MASTERY_THRESHOLD)
+    .filter((item) => item.mastery < MASTERY_THRESHOLD)
     .slice(0, 5);
 
   return {
@@ -530,14 +620,16 @@ export function analyzePracticeWithCatalog(
     unansweredCount,
     score,
     status: statusFromAccuracy(score),
+    partsCorrect: overall.partsCorrect,
+    partsTotal: overall.partsTotal,
+    hasPartialCredit: overall.partsTotal > totalQuestions && Math.abs(partsScore - score) >= 5,
     conceptsToReview,
-    strongConcepts: focus.filter((item) => item.accuracy >= MASTERY_THRESHOLD),
-    misconceptionSignals: buildMisconceptionSignals(
-      questions,
-      answers,
-      resolved.misconceptionById,
-      1,
-    ),
+    strongConcepts: focus.filter((item) => item.mastery >= MASTERY_THRESHOLD),
+    misconceptionSignals: buildMisconceptionSignals(questions, answers, resolved.misconceptionById, {
+      minimumOccurrence: 1,
+      limit: 6,
+      numberOf: questionNumbers(questions),
+    }),
     // Latihan lanjutan diambil dari subtopik pemilik konsep yang masih lemah.
     recommendedPackageSlugs: packagesForSubtopics(
       conceptsToReview.map((concept) => concept.subtopicId).filter(Boolean),

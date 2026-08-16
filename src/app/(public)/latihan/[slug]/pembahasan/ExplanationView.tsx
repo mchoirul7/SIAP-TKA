@@ -10,8 +10,14 @@ import { ButtonLink } from "@/components/ui/Button";
 import type { QuestionLabel } from "@/lib/question-labels";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import type { AnswerMap, PracticePackage, Question } from "@/data/types";
-import { correctAnswerSummary, isAnswered, isCorrectAnswer } from "@/lib/answers";
+import type { AnswerMap, Misconception, PracticePackage, Question } from "@/data/types";
+import {
+  answerParts,
+  correctAnswerSummary,
+  isAnswered,
+  isCorrectAnswer,
+  misconceptionIdsFor,
+} from "@/lib/answers";
 import { toneChip, type AccentTone } from "@/lib/tone";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { getPracticeAttempt } from "@/services/practice-service";
@@ -48,12 +54,16 @@ export function ExplanationView({
   pkg,
   questions,
   questionLabels,
+  misconceptions = [],
 }: {
   pkg: PracticePackage;
   questions: Question[];
   /** Penanda tiap soal. Baru disiapkan untuk paket Matematika. */
   questionLabels?: Record<string, QuestionLabel>;
+  /** Katalog pola keliru, untuk menjelaskan pengecoh yang tadi dipilih. */
+  misconceptions?: Misconception[];
 }) {
+  const misconceptionById = new Map(misconceptions.map((item) => [item.id, item]));
   const router = useRouter();
   const { mounted, isUnlocked } = useEntitlements();
   const [answers, setAnswers] = useState<AnswerMap>({});
@@ -109,6 +119,16 @@ export function ExplanationView({
           const answered = isAnswered(question, userAnswer);
           const isRight = isCorrectAnswer(question, userAnswer);
           const view = reviewTone[!answered ? "skipped" : isRight ? "correct" : "wrong"];
+          const parts = answerParts(question, userAnswer);
+          // Soal berbagian: sebagian tepat tetap perlu terlihat, walau nilai soalnya nol.
+          const showParts = parts.total > 1 && !isRight && parts.correct > 0;
+          const signals = misconceptionIdsFor(question, userAnswer).flatMap((id) => {
+            const found = misconceptionById.get(id);
+            return found ? [found] : [];
+          });
+          const uniqueSignals = signals.filter(
+            (item, index) => signals.findIndex((other) => other.id === item.id) === index,
+          );
 
           return (
             <li
@@ -125,11 +145,21 @@ export function ExplanationView({
                   </span>
                   Soal {index + 1}
                 </p>
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneChip[view.tone]}`}
-                >
-                  <Icon name={view.icon} className="h-4 w-4" strokeWidth={2.2} />
-                  {view.label}
+                <span className="flex flex-wrap items-center gap-2">
+                  {showParts ? (
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneChip.amber}`}
+                    >
+                      <Icon name="target" className="h-4 w-4" strokeWidth={2.2} />
+                      {parts.correct} dari {parts.total} bagian tepat
+                    </span>
+                  ) : null}
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneChip[view.tone]}`}
+                  >
+                    <Icon name={view.icon} className="h-4 w-4" strokeWidth={2.2} />
+                    {view.label}
+                  </span>
                 </span>
               </div>
 
@@ -172,11 +202,47 @@ export function ExplanationView({
                         Kunci: {correctAnswerSummary(question)}
                       </span>
                     </p>
-                    <p className="mt-2 text-[15px] leading-[1.75] text-slate-700">
-                      {question.explanation ?? "Pembahasan untuk soal ini belum tersedia."}
-                    </p>
+                    {/* Pembahasan hasil impor berbentuk HTML; dirender, bukan dicetak apa adanya. */}
+                    {question.explanation ? (
+                      question.contentFormat === "html" ? (
+                        <RichText
+                          html={question.explanation}
+                          className="mt-2 text-[15px] leading-[1.75] text-slate-700"
+                        />
+                      ) : (
+                        <p className="mt-2 text-[15px] leading-[1.75] text-slate-700">
+                          {question.explanation}
+                        </p>
+                      )
+                    ) : (
+                      <p className="mt-2 text-[15px] leading-[1.75] text-slate-500">
+                        Pembahasan untuk soal ini belum tersedia.
+                      </p>
+                    )}
                   </div>
                 </div>
+
+                {/* Pola keliru yang terbaca dari pengecoh yang tadi dipilih. */}
+                {uniqueSignals.length > 0 ? (
+                  <div className="mt-4 space-y-3 border-t border-violet-100 pt-4">
+                    {uniqueSignals.map((signal) => (
+                      <div key={signal.id} className="flex items-start gap-3">
+                        <IconBadge name="alert" tone="amber" size="sm" />
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold uppercase tracking-[0.1em] text-amber-800">
+                            Pola yang terbaca dari jawabanmu
+                          </p>
+                          <p className="mt-1 text-[15px] font-semibold leading-relaxed text-ink-900">
+                            {signal.label}
+                          </p>
+                          <p className="mt-1 text-[15px] leading-relaxed text-slate-700">
+                            {signal.insight}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </li>
           );

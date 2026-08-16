@@ -31,11 +31,18 @@ export default async function ExplanationPage({ params }: PageProps) {
   const [questions, subjects] = await Promise.all([getQuestionsForPackage(slug), getSubjects()]);
   const subject = subjects.find((item) => item.id === pkg.subjectId);
 
-  // Label diagnostik baru disiapkan untuk Matematika; mata pelajaran lain
-  // penandaannya belum lengkap sehingga kepingnya akan setengah kosong.
-  const labels = isMathSubject(subject)
-    ? buildQuestionLabels(questions, await getAnalysisCatalog())
-    : undefined;
+  // Katalog dipakai dua kali: penanda soal dan penjelasan pola keliru. Label
+  // diagnostik baru disiapkan untuk Matematika; mata pelajaran lain penandaannya
+  // belum lengkap sehingga kepingnya akan setengah kosong.
+  const catalog = await getAnalysisCatalog();
+  const labels = isMathSubject(subject) ? buildQuestionLabels(questions, catalog) : undefined;
 
-  return <ExplanationView pkg={pkg} questions={questions} questionLabels={labels} />;
+  return (
+    <ExplanationView
+      pkg={pkg}
+      questions={questions}
+      questionLabels={labels}
+      misconceptions={catalog.misconceptions}
+    />
+  );
 }
