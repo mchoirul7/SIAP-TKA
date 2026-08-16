@@ -27,7 +27,7 @@ export default async function PracticeCatalogPage() {
         as="h1"
         icon="layers"
         title="Paket Soal Latihan"
-        description="Setiap paket fokus pada satu subtopik. Akses dibuka dengan voucher seri mapel, bersama tryout dan pembahasan dalam seri yang sama."
+        description="Setiap paket fokus pada satu subtopik. Akses dibuka dengan kode akses seri mapel, bersama tryout dan pembahasan dalam seri yang sama."
       />
 
       {groups.length === 0 ? (

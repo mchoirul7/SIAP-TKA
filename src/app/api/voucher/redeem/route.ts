@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
   if (unlockedSeriesKeys.length === 0) {
     return NextResponse.json(
-      { code: "VOUCHER_INVALID", message: "Voucher tidak terhubung ke seri yang aktif." },
+      { code: "VOUCHER_INVALID", message: "Kode akses tidak terhubung ke seri yang aktif." },
       { status: 400 },
     );
   }
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
 
   const response = NextResponse.json({
     code,
-    message: "Voucher berhasil digunakan.",
+    message: "Kode akses berhasil digunakan.",
     unlockedSeriesKeys,
     unlockedPackageSlugs,
   });

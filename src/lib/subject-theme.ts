@@ -25,6 +25,7 @@ const THEMES: Record<string, SubjectTheme> = {
   rose: { cover: "rose", accent: "rose", icon: "book" },
   sky: { cover: "sky", accent: "sky", icon: "globe" },
   emerald: { cover: "emerald", accent: "emerald", icon: "leaf" },
+  neon: { cover: "neon", accent: "neon", icon: "book" },
   honey: { cover: "honey", accent: "amber", icon: "flask" },
   orange: { cover: "orange", accent: "brand", icon: "compass" },
 };
@@ -32,7 +33,7 @@ const THEMES: Record<string, SubjectTheme> = {
 /** Kata kunci pada nama atau slug mata pelajaran → warna yang dipakai. */
 const KEYWORDS: { match: RegExp; theme: keyof typeof THEMES; icon?: IconName }[] = [
   { match: /matematika|math/, theme: "violet" },
-  { match: /bahasa[-\s]?indonesia|indonesian/, theme: "rose" },
+  { match: /bahasa[-\s]?indonesia|indonesian/, theme: "neon" },
   { match: /bahasa[-\s]?inggris|english/, theme: "sky" },
   { match: /kimia|chemistry/, theme: "honey" },
   { match: /biologi|biology/, theme: "emerald" },

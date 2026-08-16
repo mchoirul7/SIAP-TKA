@@ -146,11 +146,55 @@ interface PackageAccess {
 
 // ------------------------------------------------------------------ helper
 
+const SUPABASE_PAGE_SIZE = 500;
+const FILTER_CHUNK_SIZE = 100;
+
+type SupabaseListResult<T> = {
+  data: T[] | null;
+  error: { message: string } | null;
+  count?: number | null;
+};
+
 /** Melempar dengan pesan yang jelas supaya build gagal keras, bukan diam-diam kosong. */
 function unwrap<T>(result: { data: T | null; error: { message: string } | null }, what: string): T {
   if (result.error) throw new Error(`Gagal membaca ${what} dari Supabase: ${result.error.message}`);
   if (!result.data) throw new Error(`Tidak ada data ${what} dari Supabase.`);
   return result.data;
+}
+
+async function readAllRows<T>(
+  what: string,
+  queryPage: (from: number, to: number) => PromiseLike<SupabaseListResult<T>>,
+): Promise<T[]> {
+  const rows: T[] = [];
+
+  for (let from = 0; ; from += SUPABASE_PAGE_SIZE) {
+    const to = from + SUPABASE_PAGE_SIZE - 1;
+    const result = await queryPage(from, to);
+    const page = unwrap(result, `${what} halaman ${Math.floor(from / SUPABASE_PAGE_SIZE) + 1}`);
+    rows.push(...page);
+
+    if (typeof result.count === "number" && rows.length >= result.count) return rows;
+    if (page.length < SUPABASE_PAGE_SIZE) return rows;
+  }
+}
+
+function chunk<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) chunks.push(items.slice(index, index + size));
+  return chunks;
+}
+
+async function readAllRowsForChunks<T, U>(
+  what: string,
+  values: U[],
+  queryPage: (values: U[], from: number, to: number) => PromiseLike<SupabaseListResult<T>>,
+): Promise<T[]> {
+  const rows: T[] = [];
+  for (const valuesChunk of chunk(values, FILTER_CHUNK_SIZE)) {
+    rows.push(...await readAllRows(what, (from, to) => queryPage(valuesChunk, from, to)));
+  }
+  return rows;
 }
 
 function toSubject(row: SubjectRow): Subject {
@@ -268,9 +312,9 @@ function packageAccess(
   const subject = subjects.get(row.subject_id);
   const foundSeries = row.series_id ? series.get(row.series_id) : undefined;
   const fallbackSeries = foundSeries ?? {
-    id: row.series_id ?? "ser-bulan-kemerdekaan",
-    slug: "bulan-kemerdekaan",
-    title: "Seri Bulan Kemerdekaan",
+    id: row.series_id ?? "ser-sukses-tka-sma-vol-1",
+    slug: "sukses-tka-sma-vol-1",
+    title: "Seri Sukses TKA SMA Vol.1",
     description: "",
   };
   const subjectSlug = subject?.slug ?? row.subject_id;
@@ -335,13 +379,14 @@ function toQuestion(row: QuestionRow, passageHtml: Map<string, string>): Questio
 // -------------------------------------------------------------------- baca
 
 export async function getSubjects(): Promise<Subject[]> {
-  const rows = unwrap(
-    await supabase
+  const rows = await readAllRows<SubjectRow>("mata pelajaran", (from, to) =>
+    supabase
       .from("subjects")
-      .select("id, slug, name, short_name, level, description")
-      .order("sort_order"),
-    "mata pelajaran",
-  ) as SubjectRow[];
+      .select("id, slug, name, short_name, level, description", { count: "exact" })
+      .order("sort_order")
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toSubject);
 }
 
@@ -351,59 +396,74 @@ export async function getSubjectBySlug(slug: string): Promise<Subject | null> {
 }
 
 export async function getSeries(): Promise<ContentSeries[]> {
-  const rows = unwrap(
-    await supabase
+  const rows = await readAllRows<ContentSeriesRow>("seri konten", (from, to) =>
+    supabase
       .from("content_series")
-      .select("id, slug, title, description")
+      .select("id, slug, title, description", { count: "exact" })
       .eq("is_active", true)
-      .order("sort_order"),
-    "seri konten",
-  ) as ContentSeriesRow[];
+      .order("sort_order")
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toSeries);
 }
 
 export async function getTopics(): Promise<Topic[]> {
-  const rows = unwrap(
-    await supabase.from("topics").select("id, subject_id, slug, name").order("sort_order"),
-    "topik",
-  ) as TopicRow[];
+  const rows = await readAllRows<TopicRow>("topik", (from, to) =>
+    supabase
+      .from("topics")
+      .select("id, subject_id, slug, name", { count: "exact" })
+      .order("sort_order")
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toTopic);
 }
 
 export async function getSubtopics(): Promise<Subtopic[]> {
-  const rows = unwrap(
-    await supabase.from("subtopics").select("id, topic_id, slug, name, description").order("sort_order"),
-    "subtopik",
-  ) as SubtopicRow[];
+  const rows = await readAllRows<SubtopicRow>("subtopik", (from, to) =>
+    supabase
+      .from("subtopics")
+      .select("id, topic_id, slug, name, description", { count: "exact" })
+      .order("sort_order")
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toSubtopic);
 }
 
 export async function getConcepts(): Promise<Concept[]> {
-  const rows = unwrap(
-    await supabase
+  const rows = await readAllRows<ConceptRow>("konsep", (from, to) =>
+    supabase
       .from("concepts")
-      .select("id, subtopic_id, name, description")
-      .order("sort_order"),
-    "konsep",
-  ) as ConceptRow[];
+      .select("id, subtopic_id, name, description", { count: "exact" })
+      .order("sort_order")
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toConcept);
 }
 
 export async function getMisconceptions(): Promise<Misconception[]> {
-  const rows = unwrap(
-    await supabase.from("misconceptions").select("id, label, description, insight"),
-    "miskonsepsi",
-  ) as MisconceptionRow[];
+  const rows = await readAllRows<MisconceptionRow>("miskonsepsi", (from, to) =>
+    supabase
+      .from("misconceptions")
+      .select("id, label, description, insight", { count: "exact" })
+      .order("id")
+      .range(from, to),
+  );
   return rows.map(toMisconception);
 }
 
 export async function getSubtopicPrerequisites(): Promise<SubtopicPrerequisite[]> {
-  const rows = unwrap(
-    await supabase
+  const rows = await readAllRows<SubtopicPrerequisiteRow>("prasyarat subtopik", (from, to) =>
+    supabase
       .from("subtopic_prerequisites")
-      .select("subtopic_id, requires_subtopic_id, reason"),
-    "prasyarat subtopik",
-  ) as SubtopicPrerequisiteRow[];
+      .select("subtopic_id, requires_subtopic_id, reason", { count: "exact" })
+      .order("subtopic_id")
+      .order("requires_subtopic_id")
+      .range(from, to),
+  );
 
   return rows.map((row) => ({
     subtopicId: row.subtopic_id,
@@ -413,12 +473,14 @@ export async function getSubtopicPrerequisites(): Promise<SubtopicPrerequisite[]
 }
 
 export async function getConceptPrerequisites(): Promise<ConceptPrerequisite[]> {
-  const rows = unwrap(
-    await supabase
+  const rows = await readAllRows<ConceptPrerequisiteRow>("prasyarat konsep", (from, to) =>
+    supabase
       .from("concept_prerequisites")
-      .select("concept_id, requires_concept_id"),
-    "prasyarat konsep",
-  ) as ConceptPrerequisiteRow[];
+      .select("concept_id, requires_concept_id", { count: "exact" })
+      .order("concept_id")
+      .order("requires_concept_id")
+      .range(from, to),
+  );
 
   return rows.map((row) => ({
     conceptId: row.concept_id,
@@ -432,14 +494,18 @@ const PACKAGE_COLUMNS =
 /** Urutan soal ikut `position`, karena urutan adalah bagian dari paketnya. */
 async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[]>> {
   if (packageIds.length === 0) return new Map();
-  const rows = unwrap(
-    await supabase
-      .from("package_questions")
-      .select("package_id, question_id, position")
-      .in("package_id", packageIds)
-      .order("position"),
+  const rows = await readAllRowsForChunks<{ package_id: string; question_id: string }, string>(
     "urutan soal",
-  ) as { package_id: string; question_id: string }[];
+    packageIds,
+    (ids, from, to) =>
+      supabase
+        .from("package_questions")
+        .select("package_id, question_id, position", { count: "exact" })
+        .in("package_id", ids)
+        .order("package_id")
+        .order("position")
+        .range(from, to),
+  );
 
   const map = new Map<string, string[]>();
   for (const row of rows) {
@@ -453,10 +519,17 @@ async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[
 async function questionTaxonomyFor(questionIds: string[]): Promise<Map<string, QuestionTaxonomyRow>> {
   if (questionIds.length === 0) return new Map();
 
-  const rows = unwrap(
-    await supabase.from("questions").select("id, topic_id, subtopic_id").in("id", questionIds),
+  const rows = await readAllRowsForChunks<QuestionTaxonomyRow, string>(
     "taksonomi soal",
-  ) as QuestionTaxonomyRow[];
+    questionIds,
+    (ids, from, to) =>
+      supabase
+        .from("questions")
+        .select("id, topic_id, subtopic_id", { count: "exact" })
+        .in("id", ids)
+        .order("id")
+        .range(from, to),
+  );
 
   return new Map(rows.map((row) => [row.id, row]));
 }
@@ -464,18 +537,29 @@ async function questionTaxonomyFor(questionIds: string[]): Promise<Map<string, Q
 async function questionsForIds(questionIds: string[]): Promise<Question[]> {
   if (questionIds.length === 0) return [];
 
-  const rows = unwrap(
-    await supabase.from("questions").select("*").in("id", questionIds),
-    "soal",
-  ) as QuestionRow[];
+  const rows = await readAllRowsForChunks<QuestionRow, string>("soal", questionIds, (ids, from, to) =>
+    supabase
+      .from("questions")
+      .select("*", { count: "exact" })
+      .in("id", ids)
+      .order("id")
+      .range(from, to),
+  );
 
   const passageIds = [...new Set(rows.map((row) => row.passage_id).filter(Boolean))] as string[];
   const passageHtml = new Map<string, string>();
   if (passageIds.length > 0) {
-    const passages = unwrap(
-      await supabase.from("passages").select("id, body_html").in("id", passageIds),
+    const passages = await readAllRowsForChunks<{ id: string; body_html: string }, string>(
       "bacaan",
-    ) as { id: string; body_html: string }[];
+      passageIds,
+      (ids, from, to) =>
+        supabase
+          .from("passages")
+          .select("id, body_html", { count: "exact" })
+          .in("id", ids)
+          .order("id")
+          .range(from, to),
+    );
     for (const passage of passages) passageHtml.set(passage.id, passage.body_html);
   }
 
@@ -489,10 +573,16 @@ async function questionsForIds(questionIds: string[]): Promise<Question[]> {
 
 export async function getTryouts(): Promise<Tryout[]> {
   const [rows, subjects, series] = await Promise.all([
-    unwrap(
-      await supabase.from("packages").select(PACKAGE_COLUMNS).eq("kind", "tryout").order("sort_order"),
-      "paket tryout",
-    ) as PackageRow[],
+    readAllRows<PackageRow>("paket tryout", (from, to) =>
+      supabase
+        .from("packages")
+        .select(PACKAGE_COLUMNS, { count: "exact" })
+        .eq("kind", "tryout")
+        .eq("is_published", true)
+        .order("sort_order")
+        .order("id")
+        .range(from, to),
+    ),
     getSubjects(),
     getSeries(),
   ]);
@@ -517,15 +607,16 @@ export async function getQuestionsForTryout(slug: string): Promise<Question[]> {
 
 export async function getPracticePackages(): Promise<PracticePackage[]> {
   const [rows, subjects, series] = await Promise.all([
-    unwrap(
-      await supabase
+    readAllRows<PackageRow>("paket latihan", (from, to) =>
+      supabase
         .from("packages")
-        .select(PACKAGE_COLUMNS)
+        .select(PACKAGE_COLUMNS, { count: "exact" })
         .eq("kind", "latihan")
         .eq("is_published", true)
-        .order("sort_order"),
-      "paket latihan",
-    ) as PackageRow[],
+        .order("sort_order")
+        .order("id")
+        .range(from, to),
+    ),
     getSubjects(),
     getSeries(),
   ]);

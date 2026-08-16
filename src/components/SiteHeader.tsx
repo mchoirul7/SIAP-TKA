@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
  * Penelusuran produk sudah berjalan lewat isi halaman — jenjang, lalu mata
  * pelajaran, lalu paket dan tryout di dalamnya — sehingga menu di atas hanya
  * akan menduplikasi jalan yang sama. Yang tersisa cuma jalan pulang (logo) dan
- * satu tindakan yang tidak punya tempat lain: menukar kode voucher.
+ * satu tindakan yang tidak punya tempat lain: menukar kode akses.
  */
 export function SiteHeader() {
   const { openVoucher } = useVoucherDialog();
@@ -44,8 +44,8 @@ export function SiteHeader() {
           >
             <Icon name="ticket" className="h-4 w-4" strokeWidth={2} />
             {/* Layar sempit memakai label pendek agar tidak mendorong nama produk. */}
-            <span className="sm:hidden">Voucher</span>
-            <span className="hidden sm:inline">Saya Punya Voucher</span>
+            <span className="sm:hidden">Akses</span>
+            <span className="hidden sm:inline">Saya Punya Kode Akses</span>
           </button>
         </div>
       </div>

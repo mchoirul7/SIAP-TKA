@@ -25,7 +25,7 @@ export default async function TryoutListPage() {
         icon="flag"
         iconTone="rose"
         title="Tryout yang tersedia"
-        description="Setiap tryout dibuka dengan voucher seri mapel. Satu kode membuka tryout, latihan, hasil, dan pembahasan dalam seri yang sama."
+        description="Setiap tryout dibuka dengan kode akses seri mapel. Satu kode membuka tryout, latihan, hasil, dan pembahasan dalam seri yang sama."
       />
 
       <ul className="mt-10 space-y-4">
@@ -41,7 +41,7 @@ export default async function TryoutListPage() {
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="max-w-2xl">
                       <div className="flex flex-wrap items-center gap-3">
-                        <Badge tone="voucher">Voucher</Badge>
+                        <Badge tone="voucher">Kode Akses</Badge>
                         <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
                           <Icon name="cap" className="h-4 w-4 text-brand-600" />
                           {subject?.name ?? ""} · Jenjang {tryout.level}

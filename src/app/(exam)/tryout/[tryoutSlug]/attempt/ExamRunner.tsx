@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ProtectedQuestionContent } from "@/components/ProtectedQuestionContent";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
 import { Toast } from "@/components/Toast";
@@ -226,44 +227,46 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
         {/* Area soal */}
         <main className="min-w-0 flex-1">
           <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-card sm:p-7">
-            <div className="flex items-center justify-between gap-4">
-              <h1 className="flex items-center gap-2.5 text-sm font-bold tracking-tight text-ink-900">
-                <span
-                  aria-hidden="true"
-                  className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold tabular-nums text-white shadow-card"
-                >
-                  {currentIndex + 1}
-                </span>
-                Soal {currentIndex + 1}
-              </h1>
-              {markedIds.has(question.id) ? (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200">
-                  <Icon name="flag" className="h-4 w-4" strokeWidth={2.2} />
-                  Ditandai ragu-ragu
-                </span>
-              ) : null}
-            </div>
-
-            {question.stimulus ? (
-              <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
-                <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
-                  <Icon name="note" className="h-4 w-4" />
-                  Bacaan
-                </p>
-                {question.contentFormat === "html" ? (
-                  <RichText html={question.stimulus} className="stimulus-text" />
-                ) : (
-                  <p className="stimulus-text">{question.stimulus}</p>
-                )}
+            <ProtectedQuestionContent>
+              <div className="flex items-center justify-between gap-4">
+                <h1 className="flex items-center gap-2.5 text-sm font-bold tracking-tight text-ink-900">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold tabular-nums text-white shadow-card"
+                  >
+                    {currentIndex + 1}
+                  </span>
+                  Soal {currentIndex + 1}
+                </h1>
+                {markedIds.has(question.id) ? (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200">
+                    <Icon name="flag" className="h-4 w-4" strokeWidth={2.2} />
+                    Ditandai ragu-ragu
+                  </span>
+                ) : null}
               </div>
-            ) : null}
 
-            <QuestionBody
-              question={question}
-              answer={answers[question.id]}
-              namePrefix="question"
-              onChange={(answer) => handleAnswer(question.id, answer)}
-            />
+              {question.stimulus ? (
+                <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+                  <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
+                    <Icon name="note" className="h-4 w-4" />
+                    Bacaan
+                  </p>
+                  {question.contentFormat === "html" ? (
+                    <RichText html={question.stimulus} className="stimulus-text" />
+                  ) : (
+                    <p className="stimulus-text">{question.stimulus}</p>
+                  )}
+                </div>
+              ) : null}
+
+              <QuestionBody
+                question={question}
+                answer={answers[question.id]}
+                namePrefix="question"
+                onChange={(answer) => handleAnswer(question.id, answer)}
+              />
+            </ProtectedQuestionContent>
           </article>
 
           {/* Kendali navigasi */}

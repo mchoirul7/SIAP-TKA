@@ -10,6 +10,7 @@ import { StatCard } from "@/components/ui/StatCard";
 import { useVoucherDialog } from "@/components/VoucherDialog";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 import { getPracticeAttempt } from "@/services/practice-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 
@@ -54,7 +55,7 @@ export function PackageDetail({
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
+            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Kode Akses</Badge>}
             <span className="text-sm text-slate-500">
               {subjectName} · {pkg.seriesTitle} · {topicName}
             </span>
@@ -137,7 +138,7 @@ export function PackageDetail({
               <IconBadge name="unlock" tone="emerald" size="lg" />
               <h2 className="mt-4 text-lg font-extrabold tracking-tight">Paket sudah terbuka</h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                Voucher seri {pkg.seriesTitle} membuka latihan, tryout, hasil, dan pembahasan
+                Kode akses seri {pkg.seriesTitle} membuka latihan, tryout, hasil, dan pembahasan
                 untuk mapel ini.
               </p>
 
@@ -168,12 +169,12 @@ export function PackageDetail({
           ) : (
             <div className="rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
               <IconBadge name="lock" tone="brand" size="lg" />
-              <p className="eyebrow mt-4">Konten Voucher</p>
+              <p className="eyebrow mt-4">Konten Kode Akses</p>
               <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                Masukkan voucher seri untuk membuka latihan ini.
+                Masukkan kode akses seri untuk membuka latihan ini.
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-700">
-                Satu kode voucher membuka semua latihan dan tryout {subjectName} dalam{" "}
+                Satu kode akses membuka semua latihan dan tryout {subjectName} dalam{" "}
                 {pkg.seriesTitle}.
               </p>
 
@@ -203,13 +204,22 @@ export function PackageDetail({
                 className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-800 px-4 text-base font-bold text-white transition-opacity hover:opacity-90"
               >
                 <Icon name="ticket" className="h-5 w-5" />
-                Masukkan Voucher
+                Masukkan Kode Akses
               </button>
 
               <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                Belum punya voucher? Pilih seri mapel yang ingin dibeli, lalu gunakan kode yang
-                diberikan untuk membuka seluruh kontennya.
+                Belum punya kode akses? Hubungi {accessCodePhoneDisplay} untuk mendapatkan akses
+                layanan.
               </p>
+              <a
+                href={accessCodeWhatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
+              >
+                <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
+                Hubungi WhatsApp
+              </a>
             </div>
           )}
         </div>

@@ -54,7 +54,7 @@ export function PracticePackageCard({
         icon={theme?.icon}
         label={order ? `Langkah ${order} · Latihan` : "Latihan"}
         title={pkg.title}
-        subtitle={locked ? `${pkg.seriesTitle} - dibuka dengan voucher` : "Latihan online dan pembahasan"}
+        subtitle={locked ? `${pkg.seriesTitle} - dibuka dengan kode akses` : "Latihan online dan pembahasan"}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -67,7 +67,7 @@ export function PracticePackageCard({
           {unlocked ? (
             <Badge tone="success">Terbuka</Badge>
           ) : (
-            <Badge tone="voucher">Voucher</Badge>
+            <Badge tone="voucher">Kode Akses</Badge>
           )}
         </div>
 

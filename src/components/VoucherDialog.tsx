@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
+import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
@@ -95,7 +96,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
 
     if (!unlocksCurrentContent) {
       setError(
-        `Voucher valid, tapi bukan untuk ${options.requiredLabel ?? "seri konten ini"}. Gunakan voucher seri yang sesuai.`,
+        `Kode akses valid, tapi bukan untuk ${options.requiredLabel ?? "seri konten ini"}. Gunakan kode akses seri yang sesuai.`,
       );
       setIsRedeemed(false);
       return;
@@ -130,12 +131,12 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
               <div>
                 <IconBadge name="unlock" tone="emerald" size="lg" />
                 <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
-                  Voucher berhasil digunakan.
+                  Kode akses berhasil digunakan.
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   {options.packageTitle
                     ? `Paket ${options.packageTitle} sudah terbuka bersama semua tryout dan latihan dalam seri mapel yang sama.`
-                    : "Seri mapel dari voucher ini sudah terbuka di perangkat ini."}
+                    : "Seri mapel dari kode akses ini sudah terbuka di perangkat ini."}
                 </p>
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row">
                   <Link
@@ -144,7 +145,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
                   >
                     <Icon name="layers" className="h-5 w-5" />
-                    Buka Konten
+                  Buka Konten
                   </Link>
                   <Button variant="secondary" onClick={close} className="sm:w-auto">
                     Tutup
@@ -155,10 +156,10 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
               <form onSubmit={handleSubmit}>
                 <IconBadge name="ticket" tone="brand" size="lg" />
                 <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
-                  Masukkan Voucher
+                  Masukkan Kode Akses
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Kode voucher membuka satu mata pelajaran dalam satu seri, termasuk tryout,
+                  Kode akses membuka satu mata pelajaran dalam satu seri, termasuk tryout,
                   latihan online, hasil, dan pembahasan.
                 </p>
 
@@ -167,7 +168,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     htmlFor="voucher-code"
                     className="block text-sm font-semibold text-slate-800"
                   >
-                    Kode Voucher
+                    Kode Akses
                   </label>
                   <input
                     id="voucher-code"
@@ -190,15 +191,25 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Gunakan kode yang diterima setelah membeli seri mapel.
+                      Untuk mendapatkan kode akses, hubungi {accessCodePhoneDisplay}.
                     </p>
                   )}
                 </div>
 
+                <a
+                  href={accessCodeWhatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
+                >
+                  <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
+                  Hubungi WhatsApp untuk kode akses
+                </a>
+
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
                   <Button type="submit" className="sm:flex-1" loading={isSubmitting}>
                     {isSubmitting ? null : <Icon name="unlock" className="h-5 w-5" />}
-                    Gunakan Voucher
+                    Gunakan Kode Akses
                   </Button>
                   <Button variant="secondary" onClick={close}>
                     Batal

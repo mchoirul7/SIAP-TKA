@@ -17,6 +17,7 @@ export type CoverTone =
   | "violet"
   | "sky"
   | "emerald"
+  | "neon"
   | "rose"
   | "honey";
 
@@ -31,6 +32,7 @@ const toneGradient: Record<CoverTone, string> = {
   violet: "from-violet-500 via-violet-600 to-indigo-700",
   sky: "from-sky-400 via-sky-600 to-indigo-700",
   emerald: "from-emerald-400 via-emerald-600 to-teal-700",
+  neon: "from-lime-300 via-green-400 to-emerald-500",
   rose: "from-rose-400 via-rose-600 to-pink-700",
   honey: "from-yellow-400 via-amber-500 to-amber-700",
 };

@@ -5,7 +5,7 @@ import { addUnlockedContent, readEntitlements } from "@/storage/entitlement-stor
 
 /**
  * Hak akses konten. Keputusan bisnisnya per mata pelajaran dalam satu seri.
- * Voucher ditebus ke server, lalu hasil entitlement disimpan di perangkat untuk UI.
+ * Kode akses ditebus ke server, lalu hasil entitlement disimpan di perangkat untuk UI.
  */
 
 export function getUnlockedPackageSlugs(): string[] {
@@ -86,14 +86,14 @@ export async function redeemVoucher(input: string): Promise<RedeemResult> {
 
     return {
       ok: true,
-      message: payload.message ?? "Voucher berhasil digunakan.",
+      message: payload.message ?? "Kode akses berhasil digunakan.",
       unlockedSeriesKeys: entitlements.unlockedSeriesKeys,
       unlockedPackageSlugs: entitlements.unlockedPackageSlugs,
     };
   } catch {
     return {
       ok: false,
-      message: "Voucher belum dapat diproses. Coba lagi beberapa saat.",
+      message: "Kode akses belum dapat diproses. Coba lagi beberapa saat.",
       unlockedSeriesKeys: [],
       unlockedPackageSlugs: [],
     };

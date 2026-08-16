@@ -12,6 +12,7 @@ import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 import { startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
@@ -96,7 +97,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
+            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Kode Akses</Badge>}
             <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
               <Icon name="cap" className="h-4 w-4 text-brand-600" />
               {subjectName} · {tryout.seriesTitle} · Jenjang {tryout.level}
@@ -133,7 +134,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
               icon="star"
               tone="emerald"
               label="Akses"
-              value={unlocked ? "Terbuka" : "Voucher"}
+              value={unlocked ? "Terbuka" : "Kode Akses"}
               valueClassName="text-lg"
             />
           </div>
@@ -178,12 +179,12 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
             ) : !unlocked ? (
               <>
                 <IconBadge name="lock" tone="brand" size="lg" />
-                <p className="eyebrow mt-4">Konten Voucher</p>
+                <p className="eyebrow mt-4">Konten Kode Akses</p>
                 <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                  Masukkan voucher seri untuk membuka tryout ini.
+                  Masukkan kode akses seri untuk membuka tryout ini.
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Satu kode voucher membuka semua tryout dan latihan {subjectName} dalam{" "}
+                  Satu kode akses membuka semua tryout dan latihan {subjectName} dalam{" "}
                   {tryout.seriesTitle}.
                 </p>
                 <Button
@@ -192,8 +193,20 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                   onClick={() => openVoucher(voucherOptions)}
                 >
                   <Icon name="ticket" className="h-5 w-5" />
-                  Masukkan Voucher
+                  Masukkan Kode Akses
                 </Button>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  Belum punya kode akses? Hubungi {accessCodePhoneDisplay}.
+                </p>
+                <a
+                  href={accessCodeWhatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
+                >
+                  <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
+                  Hubungi WhatsApp
+                </a>
               </>
             ) : hasUnfinishedAttempt ? (
               <>

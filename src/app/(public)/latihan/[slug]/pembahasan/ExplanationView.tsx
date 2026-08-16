@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ProtectedQuestionContent } from "@/components/ProtectedQuestionContent";
 import { QuestionLabels } from "@/components/QuestionLabels";
 import { QuestionReview } from "@/components/QuestionReview";
 import { ButtonLink } from "@/components/ui/Button";
@@ -134,27 +135,29 @@ export function ExplanationView({
 
               <QuestionLabels label={questionLabels?.[question.id]} className="mt-3" />
 
-              {question.stimulus ? (
-                <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
-                  <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
-                    <Icon name="note" className="h-4 w-4" />
-                    Bacaan
-                  </p>
-                  {question.contentFormat === "html" ? (
-                    <RichText html={question.stimulus} className="stimulus-text" />
-                  ) : (
-                    <p className="stimulus-text">{question.stimulus}</p>
-                  )}
-                </div>
-              ) : null}
+              <ProtectedQuestionContent>
+                {question.stimulus ? (
+                  <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+                    <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
+                      <Icon name="note" className="h-4 w-4" />
+                      Bacaan
+                    </p>
+                    {question.contentFormat === "html" ? (
+                      <RichText html={question.stimulus} className="stimulus-text" />
+                    ) : (
+                      <p className="stimulus-text">{question.stimulus}</p>
+                    )}
+                  </div>
+                ) : null}
 
-              {question.contentFormat === "html" ? (
-                <RichText html={question.questionText} className="question-text mt-4" />
-              ) : (
-                <p className="question-text mt-4">{question.questionText}</p>
-              )}
+                {question.contentFormat === "html" ? (
+                  <RichText html={question.questionText} className="question-text mt-4" />
+                ) : (
+                  <p className="question-text mt-4">{question.questionText}</p>
+                )}
 
-              <QuestionReview question={question} answer={userAnswer} />
+                <QuestionReview question={question} answer={userAnswer} />
+              </ProtectedQuestionContent>
 
               <div className="mt-5 rounded-2xl border border-violet-200 bg-white p-5">
                 <div className="flex items-start gap-3">

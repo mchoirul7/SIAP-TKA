@@ -171,39 +171,6 @@ export function PracticeResultView({
         />
       </section>
 
-      {/* Satu narasi, bukan daftar rincian. */}
-      <section className="mt-8">
-        <div
-          className={[
-            "rounded-3xl border p-6 shadow-card sm:p-7",
-            narrative.isAllClear
-              ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
-              : "border-violet-200 bg-gradient-to-br from-violet-50 to-white",
-          ].join(" ")}
-        >
-          <div className="flex items-start gap-4">
-            <IconBadge
-              name={narrative.isAllClear ? "trophy" : "bulb"}
-              tone={narrative.isAllClear ? "emerald" : "violet"}
-              size="lg"
-            />
-            <div className="min-w-0">
-              <p
-                className={`text-xs font-bold uppercase tracking-[0.12em] ${
-                  narrative.isAllClear ? "text-emerald-700" : "text-violet-700"
-                }`}
-              >
-                Langkah berikutnya
-              </p>
-              <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-ink-900 sm:text-2xl">
-                {narrative.headline}
-              </h2>
-              <p className="mt-2.5 text-[15px] leading-[1.75] text-slate-700">{narrative.body}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Rincian: konsep apa yang perlu dipelajari, lengkap dengan pola kelirunya. */}
       {analysis.conceptsToReview.length > 0 ? (
         <section className="mt-10">

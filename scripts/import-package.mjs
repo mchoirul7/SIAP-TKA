@@ -18,10 +18,10 @@ const IMAGE_BASE = "https://pusmendik.kemendikdasmen.go.id";
 const OUT_DIR = path.join(process.cwd(), "supabase", "seed");
 
 const DEFAULT_SERIES = {
-  id: "ser-bulan-kemerdekaan",
-  slug: "bulan-kemerdekaan",
-  title: "Seri Bulan Kemerdekaan",
-  description: "Seri soal tematik bulan kemerdekaan.",
+  id: "ser-sukses-tka-sma-vol-1",
+  slug: "sukses-tka-sma-vol-1",
+  title: "Seri Sukses TKA SMA Vol.1",
+  description: "Seri persiapan TKA SMA Vol.1.",
 };
 
 /** Keterangan paket yang tidak ada di dalam berkas JSON. */

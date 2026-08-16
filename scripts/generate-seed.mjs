@@ -33,10 +33,10 @@ const { practicePackages } = await load("practicePackages.ts");
 const { tryouts } = await load("tryouts.ts");
 
 const DEFAULT_SERIES = {
-  id: "ser-bulan-kemerdekaan",
-  slug: "bulan-kemerdekaan",
-  title: "Seri Bulan Kemerdekaan",
-  description: "Seri soal tematik bulan kemerdekaan.",
+  id: "ser-sukses-tka-sma-vol-1",
+  slug: "sukses-tka-sma-vol-1",
+  title: "Seri Sukses TKA SMA Vol.1",
+  description: "Seri persiapan TKA SMA Vol.1.",
 };
 
 // ---------------------------------------------------------------- helpers

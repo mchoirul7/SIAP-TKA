@@ -36,7 +36,7 @@ export function TryoutCard({
         tone={tone}
         label={tryout.variantLabel}
         title={tryout.title}
-        subtitle={locked ? `${tryout.seriesTitle} - dibuka dengan voucher` : "Tryout dan hasil terbuka"}
+        subtitle={locked ? `${tryout.seriesTitle} - dibuka dengan kode akses` : "Tryout dan hasil terbuka"}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -46,7 +46,7 @@ export function TryoutCard({
               {tryout.title}
             </Link>
           </h3>
-          {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Voucher</Badge>}
+          {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Kode Akses</Badge>}
         </div>
 
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">

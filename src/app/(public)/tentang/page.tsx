@@ -107,7 +107,7 @@ export default function AboutPage() {
             Catatan versi prototype
           </h2>
           <p className="mt-2 text-[15px] leading-relaxed text-amber-900">
-            Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Voucher membuka
+            Versi ini dibuat untuk menguji struktur produk dan alur penggunaan. Kode akses membuka
             satu mapel dalam satu seri, dan hasil pengerjaan tetap tersimpan di perangkat ini saja.
           </p>
         </section>

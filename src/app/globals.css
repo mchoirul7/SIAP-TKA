@@ -52,6 +52,17 @@
     @apply whitespace-pre-line text-[15.5px] leading-[1.75] text-slate-700 sm:text-base;
   }
 
+  .protected-question-content {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .protected-question-content img {
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
+
   /* Isi soal hasil impor: HTML terbatas dengan gambar rumus yang sebaris teks. */
   .rich-text > p + p,
   .rich-text > ul,
