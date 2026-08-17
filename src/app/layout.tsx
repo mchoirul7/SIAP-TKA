@@ -9,10 +9,16 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.valueProposition,
+  // Satu berkas lambang dipakai ulang untuk tab peramban dan pintasan layar utama.
+  icons: {
+    icon: "/logo-siaptka.png",
+    apple: "/logo-siaptka.png",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ea580c",
+  // Ungu lambang: warna bilah peramban pada ponsel.
+  themeColor: "#5001da",
   width: "device-width",
   initialScale: 1,
 };

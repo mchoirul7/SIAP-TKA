@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getQuestionsForTryout, getTryoutBySlug } from "@/services/content-service";
+import { getQuestionsForTryout, getSubjects, getTryoutBySlug } from "@/services/content-service";
 import { hasServerContentAccess } from "@/lib/server-entitlements";
 import { ExamRunner } from "./ExamRunner";
 
@@ -21,6 +21,11 @@ export default async function AttemptPage({ params }: PageProps) {
   if (!tryout) notFound();
   if (!(await hasServerContentAccess(tryout))) redirect(`/tryout/${tryout.slug}`);
 
-  const questions = await getQuestionsForTryout(tryoutSlug);
-  return <ExamRunner tryout={tryout} questions={questions} />;
+  const [questions, subjects] = await Promise.all([
+    getQuestionsForTryout(tryoutSlug),
+    getSubjects(),
+  ]);
+  const subjectName = subjects.find((subject) => subject.id === tryout.subjectId)?.name ?? "";
+
+  return <ExamRunner tryout={tryout} questions={questions} subjectName={subjectName} />;
 }

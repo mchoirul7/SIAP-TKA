@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { QuestionLabels } from "@/components/QuestionLabels";
 import { isAnswered, isCorrectAnswer } from "@/lib/answers";
@@ -26,10 +27,13 @@ export function TryoutResultView({
   questions,
   catalog,
   questionLabels,
+  subjectName = "",
 }: {
   tryout: Tryout;
   questions: Question[];
   catalog: AnalysisCatalog;
+  /** Nama singkat mata pelajaran, dipakai pada kalimat ringkasan hasil. */
+  subjectName?: string;
   /** Penanda tiap soal. Baru disiapkan untuk simulasi Matematika. */
   questionLabels?: Record<string, QuestionLabel>;
 }) {
@@ -57,11 +61,8 @@ export function TryoutResultView({
 
   if (state === "loading") {
     return (
-      <div className="container-page py-20">
-        <p className="flex items-center gap-2 text-sm text-slate-500">
-          <Icon name="hourglass" className="h-4 w-4" />
-          Menyiapkan hasil…
-        </p>
+      <div className="container-page py-16">
+        <LoadingScreen message="Menyiapkan hasil…" />
       </div>
     );
   }
@@ -98,7 +99,8 @@ export function TryoutResultView({
     return pkg ? [pkg] : [];
   });
   const narrative = buildTryoutNarrative(analysis, {
-    hasRecommendedPackages: recommendedPackages.length > 0,
+    studentName,
+    contextName: subjectName,
   });
   const total = questions.length || 1;
   const accuracy = Math.round((analysis.correctCount / total) * 100);
@@ -206,7 +208,7 @@ export function TryoutResultView({
             "rounded-3xl border p-6 shadow-card sm:p-8",
             narrative.isAllClear
               ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
-              : "border-violet-200 bg-gradient-to-br from-violet-50 to-white",
+              : "border-brand-200 bg-gradient-to-br from-brand-50 to-white",
           ].join(" ")}
         >
           <div className="flex items-start gap-4">
@@ -218,15 +220,12 @@ export function TryoutResultView({
             <div className="min-w-0">
               <p
                 className={`text-xs font-bold uppercase tracking-[0.12em] ${
-                  narrative.isAllClear ? "text-emerald-700" : "text-violet-700"
+                  narrative.isAllClear ? "text-emerald-700" : "text-brand-700"
                 }`}
               >
-                Yang perlu dipelajari lebih dulu
+                Ringkasan hasil
               </p>
-              <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
-                {narrative.headline}
-              </h2>
-              <p className="mt-2.5 max-w-2xl text-[15px] leading-[1.75] text-slate-700">
+              <p className="mt-2 max-w-2xl text-lg leading-[1.7] text-ink-900 sm:text-xl">
                 {narrative.body}
               </p>
             </div>

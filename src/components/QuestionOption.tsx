@@ -36,6 +36,21 @@ const checkboxStyles: Record<OptionState, { on: string; off: string }> = {
   muted: { on: "border-slate-400 bg-slate-400 text-white", off: "border-slate-300 bg-white" },
 };
 
+/**
+ * Bentuk penanda pilihan pada tampilan `plain`: lingkaran radio polos tanpa
+ * huruf, seperti lembar ujian ANBK. Warna tetap mengikuti status agar bisa
+ * dipakai ulang di luar layar ujian.
+ */
+const radioStyles: Record<OptionState, { on: string; off: string }> = {
+  default: {
+    on: "border-[6px] border-[#1877d2]",
+    off: "border-2 border-slate-400 bg-white group-hover:border-slate-500",
+  },
+  correct: { on: "border-[6px] border-emerald-600", off: "border-2 border-emerald-500 bg-white" },
+  "chosen-wrong": { on: "border-[6px] border-rose-600", off: "border-2 border-rose-300 bg-white" },
+  muted: { on: "border-[6px] border-slate-400", off: "border-2 border-slate-300 bg-white" },
+};
+
 export function QuestionOption({
   name,
   optionKey,
@@ -47,6 +62,7 @@ export function QuestionOption({
   note,
   inputType = "radio",
   isHtml = false,
+  variant = "card",
 }: {
   name: string;
   optionKey: string;
@@ -60,12 +76,21 @@ export function QuestionOption({
   note?: string;
   /** `checkbox` dipakai soal berjawaban ganda, agar pilihan dapat dinyalakan lebih dari satu. */
   inputType?: "radio" | "checkbox";
+  /**
+   * `card` memberi kotak berbingkai dengan huruf pilihan — dipakai pembahasan.
+   * `plain` hanya menampilkan lingkaran pilihan, mengikuti tampilan ujian ANBK.
+   */
+  variant?: "card" | "plain";
 }) {
+  const isPlain = variant === "plain";
+
   return (
     <label
       className={[
-        "group flex cursor-pointer items-start gap-3 rounded-lg border p-3.5 transition-colors sm:p-4",
-        stateStyles[state],
+        "group flex cursor-pointer items-start gap-3 transition-colors",
+        isPlain
+          ? "rounded-lg px-1 py-2 hover:bg-slate-50"
+          : ["rounded-lg border p-3.5 sm:p-4", stateStyles[state]].join(" "),
         disabled ? "cursor-default" : "",
       ]
         .filter(Boolean)
@@ -99,6 +124,14 @@ export function QuestionOption({
             />
           </svg>
         </span>
+      ) : isPlain ? (
+        <span
+          aria-hidden="true"
+          className={[
+            "mt-1 h-5 w-5 shrink-0 rounded-full transition-colors",
+            checked ? radioStyles[state].on : radioStyles[state].off,
+          ].join(" ")}
+        />
       ) : (
         <span
           aria-hidden="true"
@@ -115,10 +148,10 @@ export function QuestionOption({
           <RichText
             as="span"
             html={text}
-            className="block text-[15.5px] leading-relaxed text-slate-800 sm:text-base"
+            className="option-text block text-[15.5px] leading-relaxed text-slate-800 sm:text-base"
           />
         ) : (
-          <span className="block text-[15.5px] leading-relaxed text-slate-800 sm:text-base">
+          <span className="option-text block text-[15.5px] leading-relaxed text-slate-800 sm:text-base">
             {text}
           </span>
         )}

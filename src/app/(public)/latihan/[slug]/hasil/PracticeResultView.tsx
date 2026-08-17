@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { ResultStatus } from "@/components/ResultStatus";
 import { ScoreRing } from "@/components/ScoreRing";
@@ -22,6 +23,7 @@ import {
   startPracticeAttempt,
   type PracticeResult,
 } from "@/services/practice-service";
+import { readProfile } from "@/storage/profile-storage";
 
 export function PracticeResultView({
   pkg,
@@ -37,6 +39,7 @@ export function PracticeResultView({
   const { mounted, isUnlocked } = useEntitlements();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<PracticeResult | null>(null);
+  const [studentName, setStudentName] = useState("");
 
   useEffect(() => {
     if (!mounted) return;
@@ -50,6 +53,7 @@ export function PracticeResultView({
       return;
     }
     setResult(stored);
+    setStudentName(readProfile()?.name ?? "");
     setState("ready");
   }, [mounted, isUnlocked, pkg, pkg.slug, questions, catalog, router]);
 
@@ -61,11 +65,8 @@ export function PracticeResultView({
 
   if (state === "loading") {
     return (
-      <div className="container-reading py-20">
-        <p className="flex items-center gap-2 text-sm text-slate-500">
-          <Icon name="hourglass" className="h-4 w-4" />
-          Menyiapkan hasil…
-        </p>
+      <div className="container-reading py-16">
+        <LoadingScreen message="Menyiapkan hasil…" />
       </div>
     );
   }
@@ -104,9 +105,10 @@ export function PracticeResultView({
       return found ? [found] : [];
     });
 
-  const narrative = buildPracticeNarrative(analysis, {
-    hasRecommendedPackages: recommendedPackages.length > 0,
-  });
+  // Nama materi diambil dari topik paketnya, supaya kalimatnya menyebut yang
+  // dikerjakan — bukan judul paket yang biasanya lebih panjang.
+  const topicName = catalog.topics?.find((topic) => topic.id === pkg.topicId)?.name;
+  const narrative = buildPracticeNarrative(analysis, { studentName, contextName: topicName });
 
   // Pola keliru sudah tampil di kartu konsep; di sini hanya sisanya, supaya
   // tidak ada kalimat yang terbaca dua kali.
@@ -195,7 +197,7 @@ export function PracticeResultView({
             "rounded-3xl border p-6 shadow-card sm:p-8",
             narrative.isAllClear
               ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
-              : "border-violet-200 bg-gradient-to-br from-violet-50 to-white",
+              : "border-brand-200 bg-gradient-to-br from-brand-50 to-white",
           ].join(" ")}
         >
           <div className="flex items-start gap-4">
@@ -207,91 +209,18 @@ export function PracticeResultView({
             <div className="min-w-0">
               <p
                 className={`text-xs font-bold uppercase tracking-[0.12em] ${
-                  narrative.isAllClear ? "text-emerald-700" : "text-violet-700"
+                  narrative.isAllClear ? "text-emerald-700" : "text-brand-700"
                 }`}
               >
-                Yang perlu dipelajari lebih dulu
+                Catatan Hasil Latihan
               </p>
-              <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
-                {narrative.headline}
-              </h2>
-              <p className="mt-2.5 max-w-2xl text-[15px] leading-[1.75] text-slate-700">
+              <p className="mt-2 max-w-2xl text-lg leading-[1.7] text-ink-900 sm:text-xl">
                 {narrative.body}
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Rincian: konsep apa yang perlu dipelajari, lengkap dengan pola kelirunya. */}
-      {analysis.conceptsToReview.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-            <IconBadge name="book" tone="sky" size="md" />
-            Yang perlu kamu pelajari
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-            Diurutkan dari yang paling sedikit benar. Mulai dari nomor satu, ya.
-          </p>
-          <ConceptFocusList concepts={analysis.conceptsToReview} />
-        </section>
-      ) : null}
-
-      {/* Pola keliru yang belum tercakup kartu konsep di atas. */}
-      {otherSignals.length > 0 ? (
-        <section className="mt-8">
-          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-            <IconBadge name="alert" tone="amber" size="md" />
-            Pola jawaban yang perlu diluruskan
-          </h2>
-          <ul className="mt-5 space-y-3">
-            {otherSignals.map((signal) => (
-              <li
-                key={signal.id}
-                className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5"
-              >
-                <p className="text-[15px] font-semibold leading-relaxed text-ink-900">
-                  {signal.label}
-                  {signal.count > 1 ? (
-                    <span className="ml-1.5 font-normal text-amber-800">
-                      (muncul {signal.count}×)
-                    </span>
-                  ) : null}
-                </p>
-                <p className="mt-1 text-[15px] leading-relaxed text-slate-700">{signal.insight}</p>
-                {signal.questionNumbers.length > 0 ? (
-                  <p className="mt-1.5 text-sm text-amber-900">
-                    Terbaca pada soal nomor {signal.questionNumbers.join(", ")}.
-                  </p>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      {analysis.strongConcepts.length > 0 ? (
-        <section className="mt-8 rounded-3xl border border-emerald-200 bg-emerald-50/70 p-5 sm:p-6">
-          <h2 className="flex items-center gap-2.5 text-base font-extrabold tracking-tight">
-            <IconBadge name="check" tone="emerald" size="sm" />
-            Sudah kamu kuasai
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {analysis.strongConcepts.map((concept) => (
-              <li
-                key={concept.id}
-                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200"
-              >
-                <Icon name="check" className="h-4 w-4 text-emerald-600" strokeWidth={2.4} />
-                {concept.name}
-                <span className="font-normal tabular-nums text-emerald-700">
-                  {concept.correct}/{concept.total}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
 
       {/* Paket lanjutan untuk konsep yang masih lemah. */}
       {recommendedPackages.length > 0 ? (

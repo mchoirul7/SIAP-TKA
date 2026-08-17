@@ -52,6 +52,50 @@
     @apply whitespace-pre-line text-[15.5px] leading-[1.75] text-slate-700 sm:text-base;
   }
 
+  /* ------------------------------------------------------------ layar ujian
+     Tata letak ujian mengikuti kebiasaan aplikasi ANBK yang sudah dikenal
+     peserta: latar biru, satu kartu putih, dan ukuran huruf soal yang bisa
+     dipilih sendiri lewat tiga tombol "A".
+  */
+  .exam-shell {
+    background-color: #1b5fa8;
+    background-image:
+      linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 46%),
+      /* Biru ANBK di atas, meluruh ke biru dongker lambang di bawah. */
+      linear-gradient(180deg, #1e66b3 0%, #1a5697 55%, #0b1a54 100%);
+  }
+
+  /* Nilai bawaan sama dengan ukuran "sedang" agar aman bila atribut tidak ada. */
+  .exam-scope {
+    --exam-font-size: 1.0625rem;
+  }
+
+  .exam-scope[data-font="kecil"] {
+    --exam-font-size: 0.9375rem;
+  }
+
+  .exam-scope[data-font="sedang"] {
+    --exam-font-size: 1.0625rem;
+  }
+
+  .exam-scope[data-font="besar"] {
+    --exam-font-size: 1.3125rem;
+  }
+
+  /* Dua kelas ini menang atas utilitas ukuran bawaannya karena lebih spesifik. */
+  .exam-scope .question-text,
+  .exam-scope .stimulus-text,
+  .exam-scope .option-text {
+    font-size: var(--exam-font-size);
+    line-height: 1.75;
+  }
+
+  .exam-scope .question-text,
+  .exam-scope .stimulus-text {
+    text-align: justify;
+    hyphens: auto;
+  }
+
   .protected-question-content {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -107,6 +151,23 @@
   @keyframes nav-progress {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(400%); }
+  }
+
+  /* Lambang pada layar tunggu: naik-turun pelan, bukan berputar. */
+  .logo-breathe {
+    animation: logo-breathe 2.4s ease-in-out infinite;
+  }
+
+  @keyframes logo-breathe {
+    0%, 100% { transform: scale(1) translateY(0); opacity: 0.9; }
+    50% { transform: scale(1.04) translateY(-3px); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-breathe,
+    .nav-progress-bar {
+      animation: none;
+    }
   }
 }
 

@@ -41,10 +41,8 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
           {isAvailable ? <Badge tone="success">Tersedia</Badge> : <Badge tone="neutral">Segera</Badge>}
         </div>
 
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">
-          {subject.description}
-        </p>
-
+        {/* Deskripsi mapel sengaja tidak ditampilkan: sampul dan keping jumlah
+            paket sudah menerangkan isinya, dan kartu jadi lebih ringkas. */}
         {isAvailable ? (
           <ul className="mt-3 flex flex-wrap gap-1.5">
             <li

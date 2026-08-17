@@ -121,7 +121,7 @@ export function PackageDetail({
               <IconBadge name="bulb" tone="violet" size="sm" />
               Cara mengerjakan
             </h2>
-            <p className="mt-4 max-w-2xl rounded-2xl border border-violet-200 bg-violet-50/60 p-4 text-[15px] leading-relaxed text-slate-700">
+            <p className="mt-4 max-w-2xl rounded-2xl border border-brand-200 bg-brand-50/60 p-4 text-[15px] leading-relaxed text-slate-700">
               Latihan tidak memakai waktu ketat seperti simulasi. Kerjakan soal satu per satu,
               lalu lihat skor dan konsep yang perlu diulang di akhir. Pembahasan setiap soal dapat
               dibuka setelah latihan selesai.

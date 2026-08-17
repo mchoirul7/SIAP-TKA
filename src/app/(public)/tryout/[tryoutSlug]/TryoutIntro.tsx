@@ -11,6 +11,7 @@ import { useVoucherDialog } from "@/components/VoucherDialog";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
+import { gradeOptionsFor, resolveGrade } from "@/lib/grade";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 import { startAttempt } from "@/services/tryout-service";
@@ -18,15 +19,15 @@ import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
 import { readProfile, writeProfile } from "@/storage/profile-storage";
 
-const gradeOptions = ["Kelas 4", "Kelas 5", "Kelas 6", "Lainnya"];
-
 export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectName: string }) {
   const { navigate, isPending } = useNavigate();
   const { openVoucher } = useVoucherDialog();
   const { mounted: entitlementsMounted, isUnlocked } = useEntitlements();
   const [mounted, setMounted] = useState(false);
   const [name, setName] = useState("");
-  const [grade, setGrade] = useState(gradeOptions[1]);
+  // Daftar kelas mengikuti jenjang paket, bukan daftar tetap.
+  const gradeOptions = gradeOptionsFor(tryout.level);
+  const [grade, setGrade] = useState(() => resolveGrade(tryout.level, undefined));
   const [attempt, setAttempt] = useState<TryoutAttempt | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
 
@@ -34,11 +35,11 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
     const profile = readProfile();
     if (profile) {
       setName(profile.name);
-      if (profile.grade) setGrade(profile.grade);
+      setGrade(resolveGrade(tryout.level, profile.grade));
     }
     setAttempt(getAttempt(tryout.slug));
     setMounted(true);
-  }, [tryout.slug]);
+  }, [tryout.slug, tryout.level]);
 
   const hasUnfinishedAttempt = Boolean(attempt && !attempt.submittedAt);
   const hasFinishedAttempt = Boolean(attempt?.submittedAt);
@@ -148,11 +149,11 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
               {tryout.instructions.map((instruction, index) => (
                 <li
                   key={instruction}
-                  className="flex gap-3 rounded-2xl border border-sky-200 bg-sky-50/50 p-3.5"
+                  className="flex gap-3 rounded-2xl border border-aqua-200 bg-aqua-50/50 p-3.5"
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-sky-600 text-xs font-extrabold tabular-nums text-white"
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-aqua-400 to-aqua-600 text-xs font-extrabold tabular-nums text-white"
                   >
                     {index + 1}
                   </span>

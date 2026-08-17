@@ -90,10 +90,10 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
             </div>
 
             {concept.description ? (
-              <div className="mt-4 flex items-start gap-3 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+              <div className="mt-4 flex items-start gap-3 rounded-2xl border border-aqua-200 bg-aqua-50/70 p-4">
                 <IconBadge name="book" tone="sky" size="sm" />
                 <div className="min-w-0">
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
+                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-aqua-700">
                     Yang perlu dipelajari
                   </p>
                   <p className="mt-1 text-[15px] leading-relaxed text-slate-700">

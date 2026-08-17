@@ -58,7 +58,7 @@ export function TryoutCard({
             [
               { icon: "list-check", text: `${tryout.questionIds.length} soal`, tone: "bg-brand-50 text-brand-800 ring-brand-100" },
               { icon: "hourglass", text: `${tryout.durationMinutes} menit`, tone: "bg-rose-50 text-rose-800 ring-rose-100" },
-              { icon: "cap", text: `Jenjang ${tryout.level}`, tone: "bg-sky-50 text-sky-800 ring-sky-100" },
+              { icon: "cap", text: `Jenjang ${tryout.level}`, tone: "bg-aqua-50 text-aqua-800 ring-aqua-100" },
             ] satisfies { icon: IconName; text: string; tone: string }[]
           ).map((tag) => (
             <li

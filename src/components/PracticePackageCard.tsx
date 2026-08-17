@@ -10,7 +10,7 @@ import type { SubjectTheme } from "@/lib/subject-theme";
 import { toneButton, toneTag } from "@/lib/tone";
 
 /** Warna sampul dipilih berulang dari daftar ini agar deretan kartu tidak seragam. */
-const tones: CoverTone[] = ["orange", "amber", "rust", "sunset", "gold"];
+const tones: CoverTone[] = ["grape", "gold", "aqua", "twilight"];
 
 export function PracticePackageCard({
   pkg,

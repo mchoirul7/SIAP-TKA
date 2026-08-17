@@ -22,17 +22,22 @@ export function QuestionBody({
   answer,
   onChange,
   namePrefix,
+  optionVariant = "card",
+  className = "mt-5",
 }: {
   question: Question;
   answer: AnswerValue | undefined;
   onChange: (answer: AnswerValue) => void;
   namePrefix: string;
+  /** `plain` dipakai layar ujian: pilihan tampil sebagai lingkaran polos. */
+  optionVariant?: "card" | "plain";
+  className?: string;
 }) {
   const chosen = selectedKeys(answer);
   const isHtml = question.contentFormat === "html";
 
   return (
-    <fieldset className="mt-5">
+    <fieldset className={className}>
       <legend className="question-text max-w-prose">
         {isHtml ? <RichText html={question.questionText} /> : question.questionText}
       </legend>
@@ -54,7 +59,7 @@ export function QuestionBody({
           namePrefix={namePrefix}
         />
       ) : (
-        <div className="mt-5 space-y-2.5">
+        <div className={optionVariant === "plain" ? "mt-5 space-y-1" : "mt-5 space-y-2.5"}>
           {question.options.map((option) => (
             <QuestionOption
               key={option.key}
@@ -62,6 +67,7 @@ export function QuestionBody({
               optionKey={option.key}
               text={option.text}
               isHtml={isHtml}
+              variant={optionVariant}
               checked={chosen.includes(option.key)}
               inputType={question.type === "mcma" ? "checkbox" : "radio"}
               onSelect={(key) =>

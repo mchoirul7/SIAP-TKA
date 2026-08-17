@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 import { site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -7,15 +8,7 @@ export function SiteFooter() {
       <div className="container-page py-10">
         <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
           <div className="max-w-sm">
-            <div className="flex items-center gap-2.5">
-              <span
-                aria-hidden="true"
-                className="flex h-7 w-7 items-center justify-center rounded bg-brand-800 text-xs font-bold text-white"
-              >
-                S
-              </span>
-              <span className="font-semibold tracking-tight text-ink-900">{site.name}</span>
-            </div>
+            <Logo className="h-10" />
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
               {site.tagline}. Simulasi latihan dan tryout TKA dan hasilnya menunjukkan bagian
               mana yang sebaiknya diperkuat lebih dulu.

@@ -48,6 +48,7 @@ export default async function TryoutResultPage({ params }: PageProps) {
       questions={questions}
       catalog={catalog}
       questionLabels={questionLabels}
+      subjectName={subject?.shortName ?? ""}
     />
   );
 }

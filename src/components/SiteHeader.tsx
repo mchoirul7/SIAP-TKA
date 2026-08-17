@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
 import { useVoucherDialog } from "@/components/VoucherDialog";
 import { site } from "@/lib/site";
 
@@ -21,20 +22,9 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 pt-3 sm:pt-4">
       <div className="container-page">
         <div className="flex h-14 items-center justify-between gap-4 rounded-2xl border border-white/60 bg-white/95 px-4 shadow-float backdrop-blur sm:h-16 sm:px-5">
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 rounded"
-            aria-label={`${site.name} — beranda`}
-          >
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-bold text-white"
-            >
-              S
-            </span>
-            <span className="text-[17px] font-semibold tracking-tight text-ink-900">
-              {site.name}
-            </span>
+          <Link href="/" className="flex items-center rounded" aria-label={`${site.name} — beranda`}>
+            {/* Berkas lambangnya sudah memuat nama produk, jadi tanpa tulisan lagi. */}
+            <Logo className="h-9 sm:h-11" priority decorative />
           </Link>
 
           <button

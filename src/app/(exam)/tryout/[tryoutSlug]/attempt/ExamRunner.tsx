@@ -1,19 +1,28 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ProtectedQuestionContent } from "@/components/ProtectedQuestionContent";
+import {
+  ExamCardHead,
+  ExamDialog,
+  ExamDialogAction,
+  ExamInfoRow,
+  ExamNavBar,
+  ExamQuestionPanel,
+  ExamShell,
+  ExamStatusPill,
+  type ExamFontSize,
+} from "@/components/exam/ExamChrome";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
 import { Toast } from "@/components/Toast";
-import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { IconBadge } from "@/components/ui/IconBadge";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
-import { formatClock } from "@/lib/format";
+import { formatExamClock } from "@/lib/format";
 import {
   getAttempt,
   recordIntegrityEvent,
@@ -28,7 +37,15 @@ import { RichText } from "@/components/RichText";
 const LEAVE_MESSAGE =
   "Anda meninggalkan halaman ujian. Untuk hasil yang lebih akurat, kerjakan simulasi secara mandiri.";
 
-export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Question[] }) {
+export function ExamRunner({
+  tryout,
+  questions,
+  subjectName,
+}: {
+  tryout: Tryout;
+  questions: Question[];
+  subjectName: string;
+}) {
   const { navigate, isPending } = useNavigate();
   const { mounted, isUnlocked } = useEntitlements();
   const [attempt, setAttempt] = useState<TryoutAttempt | null>(null);
@@ -38,6 +55,8 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [fontSize, setFontSize] = useState<ExamFontSize>("sedang");
   const [studentName, setStudentName] = useState("");
   const hasSubmittedRef = useRef(false);
 
@@ -119,6 +138,19 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
     };
   }, [status, tryout.slug]);
 
+  // Esc menutup jendela yang sedang terbuka, dimulai dari yang paling atas.
+  useEffect(() => {
+    if (!isSubmitOpen && !isNavigatorOpen && !isInfoOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (isSubmitOpen) setIsSubmitOpen(false);
+      else if (isNavigatorOpen) setIsNavigatorOpen(false);
+      else setIsInfoOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isSubmitOpen, isNavigatorOpen, isInfoOpen]);
+
   // ------------------------------------------------------------ aksi
   const handleAnswer = (questionId: string, answer: AnswerValue) => {
     const next = saveAnswer(tryout.slug, questionId, answer);
@@ -161,291 +193,230 @@ export function ExamRunner({ tryout, questions }: { tryout: Tryout; questions: Q
   const answeredCount = navigatorItems.filter((item) => item.answered).length;
   const markedCount = navigatorItems.filter((item) => item.marked).length;
   const question = questions[currentIndex];
-  const isLowTime = remainingSeconds <= 300;
 
   if (status !== "ready" || !attempt || !question) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6">
-        <p className="text-sm text-slate-500">Menyiapkan simulasi…</p>
+      <div className="exam-shell flex min-h-screen items-center justify-center">
+        <LoadingScreen tone="exam" message="Menyiapkan simulasi…" />
       </div>
     );
   }
 
+  const isMarked = markedIds.has(question.id);
+  const isLast = currentIndex === questions.length - 1;
+  const stimulus = question.stimulus;
+
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50">
-      {/* Top bar ujian: tanpa navigasi pemasaran apa pun */}
-      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white">
-        <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-4 px-4 sm:h-16 sm:px-6">
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-semibold text-ink-900 sm:text-[15px]">
-              {tryout.title}
-            </p>
-            <p className="truncate text-xs text-slate-500">
-              {studentName ? `${studentName} · ` : ""}
-              Soal {currentIndex + 1} dari {questions.length} · {answeredCount} terjawab
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={toggleFullscreen}
-            className="hidden h-9 items-center rounded-lg border border-slate-300 px-3 text-sm font-medium text-slate-600 hover:border-brand-400 hover:text-brand-800 lg:inline-flex"
-          >
-            Layar penuh
-          </button>
-
-          <div
-            className={[
-              "flex h-9 items-center rounded-lg border px-3 text-[15px] font-semibold tabular-nums",
-              isLowTime
-                ? "border-rose-200 bg-rose-50 text-rose-700"
-                : "border-slate-200 bg-slate-50 text-ink-900",
-            ].join(" ")}
-            role="timer"
-            aria-live="off"
-          >
-            <Icon name="clock" className="mr-1.5 h-4 w-4" />
-            <span className="sr-only">Sisa waktu </span>
-            {formatClock(remainingSeconds)}
-          </div>
-
-          <Button size="sm" onClick={() => setIsSubmitOpen(true)} className="shrink-0">
-            <Icon name="flag" className="h-4 w-4" />
-            Selesai
-          </Button>
-        </div>
-
-        <div className="h-1.5 w-full bg-slate-100">
-          <div
-            className="h-full bg-gradient-to-r from-brand-400 to-brand-600 transition-[width] duration-300"
-            style={{ width: `${(answeredCount / questions.length) * 100}%` }}
-          />
-        </div>
-      </header>
-
-      <div className="mx-auto flex w-full max-w-7xl flex-1 gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:gap-10">
-        {/* Area soal */}
-        <main className="min-w-0 flex-1">
-          <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-card sm:p-7">
-            <ProtectedQuestionContent>
-              <div className="flex items-center justify-between gap-4">
-                <h1 className="flex items-center gap-2.5 text-sm font-bold tracking-tight text-ink-900">
-                  <span
-                    aria-hidden="true"
-                    className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold tabular-nums text-white shadow-card"
-                  >
-                    {currentIndex + 1}
-                  </span>
-                  Soal {currentIndex + 1}
-                </h1>
-                {markedIds.has(question.id) ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200">
-                    <Icon name="flag" className="h-4 w-4" strokeWidth={2.2} />
-                    Ditandai ragu-ragu
-                  </span>
-                ) : null}
-              </div>
-
-              {question.stimulus ? (
-                <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
-                  <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
-                    <Icon name="note" className="h-4 w-4" />
-                    Bacaan
-                  </p>
-                  {question.contentFormat === "html" ? (
-                    <RichText html={question.stimulus} className="stimulus-text" />
-                  ) : (
-                    <p className="stimulus-text">{question.stimulus}</p>
-                  )}
-                </div>
-              ) : null}
-
-              <QuestionBody
-                question={question}
-                answer={answers[question.id]}
-                namePrefix="question"
-                onChange={(answer) => handleAnswer(question.id, answer)}
-              />
-            </ProtectedQuestionContent>
-          </article>
-
-          {/* Kendali navigasi */}
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
-            <Button
-              variant="secondary"
-              onClick={() => goTo(currentIndex - 1)}
-              disabled={currentIndex === 0}
+    <>
+      <ExamShell
+        tagline="Simulasi TKA"
+        headerRight={
+          <div className="hidden items-center gap-2 lg:flex">
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
             >
-              <Icon name="arrow-left" className="h-5 w-5" />
-              Sebelumnya
-            </Button>
-            <Button
-              variant={markedIds.has(question.id) ? "primary" : "secondary"}
-              onClick={() => handleToggleMark(question.id)}
-            >
-              <Icon name="flag" className="h-5 w-5" />
-              {markedIds.has(question.id) ? "Hapus Tanda Ragu" : "Tandai Ragu-ragu"}
-            </Button>
-            <div className="ml-auto flex items-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => setIsNavigatorOpen(true)}
-                className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 text-[15px] font-semibold text-brand-800 lg:hidden"
-              >
-                <Icon name="list-check" className="h-5 w-5" />
-                Daftar Soal
-              </button>
-              {currentIndex === questions.length - 1 ? (
-                <Button onClick={() => setIsSubmitOpen(true)}>
-                  <Icon name="flag" className="h-5 w-5" />
-                  Selesai Ujian
-                </Button>
+              Layar penuh
+            </button>
+            <span className="inline-flex h-9 items-center gap-2 rounded-md bg-white/10 px-3 text-sm text-white ring-1 ring-inset ring-white/25">
+              {studentName || "Peserta"}
+              <Icon name="cap" className="h-4 w-4" strokeWidth={2} />
+            </span>
+          </div>
+        }
+      >
+        <ExamCardHead
+          title={`Soal nomor ${currentIndex + 1}`}
+          subtitle={subjectName}
+          status={
+            <ExamStatusPill alert={remainingSeconds <= 300}>
+              <span className="sr-only">Sisa waktu </span>
+              <span aria-hidden="true">Sisa Waktu : </span>
+              {formatExamClock(remainingSeconds)}
+            </ExamStatusPill>
+          }
+          infoLabel="Informasi Soal"
+          onOpenInfo={() => setIsInfoOpen(true)}
+          onOpenList={() => setIsNavigatorOpen(true)}
+          fontSize={fontSize}
+          onFontSize={setFontSize}
+        />
+
+        <ExamQuestionPanel
+          fontSize={fontSize}
+          stimulus={
+            stimulus ? (
+              question.contentFormat === "html" ? (
+                <RichText html={stimulus} className="stimulus-text" />
               ) : (
-                <Button onClick={() => goTo(currentIndex + 1)}>
-                  Selanjutnya
-                  <Icon name="arrow-right" className="h-5 w-5" />
-                </Button>
-              )}
-            </div>
-          </div>
-        </main>
-
-        {/* Navigator desktop */}
-        <aside className="hidden w-64 shrink-0 lg:block">
-          <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-            <h2 className="flex items-center gap-2 text-sm font-bold text-ink-900">
-              <Icon name="list-check" className="h-4 w-4 text-brand-600" strokeWidth={2.2} />
-              Daftar Soal
-            </h2>
-            <p className="mt-1 text-xs tabular-nums text-slate-500">
-              {answeredCount} dijawab · {markedCount} ditandai
+                <p className="stimulus-text">{stimulus}</p>
+              )
+            ) : null
+          }
+        >
+          {isMarked ? (
+            <p className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-300">
+              <Icon name="flag" className="h-4 w-4" strokeWidth={2.2} />
+              Ditandai ragu-ragu
             </p>
-            <div className="mt-4">
-              <QuestionNavigator
-                items={navigatorItems}
-                currentIndex={currentIndex}
-                onJump={goTo}
-              />
-            </div>
-            <Button
-              variant="secondary"
-              className="mt-5 w-full"
-              onClick={() => setIsSubmitOpen(true)}
-            >
-              <Icon name="flag" className="h-5 w-5" />
-              Selesai Ujian
-            </Button>
-          </div>
-        </aside>
-      </div>
+          ) : null}
 
-      {/* Navigator mobile */}
-      {isNavigatorOpen ? (
-        <div className="fixed inset-0 z-30 lg:hidden">
-          <div
-            className="absolute inset-0 bg-brand-950/40"
-            onClick={() => setIsNavigatorOpen(false)}
-            aria-hidden="true"
+          <QuestionBody
+            question={question}
+            answer={answers[question.id]}
+            namePrefix="question"
+            optionVariant="plain"
+            className="mt-0"
+            onChange={(answer) => handleAnswer(question.id, answer)}
           />
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Daftar soal"
-            className="absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-xl border-t border-slate-200 bg-white p-5"
-          >
-            <div className="flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-base font-bold text-ink-900">
-                <Icon name="list-check" className="h-5 w-5 text-brand-600" strokeWidth={2.2} />
-                Daftar Soal
-              </h2>
-              <button
-                type="button"
-                onClick={() => setIsNavigatorOpen(false)}
-                className="rounded px-2 py-1 text-sm font-semibold text-brand-700"
-              >
-                Tutup
-              </button>
-            </div>
-            <p className="mt-1 text-xs tabular-nums text-slate-500">
-              {answeredCount} dijawab · {markedCount} ditandai
-            </p>
-            <div className="mt-4">
-              <QuestionNavigator items={navigatorItems} currentIndex={currentIndex} onJump={goTo} />
-            </div>
-          </div>
-        </div>
+        </ExamQuestionPanel>
+
+        <ExamNavBar
+          onPrev={() => goTo(currentIndex - 1)}
+          prevDisabled={currentIndex === 0}
+          marked={isMarked}
+          onToggleMark={() => handleToggleMark(question.id)}
+          onNext={() => (isLast ? setIsSubmitOpen(true) : goTo(currentIndex + 1))}
+          nextLabel={isLast ? "Selesai ujian" : "Soal berikutnya"}
+          isFinish={isLast}
+        />
+      </ExamShell>
+
+      {/* Daftar soal */}
+      {isNavigatorOpen ? (
+        <ExamDialog
+          title="Daftar Soal"
+          onClose={() => setIsNavigatorOpen(false)}
+          footer={
+            <ExamDialogAction
+              onClick={() => {
+                setIsNavigatorOpen(false);
+                setIsSubmitOpen(true);
+              }}
+            >
+              <Icon name="flag" className="h-5 w-5" strokeWidth={2.2} />
+              Selesai ujian
+            </ExamDialogAction>
+          }
+        >
+          <p className="mb-3 text-sm tabular-nums text-slate-500">
+            {answeredCount} dijawab · {questions.length - answeredCount} belum · {markedCount}{" "}
+            ragu-ragu
+          </p>
+          <QuestionNavigator items={navigatorItems} currentIndex={currentIndex} onJump={goTo} />
+        </ExamDialog>
+      ) : null}
+
+      {/* Informasi soal */}
+      {isInfoOpen ? (
+        <ExamDialog title="Informasi Soal" onClose={() => setIsInfoOpen(false)}>
+          <dl className="text-[15px]">
+            <ExamInfoRow label="Peserta" value={studentName || "Peserta"} />
+            <ExamInfoRow label="Mata pelajaran" value={subjectName} />
+            <ExamInfoRow label="Paket" value={tryout.title} />
+            <ExamInfoRow label="Jumlah soal" value={`${questions.length} soal`} />
+            <ExamInfoRow label="Alokasi waktu" value={`${tryout.durationMinutes} menit`} />
+            <ExamInfoRow label="Sisa waktu" value={formatExamClock(remainingSeconds)} />
+          </dl>
+
+          {tryout.instructions.length > 0 ? (
+            <>
+              <h3 className="mt-5 text-sm font-bold uppercase tracking-wide text-slate-500">
+                Petunjuk pengerjaan
+              </h3>
+              <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-slate-700">
+                {tryout.instructions.map((instruction) => (
+                  <li key={instruction}>{instruction}</li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+        </ExamDialog>
       ) : null}
 
       {/* Konfirmasi selesai */}
       {isSubmitOpen ? (
-        <div className="fixed inset-0 z-40 flex items-end justify-center sm:items-center">
-          <div
-            className="absolute inset-0 bg-brand-950/40"
-            onClick={() => setIsSubmitOpen(false)}
-            aria-hidden="true"
-          />
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="submit-title"
-            className="relative w-full max-w-md rounded-t-xl border border-slate-200 bg-white p-6 shadow-raised sm:rounded-xl"
-          >
-            <IconBadge name="flag" tone="brand" size="lg" />
-            <h2 id="submit-title" className="mt-4 text-xl font-extrabold tracking-tight">
-              Selesaikan Tryout?
-            </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-              Setelah dikirim, jawaban tidak dapat diubah dan hasil langsung ditampilkan.
-            </p>
-
-            <dl className="mt-5 space-y-2 text-[15px]">
-              <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3.5 py-2.5">
-                <dt className="flex items-center gap-2 text-slate-600">
-                  <Icon name="list-check" className="h-4 w-4 text-slate-500" />
-                  Jumlah soal
-                </dt>
-                <dd className="font-bold tabular-nums text-ink-900">{questions.length} soal</dd>
+        <ExamDialog
+          title="Selesaikan ujian?"
+          onClose={() => setIsSubmitOpen(false)}
+          footer={
+            <div className="flex flex-col gap-2 sm:flex-row-reverse">
+              <div className="sm:flex-1">
+                <ExamDialogAction onClick={finish} disabled={isPending}>
+                  <Icon name="check" className="h-5 w-5" strokeWidth={2.4} />
+                  Kirim jawaban
+                </ExamDialogAction>
               </div>
-              <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2.5">
-                <dt className="flex items-center gap-2 text-emerald-800">
-                  <Icon name="check" className="h-4 w-4 text-emerald-600" strokeWidth={2.2} />
-                  Sudah dijawab
-                </dt>
-                <dd className="font-bold tabular-nums text-emerald-800">{answeredCount} soal</dd>
-              </div>
-              <div className="flex items-center justify-between rounded-xl bg-rose-50 px-3.5 py-2.5">
-                <dt className="flex items-center gap-2 text-rose-800">
-                  <Icon name="minus" className="h-4 w-4 text-rose-600" strokeWidth={2.2} />
-                  Belum dijawab
-                </dt>
-                <dd className="font-bold tabular-nums text-rose-800">
-                  {questions.length - answeredCount} soal
-                </dd>
-              </div>
-              <div className="flex items-center justify-between rounded-xl bg-amber-50 px-3.5 py-2.5">
-                <dt className="flex items-center gap-2 text-amber-900">
-                  <Icon name="flag" className="h-4 w-4 text-amber-600" strokeWidth={2.2} />
-                  Ditandai ragu-ragu
-                </dt>
-                <dd className="font-bold tabular-nums text-amber-900">{markedCount} soal</dd>
-              </div>
-            </dl>
-
-            <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
-              <Button className="sm:flex-1" loading={isPending} onClick={finish}>
-                {isPending ? null : <Icon name="check" className="h-5 w-5" strokeWidth={2.2} />}
-                Submit Tryout
-              </Button>
-              <Button variant="secondary" onClick={() => setIsSubmitOpen(false)}>
+              <button
+                type="button"
+                onClick={() => setIsSubmitOpen(false)}
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-slate-300 px-5 text-[15px] font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+              >
                 <Icon name="arrow-left" className="h-5 w-5" />
-                Kembali Mengerjakan
-              </Button>
+                Kembali mengerjakan
+              </button>
             </div>
-          </div>
-        </div>
+          }
+        >
+          <p className="text-[15px] leading-relaxed text-slate-600">
+            Setelah dikirim, jawaban tidak dapat diubah dan hasil langsung ditampilkan.
+          </p>
+
+          <dl className="mt-4 space-y-2 text-[15px]">
+            <SummaryRow
+              icon="list-check"
+              label="Jumlah soal"
+              value={`${questions.length} soal`}
+              className="bg-slate-50 text-slate-700"
+            />
+            <SummaryRow
+              icon="check"
+              label="Sudah dijawab"
+              value={`${answeredCount} soal`}
+              className="bg-aqua-50 text-aqua-900"
+            />
+            <SummaryRow
+              icon="minus"
+              label="Belum dijawab"
+              value={`${questions.length - answeredCount} soal`}
+              className="bg-rose-50 text-rose-800"
+            />
+            <SummaryRow
+              icon="flag"
+              label="Ditandai ragu-ragu"
+              value={`${markedCount} soal`}
+              className="bg-amber-50 text-amber-900"
+            />
+          </dl>
+        </ExamDialog>
       ) : null}
 
       <Toast message={toastMessage} onDismiss={() => setToastMessage(null)} />
+    </>
+  );
+}
+
+function SummaryRow({
+  icon,
+  label,
+  value,
+  className,
+}: {
+  icon: "list-check" | "check" | "minus" | "flag";
+  label: string;
+  value: string;
+  className: string;
+}) {
+  return (
+    <div
+      className={["flex items-center justify-between rounded-md px-3.5 py-2.5", className].join(" ")}
+    >
+      <dt className="flex items-center gap-2">
+        <Icon name={icon} className="h-4 w-4" strokeWidth={2.2} />
+        {label}
+      </dt>
+      <dd className="font-bold tabular-nums">{value}</dd>
     </div>
   );
 }

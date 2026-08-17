@@ -46,6 +46,8 @@ export interface PracticeAttempt {
   startedAt: number;
   finishedAt: number | null;
   answers: AnswerMap;
+  /** Menyusul setelah layar latihan memakai tombol ragu-ragu; data lama tidak memuatnya. */
+  markedQuestionIds: string[];
 }
 
 export const emptyIntegrity: IntegrityCounters = {
@@ -80,7 +82,11 @@ export function clearTryoutAttempt(tryoutSlug: string): void {
 export function readPracticeAttempt(packageSlug: string): PracticeAttempt | null {
   const attempt = readValue<PracticeAttempt>(storageKeys.practiceAttempt(packageSlug));
   if (!attempt || typeof attempt.startedAt !== "number") return null;
-  return { ...attempt, answers: normalizeAnswers(attempt.answers) };
+  return {
+    ...attempt,
+    answers: normalizeAnswers(attempt.answers),
+    markedQuestionIds: attempt.markedQuestionIds ?? [],
+  };
 }
 
 export function writePracticeAttempt(attempt: PracticeAttempt): void {

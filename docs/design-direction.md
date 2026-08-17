@@ -7,22 +7,37 @@ simulasi dan paket latihan yang tersedia, lalu bisa menekannya.
 ## Yang dihindari
 
 Halaman depan bergaya portal/landing yang harus dilewati sebelum sampai ke isi,
-tampilan polos tanpa penanda visual, neon, ungu "AI", dashboard gelap futuristik,
+tampilan polos tanpa penanda visual, neon, dashboard gelap futuristik,
 ikon robot/otak, animasi berlebih, copy marketing berlebihan.
 
 ## Warna
 
-Warna utama **oranye**, boleh bergradasi. Gradasi dipakai pada bidang yang memang
+Palet diambil dari lambang **Siap TKA One**: ungu topi wisuda, kuning keemasan
+tulisan "ONE", biru es tulisan "SiAP TKA", dan biru dongker garis tepinya. Warna
+utama **ungu**, boleh bergradasi. Gradasi dipakai pada bidang yang memang
 dekoratif — pita halaman depan, sampul kartu, tombol utama — bukan pada teks panjang.
 
 | Peran | Nilai |
 | --- | --- |
-| Background halaman | `ink-50 #f8f7f6`, permukaan kartu `#ffffff` |
-| Primary | `brand-500 #f97316` → `brand-600 #ea580c` (gradasi tombol & sampul) |
-| Primary pekat | `brand-700 #c2410c`, `brand-900 #7c2d12` — pita, sampul gelap |
-| Tint | `brand-50 #fff7ed`, `brand-100 #ffedd5` — chip, latar lembut |
-| Teks & judul | `ink-900 #1f1b17` (grafit hangat), bukan oranye |
+| Background halaman | `ink-50 #f5f6fb`, permukaan kartu `#ffffff` |
+| Primary | `brand-500 #8232ff` → `brand-700 #5001da` (ungu lambang) |
+| Primary pekat | `brand-800 #4200b0`, `brand-900 #2f0289` — pita, sampul gelap |
+| Tint | `brand-50 #f6f2ff`, `brand-100 #ece2ff` — chip, latar lembut |
+| Aksen | `accent-400 #fdbe01` → `accent-600 #fd9101` (kuning "ONE") |
+| Aksen sejuk | `aqua-300 #7fe4fb` → `aqua-600 #0898c2` (biru es) |
+| Teks & judul | `ink-900 #12153a` (dongker lambang), bukan ungu |
 | Netral | `slate-*` untuk teks sekunder, garis, latar |
+
+Tiga warna lambang membedakan mata pelajaran: Matematika ungu, Bahasa Indonesia
+kuning keemasan, Bahasa Inggris biru es. Mapel baru memakai salah satu dari tiga
+warna itu dan dibedakan lewat ikonnya — bukan dengan menambah warna baru.
+
+Di atas kuning dan biru es, tulisan memakai `ink-900`, bukan putih: keduanya
+terlalu terang untuk teks putih.
+
+Layar ujian dan latihan sengaja keluar dari palet ini — birunya meniru aplikasi
+ANBK agar peserta mengenali suasananya — tetapi ujung gelapnya diturunkan ke
+biru dongker lambang supaya tetap sekeluarga.
 
 Semantik hanya dipakai bila punya fungsi (status penguasaan):
 
@@ -32,7 +47,7 @@ Semantik hanya dipakai bila punya fungsi (status penguasaan):
 | Cukup (60–79%) | amber |
 | Perlu diperkuat (<60%) | rose |
 
-Warna status tetap dipisahkan dari warna merek: oranye menandakan merek dan aksi,
+Warna status tetap dipisahkan dari warna merek: ungu menandakan merek dan aksi,
 sedangkan emerald/amber/rose hanya menandakan tingkat penguasaan.
 
 ## Bentuk & permukaan
@@ -78,7 +93,7 @@ dengan bentuk + warna, tidak hanya warna.
   Target klik seluas satu baris.
 - Soal kategori memakai satu grup radio per pernyataan, dengan label kategori yang
   tetap terbaca di layar sempit.
-- `focus-visible` ring oranye terlihat jelas di semua elemen interaktif.
+- `focus-visible` ring ungu terlihat jelas di semua elemen interaktif.
 - Kontras teks minimal 4.5:1; status tidak pernah disampaikan lewat warna saja.
 - Dialog voucher: fokus otomatis, `Esc` menutup, `aria-modal`.
 

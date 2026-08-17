@@ -14,6 +14,7 @@ import type {
   Topic,
 } from "@/data/types";
 import type { AnalysisCatalog } from "@/lib/scoring";
+import { sortBySubject } from "@/lib/subject-order";
 import { supabase } from "@/lib/supabase";
 
 /**
@@ -387,7 +388,7 @@ export async function getSubjects(): Promise<Subject[]> {
       .order("id")
       .range(from, to),
   );
-  return rows.map(toSubject);
+  return sortBySubject(rows.map(toSubject), (subject) => subject.slug);
 }
 
 export async function getSubjectBySlug(slug: string): Promise<Subject | null> {
@@ -590,7 +591,10 @@ export async function getTryouts(): Promise<Tryout[]> {
   const seriesById = new Map(series.map((item) => [item.id, item]));
 
   const ids = await questionIdsFor(rows.map((row) => row.id));
-  return rows.map((row) => toTryout(row, ids.get(row.id) ?? [], packageAccess(row, subjectById, seriesById)));
+  const tryouts = rows.map((row) =>
+    toTryout(row, ids.get(row.id) ?? [], packageAccess(row, subjectById, seriesById)),
+  );
+  return sortBySubject(tryouts, (tryout) => tryout.subjectSlug);
 }
 
 export async function getTryoutBySlug(slug: string): Promise<Tryout | null> {
@@ -627,7 +631,7 @@ export async function getPracticePackages(): Promise<PracticePackage[]> {
   const allQuestionIds = [...new Set([...idsByPackage.values()].flat())];
   const questionTaxonomy = await questionTaxonomyFor(allQuestionIds);
 
-  return rows.map((row) =>
+  const packages = rows.map((row) =>
     toPracticePackage(
       row,
       idsByPackage.get(row.id) ?? [],
@@ -635,6 +639,7 @@ export async function getPracticePackages(): Promise<PracticePackage[]> {
       packageAccess(row, subjectById, seriesById),
     ),
   );
+  return sortBySubject(packages, (pkg) => pkg.subjectSlug);
 }
 
 export async function getAnalysisCatalog(): Promise<AnalysisCatalog> {
@@ -686,6 +691,7 @@ export interface PracticeTopicGroup {
 
 export async function getPracticePackagesGroupedByTopic(): Promise<PracticeTopicGroup[]> {
   const [topics, packages] = await Promise.all([getTopics(), getPracticePackages()]);
+  const subjectSlugByTopic = new Map(packages.map((pkg) => [pkg.topicId, pkg.subjectSlug]));
   const groups = topics
     .map((topic) => ({
       topic,
@@ -708,7 +714,8 @@ export async function getPracticePackagesGroupedByTopic(): Promise<PracticeTopic
     groupedTopicIds.add(pkg.topicId);
   }
 
-  return groups;
+  // Topik dari mapel yang sama dikumpulkan berdekatan, mengikuti urutan mapel.
+  return sortBySubject(groups, (group) => subjectSlugByTopic.get(group.topic.id));
 }
 
 export interface SubjectSummary {

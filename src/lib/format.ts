@@ -22,6 +22,15 @@ export function formatClock(totalSeconds: number): string {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
+/** 4492 -> "01:14:52" ; jam ikut ditampilkan, seperti penunjuk waktu ANBK. */
+export function formatExamClock(totalSeconds: number): string {
+  const safe = Math.max(0, Math.floor(totalSeconds));
+  const hours = Math.floor(safe / 3600);
+  const minutes = Math.floor((safe % 3600) / 60);
+  const seconds = safe % 60;
+  return [hours, minutes, seconds].map((part) => String(part).padStart(2, "0")).join(":");
+}
+
 /** 1860 -> "31 menit" ; dipakai ringkasan hasil. */
 export function formatDuration(totalSeconds: number): string {
   const minutes = Math.max(0, Math.round(totalSeconds / 60));

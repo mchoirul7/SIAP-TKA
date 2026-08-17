@@ -7,8 +7,10 @@ export interface NavigatorItem {
 }
 
 /**
- * Status dibedakan lewat warna sekaligus bentuk (garis tebal + titik penanda),
- * sehingga tetap terbaca tanpa mengandalkan warna saja.
+ * Petak nomor soal seperti "Daftar Soal" pada ANBK: biru untuk yang sudah
+ * dijawab, kuning untuk yang ditandai ragu-ragu, putih untuk yang belum
+ * disentuh. Status juga ditulis pada label agar tidak bergantung warna saja,
+ * dan soal yang sedang dibuka diberi cincin gelap.
  */
 export function QuestionNavigator({
   items,
@@ -21,23 +23,23 @@ export function QuestionNavigator({
 }) {
   return (
     <div>
-      <ol className="grid grid-cols-8 gap-1.5 sm:grid-cols-10 lg:grid-cols-5">
+      <ol className="grid grid-cols-6 gap-2 sm:grid-cols-8 lg:grid-cols-10">
         {items.map((item, index) => {
           const isCurrent = index === currentIndex;
           const classes = [
-            "relative flex h-10 w-full items-center justify-center rounded-md border text-sm font-semibold tabular-nums transition-colors",
+            "relative flex h-10 w-full items-center justify-center rounded-md border text-sm font-bold tabular-nums transition-colors",
           ];
 
-          // Hijau untuk yang sudah dijawab: warnanya sama dengan penanda benar di pembahasan.
-          if (item.answered) {
-            classes.push(
-              "border-emerald-600 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white hover:opacity-90",
-            );
+          // Ragu-ragu didahulukan: itu penanda yang ingin dicari peserta lebih dulu.
+          if (item.marked) {
+            classes.push("border-amber-500 bg-amber-400 text-slate-900 hover:bg-amber-300");
+          } else if (item.answered) {
+            classes.push("border-[#1877d2] bg-[#1877d2] text-white hover:bg-[#1466b6]");
           } else {
-            classes.push("border-slate-300 bg-white text-slate-600 hover:border-brand-400");
+            classes.push("border-slate-300 bg-white text-slate-600 hover:border-slate-400");
           }
           if (isCurrent) {
-            classes.push("ring-2 ring-brand-500 ring-offset-1");
+            classes.push("ring-2 ring-slate-800 ring-offset-2");
           }
 
           return (
@@ -52,23 +54,17 @@ export function QuestionNavigator({
                 className={classes.join(" ")}
               >
                 {index + 1}
-                {item.marked ? (
-                  <span
-                    aria-hidden="true"
-                    className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border border-white bg-amber-500"
-                  />
-                ) : null}
               </button>
             </li>
           );
         })}
       </ol>
 
-      <dl className="mt-4 space-y-2 text-xs text-slate-600">
+      <dl className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-600">
         <div className="flex items-center gap-2">
           <span
             aria-hidden="true"
-            className="h-4 w-4 rounded border border-emerald-600 bg-gradient-to-br from-emerald-500 to-emerald-600"
+            className="h-4 w-4 rounded border border-[#1877d2] bg-[#1877d2]"
           />
           <dt className="sr-only">Keterangan</dt>
           <dd>Sudah dijawab</dd>
@@ -80,7 +76,7 @@ export function QuestionNavigator({
         <div className="flex items-center gap-2">
           <span
             aria-hidden="true"
-            className="h-4 w-4 rounded border border-slate-300 bg-white ring-1 ring-amber-500"
+            className="h-4 w-4 rounded border border-amber-500 bg-amber-400"
           />
           <dd>Ditandai ragu-ragu</dd>
         </div>

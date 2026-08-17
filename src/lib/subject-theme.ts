@@ -20,33 +20,35 @@ export interface SubjectTheme {
   icon: IconName;
 }
 
+/**
+ * Hanya tiga keluarga warna, semuanya dari lambang: ungu, kuning keemasan, dan
+ * biru es. Tiga cukup untuk membedakan mapel yang berjalan sekarang, dan mapel
+ * berikutnya dibedakan lewat ikonnya — bukan dengan menambah warna baru yang
+ * tidak ada pada lambang.
+ */
 const THEMES: Record<string, SubjectTheme> = {
-  violet: { cover: "violet", accent: "violet", icon: "chart" },
-  rose: { cover: "rose", accent: "rose", icon: "book" },
-  sky: { cover: "sky", accent: "sky", icon: "globe" },
-  emerald: { cover: "emerald", accent: "emerald", icon: "leaf" },
-  neon: { cover: "neon", accent: "neon", icon: "book" },
-  honey: { cover: "honey", accent: "amber", icon: "flask" },
-  orange: { cover: "orange", accent: "brand", icon: "compass" },
+  grape: { cover: "grape", accent: "brand", icon: "chart" },
+  gold: { cover: "gold", accent: "gold", icon: "book" },
+  aqua: { cover: "aqua", accent: "aqua", icon: "globe" },
 };
 
 /** Kata kunci pada nama atau slug mata pelajaran → warna yang dipakai. */
 const KEYWORDS: { match: RegExp; theme: keyof typeof THEMES; icon?: IconName }[] = [
-  { match: /matematika|math/, theme: "violet" },
-  { match: /bahasa[-\s]?indonesia|indonesian/, theme: "neon" },
-  { match: /bahasa[-\s]?inggris|english/, theme: "sky" },
-  { match: /kimia|chemistry/, theme: "honey" },
-  { match: /biologi|biology/, theme: "emerald" },
-  { match: /fisika|physics/, theme: "sky", icon: "bolt" },
-  { match: /ipa|sains|science/, theme: "emerald", icon: "flask" },
-  { match: /sejarah|history/, theme: "orange", icon: "hourglass" },
-  { match: /ekonomi|economy/, theme: "honey", icon: "chart" },
-  { match: /geografi|geography/, theme: "emerald", icon: "compass" },
-  { match: /sosiologi|ppkn|ips/, theme: "orange", icon: "cap" },
+  { match: /matematika|math/, theme: "grape" },
+  { match: /bahasa[-\s]?indonesia|indonesian/, theme: "gold" },
+  { match: /bahasa[-\s]?inggris|english/, theme: "aqua" },
+  { match: /kimia|chemistry/, theme: "gold", icon: "flask" },
+  { match: /biologi|biology/, theme: "aqua", icon: "leaf" },
+  { match: /fisika|physics/, theme: "grape", icon: "bolt" },
+  { match: /ipa|sains|science/, theme: "aqua", icon: "flask" },
+  { match: /sejarah|history/, theme: "gold", icon: "hourglass" },
+  { match: /ekonomi|economy/, theme: "gold", icon: "chart" },
+  { match: /geografi|geography/, theme: "aqua", icon: "compass" },
+  { match: /sosiologi|ppkn|ips/, theme: "grape", icon: "cap" },
 ];
 
 /** Urutan warna cadangan untuk mata pelajaran yang belum dikenali. */
-const FALLBACK: (keyof typeof THEMES)[] = ["violet", "sky", "emerald", "honey", "rose", "orange"];
+const FALLBACK: (keyof typeof THEMES)[] = ["grape", "gold", "aqua"];
 
 /** Penjumlahan kode karakter: warna cadangan tetap sama setiap kali halaman dibuka. */
 function stableIndex(key: string, size: number): number {

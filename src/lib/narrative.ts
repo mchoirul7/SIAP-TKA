@@ -2,19 +2,23 @@ import { MASTERY_THRESHOLD } from "@/lib/scoring";
 import type { MisconceptionSignal, PracticeAnalysis, TryoutAnalysis } from "@/lib/scoring";
 
 /**
- * Hasil diringkas menjadi satu paragraf: apa yang perlu dipelajari lebih dulu,
- * dan kenapa.
+ * Ringkasan hasil dalam dua kalimat pendek.
  *
- * Kalimatnya sengaja dibuat sederhana dan menyapa siswa langsung ("kamu"),
- * karena halaman ini dibaca siswa sendiri. Istilah teknis seperti "ketepatan",
- * "prasyarat", atau "akurasi" diganti dengan kalimat sehari-hari, dan angka
- * ditulis sebagai "benar 3 dari 5 soal" — bukan persen — supaya langsung
- * terbayang. Rincian per konsep ditampilkan terpisah sebagai kartu.
+ * Yang membaca adalah siswa dan orang tuanya, jadi kalimatnya memakai kata
+ * sehari-hari: "belum menjawab benar", bukan "akurasi rendah"; "soal 3, 5",
+ * bukan "butir 3, 5". Istilah pelajaran memang tetap muncul — bilangan
+ * irasional tetap harus disebut bilangan irasional — tetapi bahasa di
+ * sekelilingnya dibuat sesederhana mungkin.
+ *
+ *   "Pada latihan ini, Ananda Sinta menguasai 8 dari 10 soal Operasi Bilangan.
+ *    Yang masih salah: semua bentuk akar dianggap irasional (soal 3, 5)."
+ *
+ * Rincian per materi tetap ada di bawahnya sebagai kartu, jadi paragraf ini
+ * tidak perlu menerangkan apa pun lagi.
  */
 export interface StudyNarrative {
-  headline: string;
   body: string;
-  /** Ditampilkan bila tidak ada materi yang perlu diperkuat. */
+  /** Dipakai halaman hasil untuk memilih warna dan ikon kartunya. */
   isAllClear: boolean;
 }
 
@@ -23,118 +27,140 @@ function joinList(items: string[]): string {
   return `${items.slice(0, -1).join(", ")} dan ${items[items.length - 1]}`;
 }
 
-/** Satu kalimat tambahan tentang pola jawaban yang sering keliru. */
-export function misconceptionNote(signals: MisconceptionSignal[]): string {
-  const first = signals[0];
-  if (!first) return "";
-  return ` Yang paling sering keliru: ${first.insight}`;
+/** Tanpa nama yang tercatat, sapaannya tetap sopan: "Ananda" saja. */
+function greeting(studentName: string | undefined): string {
+  const name = studentName?.trim();
+  return name ? `Ananda ${name}` : "Ananda";
+}
+
+interface NarrativeOptions {
+  /** Nama yang diisi peserta sebelum mengerjakan. */
+  studentName?: string;
+  /** Materi atau mata pelajaran yang dikerjakan, disebut setelah jumlah soal. */
+  contextName?: string;
+}
+
+/** Dua penyebab terbanyak saja; selebihnya sudah tampil sebagai kartu di bawah. */
+const WEAK_LIMIT = 2;
+
+/**
+ * Sebagian label pola keliru ditulis sebagai capaian yang belum tercapai
+ * ("Keliru: Memahami syarat kesebangunan"), sebagian lagi sebagai anggapan
+ * yang salah ("Semua bentuk akar dianggap irasional"). Awalan "Keliru:"
+ * dibuang supaya kalimatnya tidak menyebut keliru dua kali, dan huruf besar di
+ * awal diturunkan karena label ini menyambung di tengah kalimat.
+ */
+const COMPETENCY_PREFIX = /^keliru\s*:\s*/i;
+
+function isCompetencyLabel(signal: MisconceptionSignal): boolean {
+  return COMPETENCY_PREFIX.test(signal.label.trim());
+}
+
+function cleanLabel(label: string): string {
+  const text = label.trim().replace(COMPETENCY_PREFIX, "").trim();
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+/**
+ * Kalimat kedua: sespesifik mungkin sesuai data yang ada pada soalnya.
+ *
+ * Pengecoh soal Matematika sudah ditandai pola kelirunya, jadi kesalahannya
+ * bisa disebut apa adanya berikut nomor soalnya. Bila soal belum bertanda —
+ * mata pelajaran lain, atau soal dikosongkan sehingga tidak ada pengecoh yang
+ * terpilih — yang bisa disebut tinggal nama materinya.
+ */
+function detail(signals: MisconceptionSignal[], weakNames: string[]): string | null {
+  const top = signals.slice(0, WEAK_LIMIT);
+  if (top.length > 0) {
+    const parts = top.map((signal) => {
+      const numbers = signal.questionNumbers;
+      const label = cleanLabel(signal.label);
+      return numbers.length > 0 ? `${label} (soal ${numbers.join(", ")})` : label;
+    });
+    // Pembuka kalimat mengikuti bentuk label yang paling sering muncul.
+    const lead = isCompetencyLabel(top[0]) ? "Yang masih perlu dilatih" : "Yang masih salah";
+    return `${lead}: ${joinList(parts)}.`;
+  }
+  if (weakNames.length > 0) return `Materi ${joinList(weakNames)} masih perlu diperkuat.`;
+  return null;
+}
+
+function compose(
+  opening: string,
+  signals: MisconceptionSignal[],
+  weakNames: string[],
+  score: number,
+  fallbackAdvice: string,
+): StudyNarrative {
+  const specifics = detail(signals, weakNames);
+  if (specifics) return { body: `${opening} ${specifics}`, isAllClear: false };
+
+  // Materinya belum terpetakan, tetapi nilainya rendah: jangan mengaku semuanya beres.
+  if (score < MASTERY_THRESHOLD) {
+    return { body: `${opening} ${fallbackAdvice}`, isAllClear: false };
+  }
+  return { body: `${opening} Semua materinya sudah dikuasai.`, isAllClear: true };
+}
+
+/** "menguasai 0 dari 10 soal" terbaca kasar; nol disebut dengan kalimat sendiri. */
+function opening(
+  where: string,
+  studentName: string | undefined,
+  correct: number,
+  total: number,
+  contextName: string | undefined,
+): string {
+  const scope = contextName ? ` ${contextName}` : "";
+  const who = greeting(studentName);
+  if (correct === 0) {
+    return `${where}, ${who} belum menjawab benar satu pun dari ${total} soal${scope}.`;
+  }
+  return `${where}, ${who} menguasai ${correct} dari ${total} soal${scope}.`;
 }
 
 export function buildTryoutNarrative(
   analysis: TryoutAnalysis,
-  /** Kalimat penutup hanya menyebut paket latihan bila memang ada yang disarankan. */
-  options: { hasRecommendedPackages?: boolean } = {},
+  options: NarrativeOptions = {},
 ): StudyNarrative {
-  const closing = options.hasRecommendedPackages
-    ? " Paket latihan di bawah sudah diurutkan sesuai itu, jadi tinggal dikerjakan dari yang paling atas."
-    : "";
-
-  if (analysis.priorities.length === 0) {
-    // Nilai masih rendah tetapi materinya belum terpetakan: jangan mengaku semuanya beres.
-    if (analysis.score < MASTERY_THRESHOLD) {
-      return {
-        headline: "Baca ulang soal yang belum tepat",
-        body:
-          `Kamu benar ${analysis.correctCount} dari ${analysis.totalQuestions} soal. ` +
-          "Rincian materinya belum tersedia untuk simulasi ini, jadi mulailah dari soal yang " +
-          "jawabannya masih keliru dan pelajari pembahasannya satu per satu.",
-        isAllClear: false,
-      };
-    }
-
-    return {
-      headline: "Semua materi di simulasi ini sudah kamu kuasai",
-      body:
-        "Tidak ada materi yang perlu diulang dari simulasi ini. " +
-        "Langkah berikutnya: coba soal yang lebih sulit, bukan mengulang materi yang sama.",
-      isAllClear: true,
-    };
-  }
-
+  // Materi prasyarat didahulukan bila ada: itu yang sebaiknya dikuatkan lebih dulu.
   const advice = analysis.prerequisiteAdvice;
-  const [first, ...rest] = analysis.priorities;
+  const names = analysis.priorities
+    .filter((item) => item.id !== advice?.subtopicId)
+    .map((item) => item.name);
+  const weakNames = (advice ? [advice.name, ...names] : names).slice(0, WEAK_LIMIT);
 
-  // Bila materi dasarnya ikut lemah, materi dasar itu yang dikerjakan lebih dulu.
-  if (advice) {
-    const laterNames = joinList(
-      analysis.priorities.filter((item) => item.id !== advice.subtopicId).map((item) => item.name),
-    );
-
-    return {
-      headline: `Mulai dari ${advice.name}`,
-      body:
-        `${advice.name} adalah bekal untuk ${joinList(advice.supports)}. ` +
-        `Di simulasi ini bagian itu baru benar ${advice.correct} dari ${advice.total} soal. ` +
-        `${advice.reason} Jadi kuatkan bagian ini dulu` +
-        (laterNames ? `, baru lanjut ke ${laterNames}.` : ".") +
-        closing,
-      isAllClear: false,
-    };
-  }
-
-  const laterNames = joinList(rest.map((item) => item.name));
-
-  return {
-    headline: `Mulai dari ${first.name}`,
-    body:
-      `Di simulasi ini kamu benar ${first.correct} dari ${first.total} soal ${first.name} — ` +
-      `paling sedikit dibanding materi lain. Kuatkan bagian ini dulu` +
-      (laterNames ? `, baru lanjut ke ${laterNames}.` : ".") +
-      closing,
-    isAllClear: false,
-  };
+  return compose(
+    opening(
+      "Pada tryout ini",
+      options.studentName,
+      analysis.correctCount,
+      analysis.totalQuestions,
+      options.contextName,
+    ),
+    analysis.misconceptionSignals,
+    weakNames,
+    analysis.score,
+    "Buka pembahasan untuk melihat soal yang jawabannya belum tepat.",
+  );
 }
 
 export function buildPracticeNarrative(
   analysis: PracticeAnalysis,
-  options: { hasRecommendedPackages?: boolean } = {},
+  options: NarrativeOptions = {},
 ): StudyNarrative {
-  if (analysis.conceptsToReview.length === 0) {
-    // Nilai masih rendah tetapi materinya belum terpetakan: jangan mengaku semuanya beres.
-    if (analysis.score < MASTERY_THRESHOLD) {
-      return {
-        headline: "Baca ulang soal yang belum tepat",
-        body:
-          `Kamu benar ${analysis.correctCount} dari ${analysis.totalQuestions} soal. ` +
-          "Rincian materinya belum tersedia untuk paket ini, jadi buka pembahasan dan pelajari " +
-          "soal yang jawabannya masih keliru, lalu kerjakan ulang paketnya.",
-        isAllClear: false,
-      };
-    }
+  const weakNames = analysis.conceptsToReview.slice(0, WEAK_LIMIT).map((item) => item.name);
 
-    return {
-      headline: "Semua materi di paket ini sudah kamu kuasai",
-      body:
-        "Tidak ada materi yang perlu diulang dari latihan ini. " +
-        "Lanjut saja ke paket berikutnya.",
-      isAllClear: true,
-    };
-  }
-
-  const [first, ...rest] = analysis.conceptsToReview;
-  const laterNames = joinList(rest.map((item) => item.name));
-  const closing = options.hasRecommendedPackages
-    ? " Paket latihan di bawah bisa dipakai untuk berlatih lagi."
-    : "";
-
-  return {
-    headline: `Pelajari lagi ${first.name}`,
-    body:
-      `Di latihan ini kamu benar ${first.correct} dari ${first.total} soal ${first.name}` +
-      (laterNames ? `, lalu ${laterNames}.` : ".") +
-      misconceptionNote(first.misconceptions) +
-      " Baca pembahasannya dulu, lalu kerjakan ulang paket ini dan bandingkan hasilnya." +
-      closing,
-    isAllClear: false,
-  };
+  return compose(
+    opening(
+      "Pada latihan ini",
+      options.studentName,
+      analysis.correctCount,
+      analysis.totalQuestions,
+      options.contextName,
+    ),
+    analysis.misconceptionSignals,
+    weakNames,
+    analysis.score,
+    "Buka pembahasan untuk melihat soal yang jawabannya belum tepat.",
+  );
 }

@@ -17,9 +17,22 @@ export function startPracticeAttempt(slug: string): PracticeAttempt | null {
     startedAt: Date.now(),
     finishedAt: null,
     answers: {},
+    markedQuestionIds: [],
   };
   writePracticeAttempt(attempt);
   return attempt;
+}
+
+/** Tanda ragu-ragu pada latihan, sama seperti pada ujian. */
+export function togglePracticeMark(slug: string, questionId: string): PracticeAttempt | null {
+  const attempt = readPracticeAttempt(slug);
+  if (!attempt) return null;
+  const marked = new Set(attempt.markedQuestionIds);
+  if (marked.has(questionId)) marked.delete(questionId);
+  else marked.add(questionId);
+  const next: PracticeAttempt = { ...attempt, markedQuestionIds: [...marked] };
+  writePracticeAttempt(next);
+  return next;
 }
 
 export function savePracticeAnswer(

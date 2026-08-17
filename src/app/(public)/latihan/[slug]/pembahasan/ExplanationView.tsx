@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { ProtectedQuestionContent } from "@/components/ProtectedQuestionContent";
 import { QuestionLabels } from "@/components/QuestionLabels";
 import { QuestionReview } from "@/components/QuestionReview";
@@ -81,11 +82,8 @@ export function ExplanationView({
 
   if (!ready) {
     return (
-      <div className="container-reading py-20">
-        <p className="flex items-center gap-2 text-sm text-slate-500">
-          <Icon name="hourglass" className="h-4 w-4" />
-          Menyiapkan pembahasan…
-        </p>
+      <div className="container-reading py-16">
+        <LoadingScreen message="Menyiapkan pembahasan…" />
       </div>
     );
   }
@@ -167,8 +165,8 @@ export function ExplanationView({
 
               <ProtectedQuestionContent>
                 {question.stimulus ? (
-                  <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
-                    <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sky-700">
+                  <div className="mt-4 rounded-2xl border border-aqua-200 bg-aqua-50/70 p-4">
+                    <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-aqua-700">
                       <Icon name="note" className="h-4 w-4" />
                       Bacaan
                     </p>
@@ -189,7 +187,7 @@ export function ExplanationView({
                 <QuestionReview question={question} answer={userAnswer} />
               </ProtectedQuestionContent>
 
-              <div className="mt-5 rounded-2xl border border-violet-200 bg-white p-5">
+              <div className="mt-5 rounded-2xl border border-brand-200 bg-white p-5">
                 <div className="flex items-start gap-3">
                   <IconBadge name="bulb" tone="violet" size="sm" />
                   <div className="min-w-0">
@@ -224,7 +222,7 @@ export function ExplanationView({
 
                 {/* Pola keliru yang terbaca dari pengecoh yang tadi dipilih. */}
                 {uniqueSignals.length > 0 ? (
-                  <div className="mt-4 space-y-3 border-t border-violet-100 pt-4">
+                  <div className="mt-4 space-y-3 border-t border-brand-100 pt-4">
                     {uniqueSignals.map((signal) => (
                       <div key={signal.id} className="flex items-start gap-3">
                         <IconBadge name="alert" tone="amber" size="sm" />
