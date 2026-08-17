@@ -15,6 +15,7 @@ import type {
 } from "@/data/types";
 import type { AnalysisCatalog } from "@/lib/scoring";
 import { sortBySubject } from "@/lib/subject-order";
+import { isSubjectReleased } from "@/lib/subject-release";
 import { supabase } from "@/lib/supabase";
 
 /**
@@ -128,6 +129,7 @@ interface QuestionRow {
   question_text: string;
   instruction: string | null;
   explanation: string | null;
+  visual_prompt: string | null;
   options: QuestionOption[] | null;
   correct_answer: string | null;
   correct_answers: string[] | null;
@@ -351,6 +353,7 @@ function toQuestion(row: QuestionRow, passageHtml: Map<string, string>): Questio
     questionText: row.question_text,
     instruction: row.instruction ?? undefined,
     explanation: row.explanation ?? undefined,
+    visualPrompt: row.visual_prompt ?? undefined,
   } as const;
 
   if (row.type === "category") {
@@ -590,8 +593,11 @@ export async function getTryouts(): Promise<Tryout[]> {
   const subjectById = new Map(subjects.map((subject) => [subject.id, subject]));
   const seriesById = new Map(series.map((item) => [item.id, item]));
 
-  const ids = await questionIdsFor(rows.map((row) => row.id));
-  const tryouts = rows.map((row) =>
+  // Mapel yang belum dirilis disaring sebelum soalnya diambil — lihat `subject-release`.
+  const released = rows.filter((row) => isSubjectReleased(subjectById.get(row.subject_id)?.slug));
+
+  const ids = await questionIdsFor(released.map((row) => row.id));
+  const tryouts = released.map((row) =>
     toTryout(row, ids.get(row.id) ?? [], packageAccess(row, subjectById, seriesById)),
   );
   return sortBySubject(tryouts, (tryout) => tryout.subjectSlug);
@@ -627,11 +633,14 @@ export async function getPracticePackages(): Promise<PracticePackage[]> {
   const subjectById = new Map(subjects.map((subject) => [subject.id, subject]));
   const seriesById = new Map(series.map((item) => [item.id, item]));
 
-  const idsByPackage = await questionIdsFor(rows.map((row) => row.id));
+  // Mapel yang belum dirilis disaring sebelum soalnya diambil — lihat `subject-release`.
+  const released = rows.filter((row) => isSubjectReleased(subjectById.get(row.subject_id)?.slug));
+
+  const idsByPackage = await questionIdsFor(released.map((row) => row.id));
   const allQuestionIds = [...new Set([...idsByPackage.values()].flat())];
   const questionTaxonomy = await questionTaxonomyFor(allQuestionIds);
 
-  const packages = rows.map((row) =>
+  const packages = released.map((row) =>
     toPracticePackage(
       row,
       idsByPackage.get(row.id) ?? [],

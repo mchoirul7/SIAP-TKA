@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
+import { isSubjectReleased } from "@/lib/subject-release";
 import { getPracticePackages, getSubjects, getTryouts } from "@/services/content-service";
 
 /**
@@ -27,12 +28,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticRoutes,
-    ...subjects.map((subject) => ({
-      url: absoluteUrl(`/mapel/${subject.slug}`),
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
+    // Mapel yang belum dirilis halamannya masih kosong dan tidak ditautkan dari
+    // mana pun, jadi tidak ada gunanya diajukan ke mesin telusur.
+    ...subjects
+      .filter((subject) => isSubjectReleased(subject.slug))
+      .map((subject) => ({
+        url: absoluteUrl(`/mapel/${subject.slug}`),
+        lastModified,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
     ...tryouts.map((tryout) => ({
       url: absoluteUrl(`/tryout/${tryout.slug}`),
       lastModified,

@@ -2,6 +2,7 @@
 
 import { QuestionOption } from "@/components/QuestionOption";
 import { RichText } from "@/components/RichText";
+import { VisualPromptHint } from "@/components/VisualPromptHint";
 import type { AnswerValue, Question } from "@/data/types";
 import {
   categoryAssignments,
@@ -47,6 +48,8 @@ export function QuestionBody({
           {questionTypeLabel[question.type]}
         </span>
         <span>{instructionFor(question)}</span>
+        {/* Alat penyusun soal: tidak tampil bagi siswa. */}
+        <VisualPromptHint question={question} />
       </p>
 
       {question.type === "category" ? (

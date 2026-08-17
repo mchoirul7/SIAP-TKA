@@ -99,6 +99,12 @@ interface QuestionBase {
   contentFormat?: "text" | "html";
   /** Belum tentu tersedia pada soal hasil impor. */
   explanation?: string;
+  /**
+   * Deskripsi gambar yang seharusnya menyertai soal ini, ditulis penyusun soal
+   * sebagai bahan untuk dibuatkan gambarnya. Bukan untuk dibaca siswa — hanya
+   * tampil di mode penyusun, lihat `VisualPromptHint`.
+   */
+  visualPrompt?: string;
 }
 
 export interface SingleChoiceQuestion extends QuestionBase {

@@ -6,6 +6,7 @@ export const storageKeys = {
   profile: `${PREFIX}:profile`,
   level: `${PREFIX}:level`,
   entitlements: `${PREFIX}:entitlements`,
+  authorMode: `${PREFIX}:mode-penyusun`,
   tryoutAttempt: (tryoutSlug: string) => `${PREFIX}:tryout-attempt:${tryoutSlug}`,
   practiceAttempt: (packageSlug: string) => `${PREFIX}:practice-attempt:${packageSlug}`,
 } as const;

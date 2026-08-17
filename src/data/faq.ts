@@ -37,7 +37,12 @@ export const homeFaq: FaqItem[] = [
   {
     question: "Untuk jenjang apa saja?",
     answer:
-      "Tersedia untuk jenjang SD, SMP, dan SMA. Jenjang dipilih di halaman depan, lalu mata pelajaran yang sudah tersedia untuk jenjang tersebut akan muncul beserta paket latihan dan tryoutnya.",
+      "Saat ini tersedia untuk jenjang SMA. Jenjang SD dan SMP segera hadir. Jenjang dipilih di halaman depan, lalu mata pelajaran yang sudah tersedia untuk jenjang tersebut akan muncul beserta paket latihan dan tryoutnya.",
+  },
+  {
+    question: "Mata pelajaran apa saja yang sudah tersedia?",
+    answer:
+      "Untuk jenjang SMA, Matematika sudah dapat dikerjakan lengkap dengan paket latihan, tryout, pembahasan, dan analisa hasilnya. Bahasa Indonesia dan Bahasa Inggris segera hadir.",
   },
   {
     question: "Apakah perlu memasang aplikasi?",
