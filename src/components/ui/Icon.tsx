@@ -44,6 +44,7 @@ export type IconName =
   | "note"
   | "globe"
   | "flask"
+  | "share"
   | "leaf";
 
 const paths: Record<IconName, ReactNode> = {
@@ -220,6 +221,14 @@ const paths: Record<IconName, ReactNode> = {
       <circle cx="12" cy="12" r="8.6" />
       <path d="M3.6 9.4h16.8M3.6 14.6h16.8" />
       <path d="M12 3.4c2.2 2.4 3.4 5.4 3.4 8.6s-1.2 6.2-3.4 8.6c-2.2-2.4-3.4-5.4-3.4-8.6S9.8 5.8 12 3.4z" />
+    </>
+  ),
+  share: (
+    <>
+      <circle cx="18" cy="5.6" r="2.6" />
+      <circle cx="6" cy="12" r="2.6" />
+      <circle cx="18" cy="18.4" r="2.6" />
+      <path d="M8.3 10.7l7.4-3.8M8.3 13.3l7.4 3.8" />
     </>
   ),
   flask: (

@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { VoucherPrompt } from "@/components/VoucherPrompt";
+import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getSubjectTheme } from "@/lib/subject-theme";
 import { toneLabel } from "@/lib/tone";
 import { getPracticePackagesGroupedByTopic, getSubjects } from "@/services/content-service";
 
-export const metadata: Metadata = {
-  title: "Paket Soal Latihan",
+export const metadata: Metadata = pageMetadata({
+  title: "Paket Soal Latihan TKA",
   description:
-    "Paket soal latihan, dikerjakan online beserta pembahasannya.",
-};
+    "Kumpulan paket soal latihan TKA per subtopik untuk SD, SMP, dan SMA. Dikerjakan online dari rumah, lengkap dengan pembahasan di setiap soal.",
+  path: "/latihan",
+  keywords: ["paket soal TKA", "latihan soal TKA online", "soal TKA per subtopik"],
+});
 
 export default async function PracticeCatalogPage() {
   const [groups, subjects] = await Promise.all([
@@ -23,10 +27,19 @@ export default async function PracticeCatalogPage() {
 
   return (
     <div className="container-page py-12 sm:py-14">
+      <JsonLd
+        data={jsonLdGraph(
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: "Paket Soal Latihan", path: "/latihan" },
+          ]),
+        )}
+      />
+
       <SectionHeader
         as="h1"
         icon="layers"
-        title="Paket Soal Latihan"
+        title="Paket Soal Latihan TKA"
         description="Setiap paket fokus pada satu subtopik. Akses dibuka dengan kode akses seri mapel, bersama tryout dan pembahasan dalam seri yang sama."
       />
 

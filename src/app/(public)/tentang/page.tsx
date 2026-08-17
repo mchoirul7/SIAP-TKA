@@ -4,13 +4,14 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Tentang",
-  description:
-    "Tentang Siap TKA: cara kerja simulasi, cara hasil disusun, dan batasan versi prototype.",
-};
+  description: `Tentang ${site.brandName}: cara kerja simulasi TKA, cara hasil pengerjaan disusun menjadi urutan belajar, dan apa yang sengaja tidak dilakukan layanan ini.`,
+  path: "/tentang",
+});
 
 export default function AboutPage() {
   return (

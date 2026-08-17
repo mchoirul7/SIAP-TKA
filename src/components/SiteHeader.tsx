@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ShareButton } from "@/components/ShareButton";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { useVoucherDialog } from "@/components/VoucherDialog";
@@ -12,7 +13,8 @@ import { site } from "@/lib/site";
  * Penelusuran produk sudah berjalan lewat isi halaman — jenjang, lalu mata
  * pelajaran, lalu paket dan tryout di dalamnya — sehingga menu di atas hanya
  * akan menduplikasi jalan yang sama. Yang tersisa cuma jalan pulang (logo) dan
- * satu tindakan yang tidak punya tempat lain: menukar kode akses.
+ * dua tindakan yang tidak punya tempat lain: membagikan layanan ini ke orang tua
+ * lain, dan menukar kode akses.
  */
 export function SiteHeader() {
   const { openVoucher } = useVoucherDialog();
@@ -27,16 +29,20 @@ export function SiteHeader() {
             <Logo className="h-9 sm:h-11" priority decorative />
           </Link>
 
-          <button
-            type="button"
-            onClick={() => openVoucher()}
-            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 px-3.5 text-sm font-semibold text-brand-800 transition-colors hover:border-brand-400 hover:bg-brand-50"
-          >
-            <Icon name="ticket" className="h-4 w-4" strokeWidth={2} />
-            {/* Layar sempit memakai label pendek agar tidak mendorong nama produk. */}
-            <span className="sm:hidden">Akses</span>
-            <span className="hidden sm:inline">Saya Punya Kode Akses</span>
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <ShareButton />
+
+            <button
+              type="button"
+              onClick={() => openVoucher()}
+              className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 px-3.5 text-sm font-semibold text-brand-800 transition-colors hover:border-brand-400 hover:bg-brand-50"
+            >
+              <Icon name="ticket" className="h-4 w-4" strokeWidth={2} />
+              {/* Layar sempit memakai label pendek agar tidak mendorong nama produk. */}
+              <span className="sm:hidden">Akses</span>
+              <span className="hidden sm:inline">Saya Punya Kode Akses</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>

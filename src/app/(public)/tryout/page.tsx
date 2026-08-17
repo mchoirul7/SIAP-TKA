@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd } from "@/components/JsonLd";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StatCard } from "@/components/ui/StatCard";
+import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getSubjects, getTryouts } from "@/services/content-service";
 
-export const metadata: Metadata = {
-  title: "Tryout",
+export const metadata: Metadata = pageMetadata({
+  title: "Tryout TKA Online",
   description:
-    "Daftar tryout TKA per seri mapel, lengkap dengan jumlah soal dan durasi.",
-};
+    "Daftar tryout TKA online per mata pelajaran, lengkap dengan jumlah soal dan durasi. Dikerjakan dengan pembatas waktu seperti ujian sebenarnya.",
+  path: "/tryout",
+  keywords: ["tryout TKA online", "simulasi TKA", "tryout TKA gratis"],
+});
 
 export default async function TryoutListPage() {
   const [tryouts, subjects] = await Promise.all([getTryouts(), getSubjects()]);
@@ -19,12 +23,21 @@ export default async function TryoutListPage() {
 
   return (
     <div className="container-page py-12 sm:py-14">
+      <JsonLd
+        data={jsonLdGraph(
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: "Tryout TKA", path: "/tryout" },
+          ]),
+        )}
+      />
+
       <SectionHeader
         as="h1"
         eyebrow="Simulasi"
         icon="flag"
         iconTone="rose"
-        title="Tryout yang tersedia"
+        title="Tryout TKA Online yang Tersedia"
         description="Setiap tryout dibuka dengan kode akses seri mapel. Satu kode membuka tryout, latihan, hasil, dan pembahasan dalam seri yang sama."
       />
 

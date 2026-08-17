@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, courseSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import {
   getPracticePackageBySlug,
   getPracticePackages,
@@ -21,8 +23,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const pkg = await getPracticePackageBySlug(slug);
-  if (!pkg) return { title: "Paket tidak ditemukan" };
-  return { title: pkg.title, description: pkg.summary };
+  if (!pkg) return { title: "Paket tidak ditemukan", robots: { index: false } };
+
+  const subject = (await getSubjects()).find((item) => item.id === pkg.subjectId);
+  const subjectName = subject?.shortName ?? "";
+
+  return pageMetadata({
+    title: `${pkg.title} — Latihan Soal TKA`,
+    description:
+      pkg.summary ||
+      pkg.description ||
+      `Paket latihan soal TKA ${subjectName} jenjang ${pkg.level}, dikerjakan online beserta pembahasannya.`,
+    path: `/latihan/${pkg.slug}`,
+    keywords: [
+      `latihan soal TKA ${subjectName}`,
+      `soal TKA ${pkg.level}`,
+      pkg.title,
+      ...pkg.skills,
+    ],
+  });
 }
 
 export default async function PackageDetailPage({ params }: PageProps) {
@@ -35,12 +54,32 @@ export default async function PackageDetailPage({ params }: PageProps) {
   ]);
   if (!pkg) notFound();
 
+  const subject = subjects.find((item) => item.id === pkg.subjectId);
+
   return (
-    <PackageDetail
-      pkg={pkg}
-      topicName={topics.find((topic) => topic.id === pkg.topicId)?.name ?? ""}
-      subtopicName={subtopics.find((subtopic) => subtopic.id === pkg.subtopicId)?.name ?? ""}
-      subjectName={subjects.find((subject) => subject.id === pkg.subjectId)?.name ?? ""}
-    />
+    <>
+      <JsonLd
+        data={jsonLdGraph(
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            ...(subject ? [{ name: subject.name, path: `/mapel/${subject.slug}` }] : []),
+            { name: pkg.title, path: `/latihan/${pkg.slug}` },
+          ]),
+          courseSchema({
+            name: pkg.title,
+            description: pkg.summary || pkg.description,
+            path: `/latihan/${pkg.slug}`,
+            minutes: pkg.estimatedMinutes,
+          }),
+        )}
+      />
+
+      <PackageDetail
+        pkg={pkg}
+        topicName={topics.find((topic) => topic.id === pkg.topicId)?.name ?? ""}
+        subtopicName={subtopics.find((subtopic) => subtopic.id === pkg.subtopicId)?.name ?? ""}
+        subjectName={subject?.name ?? ""}
+      />
+    </>
   );
 }

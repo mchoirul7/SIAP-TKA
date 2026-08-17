@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { TryoutCard } from "@/components/TryoutCard";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
+import { breadcrumbSchema, courseSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getSubjectTheme } from "@/lib/subject-theme";
 import { toneLabel } from "@/lib/tone";
 import {
@@ -26,8 +28,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { subjectSlug } = await params;
   const subject = await getSubjectBySlug(subjectSlug);
-  if (!subject) return { title: "Mata pelajaran tidak ditemukan" };
-  return { title: subject.name, description: subject.description };
+  if (!subject) return { title: "Mata pelajaran tidak ditemukan", robots: { index: false } };
+
+  return pageMetadata({
+    // Nama mapel didahului kata yang dicari, bukan berdiri sendiri: yang diketik
+    // orang tua adalah "soal TKA Matematika SD", bukan "Matematika SD".
+    title: `Soal TKA ${subject.name} — Latihan & Tryout`,
+    description:
+      `Latihan soal TKA ${subject.name} dan tryout online sesuai kisi-kisi. ` +
+      (subject.description || `Materi jenjang ${subject.level}, lengkap dengan pembahasan.`),
+    path: `/mapel/${subject.slug}`,
+    keywords: [
+      `soal TKA ${subject.name}`,
+      `latihan TKA ${subject.shortName}`,
+      `tryout TKA ${subject.shortName}`,
+      `soal TKA ${subject.level}`,
+    ],
+  });
 }
 
 export default async function SubjectPage({
@@ -46,6 +63,33 @@ export default async function SubjectPage({
 
   return (
     <div className="container-page py-10 sm:py-12">
+      <JsonLd
+        data={jsonLdGraph(
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: subject.name, path: `/mapel/${subject.slug}` },
+          ]),
+          // Tiap paket dan tryout berdiri sendiri sebagai kursus daring, sehingga
+          // masing-masing berpeluang muncul terpisah di hasil pencarian.
+          ...subjectPackages.map((pkg) =>
+            courseSchema({
+              name: pkg.title,
+              description: pkg.summary || pkg.description,
+              path: `/latihan/${pkg.slug}`,
+              minutes: pkg.estimatedMinutes,
+            }),
+          ),
+          ...subjectTryouts.map((tryout) =>
+            courseSchema({
+              name: tryout.title,
+              description: tryout.description,
+              path: `/tryout/${tryout.slug}`,
+              minutes: tryout.durationMinutes,
+            }),
+          ),
+        )}
+      />
+
       <nav aria-label="Remah roti" className="text-sm text-slate-500">
         <Link href="/" className="hover:text-brand-800">
           Beranda
@@ -63,7 +107,10 @@ export default async function SubjectPage({
           <Icon name={theme.icon} className="h-4 w-4" />
           Jenjang {subject.level}
         </p>
-        <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">{subject.name}</h1>
+        {/* Kata "Soal TKA" ikut di judul: itulah yang diketik orang di mesin telusur. */}
+        <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Soal TKA {subject.name}
+        </h1>
         {subject.description ? (
           <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600">
             {subject.description}
