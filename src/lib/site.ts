@@ -57,16 +57,14 @@ export const siteKeywords = [
 ] as const;
 
 /**
- * Pesan yang ikut terkirim saat tautan dibagikan ke WhatsApp atau media sosial.
+ * Pesan yang sudah terisi saat tombol Bagikan membuka WhatsApp.
  *
  * Ditujukan kepada orang tua, bukan kepada siswa: yang membagikan tautan di grup
  * wali murid adalah orang tua, dan yang membeli vouchernya juga mereka. Karena
  * itu penutupnya satu ajakan yang jelas — ambil kode vouchernya di Shopee.
  */
 export const shareContent = {
-  title: `${site.brandName} — Latihan & Tryout TKA Sesuai Kisi-Kisi`,
-
-  /** WhatsApp dan Telegram: cukup ruang untuk daftar isi paket. */
+  /** WhatsApp memberi cukup ruang untuk memuat daftar isi paket. */
   message: [
     "🎓 Ayah/Bunda, TKA sudah semakin dekat.",
     "",
@@ -81,12 +79,5 @@ export const shareContent = {
     "",
     "🎟️ Dapatkan kode vouchernya sekarang di Shopee:",
     shopeeVoucherUrl,
-  ].join("\n"),
-
-  /** X dan sejenisnya membatasi panjang, jadi disediakan versi ringkas. */
-  shortMessage: [
-    `Siapkan ananda hadapi TKA dari rumah bersama ${site.brandName} — latihan, tryout, dan pembahasan sesuai kisi-kisi.`,
-    "",
-    `🎟️ Kode voucher: ${shopeeVoucherUrl}`,
   ].join("\n"),
 } as const;

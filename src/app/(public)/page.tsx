@@ -69,14 +69,14 @@ export default async function HomePage() {
         harus ada demi urutan tajuk yang benar dan demi kata kunci yang dibaca
         mesin telusur, tetapi tidak boleh mendorong isi produk ke bawah layar.
       */}
-      <div className="container-page pb-6">
+      <div className="container-page pb-10">
         <h1 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-[32px]">
           Latihan Soal TKA & Tryout Online Sesuai Kisi-Kisi
         </h1>
         <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
           Siapkan ananda menghadapi Tes Kemampuan Akademik dari rumah — paket soal per mata
-          pelajaran untuk jenjang SD, SMP, dan SMA, tryout dengan pembatas waktu, pembahasan
-          di tiap soal, dan analisa materi yang perlu diperkuat lebih dulu.
+          pelajaran untuk jenjang SD, SMP, dan SMA, tryout dengan tampilan dan suasana seperti ujian TKA sebenarnya, pembahasan
+          di tiap soal, dan rekomendasi latihan berikutnya.
         </p>
       </div>
 

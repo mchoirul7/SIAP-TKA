@@ -18,50 +18,9 @@ import { shopeeVoucherUrl, site } from "@/lib/site";
 export function HomeSeoSection() {
   return (
     <div className="container-page pb-20">
-      <section className="border-t border-slate-200 pt-12">
-        <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-ink-900 sm:text-2xl">
-          <IconBadge name="target" tone="brand" size="md" />
-          Persiapan TKA yang tidak berhenti pada nilai
-        </h2>
-        <div className="mt-4 max-w-prose space-y-3 text-[15px] leading-relaxed text-slate-600">
-          <p>
-            Soal TKA jarang meminta hafalan. Sebagian besar meminta siswa memakai konsep yang sudah
-            dipelajari pada situasi yang belum pernah dilihat — dan di situlah latihan yang asal
-            banyak berhenti menolong. Anak bisa mengerjakan lima puluh soal dan tetap tidak tahu
-            bagian mana yang membuatnya tersendat.
-          </p>
-          <p>
-            {site.brandName} menjawab pertanyaan berikutnya setelah nilai keluar:{" "}
-            <strong className="font-semibold text-ink-900">harus mulai dari mana</strong>. Setiap
-            soal terhubung ke subtopik dan konsep tertentu, sebagian konsep punya prasyarat, dan
-            pilihan jawaban yang keliru pun ikut dibaca. Hasilnya bukan sekadar angka, melainkan
-            urutan materi yang sebaiknya diperkuat lebih dulu.
-          </p>
-        </div>
-      </section>
+   
 
-      <section className="mt-12">
-        <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-ink-900 sm:text-2xl">
-          <IconBadge name="layers" tone="violet" size="md" />
-          Isi paket lengkap {site.brandName}
-        </h2>
-        <ul className="mt-5 grid gap-4 sm:grid-cols-2">
-          {packageContents.map((item) => (
-            <li
-              key={item.title}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card"
-            >
-              <h3 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-ink-900">
-                <Icon name={item.icon} className="h-5 w-5 text-brand-600" strokeWidth={2} />
-                {item.title}
-              </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{item.body}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-12">
+      <section className="mt-8">
         <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-ink-900 sm:text-2xl">
           <IconBadge name="info" tone="sky" size="md" />
           Pertanyaan yang sering ditanyakan orang tua
