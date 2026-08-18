@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 /**
@@ -45,6 +46,8 @@ const toneOnDark: Record<CoverTone, boolean> = {
 export function CoverArt({
   label,
   title,
+  titleAs: TitleTag = "p",
+  titleHref,
   subtitle,
   tone = "grape",
   icon,
@@ -53,6 +56,14 @@ export function CoverArt({
   /** Penanda kecil di atas judul, misalnya "SIMULASI" atau "LATIHAN". */
   label: string;
   title: string;
+  /**
+   * Judul sampul sekaligus judul kartunya. Kartu yang berdiri di dalam daftar
+   * mengisinya dengan "h3" supaya judul itu terbaca sebagai tajuk dan badan
+   * kartu tidak perlu mengulanginya.
+   */
+  titleAs?: "p" | "h2" | "h3";
+  /** Bila diisi, judulnya menjadi tautan ke halaman kartu. */
+  titleHref?: string;
   subtitle?: string;
   tone?: CoverTone;
   /** Ikon khas mata pelajaran, ditampilkan sebagai keping di sebelah penanda. */
@@ -125,7 +136,15 @@ export function CoverArt({
           ) : null}
           <p className={`text-[10px] font-bold uppercase tracking-[0.18em] ${ink.label}`}>{label}</p>
         </div>
-        <p className={`mt-1 text-xl font-bold leading-tight sm:text-[22px] ${ink.title}`}>{title}</p>
+        <TitleTag className={`mt-1 text-xl font-bold leading-tight sm:text-[22px] ${ink.title}`}>
+          {titleHref ? (
+            <Link href={titleHref} className="hover:underline">
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
+        </TitleTag>
         {subtitle ? (
           <p className={`mt-1.5 text-xs leading-relaxed ${ink.subtitle}`}>{subtitle}</p>
         ) : null}

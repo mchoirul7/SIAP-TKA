@@ -14,6 +14,7 @@ atau product voucher berubah.
 | 3 | `seed/tka-matematika-sma.sql` | 20 soal, 17 capaian, 43 gambar |
 | 4 | `seed/tka-bahasa-indonesia-sma.sql` | 20 soal, 4 capaian, 6 bacaan |
 | 5 | `seed/tka-bahasa-inggris-sma.sql` | 20 soal, 4 capaian, 7 bacaan |
+| 6 | `seed/0004_kode_akses_per_mapel.sql` | kode akses MAT / BIN / BING / ALL |
 
 Berkas seed berdiri sendiri dan **aman dijalankan berulang** (`on conflict do update`),
 jadi memperbarui satu paket cukup menjalankan ulang berkasnya sendiri.
@@ -43,7 +44,27 @@ Gambar sengaja **tidak** disimpan di Supabase Storage — lihat
 
 ## Membuat kode voucher
 
-Satu kode voucher diarahkan ke satu `products.slug`:
+Kode akses yang dipakai sekarang dibuat lewat `seed/0004_kode_akses_per_mapel.sql`,
+bukan satu per satu. Awalan kodenya menyatakan isinya:
+
+| Awalan | Membuka |
+| --- | --- |
+| `MAT01`–`MAT10` | Matematika SMA |
+| `BIN01`–`BIN10` | Bahasa Indonesia SMA |
+| `BING01`–`BING10` | Bahasa Inggris SMA |
+| `ALL01`–`ALL10` | seluruh mata pelajaran yang aktif |
+
+Semuanya sekali pakai (`max_redemptions = 1`). Menambah stok cukup dengan mengubah
+angka pada `generate_series(1, 10)` di berkas itu lalu menjalankannya ulang —
+kode yang sudah ada tidak kehilangan cacah pemakaiannya.
+
+Yang dipetakan adalah **slug mata pelajaran**, bukan id product. Satu mapel bisa
+tersebar di beberapa seri, dan hak akses terkunci per pasangan mapel+seri, jadi
+pemetaan lewat mapel membuat seluruh serinya ikut terbuka. Konsekuensinya: setiap
+kali ada seri atau product baru, berkas itu perlu dijalankan ulang supaya kode
+lama ikut menjangkaunya.
+
+Untuk kode satuan di luar pola itu, satu kode diarahkan ke satu `products.slug`:
 
 ```sql
 insert into public.vouchers (code, label, is_active, max_redemptions)

@@ -1,5 +1,5 @@
 import { MASTERY_THRESHOLD } from "@/lib/scoring";
-import type { MisconceptionSignal, PracticeAnalysis, TryoutAnalysis } from "@/lib/scoring";
+import type { MisconceptionSignal, TryoutAnalysis } from "@/lib/scoring";
 
 /**
  * Ringkasan hasil dalam dua kalimat pendek.
@@ -10,11 +10,17 @@ import type { MisconceptionSignal, PracticeAnalysis, TryoutAnalysis } from "@/li
  * irasional tetap harus disebut bilangan irasional — tetapi bahasa di
  * sekelilingnya dibuat sesederhana mungkin.
  *
- *   "Pada latihan ini, Ananda Sinta menguasai 8 dari 10 soal Operasi Bilangan.
+ *   "Pada tryout ini, Ananda Sinta menguasai 8 dari 10 soal Operasi Bilangan.
  *    Yang masih salah: semua bentuk akar dianggap irasional (soal 3, 5)."
  *
  * Rincian per materi tetap ada di bawahnya sebagai kartu, jadi paragraf ini
  * tidak perlu menerangkan apa pun lagi.
+ *
+ * Khusus hasil tryout. Satu paket latihan hanya mencakup satu subtopik, jadi
+ * materi yang disebut narasinya selalu mengulang judul paket yang sedang
+ * dibuka — tidak ada yang bertambah dari membacanya. Tryout mencakup banyak
+ * materi sekaligus, dan di situlah kalimat ini menunjuk sesuatu yang belum
+ * terlihat dari judul halamannya.
  */
 export interface StudyNarrative {
   body: string;
@@ -132,27 +138,6 @@ export function buildTryoutNarrative(
   return compose(
     opening(
       "Pada tryout ini",
-      options.studentName,
-      analysis.correctCount,
-      analysis.totalQuestions,
-      options.contextName,
-    ),
-    analysis.misconceptionSignals,
-    weakNames,
-    analysis.score,
-    "Buka pembahasan untuk melihat soal yang jawabannya belum tepat.",
-  );
-}
-
-export function buildPracticeNarrative(
-  analysis: PracticeAnalysis,
-  options: NarrativeOptions = {},
-): StudyNarrative {
-  const weakNames = analysis.conceptsToReview.slice(0, WEAK_LIMIT).map((item) => item.name);
-
-  return compose(
-    opening(
-      "Pada latihan ini",
       options.studentName,
       analysis.correctCount,
       analysis.totalQuestions,

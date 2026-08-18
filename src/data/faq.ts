@@ -42,7 +42,7 @@ export const homeFaq: FaqItem[] = [
   {
     question: "Mata pelajaran apa saja yang sudah tersedia?",
     answer:
-      "Untuk jenjang SMA, Matematika sudah dapat dikerjakan lengkap dengan paket latihan, tryout, pembahasan, dan analisa hasilnya. Bahasa Indonesia dan Bahasa Inggris segera hadir.",
+      "Untuk jenjang SMA, Matematika, Bahasa Indonesia, dan Bahasa Inggris sudah dapat dikerjakan lengkap dengan paket latihan, tryout, pembahasan, dan analisa hasilnya.",
   },
   {
     question: "Apakah perlu memasang aplikasi?",

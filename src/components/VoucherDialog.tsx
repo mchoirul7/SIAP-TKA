@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
+import { shopeeVoucherUrl } from "@/lib/site";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
@@ -191,20 +191,10 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Untuk mendapatkan kode akses, hubungi {accessCodePhoneDisplay}.
+                      Kode akses dibeli lewat Shopee.
                     </p>
                   )}
                 </div>
-
-                <a
-                  href={accessCodeWhatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
-                >
-                  <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
-                  Hubungi WhatsApp untuk kode akses
-                </a>
 
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
                   <Button type="submit" className="sm:flex-1" loading={isSubmitting}>
@@ -215,6 +205,20 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     Batal
                   </Button>
                 </div>
+
+                {/* Jalan keluar bagi yang belum punya kode. Ditaruh di bawah kedua
+                    tombol supaya tidak bersaing dengan tindakan utama dialog ini,
+                    yaitu menukarkan kode yang sudah dipegang. */}
+                <a
+                  href={shopeeVoucherUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-bold text-accent-900 transition-colors hover:bg-accent-100"
+                >
+                  <Icon name="ticket" className="h-4 w-4" strokeWidth={2.2} />
+                  Dapatkan Kode
+                  <Icon name="arrow-right" className="h-4 w-4" strokeWidth={2.2} />
+                </a>
               </form>
             )}
           </div>

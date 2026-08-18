@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { CoverArt } from "@/components/CoverArt";
-import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
 import { getSubjectTheme } from "@/lib/subject-theme";
-import { toneButton, toneTag } from "@/lib/tone";
+import { toneButton, toneChip, toneTag } from "@/lib/tone";
 import type { SubjectSummary } from "@/services/content-service";
 
 /**
@@ -30,35 +29,44 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
         icon={theme.icon}
         label={`Jenjang ${subject.level}`}
         title={subject.shortName}
+        titleAs="h3"
         subtitle={coverSubtitle}
       />
 
       <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[17px] font-bold leading-snug tracking-tight text-ink-900">
-            {subject.shortName}
-          </h3>
-          {isAvailable ? <Badge tone="success">Tersedia</Badge> : <Badge tone="neutral">Segera</Badge>}
-        </div>
-
-        {/* Deskripsi mapel sengaja tidak ditampilkan: sampul dan keping jumlah
-            paket sudah menerangkan isinya, dan kartu jadi lebih ringkas. */}
-        {isAvailable ? (
-          <ul className="mt-3 flex flex-wrap gap-1.5">
-            <li
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-            >
-              <Icon name="layers" className="h-3.5 w-3.5" />
-              {packageCount} paket
-            </li>
-            <li
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-            >
-              <Icon name="flag" className="h-3.5 w-3.5" />
-              {tryoutCount} tryout
-            </li>
-          </ul>
-        ) : null}
+        {/* Nama mapel cukup sekali di sampul. Deskripsinya pun sengaja tidak
+            ditampilkan: sampul dan keping di bawah ini sudah menerangkan
+            isinya, dan kartunya jadi lebih ringkas. */}
+        <ul className="flex flex-wrap gap-1.5">
+          <li
+            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
+              isAvailable ? toneChip.emerald : toneChip.slate
+            }`}
+          >
+            <Icon
+              name={isAvailable ? "check" : "hourglass"}
+              className="h-3.5 w-3.5"
+              strokeWidth={2.2}
+            />
+            {isAvailable ? "Tersedia" : "Segera"}
+          </li>
+          {isAvailable ? (
+            <>
+              <li
+                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
+              >
+                <Icon name="layers" className="h-3.5 w-3.5" />
+                {packageCount} paket
+              </li>
+              <li
+                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
+              >
+                <Icon name="flag" className="h-3.5 w-3.5" />
+                {tryoutCount} tryout
+              </li>
+            </>
+          ) : null}
+        </ul>
 
         {/* Tombol ditempel ke dasar kartu agar deretan kartu tetap rapi meski isinya berbeda panjang. */}
         <div className="mt-auto pt-4">

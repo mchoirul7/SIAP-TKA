@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { CoverArt, type CoverTone } from "@/components/CoverArt";
-import { Badge } from "@/components/ui/Badge";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { toneChip } from "@/lib/tone";
 
 export function TryoutCard({
   tryout,
@@ -36,24 +36,25 @@ export function TryoutCard({
         tone={tone}
         label={tryout.variantLabel}
         title={tryout.title}
+        titleAs="h3"
+        titleHref={`/tryout/${tryout.slug}`}
         subtitle={locked ? `${tryout.seriesTitle} - dibuka dengan kode akses` : "Tryout dan hasil terbuka"}
       />
 
       <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[17px] font-bold leading-snug tracking-tight text-ink-900">
-            <Link href={`/tryout/${tryout.slug}`} className="hover:underline">
-              {tryout.title}
-            </Link>
-          </h3>
-          {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Kode Akses</Badge>}
-        </div>
-
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">
-          {tryout.description}
-        </p>
+        {/* Sama seperti kartu latihan: judulnya cukup sekali di sampul, dan
+            statusnya menjadi keping pertama pada deret keterangan. */}
+        <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">{tryout.description}</p>
 
         <ul className="mt-3 flex flex-wrap gap-1.5">
+          <li
+            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
+              unlocked ? toneChip.emerald : toneChip.brand
+            }`}
+          >
+            <Icon name={locked ? "lock" : "unlock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
+            {locked ? "Kode Akses" : "Terbuka"}
+          </li>
           {(
             [
               { icon: "list-check", text: `${tryout.questionIds.length} soal`, tone: "bg-brand-50 text-brand-800 ring-brand-100" },

@@ -15,7 +15,6 @@ import { useNavigate } from "@/components/NavigationProgress";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import type { PracticePackage, Question } from "@/data/types";
 import { formatDuration } from "@/lib/format";
-import { buildPracticeNarrative } from "@/lib/narrative";
 import type { AnalysisCatalog } from "@/lib/scoring";
 import {
   getPracticeResult,
@@ -23,7 +22,6 @@ import {
   startPracticeAttempt,
   type PracticeResult,
 } from "@/services/practice-service";
-import { readProfile } from "@/storage/profile-storage";
 
 export function PracticeResultView({
   pkg,
@@ -39,7 +37,6 @@ export function PracticeResultView({
   const { mounted, isUnlocked } = useEntitlements();
   const [state, setState] = useState<"loading" | "empty" | "ready">("loading");
   const [result, setResult] = useState<PracticeResult | null>(null);
-  const [studentName, setStudentName] = useState("");
 
   useEffect(() => {
     if (!mounted) return;
@@ -53,7 +50,6 @@ export function PracticeResultView({
       return;
     }
     setResult(stored);
-    setStudentName(readProfile()?.name ?? "");
     setState("ready");
   }, [mounted, isUnlocked, pkg, pkg.slug, questions, catalog, router]);
 
@@ -104,11 +100,6 @@ export function PracticeResultView({
       const found = catalog.practicePackages?.find((item) => item.slug === slug);
       return found ? [found] : [];
     });
-
-  // Nama materi diambil dari topik paketnya, supaya kalimatnya menyebut yang
-  // dikerjakan — bukan judul paket yang biasanya lebih panjang.
-  const topicName = catalog.topics?.find((topic) => topic.id === pkg.topicId)?.name;
-  const narrative = buildPracticeNarrative(analysis, { studentName, contextName: topicName });
 
   // Pola keliru sudah tampil di kartu konsep; di sini hanya sisanya, supaya
   // tidak ada kalimat yang terbaca dua kali.
@@ -188,38 +179,6 @@ export function PracticeResultView({
           value={formatDuration(elapsedSeconds)}
           valueClassName="text-xl"
         />
-      </section>
-
-      {/* Satu narasi: materi apa yang harus dipelajari lebih dulu. */}
-      <section className="mt-8">
-        <div
-          className={[
-            "rounded-3xl border p-6 shadow-card sm:p-8",
-            narrative.isAllClear
-              ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
-              : "border-brand-200 bg-gradient-to-br from-brand-50 to-white",
-          ].join(" ")}
-        >
-          <div className="flex items-start gap-4">
-            <IconBadge
-              name={narrative.isAllClear ? "trophy" : "compass"}
-              tone={narrative.isAllClear ? "emerald" : "violet"}
-              size="lg"
-            />
-            <div className="min-w-0">
-              <p
-                className={`text-xs font-bold uppercase tracking-[0.12em] ${
-                  narrative.isAllClear ? "text-emerald-700" : "text-brand-700"
-                }`}
-              >
-                Catatan Hasil Latihan
-              </p>
-              <p className="mt-2 max-w-2xl text-lg leading-[1.7] text-ink-900 sm:text-xl">
-                {narrative.body}
-              </p>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Paket lanjutan untuk konsep yang masih lemah. */}
