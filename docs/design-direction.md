@@ -72,7 +72,7 @@ sedangkan emerald/amber/rose hanya menandakan tingkat penguasaan.
 
 `Button`, `Badge`, `Card`, `ProgressBar`, `SectionHeader`, `QuestionOption`,
 `QuestionBody`, `QuestionReview`, `QuestionNavigator`, `ResultStatus`, `CoverArt`,
-`CardCarousel`, `LevelSwitcher`, `TryoutCard`, `PracticePackageCard`, `VoucherDialog`, `Toast`.
+`CardCarousel`, `TryoutCard`, `PracticePackageCard`, `VoucherDialog`, `Toast`.
 Sederhana, satu tanggung jawab, tanpa design-system berlapis.
 
 `QuestionBody` dan `QuestionReview` menangani ketiga bentuk soal sekaligus, sehingga

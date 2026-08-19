@@ -53,15 +53,19 @@ export function CoverArt({
   icon,
   className = "",
 }: {
-  /** Penanda kecil di atas judul, misalnya "SIMULASI" atau "LATIHAN". */
-  label: string;
+  /**
+   * Penanda kecil di atas judul, misalnya "SIMULASI" atau "LATIHAN". Boleh
+   * dikosongkan bila keterangannya sudah tertulis di kepala daftar, supaya
+   * kartunya tidak mengulang kata yang sama berkali-kali.
+   */
+  label?: string;
   title: string;
   /**
    * Judul sampul sekaligus judul kartunya. Kartu yang berdiri di dalam daftar
    * mengisinya dengan "h3" supaya judul itu terbaca sebagai tajuk dan badan
    * kartu tidak perlu mengulanginya.
    */
-  titleAs?: "p" | "h2" | "h3";
+  titleAs?: "p" | "h2" | "h3" | "h4";
   /** Bila diisi, judulnya menjadi tautan ke halaman kartu. */
   titleHref?: string;
   subtitle?: string;
@@ -134,7 +138,11 @@ export function CoverArt({
               <Icon name={icon} className="h-4 w-4" strokeWidth={2} />
             </span>
           ) : null}
-          <p className={`text-[10px] font-bold uppercase tracking-[0.18em] ${ink.label}`}>{label}</p>
+          {label ? (
+            <p className={`text-[10px] font-bold uppercase tracking-[0.18em] ${ink.label}`}>
+              {label}
+            </p>
+          ) : null}
         </div>
         <TitleTag className={`mt-1 text-xl font-bold leading-tight sm:text-[22px] ${ink.title}`}>
           {titleHref ? (

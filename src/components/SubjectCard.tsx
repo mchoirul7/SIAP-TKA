@@ -10,6 +10,9 @@ import type { SubjectSummary } from "@/services/content-service";
  * Kartu mata pelajaran pada halaman depan. Mata pelajaran yang belum berisi soal
  * tetap ditampilkan agar cakupan produk terbaca, tetapi tidak dapat dibuka.
  *
+ * Jenjangnya tidak ditulis di kartu: halaman depan sudah mengelompokkan kartu
+ * per jenjang, jadi mengulangnya di setiap sampul hanya menambah teks.
+ *
  * Warna kartu mengikuti mata pelajarannya — lihat `getSubjectTheme` — sehingga
  * Matematika, Bahasa Indonesia, dan Bahasa Inggris langsung terbedakan sebelum
  * judulnya dibaca.
@@ -27,9 +30,8 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
         className="h-36"
         tone={theme.cover}
         icon={theme.icon}
-        label={`Jenjang ${subject.level}`}
         title={subject.shortName}
-        titleAs="h3"
+        titleAs="h4"
         subtitle={coverSubtitle}
       />
 
@@ -50,21 +52,23 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
             />
             {isAvailable ? "Tersedia" : "Segera"}
           </li>
-          {isAvailable ? (
-            <>
-              <li
-                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-              >
-                <Icon name="layers" className="h-3.5 w-3.5" />
-                {packageCount} paket
-              </li>
-              <li
-                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-              >
-                <Icon name="flag" className="h-3.5 w-3.5" />
-                {tryoutCount} tryout
-              </li>
-            </>
+          {/* Keping bernilai nol tidak ditampilkan: "0 tryout" tidak menambah
+              keterangan apa pun dan justru terbaca sebagai kekurangan. */}
+          {packageCount > 0 ? (
+            <li
+              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
+            >
+              <Icon name="layers" className="h-3.5 w-3.5" />
+              {packageCount} paket
+            </li>
+          ) : null}
+          {tryoutCount > 0 ? (
+            <li
+              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
+            >
+              <Icon name="flag" className="h-3.5 w-3.5" />
+              {tryoutCount} tryout
+            </li>
           ) : null}
         </ul>
 
