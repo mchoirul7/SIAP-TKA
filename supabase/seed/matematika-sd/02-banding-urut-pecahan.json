@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-banding-urut-pecahan",
+    "slug": "matematika-sd-perbandingan-pengurutan-pecahan",
+    "title": "Perbandingan dan Pengurutan Bilangan Pecahan",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Membandingkan dua pecahan dan mengurutkan beberapa pecahan, baik dengan menyamakan penyebut, memakai patokan setengah, maupun dengan menalar hubungan pembilang dan penyebut.",
+    "summary": "10 soal diagnostik bergaya TKA untuk perbandingan dan pengurutan bilangan pecahan.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Membandingkan pecahan berpembilang sama",
+      "Menyamakan penyebut untuk membandingkan",
+      "Memakai patokan setengah dan satu",
+      "Mengurutkan pecahan naik dan turun"
+    ],
+    "sort_order": 2
+  },
+  "submateri": {
+    "id": "con-matematika-sd-banding-urut-pecahan",
+    "name": "Perbandingan dan pengurutan bilangan pecahan",
+    "description": "Menentukan pecahan yang lebih besar atau lebih kecil dan menyusun beberapa pecahan menurut nilainya, termasuk pecahan yang penyebutnya berbeda."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-banding-001",
+      "label": "Penyebut lebih besar dianggap pecahan lebih besar",
+      "description": "Siswa membandingkan pecahan berpembilang sama dengan melihat penyebutnya saja, sehingga 2/7 dianggap lebih besar daripada 2/5.",
+      "insight": "Bila pembilangnya sama, penyebut yang lebih besar berarti potongannya lebih kecil, sehingga pecahannya justru lebih kecil."
+    },
+    {
+      "id": "mis-msd-banding-002",
+      "label": "Pembilang lebih besar dianggap pecahan lebih besar",
+      "description": "Siswa hanya melihat pembilang tanpa memperhatikan penyebut, sehingga 3/10 dianggap lebih besar daripada 2/3.",
+      "insight": "Pembilang hanya menyatakan banyak potongan; besar setiap potongan ditentukan penyebutnya, jadi keduanya harus dipertimbangkan bersama."
+    },
+    {
+      "id": "mis-msd-banding-003",
+      "label": "Membandingkan lewat selisih pembilang dan penyebut",
+      "description": "Siswa menyimpulkan pecahan dengan selisih pembilang dan penyebut lebih kecil pasti lebih besar, misalnya 3/5 dianggap lebih besar daripada 5/8.",
+      "insight": "Selisih pembilang dan penyebut bukan ukuran nilai pecahan; samakan penyebutnya lalu bandingkan pembilangnya."
+    },
+    {
+      "id": "mis-msd-banding-004",
+      "label": "Membandingkan pembilang dan penyebut secara terpisah",
+      "description": "Siswa membandingkan pembilang dengan pembilang dan penyebut dengan penyebut, lalu menyimpulkan pecahan yang kedua angkanya lebih besar pasti lebih besar.",
+      "insight": "Pecahan adalah satu bilangan, bukan dua bilangan yang berdiri sendiri; ubah ke penyebut yang sama sebelum menyimpulkan."
+    },
+    {
+      "id": "mis-msd-banding-005",
+      "label": "Pecahan senilai dianggap berbeda besar",
+      "description": "Siswa menganggap 5/8 dan 10/16 berbeda nilainya karena angkanya berbeda.",
+      "insight": "Sederhanakan dulu kedua pecahan; bila bentuk paling sederhananya sama, nilainya memang sama."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-banding-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami perbandingan pecahan berpembilang sama",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Dua kue bolu berukuran sama dipotong untuk dibagikan. Bolu pertama dipotong menjadi 5 bagian sama besar, bolu kedua dipotong menjadi 7 bagian sama besar. Rina mengambil 2 potong dari bolu pertama dan Sila mengambil 2 potong dari bolu kedua.</p>",
+      "pertanyaan": "<p>Bagian bolu yang lebih banyak diambil dinyatakan oleh pecahan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2/5, milik Rina</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2/7, milik Sila</p>",
+          "mis": "mis-msd-banding-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>keduanya sama karena banyak potongnya sama</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>tidak dapat dibandingkan karena penyebutnya berbeda</p>",
+          "mis": "mis-msd-banding-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Bolu yang sama besar dipotong 5 menghasilkan potongan yang lebih besar daripada dipotong 7. Dengan banyak potong yang sama, bagian Rina lebih banyak.</p><p>Dengan penyebut sama: 2/5 = 14/35 dan 2/7 = 10/35. Karena 14/35 lebih dari 10/35, maka 2/5 lebih besar daripada 2/7.</p>"
+    },
+    {
+      "id": "msd-banding-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pengurutan tiga pecahan berpenyebut berbeda",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Tiga botol air minum berukuran sama terisi sebagian: botol Merah 1/2 bagian, botol Biru 3/4 bagian, dan botol Hijau 2/3 bagian.</p>",
+      "pertanyaan": "<p>Urutan isi botol dari yang paling sedikit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/2, 2/3, 3/4</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1/2, 3/4, 2/3</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2/3, 1/2, 3/4</p>",
+          "mis": "mis-msd-banding-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>3/4, 2/3, 1/2</p>",
+          "mis": "mis-msd-banding-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Samakan penyebut dengan 12: 1/2 = 6/12, 3/4 = 9/12, dan 2/3 = 8/12.</p><p>Urutan pembilang dari kecil: 6, 8, 9. Jadi urutannya 1/2, 2/3, 3/4.</p>"
+    },
+    {
+      "id": "msd-banding-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perbandingan pecahan pada capaian target",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Dua kelas mengumpulkan botol bekas untuk didaur ulang. Kelas A sudah mencapai 5/8 dari targetnya, sedangkan Kelas B sudah mencapai 7/12 dari targetnya. Target kedua kelas sama banyak.</p>",
+      "pertanyaan": "<p>Kelas yang capaiannya lebih tinggi beserta alasannya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kelas A, karena 5/8 = 15/24 dan 7/12 = 14/24</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kelas B, karena penyebut 12 lebih besar daripada 8</p>",
+          "mis": "mis-msd-banding-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kelas B, karena pembilang 7 lebih besar daripada 5</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>sama tinggi, karena selisih pembilang dan penyebutnya sama-sama 3 dan 5</p>",
+          "mis": "mis-msd-banding-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Kelipatan persekutuan terkecil dari 8 dan 12 adalah 24.</p><p>5/8 = 15/24 dan 7/12 = 14/24. Karena 15/24 lebih dari 14/24, capaian Kelas A lebih tinggi.</p><p>Selisih 15 dan 14 hanya 1/24 dari target, jadi keduanya memang berdekatan — tetapi tetap tidak sama.</p>"
+    },
+    {
+      "id": "msd-banding-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pengurutan empat pecahan dari yang terbesar",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Empat pekerja melaporkan bagian pekerjaan yang sudah selesai: Ardi 3/4 bagian, Bayu 5/6 bagian, Cinta 7/12 bagian, dan Dewa 2/3 bagian.</p>",
+      "pertanyaan": "<p>Urutan pekerja dari yang paling banyak menyelesaikan pekerjaan adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Bayu, Ardi, Dewa, Cinta</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Cinta, Dewa, Ardi, Bayu</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ardi, Bayu, Cinta, Dewa</p>",
+          "mis": "mis-msd-banding-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Cinta, Bayu, Ardi, Dewa</p>",
+          "mis": "mis-msd-banding-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Samakan penyebut dengan 12: 3/4 = 9/12, 5/6 = 10/12, 7/12 = 7/12, dan 2/3 = 8/12.</p><p>Urutan pembilang dari besar: 10, 9, 8, 7. Jadi urutannya Bayu, Ardi, Dewa, Cinta.</p>"
+    },
+    {
+      "id": "msd-banding-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perbandingan untuk mencari pecahan di antara dua pecahan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pada garis bilangan, Bu Wati menandai dua titik: 1/3 dan 1/2. Siswa diminta menempelkan satu kartu pecahan tepat di antara kedua tanda itu.</p>",
+      "pertanyaan": "<p>Kartu yang tepat ditempel di antara 1/3 dan 1/2 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/4</p>",
+          "mis": "mis-msd-banding-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2/5</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3/5</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1/6</p>",
+          "mis": "mis-msd-banding-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Samakan penyebut dengan 30: 1/3 = 10/30 dan 1/2 = 15/30.</p><p>Periksa tiap kartu: 1/4 = 7,5/30 (terlalu kecil), 2/5 = 12/30 (berada di antara), 3/5 = 18/30 (terlalu besar), dan 1/6 = 5/30 (terlalu kecil).</p><p>Jadi kartu 2/5 yang tepat.</p>"
+    },
+    {
+      "id": "msd-banding-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar dengan patokan setengah untuk memilih pecahan terdekat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat regu mengisi tangki air sampai bagian tertentu: Regu I 5/9 bagian, Regu II 4/7 bagian, Regu III 7/15 bagian, dan Regu IV 3/8 bagian. Panitia mencari regu yang isinya paling dekat dengan setengah tangki.</p>",
+      "pertanyaan": "<p>Regu yang isinya paling dekat dengan 1/2 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Regu I</p>",
+          "mis": "mis-msd-banding-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Regu II</p>",
+          "mis": "mis-msd-banding-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Regu III</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Regu IV</p>",
+          "mis": "mis-msd-banding-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Setengah dari penyebut menjadi patokan pembilang. Hitung jarak setiap pecahan ke 1/2:</p><ul><li>5/9: setengah dari 9 adalah 4,5, selisih pembilang 0,5 bagian dari 9, yaitu 1/18</li><li>4/7: setengah dari 7 adalah 3,5, selisihnya 1/14</li><li>7/15: setengah dari 15 adalah 7,5, selisihnya 1/30</li><li>3/8: setengah dari 8 adalah 4, selisihnya 1/8</li></ul><p>Jarak terkecil adalah 1/30, yaitu Regu III. Perhatikan bahwa Regu III berada sedikit di bawah setengah, sedangkan Regu I dan II sedikit di atasnya — yang ditanyakan jaraknya, bukan besarnya.</p>"
+    },
+    {
+      "id": "msd-banding-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai alasan yang dipakai saat membandingkan pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dinda berkata, “3/5 lebih besar daripada 5/8, sebab selisih pembilang dan penyebut 3/5 hanya 2, sedangkan pada 5/8 selisihnya 3.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat Dinda adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena selisih yang lebih kecil menandakan pecahan yang lebih besar.</p>",
+          "mis": "mis-msd-banding-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena 3/5 = 24/40 dan 5/8 = 25/40 sehingga 5/8 justru lebih besar.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena pecahan berpenyebut lebih besar selalu lebih kecil nilainya.</p>",
+          "mis": "mis-msd-banding-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena pembilang 3 dan 5 lebih kecil daripada 5 dan 8.</p>",
+          "mis": "mis-msd-banding-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Samakan penyebut dengan 40: 3/5 = 24/40 dan 5/8 = 25/40. Ternyata 5/8 lebih besar, jadi kesimpulan Dinda salah.</p><p>Selisih pembilang dan penyebut bukan ukuran nilai pecahan. Contoh penyangkal lain: 1/2 dan 8/9 sama-sama berselisih ganjil, tetapi nilainya jauh berbeda.</p><p>Pilihan C juga tidak dapat dibenarkan sebagai aturan umum, sebab 7/8 berpenyebut lebih besar daripada 1/2 namun nilainya lebih besar.</p>"
+    },
+    {
+      "id": "msd-banding-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan perbandingan untuk menyaring pecahan lebih dari 2/3",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah lomba menetapkan syarat kelulusan: bagian soal yang dijawab benar harus lebih dari 2/3. Berikut capaian beberapa peserta.</p>",
+      "pertanyaan": "<p>Capaian yang memenuhi syarat kelulusan adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>5/6</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>3/5</p>",
+          "mis": "mis-msd-banding-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>7/9</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5/8</p>",
+          "mis": "mis-msd-banding-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>11/15</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C",
+        "E"
+      ],
+      "pembahasan": "<p>Bandingkan tiap pecahan dengan 2/3 memakai penyebut yang sama:</p><ul><li>5/6 dan 2/3 = 4/6 → 5/6 lebih besar</li><li>3/5 dan 2/3: penyebut 15 → 9/15 dan 10/15 → 3/5 lebih kecil</li><li>7/9 dan 2/3 = 6/9 → 7/9 lebih besar</li><li>5/8 dan 2/3: penyebut 24 → 15/24 dan 16/24 → 5/8 lebih kecil</li><li>11/15 dan 2/3 = 10/15 → 11/15 lebih besar</li></ul><p>Jadi yang lulus adalah 5/6, 7/9, dan 11/15.</p>"
+    },
+    {
+      "id": "msd-banding-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang aturan membandingkan dan mengurutkan pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sekelompok siswa menuliskan kesimpulan mereka setelah belajar membandingkan pecahan. Guru meminta mereka menandai kesimpulan yang dapat dipertanggungjawabkan.</p>",
+      "pertanyaan": "<p>Kesimpulan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Di antara 1/4, 1/5, dan 1/6, yang terbesar adalah 1/4.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bila pembilangnya sama, semakin besar penyebutnya semakin besar nilai pecahannya.</p>",
+          "mis": "mis-msd-banding-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4/9 lebih kecil daripada 1/2.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5/8 dan 10/16 bernilai sama karena 10/16 disederhanakan menjadi 5/8.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Pecahan yang pembilangnya lebih besar selalu bernilai lebih besar.</p>",
+          "mis": "mis-msd-banding-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: dengan pembilang sama, penyebut terkecil memberi potongan terbesar, jadi 1/4 paling besar.</p><p>B salah, justru sebaliknya — inilah kekeliruan yang sering terjadi. Contoh: 1/8 lebih kecil daripada 1/3.</p><p>C benar: setengah dari 9 adalah 4,5 sedangkan pembilangnya 4, jadi 4/9 kurang dari 1/2.</p><p>D benar: 10/16 dibagi 2 pada kedua bagiannya menjadi 5/8.</p><p>E salah: 3/10 berpembilang lebih besar daripada 2/3, tetapi nilainya jauh lebih kecil.</p>"
+    },
+    {
+      "id": "msd-banding-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai kebenaran pernyataan perbandingan pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan hasil diskusi kelas ditulis di papan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>7/8 lebih besar daripada 8/9.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-banding-003"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>2/7 lebih kecil daripada 3/10.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Urutan naik yang benar adalah 3/8, 2/5, 1/2.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>9/12 dan 6/8 bernilai sama.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Di antara 5/6 dan 7/8, yang lebih dekat ke 1 adalah 5/6.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-banding-001"
+        }
+      ],
+      "pembahasan": "<p>P1 salah: dengan penyebut 72, 7/8 = 63/72 dan 8/9 = 64/72, jadi 8/9 yang lebih besar.</p><p>P2 benar: dengan penyebut 70, 2/7 = 20/70 dan 3/10 = 21/70.</p><p>P3 benar: dengan penyebut 40, 3/8 = 15/40, 2/5 = 16/40, dan 1/2 = 20/40.</p><p>P4 benar: 9/12 dibagi 3 menjadi 3/4 dan 6/8 dibagi 2 juga menjadi 3/4.</p><p>P5 salah: 5/6 berjarak 1/6 dari 1, sedangkan 7/8 hanya berjarak 1/8. Karena 1/8 lebih kecil daripada 1/6, justru 7/8 yang lebih dekat ke 1.</p>"
+    }
+  ]
+}

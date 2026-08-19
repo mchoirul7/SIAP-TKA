@@ -1,0 +1,440 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-bangun-ruang-spasial",
+    "slug": "matematika-sd-konstruksi-bangun-ruang-visualisasi-spasial",
+    "title": "Konstruksi Bangun Ruang dan Visualisasi Spasial",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-objek-geometri",
+    "description": "Menyusun dan membaca kubus, balok, dan gabungannya: unsur bangun ruang, jaring-jaring, banyak kubus satuan penyusun, serta pandangan depan, atas, dan samping.",
+    "summary": "10 soal diagnostik bergaya TKA untuk konstruksi bangun ruang dan visualisasi spasial pada kubus, balok, dan gabungannya.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menyebut sisi, rusuk, dan titik sudut kubus dan balok",
+      "Menghitung kubus satuan penyusun bangun, termasuk yang tersembunyi",
+      "Membaca pandangan depan, atas, dan samping",
+      "Menyusun bangun dari tiga pandangan yang diketahui"
+    ],
+    "sort_order": 8
+  },
+  "submateri": {
+    "id": "con-matematika-sd-bangun-ruang-spasial",
+    "name": "Konstruksi bangun ruang dan visualisasi spasial (bagian depan, atas, dan samping)",
+    "description": "Mengenali unsur dan jaring-jaring kubus dan balok, menghitung kubus satuan penyusun bangun gabungan, serta menentukan pandangan depan, atas, dan samping. Bangun ruang mencakup kubus, balok, dan gabungannya."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-ruang-001",
+      "label": "Sisi, rusuk, dan titik sudut tertukar",
+      "description": "Siswa menyebut banyak rusuk ketika yang diminta banyak sisi, atau sebaliknya, karena ketiga unsur itu belum terpisah jelas.",
+      "insight": "Sisi adalah bidang datarnya, rusuk adalah garis pertemuan dua sisi, dan titik sudut adalah pertemuan tiga rusuk."
+    },
+    {
+      "id": "mis-msd-ruang-002",
+      "label": "Pandangan atas dianggap memperlihatkan tinggi",
+      "description": "Siswa menganggap pandangan atas dapat menunjukkan banyak lapisan tumpukan kubus, padahal tinggi tidak tampak dari atas.",
+      "insight": "Pandangan atas hanya memperlihatkan panjang dan lebar; tinggi tampak pada pandangan depan atau samping."
+    },
+    {
+      "id": "mis-msd-ruang-003",
+      "label": "Kubus tersembunyi tidak dihitung",
+      "description": "Siswa hanya menghitung kubus satuan yang terlihat pada gambar, sehingga kubus di lapisan belakang atau di bagian dalam terlewat.",
+      "insight": "Hitung per lapisan: banyak kubus tiap lapisan dikalikan banyak lapisan, bukan sekadar yang tampak dari satu arah."
+    },
+    {
+      "id": "mis-msd-ruang-004",
+      "label": "Kubus dan balok dianggap terpisah sama sekali",
+      "description": "Siswa menganggap kubus bukan balok, sehingga sifat yang berlaku pada balok dianggap tidak berlaku pada kubus.",
+      "insight": "Kubus adalah balok istimewa yang seluruh rusuknya sama panjang, jadi semua sifat balok tetap berlaku padanya."
+    },
+    {
+      "id": "mis-msd-ruang-005",
+      "label": "Bangun dianggap sama karena satu pandangannya sama",
+      "description": "Siswa menyimpulkan dua bangun tersusun dari kubus sebanyak sama hanya karena pandangan depannya serupa.",
+      "insight": "Satu pandangan tidak menentukan bangunnya; perlu paling sedikit pandangan depan, atas, dan samping untuk memastikannya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-ruang-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami unsur-unsur balok",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah kotak kado berbentuk balok akan dihias dengan pita di sepanjang setiap garis pertemuan dua sisinya.</p>",
+      "pertanyaan": "<p>Banyak rusuk yang harus dilapisi pita adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 rusuk</p>",
+          "mis": "mis-msd-ruang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>8 rusuk</p>",
+          "mis": "mis-msd-ruang-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12 rusuk</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>18 rusuk</p>",
+          "mis": "mis-msd-ruang-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Balok mempunyai 12 rusuk: 4 rusuk panjang, 4 rusuk lebar, dan 4 rusuk tinggi.</p><p>Angka 6 adalah banyak sisinya dan angka 8 adalah banyak titik sudutnya, sehingga keduanya bukan jawaban yang diminta.</p>"
+    },
+    {
+      "id": "msd-ruang-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami jaring-jaring kubus",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah kubus dari karton dibuka pada beberapa rusuknya lalu dibentangkan mendatar sehingga menjadi jaring-jaring.</p>",
+      "pertanyaan": "<p>Jaring-jaring kubus itu terdiri atas ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4 persegi yang sama besar</p>",
+          "mis": "mis-msd-ruang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>5 persegi yang sama besar</p>",
+          "mis": "mis-msd-ruang-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>6 persegi yang sama besar</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>8 persegi yang sama besar</p>",
+          "mis": "mis-msd-ruang-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Kubus mempunyai 6 sisi berbentuk persegi yang sama besar, sehingga jaring-jaringnya juga terdiri atas 6 persegi yang sama besar.</p><p>Jawaban 5 persegi sering muncul karena sisi bawah terlewat saat dibentangkan, dan jawaban 8 tertukar dengan banyak titik sudut.</p>"
+    },
+    {
+      "id": "msd-ruang-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penghitungan kubus satuan pada bangun gabungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gambar isometrik tumpukan kubus satuan. Lapisan bawah berupa balok 3 kubus (ke kanan) × 2 kubus (ke belakang) × 1 kubus tinggi. Di atas kubus sudut kanan depan lapisan bawah diletakkan tepat 1 kubus satuan lagi. Semua kubus digambar sama besar dengan rusuk bergaris tegas, wajah atas lebih terang daripada wajah samping agar tumpukannya terbaca."
+      },
+      "stimulus": "<p>Sebuah bangun disusun dari kubus satuan. Lapisan bawahnya berupa susunan 3 kubus ke arah kanan dan 2 kubus ke arah belakang, sehingga membentuk satu lapisan penuh. Di atas salah satu kubus sudut pada lapisan itu diletakkan 1 kubus lagi.</p>",
+      "pertanyaan": "<p>Banyak kubus satuan yang menyusun bangun tersebut adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 kubus</p>",
+          "mis": "mis-msd-ruang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>7 kubus</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>9 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>12 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Lapisan bawah berisi 3 × 2 = 6 kubus satuan.</p><p>Ditambah 1 kubus di atasnya, seluruhnya menjadi 6 + 1 = 7 kubus satuan.</p><p>Pilihan A muncul bila kubus di atas terlewat, sedangkan pilihan D muncul bila seluruh bangun dianggap balok penuh 3 × 2 × 2.</p>"
+    },
+    {
+      "id": "msd-ruang-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembacaan pandangan samping suatu balok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gambar isometrik balok yang tersusun dari kubus satuan berukuran 4 kubus (panjang, ke kanan) × 2 kubus (lebar, ke belakang) × 3 kubus (tinggi). Beri tanda panah berlabel 'depan' menghadap sisi panjang 4 dan panah berlabel 'samping' menghadap sisi lebar 2. Kisi kubus satuan tampak pada setiap wajah yang terlihat."
+      },
+      "stimulus": "<p>Sebuah balok disusun dari kubus satuan dengan panjang 4 satuan, lebar 2 satuan, dan tinggi 3 satuan. Pandangan depan menghadap sisi yang panjangnya 4 satuan.</p>",
+      "pertanyaan": "<p>Banyak persegi satuan yang tampak pada pandangan samping balok itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 persegi satuan</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>8 persegi satuan</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12 persegi satuan</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>24 persegi satuan</p>",
+          "mis": "mis-msd-ruang-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Pandangan samping memperlihatkan lebar dan tinggi, yaitu 2 satuan × 3 satuan = 6 persegi satuan.</p><p>Pandangan depan memperlihatkan panjang dan tinggi, yaitu 4 × 3 = 12 persegi satuan. Pandangan atas memperlihatkan panjang dan lebar, yaitu 4 × 2 = 8 persegi satuan.</p><p>Angka 24 adalah banyak kubus satuan seluruhnya, bukan banyak persegi pada satu pandangan.</p>"
+    },
+    {
+      "id": "msd-ruang-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penghitungan kubus satuan pada gabungan dua balok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gambar isometrik bangun gabungan dari kubus satuan. Balok bawah berukuran 4 kubus (ke kanan) × 2 kubus (ke belakang) × 1 kubus tinggi. Di atasnya, rata dengan tepi kiri dan tepi belakang, diletakkan balok kedua berukuran 2 kubus × 2 kubus × 1 kubus tinggi. Kisi kubus satuan tampak pada wajah-wajah yang terlihat."
+      },
+      "stimulus": "<p>Sebuah tangga hiasan disusun dari kubus satuan. Balok bagian bawah berukuran 4 satuan × 2 satuan × 1 satuan, dan di atasnya diletakkan balok kedua berukuran 2 satuan × 2 satuan × 1 satuan.</p>",
+      "pertanyaan": "<p>Banyak kubus satuan yang diperlukan untuk menyusun bangun itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>10 kubus</p>",
+          "mis": "mis-msd-ruang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>12 kubus</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>14 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>16 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Balok bawah: 4 × 2 × 1 = 8 kubus satuan.</p><p>Balok atas: 2 × 2 × 1 = 4 kubus satuan.</p><p>Seluruhnya 8 + 4 = 12 kubus satuan. Pilihan D muncul bila bangunnya dianggap balok penuh 4 × 2 × 2.</p>"
+    },
+    {
+      "id": "msd-ruang-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang kubus bagian dalam yang tidak tampak",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kubus besar disusun dari 27 kubus satuan sehingga berukuran 3 satuan × 3 satuan × 3 satuan. Seluruh permukaan luar kubus besar itu dicelup cat. Setelah kering, kubus besar dibongkar kembali menjadi 27 kubus satuan.</p>",
+      "pertanyaan": "<p>Banyak kubus satuan yang tidak terkena cat sama sekali adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0 kubus</p>",
+          "mis": "mis-msd-ruang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1 kubus</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>6 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>8 kubus</p>",
+          "mis": "mis-msd-ruang-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Kubus satuan tidak terkena cat hanya bila seluruh sisinya tidak menyentuh permukaan luar, yaitu kubus yang berada di bagian paling dalam.</p><p>Bagian dalam kubus 3 × 3 × 3 adalah kubus berukuran 1 × 1 × 1, karena satu lapisan terluar terkelupas dari setiap arah. Jadi ada 1 kubus satuan.</p><p>Angka 8 adalah banyak kubus di titik sudut, yang justru terkena cat pada tiga sisinya, dan angka 6 adalah banyak kubus di tengah setiap sisi.</p>"
+    },
+    {
+      "id": "msd-ruang-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menyusun bangun dari tiga pandangan yang diketahui",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah balok disusun dari kubus satuan. Hasil pengamatan mencatat bahwa pandangan depannya berupa 3 satuan × 2 satuan, pandangan sampingnya 2 satuan × 2 satuan, dan pandangan atasnya 3 satuan × 2 satuan.</p>",
+      "pertanyaan": "<p>Banyak kubus satuan yang menyusun balok itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7 kubus</p>",
+          "mis": "mis-msd-ruang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>10 kubus</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12 kubus</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>18 kubus</p>",
+          "mis": "mis-msd-ruang-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Pandangan depan memperlihatkan panjang dan tinggi, jadi panjang 3 satuan dan tinggi 2 satuan.</p><p>Pandangan samping memperlihatkan lebar dan tinggi. Karena tingginya sudah 2 satuan, lebarnya 2 satuan.</p><p>Periksa dengan pandangan atas: panjang × lebar = 3 × 2, dan itu memang sesuai. Jadi banyak kubus satuan = 3 × 2 × 2 = 12.</p>"
+    },
+    {
+      "id": "msd-ruang-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pengetahuan unsur kubus dan balok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas mendaftar pernyataan tentang kubus dan balok, lalu memeriksa mana yang benar.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kubus mempunyai 12 rusuk yang sama panjang.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Balok mempunyai 6 sisi yang berbentuk persegi panjang.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kubus mempunyai 8 titik sudut.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Setiap balok mempunyai 12 rusuk yang sama panjang.</p>",
+          "mis": "mis-msd-ruang-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Kubus mempunyai 4 sisi.</p>",
+          "mis": "mis-msd-ruang-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: seluruh rusuk kubus sama panjang, dan banyaknya 12.</p><p>B benar: keenam sisi balok berbentuk persegi panjang. Pada kubus, persegi panjang itu berupa persegi — persegi tetap termasuk persegi panjang.</p><p>C benar: kubus dan balok sama-sama mempunyai 8 titik sudut.</p><p>D salah: rusuk balok yang panjangnya, lebarnya, dan tingginya berbeda tidak sama panjang. Hanya kubus yang seluruh rusuknya sama.</p><p>E salah: kubus mempunyai 6 sisi, bukan 4.</p>"
+    },
+    {
+      "id": "msd-ruang-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang pandangan depan, atas, dan samping bangun gabungan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gambar isometrik bangun dari 5 kubus satuan. Di lapisan bawah, 3 kubus berjajar ke arah kanan dengan kedalaman hanya 1 kubus. Di atas kubus paling kiri, ditumpuk 2 kubus lagi sehingga kolom kiri setinggi 3 kubus. Beri panah berlabel 'depan' menghadap deretan 3 kubus tersebut."
+      },
+      "stimulus": "<p>Sebuah bangun disusun dari 5 kubus satuan. Pada lapisan bawah, 3 kubus berjajar ke arah kanan dengan kedalaman 1 kubus. Di atas kubus paling kiri ditumpuk 2 kubus lagi, sehingga kolom paling kiri setinggi 3 kubus.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang bangun itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pandangan atasnya berupa tiga persegi satuan yang berjajar.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pandangan sampingnya terdiri atas 3 persegi satuan.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pandangan depannya terdiri atas 5 persegi satuan.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pandangan depan dan pandangan atas suatu bangun selalu sama bentuknya.</p>",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Banyak kubus satuan penyusunnya adalah 6.</p>",
+          "mis": "mis-msd-ruang-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: dilihat dari atas hanya panjang dan lebar yang tampak, yaitu 3 satuan × 1 satuan, berupa tiga persegi berjajar.</p><p>B benar: dari samping, lebarnya 1 satuan dan tinggi tertingginya 3 satuan, jadi tampak 1 × 3 = 3 persegi satuan.</p><p>C benar: dari depan tampak kolom kiri setinggi 3 persegi ditambah 1 persegi pada masing-masing kolom tengah dan kanan, yaitu 3 + 1 + 1 = 5 persegi satuan.</p><p>D salah: pada bangun ini pandangan depan berbentuk tangga sedangkan pandangan atas berupa deretan lurus.</p><p>E salah: kubus penyusunnya 3 di lapisan bawah dan 2 tumpukan tambahan, seluruhnya 5 kubus.</p>"
+    },
+    {
+      "id": "msd-ruang-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang bangun ruang dan pandangannya",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan hasil diskusi tentang bangun ruang dan pandangannya dikumpulkan untuk diperiksa.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Kubus adalah balok yang seluruh rusuknya sama panjang.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Setiap balok mempunyai paling sedikit dua sisi berbentuk persegi.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-ruang-004"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Jaring-jaring kubus selalu terdiri atas 6 persegi yang sama besar.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Pandangan atas suatu bangun memperlihatkan banyak lapisan tumpukan kubusnya.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-ruang-002"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Dua bangun yang pandangan depannya sama pasti tersusun dari kubus satuan sebanyak sama.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-ruang-005"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: kubus memenuhi seluruh syarat balok, dengan tambahan semua rusuknya sama panjang.</p><p>P2 salah: balok berukuran 5 × 3 × 2 tidak mempunyai sisi berbentuk persegi sama sekali, karena tidak ada dua ukuran yang sama.</p><p>P3 benar: keenam sisi kubus berupa persegi yang sama besar, jadi bentangannya pun demikian.</p><p>P4 salah: dari atas hanya panjang dan lebar yang tampak. Tumpukan setinggi 1 kubus dan setinggi 5 kubus dapat memberi pandangan atas yang sama.</p><p>P5 salah: kedalaman bangun tidak tampak dari depan. Satu deret kubus dan dua deret kubus yang bertumpuk ke belakang memberi pandangan depan yang sama persis.</p>"
+    }
+  ]
+}

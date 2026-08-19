@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-waktu",
+    "slug": "matematika-sd-waktu",
+    "title": "Waktu",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Membaca jam, memakai penulisan 12 jam dan 24 jam, menghitung lama kegiatan dan waktu mulai, serta menalar jadwal berulang dan pergantian tanggal.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengukuran dan penggunaan waktu.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Membaca jam analog dan penulisan 24 jam",
+      "Menghitung lama kegiatan antar dua waktu",
+      "Menentukan waktu mulai dari durasi dan waktu selesai",
+      "Menalar jadwal berulang dan pergantian tanggal"
+    ],
+    "sort_order": 15
+  },
+  "submateri": {
+    "id": "con-matematika-sd-waktu",
+    "name": "Waktu",
+    "description": "Membaca dan menuliskan waktu, menghitung lama kegiatan, menentukan waktu mulai atau selesai, serta memakai penanggalan pada masalah sehari-hari."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-waktu-001",
+      "label": "Menit dikurangkan seperti bilangan desimal",
+      "description": "Siswa menghitung selisih waktu dengan mengurangkan angkanya langsung, misalnya 12.20 − 9.50 dianggap 2,70 sehingga ditulis 2 jam 70 menit.",
+      "insight": "Satu jam hanya memuat 60 menit, jadi bila menit pengurang lebih besar, pinjam 60 menit dari jamnya, bukan 100."
+    },
+    {
+      "id": "mis-msd-waktu-002",
+      "label": "Jarum pendek dan jarum panjang tertukar",
+      "description": "Siswa membaca jarum panjang sebagai penunjuk jam dan jarum pendek sebagai penunjuk menit, sehingga pukul 07.15 terbaca 03.35.",
+      "insight": "Jarum pendek menunjuk jam dan jarum panjang menunjuk menit; setiap angka yang dilewati jarum panjang bernilai 5 menit."
+    },
+    {
+      "id": "mis-msd-waktu-003",
+      "label": "Penulisan 12 jam dan 24 jam tertukar",
+      "description": "Siswa menuliskan pukul 24.15 untuk seperempat jam setelah tengah malam atau menuliskan tengah hari sebagai pukul 24.00.",
+      "insight": "Penulisan 24 jam berjalan dari 00.00 sampai 23.59; tengah malam ditulis 00.00 dan tengah hari ditulis 12.00."
+    },
+    {
+      "id": "mis-msd-waktu-004",
+      "label": "Banyak selang dianggap sama dengan banyak kejadian",
+      "description": "Pada jadwal berulang, siswa mengalikan selang waktu dengan banyak keberangkatan, padahal keberangkatan pertama belum melewati satu selang.",
+      "insight": "Untuk kejadian ke-n, selang yang dilewati hanya n − 1, karena kejadian pertama terjadi pada waktu awal."
+    },
+    {
+      "id": "mis-msd-waktu-005",
+      "label": "Pergantian bulan tidak diperhitungkan",
+      "description": "Saat menambah hari pada suatu tanggal, siswa menuliskan tanggal yang melebihi banyak hari dalam bulan itu, misalnya tanggal 37 Maret.",
+      "insight": "Bila hasil penjumlahan melebihi banyak hari dalam bulan itu, kurangi dengan banyak hari bulan tersebut dan pindah ke bulan berikutnya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-waktu-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan jam analog",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Jam analog bulat dengan angka 1 sampai 12 tercetak jelas dan garis menit kecil di tepinya. Jarum pendek berada di antara angka 7 dan 8, sedikit melewati angka 7. Jarum panjang menunjuk tepat pada angka 3. Bedakan tebal kedua jarum dengan jelas dan jangan menuliskan angka waktunya pada gambar."
+      },
+      "stimulus": "<p>Sebuah jam dinding di ruang kelas memperlihatkan jarum pendek berada di antara angka 7 dan 8, sedangkan jarum panjang menunjuk tepat pada angka 3.</p>",
+      "pertanyaan": "<p>Waktu yang ditunjukkan jam itu adalah pukul ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>03.35</p>",
+          "mis": "mis-msd-waktu-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>07.03</p>",
+          "mis": "mis-msd-waktu-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>07.15</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>08.15</p>",
+          "mis": "mis-msd-waktu-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Jarum pendek yang baru melewati angka 7 berarti jamnya masih 7, belum sampai 8.</p><p>Jarum panjang pada angka 3 berarti 3 × 5 = 15 menit.</p><p>Jadi waktunya pukul 07.15. Pilihan A muncul bila kedua jarum tertukar, dan pilihan B bila angka 3 langsung ditulis sebagai 3 menit.</p>"
+    },
+    {
+      "id": "msd-waktu-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami hubungan penulisan 24 jam dan 12 jam",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Jadwal keberangkatan kereta tertulis pukul 14.30 dengan penulisan 24 jam. Petugas ingin menyampaikannya secara lisan kepada penumpang dengan penulisan 12 jam.</p>",
+      "pertanyaan": "<p>Pukul 14.30 sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>pukul 2.30 siang</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>pukul 4.30 sore</p>",
+          "mis": "mis-msd-waktu-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>pukul 1.30 siang</p>",
+          "mis": "mis-msd-waktu-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>pukul 2.30 malam</p>",
+          "mis": "mis-msd-waktu-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Setelah pukul 12.00, penulisan 24 jam dikurangi 12 untuk mendapatkan penulisan 12 jam: 14 − 12 = 2.</p><p>Karena masih di antara tengah hari dan senja, waktunya pukul 2.30 siang.</p><p>Pukul 2.30 malam ditulis 02.30 dalam penulisan 24 jam, jadi bukan pilihan D.</p>"
+    },
+    {
+      "id": "msd-waktu-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penghitungan lama perjalanan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah bus berangkat dari terminal pukul 07.45 dan tiba di kota tujuan pukul 10.20 pada hari yang sama.</p>",
+      "pertanyaan": "<p>Lama perjalanan bus itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2 jam 35 menit</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2 jam 75 menit</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2 jam 45 menit</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>3 jam 25 menit</p>",
+          "mis": "mis-msd-waktu-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Dari pukul 07.45 sampai pukul 10.45 adalah 3 jam. Waktu tiba pukul 10.20 masih 25 menit sebelum itu.</p><p>Lama perjalanan = 3 jam − 25 menit = 2 jam 35 menit.</p><p>Pilihan B muncul bila 10,20 − 7,45 dihitung sebagai bilangan desimal. Perhatikan bahwa 75 menit sudah lebih dari satu jam, jadi penulisan itu tidak mungkin benar.</p>"
+    },
+    {
+      "id": "msd-waktu-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penentuan waktu mulai dari durasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pemutaran film di aula berdurasi 1 jam 45 menit tanpa jeda, dan selesai tepat pukul 20.15.</p>",
+      "pertanyaan": "<p>Pemutaran film itu dimulai pukul ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>18.30</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>18.70</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>19.30</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>22.00</p>",
+          "mis": "mis-msd-waktu-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Kurangi jamnya lebih dahulu: 20.15 − 1 jam = 19.15.</p><p>Lalu kurangi 45 menit: 19.15 − 45 menit = 18.30, karena 15 menit dikurangi 45 menit perlu meminjam 60 menit dari jamnya.</p><p>Pilihan D muncul bila durasinya justru ditambahkan, bukan dikurangkan.</p>"
+    },
+    {
+      "id": "msd-waktu-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan jadwal keberangkatan berulang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Angkutan kota berangkat dari pangkalan setiap 25 menit. Keberangkatan pertama tepat pukul 06.00.</p>",
+      "pertanyaan": "<p>Keberangkatan kelima terjadi pada pukul ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>07.05</p>",
+          "mis": "mis-msd-waktu-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>07.25</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>07.40</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>08.05</p>",
+          "mis": "mis-msd-waktu-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Keberangkatan pertama pukul 06.00 belum melewati satu selang, jadi sampai keberangkatan kelima hanya ada 4 selang.</p><p>4 × 25 menit = 100 menit = 1 jam 40 menit.</p><p>Pukul 06.00 + 1 jam 40 menit = 07.40. Pilihan D muncul bila selangnya dihitung 5 kali.</p>"
+    },
+    {
+      "id": "msd-waktu-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang penanggalan dan nama hari",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Hari ini hari Rabu, tanggal 12 Maret. Sebuah kegiatan akan diadakan 25 hari setelah hari ini. Bulan Maret berisi 31 hari.</p>",
+      "pertanyaan": "<p>Kegiatan itu jatuh pada ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 April, hari Minggu</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>6 April, hari Sabtu</p>",
+          "mis": "mis-msd-waktu-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>7 April, hari Minggu</p>",
+          "mis": "mis-msd-waktu-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>37 Maret, hari Minggu</p>",
+          "mis": "mis-msd-waktu-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Tanggal: 12 + 25 = 37. Karena Maret hanya 31 hari, maka 37 − 31 = 6, jadi tanggal 6 April.</p><p>Hari: 25 hari sama dengan 3 pekan lebih 4 hari, karena 25 = 3 × 7 + 4. Tiga pekan kembali ke hari Rabu, lalu maju 4 hari: Kamis, Jumat, Sabtu, Minggu.</p><p>Jadi kegiatan itu jatuh pada Minggu, 6 April.</p>"
+    },
+    {
+      "id": "msd-waktu-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai cara menghitung selisih waktu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Doni menghitung lama kegiatan dari pukul 09.50 sampai pukul 12.20 dengan cara 12,20 − 9,50 = 2,70, lalu menulis hasilnya “2 jam 70 menit”.</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pekerjaan Doni adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena selisih waktu dihitung dengan mengurangkan angkanya.</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena satu jam hanya 60 menit; lama kegiatan yang benar 2 jam 30 menit.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena lama kegiatan yang benar 3 jam 30 menit.</p>",
+          "mis": "mis-msd-waktu-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, tetapi hasilnya cukup ditulis 2,7 jam.</p>",
+          "mis": "mis-msd-waktu-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Angka menit pada penulisan waktu bukan bilangan desimal, karena satu jam hanya memuat 60 menit — bukan 100.</p><p>Cara yang benar: dari 09.50 ke 12.50 adalah 3 jam, lalu dikurangi 30 menit karena kegiatannya berakhir pukul 12.20, sehingga hasilnya 2 jam 30 menit.</p><p>Penulisan “2 jam 70 menit” juga tidak mungkin benar karena 70 menit sudah melebihi satu jam dan seharusnya ditulis 3 jam 10 menit.</p>"
+    },
+    {
+      "id": "msd-waktu-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan penulisan waktu 12 jam dan 24 jam",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas memeriksa beberapa pernyataan tentang penulisan waktu yang dipakai pada jadwal perjalanan.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pukul 13.00 sama dengan pukul 1 siang.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pukul 00.30 berarti setengah jam setelah tengah malam.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pukul 19.45 sama dengan pukul 7.45 malam.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Seperempat jam setelah tengah malam ditulis pukul 24.15.</p>",
+          "mis": "mis-msd-waktu-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Tengah hari ditulis pukul 24.00.</p>",
+          "mis": "mis-msd-waktu-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 13 − 12 = 1, jadi pukul 1 siang.</p><p>B benar: penulisan 24 jam dimulai dari 00.00 pada tengah malam.</p><p>C benar: 19 − 12 = 7, jadi pukul 7.45 malam.</p><p>D salah: seperempat jam setelah tengah malam ditulis pukul 00.15, karena angka jam pada penulisan 24 jam hanya sampai 23.</p><p>E salah: tengah hari ditulis pukul 12.00, sedangkan pukul 24.00 sebenarnya sama dengan 00.00 pada hari berikutnya.</p>"
+    },
+    {
+      "id": "msd-waktu-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang lama kegiatan pada satu jadwal",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Jadwal pagi di kelas lima tercatat sebagai berikut:</p><ul><li>Matematika: 07.00 sampai 08.20</li><li>Istirahat: 08.20 sampai 08.40</li><li>Bahasa Indonesia: 08.40 sampai 10.00</li></ul>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang jadwal itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pelajaran Matematika berlangsung 1 jam 20 menit.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Istirahat berlangsung 20 menit.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Seluruh kegiatan pagi itu berlangsung 3 jam.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bahasa Indonesia berlangsung lebih lama daripada Matematika.</p>",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Bila setiap pelajaran ditambah 10 menit, kegiatan berakhir pukul 10.10.</p>",
+          "mis": "mis-msd-waktu-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: dari 07.00 ke 08.20 adalah 1 jam 20 menit.</p><p>B benar: dari 08.20 ke 08.40 adalah 20 menit.</p><p>C benar: dari 07.00 ke 10.00 adalah 3 jam.</p><p>D salah: Bahasa Indonesia dari 08.40 ke 10.00 juga 1 jam 20 menit, jadi sama lamanya.</p><p>E salah: ada dua pelajaran, sehingga tambahan seluruhnya 20 menit dan kegiatan berakhir pukul 10.20.</p>"
+    },
+    {
+      "id": "msd-waktu-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang waktu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang waktu dikumpulkan dari catatan kelas untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 jam sama dengan 60 menit.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Pukul 15.00 sama dengan pukul 3 sore.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Lama waktu dari pukul 08.40 sampai pukul 09.10 adalah 30 menit.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Selisih dua waktu dihitung dengan mengurangkan angkanya seperti bilangan biasa.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-waktu-001"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Satu hari terdiri atas 12 jam.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-waktu-003"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: itulah dasar semua penghitungan waktu.</p><p>P2 benar: 15 − 12 = 3, jadi pukul 3 sore.</p><p>P3 benar: dari 08.40 ke 09.00 adalah 20 menit, ditambah 10 menit menjadi 30 menit.</p><p>P4 salah: karena satu jam bernilai 60 menit, bukan 100, pengurangan langsung memberi hasil keliru seperti “2 jam 70 menit”.</p><p>P5 salah: satu hari terdiri atas 24 jam. Angka 12 hanya banyak angka pada muka jam analog.</p>"
+    }
+  ]
+}

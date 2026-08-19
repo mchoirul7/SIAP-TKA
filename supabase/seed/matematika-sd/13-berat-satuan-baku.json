@@ -1,0 +1,431 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-berat-satuan-baku",
+    "slug": "matematika-sd-berat-benda-satuan-baku",
+    "title": "Berat Benda dengan Satuan Baku",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengukur berat benda dengan satuan baku: memilih satuan yang sesuai, membaca timbangan, menyetimbangkan neraca, serta membedakan berat kotor, berat bersih, dan tara.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengukuran berat benda menggunakan satuan baku.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Memilih satuan berat yang sesuai dengan benda",
+      "Membaca skala timbangan",
+      "Menghitung berat pada neraca yang setimbang",
+      "Membedakan bruto, netto, dan tara"
+    ],
+    "sort_order": 13
+  },
+  "submateri": {
+    "id": "con-matematika-sd-berat-satuan-baku",
+    "name": "Berat benda menggunakan satuan baku",
+    "description": "Mengukur dan menuliskan berat benda dengan satuan baku mg, g, hg, dan kg, termasuk membaca timbangan serta menghitung berat bersih dari berat kotor dan tara."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-berat-001",
+      "label": "Ukuran benda dianggap menentukan beratnya",
+      "description": "Siswa menyimpulkan benda yang lebih besar pasti lebih berat, tanpa memperhitungkan bahan penyusunnya.",
+      "insight": "Besar dan berat adalah dua hal berbeda; satu kilogram kapas jauh lebih besar daripada satu kilogram besi meski beratnya sama."
+    },
+    {
+      "id": "mis-msd-berat-002",
+      "label": "Berat wadah tidak diperhitungkan",
+      "description": "Pada masalah yang menyebutkan berat wadah, siswa hanya menghitung berat isinya sehingga batas beban terlampaui.",
+      "insight": "Bila batas beban meliputi wadahnya, kurangi dahulu berat wadah sebelum membagi dengan berat setiap barang."
+    },
+    {
+      "id": "mis-msd-berat-003",
+      "label": "Skala timbangan dihitung per garis",
+      "description": "Siswa menghitung banyak garis pada timbangan sebagai hasil pengukuran, tanpa memeriksa nilai setiap garisnya.",
+      "insight": "Cari nilai satu garis dengan membagi selisih dua angka tercetak dengan banyak garis di antaranya."
+    },
+    {
+      "id": "mis-msd-berat-004",
+      "label": "Bruto, netto, dan tara tertukar",
+      "description": "Siswa menjumlahkan tara ke berat kotor atau menganggap netto lebih besar daripada bruto.",
+      "insight": "Bruto adalah berat isi beserta wadahnya, tara adalah berat wadahnya, dan netto = bruto − tara."
+    },
+    {
+      "id": "mis-msd-berat-005",
+      "label": "Satuan berat dipilih tanpa memperhatikan benda",
+      "description": "Siswa menyatakan berat gajah dalam gram atau berat vitamin dalam kilogram, sehingga angkanya menjadi tidak wajar.",
+      "insight": "Pilih mg untuk benda sangat ringan seperti obat, g untuk benda seukuran tangan, dan kg untuk benda berat seperti karung dan hewan besar."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-berat-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pemilihan satuan berat yang sesuai",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Petugas kesehatan sekolah mencatat berat badan siswa kelas lima pada kartu pemeriksaan. Berat badan siswa berkisar antara 25 sampai 40.</p>",
+      "pertanyaan": "<p>Satuan baku yang paling sesuai untuk mencatat berat badan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>miligram</p>",
+          "mis": "mis-msd-berat-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>gram</p>",
+          "mis": "mis-msd-berat-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>kilogram</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>hektogram</p>",
+          "mis": "mis-msd-berat-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Berat badan siswa sekitar 30 kg, angka yang wajar dicatat.</p><p>Dalam gram angkanya menjadi 30.000 g dan dalam miligram 30.000.000 mg — keduanya terlalu besar untuk kartu pemeriksaan. Dalam hektogram menjadi 300 hg, satuan yang tidak lazim untuk berat badan.</p>"
+    },
+    {
+      "id": "msd-berat-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan skala timbangan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Timbangan jarum berbentuk lingkaran dengan angka tercetak 0, 1, 2, 3, 4, dan 5 (satuan kg) searah jarum jam, serta empat garis pendek tanpa angka di antara setiap dua angka sehingga satu garis pendek bernilai 200 g. Jarum menunjuk pada garis pendek kedua setelah angka 2. Tambahkan tulisan 'kg' kecil di tengah dial, tanpa menuliskan hasil pengukuran."
+      },
+      "stimulus": "<p>Sebuah timbangan mempunyai angka tercetak setiap 1 kg, dengan empat garis pendek di antara setiap dua angka. Jarum timbangan berhenti pada garis pendek kedua setelah angka 2.</p>",
+      "pertanyaan": "<p>Berat benda yang ditimbang itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2.200 g</p>",
+          "mis": "mis-msd-berat-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2.400 g</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2.002 g</p>",
+          "mis": "mis-msd-berat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>4.000 g</p>",
+          "mis": "mis-msd-berat-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Selisih dua angka tercetak adalah 1 kg = 1.000 g. Empat garis pendek membagi selang itu menjadi lima bagian, jadi satu garis pendek bernilai 1.000 : 5 = 200 g.</p><p>Garis kedua setelah angka 2 berarti 2 kg + 2 × 200 g = 2.000 + 400 = 2.400 g.</p><p>Pilihan A muncul bila garis dianggap bernilai 100 g, dan pilihan C bila banyak garis langsung ditulis sebagai gram.</p>"
+    },
+    {
+      "id": "msd-berat-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penjumlahan berat isi dan wadah",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah kotak kosong beratnya 400 g. Ke dalam kotak itu dimasukkan 12 bungkus biskuit yang masing-masing beratnya 250 g.</p>",
+      "pertanyaan": "<p>Berat kotak beserta isinya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>3 kg</p>",
+          "mis": "mis-msd-berat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>3,4 kg</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3,25 kg</p>",
+          "mis": "mis-msd-berat-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>6,4 kg</p>",
+          "mis": "mis-msd-berat-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Berat seluruh biskuit = 12 × 250 = 3.000 g.</p><p>Berat kotak beserta isinya = 3.000 + 400 = 3.400 g = 3,4 kg.</p><p>Pilihan A muncul bila berat kotak diabaikan.</p>"
+    },
+    {
+      "id": "msd-berat-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan keadaan setimbang pada neraca dua lengan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Neraca dua lengan dalam keadaan setimbang, lengan mendatar rata. Di piringan kiri tergambar sebuah kotak berlabel 'X' dan satu anak timbangan bertulis '200 g'. Di piringan kanan tergambar dua anak timbangan bertulis '500 g' dan '250 g'. Jangan menuliskan berat X pada gambar."
+      },
+      "stimulus": "<p>Sebuah neraca dua lengan berada dalam keadaan setimbang. Di piringan kiri terdapat benda X bersama anak timbangan 200 g, sedangkan di piringan kanan terdapat anak timbangan 500 g dan 250 g.</p>",
+      "pertanyaan": "<p>Berat benda X adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>350 g</p>",
+          "mis": "mis-msd-berat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>450 g</p>",
+          "mis": "mis-msd-berat-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>550 g</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>950 g</p>",
+          "mis": "mis-msd-berat-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Karena setimbang, berat di kedua piringan sama: X + 200 = 500 + 250 = 750 g.</p><p>Jadi X = 750 − 200 = 550 g.</p><p>Pilihan D muncul bila anak timbangan 200 g ikut dijumlahkan, bukan dikurangkan.</p>"
+    },
+    {
+      "id": "msd-berat-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan hubungan bruto, netto, dan tara",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sekarung gula ditimbang beserta karungnya dan hasilnya 5 kg. Karung kosongnya sendiri beratnya 250 g.</p>",
+      "pertanyaan": "<p>Berat bersih gula dalam karung itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4,5 kg</p>",
+          "mis": "mis-msd-berat-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4,75 kg</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>5,25 kg</p>",
+          "mis": "mis-msd-berat-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2,5 kg</p>",
+          "mis": "mis-msd-berat-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Berat kotor (bruto) 5 kg = 5.000 g, dan berat karung (tara) 250 g.</p><p>Berat bersih (netto) = 5.000 − 250 = 4.750 g = 4,75 kg.</p><p>Pilihan C keliru karena tara dijumlahkan; berat bersih tidak mungkin lebih besar daripada berat kotor.</p>"
+    },
+    {
+      "id": "msd-berat-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang batas beban yang mencakup berat wadah",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah tas hanya boleh menahan beban paling banyak 4 kg, terhitung tas beserta isinya. Tas kosong itu beratnya 500 g, dan setiap buku yang dimasukkan beratnya 250 g.</p>",
+      "pertanyaan": "<p>Banyak buku terbanyak yang dapat dimasukkan ke tas itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>12 buku</p>",
+          "mis": "mis-msd-berat-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>14 buku</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>16 buku</p>",
+          "mis": "mis-msd-berat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>18 buku</p>",
+          "mis": "mis-msd-berat-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Batas beban 4 kg = 4.000 g sudah termasuk tasnya, jadi jatah untuk buku = 4.000 − 500 = 3.500 g.</p><p>Banyak buku = 3.500 : 250 = 14 buku.</p><p>Pilihan C muncul bila berat tas diabaikan, yaitu 4.000 : 250 = 16 buku — dan itu justru membuat beban menjadi 4.500 g, melampaui batas.</p>"
+    },
+    {
+      "id": "msd-berat-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang hubungan besar benda dan beratnya",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Di atas meja terdapat sekantong besar kapas dan sebuah paku besi kecil. Seorang siswa berkata, “Kantong kapasnya jauh lebih besar, jadi pasti lebih berat daripada pakunya.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat siswa itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena benda yang lebih besar sudah pasti lebih berat daripada benda kecil.</p>",
+          "mis": "mis-msd-berat-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Belum tentu, karena berat bergantung pada bahannya sehingga keduanya harus ditimbang.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena benda yang lebih besar justru selalu lebih ringan daripada benda kecil.</p>",
+          "mis": "mis-msd-berat-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena satuan berat yang dipakai ditentukan oleh besar bendanya.</p>",
+          "mis": "mis-msd-berat-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Besar benda dan beratnya adalah dua hal berbeda. Kapas ringan meski memakan banyak ruang, sedangkan besi berat meski kecil.</p><p>Karena itu kesimpulan hanya boleh diambil setelah keduanya ditimbang. Dalam hal ini kantong kapas memang bisa lebih berat atau lebih ringan, bergantung banyaknya kapas.</p><p>Pilihan C sama kelirunya dengan pilihan A, hanya berlawanan arah — keduanya membuat aturan umum yang tidak berlaku.</p>"
+    },
+    {
+      "id": "msd-berat-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pemilihan satuan berat pada berbagai benda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas menyusun daftar satuan yang wajar untuk menyatakan berat berbagai benda.</p>",
+      "pertanyaan": "<p>Pilihan satuan yang sesuai adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Berat sebuah cincin dinyatakan dalam gram.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Berat seekor sapi dinyatakan dalam kilogram.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Berat satu butir tablet vitamin dinyatakan dalam miligram.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Berat satu karung beras dinyatakan dalam miligram.</p>",
+          "mis": "mis-msd-berat-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Berat seekor gajah dinyatakan dalam gram.</p>",
+          "mis": "mis-msd-berat-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A sesuai: berat cincin beberapa gram.</p><p>B sesuai: berat sapi ratusan kilogram.</p><p>C sesuai: berat satu tablet beberapa ratus miligram.</p><p>D tidak sesuai: satu karung beras 25 kg sama dengan 25.000.000 mg.</p><p>E tidak sesuai: gajah seberat 4.000 kg menjadi 4.000.000 g — angkanya terlalu besar untuk dibaca.</p>"
+    },
+    {
+      "id": "msd-berat-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang berat gabungan beberapa barang belanjaan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Ibu membeli 1,5 kg gula, 750 g tepung, dan 2 bungkus mentega yang masing-masing beratnya 200 g.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang belanjaan itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Berat seluruh belanjaan 2.650 g.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Berat seluruh belanjaan 2,65 kg.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Gula adalah barang yang paling berat di antara ketiganya.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Dua bungkus mentega lebih berat daripada tepungnya.</p>",
+          "mis": "mis-msd-berat-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Berat seluruh belanjaan kurang dari 2 kg.</p>",
+          "mis": "mis-msd-berat-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Seragamkan ke gram: gula 1.500 g, tepung 750 g, dan mentega 2 × 200 = 400 g.</p><p>Jumlahnya 1.500 + 750 + 400 = 2.650 g = 2,65 kg, jadi A dan B benar dan E salah.</p><p>C benar karena 1.500 g paling besar di antara 1.500, 750, dan 400.</p><p>D salah: 400 g justru lebih ringan daripada 750 g.</p>"
+    },
+    {
+      "id": "msd-berat-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang pengukuran berat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang pengukuran berat dikumpulkan dari catatan kelas untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 kg sama dengan 1.000 g.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Berat benda bertambah bila dipindahkan ke wadah yang lebih besar.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-berat-001"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Benda seberat 2.500 g lebih berat daripada benda seberat 2 kg.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Berat bersih suatu barang selalu lebih kecil daripada berat kotornya.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>1 hg sama dengan 1.000 g.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-berat-004"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: kg ke g turun tiga tangga, jadi dikali 1.000.</p><p>P2 salah: wadah yang lebih besar hanya menambah berat wadahnya, sedangkan berat benda itu sendiri tidak berubah.</p><p>P3 benar: 2 kg = 2.000 g, dan 2.500 g lebih besar daripada 2.000 g.</p><p>P4 benar: berat bersih = berat kotor − tara, dan tara selalu bernilai lebih dari nol karena setiap wadah punya berat.</p><p>P5 salah: 1 hg = 100 g, karena hg hanya dua tangga di atas gram sedangkan kg tiga tangga.</p>"
+    }
+  ]
+}

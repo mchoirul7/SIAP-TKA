@@ -1,0 +1,99 @@
+{
+  "mapel": {
+    "id": "sub-matematika-sd",
+    "slug": "matematika-sd",
+    "name": "Matematika SD",
+    "short_name": "Matematika",
+    "level": "SD",
+    "description": "Latihan dan tryout TKA Matematika tingkat SD sesuai matriks asesmen Pusmendik: Bilangan, Geometri dan Pengukuran, serta Data.",
+    "sort_order": 3
+  },
+
+  "seri": {
+    "id": "series-latihan-tka-matematika-sd",
+    "slug": "latihan-tka-matematika-sd",
+    "title": "Latihan TKA Matematika SD",
+    "description": "Seri latihan diagnostik TKA Matematika SD berdasarkan matriks asesmen Pusmendik. Satu paket untuk satu sub-elemen.",
+    "sort_order": 4
+  },
+
+  "produk": {
+    "id": "prd-latihan-tka-matematika-sd",
+    "slug": "latihan-tka-matematika-sd",
+    "title": "Latihan TKA Matematika SD",
+    "description": "Membuka seluruh paket latihan Matematika SD dalam seri Latihan TKA Matematika SD.",
+    "sort_order": 4
+  },
+
+  "_catatan_capaian": "Capaian mengikuti kolom Elemen/Materi pada matriks TKA SD, materi mengikuti kolom Sub-elemen/Submateri, dan submateri mengikuti tiap bullet kompetensi. Satu bullet = satu submateri = satu paket latihan.",
+
+  "capaian": [
+    {
+      "id": "top-matematika-sd-bilangan",
+      "slug": "bilangan",
+      "name": "Bilangan",
+      "description": "Memahami, mengaplikasikan, dan bernalar yang lebih tinggi untuk menyelesaikan permasalahan terkait bilangan rasional.",
+      "sort_order": 0
+    },
+    {
+      "id": "top-matematika-sd-geometri-pengukuran",
+      "slug": "geometri-dan-pengukuran",
+      "name": "Geometri dan Pengukuran",
+      "description": "Memahami, mengaplikasikan, dan bernalar yang lebih tinggi untuk menyelesaikan permasalahan terkait objek geometri dan pengukuran.",
+      "sort_order": 1
+    },
+    {
+      "id": "top-matematika-sd-data",
+      "slug": "data",
+      "name": "Data",
+      "description": "Memahami, mengaplikasikan, dan bernalar yang lebih tinggi untuk menyelesaikan permasalahan terkait penyajian dan penggunaan data.",
+      "sort_order": 2
+    }
+  ],
+
+  "materi": [
+    {
+      "id": "st-matematika-sd-bilangan-rasional",
+      "topic_id": "top-matematika-sd-bilangan",
+      "slug": "bilangan-rasional",
+      "name": "Bilangan Rasional",
+      "description": "Pecahan senilai, perbandingan dan pengurutan pecahan, relasi pecahan-desimal-persen, operasi bilangan cacah, operasi bilangan pecahan, serta kelipatan, faktor, KPK, dan FPB.",
+      "sort_order": 0
+    },
+    {
+      "id": "st-matematika-sd-objek-geometri",
+      "topic_id": "top-matematika-sd-geometri-pengukuran",
+      "slug": "objek-geometri",
+      "name": "Objek Geometri",
+      "description": "Bentuk bangun datar (segitiga, segiempat, segi banyak) serta konstruksi bangun ruang dan visualisasi spasial pada kubus, balok, dan gabungannya.",
+      "sort_order": 0
+    },
+    {
+      "id": "st-matematika-sd-pengukuran",
+      "topic_id": "top-matematika-sd-geometri-pengukuran",
+      "slug": "pengukuran",
+      "name": "Pengukuran",
+      "description": "Panjang, volume, berat, dan waktu dengan satuan baku beserta hubungan antar-satuannya, laju perubahan, keliling dan luas bangun datar, volume bangun ruang, besar sudut, dan penaksiran ukuran.",
+      "sort_order": 1
+    },
+    {
+      "id": "st-matematika-sd-penyajian-data",
+      "topic_id": "top-matematika-sd-data",
+      "slug": "penyajian-dan-penggunaan-data",
+      "name": "Penyajian dan Penggunaan Data",
+      "description": "Penyajian data dalam bentuk gambar, piktogram, diagram batang, dan tabel frekuensi, serta pengambilan informasi dan penggunaan data.",
+      "sort_order": 0
+    }
+  ],
+
+  "batasan": {
+    "bangun_datar": "Segitiga, segiempat, dan segi banyak. Lingkaran TIDAK termasuk cakupan keliling dan luas bangun datar TKA SD.",
+    "bangun_ruang": "Kubus, balok, dan gabungannya. Prisma lain, tabung, kerucut, dan bola tidak termasuk.",
+    "satuan_panjang": "mm, cm, dm, m, dam, hm, km",
+    "satuan_volume": "ml, cl, dl, l, dal, hl, kl",
+    "satuan_berat": "mg, cg, dg, g, dag, hg, kg",
+    "satuan_waktu": "detik, menit, jam, hari, pekan, bulan, tahun",
+    "bilangan": "Bilangan cacah dan pecahan positif. Tidak ada bilangan negatif, eksponen, akar, atau aljabar simbolik.",
+    "penyajian_data": "Gambar, piktogram, diagram batang, dan tabel frekuensi. Diagram lingkaran, diagram garis, dan ukuran penyebaran tidak termasuk."
+  }
+}

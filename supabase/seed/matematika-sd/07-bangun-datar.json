@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-bangun-datar",
+    "slug": "matematika-sd-bentuk-bangun-datar",
+    "title": "Bentuk Bangun Datar",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-objek-geometri",
+    "description": "Mengenali dan menggolongkan segitiga, segiempat, dan segi banyak dari sisi, sudut, diagonal, dan sumbu simetrinya, serta menalar hubungan antargolongan bangun.",
+    "summary": "10 soal diagnostik bergaya TKA untuk bentuk bangun datar: segitiga, segiempat, dan segi banyak.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengenali bangun datar dari sifat sisi dan sudutnya",
+      "Menghitung sumbu simetri bangun datar",
+      "Menentukan nama segi banyak dari banyak sisinya",
+      "Menalar hubungan antargolongan segiempat"
+    ],
+    "sort_order": 7
+  },
+  "submateri": {
+    "id": "con-matematika-sd-bangun-datar",
+    "name": "Bentuk bangun datar",
+    "description": "Menggolongkan dan mengenali segitiga, segiempat, dan segi banyak berdasarkan panjang sisi, besar sudut, diagonal, dan sumbu simetri. Bangun datar mencakup segitiga, segiempat, dan segi banyak."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-bangdat-001",
+      "label": "Persegi dan persegi panjang dianggap saling terpisah",
+      "description": "Siswa menganggap persegi bukan persegi panjang karena keduanya diberi nama berbeda, sehingga golongan bangun dianggap tidak dapat bertumpang.",
+      "insight": "Persegi memenuhi semua syarat persegi panjang dan menambahkan satu syarat lagi, yaitu keempat sisinya sama panjang."
+    },
+    {
+      "id": "mis-msd-bangdat-002",
+      "label": "Belah ketupat dianggap harus bersudut siku-siku",
+      "description": "Siswa mencampur syarat belah ketupat dengan syarat persegi, sehingga bangun bersisi empat sama panjang tanpa sudut siku-siku tidak dikenali sebagai belah ketupat.",
+      "insight": "Belah ketupat hanya menuntut keempat sisi sama panjang; sudut siku-siku adalah syarat tambahan milik persegi."
+    },
+    {
+      "id": "mis-msd-bangdat-003",
+      "label": "Sumbu simetri persegi panjang dianggap empat",
+      "description": "Siswa menyalin banyak sumbu simetri persegi ke persegi panjang, sehingga menghitung empat padahal hanya dua.",
+      "insight": "Lipatan sepanjang diagonal persegi panjang tidak menghasilkan dua bagian yang saling menutup, jadi diagonalnya bukan sumbu simetri."
+    },
+    {
+      "id": "mis-msd-bangdat-004",
+      "label": "Nama segi banyak ditentukan dari sudut yang tampak menonjol",
+      "description": "Pada bangun gabungan, siswa hanya menghitung sudut yang menonjol ke luar dan melewatkan sudut yang menjorok ke dalam.",
+      "insight": "Nama segi banyak ditentukan oleh banyak sisinya; hitung sisi satu per satu mengikuti tepi bangun sampai kembali ke titik awal."
+    },
+    {
+      "id": "mis-msd-bangdat-005",
+      "label": "Trapesium dianggap punya dua pasang sisi sejajar",
+      "description": "Siswa menyamakan trapesium dengan jajar genjang, sehingga menganggap kedua pasang sisi trapesium sejajar.",
+      "insight": "Trapesium hanya dijamin mempunyai satu pasang sisi sejajar; bila dua pasang sisinya sejajar, bangun itu sudah menjadi jajar genjang."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-bangdat-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami ciri bangun datar dari sisi dan sudutnya",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah ubin lantai mempunyai empat sisi yang sama panjang dan keempat sudutnya berbentuk siku-siku.</p>",
+      "pertanyaan": "<p>Bentuk ubin itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>persegi</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>persegi panjang</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>belah ketupat</p>",
+          "mis": "mis-msd-bangdat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>jajar genjang</p>",
+          "mis": "mis-msd-bangdat-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Bangun bersisi empat dengan keempat sisi sama panjang sekaligus keempat sudut siku-siku disebut persegi.</p><p>Persegi panjang memenuhi syarat sudut siku-siku tetapi tidak menuntut sisinya sama panjang; belah ketupat memenuhi syarat sisi sama panjang tetapi tidak menuntut sudut siku-siku. Persegi memenuhi keduanya.</p>"
+    },
+    {
+      "id": "msd-bangdat-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami penggolongan segitiga menurut panjang sisinya",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Rangka hiasan dinding berbentuk segitiga. Dua sisinya diukur sama panjang, yaitu 15 cm, sedangkan sisi ketiganya 20 cm.</p>",
+      "pertanyaan": "<p>Segitiga pada rangka itu tergolong ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>segitiga sama sisi</p>",
+          "mis": "mis-msd-bangdat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>segitiga siku-siku</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>segitiga sembarang</p>",
+          "mis": "mis-msd-bangdat-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>segitiga sama kaki</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Segitiga dengan tepat dua sisi sama panjang disebut segitiga sama kaki.</p><p>Segitiga sama sisi menuntut ketiga sisinya sama panjang, sedangkan segitiga sembarang tidak punya sisi yang sama panjang. Penggolongan siku-siku ditentukan oleh sudutnya, bukan sisinya, dan tidak ada keterangan sudut pada soal.</p>"
+    },
+    {
+      "id": "msd-bangdat-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan sifat segiempat untuk mengenali bangunnya",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Bangun ABCD mempunyai sifat berikut:</p><ul><li>dua pasang sisi berhadapan sejajar;</li><li>sisi yang berhadapan sama panjang;</li><li>keempat sudutnya tidak siku-siku;</li><li>keempat sisinya tidak sama panjang.</li></ul>",
+      "pertanyaan": "<p>Bangun ABCD adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>persegi panjang</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>belah ketupat</p>",
+          "mis": "mis-msd-bangdat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>trapesium</p>",
+          "mis": "mis-msd-bangdat-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>jajar genjang</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Dua pasang sisi sejajar dengan sisi berhadapan sama panjang adalah ciri jajar genjang.</p><p>Persegi panjang tersingkir karena sudutnya harus siku-siku, dan belah ketupat tersingkir karena keempat sisinya harus sama panjang. Trapesium hanya dijamin mempunyai satu pasang sisi sejajar, sehingga syarat pertama tidak terpenuhi sebagai penciri trapesium.</p>"
+    },
+    {
+      "id": "msd-bangdat-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penamaan segi banyak pada bangun gabungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Denah lantai berbentuk huruf L dilihat dari atas, bergaris tepi tebal dan berlatar abu muda. Bentuknya dibuat dari persegi panjang besar 6 satuan × 4 satuan yang salah satu sudut kanan atasnya dipotong oleh persegi panjang 3 satuan × 2 satuan. Tandai setiap sisi lurus dengan huruf a sampai f mengikuti tepinya searah jarum jam, tanpa menuliskan nama bangunnya."
+      },
+      "stimulus": "<p>Lantai ruang serbaguna berbentuk seperti huruf L. Bentuk itu dibuat dari sebuah persegi panjang besar yang salah satu sudutnya dipotong oleh persegi panjang yang lebih kecil. Seluruh tepinya berupa garis lurus.</p>",
+      "pertanyaan": "<p>Lantai ruang itu berbentuk ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>segi empat</p>",
+          "mis": "mis-msd-bangdat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>segi lima</p>",
+          "mis": "mis-msd-bangdat-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>segi enam</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>segi delapan</p>",
+          "mis": "mis-msd-bangdat-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Ikuti tepi bangun berbentuk huruf L satu per satu sampai kembali ke titik awal. Ternyata ada 6 sisi lurus, jadi bangunnya segi enam.</p><p>Bangun ini mempunyai 5 sudut yang menonjol ke luar dan 1 sudut yang menjorok ke dalam. Bila hanya sudut menonjol yang dihitung, hasilnya keliru menjadi segi lima.</p><p>Nama segi banyak ditentukan oleh banyak sisinya, bukan oleh sudut yang tampak menonjol saja.</p>"
+    },
+    {
+      "id": "msd-bangdat-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan sumbu simetri pada bangun datar",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Selembar kertas berbentuk persegi panjang berukuran 20 cm × 12 cm dilipat dengan berbagai cara. Lipatan disebut sumbu simetri bila kedua bagian kertas saling menutup tepat.</p>",
+      "pertanyaan": "<p>Banyak sumbu simetri persegi panjang itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1</p>",
+          "mis": "mis-msd-bangdat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>tak terhingga</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4</p>",
+          "mis": "mis-msd-bangdat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Lipatan mendatar di tengah dan lipatan tegak di tengah keduanya menghasilkan dua bagian yang saling menutup, jadi ada 2 sumbu simetri.</p><p>Lipatan sepanjang diagonal tidak menghasilkan dua bagian yang saling menutup pada persegi panjang, karena sisi 20 cm tidak akan jatuh tepat di atas sisi 12 cm.</p><p>Persegi memang mempunyai 4 sumbu simetri, tetapi itu berlaku hanya bila keempat sisinya sama panjang.</p>"
+    },
+    {
+      "id": "msd-bangdat-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang hubungan antargolongan segiempat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua siswa berdebat. Sari berkata, “Persegi itu juga persegi panjang.” Beni membalas, “Kalau begitu, persegi panjang juga persegi.”</p>",
+      "pertanyaan": "<p>Penilaian yang tepat terhadap kedua pendapat itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Keduanya benar, karena persegi dan persegi panjang sama-sama bersisi empat.</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Keduanya salah, karena persegi dan persegi panjang adalah dua golongan yang tidak berhubungan.</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Hanya Beni yang benar, karena persegi panjang mempunyai lebih banyak sifat.</p>",
+          "mis": "mis-msd-bangdat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Hanya Sari yang benar, karena persegi memenuhi semua syarat persegi panjang, sedangkan persegi panjang belum tentu bersisi empat sama panjang.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Syarat persegi panjang adalah bersisi empat dengan keempat sudut siku-siku. Persegi memenuhi syarat itu, jadi setiap persegi adalah persegi panjang — pendapat Sari benar.</p><p>Sebaliknya tidak berlaku: persegi panjang berukuran 20 cm × 12 cm bersudut siku-siku semua tetapi sisinya tidak sama panjang, sehingga bukan persegi. Pendapat Beni salah.</p><p>Hubungan seperti ini searah, mirip dengan “setiap kucing adalah hewan, tetapi tidak setiap hewan adalah kucing”.</p>"
+    },
+    {
+      "id": "msd-bangdat-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang kedudukan belah ketupat dalam golongan segiempat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Guru menggambar belah ketupat yang keempat sisinya 8 cm dan tidak satu pun sudutnya siku-siku. Kelas ditanya apakah bangun itu termasuk jajar genjang.</p>",
+      "pertanyaan": "<p>Jawaban beserta alasan yang tepat adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Termasuk, karena kedua pasang sisi berhadapannya sejajar dan sama panjang.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tidak termasuk, karena jajar genjang harus mempunyai sisi yang tidak sama panjang.</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Tidak termasuk, karena jajar genjang harus mempunyai sudut siku-siku.</p>",
+          "mis": "mis-msd-bangdat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Termasuk, karena setiap bangun bersisi empat adalah jajar genjang.</p>",
+          "mis": "mis-msd-bangdat-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Syarat jajar genjang adalah dua pasang sisi berhadapan yang sejajar. Pada belah ketupat, syarat itu terpenuhi, jadi belah ketupat termasuk jajar genjang.</p><p>Jajar genjang tidak menuntut sudut siku-siku maupun sisi yang berbeda panjang, sehingga alasan pada pilihan B dan C tidak berlaku.</p><p>Pilihan D terlalu luas: trapesium bersisi empat tetapi hanya satu pasang sisinya yang sejajar, sehingga bukan jajar genjang.</p>"
+    },
+    {
+      "id": "msd-bangdat-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan sifat persegi panjang untuk menyaring pernyataan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas mendaftar sifat-sifat persegi panjang di papan tulis. Beberapa di antaranya perlu diperiksa kembali.</p>",
+      "pertanyaan": "<p>Sifat yang pasti dimiliki setiap persegi panjang adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Keempat sudutnya siku-siku.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Sisi yang berhadapan sama panjang dan sejajar.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kedua diagonalnya sama panjang.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Keempat sisinya sama panjang.</p>",
+          "mis": "mis-msd-bangdat-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Mempunyai 4 sumbu simetri.</p>",
+          "mis": "mis-msd-bangdat-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A, B, dan C adalah sifat yang berlaku pada setiap persegi panjang, termasuk persegi.</p><p>D salah sebagai sifat umum: persegi panjang 20 cm × 12 cm tidak bersisi sama panjang. Sifat itu hanya milik persegi.</p><p>E salah: persegi panjang yang bukan persegi hanya mempunyai 2 sumbu simetri.</p>"
+    },
+    {
+      "id": "msd-bangdat-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang sifat segitiga, segiempat, dan segi banyak beraturan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Beberapa kesimpulan hasil kerja kelompok tentang bangun datar dikumpulkan untuk diperiksa.</p>",
+      "pertanyaan": "<p>Kesimpulan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Segi enam beraturan mempunyai 6 sumbu simetri.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Belah ketupat termasuk bangun segi empat.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Setiap trapesium mempunyai dua pasang sisi sejajar.</p>",
+          "mis": "mis-msd-bangdat-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Segitiga sama sisi mempunyai 3 sumbu simetri.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Setiap bangun segi empat mempunyai dua diagonal yang sama panjang.</p>",
+          "mis": "mis-msd-bangdat-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: pada segi banyak beraturan, banyak sumbu simetri sama dengan banyak sisinya.</p><p>B benar: belah ketupat mempunyai empat sisi, jadi termasuk segi empat.</p><p>C salah: trapesium hanya dijamin satu pasang sisi sejajar. Bila dua pasang sisinya sejajar, bangun itu sudah menjadi jajar genjang.</p><p>D benar: sumbu simetrinya melewati setiap titik sudut menuju tengah sisi di hadapannya.</p><p>E salah: pada jajar genjang biasa maupun belah ketupat, kedua diagonalnya berbeda panjang.</p>"
+    },
+    {
+      "id": "msd-bangdat-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang golongan bangun datar",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang bangun datar ditempel di papan pengumuman kelas untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Setiap persegi adalah belah ketupat.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Setiap belah ketupat adalah persegi.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-bangdat-002"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Segitiga sama sisi juga merupakan segitiga sama kaki.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Jajar genjang yang bukan persegi panjang mempunyai satu sumbu simetri.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-bangdat-003"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Segi delapan beraturan mempunyai 8 sisi yang sama panjang.</p>",
+          "kategori": "B"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: persegi bersisi empat sama panjang, yang merupakan syarat belah ketupat.</p><p>P2 salah: belah ketupat bersudut 60° dan 120° tetap bersisi sama panjang, tetapi bukan persegi karena sudutnya tidak siku-siku.</p><p>P3 benar: segitiga sama kaki menuntut paling sedikit dua sisi sama panjang, dan segitiga sama sisi memenuhinya.</p><p>P4 salah: jajar genjang yang bukan persegi panjang tidak mempunyai sumbu simetri sama sekali. Bangun itu hanya setangkup bila diputar setengah putaran.</p><p>P5 benar: pada segi banyak beraturan, semua sisinya sama panjang dan semua sudutnya sama besar.</p>"
+    }
+  ]
+}

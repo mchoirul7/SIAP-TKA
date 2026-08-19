@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-konversi-berat",
+    "slug": "matematika-sd-hubungan-antar-satuan-berat",
+    "title": "Hubungan Antar-Satuan Baku Berat",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengubah dan membandingkan satuan berat mg, cg, dg, g, dag, hg, dan kg, termasuk menjumlahkan berat bersatuan berbeda dan menalar arah tangga satuan.",
+    "summary": "10 soal diagnostik bergaya TKA untuk hubungan antar-satuan baku berat (mg, dg, cg, g, dag, hg, kg).",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengubah satuan berat naik dan turun tangga",
+      "Menjumlahkan berat yang satuannya berbeda",
+      "Mengurutkan berat setelah menyeragamkan satuan",
+      "Membedakan dag, hg, dan kg"
+    ],
+    "sort_order": 14
+  },
+  "submateri": {
+    "id": "con-matematika-sd-konversi-berat",
+    "name": "Hubungan antar-satuan baku berat (mg, dg, cg, g, dag, hg, kg)",
+    "description": "Menentukan kesetaraan antarsatuan berat pada tangga satuan dan memakainya untuk menjumlahkan, membandingkan, serta mengurutkan berat."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-konvberat-001",
+      "label": "Arah tangga satuan berat terbalik",
+      "description": "Siswa mengalikan ketika seharusnya membagi, misalnya mengubah gram menjadi kilogram dengan mengalikan 1.000.",
+      "insight": "Satuan yang lebih besar memberi angka yang lebih kecil, jadi gram dibagi 1.000 untuk menjadi kilogram."
+    },
+    {
+      "id": "mis-msd-konvberat-002",
+      "label": "Tangga dag, hg, cg, atau dg dilompati",
+      "description": "Siswa melompati satu tangga sehingga pengalinya kurang atau lebih satu angka nol, misalnya menganggap 1 hg sama dengan 1.000 g.",
+      "insight": "Urutan tangganya kg, hg, dag, g, dg, cg, mg — hitung satu per satu tanpa melompat."
+    },
+    {
+      "id": "mis-msd-konvberat-003",
+      "label": "Setiap tangga dianggap berkelipatan 1.000",
+      "description": "Siswa memakai pengali 1.000 untuk setiap perpindahan satuan berat, karena hanya menghafal hubungan kg dan g.",
+      "insight": "Setiap tangga hanya berkelipatan 10; pengali 1.000 muncul karena kg dan g terpisah tiga tangga."
+    },
+    {
+      "id": "mis-msd-konvberat-004",
+      "label": "Perpindahan koma keliru banyak angkanya",
+      "description": "Pada bentuk desimal, siswa memindahkan koma lebih sedikit atau lebih banyak daripada banyak tangga yang dilewati.",
+      "insight": "Banyak angka perpindahan koma sama dengan banyak tangga yang dilewati, satu angka untuk satu tangga."
+    },
+    {
+      "id": "mis-msd-konvberat-005",
+      "label": "Membandingkan angka tanpa menyeragamkan satuan",
+      "description": "Siswa langsung membandingkan angkanya, sehingga 45.000 cg dianggap jauh lebih berat daripada 0,4 kg.",
+      "insight": "Ubah semua besaran ke satu satuan yang sama lebih dahulu, baru bandingkan angkanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-konvberat-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan kilogram ke gram",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sekantong tepung beratnya 3 kg. Penjual kue ingin menuliskan beratnya dalam gram supaya sesuai dengan takaran resepnya.</p>",
+      "pertanyaan": "<p>Berat tepung itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>300 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3.000 g</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>30.000 g</p>",
+          "mis": "mis-msd-konvberat-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Dari kg ke g turun tiga tangga: kg ke hg, hg ke dag, dag ke g. Pengalinya 10 × 10 × 10 = 1.000.</p><p>3 × 1.000 = 3.000 g.</p><p>Pilihan B muncul bila satu tangga dilompati sehingga hanya dikali 100.</p>"
+    },
+    {
+      "id": "msd-konvberat-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan gram ke kilogram",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Timbangan digital di pasar menunjukkan berat buah 5.000 g. Pembeli ingin mencatatnya dalam kilogram pada daftar belanjanya.</p>",
+      "pertanyaan": "<p>Berat buah itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0,5 kg</p>",
+          "mis": "mis-msd-konvberat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>5.000.000 kg</p>",
+          "mis": "mis-msd-konvberat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>50 kg</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5 kg</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Dari g ke kg naik tiga tangga, jadi dibagi 1.000.</p><p>5.000 : 1.000 = 5 kg.</p><p>Pilihan B muncul bila justru dikalikan; hasilnya mustahil karena sekantong buah tidak mungkin seberat lima juta kilogram.</p>"
+    },
+    {
+      "id": "msd-konvberat-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan hektogram ke gram",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pada bungkus kacang tertulis berat isi 4 hg. Pembeli ingin mengetahui berat itu dalam gram.</p>",
+      "pertanyaan": "<p>Berat isi bungkus kacang itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>40 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>0,4 g</p>",
+          "mis": "mis-msd-konvberat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4.000 g</p>",
+          "mis": "mis-msd-konvberat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>400 g</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Dari hg ke g turun dua tangga: hg ke dag, dag ke g. Pengalinya 10 × 10 = 100.</p><p>4 × 100 = 400 g.</p><p>Pilihan C muncul bila hg dianggap sama jaraknya dengan kg terhadap gram, yaitu tiga tangga.</p>"
+    },
+    {
+      "id": "msd-konvberat-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penjumlahan berat bersatuan berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah keranjang belanja berisi 2 kg beras, 5 hg gula, dan 250 g garam.</p>",
+      "pertanyaan": "<p>Berat seluruh isi keranjang itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>257 g</p>",
+          "mis": "mis-msd-konvberat-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2.550 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2.750 g</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>7.250 g</p>",
+          "mis": "mis-msd-konvberat-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Seragamkan ke gram: 2 kg = 2.000 g, 5 hg = 5 × 100 = 500 g, dan 250 g tetap.</p><p>Jumlahnya = 2.000 + 500 + 250 = 2.750 g, atau 2,75 kg.</p><p>Pilihan B muncul bila 5 hg dianggap 50 g, dan pilihan D bila dianggap 5.000 g.</p>"
+    },
+    {
+      "id": "msd-konvberat-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan miligram ke gram",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pada kemasan obat tertulis bahwa satu bungkus mengandung 7.500 mg bahan aktif. Apoteker ingin mencatatnya dalam gram.</p>",
+      "pertanyaan": "<p>Berat bahan aktif itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0,75 g</p>",
+          "mis": "mis-msd-konvberat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>7.500.000 g</p>",
+          "mis": "mis-msd-konvberat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>75 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>7,5 g</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Dari mg ke g naik tiga tangga: mg ke cg, cg ke dg, dg ke g. Jadi dibagi 1.000.</p><p>7.500 : 1.000 = 7,5 g.</p><p>Pilihan A muncul bila komanya digeser empat angka, dan pilihan C bila hanya digeser dua angka.</p>"
+    },
+    {
+      "id": "msd-konvberat-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengurutkan berat yang satuannya berbeda-beda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat paket kiriman ditimbang dan dicatat dengan satuan yang berbeda-beda:</p><ul><li>Paket I: 0,4 kg</li><li>Paket II: 380 g</li><li>Paket III: 4.200 dg</li><li>Paket IV: 45.000 cg</li></ul>",
+      "pertanyaan": "<p>Urutan paket dari yang paling ringan adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Paket II, Paket I, Paket III, Paket IV</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Paket I, Paket II, Paket III, Paket IV</p>",
+          "mis": "mis-msd-konvberat-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Paket II, Paket III, Paket I, Paket IV</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Paket IV, Paket III, Paket II, Paket I</p>",
+          "mis": "mis-msd-konvberat-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seragamkan semuanya ke gram:</p><ul><li>Paket I: 0,4 kg = 400 g</li><li>Paket II: 380 g</li><li>Paket III: 4.200 dg = 4.200 : 10 = 420 g</li><li>Paket IV: 45.000 cg = 45.000 : 100 = 450 g</li></ul><p>Urutan dari paling ringan: 380, 400, 420, 450, yaitu Paket II, Paket I, Paket III, Paket IV.</p><p>Paket bersatuan cg tampak berangka paling besar, padahal beratnya hanya 450 g.</p>"
+    },
+    {
+      "id": "msd-konvberat-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang kesetaraan dekagram dan gram",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Rina menulis di bukunya, “1 dag sama dengan 100 g, karena setiap perpindahan satuan berat dikalikan 100.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap catatan Rina adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena setiap tangga satuan berat memang berkelipatan 100.</p>",
+          "mis": "mis-msd-konvberat-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Benar, karena dag dan hg sesungguhnya dua nama untuk satuan yang sama.</p>",
+          "mis": "mis-msd-konvberat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena 1 dag sebenarnya sama dengan 1.000 g seperti hubungan kg dan g.</p>",
+          "mis": "mis-msd-konvberat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Salah, karena dag hanya satu tangga di atas gram, jadi 1 dag = 10 g.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Urutan tangga satuan berat adalah kg, hg, dag, g, dg, cg, mg, dan setiap tangga berkelipatan 10 — bukan 100.</p><p>Karena dag hanya satu tangga di atas gram, maka 1 dag = 10 g. Nilai 100 g diperoleh dari 1 hg, yang berjarak dua tangga.</p><p>Pengali 1.000 pada hubungan kg dan g muncul karena keduanya terpisah tiga tangga, bukan karena setiap tangga bernilai 1.000.</p>"
+    },
+    {
+      "id": "msd-konvberat-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan kesetaraan antarsatuan berat",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Beberapa kesetaraan satuan berat ditulis di papan tulis untuk diperiksa kebenarannya.</p>",
+      "pertanyaan": "<p>Kesetaraan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1 kg = 10 hg</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1 g = 1.000 mg</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1 dag = 10 g</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1 hg = 1.000 g</p>",
+          "mis": "mis-msd-konvberat-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1 cg = 100 mg</p>",
+          "mis": "mis-msd-konvberat-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: kg ke hg turun satu tangga, jadi dikali 10.</p><p>B benar: g ke mg turun tiga tangga, jadi dikali 1.000.</p><p>C benar: dag ke g turun satu tangga, jadi dikali 10.</p><p>D salah: 1 hg = 100 g, karena hg dua tangga di atas gram.</p><p>E salah: 1 cg = 10 mg, karena cg hanya satu tangga di atas mg.</p>"
+    },
+    {
+      "id": "msd-konvberat-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang berbagai penulisan satu berat yang sama",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Berat sebuah paket adalah 1,25 kg. Berat itu akan dicatat dengan beberapa satuan berbeda pada formulir pengiriman.</p>",
+      "pertanyaan": "<p>Penulisan yang benar untuk berat paket itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1.250 g</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>12,5 hg</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>125 dag</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>125.000 mg</p>",
+          "mis": "mis-msd-konvberat-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>12.500 g</p>",
+          "mis": "mis-msd-konvberat-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 1,25 × 1.000 = 1.250 g.</p><p>B benar: kg ke hg turun satu tangga, jadi 1,25 × 10 = 12,5 hg.</p><p>C benar: kg ke dag turun dua tangga, jadi 1,25 × 100 = 125 dag.</p><p>D salah: 1.250 g = 1.250.000 mg. Angka 125.000 mg hanya sama dengan 125 g.</p><p>E salah: 12.500 g sama dengan 12,5 kg, sepuluh kali lebih berat daripada paket itu.</p>"
+    },
+    {
+      "id": "msd-konvberat-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang hubungan antar-satuan berat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang satuan berat dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 hg sama dengan 100 g.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>250 mg sama dengan 2,5 g.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvberat-004"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>0,75 kg sama dengan 750 g.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>1 dg lebih berat daripada 1 cg.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Mengubah miligram menjadi gram dilakukan dengan mengalikan 1.000.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvberat-001"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: hg ke g turun dua tangga, jadi dikali 100.</p><p>P2 salah: 250 mg = 0,25 g, karena mg ke g naik tiga tangga sehingga dibagi 1.000. Nilai 2,5 g sama dengan 2.500 mg.</p><p>P3 benar: 0,75 × 1.000 = 750 g.</p><p>P4 benar: dg berada satu tangga di atas cg, sehingga 1 dg = 10 cg.</p><p>P5 salah: gram lebih besar daripada miligram, jadi angkanya berkurang — miligram dibagi 1.000 untuk menjadi gram.</p>"
+    }
+  ]
+}

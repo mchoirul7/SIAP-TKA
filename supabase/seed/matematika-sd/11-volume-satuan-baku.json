@@ -1,0 +1,431 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-volume-satuan-baku",
+    "slug": "matematika-sd-volume-benda-satuan-baku",
+    "title": "Volume Benda dengan Satuan Baku",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengukur volume dan isi benda dengan satuan baku: memilih satuan yang sesuai, membaca gelas ukur, menuang antarwadah, dan mengukur volume benda padat lewat kenaikan air.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengukuran volume benda menggunakan satuan baku.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Memilih satuan volume yang sesuai dengan wadah",
+      "Membaca skala gelas ukur",
+      "Menghitung isi setelah dituang antarwadah",
+      "Mengukur volume benda padat dari kenaikan permukaan air"
+    ],
+    "sort_order": 11
+  },
+  "submateri": {
+    "id": "con-matematika-sd-volume-satuan-baku",
+    "name": "Volume benda menggunakan satuan baku",
+    "description": "Mengukur dan menuliskan volume atau isi benda dengan satuan baku ml, cl, dl, l, dal, hl, dan kl, termasuk membaca alat ukur dan mengukur benda padat lewat kenaikan air."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-volbenda-001",
+      "label": "Tinggi permukaan air dianggap menentukan volume",
+      "description": "Siswa menyimpulkan wadah yang permukaan airnya lebih tinggi pasti berisi air lebih banyak, tanpa memperhatikan luas dasar wadahnya.",
+      "insight": "Volume ditentukan oleh luas dasar dan tinggi bersama-sama; wadah sempit membuat air yang sama tampak jauh lebih tinggi."
+    },
+    {
+      "id": "mis-msd-volbenda-002",
+      "label": "Satuan volume dipilih tanpa memperhatikan besar wadah",
+      "description": "Siswa menyatakan isi gelas dalam kiloliter atau isi tangki air dalam mililiter, sehingga angkanya menjadi tidak wajar.",
+      "insight": "Pilih ml untuk wadah kecil seperti gelas dan sendok obat, l untuk ember dan botol besar, serta kl untuk tangki dan kolam."
+    },
+    {
+      "id": "mis-msd-volbenda-003",
+      "label": "Skala gelas ukur dihitung per garis",
+      "description": "Siswa menghitung banyak garis pada gelas ukur sebagai hasil pengukuran, tanpa memperhatikan nilai setiap garisnya.",
+      "insight": "Periksa dulu nilai satu garis dengan membagi selisih dua angka tercetak dengan banyak garis di antaranya."
+    },
+    {
+      "id": "mis-msd-volbenda-004",
+      "label": "Volume benda tenggelam dianggap tinggi air akhir",
+      "description": "Saat benda dimasukkan ke gelas ukur, siswa membaca angka permukaan air terakhir sebagai volume bendanya.",
+      "insight": "Volume benda sama dengan selisih permukaan air sesudah dan sebelum benda dimasukkan."
+    },
+    {
+      "id": "mis-msd-volbenda-005",
+      "label": "Volume dianggap berubah saat dipindahkan",
+      "description": "Siswa menganggap banyak air berubah ketika dituang ke wadah yang bentuknya berbeda.",
+      "insight": "Menuang hanya mengubah bentuk permukaan air, bukan banyaknya; volume air tetap selama tidak ada yang tercecer."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-volbenda-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pemilihan satuan volume yang sesuai",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Pada kemasan minuman kotak untuk anak, isi minuman perlu dicantumkan dengan satuan yang wajar. Isi satu kotak kira-kira sebanyak satu gelas minum.</p>",
+      "pertanyaan": "<p>Satuan baku yang paling sesuai untuk mencantumkan isi minuman itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>mililiter</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>liter</p>",
+          "mis": "mis-msd-volbenda-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>hektoliter</p>",
+          "mis": "mis-msd-volbenda-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>kiloliter</p>",
+          "mis": "mis-msd-volbenda-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Isi satu gelas minum kira-kira 200 ml, angka yang wajar dibaca.</p><p>Dalam liter angkanya menjadi 0,2 l, dalam hektoliter 0,002 hl, dan dalam kiloliter 0,0002 kl — semuanya terlalu kecil untuk dicantumkan pada kemasan.</p>"
+    },
+    {
+      "id": "msd-volbenda-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan skala gelas ukur",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gelas ukur tegak bening dengan skala di sisi kanan: angka tercetak 0, 100, 200, 300, 400, dan 500 ml, serta garis pendek tanpa angka tepat di tengah tiap dua angka (yaitu setiap 50 ml). Air berwarna biru muda mengisi gelas sampai garis pendek yang berada di antara angka 300 dan 400. Jangan menuliskan nilai volumenya pada gambar."
+      },
+      "stimulus": "<p>Sebuah gelas ukur mempunyai angka tercetak setiap 100 ml, dengan satu garis pendek tepat di tengah setiap dua angka. Permukaan air berada tepat pada garis pendek antara angka 300 dan 400.</p>",
+      "pertanyaan": "<p>Volume air dalam gelas ukur itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>300 ml</p>",
+          "mis": "mis-msd-volbenda-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>3,5 ml</p>",
+          "mis": "mis-msd-volbenda-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>400 ml</p>",
+          "mis": "mis-msd-volbenda-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>350 ml</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Selisih dua angka tercetak adalah 100 ml, dan di antaranya ada satu garis pendek yang membaginya menjadi dua bagian. Jadi satu garis pendek bernilai 50 ml.</p><p>Permukaan air pada garis di antara 300 dan 400 berarti 300 + 50 = 350 ml.</p>"
+    },
+    {
+      "id": "msd-volbenda-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembagian isi wadah besar ke wadah kecil",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah botol berisi penuh 600 ml sirop. Sirop itu dituang ke gelas-gelas kecil yang masing-masing berisi 150 ml sampai penuh.</p>",
+      "pertanyaan": "<p>Banyak gelas penuh yang dapat diisi dari botol itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>3 gelas</p>",
+          "mis": "mis-msd-volbenda-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>5 gelas</p>",
+          "mis": "mis-msd-volbenda-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4 gelas</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>45 gelas</p>",
+          "mis": "mis-msd-volbenda-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Banyak gelas = 600 : 150 = 4 gelas.</p><p>Periksa: 4 × 150 = 600 ml, tepat habis tanpa sisa.</p>"
+    },
+    {
+      "id": "msd-volbenda-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penambahan isi dengan satuan berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah ember sudah berisi 8 l air. Ke dalam ember itu dituangkan 3 botol air yang masing-masing berisi 750 ml.</p>",
+      "pertanyaan": "<p>Isi ember sekarang adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>8,75 l</p>",
+          "mis": "mis-msd-volbenda-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>11 l</p>",
+          "mis": "mis-msd-volbenda-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>10,75 l</p>",
+          "mis": "mis-msd-volbenda-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>10,25 l</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Air yang dituangkan = 3 × 750 = 2.250 ml = 2,25 l.</p><p>Isi ember = 8 + 2,25 = 10,25 l.</p><p>Pilihan A muncul bila hanya satu botol yang dihitung, dan pilihan B bila 750 ml dibulatkan menjadi 1 l.</p>"
+    },
+    {
+      "id": "msd-volbenda-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembagian volume secara merata",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Air sebanyak 2 l dituang rata ke dalam 8 gelas yang sama besar sampai seluruh air habis.</p>",
+      "pertanyaan": "<p>Isi setiap gelas adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>25 ml</p>",
+          "mis": "mis-msd-volbenda-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>160 ml</p>",
+          "mis": "mis-msd-volbenda-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>250 ml</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>400 ml</p>",
+          "mis": "mis-msd-volbenda-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Ubah lebih dahulu: 2 l = 2.000 ml.</p><p>Isi setiap gelas = 2.000 : 8 = 250 ml.</p><p>Periksa: 8 × 250 = 2.000 ml, sesuai. Pilihan D adalah pembagian untuk 5 gelas, bukan 8 gelas.</p>"
+    },
+    {
+      "id": "msd-volbenda-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang tinggi permukaan air pada wadah berbeda bentuk",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "visual": {
+        "type": "svg",
+        "prompt": "Dua wadah bening berdampingan di atas meja datar. Wadah kiri lebar dan pendek, wadah kanan sempit dan tinggi. Keduanya berisi air biru muda; permukaan air di wadah kanan jauh lebih tinggi daripada di wadah kiri, sedangkan luas daerah berisi air digambar sama besar. Beri label 'Wadah P' pada yang lebar dan 'Wadah Q' pada yang sempit, tanpa mencantumkan angka volume."
+      },
+      "stimulus": "<p>Air sebanyak 500 ml dituang ke Wadah P yang lebar dan pendek, lalu 500 ml lainnya dituang ke Wadah Q yang sempit dan tinggi. Ternyata permukaan air di Wadah Q jauh lebih tinggi daripada di Wadah P.</p>",
+      "pertanyaan": "<p>Kesimpulan yang tepat tentang kedua wadah itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Air di Wadah Q lebih banyak, karena permukaannya lebih tinggi.</p>",
+          "mis": "mis-msd-volbenda-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Volume air berubah saat dituang ke wadah yang bentuknya berbeda.</p>",
+          "mis": "mis-msd-volbenda-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Air di Wadah P lebih banyak, karena wadahnya lebih lebar.</p>",
+          "mis": "mis-msd-volbenda-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Air di kedua wadah sama banyak; permukaan Wadah Q lebih tinggi karena dasarnya lebih sempit.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Kedua wadah menerima 500 ml, jadi banyak airnya sama.</p><p>Pada wadah sempit, air yang sama harus menumpuk lebih tinggi karena luas dasarnya kecil. Pada wadah lebar, air itu menyebar sehingga permukaannya rendah.</p><p>Tinggi permukaan saja tidak dapat dipakai membandingkan volume, kecuali kedua wadah berukuran dasar sama.</p>"
+    },
+    {
+      "id": "msd-volbenda-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengukur volume benda padat dari kenaikan air",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah gelas ukur berisi air sampai angka 250 ml. Sebuah batu kecil dimasukkan sampai seluruhnya terbenam, dan permukaan air naik sampai angka 310 ml. Tidak ada air yang tercecer.</p>",
+      "pertanyaan": "<p>Volume batu itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>60 ml</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>250 ml</p>",
+          "mis": "mis-msd-volbenda-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>310 ml</p>",
+          "mis": "mis-msd-volbenda-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>560 ml</p>",
+          "mis": "mis-msd-volbenda-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Batu yang terbenam mendorong air ke atas sebanyak volume batu itu sendiri.</p><p>Volume batu = 310 − 250 = 60 ml.</p><p>Pilihan C adalah volume air dan batu bersama-sama, sedangkan pilihan D didapat dengan menjumlahkan kedua bacaan.</p>"
+    },
+    {
+      "id": "msd-volbenda-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pemilihan satuan volume pada berbagai wadah",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas menyusun daftar satuan yang wajar untuk menyatakan isi berbagai wadah.</p>",
+      "pertanyaan": "<p>Pilihan satuan yang sesuai adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Isi satu sendok obat dinyatakan dalam mililiter.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Isi bak mandi dinyatakan dalam liter.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Isi tangki air satu kompleks perumahan dinyatakan dalam kiloliter.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Isi satu gelas minum dinyatakan dalam kiloliter.</p>",
+          "mis": "mis-msd-volbenda-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Isi satu tetes obat mata dinyatakan dalam hektoliter.</p>",
+          "mis": "mis-msd-volbenda-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A sesuai: isi satu sendok obat sekitar 5 ml.</p><p>B sesuai: isi bak mandi ratusan liter.</p><p>C sesuai: tangki kompleks perumahan bervolume puluhan kiloliter.</p><p>D tidak sesuai: isi gelas 200 ml sama dengan 0,0002 kl, angka yang tidak masuk akal untuk dicatat.</p><p>E tidak sesuai: satu tetes hanya sekitar 0,05 ml, jauh lebih kecil daripada satu hektoliter yang sama dengan 100 l.</p>"
+    },
+    {
+      "id": "msd-volbenda-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang sisa isi setelah dituang berulang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah botol berisi penuh 1,5 l air. Air itu dituang ke 5 gelas, masing-masing berisi 200 ml sampai penuh.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang keadaan air itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Air yang dituang ke gelas seluruhnya 1.000 ml.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Air yang tersisa di botol 500 ml.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Air yang tersisa di botol 0,5 l.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Air dalam botol tepat habis setelah kelima gelas terisi.</p>",
+          "mis": "mis-msd-volbenda-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Air dalam botol tepat habis bila dituang ke 7 gelas berukuran 200 ml.</p>",
+          "mis": "mis-msd-volbenda-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Air yang dituang = 5 × 200 = 1.000 ml, jadi A benar.</p><p>Isi botol = 1,5 l = 1.500 ml, sehingga sisanya 1.500 − 1.000 = 500 ml, yaitu 0,5 l. B dan C benar dan menyatakan hal yang sama.</p><p>D salah karena masih ada sisa 500 ml.</p><p>E salah: 7 × 200 = 1.400 ml, masih kurang 100 ml dari 1.500 ml. Botol baru habis bila gelas terakhir tidak penuh.</p>"
+    },
+    {
+      "id": "msd-volbenda-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang pengukuran volume",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang pengukuran volume dikumpulkan dari catatan kelas untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 liter sama dengan 1.000 mililiter.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Volume air tidak berubah meskipun dipindahkan ke wadah yang bentuknya berbeda.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Gelas yang permukaan airnya lebih tinggi selalu berisi air lebih banyak.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-volbenda-001"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>1 kiloliter sama dengan 1.000 liter.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Volume benda padat yang bentuknya tidak beraturan tidak dapat diukur.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-volbenda-004"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: l ke ml turun tiga tangga, jadi dikali 1.000.</p><p>P2 benar: menuang hanya mengubah bentuk permukaan air, bukan banyaknya.</p><p>P3 salah: pada wadah yang luas dasarnya berbeda, air sebanyak sama memberi tinggi permukaan yang berbeda.</p><p>P4 benar: kl ke l juga turun tiga tangga.</p><p>P5 salah: volumenya dapat diukur dari kenaikan permukaan air ketika benda itu dibenamkan ke dalam gelas ukur.</p>"
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-penyajian-data",
+    "slug": "matematika-sd-penyajian-data",
+    "title": "Penyajian Data",
+    "topic_id": "top-matematika-sd-data",
+    "subtopic_id": "st-matematika-sd-penyajian-data",
+    "description": "Membaca dan menilai penyajian data dalam bentuk gambar, piktogram, diagram batang, dan tabel frekuensi, termasuk mengubah satu bentuk penyajian menjadi bentuk lainnya.",
+    "summary": "10 soal diagnostik bergaya TKA untuk penyajian data (gambar, piktogram, diagram batang, dan tabel frekuensi).",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Membaca piktogram beserta keterangan nilai gambarnya",
+      "Membaca tabel frekuensi dan diagram batang",
+      "Mengubah satu bentuk penyajian data menjadi bentuk lain",
+      "Menilai kelengkapan dan keadilan suatu penyajian data"
+    ],
+    "sort_order": 22
+  },
+  "submateri": {
+    "id": "con-matematika-sd-penyajian-data",
+    "name": "Penyajian data (gambar, piktogram, diagram batang, dan tabel frekuensi)",
+    "description": "Membaca, membandingkan, dan mengalihbentukkan penyajian data berupa gambar, piktogram, diagram batang, dan tabel frekuensi."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-sajidata-001",
+      "label": "Banyak gambar piktogram dibaca sebagai banyak data",
+      "description": "Siswa menjawab banyak gambar yang tampak, tanpa mengalikannya dengan nilai setiap gambar.",
+      "insight": "Pada piktogram, banyak data = banyak gambar × nilai satu gambar; keterangan nilai gambar harus dibaca lebih dahulu."
+    },
+    {
+      "id": "mis-msd-sajidata-002",
+      "label": "Setengah gambar diabaikan atau dihitung penuh",
+      "description": "Siswa membaca 3 setengah gambar sebagai 3 gambar atau sebagai 4 gambar.",
+      "insight": "Setengah gambar bernilai setengah dari nilai satu gambar, jadi harus dihitung sebagai tambahan yang tepat."
+    },
+    {
+      "id": "mis-msd-sajidata-003",
+      "label": "Nilai data dan frekuensinya tertukar",
+      "description": "Pada tabel frekuensi, siswa menjumlahkan nilai datanya, bukan frekuensinya, ketika mencari banyak seluruh data.",
+      "insight": "Banyak seluruh data adalah jumlah frekuensinya; kolom nilai hanya menyatakan kelompok datanya."
+    },
+    {
+      "id": "mis-msd-sajidata-004",
+      "label": "Skala diagram batang dihitung per garis",
+      "description": "Siswa menghitung banyak garis pada sumbu diagram batang tanpa memeriksa nilai setiap garisnya.",
+      "insight": "Periksa dulu nilai satu garis pada sumbu, karena satu garis belum tentu bernilai satu."
+    },
+    {
+      "id": "mis-msd-sajidata-005",
+      "label": "Data dibandingkan tanpa memeriksa keterangan penyajiannya",
+      "description": "Siswa langsung membandingkan tinggi batang atau banyak gambar meski skala atau nilai gambarnya tidak dinyatakan.",
+      "insight": "Penyajian data tanpa keterangan skala atau nilai gambar tidak dapat dibaca sebagai angka; keterangan itu bagian wajib penyajian."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-sajidata-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan piktogram",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Piktogram mendatar berjudul 'Buku Terjual'. Empat baris berlabel Senin, Selasa, Rabu, Kamis. Baris Senin memuat 4 ikon buku identik, Selasa 6 ikon, Rabu 3 ikon, Kamis 5 ikon, semuanya sama besar dan berjarak sama. Di bawah gambar tuliskan keterangan 'Satu gambar buku mewakili 5 buku'."
+      },
+      "stimulus": "<p>Sebuah piktogram menampilkan banyak buku yang terjual di koperasi sekolah. Satu gambar buku mewakili 5 buku. Pada baris Senin terdapat 4 gambar buku.</p>",
+      "pertanyaan": "<p>Banyak buku yang terjual pada hari Senin adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4 buku</p>",
+          "mis": "mis-msd-sajidata-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>9 buku</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>20 buku</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>25 buku</p>",
+          "mis": "mis-msd-sajidata-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Banyak data = banyak gambar × nilai satu gambar = 4 × 5 = 20 buku.</p><p>Pilihan A hanya menyebut banyak gambarnya, dan pilihan B menjumlahkan 4 dengan 5 alih-alih mengalikannya.</p>"
+    },
+    {
+      "id": "msd-sajidata-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan tabel frekuensi",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Tabel frekuensi nilai ulangan matematika satu kelas tercatat sebagai berikut:</p><ul><li>Nilai 6: 5 siswa</li><li>Nilai 7: 8 siswa</li><li>Nilai 8: 6 siswa</li><li>Nilai 9: 3 siswa</li><li>Nilai 10: 2 siswa</li></ul>",
+      "pertanyaan": "<p>Banyak siswa yang mengikuti ulangan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>5 siswa</p>",
+          "mis": "mis-msd-sajidata-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>178 siswa</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>40 siswa</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>24 siswa</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Banyak seluruh siswa adalah jumlah frekuensinya: 5 + 8 + 6 + 3 + 2 = 24 siswa.</p><p>Pilihan C menjumlahkan nilai ulangannya, yaitu 6 + 7 + 8 + 9 + 10 = 40 — itu bukan banyak siswa.</p><p>Pilihan B mengalikan setiap nilai dengan frekuensinya lalu menjumlahkannya; hasil itu jumlah seluruh nilai, bukan banyak siswa.</p>"
+    },
+    {
+      "id": "msd-sajidata-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembacaan tabel frekuensi untuk mencari banyak data pada beberapa kelompok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Tabel frekuensi nilai ulangan yang sama memuat: nilai 6 sebanyak 5 siswa, nilai 7 sebanyak 8 siswa, nilai 8 sebanyak 6 siswa, nilai 9 sebanyak 3 siswa, dan nilai 10 sebanyak 2 siswa.</p>",
+      "pertanyaan": "<p>Banyak siswa yang memperoleh nilai paling sedikit 8 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 siswa</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>9 siswa</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>11 siswa</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>13 siswa</p>",
+          "mis": "mis-msd-sajidata-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>“Paling sedikit 8” berarti nilai 8, 9, dan 10 ikut dihitung.</p><p>Jumlahnya = 6 + 3 + 2 = 11 siswa.</p><p>Pilihan A hanya menghitung nilai 8, dan pilihan D ikut menghitung nilai 7 yang seharusnya tidak termasuk.</p>"
+    },
+    {
+      "id": "msd-sajidata-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembacaan piktogram dengan setengah gambar",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Piktogram mendatar berjudul 'Pengunjung Perpustakaan'. Tiga baris berlabel Senin, Selasa, Rabu. Baris Senin memuat 2 ikon orang penuh, Selasa 4 ikon penuh, dan Rabu 3 ikon penuh ditambah satu ikon yang digambar terpotong tepat separuhnya. Di bawah gambar tuliskan keterangan 'Satu gambar orang mewakili 10 pengunjung'."
+      },
+      "stimulus": "<p>Sebuah piktogram menampilkan banyak pengunjung perpustakaan. Satu gambar orang mewakili 10 pengunjung. Pada baris Rabu terdapat 3 gambar penuh dan 1 gambar yang tampak separuh.</p>",
+      "pertanyaan": "<p>Banyak pengunjung pada hari Rabu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>35 pengunjung</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>30 pengunjung</p>",
+          "mis": "mis-msd-sajidata-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3,5 pengunjung</p>",
+          "mis": "mis-msd-sajidata-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>40 pengunjung</p>",
+          "mis": "mis-msd-sajidata-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Tiga gambar penuh bernilai 3 × 10 = 30 pengunjung, dan satu gambar separuh bernilai 10 : 2 = 5 pengunjung.</p><p>Jumlahnya = 30 + 5 = 35 pengunjung.</p><p>Pilihan B membuang gambar separuhnya dan pilihan D menghitungnya sebagai gambar penuh.</p>"
+    },
+    {
+      "id": "msd-sajidata-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembacaan diagram batang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Diagram batang tegak berjudul 'Pengunjung Perpustakaan per Hari'. Sumbu mendatar memuat lima label: Senin, Selasa, Rabu, Kamis, Jumat. Sumbu tegak bertulis 'Banyak pengunjung' dengan angka 0, 3, 6, 9, 12, 15, 18, 21, 24 dan garis bantu mendatar tipis. Tinggi batang berturut-turut 12, 18, 15, 9, dan 21. Semua batang sama lebar dan berwarna sama."
+      },
+      "stimulus": "<p>Diagram batang banyak pengunjung perpustakaan selama lima hari mencatat: Senin 12 orang, Selasa 18 orang, Rabu 15 orang, Kamis 9 orang, dan Jumat 21 orang.</p>",
+      "pertanyaan": "<p>Selisih banyak pengunjung pada hari terbanyak dan hari tersedikit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>9 orang</p>",
+          "mis": "mis-msd-sajidata-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>30 orang</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>21 orang</p>",
+          "mis": "mis-msd-sajidata-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>12 orang</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Hari terbanyak adalah Jumat dengan 21 orang, dan hari tersedikit adalah Kamis dengan 9 orang.</p><p>Selisihnya = 21 − 9 = 12 orang.</p><p>Pilihan B menjumlahkan keduanya, bukan mengurangkan.</p>"
+    },
+    {
+      "id": "msd-sajidata-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang kelengkapan keterangan pada piktogram",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah piktogram menampilkan banyak siswa yang mengikuti tiga jenis ekstrakurikuler. Gambarnya rapi dan mudah dibaca, tetapi tidak ada satu pun keterangan tentang berapa siswa yang diwakili setiap gambar.</p>",
+      "pertanyaan": "<p>Kesimpulan yang tepat tentang piktogram itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Banyak siswa tidak dapat ditentukan; yang masih terbaca hanya urutan banyak-sedikitnya.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Banyak siswa sama dengan banyak gambarnya, karena satu gambar mewakili satu siswa.</p>",
+          "mis": "mis-msd-sajidata-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Banyak siswa dapat dihitung dengan menjumlahkan seluruh gambar lalu dikalikan 10.</p>",
+          "mis": "mis-msd-sajidata-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Piktogram itu tidak berguna sama sekali sehingga seluruh datanya harus dibuang.</p>",
+          "mis": "mis-msd-sajidata-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Nilai satu gambar adalah keterangan wajib pada piktogram. Tanpa keterangan itu, banyak data tidak dapat dihitung sebagai angka.</p><p>Meski begitu, piktogramnya tidak sepenuhnya tak berguna: urutan mana yang paling banyak dan paling sedikit masih terbaca dari banyak gambarnya, selama semua gambar sama besar.</p><p>Pilihan B dan C sama-sama menebak nilai gambar tanpa dasar apa pun.</p>"
+    },
+    {
+      "id": "msd-sajidata-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengubah tabel frekuensi menjadi piktogram",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Data warna kesukaan siswa akan diubah dari tabel frekuensi menjadi piktogram. Salah satu warna dipilih oleh 10 siswa, dan pada piktogram itu satu gambar akan mewakili 4 siswa.</p>",
+      "pertanyaan": "<p>Banyak gambar yang harus digambar untuk warna itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2 gambar</p>",
+          "mis": "mis-msd-sajidata-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>40 gambar</p>",
+          "mis": "mis-msd-sajidata-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3 gambar</p>",
+          "mis": "mis-msd-sajidata-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2 setengah gambar</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Banyak gambar = banyak data : nilai satu gambar = 10 : 4 = 2 sisa 2.</p><p>Sisa 2 siswa sama dengan setengah dari nilai satu gambar, jadi digambar sebagai setengah gambar. Hasilnya 2 setengah gambar.</p><p>Pilihan A membuang sisanya dan pilihan C membulatkannya menjadi satu gambar penuh — keduanya membuat piktogram tidak lagi menyatakan data yang sebenarnya. Pilihan B mengalikan alih-alih membagi.</p>"
+    },
+    {
+      "id": "msd-sajidata-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pembacaan tabel frekuensi warna kesukaan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Tabel frekuensi warna kesukaan siswa satu kelas tercatat sebagai berikut:</p><ul><li>Merah: 7 siswa</li><li>Biru: 10 siswa</li><li>Hijau: 5 siswa</li><li>Kuning: 3 siswa</li></ul>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang data itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Banyak siswa seluruhnya 25 orang.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Biru adalah warna yang paling banyak dipilih.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kuning adalah warna yang paling sedikit dipilih.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Merah dipilih lebih banyak daripada biru.</p>",
+          "mis": "mis-msd-sajidata-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Selisih pemilih biru dan hijau adalah 15 siswa.</p>",
+          "mis": "mis-msd-sajidata-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 7 + 10 + 5 + 3 = 25 siswa.</p><p>B benar: 10 adalah frekuensi terbesar.</p><p>C benar: 3 adalah frekuensi terkecil.</p><p>D salah: 7 kurang dari 10.</p><p>E salah: selisihnya 10 − 5 = 5 siswa, sedangkan 15 adalah jumlah keduanya.</p>"
+    },
+    {
+      "id": "msd-sajidata-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang data pada diagram batang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Diagram batang banyak pengunjung perpustakaan mencatat: Senin 12 orang, Selasa 18 orang, Rabu 15 orang, Kamis 9 orang, dan Jumat 21 orang.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang data itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jumlah pengunjung selama lima hari itu 75 orang.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Hari Jumat paling banyak dikunjungi.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Selisih pengunjung hari Jumat dan hari Kamis 12 orang.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pengunjung hari Rabu dua kali pengunjung hari Kamis.</p>",
+          "mis": "mis-msd-sajidata-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Banyak pengunjung selalu bertambah dari hari ke hari.</p>",
+          "mis": "mis-msd-sajidata-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 12 + 18 + 15 + 9 + 21 = 75 orang.</p><p>B benar: 21 adalah batang tertinggi.</p><p>C benar: 21 − 9 = 12 orang.</p><p>D salah: dua kali 9 adalah 18, sedangkan hari Rabu 15 orang. Yang dua kali pengunjung hari Kamis justru hari Selasa.</p><p>E salah: dari Rabu ke Kamis banyak pengunjung justru turun dari 15 menjadi 9.</p>"
+    },
+    {
+      "id": "msd-sajidata-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang penyajian data",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang cara menyajikan data dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Piktogram harus menyertakan keterangan nilai setiap gambarnya.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Tabel frekuensi menunjukkan banyak data pada setiap kelompok.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Tinggi batang pada diagram batang menyatakan banyak data.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Diagram batang dengan lebar batang yang berbeda-beda tetap adil untuk dibandingkan.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-sajidata-005"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Piktogram tidak dapat memuat setengah gambar.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-sajidata-002"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: tanpa keterangan itu, banyak data tidak dapat dihitung.</p><p>P2 benar: itulah gunanya kolom frekuensi.</p><p>P3 benar: yang dibandingkan pada diagram batang adalah tingginya.</p><p>P4 salah: batang yang lebih lebar tampak lebih besar meski tingginya sama, sehingga pembacanya dapat tersesatkan. Lebar batang harus dibuat sama.</p><p>P5 salah: setengah gambar justru dipakai untuk menyatakan data yang bukan kelipatan nilai gambarnya, misalnya 35 pada piktogram bernilai 10 per gambar.</p>"
+    }
+  ]
+}

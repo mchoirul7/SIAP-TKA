@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-keliling-luas",
+    "slug": "matematika-sd-keliling-dan-luas-bangun-datar",
+    "title": "Keliling dan Luas Bangun Datar",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Menghitung keliling dan luas segitiga, segiempat, dan segi banyak termasuk bangun gabungan, serta menalar hubungan keliling, luas, dan perubahan ukuran sisinya.",
+    "summary": "10 soal diagnostik bergaya TKA untuk keliling dan luas bangun datar (segitiga, segiempat, dan segi banyak).",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menghitung keliling dan luas persegi serta persegi panjang",
+      "Menghitung luas segitiga dan trapesium",
+      "Menghitung keliling dan luas bangun gabungan",
+      "Menalar hubungan keliling, luas, dan perubahan ukuran"
+    ],
+    "sort_order": 18
+  },
+  "submateri": {
+    "id": "con-matematika-sd-keliling-luas",
+    "name": "Keliling dan luas bangun datar (segitiga, segiempat, dan segi banyak)",
+    "description": "Menentukan keliling dan luas segitiga, segiempat, dan segi banyak, termasuk bangun gabungan. Lingkaran tidak termasuk cakupan submateri ini."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-luas-001",
+      "label": "Keliling dan luas tertukar",
+      "description": "Siswa menghitung luas ketika yang diminta keliling, atau sebaliknya, karena kedua besaran itu belum terpisah jelas.",
+      "insight": "Keliling mengukur panjang tepinya dan bersatuan cm, sedangkan luas mengukur daerah di dalamnya dan bersatuan cm²."
+    },
+    {
+      "id": "mis-msd-luas-002",
+      "label": "Pembagian dua pada luas segitiga terlewat",
+      "description": "Siswa menghitung luas segitiga sebagai alas kali tinggi tanpa membaginya dua.",
+      "insight": "Segitiga adalah setengah dari persegi panjang beralas dan bertinggi sama, jadi hasilnya harus dibagi dua."
+    },
+    {
+      "id": "mis-msd-luas-003",
+      "label": "Bagian yang dipotong tidak dikurangkan",
+      "description": "Pada bangun gabungan, siswa menghitung luas persegi panjang utuhnya saja tanpa mengurangi bagian yang dipotong.",
+      "insight": "Luas bangun gabungan dihitung dengan menjumlahkan bagian-bagiannya atau mengurangi bagian yang hilang dari bangun utuhnya."
+    },
+    {
+      "id": "mis-msd-luas-004",
+      "label": "Keliling persegi panjang hanya panjang ditambah lebar",
+      "description": "Siswa menjumlahkan panjang dan lebar sekali saja, sehingga kelilingnya hanya separuh dari yang seharusnya.",
+      "insight": "Persegi panjang mempunyai dua sisi panjang dan dua sisi lebar, jadi kelilingnya 2 × (panjang + lebar)."
+    },
+    {
+      "id": "mis-msd-luas-005",
+      "label": "Luas dianggap berlipat sama dengan sisinya",
+      "description": "Siswa menganggap menggandakan panjang dan lebar membuat luasnya menjadi dua kali, bukan empat kali.",
+      "insight": "Luas dipengaruhi dua ukuran sekaligus, jadi bila keduanya menjadi dua kali, luasnya menjadi 2 × 2 = 4 kali."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-luas-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami keliling persegi panjang",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah papan mading berbentuk persegi panjang berukuran panjang 12 cm dan lebar 7 cm pada gambar rancangan. Seluruh tepinya akan dilapisi selotip berwarna.</p>",
+      "pertanyaan": "<p>Panjang selotip yang diperlukan untuk melapisi seluruh tepi papan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>19 cm</p>",
+          "mis": "mis-msd-luas-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>84 cm</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>76 cm</p>",
+          "mis": "mis-msd-luas-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>38 cm</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Tepi papan adalah kelilingnya: 2 × (12 + 7) = 2 × 19 = 38 cm.</p><p>Pilihan A hanya menjumlahkan panjang dan lebar sekali, padahal ada dua sisi panjang dan dua sisi lebar.</p><p>Pilihan B adalah luasnya, yaitu 12 × 7 = 84 — dan satuannya pun seharusnya cm², bukan cm.</p>"
+    },
+    {
+      "id": "msd-luas-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami luas persegi",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah ubin berbentuk persegi dengan panjang sisi 9 cm akan dihitung luas permukaannya untuk keperluan pemasangan.</p>",
+      "pertanyaan": "<p>Luas ubin itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>18 cm²</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>36 cm²</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>72 cm²</p>",
+          "mis": "mis-msd-luas-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>81 cm²</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Luas persegi = sisi × sisi = 9 × 9 = 81 cm².</p><p>Pilihan B adalah kelilingnya, yaitu 4 × 9 = 36 cm — bukan luasnya, dan satuannya pun cm.</p><p>Pilihan A hanya menjumlahkan dua sisi.</p>"
+    },
+    {
+      "id": "msd-luas-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan luas segitiga",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah bendera hias berbentuk segitiga dengan panjang alas 14 cm dan tinggi 9 cm. Kain untuk membuat bendera dihitung berdasarkan luasnya.</p>",
+      "pertanyaan": "<p>Luas satu bendera hias itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>23 cm²</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>46 cm²</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>63 cm²</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>126 cm²</p>",
+          "mis": "mis-msd-luas-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Luas segitiga = 1/2 × alas × tinggi = 1/2 × 14 × 9 = 63 cm².</p><p>Pilihan D adalah 14 × 9 tanpa dibagi dua — itu luas persegi panjang beralas dan bertinggi sama, yaitu dua kali luas segitiganya.</p>"
+    },
+    {
+      "id": "msd-luas-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan keliling bangun segi banyak gabungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Bangun datar berbentuk huruf L dengan garis tepi tebal, berlatar abu muda. Bentuknya berasal dari persegi panjang 10 cm (mendatar) × 6 cm (tegak) yang sudut kanan atasnya dipotong persegi panjang 4 cm × 3 cm. Tuliskan ukuran pada setiap sisi mengikuti tepinya: 10 cm di sisi bawah, 3 cm di sisi kanan, 4 cm mendatar ke dalam, 3 cm tegak ke atas, 6 cm di sisi atas, dan 6 cm di sisi kiri."
+      },
+      "stimulus": "<p>Sebuah taman kecil berbentuk huruf L. Bentuk itu berasal dari persegi panjang berukuran 10 cm × 6 cm pada gambar rancangan, yang salah satu sudutnya dipotong oleh persegi panjang 4 cm × 3 cm. Panjang keenam sisinya berturut-turut 10 cm, 3 cm, 4 cm, 3 cm, 6 cm, dan 6 cm.</p>",
+      "pertanyaan": "<p>Keliling taman itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>26 cm</p>",
+          "mis": "mis-msd-luas-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>48 cm</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>44 cm</p>",
+          "mis": "mis-msd-luas-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>32 cm</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Keliling adalah jumlah panjang semua sisinya: 10 + 3 + 4 + 3 + 6 + 6 = 32 cm.</p><p>Menarik diperhatikan: kelilingnya persis sama dengan keliling persegi panjang utuh 10 cm × 6 cm, yaitu 2 × (10 + 6) = 32 cm. Potongan pada sudut memindahkan tepinya ke dalam tanpa mengubah panjang totalnya.</p><p>Pilihan B adalah luas bangun itu, bukan kelilingnya.</p>"
+    },
+    {
+      "id": "msd-luas-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan luas bangun gabungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Taman berbentuk huruf L pada rancangan yang sama berasal dari persegi panjang 10 cm × 6 cm dengan potongan persegi panjang 4 cm × 3 cm di salah satu sudutnya.</p>",
+      "pertanyaan": "<p>Luas taman itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>36 cm²</p>",
+          "mis": "mis-msd-luas-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>72 cm²</p>",
+          "mis": "mis-msd-luas-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>60 cm²</p>",
+          "mis": "mis-msd-luas-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>48 cm²</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Luas persegi panjang utuh = 10 × 6 = 60 cm². Luas potongan = 4 × 3 = 12 cm².</p><p>Luas taman = 60 − 12 = 48 cm².</p><p>Pilihan C adalah luas persegi panjang utuhnya, yang berarti potongannya lupa dikurangkan.</p>"
+    },
+    {
+      "id": "msd-luas-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang bangun berkeliling sama dengan luas berbeda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua bidang tanah berbentuk persegi panjang dipagari dengan kawat sepanjang 24 m, dan seluruh kawat terpakai pada masing-masing bidang.</p><ul><li>Bidang I berukuran 8 m × 4 m.</li><li>Bidang II berukuran 6 m × 6 m.</li></ul>",
+      "pertanyaan": "<p>Kesimpulan yang tepat tentang kedua bidang itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Luas kedua bidang sama, karena kelilingnya sama.</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Luas kedua bidang tidak dapat dibandingkan karena bentuknya berbeda.</p>",
+          "mis": "mis-msd-luas-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bidang I lebih luas, karena sisi terpanjangnya lebih besar.</p>",
+          "mis": "mis-msd-luas-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bidang II lebih luas, yaitu 36 m² dibanding 32 m², meskipun kelilingnya sama.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Periksa kelilingnya: Bidang I = 2 × (8 + 4) = 24 m dan Bidang II = 2 × (6 + 6) = 24 m — memang sama.</p><p>Periksa luasnya: Bidang I = 8 × 4 = 32 m² dan Bidang II = 6 × 6 = 36 m². Jadi bidang yang lebih mendekati bentuk persegi ternyata lebih luas.</p><p>Keliling sama tidak menjamin luas sama. Inilah sebabnya keliling dan luas harus dihitung terpisah.</p>"
+    },
+    {
+      "id": "msd-luas-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang pengaruh pelipatan sisi terhadap luas",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kertas gambar berbentuk persegi panjang berukuran 5 cm × 3 cm. Kertas gambar baru dibuat dengan panjang dan lebar masing-masing dua kali ukuran itu.</p>",
+      "pertanyaan": "<p>Luas kertas gambar baru dibandingkan luas kertas semula menjadi ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2 kali</p>",
+          "mis": "mis-msd-luas-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>6 kali</p>",
+          "mis": "mis-msd-luas-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4 kali</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>tetap sama</p>",
+          "mis": "mis-msd-luas-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Luas semula = 5 × 3 = 15 cm². Ukuran baru 10 cm × 6 cm, sehingga luasnya 10 × 6 = 60 cm².</p><p>Perbandingannya 60 : 15 = 4 kali.</p><p>Luas dipengaruhi dua ukuran sekaligus, jadi bila keduanya menjadi dua kali, luasnya menjadi 2 × 2 = 4 kali. Kelilingnya sendiri hanya menjadi 2 kali, dari 16 cm menjadi 32 cm.</p>"
+    },
+    {
+      "id": "msd-luas-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan keliling dan luas pada satu persegi panjang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah karton berbentuk persegi panjang berukuran panjang 15 cm dan lebar 8 cm.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang karton itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kelilingnya 46 cm.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Luasnya 120 cm².</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Luasnya 46 cm².</p>",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bila panjangnya ditambah 5 cm, luasnya menjadi 160 cm².</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Kelilingnya 120 cm.</p>",
+          "mis": "mis-msd-luas-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 2 × (15 + 8) = 2 × 23 = 46 cm.</p><p>B benar: 15 × 8 = 120 cm².</p><p>C dan E salah karena angka keliling dan luasnya tertukar.</p><p>D benar: panjang menjadi 20 cm, sehingga luasnya 20 × 8 = 160 cm².</p>"
+    },
+    {
+      "id": "msd-luas-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar membandingkan luas segitiga dan trapesium",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua potong kain dipotong menurut bentuk berikut:</p><ul><li>Kain P berbentuk segitiga dengan alas 12 cm dan tinggi 5 cm.</li><li>Kain Q berbentuk trapesium dengan sisi sejajar 8 cm dan 12 cm serta tinggi 6 cm.</li></ul>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang kedua kain itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Luas Kain P adalah 30 cm².</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Luas Kain Q adalah 60 cm².</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Luas Kain Q dua kali luas Kain P.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Luas Kain P adalah 60 cm².</p>",
+          "mis": "mis-msd-luas-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Luas Kain Q adalah 120 cm².</p>",
+          "mis": "mis-msd-luas-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: luas segitiga = 1/2 × 12 × 5 = 30 cm².</p><p>B benar: luas trapesium = 1/2 × (8 + 12) × 6 = 1/2 × 20 × 6 = 60 cm².</p><p>C benar: 60 : 30 = 2.</p><p>D salah: 60 diperoleh dari 12 × 5 tanpa dibagi dua.</p><p>E salah: 120 diperoleh dari (8 + 12) × 6 tanpa dibagi dua.</p>"
+    },
+    {
+      "id": "msd-luas-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang keliling dan luas",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang keliling dan luas ditulis di papan tulis untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Keliling suatu bangun datar adalah jumlah panjang semua sisinya.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Luas persegi yang panjang sisinya 6 cm adalah 24 cm².</p>",
+          "kategori": "S",
+          "mis": "mis-msd-luas-001"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Luas segitiga dihitung dengan setengah alas kali tinggi.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Dua bangun datar yang luasnya sama pasti kelilingnya juga sama.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-luas-005"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Satuan luas ditulis cm², sedangkan satuan keliling ditulis cm.</p>",
+          "kategori": "B"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: keliling mengukur panjang seluruh tepinya.</p><p>P2 salah: luasnya 6 × 6 = 36 cm². Angka 24 adalah kelilingnya, yaitu 4 × 6 cm.</p><p>P3 benar: segitiga adalah setengah persegi panjang beralas dan bertinggi sama.</p><p>P4 salah: persegi panjang 1 cm × 36 cm dan persegi 6 cm × 6 cm sama-sama berluas 36 cm², tetapi kelilingnya 74 cm dan 24 cm.</p><p>P5 benar: luas mengukur daerah sehingga satuannya persegi, sedangkan keliling mengukur panjang.</p>"
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-panjang-satuan-baku",
+    "slug": "matematika-sd-panjang-benda-satuan-baku",
+    "title": "Panjang Benda dengan Satuan Baku",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengukur panjang benda dengan satuan baku: memilih satuan yang sesuai, membaca penggaris yang tidak dimulai dari angka nol, dan menalar mengapa satuan baku diperlukan.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengukuran panjang benda menggunakan satuan baku.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Memilih satuan baku yang sesuai dengan ukuran benda",
+      "Membaca hasil pengukuran pada penggaris",
+      "Menuliskan hasil ukur dalam gabungan satuan",
+      "Menalar sebab perbedaan hasil pengukuran"
+    ],
+    "sort_order": 9
+  },
+  "submateri": {
+    "id": "con-matematika-sd-panjang-satuan-baku",
+    "name": "Panjang benda menggunakan satuan baku",
+    "description": "Mengukur dan menuliskan panjang benda dengan satuan baku mm, cm, m, dan km, termasuk membaca alat ukur dan memilih satuan yang paling sesuai."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-panjang-001",
+      "label": "Angka ujung dibaca sebagai panjang",
+      "description": "Saat benda tidak diletakkan mulai dari angka 0, siswa langsung membaca angka di ujung benda tanpa mengurangi angka awalnya.",
+      "insight": "Panjang benda adalah selisih angka di kedua ujungnya, bukan angka di ujung akhir."
+    },
+    {
+      "id": "mis-msd-panjang-002",
+      "label": "Satuan dipilih tanpa memperhatikan ukuran benda",
+      "description": "Siswa memilih satuan yang jauh terlalu besar atau terlalu kecil, misalnya menyatakan tebal uang logam dalam meter.",
+      "insight": "Pilih satuan yang membuat angka hasil ukur wajar dibaca: mm untuk benda sangat tipis, cm untuk benda seukuran tangan, m untuk ruangan, km untuk jarak antarkota."
+    },
+    {
+      "id": "mis-msd-panjang-003",
+      "label": "Angka hasil ukur dianggap mengubah panjang benda",
+      "description": "Siswa menganggap benda menjadi lebih panjang ketika hasil ukurnya ditulis dalam satuan yang lebih kecil, misalnya 2 m ditulis 200 cm.",
+      "insight": "Panjang benda tetap; yang berubah hanya satuan dan angkanya, karena satuan yang lebih kecil dibutuhkan lebih banyak."
+    },
+    {
+      "id": "mis-msd-panjang-004",
+      "label": "Gabungan cm dan mm ditulis seperti bilangan desimal",
+      "description": "Siswa menuliskan 4 cm 6 mm sebagai 4,6 mm atau 46 cm karena satuan gabungan tidak diurai lebih dahulu.",
+      "insight": "Ubah dahulu ke satu satuan: 4 cm = 40 mm, ditambah 6 mm menjadi 46 mm, atau 4,6 cm."
+    },
+    {
+      "id": "mis-msd-panjang-005",
+      "label": "Sisa pada pengukuran berulang tidak dijumlahkan",
+      "description": "Saat benda diukur dengan alat yang lebih pendek secara berulang, siswa lupa menambahkan bagian sisa yang tidak sampai satu kali penuh.",
+      "insight": "Panjang seluruhnya adalah banyak pengulangan penuh dikalikan panjang alat, ditambah panjang sisanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-panjang-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pemilihan satuan baku yang sesuai",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Andi hendak mencatat panjang pensilnya di buku catatan. Pensil itu masih baru dan panjangnya sekitar sejengkal tangan anak.</p>",
+      "pertanyaan": "<p>Satuan baku yang paling sesuai untuk menyatakan panjang pensil adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>milimeter</p>",
+          "mis": "mis-msd-panjang-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>sentimeter</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>meter</p>",
+          "mis": "mis-msd-panjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>kilometer</p>",
+          "mis": "mis-msd-panjang-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Panjang pensil sekitar 17 cm, angka yang wajar dan mudah dibaca.</p><p>Dalam milimeter angkanya menjadi 170 mm yang terlalu rinci, sedangkan dalam meter menjadi 0,17 m dan dalam kilometer 0,00017 km yang jauh terlalu kecil untuk dicatat.</p>"
+    },
+    {
+      "id": "msd-panjang-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan penggaris yang tidak dimulai dari nol",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Penggaris mendatar berskala 0 sampai 15 cm dengan garis panjang tiap 1 cm dan garis pendek tiap 1 mm, angka tercetak jelas. Di atas penggaris tergambar sebuah pita berwarna hijau yang ujung kirinya tepat di angka 2 dan ujung kanannya tepat di angka 9,5. Jangan menuliskan panjang pita pada gambar."
+      },
+      "stimulus": "<p>Sebuah pita diukur dengan penggaris. Ujung kiri pita berada tepat di angka 2 cm dan ujung kanannya tepat di angka 9,5 cm.</p>",
+      "pertanyaan": "<p>Panjang pita itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7 cm</p>",
+          "mis": "mis-msd-panjang-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>7,5 cm</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>9,5 cm</p>",
+          "mis": "mis-msd-panjang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>11,5 cm</p>",
+          "mis": "mis-msd-panjang-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Panjang benda adalah selisih angka kedua ujungnya: 9,5 − 2 = 7,5 cm.</p><p>Pilihan C adalah angka di ujung kanan saja, yang hanya benar bila pita dimulai dari angka 0. Pilihan D didapat dengan menjumlahkan kedua angka.</p>"
+    },
+    {
+      "id": "msd-panjang-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penulisan hasil ukur gabungan cm dan mm",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah paku diukur dengan penggaris berskala milimeter. Hasilnya tercatat 4 cm lebih 6 mm.</p>",
+      "pertanyaan": "<p>Panjang paku itu bila dinyatakan seluruhnya dalam milimeter adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>10 mm</p>",
+          "mis": "mis-msd-panjang-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>46 mm</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4,6 mm</p>",
+          "mis": "mis-msd-panjang-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>406 mm</p>",
+          "mis": "mis-msd-panjang-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Ubah bagian sentimeternya lebih dahulu: 4 cm = 40 mm.</p><p>Lalu tambahkan sisanya: 40 + 6 = 46 mm. Panjang itu sama dengan 4,6 cm.</p><p>Pilihan A muncul bila 4 dan 6 dijumlahkan tanpa mengubah satuan, dan pilihan C keliru menuliskan bentuk sentimeter dengan satuan milimeter.</p>"
+    },
+    {
+      "id": "msd-panjang-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pengukuran berulang dengan alat yang lebih pendek",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Panjang sebuah meja diukur memakai pensil yang panjangnya 15 cm. Pensil itu dapat diletakkan berturut-turut sebanyak 8 kali penuh, dan masih tersisa bagian meja sepanjang 6 cm.</p>",
+      "pertanyaan": "<p>Panjang meja itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>120 cm</p>",
+          "mis": "mis-msd-panjang-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>121 cm</p>",
+          "mis": "mis-msd-panjang-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>126 cm</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>138 cm</p>",
+          "mis": "mis-msd-panjang-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Delapan kali panjang pensil = 8 × 15 = 120 cm.</p><p>Ditambah sisa 6 cm, panjang meja = 120 + 6 = 126 cm.</p><p>Pilihan A muncul bila sisanya dibuang, dan pilihan D bila sisanya dihitung sebagai satu pensil penuh.</p>"
+    },
+    {
+      "id": "msd-panjang-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembandingan hasil ukur yang satuannya berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Tiga potong tali diukur oleh tiga anak dengan cara pencatatan yang berbeda:</p><ul><li>Tali P: 1.250 mm</li><li>Tali Q: 1 m 30 cm</li><li>Tali R: 125 cm</li></ul>",
+      "pertanyaan": "<p>Tali yang paling panjang adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Tali P</p>",
+          "mis": "mis-msd-panjang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tali Q</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Tali R</p>",
+          "mis": "mis-msd-panjang-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>ketiganya sama panjang</p>",
+          "mis": "mis-msd-panjang-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Seragamkan satuannya menjadi sentimeter: Tali P = 1.250 mm = 125 cm, Tali Q = 1 m 30 cm = 130 cm, dan Tali R = 125 cm.</p><p>Yang terpanjang adalah Tali Q, yaitu 130 cm.</p><p>Perhatikan bahwa Tali P dan Tali R sebenarnya sama panjang meski angkanya tampak jauh berbeda.</p>"
+    },
+    {
+      "id": "msd-panjang-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang sebab perbedaan hasil pengukuran",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua siswa mengukur satu pita yang sama dengan penggaris yang sama. Nia melaporkan 24 cm, sedangkan Rio melaporkan 22 cm. Setelah diperiksa, penggarisnya tidak rusak dan pitanya tidak berubah.</p>",
+      "pertanyaan": "<p>Penjelasan yang paling mungkin atas perbedaan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Salah satu anak meletakkan ujung pita bukan di angka 0 lalu membaca angka ujung lainnya apa adanya.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Panjang pita berubah karena diukur dua kali.</p>",
+          "mis": "mis-msd-panjang-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Satuan sentimeter berbeda besarnya bagi setiap orang.</p>",
+          "mis": "mis-msd-panjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Perbedaan itu wajar karena hasil pengukuran memang tidak dapat sama.</p>",
+          "mis": "mis-msd-panjang-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Beda 2 cm sama dengan pergeseran titik awal sebesar 2 cm. Bila pita diletakkan mulai dari angka 2 tetapi angka ujungnya dibaca apa adanya, hasilnya memang berbeda 2 cm dari pengukuran yang benar.</p><p>Justru itulah gunanya satuan baku: sentimeter bernilai sama bagi siapa pun, sehingga hasil ukur seharusnya dapat diperbandingkan — pilihan C bertentangan dengan gagasan satuan baku.</p><p>Panjang benda tidak berubah karena diukur, jadi pilihan B tidak mungkin.</p>"
+    },
+    {
+      "id": "msd-panjang-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang hubungan besar satuan dan angka hasil ukur",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Panjang sebuah meja tercatat 2 m. Guru menuliskannya ulang menjadi 200 cm. Seorang siswa berkata, “Berarti mejanya jadi jauh lebih panjang, karena angkanya bertambah besar.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat siswa itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena angka 200 lebih besar daripada 2 sehingga mejanya menjadi lebih panjang.</p>",
+          "mis": "mis-msd-panjang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena sentimeter lebih kecil sehingga dibutuhkan lebih banyak; panjang mejanya tetap.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena 200 cm sebenarnya lebih pendek daripada 2 m bila diukur dengan penggaris.</p>",
+          "mis": "mis-msd-panjang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena mengubah satuan berarti mengubah ukuran benda yang sedang diukur.</p>",
+          "mis": "mis-msd-panjang-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satu meter memuat 100 sentimeter, sehingga 2 m memuat 200 cm. Kedua tulisan itu menyatakan panjang yang sama persis.</p><p>Semakin kecil satuan yang dipakai, semakin besar angkanya — tetapi bendanya tidak ikut berubah. Angka dan satuan harus selalu dibaca bersama-sama.</p>"
+    },
+    {
+      "id": "msd-panjang-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pemilihan satuan baku pada berbagai benda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas menyusun daftar satuan yang paling sesuai untuk mengukur berbagai benda dan jarak.</p>",
+      "pertanyaan": "<p>Pilihan satuan yang sesuai adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Tinggi pintu rumah dinyatakan dalam meter.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tebal uang logam dinyatakan dalam milimeter.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jarak antara dua kota dinyatakan dalam sentimeter.</p>",
+          "mis": "mis-msd-panjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Panjang buku tulis dinyatakan dalam sentimeter.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Panjang lapangan sepak bola dinyatakan dalam milimeter.</p>",
+          "mis": "mis-msd-panjang-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A sesuai: tinggi pintu sekitar 2 m.</p><p>B sesuai: tebal uang logam sekitar 2 mm, terlalu tipis untuk dinyatakan dalam sentimeter.</p><p>D sesuai: panjang buku tulis sekitar 25 cm.</p><p>C tidak sesuai: jarak antarkota puluhan kilometer, yang bila ditulis dalam sentimeter menjadi jutaan.</p><p>E tidak sesuai: panjang lapangan sekitar 100 m, yang menjadi 100.000 mm — angkanya terlalu besar untuk dibaca.</p>"
+    },
+    {
+      "id": "msd-panjang-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang hasil pembacaan penggaris",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah pita diletakkan di atas penggaris berskala sentimeter dan milimeter. Ujung kirinya berada di angka 3 dan ujung kanannya di angka 17,5.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang pengukuran itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Panjang pita 14,5 cm.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Panjang pita 145 mm.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Panjang pita 17,5 cm.</p>",
+          "mis": "mis-msd-panjang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Hasilnya tetap sama bila pita digeser sehingga ujung kirinya di angka 0 dan ujung kanannya di angka 14,5.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Panjang pita 20,5 cm.</p>",
+          "mis": "mis-msd-panjang-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 17,5 − 3 = 14,5 cm.</p><p>B benar: 14,5 cm = 145 mm, karena 1 cm = 10 mm.</p><p>C salah: 17,5 cm hanya benar bila pita dimulai dari angka 0.</p><p>D benar: menggeser benda tidak mengubah panjangnya, dan selisih kedua ujungnya tetap 14,5 cm.</p><p>E salah: 20,5 didapat dengan menjumlahkan 3 dan 17,5, bukan mengurangkannya.</p>"
+    },
+    {
+      "id": "msd-panjang-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang pengukuran panjang dengan satuan baku",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang pengukuran panjang ditulis di papan tulis untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Pengukuran hanya sah bila benda diletakkan mulai dari angka 0 pada penggaris.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-panjang-001"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>1 cm sama dengan 10 mm.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Benda yang diukur dengan satuan lebih kecil menjadi lebih panjang.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-panjang-003"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Hasil ukur 3 cm dan 30 mm menyatakan panjang yang sama.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Satuan baku dipakai agar hasil pengukuran orang yang berbeda tetap dapat diperbandingkan.</p>",
+          "kategori": "B"
+        }
+      ],
+      "pembahasan": "<p>P1 salah: benda boleh diletakkan mulai dari angka mana pun, asal panjangnya dihitung sebagai selisih kedua ujungnya. Memulai dari 0 hanya mempermudah pembacaan.</p><p>P2 benar: satu sentimeter dibagi menjadi 10 bagian milimeter pada penggaris.</p><p>P3 salah: yang bertambah hanya angkanya, bukan panjang bendanya.</p><p>P4 benar: 3 × 10 = 30, jadi keduanya panjang yang sama.</p><p>P5 benar: bila setiap orang memakai satuan sendiri seperti jengkal atau langkah, hasilnya tidak dapat diperbandingkan karena ukuran jengkal setiap orang berbeda.</p>"
+    }
+  ]
+}

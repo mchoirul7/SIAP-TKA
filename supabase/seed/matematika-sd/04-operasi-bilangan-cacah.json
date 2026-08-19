@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-operasi-bilangan-cacah",
+    "slug": "matematika-sd-operasi-bilangan-cacah",
+    "title": "Operasi Hitung Bilangan Cacah",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Penjumlahan, pengurangan, perkalian, dan pembagian bilangan cacah pada masalah sehari-hari, termasuk urutan pengerjaan operasi, pembagian bersisa, dan penaksiran hasil.",
+    "summary": "10 soal diagnostik bergaya TKA untuk operasi penjumlahan, pengurangan, perkalian, dan pembagian bilangan cacah.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menjumlah dan mengurang bilangan cacah bersusun",
+      "Menerapkan urutan pengerjaan operasi hitung",
+      "Menafsirkan sisa pada pembagian",
+      "Menaksir hasil operasi tanpa menghitung tepat"
+    ],
+    "sort_order": 4
+  },
+  "submateri": {
+    "id": "con-matematika-sd-operasi-bilangan-cacah",
+    "name": "Operasi penjumlahan, pengurangan, perkalian, dan pembagian bilangan cacah",
+    "description": "Menyelesaikan masalah yang memuat satu atau beberapa operasi hitung bilangan cacah, memilih operasi yang tepat, dan menafsirkan hasilnya termasuk sisa pembagian."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-cacah-001",
+      "label": "Mengerjakan operasi berurutan dari kiri",
+      "description": "Siswa mengerjakan 18 + 6 × 4 dari kiri ke kanan menjadi 24 × 4, tanpa mendahulukan perkalian.",
+      "insight": "Perkalian dan pembagian dikerjakan lebih dahulu daripada penjumlahan dan pengurangan, kecuali ada tanda kurung."
+    },
+    {
+      "id": "mis-msd-cacah-002",
+      "label": "Sisa pembagian dibuang",
+      "description": "Pada masalah yang menuntut semua benda atau orang terangkut, siswa membuang sisa pembagian sehingga jawabannya kurang satu.",
+      "insight": "Bila masih ada sisa yang harus ditampung, banyak wadah atau kendaraan dibulatkan ke atas."
+    },
+    {
+      "id": "mis-msd-cacah-003",
+      "label": "Keliru menyimpan atau meminjam",
+      "description": "Siswa salah menyimpan pada penjumlahan atau salah meminjam pada pengurangan bersusun, sehingga hasilnya berbeda pada satu nilai tempat.",
+      "insight": "Periksa hasil pengurangan dengan menjumlahkannya kembali ke bilangan pengurang."
+    },
+    {
+      "id": "mis-msd-cacah-004",
+      "label": "Pengurangan dan pembagian dianggap dapat ditukar urutannya",
+      "description": "Siswa menganggap sifat yang berlaku pada penjumlahan dan perkalian juga berlaku pada pengurangan dan pembagian, misalnya 120 : 6 : 2 dianggap sama dengan 120 : (6 : 2).",
+      "insight": "Pengurangan dan pembagian tidak dapat ditukar urutannya; kerjakan dari kiri ke kanan atau ikuti tanda kurung."
+    },
+    {
+      "id": "mis-msd-cacah-005",
+      "label": "Memilih operasi hanya dari kata kunci",
+      "description": "Siswa memilih operasi karena menemukan kata seperti “seluruhnya” atau “sisa”, tanpa memeriksa hubungan bilangan pada ceritanya.",
+      "insight": "Baca ulang alur ceritanya dan tentukan apa yang dibagi, apa yang digabung, lalu pilih operasinya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-cacah-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pengurangan bilangan cacah empat angka",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Perpustakaan sekolah mencatat 4.083 buku di daftar induk. Pada akhir semester, 1.756 buku sedang dipinjam siswa.</p>",
+      "pertanyaan": "<p>Banyak buku yang masih berada di rak adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2.227 buku</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2.327 buku</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2.337 buku</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5.839 buku</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Buku di rak = 4.083 − 1.756 = 2.327.</p><p>Periksa dengan penjumlahan: 2.327 + 1.756 = 4.083, jadi hasilnya benar.</p><p>Pilihan D didapat dengan menjumlahkan, padahal buku yang dipinjam justru mengurangi isi rak.</p>"
+    },
+    {
+      "id": "msd-cacah-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami urutan pengerjaan operasi hitung",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Ali membeli 1 buku tulis berharga Rp18.000 dan 6 pulpen yang masing-masing berharga Rp4.000.</p>",
+      "pertanyaan": "<p>Uang yang harus dibayar Ali dihitung dengan 18.000 + 6 × 4.000, yaitu ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rp42.000</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rp96.000</p>",
+          "mis": "mis-msd-cacah-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rp28.000</p>",
+          "mis": "mis-msd-cacah-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rp72.000</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Perkalian dikerjakan lebih dahulu: 6 × 4.000 = 24.000.</p><p>Lalu dijumlahkan: 18.000 + 24.000 = 42.000.</p><p>Pilihan B muncul bila dikerjakan dari kiri, yaitu (18.000 + 6) × 4.000 — hasilnya tidak masuk akal untuk harga tujuh barang.</p>"
+    },
+    {
+      "id": "msd-cacah-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perkalian dan pembagian pada masalah dua langkah",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Panitia kegiatan membeli 8 dus air mineral gelas. Setiap dus berisi 48 gelas. Seluruh gelas itu dibagikan rata kepada 12 kelas.</p>",
+      "pertanyaan": "<p>Banyak gelas yang diterima setiap kelas adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>28 gelas</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>32 gelas</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>36 gelas</p>",
+          "mis": "mis-msd-cacah-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>384 gelas</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Seluruh gelas = 8 × 48 = 384.</p><p>Dibagi 12 kelas: 384 : 12 = 32.</p><p>Periksa: 32 × 12 = 384, sesuai. Pilihan D adalah jumlah seluruh gelas, belum dibagi ke kelas.</p>"
+    },
+    {
+      "id": "msd-cacah-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penafsiran sisa pada pembagian",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebanyak 250 siswa akan berangkat studi wisata. Setiap bus hanya boleh mengangkut 40 siswa. Semua siswa harus terangkut dalam satu kali perjalanan.</p>",
+      "pertanyaan": "<p>Banyak bus paling sedikit yang harus disewa adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 bus</p>",
+          "mis": "mis-msd-cacah-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>6 bus dan 10 siswa berjalan kaki</p>",
+          "mis": "mis-msd-cacah-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>7 bus</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>10 bus</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>250 : 40 = 6 sisa 10. Enam bus hanya memuat 6 × 40 = 240 siswa.</p><p>Masih ada 10 siswa yang harus terangkut, sehingga diperlukan satu bus tambahan. Jadi 7 bus.</p><p>Sisa pembagian tidak boleh dibuang pada masalah seperti ini, karena setiap siswa tetap harus mendapat tempat.</p>"
+    },
+    {
+      "id": "msd-cacah-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pengurangan berturut pada masalah uang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Tabungan Rio berisi Rp1.500.000. Ia membeli sepeda berharga Rp875.000 dan sebuah helm berharga Rp135.000 dari tabungan itu.</p>",
+      "pertanyaan": "<p>Sisa tabungan Rio adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rp490.000</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rp500.000</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rp590.000</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rp1.010.000</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seluruh pengeluaran = 875.000 + 135.000 = 1.010.000.</p><p>Sisa tabungan = 1.500.000 − 1.010.000 = 490.000.</p><p>Pilihan D adalah jumlah pengeluarannya, bukan sisa tabungan.</p>"
+    },
+    {
+      "id": "msd-cacah-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar menaksir hasil perkalian tanpa menghitung tepat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Bu Guru menuliskan 47 × 29 di papan, lalu meminta siswa menyimpulkan sesuatu tentang hasilnya tanpa menghitung sampai selesai.</p>",
+      "pertanyaan": "<p>Pernyataan yang pasti benar tentang hasil 47 × 29 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>hasilnya lebih dari 1.500</p>",
+          "mis": "mis-msd-cacah-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>hasilnya kurang dari 1.500</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>hasilnya lebih dari 2.000</p>",
+          "mis": "mis-msd-cacah-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>hasilnya kurang dari 1.000</p>",
+          "mis": "mis-msd-cacah-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Karena 47 kurang dari 50 dan 29 kurang dari 30, maka 47 × 29 pasti kurang dari 50 × 30 = 1.500.</p><p>Sekaligus, 47 × 29 lebih dari 40 × 20 = 800, jadi hasilnya berada antara 800 dan 1.500 — pilihan D tersingkir.</p><p>Hasil tepatnya 1.363, yang memang berada di antara kedua taksiran itu.</p>"
+    },
+    {
+      "id": "msd-cacah-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai sifat urutan pada pembagian berturut",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dito berpendapat, “Pembagian boleh dikerjakan dari mana saja, jadi 120 : 6 : 2 sama nilainya dengan 120 : (6 : 2).”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat Dito adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena bilangan yang dibagi tetap 120.</p>",
+          "mis": "mis-msd-cacah-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena 120 : 6 : 2 = 10 sedangkan 120 : (6 : 2) = 40.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena pembagian harus selalu dikerjakan dari kanan ke kiri.</p>",
+          "mis": "mis-msd-cacah-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena tanda kurung tidak memengaruhi hasil pembagian.</p>",
+          "mis": "mis-msd-cacah-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Tanpa tanda kurung, pembagian dikerjakan dari kiri: 120 : 6 = 20, lalu 20 : 2 = 10.</p><p>Dengan tanda kurung: 6 : 2 = 3, lalu 120 : 3 = 40.</p><p>Hasilnya berbeda, jadi pembagian tidak dapat ditukar urutannya. Sifat itu hanya berlaku pada penjumlahan dan perkalian.</p>"
+    },
+    {
+      "id": "msd-cacah-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan perkalian dan pembagian untuk memeriksa hasil hitungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Lima hasil hitungan siswa dikumpulkan untuk diperiksa. Guru meminta kelas menandai hitungan yang sudah benar.</p>",
+      "pertanyaan": "<p>Hitungan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>36 × 25 = 900</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>504 : 7 = 72</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1.008 : 12 = 86</p>",
+          "mis": "mis-msd-cacah-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>125 × 8 = 1.000</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>96 : 4 = 26</p>",
+          "mis": "mis-msd-cacah-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>36 × 25 = 36 × 100 : 4 = 900, benar.</p><p>504 : 7 = 72, benar karena 7 × 72 = 504.</p><p>1.008 : 12 = 84, bukan 86, karena 12 × 84 = 1.008.</p><p>125 × 8 = 1.000, benar.</p><p>96 : 4 = 24, bukan 26, karena 4 × 24 = 96.</p>"
+    },
+    {
+      "id": "msd-cacah-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang hubungan antar-langkah pada pengemasan bertingkat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Gudang berisi 1.440 batang pensil. Pensil dikemas 12 batang per bungkus, kemudian setiap dus diisi 10 bungkus.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang pengemasan itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Seluruh pensil menjadi 120 bungkus.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Seluruh bungkus memenuhi tepat 12 dus.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Setiap dus berisi 120 batang pensil.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bila setiap dus diisi 12 bungkus, dus yang diperlukan menjadi lebih banyak.</p>",
+          "mis": "mis-msd-cacah-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Banyak pensil seluruhnya berubah bila cara pengemasannya diubah.</p>",
+          "mis": "mis-msd-cacah-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Banyak bungkus = 1.440 : 12 = 120, jadi A benar.</p><p>Banyak dus = 120 : 10 = 12, jadi B benar.</p><p>Isi tiap dus = 10 × 12 = 120 batang, jadi C benar.</p><p>D salah: bila tiap dus berisi 12 bungkus, dus yang diperlukan 120 : 12 = 10 dus, yaitu lebih sedikit — wadah yang lebih besar selalu membutuhkan lebih sedikit wadah.</p><p>E salah: cara pengemasan hanya mengubah pengelompokan, bukan banyak pensilnya yang tetap 1.440.</p>"
+    },
+    {
+      "id": "msd-cacah-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai sifat-sifat operasi hitung bilangan cacah",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Kelas menyusun lima pernyataan tentang sifat operasi hitung untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>25 × 32 menghasilkan bilangan yang sama dengan 32 × 25.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>100 − 45 menghasilkan bilangan yang sama dengan 45 − 100.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-cacah-004"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Karena 144 : 12 = 12, maka 12 × 12 = 144.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>(60 + 40) : 5 menghasilkan bilangan yang sama dengan 60 : 5 + 40 : 5.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>200 : (4 × 5) menghasilkan bilangan yang sama dengan 200 : 4 × 5.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-cacah-001"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: perkalian dapat ditukar urutannya, keduanya bernilai 800.</p><p>P2 salah: pengurangan tidak dapat ditukar. 100 − 45 = 55, sedangkan 45 − 100 bukan bilangan cacah.</p><p>P3 benar: pembagian dan perkalian saling berkebalikan, jadi hasil pembagian dapat diperiksa dengan mengalikannya kembali.</p><p>P4 benar: 100 : 5 = 20, dan 12 + 8 = 20. Pembagian dapat disebar ke setiap suku penjumlahan.</p><p>P5 salah: 200 : (4 × 5) = 200 : 20 = 10, sedangkan 200 : 4 × 5 = 50 × 5 = 250.</p>"
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-besar-sudut",
+    "slug": "matematika-sd-besar-sudut",
+    "title": "Besar Sudut",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengukur dan menggolongkan sudut, membaca busur derajat, memakai sudut pelurus dan penyiku, jumlah sudut segitiga, serta menalar sudut yang dibentuk jarum jam.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengukuran besar sudut.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menggolongkan sudut lancip, siku-siku, dan tumpul",
+      "Membaca busur derajat dengan benar",
+      "Memakai sudut pelurus, penyiku, dan jumlah sudut segitiga",
+      "Menentukan sudut yang dibentuk jarum jam"
+    ],
+    "sort_order": 20
+  },
+  "submateri": {
+    "id": "con-matematika-sd-besar-sudut",
+    "name": "Besar sudut",
+    "description": "Mengukur besar sudut dengan busur derajat, menggolongkan jenis sudut, serta memakai hubungan sudut pelurus, penyiku, dan jumlah sudut dalam segitiga."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-sudut-001",
+      "label": "Panjang kaki sudut dianggap menentukan besarnya",
+      "description": "Siswa menyimpulkan sudut yang kakinya digambar lebih panjang pasti lebih besar daripada sudut berkaki pendek.",
+      "insight": "Besar sudut ditentukan oleh bukaan antara kedua kakinya; memperpanjang kaki tidak mengubah bukaan itu."
+    },
+    {
+      "id": "mis-msd-sudut-002",
+      "label": "Skala dalam dan luar busur derajat tertukar",
+      "description": "Siswa membaca angka pada deretan skala yang salah, sehingga 65° terbaca 115° atau sebaliknya.",
+      "insight": "Mulai membaca dari angka 0 yang berimpit dengan salah satu kaki sudut, lalu ikuti deretan angka pada baris yang sama."
+    },
+    {
+      "id": "mis-msd-sudut-003",
+      "label": "Batas penggolongan jenis sudut keliru",
+      "description": "Siswa menggolongkan sudut 95° sebagai lancip atau sudut 180° sebagai tumpul karena batasnya belum jelas.",
+      "insight": "Lancip kurang dari 90°, siku-siku tepat 90°, tumpul antara 90° dan 180°, dan lurus tepat 180°."
+    },
+    {
+      "id": "mis-msd-sudut-004",
+      "label": "Jumlah sudut segitiga dianggap 360°",
+      "description": "Siswa memakai 360° sebagai jumlah sudut dalam segitiga, tertukar dengan jumlah sudut segi empat atau satu putaran penuh.",
+      "insight": "Jumlah sudut dalam segitiga selalu 180°; 360° adalah satu putaran penuh atau jumlah sudut segi empat."
+    },
+    {
+      "id": "mis-msd-sudut-005",
+      "label": "Pergerakan jarum jam pendek diabaikan",
+      "description": "Saat menghitung sudut pada pukul setengah, siswa menganggap jarum pendek masih tepat di angka jamnya, padahal jarum itu sudah bergeser separuh selang.",
+      "insight": "Dalam 30 menit, jarum pendek bergeser setengah selang, yaitu 15°, sehingga posisinya tidak lagi tepat di angka jamnya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-sudut-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami penggolongan jenis sudut",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Pada gambar rancangan atap rumah tercatat sebuah sudut yang besarnya 45°.</p>",
+      "pertanyaan": "<p>Sudut itu tergolong ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>sudut lancip</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>sudut siku-siku</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>sudut tumpul</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>sudut lurus</p>",
+          "mis": "mis-msd-sudut-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Sudut lancip adalah sudut yang besarnya kurang dari 90°. Karena 45° kurang dari 90°, sudut itu lancip.</p><p>Sudut siku-siku tepat 90°, sudut tumpul antara 90° dan 180°, dan sudut lurus tepat 180°.</p>"
+    },
+    {
+      "id": "msd-sudut-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami pembacaan busur derajat",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Busur derajat setengah lingkaran dengan dua deret angka: deret luar 0 sampai 180 dari kiri ke kanan, dan deret dalam 180 sampai 0 dari kiri ke kanan. Sebuah sudut digambar dengan titik sudut di pusat busur; kaki pertama mendatar ke kanan berimpit dengan angka 0 pada deret luar, kaki kedua menembus tepi busur tepat pada angka 65 deret luar. Jangan menuliskan besar sudutnya di luar skala busur."
+      },
+      "stimulus": "<p>Sebuah sudut diukur dengan busur derajat. Salah satu kakinya berimpit dengan angka 0, dan kaki lainnya menunjuk angka 65 pada deretan skala yang sama.</p>",
+      "pertanyaan": "<p>Besar dan jenis sudut itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>65°, sudut lancip</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>115°, sudut tumpul</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>65°, sudut tumpul</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>25°, sudut lancip</p>",
+          "mis": "mis-msd-sudut-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Karena pembacaan dimulai dari angka 0 dan diikuti pada deretan yang sama, besar sudutnya 65°.</p><p>Karena kurang dari 90°, sudut itu tergolong lancip.</p><p>Pilihan B muncul bila angka dibaca pada deretan skala yang berlawanan, yaitu 180 − 65 = 115.</p>"
+    },
+    {
+      "id": "msd-sudut-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan besar sudut pada jarum jam tepat",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah jam dinding menunjukkan pukul 04.00 tepat. Muka jam dibagi menjadi 12 selang yang sama, sehingga setiap selang antara dua angka bernilai 30°.</p>",
+      "pertanyaan": "<p>Sudut terkecil yang dibentuk kedua jarum jam itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30°</p>",
+          "mis": "mis-msd-sudut-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>60°</p>",
+          "mis": "mis-msd-sudut-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>90°</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>120°</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Pada pukul 04.00, jarum panjang di angka 12 dan jarum pendek di angka 4, sehingga terpisah 4 selang.</p><p>Besar sudutnya = 4 × 30° = 120°.</p><p>Sudut itu tergolong tumpul. Pilihan C adalah sudut pada pukul 03.00, yaitu 3 selang.</p>"
+    },
+    {
+      "id": "msd-sudut-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan hubungan sudut berpelurus",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Dua sudut terletak berdampingan pada satu garis lurus sehingga keduanya berpelurus. Salah satu sudut besarnya 115°.</p>",
+      "pertanyaan": "<p>Besar sudut yang lainnya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>65°</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>75°</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>85°</p>",
+          "mis": "mis-msd-sudut-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>245°</p>",
+          "mis": "mis-msd-sudut-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Dua sudut yang berpelurus berjumlah 180°, karena bersama-sama membentuk sudut lurus.</p><p>Sudut lainnya = 180° − 115° = 65°.</p><p>Pilihan D muncul bila 115° ditambahkan ke 360° dan dikurangi, yaitu memakai satu putaran penuh sebagai patokan.</p>"
+    },
+    {
+      "id": "msd-sudut-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan jumlah sudut dalam segitiga",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah rangka layang-layang berbentuk segitiga. Dua sudut yang sudah diukur besarnya 55° dan 65°.</p>",
+      "pertanyaan": "<p>Besar sudut yang ketiga adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>50°</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>240°</p>",
+          "mis": "mis-msd-sudut-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>70°</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>60°</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Jumlah sudut dalam segitiga adalah 180°.</p><p>Sudut ketiga = 180° − (55° + 65°) = 180° − 120° = 60°.</p><p>Pilihan B muncul bila jumlah sudut segitiga dianggap 360°. Perhatikan bahwa satu sudut sebesar 240° tidak mungkin ada dalam segitiga.</p>"
+    },
+    {
+      "id": "msd-sudut-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang sudut jarum jam pada pukul setengah",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah jam menunjukkan pukul 07.30. Setiap selang antara dua angka pada muka jam bernilai 30°, dan jarum pendek bergerak perlahan mengikuti perjalanan menit.</p>",
+      "pertanyaan": "<p>Sudut terkecil yang dibentuk kedua jarum jam itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30°</p>",
+          "mis": "mis-msd-sudut-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>75°</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>60°</p>",
+          "mis": "mis-msd-sudut-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>45°</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Jarum panjang pada 30 menit berada di angka 6.</p><p>Jarum pendek tidak lagi tepat di angka 7. Dalam 30 menit ia sudah bergeser setengah selang, yaitu 15°, sehingga berada 15° setelah angka 7.</p><p>Jarak angka 6 ke angka 7 adalah 30°, ditambah geseran 15° menjadi 45°.</p><p>Pilihan C muncul bila jarum pendek dianggap masih tepat di angka 7, dan pilihan A bila geserannya dihitung dua kali.</p>"
+    },
+    {
+      "id": "msd-sudut-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang apa yang menentukan besar sudut",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Guru menggambar dua sudut yang bukaannya persis sama, tetapi kaki sudut pertama digambar 3 cm dan kaki sudut kedua digambar 8 cm. Seorang siswa berkata, “Sudut kedua lebih besar, karena kakinya lebih panjang.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat siswa itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena kaki yang lebih panjang membuat bukaan sudutnya ikut melebar.</p>",
+          "mis": "mis-msd-sudut-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Benar, karena besar sudut diukur dengan penggaris pada panjang kakinya.</p>",
+          "mis": "mis-msd-sudut-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena kaki yang lebih panjang justru membuat sudutnya menjadi lebih kecil.</p>",
+          "mis": "mis-msd-sudut-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Salah, karena besar sudut ditentukan bukaan kakinya, jadi keduanya sama besar.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Sudut diukur dari bukaan antara kedua kakinya dengan busur derajat, bukan dengan penggaris.</p><p>Memperpanjang kaki sudut hanya memperpanjang garisnya; bukaannya tetap, jadi besar sudutnya tidak berubah. Kedua sudut pada gambar itu sama besar.</p><p>Pilihan C sama kelirunya dengan pilihan A, hanya berlawanan arah.</p>"
+    },
+    {
+      "id": "msd-sudut-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan penggolongan dan hubungan besar sudut",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas mendaftar beberapa pernyataan tentang besar sudut untuk diperiksa kebenarannya.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Sudut yang besarnya 90° disebut sudut siku-siku.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Sudut yang besarnya kurang dari 90° disebut sudut lancip.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sudut yang besarnya antara 90° dan 180° disebut sudut tumpul.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Sudut yang besarnya 180° disebut sudut lancip.</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Jumlah sudut dalam segitiga adalah 360°.</p>",
+          "mis": "mis-msd-sudut-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A, B, dan C adalah batasan baku penggolongan sudut.</p><p>D salah: sudut 180° disebut sudut lurus.</p><p>E salah: jumlah sudut dalam segitiga 180°, sedangkan 360° adalah satu putaran penuh atau jumlah sudut dalam segi empat.</p>"
+    },
+    {
+      "id": "msd-sudut-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang sudut-sudut dalam satu segitiga",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah segitiga mempunyai satu sudut 90° dan satu sudut 35°.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang segitiga itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Sudut ketiganya 55°.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Segitiga itu tergolong segitiga siku-siku.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kedua sudut selain sudut siku-siku sama-sama lancip.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Segitiga itu mempunyai dua sudut tumpul.</p>",
+          "mis": "mis-msd-sudut-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Sudut ketiganya 145°.</p>",
+          "mis": "mis-msd-sudut-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 180° − (90° + 35°) = 55°.</p><p>B benar: salah satu sudutnya tepat 90°.</p><p>C benar: 35° dan 55° keduanya kurang dari 90°.</p><p>D salah: tidak ada sudut yang lebih dari 90°. Segitiga bahkan tidak mungkin punya dua sudut tumpul, karena jumlahnya sudah melebihi 180°.</p><p>E salah: 145° diperoleh dari 180° − 35° dengan mengabaikan sudut 90°.</p>"
+    },
+    {
+      "id": "msd-sudut-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang besar sudut",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang besar sudut ditulis di papan tulis untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Satu putaran penuh sama dengan 360°.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Sudut lurus besarnya 180°.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Besar suatu sudut bergantung pada panjang kakinya.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-sudut-001"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Dua sudut yang berpenyiku berjumlah 90°.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Sudut yang besarnya 95° tergolong sudut lancip.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-sudut-003"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: satu putaran penuh dibagi menjadi 360 bagian yang sama.</p><p>P2 benar: sudut lurus adalah setengah putaran, yaitu 180°.</p><p>P3 salah: yang menentukan besar sudut adalah bukaan kedua kakinya.</p><p>P4 benar: berpenyiku berarti bersama-sama membentuk sudut siku-siku.</p><p>P5 salah: 95° lebih dari 90°, sehingga tergolong sudut tumpul.</p>"
+    }
+  ]
+}

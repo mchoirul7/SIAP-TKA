@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-kecepatan",
+    "slug": "matematika-sd-laju-perubahan-kecepatan",
+    "title": "Laju Perubahan (Kecepatan)",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Menghitung kecepatan, jarak, dan waktu tempuh, mengubah menit menjadi jam pada perhitungan kecepatan, serta menalar kecepatan rata-rata dan hubungan berbalik antara kecepatan dan waktu.",
+    "summary": "10 soal diagnostik bergaya TKA untuk laju perubahan (kecepatan).",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menghitung kecepatan dari jarak dan waktu",
+      "Menghitung jarak dan waktu tempuh",
+      "Mengubah menit menjadi jam pada perhitungan kecepatan",
+      "Menalar kecepatan rata-rata perjalanan bertahap"
+    ],
+    "sort_order": 17
+  },
+  "submateri": {
+    "id": "con-matematika-sd-kecepatan",
+    "name": "Laju perubahan (kecepatan)",
+    "description": "Menentukan kecepatan, jarak, dan waktu tempuh pada masalah sehari-hari, serta menalar hubungan ketiganya termasuk kecepatan rata-rata perjalanan bertahap."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-kecepatan-001",
+      "label": "Jarak dan waktu tertukar",
+      "description": "Siswa membagi waktu dengan jarak, atau mengalikan ketika seharusnya membagi, sehingga satuan hasilnya tidak masuk akal.",
+      "insight": "Kecepatan = jarak : waktu. Periksa satuannya: hasil km : jam memang km/jam, sedangkan jam : km bukan satuan kecepatan."
+    },
+    {
+      "id": "mis-msd-kecepatan-002",
+      "label": "Menit dipakai langsung sebagai jam",
+      "description": "Siswa memasukkan 45 menit sebagai angka 45 ke dalam perhitungan berkecepatan km/jam, tanpa mengubahnya menjadi jam.",
+      "insight": "Bila kecepatannya km/jam, waktu harus dinyatakan dalam jam: 45 menit sama dengan 45 : 60 = 0,75 jam."
+    },
+    {
+      "id": "mis-msd-kecepatan-003",
+      "label": "Kecepatan rata-rata dianggap rata-rata kedua kecepatan",
+      "description": "Pada perjalanan dua tahap, siswa menjumlahkan kedua kecepatan lalu membaginya dua, tanpa memperhatikan lama masing-masing tahap.",
+      "insight": "Kecepatan rata-rata = jarak seluruhnya : waktu seluruhnya, bukan rata-rata dari angka kecepatannya."
+    },
+    {
+      "id": "mis-msd-kecepatan-004",
+      "label": "Kecepatan dan waktu dianggap berubah searah",
+      "description": "Siswa menganggap menggandakan kecepatan berarti waktu tempuhnya juga menjadi dua kali.",
+      "insight": "Untuk jarak yang tetap, kecepatan dan waktu berbanding berbalik: kecepatan dua kali membuat waktunya menjadi setengah."
+    },
+    {
+      "id": "mis-msd-kecepatan-005",
+      "label": "Satuan kecepatan diabaikan saat membandingkan",
+      "description": "Siswa membandingkan 5 m/detik dengan 5 km/jam hanya dari angkanya, tanpa menyeragamkan satuannya.",
+      "insight": "Seragamkan satuannya lebih dahulu; 5 m/detik sama dengan 18 km/jam, jauh lebih cepat daripada 5 km/jam."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-kecepatan-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami penghitungan kecepatan dari jarak dan waktu",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Seorang pesepeda menempuh jarak 60 km dari kota ke desa dalam waktu 3 jam dengan laju yang tetap.</p>",
+      "pertanyaan": "<p>Kecepatan pesepeda itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>20 km/jam</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>30 km/jam</p>",
+          "mis": "mis-msd-kecepatan-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>63 km/jam</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>180 km/jam</p>",
+          "mis": "mis-msd-kecepatan-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Kecepatan = jarak : waktu = 60 : 3 = 20 km/jam.</p><p>Pilihan D muncul bila jarak dikalikan waktu, dan pilihan C bila keduanya dijumlahkan. Periksa kewajaran: 20 km/jam memang laju sepeda yang masuk akal, sedangkan 180 km/jam laju kendaraan balap.</p>"
+    },
+    {
+      "id": "msd-kecepatan-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami arti satuan kecepatan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Pada papan petunjuk tertulis bahwa batas kecepatan di jalan itu 40 km/jam.</p>",
+      "pertanyaan": "<p>Arti kecepatan 40 km/jam adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>dalam 1 jam kendaraan menempuh 40 km</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>dalam 1 km kendaraan memerlukan 40 jam</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>dalam 40 jam kendaraan menempuh 1 km</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>dalam 1 menit kendaraan menempuh 40 km</p>",
+          "mis": "mis-msd-kecepatan-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Satuan km/jam dibaca “kilometer per jam”, yang berarti banyak kilometer yang ditempuh dalam waktu satu jam.</p><p>Jadi 40 km/jam berarti dalam 1 jam kendaraan menempuh 40 km. Pilihan D keliru karena mengganti jam dengan menit — kalau benar, kendaraan itu menempuh 2.400 km dalam sejam.</p>"
+    },
+    {
+      "id": "msd-kecepatan-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penghitungan jarak dari kecepatan dan waktu",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah mobil melaju dengan kecepatan tetap 60 km/jam selama 2,5 jam tanpa berhenti.</p>",
+      "pertanyaan": "<p>Jarak yang ditempuh mobil itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>24 km</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>62,5 km</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>120 km</p>",
+          "mis": "mis-msd-kecepatan-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>150 km</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Jarak = kecepatan × waktu = 60 × 2,5 = 150 km.</p><p>Cara lain: dalam 2 jam menempuh 120 km, ditambah setengah jam yang menempuh 30 km, seluruhnya 150 km.</p><p>Pilihan C muncul bila setengah jam terakhir diabaikan, dan pilihan A bila jarak dibagi bukan dikalikan.</p>"
+    },
+    {
+      "id": "msd-kecepatan-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penghitungan waktu tempuh",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah bus harus menempuh jarak 180 km. Bus itu melaju dengan kecepatan tetap 45 km/jam.</p>",
+      "pertanyaan": "<p>Waktu tempuh bus itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>3 jam</p>",
+          "mis": "mis-msd-kecepatan-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4 jam</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>5 jam</p>",
+          "mis": "mis-msd-kecepatan-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>135 jam</p>",
+          "mis": "mis-msd-kecepatan-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Waktu = jarak : kecepatan = 180 : 45 = 4 jam.</p><p>Periksa: 4 × 45 = 180 km, sesuai.</p><p>Pilihan D muncul bila jarak dikurangi kecepatan, yang jelas tidak menghasilkan satuan waktu.</p>"
+    },
+    {
+      "id": "msd-kecepatan-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan menit menjadi jam pada perhitungan kecepatan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Seorang pejalan kaki berjalan dengan kecepatan tetap 4 km/jam selama 45 menit.</p>",
+      "pertanyaan": "<p>Jarak yang ditempuh pejalan kaki itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2,5 km</p>",
+          "mis": "mis-msd-kecepatan-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>3 km</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>5,3 km</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>180 km</p>",
+          "mis": "mis-msd-kecepatan-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Karena kecepatannya km/jam, ubah waktunya menjadi jam: 45 menit = 45 : 60 = 0,75 jam.</p><p>Jarak = 4 × 0,75 = 3 km.</p><p>Pilihan D muncul bila 45 menit dipakai apa adanya sebagai 45 jam. Periksa kewajaran: berjalan kaki 180 km dalam kurang dari sejam mustahil.</p>"
+    },
+    {
+      "id": "msd-kecepatan-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang kecepatan rata-rata perjalanan dua tahap",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kendaraan berangkat menempuh 60 km dalam waktu 1 jam. Saat kembali melalui jalan yang sama, kendaraan itu menempuh 60 km dalam waktu 2 jam karena jalanan padat.</p>",
+      "pertanyaan": "<p>Kecepatan rata-rata seluruh perjalanan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30 km/jam</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>40 km/jam</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>45 km/jam</p>",
+          "mis": "mis-msd-kecepatan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>60 km/jam</p>",
+          "mis": "mis-msd-kecepatan-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Jarak seluruhnya = 60 + 60 = 120 km. Waktu seluruhnya = 1 + 2 = 3 jam.</p><p>Kecepatan rata-rata = 120 : 3 = 40 km/jam.</p><p>Pilihan C adalah rata-rata dari 60 km/jam dan 30 km/jam. Cara itu keliru karena kendaraan berjalan lebih lama pada tahap yang lambat, sehingga tahap lambat lebih berpengaruh dan hasilnya condong ke bawah 45.</p>"
+    },
+    {
+      "id": "msd-kecepatan-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang hubungan berbalik kecepatan dan waktu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kendaraan menempuh jarak tertentu dalam 6 jam. Seorang siswa berkata, “Kalau kecepatannya digandakan, waktu tempuhnya juga menjadi dua kali, yaitu 12 jam.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat siswa itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena kecepatan dan waktu selalu berubah searah.</p>",
+          "mis": "mis-msd-kecepatan-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena untuk jarak yang tetap kecepatan dua kali membuat waktunya menjadi setengah, yaitu 3 jam.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena waktu tempuhnya tidak berubah meski kecepatannya berubah.</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena jarak yang ditempuh ikut menjadi dua kali.</p>",
+          "mis": "mis-msd-kecepatan-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Untuk jarak yang tetap, kecepatan dan waktu berbanding berbalik. Bergerak lebih cepat pasti membuat perjalanan lebih singkat, bukan lebih lama.</p><p>Contoh angka: jarak 300 km dengan 50 km/jam memerlukan 6 jam; dengan 100 km/jam hanya 3 jam.</p><p>Pilihan D keliru karena yang digandakan hanya kecepatannya, sedangkan jaraknya tetap.</p>"
+    },
+    {
+      "id": "msd-kecepatan-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan hubungan jarak, waktu, dan kecepatan pada satu perjalanan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah sepeda motor menempuh jarak 90 km dalam waktu 2 jam dengan kecepatan tetap.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang perjalanan itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kecepatan sepeda motor itu 45 km/jam.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Dalam 4 jam dengan kecepatan yang sama, jaraknya menjadi 180 km.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Dalam 30 menit dengan kecepatan yang sama, jaraknya 22,5 km.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kecepatan sepeda motor itu 180 km/jam.</p>",
+          "mis": "mis-msd-kecepatan-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Untuk menempuh 45 km diperlukan waktu 2 jam.</p>",
+          "mis": "mis-msd-kecepatan-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 90 : 2 = 45 km/jam.</p><p>B benar: 45 × 4 = 180 km.</p><p>C benar: 30 menit = 0,5 jam, jadi 45 × 0,5 = 22,5 km.</p><p>D salah: 180 diperoleh dari 90 × 2, bukan 90 : 2.</p><p>E salah: 45 km ditempuh tepat dalam 1 jam, karena kecepatannya 45 km/jam.</p>"
+    },
+    {
+      "id": "msd-kecepatan-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar membandingkan kecepatan dua orang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Ana bersepeda menempuh 12 km dalam 40 menit. Budi berjalan kaki menempuh 3 km dalam 30 menit. Keduanya bergerak dengan laju tetap.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang keduanya adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kecepatan Ana 18 km/jam.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kecepatan Budi 6 km/jam.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kecepatan Ana tiga kali kecepatan Budi.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Budi menempuh jarak lebih jauh daripada Ana.</p>",
+          "mis": "mis-msd-kecepatan-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Bila keduanya bergerak selama 1 jam, selisih jaraknya 9 km.</p>",
+          "mis": "mis-msd-kecepatan-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 40 menit = 40 : 60 = 2/3 jam, jadi 12 : (2/3) = 18 km/jam.</p><p>B benar: 30 menit = 0,5 jam, jadi 3 : 0,5 = 6 km/jam.</p><p>C benar: 18 : 6 = 3.</p><p>D salah: Ana menempuh 12 km sedangkan Budi hanya 3 km.</p><p>E salah: dalam 1 jam Ana menempuh 18 km dan Budi 6 km, sehingga selisihnya 12 km.</p>"
+    },
+    {
+      "id": "msd-kecepatan-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang kecepatan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang kecepatan dikumpulkan dari catatan kelas untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Kecepatan diperoleh dengan membagi jarak dengan waktu.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Kecepatan 5 m/detik lebih besar daripada kecepatan 5 km/jam.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Bila waktunya sama, yang menempuh jarak lebih jauh berarti berkecepatan lebih besar.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Kecepatan rata-rata dua tahap perjalanan selalu sama dengan rata-rata kedua kecepatannya.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-kecepatan-003"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Menempuh 100 km dalam 2 jam lebih cepat daripada menempuh 150 km dalam 3 jam.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-kecepatan-005"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: itulah hubungan dasar kecepatan.</p><p>P2 benar: 5 m/detik berarti 5 × 60 × 60 = 18.000 m dalam satu jam, yaitu 18 km/jam — jauh lebih besar daripada 5 km/jam.</p><p>P3 benar: dengan waktu yang sama, jarak yang lebih besar memberi hasil bagi yang lebih besar.</p><p>P4 salah: cara itu hanya benar bila lama kedua tahap sama. Kecepatan rata-rata dihitung dari jarak seluruhnya dibagi waktu seluruhnya.</p><p>P5 salah: 100 : 2 = 50 km/jam dan 150 : 3 = 50 km/jam, jadi keduanya sama cepat.</p>"
+    }
+  ]
+}

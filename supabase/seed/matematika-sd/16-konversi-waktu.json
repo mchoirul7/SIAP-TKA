@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-konversi-waktu",
+    "slug": "matematika-sd-hubungan-antar-satuan-waktu",
+    "title": "Hubungan Antar-Satuan Waktu",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengubah dan membandingkan satuan waktu detik, menit, jam, hari, pekan, bulan, dan tahun, termasuk menafsirkan bentuk desimal jam dan sisa pembagian detik.",
+    "summary": "10 soal diagnostik bergaya TKA untuk hubungan antar-satuan waktu (detik, menit, jam, hari, pekan, bulan, tahun).",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengubah jam, menit, dan detik",
+      "Mengubah hari, pekan, bulan, dan tahun",
+      "Menafsirkan bentuk desimal pada satuan jam",
+      "Mengurutkan lama waktu setelah menyeragamkan satuan"
+    ],
+    "sort_order": 16
+  },
+  "submateri": {
+    "id": "con-matematika-sd-konversi-waktu",
+    "name": "Hubungan antar-satuan waktu (detik, menit, jam, hari, pekan, bulan, tahun)",
+    "description": "Menentukan kesetaraan antarsatuan waktu dan memakainya untuk menjumlahkan, membandingkan, serta mengurutkan lama kegiatan."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-konvwaktu-001",
+      "label": "Satuan waktu dianggap berkelipatan 10 atau 100",
+      "description": "Siswa memakai pengali 10 atau 100 untuk mengubah jam ke menit atau menit ke detik, seperti pada satuan panjang dan berat.",
+      "insight": "Satuan waktu tidak memakai tangga puluhan: 1 jam = 60 menit, 1 menit = 60 detik, 1 hari = 24 jam, dan 1 pekan = 7 hari."
+    },
+    {
+      "id": "mis-msd-konvwaktu-002",
+      "label": "Bentuk desimal jam dibaca sebagai menit",
+      "description": "Siswa menafsirkan 1,5 jam sebagai 1 jam 5 menit atau 2,5 jam sebagai 2 jam 5 menit.",
+      "insight": "Angka di belakang koma adalah bagian dari jam: 0,5 jam berarti setengah jam, yaitu 30 menit."
+    },
+    {
+      "id": "mis-msd-konvwaktu-003",
+      "label": "Arah perubahan satuan waktu terbalik",
+      "description": "Siswa membagi ketika seharusnya mengalikan, misalnya mengubah 3 jam ke menit dengan membagi 60.",
+      "insight": "Satuan yang lebih kecil dibutuhkan lebih banyak, jadi jam ke menit dikali 60 dan menit ke jam dibagi 60."
+    },
+    {
+      "id": "mis-msd-konvwaktu-004",
+      "label": "Sisa pembagian detik ditulis keliru",
+      "description": "Saat mengubah detik ke menit, siswa menuliskan hasil bagi dan sisanya tertukar atau memakai sisa lebih dari 60.",
+      "insight": "Hasil bagi menjadi banyak menit dan sisanya menjadi detik; sisa harus selalu kurang dari 60."
+    },
+    {
+      "id": "mis-msd-konvwaktu-005",
+      "label": "Membandingkan angka tanpa menyeragamkan satuan",
+      "description": "Siswa langsung membandingkan angkanya, sehingga 1.500 detik dianggap lebih lama daripada 0,6 jam.",
+      "insight": "Ubah semua lama waktu ke satu satuan yang sama, biasanya menit, sebelum dibandingkan."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-konvwaktu-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan jam ke menit",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah pelatihan berlangsung 3 jam tanpa jeda. Panitia ingin mencatat lamanya dalam menit pada laporan kegiatan.</p>",
+      "pertanyaan": "<p>Lama pelatihan itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>180 menit</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>300 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,05 menit</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satu jam sama dengan 60 menit, jadi 3 jam = 3 × 60 = 180 menit.</p><p>Pilihan A dan C muncul bila pengalinya dianggap 10 atau 100 seperti pada satuan panjang.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan pekan ke hari",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Libur sekolah berlangsung 2 pekan. Wali kelas ingin menuliskannya dalam hari pada surat pemberitahuan.</p>",
+      "pertanyaan": "<p>Lama libur itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7 hari</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>14 hari</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>20 hari</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>30 hari</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satu pekan sama dengan 7 hari, jadi 2 pekan = 2 × 7 = 14 hari.</p><p>Pilihan C dan D muncul bila pekan dianggap 10 atau 15 hari.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan menit ke detik",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Waktu tempuh pelari terbaik pada lomba antarkelas tercatat 5 menit. Pencatat waktu ingin menuliskannya dalam detik pada papan hasil.</p>",
+      "pertanyaan": "<p>Waktu tempuh itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>50 detik</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>300 detik</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>500 detik</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,08 detik</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satu menit sama dengan 60 detik, jadi 5 menit = 5 × 60 = 300 detik.</p><p>Pilihan D muncul bila justru dibagi 60; hasilnya mustahil karena 5 menit jelas jauh lebih lama daripada satu detik.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan gabungan jam dan menit",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Ujian sekolah berlangsung 2 jam 15 menit. Pengawas ingin menuliskan seluruh waktunya dalam menit agar mudah dihitung dengan penghitung waktu.</p>",
+      "pertanyaan": "<p>Lama ujian itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>75 menit</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>135 menit</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>215 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>230 menit</p>",
+          "mis": "mis-msd-konvwaktu-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Ubah bagian jamnya lebih dahulu: 2 jam = 2 × 60 = 120 menit.</p><p>Lalu tambahkan sisanya: 120 + 15 = 135 menit.</p><p>Pilihan C muncul bila angka 2 dan 15 langsung ditempelkan tanpa mengubah satuan.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penyeragaman tiga satuan waktu sekaligus",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Latihan drum band terdiri atas tiga bagian: pemanasan 1 jam, latihan pola 45 menit, dan penenangan 120 detik.</p>",
+      "pertanyaan": "<p>Lama seluruh latihan itu bila dinyatakan dalam menit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>105 menit</p>",
+          "mis": "mis-msd-konvwaktu-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>107 menit</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>166 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>225 menit</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Ubah semuanya ke menit: 1 jam = 60 menit, 45 menit tetap, dan 120 detik = 120 : 60 = 2 menit.</p><p>Jumlahnya = 60 + 45 + 2 = 107 menit.</p><p>Pilihan A muncul bila penenangan diabaikan, dan pilihan D bila 120 detik dianggap 120 menit.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengurutkan lama waktu yang satuannya berbeda-beda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat kegiatan dicatat dengan satuan waktu yang berbeda-beda:</p><ul><li>Kegiatan I: 1/2 jam</li><li>Kegiatan II: 1.500 detik</li><li>Kegiatan III: 20 menit</li><li>Kegiatan IV: 0,6 jam</li></ul>",
+      "pertanyaan": "<p>Urutan kegiatan dari yang paling singkat adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kegiatan III, Kegiatan II, Kegiatan I, Kegiatan IV</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kegiatan I, Kegiatan II, Kegiatan III, Kegiatan IV</p>",
+          "mis": "mis-msd-konvwaktu-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kegiatan III, Kegiatan I, Kegiatan IV, Kegiatan II</p>",
+          "mis": "mis-msd-konvwaktu-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kegiatan IV, Kegiatan I, Kegiatan II, Kegiatan III</p>",
+          "mis": "mis-msd-konvwaktu-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seragamkan semuanya ke menit:</p><ul><li>Kegiatan I: 1/2 jam = 30 menit</li><li>Kegiatan II: 1.500 detik = 1.500 : 60 = 25 menit</li><li>Kegiatan III: 20 menit</li><li>Kegiatan IV: 0,6 jam = 0,6 × 60 = 36 menit</li></ul><p>Urutan dari paling singkat: 20, 25, 30, 36, yaitu Kegiatan III, II, I, IV.</p><p>Kegiatan bersatuan detik berangka paling besar, padahal justru bukan yang paling lama.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang pengali antarsatuan waktu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Wira berpendapat, “Satu jam sama dengan 100 menit, sebab setiap perpindahan satuan pasti berkelipatan 10 atau 100 seperti pada satuan panjang.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat Wira adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena semua satuan ukur memakai tangga puluhan tanpa kecuali.</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena satuan waktu tidak bertangga puluhan: 1 jam = 60 menit.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena satu jam sebenarnya terdiri atas 24 menit, bukan 100 menit.</p>",
+          "mis": "mis-msd-konvwaktu-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, tetapi aturan itu hanya berlaku pada perubahan menit ke detik.</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satuan panjang, berat, dan volume memang berkelipatan 10 pada setiap tangganya, tetapi satuan waktu tidak.</p><p>Hubungan yang benar: 1 menit = 60 detik, 1 jam = 60 menit, 1 hari = 24 jam, 1 pekan = 7 hari, dan 1 tahun = 12 bulan. Angka 24 pada pilihan C adalah banyak jam dalam satu hari, bukan banyak menit dalam satu jam.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan kesetaraan antarsatuan waktu",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Beberapa kesetaraan satuan waktu ditulis di papan tulis untuk diperiksa kebenarannya.</p>",
+      "pertanyaan": "<p>Kesetaraan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1 menit = 60 detik</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1 hari = 24 jam</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1 pekan = 7 hari</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1 jam = 100 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1 tahun = 10 bulan</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A, B, dan C adalah hubungan baku antarsatuan waktu.</p><p>D salah: 1 jam = 60 menit.</p><p>E salah: 1 tahun = 12 bulan. Angka 10 hanya berlaku pada tangga satuan panjang, berat, dan volume.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang berbagai penulisan satu lama waktu yang sama",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Latihan paduan suara berlangsung 2,5 jam. Lama itu dicatat dengan beberapa cara berbeda pada buku kegiatan.</p>",
+      "pertanyaan": "<p>Penulisan yang benar untuk lama latihan itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>150 menit</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>9.000 detik</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>250 menit</p>",
+          "mis": "mis-msd-konvwaktu-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2 jam 30 menit</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>2 jam 50 menit</p>",
+          "mis": "mis-msd-konvwaktu-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 2,5 × 60 = 150 menit.</p><p>B benar: 150 × 60 = 9.000 detik.</p><p>C salah: angka 250 muncul bila pengalinya dianggap 100.</p><p>D benar: 0,5 jam berarti setengah jam, yaitu 30 menit.</p><p>E salah: angka 5 di belakang koma bukan 5 menit, melainkan setengah jam.</p>"
+    },
+    {
+      "id": "msd-konvwaktu-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang hubungan antar-satuan waktu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang satuan waktu dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 tahun sama dengan 12 bulan.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>90 menit sama dengan 1,5 jam.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>1 hari sama dengan 1.440 menit.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>200 detik sama dengan 2 menit 20 detik.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvwaktu-004"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>1 pekan sama dengan 10 hari.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvwaktu-001"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: itu hubungan baku antara tahun dan bulan.</p><p>P2 benar: 90 : 60 = 1,5 jam, yaitu 1 jam 30 menit.</p><p>P3 benar: 24 × 60 = 1.440 menit.</p><p>P4 salah: 200 : 60 = 3 sisa 20, jadi 200 detik sama dengan 3 menit 20 detik. Nilai 2 menit 20 detik hanya 140 detik.</p><p>P5 salah: 1 pekan sama dengan 7 hari.</p>"
+    }
+  ]
+}

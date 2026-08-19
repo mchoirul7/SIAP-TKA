@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-relasi-bentuk-pecahan",
+    "slug": "matematika-sd-relasi-pecahan-desimal-persen",
+    "title": "Relasi Pecahan, Desimal, dan Persen",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Mengubah bentuk pecahan sederhana, desimal, dan persen satu ke yang lain, lalu memakainya untuk membandingkan besaran yang ditulis dalam bentuk berbeda.",
+    "summary": "10 soal diagnostik bergaya TKA untuk relasi berbagai bentuk pecahan: pecahan sederhana, desimal, dan persen.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengubah pecahan menjadi desimal dan persen",
+      "Mengubah desimal menjadi pecahan paling sederhana",
+      "Membandingkan besaran dalam bentuk yang berbeda",
+      "Menalar kekeliruan penulisan bentuk pecahan"
+    ],
+    "sort_order": 3
+  },
+  "submateri": {
+    "id": "con-matematika-sd-relasi-bentuk-pecahan",
+    "name": "Relasi berbagai bentuk pecahan (pecahan sederhana, desimal, persen)",
+    "description": "Menyatakan satu besaran dalam bentuk pecahan sederhana, desimal, dan persen serta mengenali kesetaraan dan urutan antarbentuk."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-relasi-001",
+      "label": "Menyalin angka pecahan menjadi persen",
+      "description": "Siswa menuliskan 3/4 sebagai 34% dengan menempelkan pembilang dan penyebut, tanpa menghitung nilai pecahannya.",
+      "insight": "Ubah pecahan menjadi penyebut 100 atau bagi pembilang dengan penyebut lebih dahulu, baru nyatakan sebagai persen."
+    },
+    {
+      "id": "mis-msd-relasi-002",
+      "label": "Desimal dianggap persen dengan menghapus koma",
+      "description": "Siswa menuliskan 0,5 sebagai 5% karena hanya menghilangkan tanda koma, bukan mengalikan dengan 100.",
+      "insight": "Persen berarti per seratus, jadi desimal dikalikan 100 lebih dahulu: 0,5 × 100 = 50%."
+    },
+    {
+      "id": "mis-msd-relasi-003",
+      "label": "Nilai tempat desimal tertukar",
+      "description": "Siswa menganggap 0,08 sama dengan 8/10 karena tidak membedakan tempat persepuluhan dan perseratusan.",
+      "insight": "Satu angka di belakang koma berarti persepuluhan, dua angka berarti perseratusan; 0,08 berarti 8/100."
+    },
+    {
+      "id": "mis-msd-relasi-004",
+      "label": "Membandingkan bentuk berbeda tanpa menyeragamkan",
+      "description": "Siswa membandingkan pecahan, desimal, dan persen apa adanya tanpa mengubahnya ke satu bentuk yang sama.",
+      "insight": "Ubah semua besaran ke satu bentuk — biasanya desimal — sebelum diurutkan atau dibandingkan."
+    },
+    {
+      "id": "mis-msd-relasi-005",
+      "label": "Persen dianggap selalu lebih besar",
+      "description": "Siswa menganggap bentuk persen pasti bernilai lebih besar daripada bentuk pecahan atau desimalnya karena angkanya tampak besar.",
+      "insight": "Bentuk penulisan tidak mengubah nilai; 40%, 0,4, dan 2/5 adalah bilangan yang sama."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-relasi-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami bentuk desimal dan persen dari suatu pecahan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Pada laporan panen, tertulis bahwa 3/4 bagian lahan sudah dipanen. Petugas ingin menuliskan angka itu dalam bentuk desimal dan persen pada papan pengumuman.</p>",
+      "pertanyaan": "<p>Bentuk desimal dan persen dari 3/4 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0,34 dan 34%</p>",
+          "mis": "mis-msd-relasi-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>7,5 dan 75%</p>",
+          "mis": "mis-msd-relasi-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>0,25 dan 25%</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,75 dan 75%</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>3/4 dikalikan 25 pada pembilang dan penyebut menjadi 75/100, yaitu 0,75.</p><p>Karena persen berarti per seratus, 75/100 sama dengan 75%.</p><p>Pilihan C adalah bagian yang belum dipanen, bukan yang sudah.</p>"
+    },
+    {
+      "id": "msd-relasi-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami bentuk pecahan sederhana dan persen dari suatu desimal",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Alat ukur digital menunjukkan bahwa 0,4 bagian tangki sudah terisi. Angka itu akan ditulis ulang sebagai pecahan paling sederhana dan sebagai persen.</p>",
+      "pertanyaan": "<p>Bentuk pecahan paling sederhana dan persen dari 0,4 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/4 dan 25%</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1/40 dan 4%</p>",
+          "mis": "mis-msd-relasi-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4/5 dan 80%</p>",
+          "mis": "mis-msd-relasi-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2/5 dan 40%</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>0,4 berarti 4 persepuluhan, yaitu 4/10. Pembilang dan penyebut dibagi 2 menjadi 2/5.</p><p>Untuk persen: 4/10 = 40/100 = 40%.</p><p>Pilihan B muncul bila koma sekadar dihapus tanpa mengalikan 100.</p>"
+    },
+    {
+      "id": "msd-relasi-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan pecahan menjadi persen berkoma",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah toko menuliskan potongan harga sebagai pecahan, yaitu 3/8 dari harga semula. Pemilik toko ingin memasang spanduk dengan angka persen agar lebih mudah dibaca pembeli.</p>",
+      "pertanyaan": "<p>Potongan harga itu setara dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>3,8%</p>",
+          "mis": "mis-msd-relasi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>24%</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>37,5%</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>38%</p>",
+          "mis": "mis-msd-relasi-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>3 dibagi 8 sama dengan 0,375. Dikalikan 100 menjadi 37,5%.</p><p>Cara lain: 3/8 dikalikan 12,5 pada pembilang dan penyebut menghasilkan 37,5/100, yaitu 37,5%.</p><p>Pilihan D didapat dengan menempelkan angka 3 dan 8, yang tidak ada kaitannya dengan nilai pecahannya.</p>"
+    },
+    {
+      "id": "msd-relasi-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penyeragaman bentuk untuk mengurutkan besaran",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Tiga sekolah melaporkan bagian siswa yang mengikuti kegiatan literasi dengan bentuk penulisan yang berbeda:</p><ul><li>Sekolah Melati: 0,7 bagian</li><li>Sekolah Nusa: 3/5 bagian</li><li>Sekolah Oryza: 65% bagian</li></ul>",
+      "pertanyaan": "<p>Urutan sekolah dari bagian peserta yang paling sedikit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Nusa, Oryza, Melati</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Melati, Nusa, Oryza</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Nusa, Melati, Oryza</p>",
+          "mis": "mis-msd-relasi-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Oryza, Nusa, Melati</p>",
+          "mis": "mis-msd-relasi-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Ubah semuanya menjadi desimal: 0,7 tetap 0,7; 3/5 = 0,6; dan 65% = 0,65.</p><p>Urutan dari kecil: 0,6 lalu 0,65 lalu 0,7, yaitu Nusa, Oryza, Melati.</p><p>Pilihan D keliru karena angka 65 tampak besar padahal nilainya 0,65.</p>"
+    },
+    {
+      "id": "msd-relasi-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan hasil pekerjaan menjadi persen",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Ulangan matematika berisi 24 soal. Nadia menjawab benar 18 soal. Guru menuliskan hasilnya dalam bentuk persen di buku nilai.</p>",
+      "pertanyaan": "<p>Persentase jawaban benar Nadia adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>62,5%</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>70%</p>",
+          "mis": "mis-msd-relasi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>75%</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>80%</p>",
+          "mis": "mis-msd-relasi-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bagian jawaban benar = 18/24. Pembilang dan penyebut dibagi 6 menjadi 3/4.</p><p>3/4 = 75/100 = 75%.</p><p>Pilihan A adalah 15/24, bukan 18/24, dan pilihan D adalah 19,2 dari 24 soal.</p>"
+    },
+    {
+      "id": "msd-relasi-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar memilih besaran terbesar dari bentuk yang berbeda-beda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat pedagang memasang potongan harga dengan bentuk penulisan yang berbeda:</p><ul><li>Pedagang I: 5/8 dari harga</li><li>Pedagang II: 0,62 dari harga</li><li>Pedagang III: 63% dari harga</li><li>Pedagang IV: 3/5 dari harga</li></ul>",
+      "pertanyaan": "<p>Potongan harga terbesar diberikan oleh ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pedagang I</p>",
+          "mis": "mis-msd-relasi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pedagang II</p>",
+          "mis": "mis-msd-relasi-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pedagang III</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pedagang IV</p>",
+          "mis": "mis-msd-relasi-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Ubah semuanya menjadi desimal: 5/8 = 0,625; 0,62 tetap 0,62; 63% = 0,63; dan 3/5 = 0,6.</p><p>Nilai terbesar adalah 0,63, yaitu Pedagang III.</p><p>Perhatikan bahwa 5/8 dan 63% hanya berselisih 0,005, sehingga menebak tanpa menyeragamkan bentuk mudah keliru.</p>"
+    },
+    {
+      "id": "msd-relasi-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai kekeliruan mengubah desimal menjadi persen",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Rani menulis di buku catatannya, “0,5 sama dengan 5%, karena tanda komanya cukup dihilangkan.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap catatan Rani adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena angka di belakang koma langsung menjadi angka persen.</p>",
+          "mis": "mis-msd-relasi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Benar, karena 5% dan 0,5 sama-sama bernilai setengah.</p>",
+          "mis": "mis-msd-relasi-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena 0,5 tidak dapat dinyatakan dalam bentuk persen.</p>",
+          "mis": "mis-msd-relasi-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Salah, karena 0,5 sama dengan 50/100 sehingga setara 50%.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>0,5 berarti 5 persepuluhan, yaitu 5/10 = 50/100 = 50%.</p><p>Sedangkan 5% berarti 5/100 = 0,05, sepuluh kali lebih kecil. Jadi catatan Rani salah.</p><p>Aturan yang benar: desimal dikalikan 100 untuk menjadi persen, dan persen dibagi 100 untuk menjadi desimal.</p>"
+    },
+    {
+      "id": "msd-relasi-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan kesetaraan bentuk untuk menyaring nilai yang sama",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Guru menempel beberapa kartu bilangan di papan. Kartu yang nilainya sama dengan 0,25 akan dikumpulkan dalam satu kotak.</p>",
+      "pertanyaan": "<p>Kartu yang masuk kotak itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/4</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>25%</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>25/100</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2,5%</p>",
+          "mis": "mis-msd-relasi-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1/25</p>",
+          "mis": "mis-msd-relasi-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>0,25 berarti 25 perseratusan, yaitu 25/100. Disederhanakan menjadi 1/4, dan dalam bentuk persen menjadi 25%. Ketiganya senilai.</p><p>2,5% = 0,025, sepuluh kali lebih kecil daripada 0,25.</p><p>1/25 = 4/100 = 0,04, jadi bukan pasangan yang sama.</p>"
+    },
+    {
+      "id": "msd-relasi-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang kesetaraan antarbentuk bilangan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan hasil kerja kelompok dikumpulkan untuk diperiksa ketepatannya.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7/10 setara dengan 70%.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1/3 setara dengan tepat 33%.</p>",
+          "mis": "mis-msd-relasi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>0,05 setara dengan 5%.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,8 setara dengan 4/5.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>3/4 setara dengan 34%.</p>",
+          "mis": "mis-msd-relasi-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 7/10 = 70/100 = 70%.</p><p>B salah: 1 dibagi 3 menghasilkan 0,333… sehingga persennya 33,33…%, bukan tepat 33%.</p><p>C benar: 0,05 = 5/100 = 5%.</p><p>D benar: 0,8 = 8/10, dibagi 2 menjadi 4/5.</p><p>E salah: 3/4 = 75%, bukan 34%. Angka 34 hanya menempelkan pembilang dan penyebut.</p>"
+    },
+    {
+      "id": "msd-relasi-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang relasi pecahan, desimal, dan persen",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Papan pengumuman kelas memuat lima catatan tentang bentuk bilangan. Kelas diminta memeriksa satu per satu.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>9/20 setara dengan 45%.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>0,08 setara dengan 8/10.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-relasi-003"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>1/8 setara dengan 12,5%.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Bentuk persen selalu bernilai lebih besar daripada bentuk pecahan yang setara, karena angkanya lebih besar.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-relasi-005"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>2/25 setara dengan 0,08.</p>",
+          "kategori": "B"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: 9/20 dikalikan 5 pada kedua bagian menjadi 45/100 = 45%.</p><p>P2 salah: 0,08 berarti 8 perseratusan, yaitu 8/100 = 2/25. Sedangkan 8/10 sama dengan 0,8.</p><p>P3 benar: 1 dibagi 8 sama dengan 0,125, yaitu 12,5%.</p><p>P4 salah: bentuk penulisan tidak mengubah nilai. Misalnya 45% dan 9/20 adalah bilangan yang sama.</p><p>P5 benar: 2/25 dikalikan 4 pada kedua bagian menjadi 8/100 = 0,08.</p>"
+    }
+  ]
+}

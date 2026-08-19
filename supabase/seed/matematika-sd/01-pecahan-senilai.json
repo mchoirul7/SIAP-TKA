@@ -1,0 +1,435 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-pecahan-senilai",
+    "slug": "matematika-sd-pecahan-senilai",
+    "title": "Pecahan Senilai lewat Gambar dan Simbol",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Mengenali pecahan senilai dari gambar bagian yang diwarnai maupun dari simbol matematika, menyederhanakan pecahan, dan menalar mengapa dua pecahan bernilai sama.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pecahan senilai menggunakan gambar dan simbol matematika.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Membaca pecahan dari gambar bagian yang diwarnai",
+      "Menyederhanakan pecahan ke bentuk paling sederhana",
+      "Membuat pecahan senilai dengan pengali yang sama",
+      "Menalar sah tidaknya cara membuat pecahan senilai"
+    ],
+    "sort_order": 1
+  },
+  "submateri": {
+    "id": "con-matematika-sd-pecahan-senilai",
+    "name": "Pecahan senilai menggunakan gambar dan simbol matematika",
+    "description": "Menentukan dan membuktikan pecahan senilai lewat gambar bagian yang diwarnai serta lewat perkalian dan pembagian pembilang dan penyebut dengan bilangan yang sama."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-senilai-001",
+      "label": "Menambah bilangan yang sama pada pembilang dan penyebut",
+      "description": "Siswa menganggap menambah bilangan yang sama pada pembilang dan penyebut menghasilkan pecahan senilai, misalnya 2/3 dianggap sama dengan 3/4.",
+      "insight": "Pecahan senilai diperoleh dengan mengalikan atau membagi pembilang dan penyebut dengan bilangan yang sama, bukan dengan menambah atau mengurangi."
+    },
+    {
+      "id": "mis-msd-senilai-002",
+      "label": "Mengalikan hanya pembilang atau hanya penyebut",
+      "description": "Siswa mengalikan salah satu bagian pecahan saja, misalnya 3/5 dijadikan 6/5 atau 3/10, lalu menganggapnya senilai.",
+      "insight": "Kedua bagian pecahan harus dikalikan bilangan yang sama; mengubah satu bagian saja mengubah nilai pecahannya."
+    },
+    {
+      "id": "mis-msd-senilai-003",
+      "label": "Berhenti sebelum bentuk paling sederhana",
+      "description": "Siswa membagi pembilang dan penyebut dengan faktor yang belum terbesar, sehingga hasilnya masih dapat disederhanakan lagi.",
+      "insight": "Periksa apakah pembilang dan penyebut masih punya faktor bersama sebelum menyatakan pecahan sudah paling sederhana."
+    },
+    {
+      "id": "mis-msd-senilai-004",
+      "label": "Potongan lebih banyak dianggap bagian lebih besar",
+      "description": "Pada gambar, siswa menyimpulkan bagian berwarna lebih luas hanya karena benda itu dibagi menjadi lebih banyak potongan.",
+      "insight": "Semakin banyak potongan pada benda yang sama, setiap potongannya justru semakin kecil; yang dibandingkan adalah luas seluruh bagian berwarna."
+    },
+    {
+      "id": "mis-msd-senilai-005",
+      "label": "Menilai senilai dari selisih pembilang dan penyebut",
+      "description": "Siswa menganggap dua pecahan senilai bila selisih pembilang dan penyebutnya sama, misalnya 3/4 dianggap sama dengan 4/5.",
+      "insight": "Yang menentukan nilai pecahan adalah perbandingan pembilang terhadap penyebut, bukan selisih keduanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-senilai-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pecahan senilai dari gambar bagian yang diwarnai",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "visual": {
+        "type": "svg",
+        "prompt": "Dua pita kertas mendatar sama panjang, ditumpuk atas-bawah dan disejajarkan ujungnya. Pita atas berlabel 'Pita A' dibagi 6 kotak sama besar, 4 kotak paling kiri diwarnai biru. Pita bawah berlabel 'Pita B' dibagi 9 kotak sama besar, 6 kotak paling kiri diwarnai biru. Garis pembagi tampak jelas, panjang total kedua pita persis sama."
+      },
+      "stimulus": "<p>Dua pita kertas mempunyai panjang yang sama. Pita A dibagi menjadi 6 bagian sama besar dan 4 bagian di antaranya diwarnai. Pita B dibagi menjadi 9 bagian sama besar dan 6 bagian di antaranya diwarnai.</p>",
+      "pertanyaan": "<p>Ternyata panjang bagian berwarna pada kedua pita sama. Bentuk paling sederhana dari pecahan bagian berwarna itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/2</p>",
+          "mis": "mis-msd-senilai-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4/6</p>",
+          "mis": "mis-msd-senilai-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3/4</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2/3</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Pita A: 4 dari 6 bagian, yaitu 4/6. Pita B: 6 dari 9 bagian, yaitu 6/9.</p><p>4/6 dibagi 2 pada pembilang dan penyebut menjadi 2/3. 6/9 dibagi 3 pada pembilang dan penyebut juga menjadi 2/3. Jadi keduanya senilai dengan 2/3.</p><p>Pilihan B memang bernilai sama, tetapi 4/6 belum bentuk paling sederhana karena 4 dan 6 masih dapat dibagi 2.</p>"
+    },
+    {
+      "id": "msd-senilai-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami cara membuat pecahan senilai dengan simbol matematika",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah resep memakai 3 dari 5 takaran gula yang tersedia. Bu Sari ingin menuliskan ulang bagian itu dengan penyebut 10 agar mudah dibaca pada gelas ukur bergaris sepuluh.</p>",
+      "pertanyaan": "<p>Pecahan yang senilai dengan 3/5 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>5/7</p>",
+          "mis": "mis-msd-senilai-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>6/5</p>",
+          "mis": "mis-msd-senilai-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3/10</p>",
+          "mis": "mis-msd-senilai-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>6/10</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Agar penyebut 5 menjadi 10, penyebut dikalikan 2. Pembilang harus dikalikan 2 juga: 3 × 2 = 6.</p><p>Jadi 3/5 = 6/10.</p><p>Pilihan A didapat dengan menambah 2 pada pembilang dan penyebut — cara ini mengubah nilai pecahan. Pilihan C dan B hanya mengalikan satu bagian saja.</p>"
+    },
+    {
+      "id": "msd-senilai-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pecahan senilai pada data dua kelompok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Di Kelas A, 12 dari 20 siswa membawa bekal dari rumah. Di Kelas B, 15 dari 25 siswa membawa bekal. Setelah disederhanakan, kedua kelas ternyata mempunyai bagian pembawa bekal yang sama.</p>",
+      "pertanyaan": "<p>Kelas C berisi 30 siswa dengan bagian pembawa bekal yang senilai dengan kedua kelas itu. Banyak siswa Kelas C yang membawa bekal adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>15 siswa</p>",
+          "mis": "mis-msd-senilai-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>20 siswa</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>18 siswa</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>22 siswa</p>",
+          "mis": "mis-msd-senilai-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Kelas A: 12/20 = 3/5 (dibagi 4). Kelas B: 15/25 = 3/5 (dibagi 5). Bagian yang sama adalah 3/5.</p><p>Untuk 30 siswa, penyebut 5 dikalikan 6 menjadi 30, maka pembilang 3 dikalikan 6 menjadi 18.</p><p>Jadi 18 siswa membawa bekal.</p>"
+    },
+    {
+      "id": "msd-senilai-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pecahan senilai pada pembagian petak",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Persegi panjang mendatar berlabel 'Taman Sekolah' dibagi menjadi kisi 4 baris × 6 kolom sehingga terbentuk 24 petak sama besar. Sembilan petak diwarnai hijau muda dan diberi ikon bunga kecil; petak lainnya dibiarkan putih. Garis kisi tipis berwarna abu-abu."
+      },
+      "stimulus": "<p>Taman sekolah berbentuk persegi panjang dibagi menjadi 24 petak sama besar. Sebanyak 9 petak ditanami bunga, sisanya ditanami rumput.</p>",
+      "pertanyaan": "<p>Taman di sekolah lain dibagi menjadi 40 petak sama besar dengan bagian bunga yang senilai. Banyak petak bunga di taman itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>12 petak</p>",
+          "mis": "mis-msd-senilai-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>25 petak</p>",
+          "mis": "mis-msd-senilai-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>16 petak</p>",
+          "mis": "mis-msd-senilai-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>15 petak</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Bagian bunga = 9/24. Pembilang dan penyebut dibagi 3 menjadi 3/8.</p><p>Untuk 40 petak: penyebut 8 dikalikan 5 menjadi 40, maka pembilang 3 dikalikan 5 menjadi 15.</p><p>Jadi 15 petak ditanami bunga. Periksa: 15/40 dibagi 5 menghasilkan 3/8, sama dengan 9/24.</p>"
+    },
+    {
+      "id": "msd-senilai-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penyederhanaan pecahan pada data tempat duduk",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pak Yusuf mencatat 35 dari 60 kursi aula sudah terisi. Ia ingin menuliskan catatan itu sebagai pecahan dalam bentuk paling sederhana.</p>",
+      "pertanyaan": "<p>Penyebut pecahan setelah disederhanakan adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>5</p>",
+          "mis": "mis-msd-senilai-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>15</p>",
+          "mis": "mis-msd-senilai-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>30</p>",
+          "mis": "mis-msd-senilai-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bagian kursi terisi = 35/60. Faktor bersama terbesar 35 dan 60 adalah 5.</p><p>35 : 5 = 7 dan 60 : 5 = 12, sehingga 35/60 = 7/12. Penyebutnya 12.</p><p>Pilihan B didapat bila hanya dibagi 4 (yang bukan faktor 35), dan pilihan D bila hanya dibagi 2 (yang bukan faktor 35). Keduanya tidak sah karena pembagi harus membagi habis kedua bagian.</p>"
+    },
+    {
+      "id": "msd-senilai-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar memilih pecahan yang tidak senilai dalam satu kumpulan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat kartu pecahan disusun di papan tulis:</p><ul><li>Kartu I: 4/6</li><li>Kartu II: 6/9</li><li>Kartu III: 8/12</li><li>Kartu IV: 10/14</li></ul><p>Guru berkata bahwa satu kartu tidak sekelompok dengan tiga kartu lainnya.</p>",
+      "pertanyaan": "<p>Kartu yang tidak sekelompok adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kartu I</p>",
+          "mis": "mis-msd-senilai-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kartu II</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kartu III</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kartu IV</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Sederhanakan setiap kartu:</p><ul><li>4/6 dibagi 2 menjadi 2/3</li><li>6/9 dibagi 3 menjadi 2/3</li><li>8/12 dibagi 4 menjadi 2/3</li><li>10/14 dibagi 2 menjadi 5/7</li></ul><p>Tiga kartu pertama senilai 2/3, sedangkan Kartu IV bernilai 5/7. Jadi Kartu IV yang tidak sekelompok.</p>"
+    },
+    {
+      "id": "msd-senilai-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai kesahihan cara membuat pecahan senilai",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua siswa berbeda pendapat saat mengisi tabel pecahan senilai.</p><ul><li>Andi menulis 2/3 = 4/6 karena pembilang dan penyebut dikalikan 2.</li><li>Bima menulis 2/3 = 3/4 karena pembilang dan penyebut ditambah 1.</li></ul>",
+      "pertanyaan": "<p>Penilaian yang tepat terhadap kedua pekerjaan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Keduanya benar, karena Andi dan Bima sama-sama memperlakukan pembilang dan penyebut dengan cara yang sama.</p>",
+          "mis": "mis-msd-senilai-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Hanya Bima yang benar, karena selisih pembilang dan penyebutnya tetap 1 sehingga nilainya tetap.</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Hanya Andi yang benar, karena mengalikan kedua bagian dengan bilangan yang sama tidak mengubah nilai.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Keduanya salah, karena pecahan senilai hanya boleh dibuat dengan membagi, bukan dengan mengalikan.</p>",
+          "mis": "mis-msd-senilai-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Mengalikan pembilang dan penyebut dengan bilangan yang sama berarti mengalikan pecahan dengan 2/2, yaitu dengan 1, sehingga nilainya tetap. Pekerjaan Andi benar.</p><p>Menambah 1 pada kedua bagian tidak sama dengan mengalikan 1. Buktinya, 2/3 = 8/12 sedangkan 3/4 = 9/12, jadi 3/4 lebih besar. Pekerjaan Bima salah.</p><p>Pecahan senilai boleh dibuat dengan mengalikan maupun membagi, jadi pilihan D juga tidak tepat.</p>"
+    },
+    {
+      "id": "msd-senilai-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan penyederhanaan untuk menyaring pecahan senilai",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Panitia lomba menempel kartu-kartu pecahan di papan. Kartu yang senilai dengan 3/4 akan dikumpulkan menjadi satu kelompok.</p>",
+      "pertanyaan": "<p>Kartu yang masuk kelompok itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6/8</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4/5</p>",
+          "mis": "mis-msd-senilai-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>9/12</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>15/20</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>12/15</p>",
+          "mis": "mis-msd-senilai-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C",
+        "D"
+      ],
+      "pembahasan": "<p>Sederhanakan tiap kartu:</p><ul><li>6/8 dibagi 2 menjadi 3/4 — senilai</li><li>4/5 sudah paling sederhana, bukan 3/4</li><li>9/12 dibagi 3 menjadi 3/4 — senilai</li><li>15/20 dibagi 5 menjadi 3/4 — senilai</li><li>12/15 dibagi 3 menjadi 4/5 — bukan 3/4</li></ul><p>Jadi kartu yang senilai dengan 3/4 adalah 6/8, 9/12, dan 15/20.</p>"
+    },
+    {
+      "id": "msd-senilai-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang gambar dua pita yang pecahannya senilai",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "visual": {
+        "type": "svg",
+        "prompt": "Dua pita kertas mendatar sama panjang disejajarkan atas-bawah. Pita atas berlabel 'Pita A' dibagi 4 kotak besar sama lebar, 3 kotak paling kiri diwarnai oranye. Pita bawah berlabel 'Pita B' dibagi 12 kotak kecil sama lebar, 9 kotak paling kiri diwarnai oranye. Perhatikan panjang total kedua pita harus digambar persis sama."
+      },
+      "stimulus": "<p>Pita A dan Pita B sama panjang. Pita A dibagi menjadi 4 bagian sama besar dengan 3 bagian diwarnai. Pita B dibagi menjadi 12 bagian sama besar dengan 9 bagian diwarnai.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang kedua pita itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Panjang bagian berwarna kedua pita sama.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bagian berwarna Pita B lebih panjang karena potongannya lebih banyak.</p>",
+          "mis": "mis-msd-senilai-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3/4 dan 9/12 adalah pecahan senilai.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Setiap potongan Pita B lebih pendek daripada setiap potongan Pita A.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Pecahan pada Pita B tidak dapat disederhanakan.</p>",
+          "mis": "mis-msd-senilai-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C",
+        "D"
+      ],
+      "pembahasan": "<p>9/12 dibagi 3 pada pembilang dan penyebut menghasilkan 3/4, jadi kedua pecahan senilai dan panjang bagian berwarnanya sama. Pernyataan A dan C benar.</p><p>Pita yang sama panjang dibagi 12 menghasilkan potongan yang lebih pendek daripada dibagi 4, jadi pernyataan D benar dan pernyataan B keliru: potongan lebih banyak berarti setiap potongan lebih kecil.</p><p>Pernyataan E salah karena 9/12 masih dapat dibagi 3.</p>"
+    },
+    {
+      "id": "msd-senilai-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai kebenaran pernyataan tentang pecahan senilai",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Kelompok belajar menyusun lima pernyataan tentang pecahan senilai untuk saling diperiksa.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>5/8 senilai dengan 15/24.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Menambah 3 pada pembilang dan penyebut 1/2 menghasilkan pecahan yang senilai.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-senilai-001"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>12/18 dan 8/12 adalah dua pecahan yang senilai.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Setiap pecahan yang senilai dengan 1/3 mempunyai penyebut kelipatan 3.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Membagi pembilang dan penyebut dengan bilangan yang sama membuat nilai pecahan berubah.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-senilai-002"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: 5/8 dikalikan 3 pada kedua bagian menjadi 15/24.</p><p>P2 salah: 1/2 menjadi 4/5, dan 1/2 = 5/10 sedangkan 4/5 = 8/10, jadi nilainya berubah.</p><p>P3 benar: 12/18 dibagi 6 menjadi 2/3, dan 8/12 dibagi 4 juga menjadi 2/3.</p><p>P4 benar: pecahan senilai 1/3 berbentuk k/(3 × k), sehingga penyebutnya selalu kelipatan 3, misalnya 2/6, 3/9, 5/15.</p><p>P5 salah: membagi kedua bagian dengan bilangan yang sama justru cara menyederhanakan tanpa mengubah nilai, misalnya 6/8 = 3/4.</p>"
+    }
+  ]
+}

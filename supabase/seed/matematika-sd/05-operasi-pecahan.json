@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-operasi-pecahan",
+    "slug": "matematika-sd-operasi-bilangan-pecahan",
+    "title": "Operasi Hitung Bilangan Pecahan",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Penjumlahan dan pengurangan bilangan pecahan, serta perkalian dan pembagian bilangan pecahan dengan bilangan asli pada masalah sehari-hari.",
+    "summary": "10 soal diagnostik bergaya TKA untuk operasi penjumlahan, pengurangan, perkalian, dan pembagian bilangan pecahan.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menjumlah dan mengurang pecahan berpenyebut sama dan berbeda",
+      "Mengalikan pecahan dengan bilangan asli",
+      "Membagi pecahan dengan bilangan asli",
+      "Menalar kewajaran hasil operasi pecahan"
+    ],
+    "sort_order": 5
+  },
+  "submateri": {
+    "id": "con-matematika-sd-operasi-pecahan",
+    "name": "Operasi penjumlahan dan pengurangan bilangan pecahan, serta operasi perkalian dan pembagian bilangan pecahan dengan bilangan asli",
+    "description": "Menghitung penjumlahan dan pengurangan pecahan, termasuk yang penyebutnya berbeda, serta perkalian dan pembagian pecahan oleh bilangan asli pada konteks sehari-hari."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-oppec-001",
+      "label": "Pembilang dan penyebut dijumlahkan bersamaan",
+      "description": "Siswa menghitung 2/7 + 3/7 menjadi 5/14 karena penyebutnya ikut dijumlahkan.",
+      "insight": "Penyebut menyatakan besar potongan dan tidak berubah saat potongan digabung; yang dijumlahkan hanya pembilangnya."
+    },
+    {
+      "id": "mis-msd-oppec-002",
+      "label": "Penyebut belum disamakan",
+      "description": "Siswa langsung menjumlahkan atau mengurangkan pembilang meski penyebutnya berbeda, misalnya 1/2 + 1/3 dianggap 2/5.",
+      "insight": "Pecahan hanya dapat dijumlahkan atau dikurangkan setelah penyebutnya sama, karena potongannya harus sama besar."
+    },
+    {
+      "id": "mis-msd-oppec-003",
+      "label": "Pembagian pecahan dikerjakan seperti perkalian",
+      "description": "Siswa menghitung 2/3 : 4 dengan mengalikan pembilang dengan 4, sehingga hasilnya justru membesar.",
+      "insight": "Membagi pecahan dengan bilangan asli berarti memecahnya menjadi lebih banyak bagian, jadi penyebutnya yang dikalikan."
+    },
+    {
+      "id": "mis-msd-oppec-004",
+      "label": "Perkalian dengan bilangan asli dikenakan pada penyebut",
+      "description": "Siswa menghitung 3/4 × 8 dengan mengalikan penyebutnya, sehingga hasilnya mengecil, bukan membesar.",
+      "insight": "Mengalikan pecahan dengan bilangan asli berarti menyalin pecahan itu sebanyak bilangan tersebut, jadi pembilangnya yang dikalikan."
+    },
+    {
+      "id": "mis-msd-oppec-005",
+      "label": "Penyebut disamakan tetapi pembilang tidak diubah",
+      "description": "Siswa mengubah 5/6 − 1/4 menjadi 5/12 − 1/12 karena hanya penyebutnya disamakan tanpa mengalikan pembilangnya.",
+      "insight": "Setiap kali penyebut dikalikan, pembilangnya harus dikalikan dengan bilangan yang sama agar nilainya tetap."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-oppec-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami penjumlahan pecahan berpenyebut sama",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah semangka dipotong menjadi 7 bagian sama besar. Doni memakan 2 bagian dan Endah memakan 3 bagian.</p>",
+      "pertanyaan": "<p>Bagian semangka yang dimakan keduanya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>5/7</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>5/14</p>",
+          "mis": "mis-msd-oppec-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>6/7</p>",
+          "mis": "mis-msd-oppec-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5/49</p>",
+          "mis": "mis-msd-oppec-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>2/7 + 3/7 = 5/7 karena potongannya sama besar, sehingga cukup pembilangnya dijumlahkan.</p><p>Penyebut 7 tetap, sebab semangkanya tetap dipotong menjadi 7 bagian — jumlah potongannya tidak berubah menjadi 14.</p>"
+    },
+    {
+      "id": "msd-oppec-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami perkalian pecahan dengan bilangan asli",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah wadah berisi 8 liter air. Sebanyak 3/4 bagian air itu dipakai untuk menyiram tanaman.</p>",
+      "pertanyaan": "<p>Banyak air yang dipakai untuk menyiram adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 liter</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2 liter</p>",
+          "mis": "mis-msd-oppec-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>24 liter</p>",
+          "mis": "mis-msd-oppec-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>3/32 liter</p>",
+          "mis": "mis-msd-oppec-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>3/4 × 8 = (3 × 8) : 4 = 24 : 4 = 6 liter.</p><p>Cara lain: 1/4 dari 8 liter adalah 2 liter, jadi 3/4 adalah 3 × 2 = 6 liter.</p><p>Pilihan B adalah sisa airnya, bukan air yang dipakai.</p>"
+    },
+    {
+      "id": "msd-oppec-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pengurangan pecahan berpenyebut berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah pita panjangnya 5/6 meter. Sebanyak 1/4 meter dipotong untuk hiasan buku.</p>",
+      "pertanyaan": "<p>Panjang pita yang tersisa adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7/12 meter</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4/2 meter</p>",
+          "mis": "mis-msd-oppec-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4/12 meter</p>",
+          "mis": "mis-msd-oppec-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2/3 meter</p>",
+          "mis": "mis-msd-oppec-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Kelipatan persekutuan terkecil 6 dan 4 adalah 12. Ubah kedua pecahan: 5/6 = 10/12 dan 1/4 = 3/12.</p><p>10/12 − 3/12 = 7/12 meter.</p><p>Pilihan C muncul bila penyebut diubah menjadi 12 tetapi pembilangnya dibiarkan 5 dan 1.</p>"
+    },
+    {
+      "id": "msd-oppec-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan pembagian pecahan dengan bilangan asli",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Gula sebanyak 2/3 kilogram dibagi rata ke dalam 4 wadah kecil.</p>",
+      "pertanyaan": "<p>Berat gula pada setiap wadah adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/6 kilogram</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>8/3 kilogram</p>",
+          "mis": "mis-msd-oppec-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1/12 kilogram</p>",
+          "mis": "mis-msd-oppec-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>6 kilogram</p>",
+          "mis": "mis-msd-oppec-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>2/3 : 4 berarti 2/3 dipecah menjadi 4 bagian sama, sehingga penyebutnya dikalikan 4: 2/(3 × 4) = 2/12 = 1/6 kilogram.</p><p>Periksa kewajaran: 1/6 kg lebih kecil daripada 2/3 kg, dan 4 × 1/6 = 4/6 = 2/3 kg, sesuai dengan gula semula.</p><p>Pilihan B lebih besar daripada gula semula, jadi tidak mungkin benar.</p>"
+    },
+    {
+      "id": "msd-oppec-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penjumlahan pecahan untuk mencari sisa dari satu keseluruhan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Ayah mengecat dinding ruang tamu. Pada pagi hari selesai 1/2 bagian dinding, dan pada siang hari selesai 1/3 bagian dinding.</p>",
+      "pertanyaan": "<p>Bagian dinding yang belum dicat adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1/6 bagian</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2/5 bagian</p>",
+          "mis": "mis-msd-oppec-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1/5 bagian</p>",
+          "mis": "mis-msd-oppec-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5/6 bagian</p>",
+          "mis": "mis-msd-oppec-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Bagian yang sudah dicat = 1/2 + 1/3. Dengan penyebut 6: 3/6 + 2/6 = 5/6.</p><p>Bagian yang belum dicat = 1 − 5/6 = 6/6 − 5/6 = 1/6.</p><p>Pilihan D adalah bagian yang sudah dicat, bukan yang belum.</p>"
+    },
+    {
+      "id": "msd-oppec-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar dengan perkalian pecahan untuk memeriksa kecukupan bahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Satu loyang kue membutuhkan 3/4 kilogram tepung. Bu Hana akan membuat 6 loyang dan di dapurnya tersedia 5 kilogram tepung.</p>",
+      "pertanyaan": "<p>Kesimpulan yang tepat tentang persediaan tepung Bu Hana adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>cukup, dan tersisa 1/2 kilogram</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>cukup, dan tersisa 2 kilogram</p>",
+          "mis": "mis-msd-oppec-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>tidak cukup, karena kurang 1/2 kilogram</p>",
+          "mis": "mis-msd-oppec-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>cukup, dan tepung terpakai habis tanpa sisa</p>",
+          "mis": "mis-msd-oppec-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Tepung yang dibutuhkan = 3/4 × 6 = 18/4 = 4 1/2 kilogram.</p><p>Persediaan 5 kilogram, jadi cukup. Sisanya = 5 − 4 1/2 = 1/2 kilogram.</p><p>Pilihan B muncul bila kebutuhan ditaksir hanya 3 kilogram, misalnya karena 3/4 dibulatkan menjadi 1/2.</p>"
+    },
+    {
+      "id": "msd-oppec-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai kekeliruan menjumlahkan pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Tio menulis di bukunya, “1/2 + 1/3 = 2/5, karena pembilang dijumlahkan dengan pembilang dan penyebut dijumlahkan dengan penyebut.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pekerjaan Tio adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena pembilang dan penyebut sama-sama dijumlahkan sehingga caranya taat aturan.</p>",
+          "mis": "mis-msd-oppec-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Benar, karena 2/5 dan 5/6 sebenarnya dua pecahan senilai yang hanya berbeda bentuknya.</p>",
+          "mis": "mis-msd-oppec-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena pecahan yang penyebutnya berbeda memang tidak dapat dijumlahkan sama sekali.</p>",
+          "mis": "mis-msd-oppec-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Salah, karena hasilnya seharusnya 5/6; selain itu 2/5 justru lebih kecil daripada 1/2.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Dengan penyebut 6: 1/2 + 1/3 = 3/6 + 2/6 = 5/6.</p><p>Pemeriksaan cepat menunjukkan cara Tio pasti salah: menambahkan sesuatu pada 1/2 tidak mungkin menghasilkan bilangan yang lebih kecil daripada 1/2, sedangkan 2/5 kurang dari 1/2.</p><p>Pecahan berpenyebut berbeda tetap dapat dijumlahkan setelah penyebutnya disamakan, jadi pilihan C tidak tepat.</p>"
+    },
+    {
+      "id": "msd-oppec-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan operasi pecahan untuk memeriksa hasil hitungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Lima hasil hitungan pecahan dikumpulkan dari buku latihan siswa untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Hitungan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>3/8 + 1/8 = 1/2</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>5/6 − 1/2 = 1/3</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2/5 × 10 = 4</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>3/4 : 3 = 9/4</p>",
+          "mis": "mis-msd-oppec-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1/3 + 1/6 = 2/9</p>",
+          "mis": "mis-msd-oppec-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 3/8 + 1/8 = 4/8 = 1/2.</p><p>B benar: 5/6 − 3/6 = 2/6 = 1/3.</p><p>C benar: 2/5 × 10 = 20/5 = 4.</p><p>D salah: 3/4 : 3 = 3/(4 × 3) = 3/12 = 1/4. Hasil 9/4 justru lebih besar daripada 3/4, padahal membagi seharusnya memperkecil.</p><p>E salah: 1/3 + 1/6 = 2/6 + 1/6 = 3/6 = 1/2, bukan 2/9.</p>"
+    },
+    {
+      "id": "msd-oppec-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang pembagian satu keseluruhan menjadi beberapa bagian pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kue dibagi tiga. Andi mendapat 1/4 bagian, Bina mendapat 1/3 bagian, dan sisanya untuk Cita.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang pembagian kue itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Bagian Cita adalah 5/12 bagian.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bagian Bina lebih banyak daripada bagian Andi.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Cita mendapat bagian paling banyak.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Andi dan Bina bersama-sama mendapat 2/7 bagian.</p>",
+          "mis": "mis-msd-oppec-001"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Bila Cita memberikan 1/12 bagiannya kepada Andi, bagian Andi menjadi lebih banyak daripada bagian Cita.</p>",
+          "mis": "mis-msd-oppec-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Dengan penyebut 12: Andi 3/12, Bina 4/12, dan keduanya 7/12. Bagian Cita = 12/12 − 7/12 = 5/12, jadi A benar dan D salah (2/7 diperoleh dengan menjumlahkan penyebut).</p><p>B benar karena 4/12 lebih dari 3/12. C benar karena 5/12 paling besar di antara 3/12, 4/12, dan 5/12.</p><p>E salah: setelah pemberian itu Andi menjadi 3/12 + 1/12 = 4/12 dan Cita menjadi 5/12 − 1/12 = 4/12, jadi bagian keduanya sama, bukan Andi lebih banyak.</p>"
+    },
+    {
+      "id": "msd-oppec-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang operasi bilangan pecahan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Kelompok belajar menuliskan lima pernyataan tentang operasi pecahan untuk saling diperiksa.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>2/5 + 1/5 = 3/5</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>7/10 − 2/5 = 3/10</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>5/6 × 3 = 2 1/2</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>4/5 : 2 = 8/5</p>",
+          "kategori": "S",
+          "mis": "mis-msd-oppec-003"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Mengalikan pecahan dengan bilangan asli yang lebih dari 1 selalu menghasilkan bilangan yang lebih kecil daripada pecahan semula.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-oppec-004"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: penyebutnya sudah sama, jadi 2/5 + 1/5 = 3/5.</p><p>P2 benar: 2/5 = 4/10, sehingga 7/10 − 4/10 = 3/10.</p><p>P3 benar: 5/6 × 3 = 15/6 = 5/2 = 2 1/2.</p><p>P4 salah: 4/5 : 2 = 4/(5 × 2) = 4/10 = 2/5. Hasil 8/5 diperoleh dengan mengalikan, bukan membagi.</p><p>P5 salah: 3/4 × 4 = 3, yang jauh lebih besar daripada 3/4. Mengalikan dengan bilangan asli lebih dari 1 justru memperbesar.</p>"
+    }
+  ]
+}

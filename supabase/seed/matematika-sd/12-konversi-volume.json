@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-konversi-volume",
+    "slug": "matematika-sd-hubungan-antar-satuan-volume",
+    "title": "Hubungan Antar-Satuan Baku Volume",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengubah dan membandingkan satuan volume ml, cl, dl, l, dal, hl, dan kl, termasuk menjumlahkan isi yang satuannya berbeda dan menalar arah tangga satuan.",
+    "summary": "10 soal diagnostik bergaya TKA untuk hubungan antar-satuan baku volume (ml, dl, cl, l, dal, hl, kl).",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengubah satuan volume naik dan turun tangga",
+      "Menjumlahkan isi yang satuannya berbeda",
+      "Mengurutkan volume setelah menyeragamkan satuan",
+      "Membedakan mililiter dan sentiliter"
+    ],
+    "sort_order": 12
+  },
+  "submateri": {
+    "id": "con-matematika-sd-konversi-volume",
+    "name": "Hubungan antar-satuan baku volume (ml, dl, cl, l, dal, hl, kl)",
+    "description": "Menentukan kesetaraan antarsatuan volume pada tangga satuan dan memakainya untuk menjumlahkan, membandingkan, serta mengurutkan volume."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-konvvol-001",
+      "label": "Arah tangga satuan volume terbalik",
+      "description": "Siswa mengalikan ketika seharusnya membagi, misalnya mengubah 2.000 ml ke liter dengan mengalikan 1.000.",
+      "insight": "Satuan yang lebih besar selalu memberi angka yang lebih kecil, jadi ml ke l dibagi 1.000, bukan dikali."
+    },
+    {
+      "id": "mis-msd-konvvol-002",
+      "label": "Tangga cl, dl, atau dal dilompati",
+      "description": "Siswa melompati satu tangga saat berpindah satuan, sehingga pengalinya kurang atau lebih satu angka nol.",
+      "insight": "Urutan tangganya kl, hl, dal, l, dl, cl, ml — hitung satu per satu tanpa melompat."
+    },
+    {
+      "id": "mis-msd-konvvol-003",
+      "label": "Sentiliter dianggap sama dengan mililiter",
+      "description": "Siswa menganggap 1 cl sama dengan 1 ml karena keduanya satuan kecil yang jarang dipakai.",
+      "insight": "cl berada satu tangga di atas ml, jadi 1 cl sama dengan 10 ml."
+    },
+    {
+      "id": "mis-msd-konvvol-004",
+      "label": "Kiloliter dianggap 100 liter",
+      "description": "Siswa memakai pengali 100 untuk kl ke l, padahal jaraknya tiga tangga.",
+      "insight": "kl ke l melewati hl dan dal, jadi pengalinya 1.000."
+    },
+    {
+      "id": "mis-msd-konvvol-005",
+      "label": "Membandingkan angka tanpa menyeragamkan satuan",
+      "description": "Siswa langsung membandingkan angkanya, sehingga 750 l dianggap lebih banyak daripada 0,8 kl.",
+      "insight": "Ubah semua besaran ke satu satuan yang sama lebih dahulu, baru bandingkan angkanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-konvvol-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan liter ke mililiter",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah jeriken berisi 4 l minyak goreng. Penjual ingin menuliskan isinya dalam mililiter pada label kemasan kecil.</p>",
+      "pertanyaan": "<p>Isi jeriken itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>40 ml</p>",
+          "mis": "mis-msd-konvvol-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>400 ml</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>4.000 ml</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,004 ml</p>",
+          "mis": "mis-msd-konvvol-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Dari l ke ml turun tiga tangga: l ke dl, dl ke cl, cl ke ml. Pengalinya 10 × 10 × 10 = 1.000.</p><p>4 × 1.000 = 4.000 ml.</p><p>Pilihan B muncul bila satu tangga dilompati sehingga hanya dikali 100.</p>"
+    },
+    {
+      "id": "msd-konvvol-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan mililiter ke liter",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Dua botol air masing-masing berisi 1.000 ml dituang ke dalam satu wadah, sehingga wadah itu berisi 2.000 ml air.</p>",
+      "pertanyaan": "<p>Isi wadah itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0,2 l</p>",
+          "mis": "mis-msd-konvvol-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>2 l</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>20 l</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2.000.000 l</p>",
+          "mis": "mis-msd-konvvol-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Dari ml ke l naik tiga tangga, jadi dibagi 1.000.</p><p>2.000 : 1.000 = 2 l.</p><p>Pilihan D muncul bila justru dikalikan 1.000; hasilnya jelas mustahil karena dua botol air tidak mungkin sebanyak dua juta liter.</p>"
+    },
+    {
+      "id": "msd-konvvol-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan dekaliter ke liter",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah tandon air kecil berisi 5 dal air bersih. Petugas ingin mencatat isinya dalam liter di buku laporan.</p>",
+      "pertanyaan": "<p>Isi tandon itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>0,5 l</p>",
+          "mis": "mis-msd-konvvol-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>50 l</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>500 l</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5.000 l</p>",
+          "mis": "mis-msd-konvvol-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Dari dal ke l turun satu tangga, jadi dikali 10.</p><p>5 × 10 = 50 l.</p><p>Pilihan C muncul bila dal dianggap berjarak dua tangga dari l, dan pilihan D bila dianggap tiga tangga.</p>"
+    },
+    {
+      "id": "msd-konvvol-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penjumlahan isi bersatuan berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Ke dalam sebuah teko dituangkan 3 l air panas, kemudian ditambah 250 ml air dingin.</p>",
+      "pertanyaan": "<p>Isi teko itu bila dinyatakan seluruhnya dalam mililiter adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>253 ml</p>",
+          "mis": "mis-msd-konvvol-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>550 ml</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3.250 ml</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>30.250 ml</p>",
+          "mis": "mis-msd-konvvol-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Seragamkan satuannya: 3 l = 3.000 ml.</p><p>Isi teko = 3.000 + 250 = 3.250 ml, atau 3,25 l.</p><p>Pilihan A muncul bila angka 3 dan 250 langsung dijumlahkan tanpa mengubah satuan.</p>"
+    },
+    {
+      "id": "msd-konvvol-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penyeragaman tiga satuan volume sekaligus",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Persediaan air bersih di sebuah balai desa dicatat dalam tiga wadah: tandon utama 1 kl, tandon cadangan 5 hl, dan beberapa jeriken yang seluruhnya 20 l.</p>",
+      "pertanyaan": "<p>Seluruh persediaan air itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1.520 l</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>620 l</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1.070 l</p>",
+          "mis": "mis-msd-konvvol-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>5.120 l</p>",
+          "mis": "mis-msd-konvvol-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Ubah semuanya ke liter: 1 kl = 1.000 l, 5 hl = 5 × 100 = 500 l, dan 20 l tetap.</p><p>Jumlahnya = 1.000 + 500 + 20 = 1.520 l.</p><p>Pilihan B muncul bila 1 kl dianggap 100 l, dan pilihan C bila 5 hl dianggap 50 l.</p>"
+    },
+    {
+      "id": "msd-konvvol-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengurutkan volume yang satuannya berbeda-beda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat tangki air dicatat dengan satuan yang berbeda-beda:</p><ul><li>Tangki I: 0,8 kl</li><li>Tangki II: 750 l</li><li>Tangki III: 85.000 cl</li><li>Tangki IV: 7.900 dl</li></ul>",
+      "pertanyaan": "<p>Urutan tangki dari isi yang paling sedikit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Tangki II, Tangki IV, Tangki I, Tangki III</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tangki I, Tangki II, Tangki IV, Tangki III</p>",
+          "mis": "mis-msd-konvvol-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Tangki II, Tangki I, Tangki IV, Tangki III</p>",
+          "mis": "mis-msd-konvvol-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Tangki III, Tangki IV, Tangki II, Tangki I</p>",
+          "mis": "mis-msd-konvvol-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seragamkan semuanya ke liter:</p><ul><li>Tangki I: 0,8 kl = 800 l</li><li>Tangki II: 750 l</li><li>Tangki III: 85.000 cl = 85.000 : 100 = 850 l</li><li>Tangki IV: 7.900 dl = 7.900 : 10 = 790 l</li></ul><p>Urutan dari paling sedikit: 750, 790, 800, 850, yaitu Tangki II, Tangki IV, Tangki I, Tangki III.</p><p>Bila hanya angkanya yang dibandingkan, tangki bersatuan cl akan tampak paling banyak sekaligus paling menyesatkan.</p>"
+    },
+    {
+      "id": "msd-konvvol-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang hubungan sentiliter dan mililiter",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Pada botol obat tertulis isi 20 cl. Andi berkata, “Berarti isinya 20 ml, karena cl dan ml sama saja.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat Andi adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena keduanya satuan yang sangat kecil.</p>",
+          "mis": "mis-msd-konvvol-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena 1 cl sama dengan 10 ml sehingga isinya 200 ml.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena 1 cl sama dengan 100 ml sehingga isinya 2.000 ml.</p>",
+          "mis": "mis-msd-konvvol-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, tetapi isinya seharusnya ditulis 2 ml.</p>",
+          "mis": "mis-msd-konvvol-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Pada tangga satuan volume, urutannya l, dl, cl, ml. Satuan cl berada satu tangga di atas ml, jadi 1 cl = 10 ml.</p><p>Isi botol = 20 × 10 = 200 ml, yaitu 0,2 l. Angka itu wajar untuk sebuah botol obat cair.</p><p>Pilihan C keliru karena memakai pengali dua tangga, padahal jaraknya hanya satu tangga.</p>"
+    },
+    {
+      "id": "msd-konvvol-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan kesetaraan antarsatuan volume",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Beberapa kesetaraan satuan volume ditulis di papan tulis untuk diperiksa kebenarannya.</p>",
+      "pertanyaan": "<p>Kesetaraan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1 l = 10 dl</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1 l = 100 cl</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1 l = 1.000 ml</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1 dal = 100 l</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1 hl = 10 l</p>",
+          "mis": "mis-msd-konvvol-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A, B, dan C benar karena dl, cl, dan ml berturut-turut berjarak satu, dua, dan tiga tangga di bawah liter.</p><p>D salah: 1 dal = 10 l, karena dal hanya satu tangga di atas liter.</p><p>E salah: 1 hl = 100 l, karena hl berjarak dua tangga di atas liter.</p>"
+    },
+    {
+      "id": "msd-konvvol-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang berbagai penulisan satu volume yang sama",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Isi sebuah termos adalah 2,5 l. Isi itu akan dicatat dengan beberapa satuan berbeda untuk keperluan yang berbeda.</p>",
+      "pertanyaan": "<p>Penulisan yang benar untuk isi termos itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2.500 ml</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>250 cl</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>25 dl</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,025 kl</p>",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>25 dal</p>",
+          "mis": "mis-msd-konvvol-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 2,5 × 1.000 = 2.500 ml.</p><p>B benar: 2,5 × 100 = 250 cl.</p><p>C benar: 2,5 × 10 = 25 dl.</p><p>D salah: l ke kl naik tiga tangga, jadi 2,5 : 1.000 = 0,0025 kl.</p><p>E salah: l ke dal naik satu tangga, jadi 2,5 : 10 = 0,25 dal. Angka 25 dal justru sama dengan 250 l.</p>"
+    },
+    {
+      "id": "msd-konvvol-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang hubungan antar-satuan volume",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang satuan volume dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 dl sama dengan 100 ml.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>500 ml sama dengan 0,5 l.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>1 kl sama dengan 100 l.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvvol-004"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>6.000 cl sama dengan 60 l.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Mengubah mililiter menjadi liter dilakukan dengan mengalikan 1.000.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvvol-001"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: dl ke ml turun dua tangga, jadi dikali 100.</p><p>P2 benar: 500 : 1.000 = 0,5 l.</p><p>P3 salah: 1 kl = 1.000 l, karena kl berjarak tiga tangga di atas liter.</p><p>P4 benar: 6.000 : 100 = 60 l.</p><p>P5 salah: liter lebih besar daripada mililiter, jadi angkanya berkurang — mililiter dibagi 1.000 untuk menjadi liter.</p>"
+    }
+  ]
+}

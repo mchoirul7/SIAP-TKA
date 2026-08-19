@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-penaksiran",
+    "slug": "matematika-sd-penaksiran-ukuran",
+    "title": "Penaksiran Ukuran",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Menaksir hasil operasi hitung dan ukuran benda dengan pembulatan, memperkirakan kecukupan uang dan bahan, serta menalar kapan penaksiran boleh dipakai dan kapan tidak.",
+    "summary": "10 soal diagnostik bergaya TKA untuk penaksiran ukuran.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Membulatkan bilangan ke puluhan, ratusan, dan ribuan terdekat",
+      "Menaksir hasil perkalian dan penjumlahan",
+      "Menaksir ukuran benda dengan benda acuan",
+      "Menalar arah taksiran dan batas penggunaannya"
+    ],
+    "sort_order": 21
+  },
+  "submateri": {
+    "id": "con-matematika-sd-penaksiran",
+    "name": "Penaksiran ukuran",
+    "description": "Menaksir hasil operasi hitung dan ukuran benda dengan pembulatan serta benda acuan, dan menilai kapan hasil taksiran memadai atau justru memerlukan hitungan tepat."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-taksir-001",
+      "label": "Pembulatan ke nilai tempat yang keliru",
+      "description": "Siswa membulatkan ke ratusan padahal yang diminta puluhan, atau sebaliknya, sehingga taksirannya melenceng jauh.",
+      "insight": "Tentukan dulu nilai tempat yang diminta, lalu perhatikan satu angka di sebelah kanannya untuk memutuskan naik atau tetap."
+    },
+    {
+      "id": "mis-msd-taksir-002",
+      "label": "Angka tepat di tengah dibulatkan ke bawah",
+      "description": "Siswa membulatkan 4.350 ke ratusan terdekat menjadi 4.300, padahal angka tepat di tengah dibulatkan ke atas.",
+      "insight": "Bila angka penentunya 5 atau lebih, pembulatan dilakukan ke atas — termasuk ketika nilainya tepat di tengah."
+    },
+    {
+      "id": "mis-msd-taksir-003",
+      "label": "Arah taksiran dianggap selalu ke bawah",
+      "description": "Siswa menganggap hasil taksiran selalu lebih kecil daripada hasil sebenarnya, tanpa memeriksa arah pembulatannya.",
+      "insight": "Bila kedua faktor dibulatkan ke atas, taksirannya lebih besar daripada hasil sebenarnya; bila ke bawah, taksirannya lebih kecil."
+    },
+    {
+      "id": "mis-msd-taksir-004",
+      "label": "Penaksiran dipakai pada situasi yang menuntut hasil tepat",
+      "description": "Siswa memakai taksiran untuk menghitung uang kembalian atau hasil ujian, padahal keduanya menuntut hitungan tepat.",
+      "insight": "Penaksiran hanya untuk memperkirakan dengan cepat; urusan uang dan pencatatan resmi tetap memerlukan hitungan tepat."
+    },
+    {
+      "id": "mis-msd-taksir-005",
+      "label": "Taksiran ukuran tidak dibandingkan dengan benda acuan",
+      "description": "Siswa menaksir ukuran benda tanpa membandingkannya dengan benda yang sudah dikenal, sehingga hasilnya jauh dari wajar.",
+      "insight": "Pakai benda acuan yang dikenal — tinggi pintu sekitar 2 m, tebal buku sekitar 1 cm — lalu bandingkan benda yang ditaksir dengan acuan itu."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-taksir-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami penaksiran hasil perkalian dengan pembulatan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Panitia lomba ingin memperkirakan banyak kursi yang diperlukan bila ada 47 baris dengan 21 kursi setiap barisnya. Perkiraan dilakukan dengan membulatkan kedua bilangan ke puluhan terdekat.</p>",
+      "pertanyaan": "<p>Taksiran banyak kursi seluruhnya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>800</p>",
+          "mis": "mis-msd-taksir-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>900</p>",
+          "mis": "mis-msd-taksir-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1.000</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1.200</p>",
+          "mis": "mis-msd-taksir-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bulatkan ke puluhan terdekat: 47 menjadi 50 dan 21 menjadi 20.</p><p>Taksirannya 50 × 20 = 1.000 kursi.</p><p>Hasil sebenarnya 47 × 21 = 987, jadi taksiran 1.000 memang mendekati.</p>"
+    },
+    {
+      "id": "msd-taksir-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami penaksiran ukuran benda dengan benda acuan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Seorang siswa diminta memperkirakan tinggi pintu ruang kelas tanpa mengukurnya, hanya dengan membandingkannya terhadap tinggi badannya sendiri yang sekitar 1,4 m.</p>",
+      "pertanyaan": "<p>Taksiran tinggi pintu yang paling wajar adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>20 cm</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>200 m</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>20 m</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>2 m</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Tinggi pintu sedikit lebih tinggi daripada orang dewasa, jadi sekitar 2 m.</p><p>Ukuran 20 cm hanya sepanjang penggaris, sedangkan 20 m setinggi bangunan bertingkat enam dan 200 m jauh lebih tinggi lagi.</p><p>Membandingkan dengan benda acuan yang dikenal membuat taksiran tetap wajar.</p>"
+    },
+    {
+      "id": "msd-taksir-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penaksiran penjumlahan harga",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Seorang pembeli mencatat tiga harga barang: Rp18.700, Rp24.300, dan Rp9.800. Ia ingin memperkirakan total harganya dengan membulatkan setiap harga ke ribuan terdekat.</p>",
+      "pertanyaan": "<p>Taksiran total harga ketiga barang itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rp50.000</p>",
+          "mis": "mis-msd-taksir-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rp52.000</p>",
+          "mis": "mis-msd-taksir-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rp53.000</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rp55.000</p>",
+          "mis": "mis-msd-taksir-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bulatkan ke ribuan terdekat: Rp18.700 menjadi Rp19.000, Rp24.300 menjadi Rp24.000, dan Rp9.800 menjadi Rp10.000.</p><p>Taksirannya 19.000 + 24.000 + 10.000 = Rp53.000.</p><p>Total sebenarnya Rp52.800, jadi taksirannya hanya berselisih Rp200.</p>"
+    },
+    {
+      "id": "msd-taksir-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penaksiran untuk memeriksa kecukupan uang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Rani membawa uang Rp50.000 dan ingin membeli 4 buku tulis yang masing-masing berharga Rp11.500. Sebelum ke kasir, ia menaksir total harganya dengan membulatkan harga satuan ke ribuan terdekat.</p>",
+      "pertanyaan": "<p>Taksiran total harga dan kesimpulannya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rp44.000, uang Rani cukup</p>",
+          "mis": "mis-msd-taksir-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rp56.000, uang Rani tidak cukup</p>",
+          "mis": "mis-msd-taksir-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rp48.000, uang Rani tidak cukup</p>",
+          "mis": "mis-msd-taksir-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rp48.000, uang Rani cukup</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Harga Rp11.500 dibulatkan ke ribuan terdekat menjadi Rp12.000, karena angka ratusannya 5 sehingga dibulatkan ke atas.</p><p>Taksirannya 4 × 12.000 = Rp48.000, masih di bawah Rp50.000, jadi uangnya cukup.</p><p>Harga sebenarnya 4 × 11.500 = Rp46.000. Karena pembulatan dilakukan ke atas, taksirannya sedikit lebih besar — dan itu justru menguntungkan untuk memeriksa kecukupan uang.</p>"
+    },
+    {
+      "id": "msd-taksir-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penaksiran luas",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah taman berbentuk persegi panjang berukuran 19 m × 11 m. Petugas ingin memperkirakan luasnya dengan cepat dengan membulatkan kedua ukurannya ke puluhan terdekat.</p>",
+      "pertanyaan": "<p>Taksiran luas taman itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>190 m²</p>",
+          "mis": "mis-msd-taksir-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>300 m²</p>",
+          "mis": "mis-msd-taksir-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>220 m²</p>",
+          "mis": "mis-msd-taksir-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>200 m²</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Bulatkan ke puluhan terdekat: 19 menjadi 20 dan 11 menjadi 10.</p><p>Taksirannya 20 × 10 = 200 m².</p><p>Luas sebenarnya 19 × 11 = 209 m², jadi taksirannya berselisih 9 m² saja.</p>"
+    },
+    {
+      "id": "msd-taksir-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang arah taksiran terhadap hasil sebenarnya",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Untuk menaksir 47 × 21, kedua bilangan dibulatkan menjadi 50 × 20 sehingga diperoleh taksiran 1.000.</p>",
+      "pertanyaan": "<p>Pernyataan yang tepat tentang taksiran itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Taksirannya lebih kecil daripada hasil sebenarnya, karena hasil taksiran selalu lebih kecil.</p>",
+          "mis": "mis-msd-taksir-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Taksirannya tepat sama dengan hasil sebenarnya.</p>",
+          "mis": "mis-msd-taksir-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Taksirannya lebih besar daripada hasil sebenarnya, karena kenaikan 47 menjadi 50 lebih berpengaruh daripada penurunan 21 menjadi 20.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Arah taksiran tidak dapat diketahui tanpa menghitung ulang seluruh perkaliannya.</p>",
+          "mis": "mis-msd-taksir-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Hasil sebenarnya 47 × 21 = 987, sedangkan taksirannya 1.000. Jadi taksirannya memang lebih besar.</p><p>Satu bilangan dibulatkan naik 3 dan yang lain turun 1. Karena pengaruh kenaikan itu lebih besar, hasil akhirnya condong ke atas.</p><p>Arah taksiran dapat diperkirakan tanpa menghitung tepat, cukup dengan melihat arah pembulatan setiap bilangannya.</p>"
+    },
+    {
+      "id": "msd-taksir-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang batas penggunaan penaksiran",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Kelas mendiskusikan situasi mana yang cocok diselesaikan dengan penaksiran dan mana yang menuntut hitungan tepat.</p>",
+      "pertanyaan": "<p>Situasi yang <strong>tidak tepat</strong> diselesaikan dengan penaksiran adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>memperkirakan banyak kursi yang dapat dimuat di aula</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>memperkirakan lama perjalanan ke sekolah</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>menghitung uang kembalian yang harus diterima pembeli</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>memperkirakan berat sekarung buah sebelum ditimbang</p>",
+          "mis": "mis-msd-taksir-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Uang kembalian menuntut hitungan tepat sampai satuan rupiahnya. Taksiran akan membuat pembeli atau penjual dirugikan meski selisihnya kecil.</p><p>Tiga situasi lainnya hanya memerlukan gambaran yang mendekati, sehingga penaksiran memang cara yang cepat dan memadai.</p><p>Jadi penaksiran berguna untuk mengambil keputusan cepat, tetapi bukan pengganti hitungan tepat pada urusan yang menuntut ketepatan.</p>"
+    },
+    {
+      "id": "msd-taksir-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan penaksiran ukuran benda sehari-hari",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas menyusun daftar taksiran ukuran beberapa benda di sekitar sekolah.</p>",
+      "pertanyaan": "<p>Taksiran yang wajar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Berat badan seorang siswa SD kira-kira 30 kg.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tinggi meja belajar kira-kira 75 cm.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Isi satu gelas minum kira-kira 200 ml.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Panjang lapangan sepak bola kira-kira 10 m.</p>",
+          "mis": "mis-msd-taksir-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Berat sebuah pensil kira-kira 5 kg.</p>",
+          "mis": "mis-msd-taksir-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A, B, dan C sesuai dengan ukuran benda yang biasa dijumpai.</p><p>D tidak wajar: panjang lapangan sepak bola sekitar 100 m, sedangkan 10 m hanya sepanjang satu ruang kelas.</p><p>E tidak wajar: 5 kg setara sekarung beras kecil, sedangkan pensil hanya beberapa gram.</p>"
+    },
+    {
+      "id": "msd-taksir-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang taksiran dibandingkan hasil sebenarnya",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Panitia menaksir banyak kursi di aula yang tersusun 24 baris dengan 19 kursi setiap barisnya. Taksiran dilakukan dengan membulatkan kedua bilangan ke puluhan terdekat.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang penaksiran itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Taksirannya 20 × 20 = 400 kursi.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Banyak kursi sebenarnya 456.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Taksirannya lebih kecil daripada banyak kursi sebenarnya.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Taksirannya lebih besar daripada banyak kursi sebenarnya.</p>",
+          "mis": "mis-msd-taksir-003"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Taksirannya tepat sama dengan banyak kursi sebenarnya.</p>",
+          "mis": "mis-msd-taksir-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 24 dibulatkan menjadi 20 dan 19 dibulatkan menjadi 20, sehingga taksirannya 400.</p><p>B benar: 24 × 19 = 456.</p><p>C benar: 400 kurang dari 456. Penurunan 24 menjadi 20 lebih berpengaruh daripada kenaikan 19 menjadi 20, sehingga taksirannya condong ke bawah.</p><p>D dan E salah karena bertentangan dengan hitungan itu. Perhatikan bahwa untuk menyiapkan kursi, taksiran yang terlalu kecil justru berisiko kekurangan.</p>"
+    },
+    {
+      "id": "msd-taksir-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang penaksiran dan pembulatan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang penaksiran dan pembulatan dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Penaksiran dipakai untuk memperoleh hasil yang mendekati, bukan hasil yang tepat.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Bilangan 68 dibulatkan ke puluhan terdekat menjadi 70.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Bilangan 4.350 dibulatkan ke ratusan terdekat menjadi 4.300.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-taksir-002"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Membulatkan kedua faktor ke atas membuat taksiran perkaliannya lebih besar daripada hasil sebenarnya.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Hasil penaksiran selalu lebih kecil daripada hasil sebenarnya.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-taksir-003"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: itulah gunanya penaksiran — cepat dan cukup mendekati.</p><p>P2 benar: angka satuannya 8, lebih dari 5, jadi dibulatkan ke atas.</p><p>P3 salah: angka puluhannya tepat 50, yaitu persis di tengah antara 4.300 dan 4.400. Aturan pembulatan mengambil yang lebih besar, jadi hasilnya 4.400.</p><p>P4 benar: kedua faktor bertambah, sehingga hasil kalinya pasti bertambah.</p><p>P5 salah: arah taksiran bergantung arah pembulatannya. Taksiran 50 × 20 = 1.000 untuk 47 × 21 = 987 justru lebih besar.</p>"
+    }
+  ]
+}

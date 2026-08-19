@@ -1,0 +1,427 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-volume-bangun-ruang",
+    "slug": "matematika-sd-volume-bangun-ruang",
+    "title": "Volume Bangun Ruang",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Menghitung volume kubus, balok, dan bangun gabungannya, mengubah cm³ ke liter, mencari ukuran yang belum diketahui, serta menalar pengaruh pelipatan rusuk terhadap volume.",
+    "summary": "10 soal diagnostik bergaya TKA untuk volume bangun ruang (kubus, balok, dan gabungannya).",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menghitung volume kubus dan balok",
+      "Menghitung volume bangun gabungan",
+      "Mengubah cm³ menjadi liter",
+      "Menalar pengaruh perubahan ukuran terhadap volume"
+    ],
+    "sort_order": 19
+  },
+  "submateri": {
+    "id": "con-matematika-sd-volume-bangun-ruang",
+    "name": "Volume bangun ruang (kubus, balok, dan gabungannya)",
+    "description": "Menentukan volume kubus, balok, dan gabungannya serta memakainya pada masalah pengisian wadah. Tabung, kerucut, dan bola tidak termasuk cakupan submateri ini."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-volruang-001",
+      "label": "Rusuk kubus hanya dikalikan tiga",
+      "description": "Siswa menghitung volume kubus dengan mengalikan rusuknya dengan 3, misalnya kubus berusuk 5 cm dijawab 15 cm³.",
+      "insight": "Volume kubus adalah rusuk × rusuk × rusuk, karena panjang, lebar, dan tingginya sama."
+    },
+    {
+      "id": "mis-msd-volruang-002",
+      "label": "Volume dan luas tertukar",
+      "description": "Siswa mengalikan hanya dua ukuran sehingga yang dihitung sebenarnya luas salah satu sisinya, bukan volumenya.",
+      "insight": "Volume memerlukan tiga ukuran sekaligus dan bersatuan cm³, sedangkan luas hanya dua ukuran dan bersatuan cm²."
+    },
+    {
+      "id": "mis-msd-volruang-003",
+      "label": "Hubungan cm³ dan liter keliru",
+      "description": "Siswa memakai pengali 100 atau 10.000 untuk mengubah cm³ ke liter, bukan 1.000.",
+      "insight": "1 liter sama dengan 1.000 cm³, jadi banyak cm³ dibagi 1.000 untuk menjadi liter."
+    },
+    {
+      "id": "mis-msd-volruang-004",
+      "label": "Bagian bangun gabungan tidak dijumlahkan seluruhnya",
+      "description": "Pada bangun gabungan, siswa hanya menghitung volume balok terbesarnya dan mengabaikan bagian lainnya.",
+      "insight": "Pecah bangun gabungan menjadi balok-balok yang jelas ukurannya, hitung volume masing-masing, lalu jumlahkan."
+    },
+    {
+      "id": "mis-msd-volruang-005",
+      "label": "Volume dianggap berlipat sama dengan rusuknya",
+      "description": "Siswa menganggap menggandakan rusuk kubus membuat volumenya menjadi dua kali, bukan delapan kali.",
+      "insight": "Volume dipengaruhi tiga ukuran sekaligus, jadi bila ketiganya menjadi dua kali, volumenya menjadi 2 × 2 × 2 = 8 kali."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-volruang-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami volume kubus",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah kotak mainan berbentuk kubus dengan panjang rusuk 5 cm akan diisi penuh kubus satuan berukuran 1 cm.</p>",
+      "pertanyaan": "<p>Volume kotak mainan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>15 cm³</p>",
+          "mis": "mis-msd-volruang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>25 cm³</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>125 cm³</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>150 cm³</p>",
+          "mis": "mis-msd-volruang-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Volume kubus = rusuk × rusuk × rusuk = 5 × 5 × 5 = 125 cm³.</p><p>Pilihan A muncul bila rusuk hanya dikalikan 3, dan pilihan B bila hanya dua ukuran yang dikalikan — itu luas satu sisinya, bukan volumenya.</p>"
+    },
+    {
+      "id": "msd-volruang-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami volume balok",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Sebuah kotak pensil berbentuk balok berukuran panjang 8 cm, lebar 5 cm, dan tinggi 3 cm.</p>",
+      "pertanyaan": "<p>Volume kotak pensil itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>16 cm³</p>",
+          "mis": "mis-msd-volruang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>40 cm³</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>120 cm³</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>240 cm³</p>",
+          "mis": "mis-msd-volruang-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Volume balok = panjang × lebar × tinggi = 8 × 5 × 3 = 120 cm³.</p><p>Pilihan B adalah 8 × 5 saja, yaitu luas sisi bawahnya. Pilihan A adalah jumlah ketiga ukurannya.</p>"
+    },
+    {
+      "id": "msd-volruang-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan volume balok beserta perubahan ke liter",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah akuarium berbentuk balok berukuran panjang 60 cm, lebar 30 cm, dan tinggi 40 cm. Akuarium itu akan diisi air sampai penuh.</p>",
+      "pertanyaan": "<p>Banyak air yang diperlukan untuk mengisi akuarium itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>7,2 liter</p>",
+          "mis": "mis-msd-volruang-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>72.000 liter</p>",
+          "mis": "mis-msd-volruang-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>720 liter</p>",
+          "mis": "mis-msd-volruang-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>72 liter</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Volume akuarium = 60 × 30 × 40 = 72.000 cm³.</p><p>Karena 1 liter = 1.000 cm³, maka 72.000 : 1.000 = 72 liter.</p><p>Pilihan B lupa mengubah satuannya, dan hasil sebesar itu jelas mustahil untuk akuarium meja.</p>"
+    },
+    {
+      "id": "msd-volruang-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan volume untuk mencari ukuran yang belum diketahui",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah kotak berbentuk balok bervolume 240 cm³. Panjangnya 10 cm dan lebarnya 6 cm.</p>",
+      "pertanyaan": "<p>Tinggi kotak itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4 cm</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>14 cm</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>24 cm</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>40 cm</p>",
+          "mis": "mis-msd-volruang-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Luas sisi bawah = 10 × 6 = 60 cm².</p><p>Tinggi = volume : luas sisi bawah = 240 : 60 = 4 cm.</p><p>Periksa: 10 × 6 × 4 = 240 cm³, sesuai. Pilihan C muncul bila volume hanya dibagi 10.</p>"
+    },
+    {
+      "id": "msd-volruang-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan volume bangun gabungan dua balok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "visual": {
+        "type": "svg",
+        "prompt": "Gambar isometrik bangun gabungan dua balok. Balok bawah berukuran panjang 12 cm, lebar 8 cm, tinggi 5 cm. Di atasnya, rata dengan tepi kiri dan tepi belakang, berdiri balok kedua berukuran panjang 6 cm, lebar 4 cm, tinggi 5 cm. Tuliskan ukuran setiap rusuk yang tampak beserta satuan cm, garis tepi tegas, wajah atas lebih terang."
+      },
+      "stimulus": "<p>Sebuah bangun gabungan tersusun dari dua balok. Balok bawah berukuran 12 cm × 8 cm × 5 cm, dan di atasnya berdiri balok kedua berukuran 6 cm × 4 cm × 5 cm.</p>",
+      "pertanyaan": "<p>Volume bangun gabungan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>360 cm³</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>480 cm³</p>",
+          "mis": "mis-msd-volruang-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>600 cm³</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>720 cm³</p>",
+          "mis": "mis-msd-volruang-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Volume balok bawah = 12 × 8 × 5 = 480 cm³.</p><p>Volume balok atas = 6 × 4 × 5 = 120 cm³.</p><p>Volume gabungan = 480 + 120 = 600 cm³. Pilihan B hanya menghitung balok bawahnya saja.</p>"
+    },
+    {
+      "id": "msd-volruang-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang waktu pengisian bak dari volume dan laju air",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah bak berbentuk balok berukuran 90 cm × 50 cm × 40 cm diisi air dari sebuah kran. Kran itu mengalirkan 15 liter air setiap menit dan bak diisi sampai penuh.</p>",
+      "pertanyaan": "<p>Waktu yang diperlukan untuk mengisi bak itu sampai penuh adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>9 menit</p>",
+          "mis": "mis-msd-volruang-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>120 menit</p>",
+          "mis": "mis-msd-volruang-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>15 menit</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>12 menit</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Volume bak = 90 × 50 × 40 = 180.000 cm³.</p><p>Ubah ke liter: 180.000 : 1.000 = 180 liter.</p><p>Waktu = 180 : 15 = 12 menit. Pilihan B muncul bila volumenya dibagi 15 tanpa lebih dahulu diubah ke liter.</p>"
+    },
+    {
+      "id": "msd-volruang-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang pengaruh pelipatan rusuk terhadap volume",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Sebuah kotak berbentuk kubus mempunyai rusuk 3 cm. Kotak baru dibuat dengan rusuk dua kali panjang rusuk kotak semula.</p>",
+      "pertanyaan": "<p>Volume kotak baru dibandingkan volume kotak semula menjadi ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2 kali</p>",
+          "mis": "mis-msd-volruang-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>4 kali</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>6 kali</p>",
+          "mis": "mis-msd-volruang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>8 kali</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Volume semula = 3 × 3 × 3 = 27 cm³. Rusuk baru 6 cm, sehingga volumenya 6 × 6 × 6 = 216 cm³.</p><p>Perbandingannya 216 : 27 = 8 kali.</p><p>Volume dipengaruhi tiga ukuran sekaligus: 2 × 2 × 2 = 8. Perhatikan bahwa luas satu sisinya hanya menjadi 4 kali, dan panjang rusuknya sendiri 2 kali.</p>"
+    },
+    {
+      "id": "msd-volruang-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan volume balok pada beberapa pernyataan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah kardus berbentuk balok berukuran panjang 10 cm, lebar 6 cm, dan tinggi 4 cm.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang kardus itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Volumenya 240 cm³.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bila tingginya menjadi 8 cm, volumenya menjadi 480 cm³.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Volumenya 20 cm³.</p>",
+          "mis": "mis-msd-volruang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kardus itu dapat diisi penuh oleh 240 kubus satuan berusuk 1 cm.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Volumenya sama dengan volume kubus berusuk 6 cm.</p>",
+          "mis": "mis-msd-volruang-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 10 × 6 × 4 = 240 cm³.</p><p>B benar: tinggi menjadi dua kali membuat volumenya dua kali, yaitu 480 cm³.</p><p>C salah: 20 hanya jumlah ketiga ukurannya.</p><p>D benar: satu kubus satuan bervolume 1 cm³, jadi 240 cm³ memuat 240 kubus satuan.</p><p>E salah: kubus berusuk 6 cm bervolume 6 × 6 × 6 = 216 cm³, bukan 240 cm³.</p>"
+    },
+    {
+      "id": "msd-volruang-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar membandingkan volume kubus dan balok",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Dua wadah dibandingkan isinya:</p><ul><li>Wadah P berbentuk kubus dengan rusuk 6 cm.</li><li>Wadah Q berbentuk balok berukuran 9 cm × 4 cm × 3 cm.</li></ul>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang kedua wadah itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Volume Wadah P adalah 216 cm³.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Volume Wadah Q adalah 108 cm³.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Volume Wadah P dua kali volume Wadah Q.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Volume Wadah Q lebih besar daripada volume Wadah P.</p>",
+          "mis": "mis-msd-volruang-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Volume Wadah P adalah 36 cm³.</p>",
+          "mis": "mis-msd-volruang-002"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 6 × 6 × 6 = 216 cm³.</p><p>B benar: 9 × 4 × 3 = 108 cm³.</p><p>C benar: 216 : 108 = 2.</p><p>D salah: 108 cm³ justru lebih kecil daripada 216 cm³.</p><p>E salah: 36 adalah luas satu sisi kubus itu, yaitu 6 × 6, bukan volumenya.</p>"
+    },
+    {
+      "id": "msd-volruang-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang volume bangun ruang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang volume bangun ruang ditulis di papan tulis untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Volume balok dihitung dengan panjang × lebar × tinggi.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Volume kubus yang panjang rusuknya 4 cm adalah 12 cm³.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-volruang-001"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>1 liter sama dengan 1.000 cm³.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Dua bangun ruang yang volumenya sama pasti bentuknya sama.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-volruang-004"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Satuan volume ditulis dengan cm³.</p>",
+          "kategori": "B"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: volume memerlukan tiga ukuran sekaligus.</p><p>P2 salah: volumenya 4 × 4 × 4 = 64 cm³. Angka 12 hanya 4 × 3.</p><p>P3 benar: itulah hubungan yang dipakai untuk mengubah volume wadah menjadi banyak air.</p><p>P4 salah: kubus berusuk 6 cm dan balok 12 cm × 6 cm × 3 cm sama-sama bervolume 216 cm³ dengan bentuk yang jelas berbeda.</p><p>P5 benar: volume mengukur ruang sehingga satuannya berpangkat tiga.</p>"
+    }
+  ]
+}

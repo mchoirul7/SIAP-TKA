@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-konversi-panjang",
+    "slug": "matematika-sd-hubungan-antar-satuan-panjang",
+    "title": "Hubungan Antar-Satuan Baku Panjang",
+    "topic_id": "top-matematika-sd-geometri-pengukuran",
+    "subtopic_id": "st-matematika-sd-pengukuran",
+    "description": "Mengubah dan membandingkan satuan panjang mm, cm, dm, m, dam, hm, dan km, termasuk menjumlahkan besaran yang satuannya berbeda dan menalar arah naik-turun tangga satuan.",
+    "summary": "10 soal diagnostik bergaya TKA untuk hubungan antar-satuan baku panjang (mm, dm, cm, m, dam, hm, km).",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengubah satuan panjang naik dan turun satu tangga",
+      "Menjumlahkan panjang yang satuannya berbeda",
+      "Mengurutkan panjang setelah menyeragamkan satuan",
+      "Menalar arah pengali pada tangga satuan"
+    ],
+    "sort_order": 10
+  },
+  "submateri": {
+    "id": "con-matematika-sd-konversi-panjang",
+    "name": "Hubungan antar-satuan baku panjang (mm, dm, cm, m, dam, hm, km)",
+    "description": "Menentukan kesetaraan antarsatuan panjang pada tangga satuan dan memakainya untuk menjumlahkan, membandingkan, serta mengurutkan panjang."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-konvpanjang-001",
+      "label": "Arah tangga satuan terbalik",
+      "description": "Siswa mengalikan ketika seharusnya membagi, misalnya mengubah 2.500 cm ke meter dengan mengalikan 100.",
+      "insight": "Turun satu tangga satuan berarti dikali 10 dan naik satu tangga berarti dibagi 10; satuan yang lebih besar selalu memberi angka yang lebih kecil."
+    },
+    {
+      "id": "mis-msd-konvpanjang-002",
+      "label": "Tangga dam dan hm dilompati",
+      "description": "Siswa melompati dam atau hm saat menghitung banyak tangga, sehingga pengalinya kurang atau lebih satu angka nol.",
+      "insight": "Urutan tangganya km, hm, dam, m, dm, cm, mm — hitung tangganya satu per satu tanpa melompat."
+    },
+    {
+      "id": "mis-msd-konvpanjang-003",
+      "label": "Setiap tangga dianggap berkelipatan 100",
+      "description": "Siswa memakai pengali 100 untuk setiap tangga satuan panjang, seperti pada satuan luas.",
+      "insight": "Pada satuan panjang setiap tangga berkelipatan 10; pengali 100 baru muncul bila melewati dua tangga sekaligus."
+    },
+    {
+      "id": "mis-msd-konvpanjang-004",
+      "label": "Perpindahan koma keliru banyak angkanya",
+      "description": "Pada bentuk desimal, siswa memindahkan koma lebih sedikit atau lebih banyak daripada banyak tangga yang dilewati.",
+      "insight": "Banyak angka perpindahan koma sama dengan banyak tangga yang dilewati, satu angka untuk satu tangga."
+    },
+    {
+      "id": "mis-msd-konvpanjang-005",
+      "label": "Membandingkan angka tanpa menyeragamkan satuan",
+      "description": "Siswa langsung membandingkan angkanya, sehingga 450 m dianggap lebih panjang daripada 0,5 km.",
+      "insight": "Ubah semua besaran ke satu satuan yang sama lebih dahulu, baru bandingkan angkanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-konvpanjang-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan meter ke sentimeter",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Panjang kain gorden tercatat 5 m pada nota pembelian. Penjahit ingin menuliskannya dalam sentimeter agar sesuai dengan alat ukurnya.</p>",
+      "pertanyaan": "<p>Panjang kain itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>50 cm</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>500 cm</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>5.000 cm</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>0,05 cm</p>",
+          "mis": "mis-msd-konvpanjang-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Dari m ke cm turun dua tangga, yaitu m ke dm lalu dm ke cm, sehingga dikali 10 × 10 = 100.</p><p>5 × 100 = 500 cm.</p><p>Pilihan A hanya turun satu tangga dan pilihan C turun tiga tangga.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami perubahan kilometer ke meter",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Papan penunjuk di tepi jalan menyebutkan jarak ke pasar 3 km. Panitia jalan sehat ingin mencantumkannya dalam meter pada peta rute.</p>",
+      "pertanyaan": "<p>Jarak itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>30 m</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>300 m</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>3.000 m</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>30.000 m</p>",
+          "mis": "mis-msd-konvpanjang-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Dari km ke m turun tiga tangga: km ke hm, hm ke dam, dam ke m. Pengalinya 10 × 10 × 10 = 1.000.</p><p>3 × 1.000 = 3.000 m.</p><p>Pilihan B muncul bila tangga dam dilompati sehingga hanya dikali 100.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan perubahan satuan naik tangga",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Sebuah gulungan benang layang-layang panjangnya tercatat 2.500 cm. Angka itu akan ditulis ulang dalam meter pada catatan lomba.</p>",
+      "pertanyaan": "<p>Panjang benang itu sama dengan ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2,5 m</p>",
+          "mis": "mis-msd-konvpanjang-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>25 m</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>250 m</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>250.000 m</p>",
+          "mis": "mis-msd-konvpanjang-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Dari cm ke m naik dua tangga, jadi dibagi 100.</p><p>2.500 : 100 = 25 m.</p><p>Pilihan A muncul bila komanya digeser tiga angka, dan pilihan D bila justru dikalikan.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penjumlahan panjang bersatuan berbeda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Pak Rahmat menyambung dua batang bambu. Batang pertama panjangnya 4 dam dan batang kedua 6 m.</p>",
+      "pertanyaan": "<p>Panjang bambu setelah disambung adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>10 m</p>",
+          "mis": "mis-msd-konvpanjang-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>46 m</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>64 m</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>406 m</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Seragamkan satuannya lebih dahulu: 1 dam = 10 m, sehingga 4 dam = 40 m.</p><p>Panjang seluruhnya = 40 + 6 = 46 m.</p><p>Pilihan A muncul bila angka 4 dan 6 dijumlahkan tanpa mengubah satuan, dan pilihan D bila 1 dam dianggap 100 m.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan penyeragaman tiga satuan panjang sekaligus",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Rute lari pagi terdiri atas tiga bagian: menyusuri jalan raya 1 km, memotong lapangan 250 m, dan melewati gang sepanjang 3.000 cm.</p>",
+      "pertanyaan": "<p>Panjang seluruh rute itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1.253 m</p>",
+          "mis": "mis-msd-konvpanjang-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1.280 m</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1.550 m</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>4.250 m</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Ubah semuanya ke meter: 1 km = 1.000 m, 250 m tetap, dan 3.000 cm = 3.000 : 100 = 30 m.</p><p>Jumlahnya = 1.000 + 250 + 30 = 1.280 m.</p><p>Pilihan A muncul bila 3.000 cm dianggap 3 m, dan pilihan C bila dianggap 300 m.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar mengurutkan panjang yang satuannya berbeda-beda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Empat jalur jalan sehat dicatat dengan satuan yang berbeda-beda:</p><ul><li>Jalur I: 0,5 km</li><li>Jalur II: 450 m</li><li>Jalur III: 48.000 cm</li><li>Jalur IV: 5.200 dm</li></ul>",
+      "pertanyaan": "<p>Urutan jalur dari yang terpendek adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jalur II, Jalur III, Jalur I, Jalur IV</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Jalur I, Jalur II, Jalur III, Jalur IV</p>",
+          "mis": "mis-msd-konvpanjang-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jalur II, Jalur I, Jalur IV, Jalur III</p>",
+          "mis": "mis-msd-konvpanjang-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Jalur IV, Jalur III, Jalur II, Jalur I</p>",
+          "mis": "mis-msd-konvpanjang-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seragamkan semuanya ke meter:</p><ul><li>Jalur I: 0,5 km = 500 m</li><li>Jalur II: 450 m</li><li>Jalur III: 48.000 cm = 480 m</li><li>Jalur IV: 5.200 dm = 520 m</li></ul><p>Urutan dari terpendek: 450, 480, 500, 520, yaitu Jalur II, Jalur III, Jalur I, Jalur IV.</p><p>Bila hanya angkanya yang dibandingkan, jalur dengan satuan kecil seperti cm akan tampak paling panjang — padahal justru bukan.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang arah pengali pada tangga satuan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Untuk mengubah 7 km menjadi meter, Sinta membagi 7 dengan 1.000 dan memperoleh 0,007 m. Ia beralasan, “Angkanya harus dibagi karena satuannya berubah.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pekerjaan Sinta adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena setiap perubahan satuan panjang selalu dikerjakan dengan pembagian.</p>",
+          "mis": "mis-msd-konvpanjang-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena meter lebih kecil daripada kilometer, jadi 7 × 1.000 = 7.000 m.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena pengalinya seharusnya 100 sehingga hasilnya menjadi 700 m.</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, tetapi hasil pembagiannya keliru sehingga seharusnya menjadi 0,7 m.</p>",
+          "mis": "mis-msd-konvpanjang-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Satu kilometer sama dengan 1.000 meter, jadi 7 km jelas jauh lebih panjang daripada 7 m — hasil 0,007 m mustahil.</p><p>Karena satuan tujuannya lebih kecil, dibutuhkan lebih banyak satuan, sehingga angkanya dikali: 7 × 1.000 = 7.000 m.</p><p>Pengali 1.000 didapat dari tiga tangga km → hm → dam → m, jadi pilihan C juga keliru karena melompati satu tangga.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan kesetaraan antarsatuan panjang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kelas menuliskan beberapa kesetaraan satuan panjang di papan tulis untuk diperiksa.</p>",
+      "pertanyaan": "<p>Kesetaraan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1 m = 10 dm</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1 hm = 100 m</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>1 cm = 100 mm</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>1 km = 10 hm</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>1 dam = 100 m</p>",
+          "mis": "mis-msd-konvpanjang-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: m ke dm turun satu tangga, jadi dikali 10.</p><p>B benar: hm ke m turun dua tangga, jadi dikali 100.</p><p>C salah: 1 cm = 10 mm, karena cm ke mm hanya turun satu tangga.</p><p>D benar: km ke hm turun satu tangga, jadi dikali 10.</p><p>E salah: 1 dam = 10 m, bukan 100 m.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang berbagai penulisan satu panjang yang sama",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Panjang sebuah jalur sepeda adalah 2,4 km. Panitia menuliskannya dengan beberapa satuan berbeda untuk berbagai keperluan.</p>",
+      "pertanyaan": "<p>Penulisan yang benar untuk panjang jalur itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2.400 m</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>24 hm</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2.400 dam</p>",
+          "mis": "mis-msd-konvpanjang-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>24.000 cm</p>",
+          "mis": "mis-msd-konvpanjang-004"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>2.400.000 mm</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "E"
+      ],
+      "pembahasan": "<p>A benar: 2,4 × 1.000 = 2.400 m.</p><p>B benar: km ke hm turun satu tangga, jadi 2,4 × 10 = 24 hm.</p><p>C salah: km ke dam turun dua tangga, jadi 2,4 × 100 = 240 dam, bukan 2.400 dam.</p><p>D salah: 2.400 m = 240.000 cm. Angka 24.000 cm hanya sama dengan 240 m.</p><p>E benar: 2.400 m × 1.000 = 2.400.000 mm.</p>"
+    },
+    {
+      "id": "msd-konvpanjang-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang hubungan antar-satuan panjang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang satuan panjang dikumpulkan dari catatan siswa untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>1 dm sama dengan 10 cm.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>750 mm sama dengan 7,5 cm.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvpanjang-004"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>0,25 km sama dengan 250 m.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>1 hm lebih panjang daripada 1 dam.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Mengubah meter menjadi kilometer dilakukan dengan mengalikan 1.000.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-konvpanjang-001"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: dm ke cm turun satu tangga, jadi dikali 10.</p><p>P2 salah: 750 mm = 75 cm, karena mm ke cm naik satu tangga sehingga dibagi 10. Nilai 7,5 cm didapat bila dibagi 100.</p><p>P3 benar: 0,25 × 1.000 = 250 m.</p><p>P4 benar: 1 hm = 100 m sedangkan 1 dam = 10 m.</p><p>P5 salah: kilometer lebih besar daripada meter, jadi angkanya berkurang — meter dibagi 1.000 untuk menjadi kilometer.</p>"
+    }
+  ]
+}

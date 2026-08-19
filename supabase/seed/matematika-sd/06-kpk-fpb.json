@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-kpk-fpb",
+    "slug": "matematika-sd-kelipatan-faktor-kpk-fpb",
+    "title": "Kelipatan, Faktor, KPK, dan FPB",
+    "topic_id": "top-matematika-sd-bilangan",
+    "subtopic_id": "st-matematika-sd-bilangan-rasional",
+    "description": "Mendaftar kelipatan dan faktor bilangan asli, menentukan KPK dan FPB, serta memilih di antara keduanya pada masalah jadwal berulang dan pembagian rata.",
+    "summary": "10 soal diagnostik bergaya TKA untuk kelipatan, faktor, KPK, dan FPB bilangan asli.",
+    "estimated_minutes": 25,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mendaftar faktor dan kelipatan bilangan asli",
+      "Menentukan KPK pada masalah kejadian berulang",
+      "Menentukan FPB pada masalah pembagian rata",
+      "Membedakan kapan memakai KPK dan kapan memakai FPB"
+    ],
+    "sort_order": 6
+  },
+  "submateri": {
+    "id": "con-matematika-sd-kpk-fpb",
+    "name": "Kelipatan, faktor, KPK, dan FPB bilangan asli",
+    "description": "Menentukan kelipatan, faktor, kelipatan persekutuan terkecil, dan faktor persekutuan terbesar, serta memakainya untuk menyelesaikan masalah jadwal dan pengelompokan."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-kpkfpb-001",
+      "label": "KPK dan FPB tertukar",
+      "description": "Siswa memakai FPB pada masalah kejadian berulang atau memakai KPK pada masalah pembagian rata.",
+      "insight": "Masalah “bertemu atau berulang bersama lagi” memakai KPK, sedangkan masalah “dibagi rata sebanyak mungkin kelompok” memakai FPB."
+    },
+    {
+      "id": "mis-msd-kpkfpb-002",
+      "label": "KPK dianggap selalu hasil kali kedua bilangan",
+      "description": "Siswa langsung mengalikan kedua bilangan untuk mencari KPK, misalnya KPK 4 dan 6 dijawab 24.",
+      "insight": "Hasil kali dua bilangan memang kelipatan persekutuan, tetapi belum tentu yang terkecil; hasil kali sama dengan KPK hanya bila FPB-nya 1."
+    },
+    {
+      "id": "mis-msd-kpkfpb-003",
+      "label": "Daftar faktor tidak lengkap",
+      "description": "Siswa melewatkan pasangan faktor, misalnya mendaftar faktor 24 tanpa menyertakan 8, karena tidak memeriksa secara berpasangan.",
+      "insight": "Daftar faktor secara berpasangan dari yang terkecil: 1 dan 24, 2 dan 12, 3 dan 8, 4 dan 6, sehingga tidak ada yang terlewat."
+    },
+    {
+      "id": "mis-msd-kpkfpb-004",
+      "label": "Aturan habis dibagi dibalik",
+      "description": "Siswa menyimpulkan bahwa bilangan yang habis dibagi 3 pasti habis dibagi 9, membalik arah hubungan yang benar.",
+      "insight": "Setiap bilangan yang habis dibagi 9 pasti habis dibagi 3, tetapi tidak sebaliknya — 12 habis dibagi 3 namun tidak habis dibagi 9."
+    },
+    {
+      "id": "mis-msd-kpkfpb-005",
+      "label": "Kelipatan dan faktor tertukar",
+      "description": "Siswa menyebut 45 sebagai kelipatan 6 atau menyebut 6 sebagai kelipatan 24, karena arah hubungan faktor dan kelipatan tertukar.",
+      "insight": "Faktor membagi habis bilangannya, sedangkan kelipatan adalah hasil mengalikan bilangan itu dengan bilangan asli."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-kpkfpb-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami daftar faktor suatu bilangan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Bu Nita mempunyai 24 bunga yang akan ditata dalam beberapa vas dengan isi sama banyak, tanpa ada bunga yang tersisa. Banyak bunga per vas haruslah faktor dari 24.</p>",
+      "pertanyaan": "<p>Daftar faktor 24 yang lengkap adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>1, 2, 3, 4, 6, 8, 12, 24</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>1, 2, 3, 4, 6, 12, 24</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>2, 3, 4, 6, 8, 12</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>24, 48, 72, 96</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Daftar faktor secara berpasangan: 1 × 24, 2 × 12, 3 × 8, dan 4 × 6.</p><p>Jadi faktornya 1, 2, 3, 4, 6, 8, 12, dan 24 — seluruhnya 8 faktor.</p><p>Pilihan B melewatkan 8, pilihan C melewatkan 1 dan 24, dan pilihan D justru daftar kelipatan 24.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami kelipatan persekutuan terkecil dua bilangan",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Kelipatan 4 adalah 4, 8, 12, 16, 20, 24, … dan kelipatan 6 adalah 6, 12, 18, 24, 30, …</p>",
+      "pertanyaan": "<p>Kelipatan persekutuan terkecil dari 4 dan 6 adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>2</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>12</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>24</p>",
+          "mis": "mis-msd-kpkfpb-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>10</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Kelipatan persekutuan 4 dan 6 adalah 12, 24, 36, … Yang terkecil adalah 12.</p><p>Pilihan A adalah FPB 4 dan 6, bukan KPK-nya. Pilihan C adalah hasil kali 4 × 6, yang memang kelipatan persekutuan tetapi bukan yang terkecil.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan KPK pada masalah kejadian berulang",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Dua lampu hias dinyalakan bersama pada pukul 19.00. Lampu merah berkedip setiap 12 detik dan lampu kuning berkedip setiap 18 detik.</p>",
+      "pertanyaan": "<p>Kedua lampu berkedip bersamaan lagi setelah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>6 detik</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>30 detik</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>36 detik</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>216 detik</p>",
+          "mis": "mis-msd-kpkfpb-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Masalah “berulang bersama lagi” diselesaikan dengan KPK.</p><p>Faktorisasi: 12 = 2 × 2 × 3 dan 18 = 2 × 3 × 3, sehingga KPK = 2 × 2 × 3 × 3 = 36.</p><p>Periksa: 36 : 12 = 3 kedipan lampu merah dan 36 : 18 = 2 kedipan lampu kuning — keduanya bulat. Pilihan A adalah FPB dan pilihan D adalah hasil kali 12 × 18.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan FPB pada masalah pembagian rata",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Panitia bakti sosial mempunyai 36 buku tulis dan 48 pensil. Semuanya akan dimasukkan ke dalam paket dengan isi sama, dan tidak boleh ada barang yang tersisa.</p>",
+      "pertanyaan": "<p>Banyak paket terbanyak yang dapat dibuat adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4 paket</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>6 paket</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12 paket</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>144 paket</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Masalah “dibagi rata sebanyak mungkin kelompok” diselesaikan dengan FPB.</p><p>Faktorisasi: 36 = 2 × 2 × 3 × 3 dan 48 = 2 × 2 × 2 × 2 × 3, sehingga FPB = 2 × 2 × 3 = 12.</p><p>Periksa: 36 : 12 = 3 buku dan 48 : 12 = 4 pensil per paket, tanpa sisa. Pilihan A dan B juga membagi habis, tetapi paketnya lebih sedikit daripada yang terbanyak.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan FPB untuk menentukan isi setiap kelompok",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Ibu mempunyai 60 kue dan 45 permen. Semuanya dibagikan rata kepada anak-anak sebanyak mungkin, tanpa ada yang tersisa.</p>",
+      "pertanyaan": "<p>Setiap anak menerima ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>4 kue dan 3 permen</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>3 kue dan 4 permen</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>5 kue dan 4 permen</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>12 kue dan 9 permen</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Banyak anak terbanyak = FPB 60 dan 45. Faktorisasi: 60 = 2 × 2 × 3 × 5 dan 45 = 3 × 3 × 5, sehingga FPB = 3 × 5 = 15 anak.</p><p>Setiap anak menerima 60 : 15 = 4 kue dan 45 : 15 = 3 permen.</p><p>Pilihan D adalah pembagian untuk 5 anak, yang bukan jumlah anak terbanyak.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar dengan KPK tiga bilangan beserta penanggalannya",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Tiga anggota keluarga mendapat jadwal piket berbeda: Ayah setiap 4 hari, Ibu setiap 6 hari, dan Kakak setiap 8 hari. Hari ini, hari Senin, ketiganya piket bersama.</p>",
+      "pertanyaan": "<p>Ketiganya piket bersama lagi setelah ... dan jatuh pada hari ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>24 hari, hari Kamis</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>24 hari, hari Selasa</p>",
+          "mis": "mis-msd-kpkfpb-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12 hari, hari Sabtu</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>192 hari, hari Kamis</p>",
+          "mis": "mis-msd-kpkfpb-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Faktorisasi: 4 = 2 × 2, 6 = 2 × 3, dan 8 = 2 × 2 × 2. KPK = 2 × 2 × 2 × 3 = 24 hari.</p><p>Untuk harinya, 24 hari sama dengan 3 pekan lebih 3 hari, karena 24 = 3 × 7 + 3. Tiga pekan kembali ke hari Senin, lalu maju 3 hari menjadi Kamis.</p><p>Pilihan C keliru karena 12 bukan kelipatan 8, dan pilihan D memakai hasil kali 4 × 6 × 8.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai pernyataan umum tentang KPK",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Rudi berpendapat, “KPK dua bilangan selalu sama dengan hasil kali kedua bilangan itu.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap pendapat Rudi adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benar, karena hasil kali dua bilangan pasti dapat dibagi keduanya.</p>",
+          "mis": "mis-msd-kpkfpb-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Salah, karena KPK 4 dan 6 adalah 12 sedangkan hasil kalinya 24; keduanya hanya sama bila FPB kedua bilangan adalah 1.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Salah, karena KPK dua bilangan selalu lebih kecil daripada kedua bilangan itu.</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benar, karena kelipatan persekutuan hanya ada satu untuk setiap pasangan bilangan.</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Hasil kali dua bilangan memang selalu merupakan kelipatan persekutuan, tetapi tidak selalu yang terkecil. Contoh penyangkalnya: KPK 4 dan 6 adalah 12, bukan 24.</p><p>Hasil kali baru sama dengan KPK bila kedua bilangan tidak punya faktor bersama selain 1, misalnya 5 dan 7 yang KPK-nya 35.</p><p>Pilihan C jelas salah karena KPK selalu paling sedikit sebesar bilangan terbesarnya, dan kelipatan persekutuan ada tak terhingga banyaknya sehingga pilihan D juga keliru.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan faktor, kelipatan, KPK, dan FPB untuk memeriksa pernyataan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Lima pernyataan tentang faktor dan kelipatan ditulis di papan tulis untuk diperiksa kebenarannya.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>FPB dari 18 dan 27 adalah 9.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>KPK dari 5 dan 15 adalah 15.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>7 adalah faktor dari 56.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>45 adalah kelipatan 6.</p>",
+          "mis": "mis-msd-kpkfpb-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>FPB dua bilangan selalu lebih besar daripada KPK-nya.</p>",
+          "mis": "mis-msd-kpkfpb-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 18 = 2 × 3 × 3 dan 27 = 3 × 3 × 3, sehingga FPB = 3 × 3 = 9.</p><p>B benar: 15 sudah kelipatan 5, jadi KPK-nya 15 — hasil kali 75 bukan yang terkecil.</p><p>C benar: 7 × 8 = 56, jadi 7 membagi habis 56.</p><p>D salah: kelipatan 6 di sekitar 45 adalah 42 dan 48, sedangkan 45 : 6 bersisa 3.</p><p>E salah: FPB selalu paling besar sebesar bilangan terkecilnya, sedangkan KPK paling kecil sebesar bilangan terbesarnya, jadi FPB tidak pernah melebihi KPK.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang faktorisasi dan keterbagian satu bilangan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Bilangan 84 dituliskan di papan. Kelas diminta memeriksa beberapa pernyataan tentang bilangan itu.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang 84 adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>84 = 2 × 2 × 3 × 7</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>84 habis dibagi 6.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>84 habis dibagi 8.</p>",
+          "mis": "mis-msd-kpkfpb-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Faktor terbesar 84 selain 84 sendiri adalah 42.</p>"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>84 adalah kelipatan 9.</p>",
+          "mis": "mis-msd-kpkfpb-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "D"
+      ],
+      "pembahasan": "<p>A benar: 2 × 2 × 3 × 7 = 84.</p><p>B benar: 84 : 6 = 14. Bilangan itu habis dibagi 2 dan habis dibagi 3, jadi habis dibagi 6.</p><p>C salah: 84 hanya memuat dua faktor 2, sedangkan 8 memerlukan tiga faktor 2. Memang 84 habis dibagi 4, tetapi tidak habis dibagi 8.</p><p>D benar: 84 : 2 = 42, dan tidak ada faktor lain yang lebih besar selain 84 sendiri.</p><p>E salah: jumlah angka 8 + 4 = 12 tidak habis dibagi 9, dan 84 : 9 bersisa 3. Bilangan ini habis dibagi 3 tetapi tidak habis dibagi 9.</p>"
+    },
+    {
+      "id": "msd-kpkfpb-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang KPK, FPB, dan keterbagian",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan hasil diskusi kelompok dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>FPB dari 24 dan 36 adalah 12.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>KPK dari 24 dan 36 adalah 72.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Setiap bilangan yang habis dibagi 9 pasti habis dibagi 3.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Setiap bilangan yang habis dibagi 3 pasti habis dibagi 9.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-kpkfpb-004"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Dua bilangan yang FPB-nya 1 tidak mempunyai KPK.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-kpkfpb-002"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: 24 = 2 × 2 × 2 × 3 dan 36 = 2 × 2 × 3 × 3, sehingga FPB = 2 × 2 × 3 = 12.</p><p>P2 benar: KPK = 2 × 2 × 2 × 3 × 3 = 72. Periksa: 72 : 24 = 3 dan 72 : 36 = 2.</p><p>P3 benar: 9 memuat dua faktor 3, jadi bilangan yang habis dibagi 9 sudah pasti memuat faktor 3.</p><p>P4 salah: 12 habis dibagi 3 tetapi tidak habis dibagi 9. Hubungannya hanya berlaku satu arah.</p><p>P5 salah: setiap pasangan bilangan asli selalu punya KPK. Bila FPB-nya 1, KPK-nya justru tepat sama dengan hasil kali kedua bilangan, misalnya KPK 5 dan 7 adalah 35.</p>"
+    }
+  ]
+}

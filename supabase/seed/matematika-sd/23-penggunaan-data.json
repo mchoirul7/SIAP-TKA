@@ -1,0 +1,423 @@
+{
+  "paket": {
+    "id": "pkg-latihan-msd-penggunaan-data",
+    "slug": "matematika-sd-pengambilan-informasi-penggunaan-data",
+    "title": "Pengambilan Informasi dan Penggunaan Data",
+    "topic_id": "top-matematika-sd-data",
+    "subtopic_id": "st-matematika-sd-penyajian-data",
+    "description": "Mengambil informasi dari data yang tersaji, memakainya untuk menghitung dan mengambil keputusan, serta menalar batas kesimpulan yang boleh ditarik dari suatu data.",
+    "summary": "10 soal diagnostik bergaya TKA untuk pengambilan informasi dan penggunaan data.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengambil informasi langsung dari tabel dan diagram",
+      "Memakai data untuk menghitung jumlah dan selisih",
+      "Memakai data untuk mengambil keputusan",
+      "Menilai kesimpulan yang melampaui dukungan data"
+    ],
+    "sort_order": 23
+  },
+  "submateri": {
+    "id": "con-matematika-sd-penggunaan-data",
+    "name": "Pengambilan informasi dan penggunaan data",
+    "description": "Membaca informasi dari data yang tersaji, memakainya untuk menghitung dan memutuskan, serta menilai sejauh mana suatu kesimpulan didukung datanya."
+  },
+  "miskonsepsi": [
+    {
+      "id": "mis-msd-gunadata-001",
+      "label": "Kesimpulan melampaui apa yang ditunjukkan data",
+      "description": "Siswa menyimpulkan sebab atau kesukaan dari data yang sebenarnya hanya mencatat jumlah kejadian.",
+      "insight": "Periksa apa yang sesungguhnya dicatat oleh data itu; jumlah peminjaman belum tentu menunjukkan kesukaan, karena bisa jadi koleksinya memang sedikit."
+    },
+    {
+      "id": "mis-msd-gunadata-002",
+      "label": "Perkiraan dianggap kepastian",
+      "description": "Siswa menyatakan kejadian berikutnya pasti mengikuti pola yang tampak pada data sebelumnya.",
+      "insight": "Pola pada data hanya mendasari perkiraan; keadaan berikutnya dapat berubah, jadi pakai kata “diperkirakan”, bukan “pasti”."
+    },
+    {
+      "id": "mis-msd-gunadata-003",
+      "label": "Frekuensi tertinggi dianggap berlaku bagi setiap orang",
+      "description": "Siswa menyimpulkan bahwa pilihan terbanyak berarti semua orang menyukainya.",
+      "insight": "Frekuensi tertinggi hanya berarti paling banyak dipilih; masih ada anggota lain yang memilih hal yang berbeda."
+    },
+    {
+      "id": "mis-msd-gunadata-004",
+      "label": "Data kelompok kecil dianggap mewakili kelompok besar",
+      "description": "Siswa memakai data satu kelas untuk menyimpulkan keadaan seluruh sekolah tanpa catatan apa pun.",
+      "insight": "Kesimpulan hanya berlaku untuk kelompok yang datanya benar-benar dikumpulkan, kecuali datanya diambil mewakili keseluruhan."
+    },
+    {
+      "id": "mis-msd-gunadata-005",
+      "label": "Jumlah dan selisih tertukar",
+      "description": "Siswa menjumlahkan dua data ketika yang diminta selisihnya, atau sebaliknya.",
+      "insight": "Baca kembali kata kuncinya: “selisih” berarti mengurangkan, sedangkan “seluruhnya” atau “bersama-sama” berarti menjumlahkan."
+    }
+  ],
+  "soal": [
+    {
+      "id": "msd-gunadata-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memahami pengambilan informasi langsung dari tabel",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Perpustakaan sekolah mencatat peminjaman buku selama satu pekan:</p><ul><li>Cerita rakyat: 24 buku</li><li>Ensiklopedia: 15 buku</li><li>Komik edukasi: 32 buku</li><li>Biografi: 9 buku</li></ul>",
+      "pertanyaan": "<p>Jenis buku yang paling banyak dipinjam adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>cerita rakyat</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>ensiklopedia</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>komik edukasi</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>biografi</p>",
+          "mis": "mis-msd-gunadata-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bandingkan keempat angkanya: 24, 15, 32, dan 9.</p><p>Angka terbesar adalah 32, yaitu komik edukasi.</p><p>Perhatikan bahwa biografi dengan 9 buku adalah yang paling sedikit, bukan yang paling banyak.</p>"
+    },
+    {
+      "id": "msd-gunadata-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Memahami penjumlahan seluruh data",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "stimulus": "<p>Catatan peminjaman yang sama memuat cerita rakyat 24 buku, ensiklopedia 15 buku, komik edukasi 32 buku, dan biografi 9 buku.</p>",
+      "pertanyaan": "<p>Banyak buku yang dipinjam selama pekan itu seluruhnya adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>32 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>71 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>80 buku</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>4 buku</p>",
+          "mis": "mis-msd-gunadata-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Jumlahkan seluruh frekuensinya: 24 + 15 + 32 + 9 = 80 buku.</p><p>Pilihan A hanya jenis yang terbanyak, dan pilihan D adalah banyak jenis bukunya, bukan banyak bukunya.</p>"
+    },
+    {
+      "id": "msd-gunadata-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan data untuk mencari selisih",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Catatan peminjaman memuat cerita rakyat 24 buku, ensiklopedia 15 buku, komik edukasi 32 buku, dan biografi 9 buku.</p>",
+      "pertanyaan": "<p>Selisih peminjaman antara jenis buku yang paling banyak dan yang paling sedikit adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>17 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>80 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>41 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>23 buku</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paling banyak adalah komik edukasi 32 buku, dan paling sedikit adalah biografi 9 buku.</p><p>Selisihnya = 32 − 9 = 23 buku.</p><p>Pilihan C menjumlahkan keduanya, dan pilihan A memakai ensiklopedia yang bukan data paling sedikit.</p>"
+    },
+    {
+      "id": "msd-gunadata-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan data untuk mengambil keputusan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Kantin sekolah mencatat banyak pembeli pada empat waktu berbeda dalam sehari:</p><ul><li>Pukul 09.30: 45 pembeli</li><li>Pukul 10.00: 78 pembeli</li><li>Pukul 12.00: 95 pembeli</li><li>Pukul 12.30: 60 pembeli</li></ul><p>Pengelola kantin hanya mampu menambah satu petugas pada satu waktu saja.</p>",
+      "pertanyaan": "<p>Berdasarkan data itu, petugas tambahan paling tepat ditempatkan pada pukul ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>09.30</p>",
+          "mis": "mis-msd-gunadata-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>10.00</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>12.00</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>12.30</p>",
+          "mis": "mis-msd-gunadata-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Petugas tambahan paling berguna pada waktu tersibuk, yaitu ketika pembelinya paling banyak.</p><p>Angka terbesar adalah 95 pembeli pada pukul 12.00.</p><p>Pilihan A justru waktu paling lengang dengan 45 pembeli.</p>"
+    },
+    {
+      "id": "msd-gunadata-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengaplikasikan data untuk menghitung kebutuhan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Berdasarkan catatan peminjaman satu pekan, komik edukasi dipinjam 32 kali. Sekolah memutuskan menambah koleksi komik edukasi sebanyak setengah dari banyak peminjaman itu.</p>",
+      "pertanyaan": "<p>Banyak komik edukasi yang akan ditambahkan adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>16 buku</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>8 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>32 buku</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>64 buku</p>",
+          "mis": "mis-msd-gunadata-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Setengah dari 32 adalah 32 : 2 = 16 buku.</p><p>Pilihan C adalah banyak peminjamannya sendiri, dan pilihan D justru menggandakannya.</p>"
+    },
+    {
+      "id": "msd-gunadata-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Bernalar menilai kesimpulan yang melampaui data",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Melihat catatan bahwa biografi hanya dipinjam 9 kali sedangkan komik edukasi 32 kali, seorang siswa menyimpulkan, “Berarti siswa di sekolah ini tidak menyukai buku biografi.”</p>",
+      "pertanyaan": "<p>Tanggapan yang tepat terhadap kesimpulan itu adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Tepat, karena angka peminjaman biografi paling kecil di antara keempat jenis buku.</p>",
+          "mis": "mis-msd-gunadata-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tidak tepat, karena data peminjaman tidak dapat dipakai untuk keperluan apa pun.</p>",
+          "mis": "mis-msd-gunadata-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Tepat, karena setiap siswa pasti memilih buku yang paling banyak dipinjam temannya.</p>",
+          "mis": "mis-msd-gunadata-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Belum tentu tepat, karena data itu hanya mencatat peminjaman, bukan kesukaan siswa.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Data itu mencatat banyak peminjaman, bukan kesukaan. Angka kecil bisa berasal dari sebab lain: koleksinya sedikit, letaknya di rak yang jarang dilewati, atau buku-bukunya sedang dipinjam lama.</p><p>Untuk menyimpulkan kesukaan, diperlukan data lain seperti hasil angket, bukan catatan peminjaman.</p><p>Data itu tetap berguna, misalnya untuk memutuskan penambahan koleksi — jadi pilihan B terlalu jauh.</p>"
+    },
+    {
+      "id": "msd-gunadata-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Bernalar tentang batas perkiraan berdasarkan data",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Selama satu pekan, komik edukasi selalu menjadi buku yang paling banyak dipinjam. Panitia perpustakaan ingin menyimpulkan keadaan pekan depan.</p>",
+      "pertanyaan": "<p>Pernyataan yang paling dapat dipertanggungjawabkan adalah ....</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pekan depan komik edukasi diperkirakan tetap paling banyak dipinjam, tetapi hal itu belum dapat dipastikan.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pekan depan komik edukasi pasti kembali menjadi buku yang paling banyak dipinjam.</p>",
+          "mis": "mis-msd-gunadata-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pekan depan komik edukasi pasti tidak lagi paling banyak dipinjam.</p>",
+          "mis": "mis-msd-gunadata-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Data satu pekan tidak dapat dipakai untuk memperkirakan apa pun.</p>",
+          "mis": "mis-msd-gunadata-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Data satu pekan memberi dasar untuk memperkirakan, karena kebiasaan biasanya berulang. Karena itu kata yang tepat adalah “diperkirakan”.</p><p>Namun kepastian tidak dapat diklaim: pekan depan bisa ada buku baru, tugas dari guru, atau perubahan jadwal yang mengubah keadaan.</p><p>Pilihan D terlalu jauh ke arah sebaliknya — data tetap berguna sebagai dasar perkiraan, sekadar bukan jaminan.</p>"
+    },
+    {
+      "id": "msd-gunadata-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengaplikasikan pengambilan informasi dari satu kumpulan data",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "stimulus": "<p>Catatan peminjaman satu pekan: cerita rakyat 24 buku, ensiklopedia 15 buku, komik edukasi 32 buku, dan biografi 9 buku.</p>",
+      "pertanyaan": "<p>Pernyataan yang benar tentang data itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Komik edukasi dipinjam lebih banyak daripada cerita rakyat.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Jumlah seluruh peminjaman 80 buku.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ensiklopedia dipinjam lebih banyak daripada biografi.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Biografi dipinjam lebih banyak daripada ensiklopedia.</p>",
+          "mis": "mis-msd-gunadata-005"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Cerita rakyat dan biografi bersama-sama masih lebih sedikit daripada komik edukasi.</p>",
+          "mis": "mis-msd-gunadata-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 32 lebih dari 24.</p><p>B benar: 24 + 15 + 32 + 9 = 80 buku.</p><p>C benar: 15 lebih dari 9.</p><p>D salah: 9 kurang dari 15.</p><p>E salah: 24 + 9 = 33, yang justru lebih banyak daripada 32. Selisihnya hanya 1 buku, jadi pernyataan ini harus benar-benar dihitung, tidak boleh ditebak.</p>"
+    },
+    {
+      "id": "msd-gunadata-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Bernalar tentang kesimpulan yang didukung data berpola",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Hasil panen sayur di kebun sekolah selama tiga bulan tercatat sebagai berikut:</p><ul><li>Januari: 120 kg</li><li>Februari: 150 kg</li><li>Maret: 180 kg</li></ul>",
+      "pertanyaan": "<p>Pernyataan yang didukung data itu adalah ....</p>",
+      "perintah": "Pilih semua jawaban yang benar.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Hasil panen bertambah 30 kg setiap bulan.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Jumlah panen selama tiga bulan itu 450 kg.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bila pola itu berlanjut, panen April diperkirakan 210 kg.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Panen April pasti 210 kg.</p>",
+          "mis": "mis-msd-gunadata-002"
+        },
+        {
+          "kode": "E",
+          "teks": "<p>Panen Maret dua kali panen Januari.</p>",
+          "mis": "mis-msd-gunadata-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>A benar: 150 − 120 = 30 dan 180 − 150 = 30.</p><p>B benar: 120 + 150 + 180 = 450 kg.</p><p>C benar: bila polanya berlanjut, 180 + 30 = 210 kg — dan kata “diperkirakan” sudah tepat.</p><p>D salah: panen bergantung cuaca, hama, dan perawatan, jadi tidak dapat dipastikan.</p><p>E salah: dua kali 120 adalah 240 kg, sedangkan panen Maret 180 kg.</p>"
+    },
+    {
+      "id": "msd-gunadata-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Bernalar menilai pernyataan tentang penggunaan data",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Lima pernyataan tentang cara memakai data dikumpulkan untuk diperiksa bersama.</p>",
+      "pertanyaan": "<p>Tentukan benar atau salah setiap pernyataan berikut.</p>",
+      "perintah": "Tentukan kategori setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Data dapat dipakai untuk memperkirakan keadaan berikutnya, tetapi tidak untuk memastikannya.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Kesimpulan yang ditarik harus didukung oleh data yang tersedia.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Jumlah seluruh frekuensi pada tabel menyatakan banyak seluruh data.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Kategori dengan frekuensi tertinggi pasti menjadi kesukaan setiap orang dalam kelompok itu.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-gunadata-003"
+        },
+        {
+          "id": "p5",
+          "teks": "<p>Data yang dikumpulkan dari satu kelas dapat langsung dipakai menyimpulkan keadaan seluruh sekolah.</p>",
+          "kategori": "S",
+          "mis": "mis-msd-gunadata-004"
+        }
+      ],
+      "pembahasan": "<p>P1 benar: data menunjukkan kecenderungan, bukan jaminan.</p><p>P2 benar: kesimpulan tanpa dukungan data hanyalah dugaan.</p><p>P3 benar: itulah cara menghitung banyak seluruh data pada tabel frekuensi.</p><p>P4 salah: frekuensi tertinggi hanya berarti paling banyak dipilih. Bila biru dipilih 10 dari 25 siswa, masih ada 15 siswa yang memilih warna lain.</p><p>P5 salah: satu kelas belum tentu mewakili seluruh sekolah, karena kelas lain dapat berbeda kebiasaan dan pilihannya.</p>"
+    }
+  ]
+}
