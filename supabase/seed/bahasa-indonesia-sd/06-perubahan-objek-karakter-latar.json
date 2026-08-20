@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-perubahan-unsur",
+    "slug": "bahasa-indonesia-sd-perubahan-objek-karakter-latar",
+    "title": "Menyimpulkan Perubahan Objek, Karakter, dan Latar",
+    "topic_id": "top-bi-sd-inferensial",
+    "subtopic_id": "st-bi-sd-perubahan-unsur",
+    "description": "Menyimpulkan perubahan bentuk benda pada teks proses, perubahan sikap tokoh pada cerita, dan perubahan suasana tempat dari dahulu ke sekarang.",
+    "summary": "10 soal bergaya TKA untuk menyimpulkan perubahan sederhana pada benda, tokoh, dan latar beserta penyebabnya.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menyimpulkan perubahan bentuk benda pada teks proses",
+      "Menemukan penyebab sebuah perubahan",
+      "Menyimpulkan perubahan sikap tokoh dalam cerita",
+      "Membandingkan keadaan latar dahulu dan sekarang"
+    ],
+    "sort_order": 6
+  },
+  "submateri": {
+    "id": "con-bi-sd-perubahan-unsur",
+    "name": "Perubahan objek pada teks proses serta perubahan karakter dan latar pada cerita",
+    "description": "Menyimpulkan apa yang berubah, dari keadaan apa menjadi apa, dan peristiwa mana yang menyebabkan perubahan tersebut."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-perubahan-tempe",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 1, 2, 3, dan 8",
+      "html": "<p><strong>Dari Kedelai Menjadi Tempe</strong></p><p>Tempe dibuat dari biji kedelai. Mula-mula kedelai keras dan berwarna kuning. Setelah diolah, kedelai berubah menjadi tempe yang padat dan putih.</p><p>Kedelai direbus lebih dahulu selama satu jam. Biji yang tadinya keras menjadi lunak. Setelah dingin, kulit arinya dikupas. Kedelai lalu dicuci sampai bersih.</p><p>Kedelai yang bersih direndam semalaman. Air rendaman menjadi asam pada keesokan harinya. Rasa asam itu membantu jamur tempe tumbuh.</p><p>Kedelai kemudian ditiriskan sampai kering. Ragi tempe ditaburkan lalu diaduk rata. Kedelai dibungkus daun pisang atau plastik berlubang. Lubang kecil itu dibuat dengan ujung lidi.</p><p>Bungkusan disimpan dua hari di tempat hangat. Benang-benang putih mulai tumbuh di sela kedelai. Benang itu adalah jamur tempe. Butiran kedelai pun menyatu menjadi satu balok padat.</p><p>Tempe yang baru jadi berbau segar. Bila disimpan terlalu lama, tempe berubah menjadi kehitaman. Baunya pun menjadi tajam dan tidak sedap. Tempe seperti itu sebaiknya tidak dimakan.</p>"
+    },
+    {
+      "id": "psg-bisd-perubahan-rio",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 4, 5, dan 9",
+      "html": "<p><strong>Rio dan Jam Weker</strong></p><p>Dahulu Rio dikenal sebagai anak yang sering terlambat. Ia bangun ketika matahari sudah tinggi. Sarapan pun sering ia tinggalkan.</p><p>Setiap pagi ibunya membangunkan berkali-kali. Rio hanya menarik selimut lalu tidur lagi. Ia baru bergegas saat mendengar bel sekolah dari kejauhan.</p><p>Suatu hari sekolah mengadakan lomba baris-berbaris. Rio dipilih menjadi pemimpin regu. Ia berlatih setiap sore dengan gembira. Aba-abanya terdengar lantang di halaman sekolah.</p><p>Pada hari lomba, Rio datang terlambat setengah jam. Regunya terpaksa maju tanpa pemimpin. Nilai mereka pun berkurang banyak.</p><p>Rio duduk di pojok lapangan tanpa suara. Ia memandangi regunya yang berbaris rapi. Teman-temannya tidak menyalahkan, tetapi ia tetap merasa bersalah.</p><p>Malam itu Rio meminta jam weker kepada ayahnya. Ia menaruh jam itu di dekat bantal. Ia juga menyiapkan seragam sebelum tidur.</p><p>Sejak saat itu Rio berangkat lebih pagi. Ia bahkan sempat membuka jendela kelas. Teman-temannya kini memanggilnya ketua regu.</p>"
+    },
+    {
+      "id": "psg-bisd-perubahan-kampung",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 6, 7, dan 10",
+      "html": "<p><strong>Kampung Kami Dahulu dan Kini</strong></p><p>Kakek sering bercerita tentang kampung kami. Dahulu di depan rumah terbentang sawah luas. Airnya mengalir dari sungai kecil di utara.</p><p>Pada sore hari, anak-anak bermain layang-layang di pematang. Suara katak terdengar sampai ke teras rumah. Jalan kampung masih berupa tanah berbatu.</p><p>Sekarang keadaannya sudah berbeda. Sawah di depan rumah berubah menjadi deretan toko. Jalan kampung pun sudah dilapisi aspal halus.</p><p>Toko-toko itu buka sejak pagi sampai malam. Anak-anak kini bermain di lapangan kecil dekat balai desa. Suara katak berganti dengan suara kendaraan. Sungai kecil di utara menyempit karena tepinya ditutup bangunan.</p><p>Kakek tidak melarang perubahan itu. Menurutnya, kampung memang tumbuh seperti anak-anak. Ia hanya berpesan satu hal. Sungai dan pepohonan harus tetap dijaga.</p><p>Bersama warga, ayah menanam pohon di tepi jalan. Bibit pohon itu diberi pagar bambu. Setiap sore anak-anak ikut menyiraminya. Lima tahun lagi, jalan kampung akan kembali rindang.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-perubahan-001",
+      "label": "Menukar keadaan awal dengan keadaan akhir",
+      "description": "Siswa membalik arah perubahan, misalnya menyebut jalan berubah dari aspal menjadi tanah berbatu.",
+      "insight": "Tandai dua keadaan itu dengan kata dahulu dan sekarang. Arah perubahan selalu dari keadaan lama menuju keadaan baru."
+    },
+    {
+      "id": "mis-bisd-perubahan-002",
+      "label": "Mengira kejadian terakhir sebagai penyebab perubahan",
+      "description": "Siswa memilih kejadian yang muncul paling akhir sebagai penyebab, padahal kejadian itu justru akibat dari perubahannya.",
+      "insight": "Penyebab selalu terjadi lebih dahulu. Periksa urutan kejadiannya sebelum menentukan mana sebab dan mana akibat."
+    },
+    {
+      "id": "mis-bisd-perubahan-003",
+      "label": "Menyebut perubahan yang tidak ada dalam teks",
+      "description": "Siswa menambahkan perubahan yang biasa terjadi menurut pengalamannya, padahal teks tidak menyebutkannya.",
+      "insight": "Setiap perubahan yang dipilih harus punya dua bukti dalam teks: keadaan sebelumnya dan keadaan sesudahnya."
+    },
+    {
+      "id": "mis-bisd-perubahan-004",
+      "label": "Mengira tokoh berubah hanya karena dinasihati",
+      "description": "Siswa menyimpulkan tokoh berubah karena nasihat orang lain, padahal cerita menunjukkan tokoh berubah setelah mengalami akibat perbuatannya.",
+      "insight": "Cari peristiwa yang membuat tokoh merasakan akibatnya sendiri. Peristiwa itulah titik balik perubahannya."
+    },
+    {
+      "id": "mis-bisd-perubahan-005",
+      "label": "Mencampur perubahan benda dengan perubahan tempat",
+      "description": "Siswa mencampur apa yang berubah pada benda dengan apa yang berubah pada tempat atau suasana di sekitarnya.",
+      "insight": "Tanyakan lebih dahulu: yang berubah bendanya, tokohnya, atau tempatnya? Baru cari buktinya di dalam teks."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-perubahan-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perubahan bentuk benda pada teks proses",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-perubahan-tempe",
+      "pertanyaan": "<p>Perubahan apa yang terjadi pada kedelai setelah direbus?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Warnanya berubah menjadi putih bersih.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bijinya berubah dari keras menjadi lunak.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Butirannya menyatu menjadi satu balok.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Baunya berubah menjadi tajam dan tidak sedap.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Paragraf kedua menulis: “Kedelai direbus lebih dahulu selama satu jam. Biji yang tadinya keras menjadi lunak.”</p><p>Warna putih dan bentuk balok baru muncul setelah jamur tempe tumbuh, sedangkan bau tajam terjadi pada tempe yang disimpan terlalu lama.</p>"
+    },
+    {
+      "id": "bisd-perubahan-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menemukan penyebab perubahan bentuk benda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-tempe",
+      "pertanyaan": "<p>Apa yang membuat butiran kedelai menyatu menjadi satu balok padat?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Perebusan kedelai selama satu jam.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Perendaman kedelai selama semalaman.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bungkus daun pisang yang rapat.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Benang-benang jamur tempe yang tumbuh.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paragraf kelima menyebut benang putih tumbuh di sela kedelai, lalu “Butiran kedelai pun menyatu menjadi satu balok padat.” Benang itu adalah jamur tempe.</p><p>Perebusan hanya melunakkan biji dan perendaman membuat air menjadi asam. Keduanya terjadi jauh sebelum kedelai menyatu.</p>"
+    },
+    {
+      "id": "bisd-perubahan-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan sebab perubahan keadaan benda",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-tempe",
+      "pertanyaan": "<p>Mengapa tempe yang berwarna kehitaman sebaiknya tidak dimakan?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Karena raginya belum tumbuh dengan sempurna.</p>",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Karena kedelainya kurang lama direbus.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Karena tempe sudah terlalu lama disimpan.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Karena bungkusnya memakai plastik berlubang.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks menyebut tempe yang baru jadi berbau segar, lalu “Bila disimpan terlalu lama, tempe berubah menjadi kehitaman. Baunya pun menjadi tajam dan tidak sedap.”</p><p>Warna kehitaman itu tanda tempe sudah terlalu lama disimpan, bukan tanda pembuatannya gagal sejak awal.</p>"
+    },
+    {
+      "id": "bisd-perubahan-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perubahan sikap tokoh dalam cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-rio",
+      "pertanyaan": "<p>Bagaimana perubahan sikap Rio setelah lomba baris-berbaris?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Ia menjadi disiplin dan berangkat lebih pagi.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Ia menjadi pendiam dan menjauhi teman-temannya.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ia berhenti mengikuti kegiatan di sekolah.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Ia minta diantar ayahnya setiap pagi.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Setelah lomba, Rio meminta jam weker, menyiapkan seragam sebelum tidur, dan berangkat lebih pagi. Semuanya menunjukkan sikap yang lebih disiplin.</p><p>Rio memang sempat duduk termenung, tetapi cerita tidak menyebut ia menjauhi teman-temannya. Ia justru dipanggil ketua regu.</p>"
+    },
+    {
+      "id": "bisd-perubahan-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menemukan peristiwa yang menyebabkan tokoh berubah",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-perubahan-rio",
+      "pertanyaan": "<p>Peristiwa apa yang membuat Rio berubah?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Ibunya membangunkan Rio berkali-kali setiap pagi.</p>",
+          "mis": "mis-bisd-perubahan-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Regunya maju tanpa pemimpin karena Rio terlambat.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ayahnya memberikan sebuah jam weker kepadanya.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Teman-temannya memanggil Rio dengan sebutan ketua regu.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Rio sudah lama dibangunkan ibunya, tetapi sikapnya tidak berubah. Perubahan baru terjadi setelah regunya maju tanpa pemimpin dan nilainya berkurang. Rio merasakan sendiri akibat keterlambatannya.</p><p>Jam weker dan sebutan ketua regu justru muncul setelah Rio berubah, jadi keduanya akibat, bukan penyebab.</p>"
+    },
+    {
+      "id": "bisd-perubahan-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perubahan latar tempat dalam teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-kampung",
+      "pertanyaan": "<p>Perubahan latar apa yang terjadi di kampung tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Sungai kecil di utara berubah menjadi sawah luas.</p>",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Lapangan dekat balai desa berubah menjadi toko.</p>",
+          "mis": "mis-bisd-perubahan-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jalan beraspal berubah menjadi tanah berbatu.</p>",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Sawah di depan rumah berubah menjadi deretan toko.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Teks menyebut dahulu di depan rumah terbentang sawah luas, lalu “Sawah di depan rumah berubah menjadi deretan toko.”</p><p>Pilihan A dan C membalik arah perubahannya. Lapangan dekat balai desa justru menjadi tempat bermain anak-anak sekarang.</p>"
+    },
+    {
+      "id": "bisd-perubahan-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar hubungan perubahan latar dengan suasana kampung",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-perubahan-kampung",
+      "pertanyaan": "<p>Perubahan mana yang membuat suasana kampung menjadi lebih bising?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jalan kampung yang kini dilapisi aspal halus.</p>",
+          "mis": "mis-bisd-perubahan-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Anak-anak yang bermain di lapangan balai desa.</p>",
+          "mis": "mis-bisd-perubahan-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sawah yang berganti toko sehingga kendaraan bertambah.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bibit pohon di tepi jalan yang diberi pagar bambu.</p>",
+          "mis": "mis-bisd-perubahan-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks menulis “Suara katak berganti dengan suara kendaraan”. Kendaraan bertambah karena sawah di depan rumah berubah menjadi deretan toko.</p><p>Aspal, lapangan, dan bibit pohon disebut teks, tetapi tidak dihubungkan dengan bertambahnya suara kendaraan.</p>"
+    },
+    {
+      "id": "bisd-perubahan-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Menentukan perubahan benda yang disebut dalam teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-tempe",
+      "pertanyaan": "<p>Perubahan apa saja yang dialami kedelai sampai menjadi tempe?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Dari kuning menjadi kehitaman.</p>",
+          "mis": "mis-bisd-perubahan-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Dari keras menjadi lunak.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Dari butiran terpisah menjadi balok padat.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Kedelai melunak setelah direbus dan menyatu menjadi balok setelah jamur tempe tumbuh. Keduanya perubahan yang dialami kedelai selama menjadi tempe.</p><p>Warna kehitaman terjadi pada tempe yang sudah jadi lalu disimpan terlalu lama, bukan bagian dari proses pembuatannya.</p>"
+    },
+    {
+      "id": "bisd-perubahan-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menentukan perbuatan yang menunjukkan perubahan tokoh",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-perubahan-rio",
+      "pertanyaan": "<p>Perbuatan apa saja yang menunjukkan perubahan sikap Rio?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Menaruh jam weker di dekat bantal.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Menarik selimut lalu tidur lagi.</p>",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Menyiapkan seragam sebelum tidur.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Kedua perbuatan itu dilakukan Rio pada malam setelah lomba, yaitu saat ia mulai berubah.</p><p>Menarik selimut lalu tidur lagi adalah kebiasaan Rio yang lama, jadi justru menunjukkan keadaan sebelum ia berubah.</p>"
+    },
+    {
+      "id": "bisd-perubahan-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Membandingkan keadaan latar dahulu dan sekarang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-perubahan-kampung",
+      "pertanyaan": "<p>Tentukan keadaan dahulu atau keadaan sekarang untuk setiap pernyataan berikut!</p>",
+      "perintah": "Klik pada pilihan Dahulu atau Sekarang untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "D",
+          "label": "Dahulu"
+        },
+        {
+          "kode": "S",
+          "label": "Sekarang"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Jalan kampung dilapisi aspal halus.</p>",
+          "kategori": "S",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Anak-anak bermain layang-layang di pematang sawah.</p>",
+          "kategori": "D"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Sungai kecil di utara menyempit karena bangunan.</p>",
+          "kategori": "S",
+          "mis": "mis-bisd-perubahan-001"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Suara katak terdengar sampai ke teras rumah.</p>",
+          "kategori": "D"
+        }
+      ],
+      "pembahasan": "<p>P2 dan P4 berada pada bagian cerita Kakek tentang masa lalu: anak-anak bermain di pematang dan suara katak masih terdengar.</p><p>P1 dan P3 muncul setelah kalimat “Sekarang keadaannya sudah berbeda”, jadi keduanya keadaan sekarang.</p>"
+    }
+  ]
+}

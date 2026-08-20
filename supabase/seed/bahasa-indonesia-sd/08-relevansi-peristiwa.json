@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-relevansi-peristiwa",
+    "slug": "bahasa-indonesia-sd-relevansi-peristiwa",
+    "title": "Menilai Relevansi Peristiwa dengan Kehidupan Sehari-hari",
+    "topic_id": "top-bi-sd-evaluasi",
+    "subtopic_id": "st-bi-sd-relevansi-peristiwa",
+    "description": "Menilai peristiwa dalam teks dengan pengalaman sendiri: memilih contoh kejadian sehari-hari yang sejalan dengan isi teks dan menolak contoh yang justru berlawanan.",
+    "summary": "10 soal bergaya TKA untuk menghubungkan peristiwa dalam teks dengan kejadian sehari-hari di rumah, sekolah, dan kampung.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Memilih contoh kejadian sehari-hari yang sejalan dengan teks",
+      "Menilai perbuatan tokoh yang layak ditiru",
+      "Membedakan alasan yang mendukung dan yang tidak mendukung",
+      "Menerapkan pesan teks pada keadaan di sekolah dan rumah"
+    ],
+    "sort_order": 8
+  },
+  "submateri": {
+    "id": "con-bi-sd-relevansi-peristiwa",
+    "name": "Relevansi peristiwa dalam teks dengan pengalaman sehari-hari",
+    "description": "Menilai kejadian sehari-hari mana yang sejalan dengan peristiwa dan pesan dalam teks, dengan bukti dari teks dan pengalaman pribadi."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-relevansi-puskesmas",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, dan 10",
+      "html": "<p><strong>Bangku Panjang di Puskesmas</strong></p><p>Sabtu pagi Nia menemani ibunya ke puskesmas. Mereka berangkat naik angkutan umum. Mereka mengambil nomor antrean di meja depan. Nomor mereka dua puluh tiga.</p><p>Bangku panjang di ruang tunggu sudah penuh. Nia dan ibunya berdiri di dekat pintu. Beberapa orang tampak mengipasi wajahnya.</p><p>Tak lama kemudian seorang kakek datang. Ia berjalan pelan sambil memegang tongkat. Kakek itu berdiri di belakang antrean.</p><p>Nia menyenggol lengan ibunya. “Bu, kakek itu berdiri sejak tadi,” bisiknya.</p><p>Ibu Nia lalu menghampiri petugas. Petugas mengumumkan agar tempat duduk didahulukan untuk lansia. Seorang pemuda segera berdiri dari bangku. Kakek itu duduk sambil mengucapkan terima kasih.</p><p>Ketika nomor dua puluh tiga dipanggil, Nia mengantar ibunya masuk. Dokter memeriksa ibunya dengan sabar. Obat diambil di loket sebelah kanan.</p><p>Pulang dari puskesmas, ibu berkata pelan kepada Nia. “Menunggu memang tidak mudah. Namun, giliran orang lain tetap harus kita hormati.”</p>"
+    },
+    {
+      "id": "psg-bisd-relevansi-air",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 3, 4, 5, dan 8",
+      "html": "<p><strong>Menghemat Air pada Musim Kemarau</strong></p><p>Musim kemarau membuat sumur warga cepat surut. Di beberapa daerah, air bersih diambil dari tempat yang jauh. Karena itu, air perlu dipakai dengan hemat.</p><p>Cara pertama adalah menutup keran rapat-rapat. Keran yang menetes membuang air belasan liter setiap hari. Tetesan itu sering tidak disadari penghuni rumah.</p><p>Cara kedua adalah menampung air bekas cucian beras. Air itu masih dapat dipakai untuk menyiram tanaman.</p><p>Cara ketiga adalah mandi memakai gayung. Mandi dengan gayung memakai air lebih sedikit daripada berendam.</p><p>Cara keempat adalah memeriksa pipa yang bocor. Pipa bocor membuat air terbuang tanpa terlihat.</p><p>Sekolah juga dapat ikut membantu. Bak cuci tangan sebaiknya memakai keran kecil. Petugas kebersihan menyiram tanaman pada sore hari. Pada waktu itu air tidak cepat menguap.</p><p>Kebiasaan kecil ternyata berpengaruh besar. Bila semua warga ikut berhemat, sumur tidak cepat kering. Air yang dihemat hari ini berguna pada hari kering berikutnya.</p>"
+    },
+    {
+      "id": "psg-bisd-relevansi-listrik",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 6, 7, dan 9",
+      "html": "<p><strong>Ketika Listrik Padam</strong></p><p>Hujan deras mengguyur kampung sejak sore. Menjelang malam listrik tiba-tiba padam. Rumah-rumah pun menjadi gelap.</p><p>Pak RT berkeliling membawa senter. Ia mengetuk pintu satu per satu. Warga diminta berkumpul di pos ronda.</p><p>Ternyata ada dahan besar menimpa kabel. Dahan itu patah tertiup angin kencang. Beberapa bapak membawa gergaji dan tali. Mereka bekerja bergantian agar tidak kelelahan. Senter warga diarahkan ke dahan yang patah.</p><p>Ibu-ibu menyiapkan teh hangat di pos ronda. Anak-anak diminta menunggu di dalam rumah. Adi dan adiknya menyalakan lilin di teras.</p><p>Dahan berhasil disingkirkan sebelum tengah malam. Potongannya dipinggirkan ke tepi jalan. Petugas listrik datang lalu memperbaiki kabelnya. Lampu kampung akhirnya menyala kembali. Warga bertepuk tangan di pos ronda.</p><p>Sebelum pulang, Pak RT mengucapkan terima kasih. “Pekerjaan berat menjadi ringan bila dikerjakan bersama,” katanya.</p><p>Adi mengingat kalimat itu sampai keesokan harinya. Di sekolah, ia mengajak teman-temannya membersihkan selokan kelas.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-relevansi-001",
+      "label": "Memilih contoh yang hanya mirip tempatnya",
+      "description": "Siswa memilih kejadian sehari-hari karena tempatnya sama dengan teks, misalnya sama-sama di sekolah, walaupun perbuatannya berbeda.",
+      "insight": "Yang dibandingkan adalah perbuatan dan nilainya, bukan tempatnya. Tanyakan: apakah perbuatannya sejalan dengan pesan teks?"
+    },
+    {
+      "id": "mis-bisd-relevansi-002",
+      "label": "Memilih contoh yang berlawanan dengan pesan teks",
+      "description": "Siswa memilih kejadian yang justru kebalikan dari pesan teks karena topiknya terasa berhubungan.",
+      "insight": "Periksa arah perbuatannya. Menyerobot antrean berhubungan dengan antre, tetapi arahnya berlawanan dengan pesan teks."
+    },
+    {
+      "id": "mis-bisd-relevansi-003",
+      "label": "Menilai perbuatan tanpa memakai isi teks",
+      "description": "Siswa menilai baik atau buruk berdasarkan pendapat sendiri tanpa mencari bukti di dalam teks.",
+      "insight": "Penilaian boleh memakai pengalaman pribadi, tetapi tetap harus dapat dihubungkan dengan kejadian yang ada di dalam teks."
+    },
+    {
+      "id": "mis-bisd-relevansi-004",
+      "label": "Menganggap semua pernyataan benar sebagai alasan yang mendukung",
+      "description": "Siswa menerima pernyataan yang memang benar, padahal pernyataan itu tidak menjelaskan pendapat yang sedang dibahas.",
+      "insight": "Alasan yang mendukung harus menjawab pertanyaan mengapa. Pernyataan benar yang tidak menjawabnya bukan alasan pendukung."
+    },
+    {
+      "id": "mis-bisd-relevansi-005",
+      "label": "Mengandalkan kebiasaan sendiri walaupun bertentangan dengan teks",
+      "description": "Siswa memilih kebiasaan yang biasa ia lakukan di rumah walaupun teks menganjurkan hal yang berbeda.",
+      "insight": "Kebiasaan yang sudah biasa dilakukan belum tentu sesuai anjuran teks. Bandingkan kebiasaan itu dengan cara yang disarankan penulis."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-relevansi-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menghubungkan peristiwa dalam teks dengan pengalaman sehari-hari",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-relevansi-puskesmas",
+      "pertanyaan": "<p>Peristiwa pada cerita tersebut paling sesuai dengan kejadian sehari-hari berikut, yaitu ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>seorang siswa meminjam pensil kepada teman sebangkunya</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>seorang anak membeli jajan sepulang dari sekolah</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>seorang siswa menyalin catatan milik teman sekelasnya</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>seorang anak memberikan tempat duduknya kepada nenek di bus</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Inti cerita adalah mendahulukan orang yang lebih membutuhkan tempat duduk, yaitu kakek yang berjalan dengan tongkat. Memberikan tempat duduk kepada nenek di bus adalah kejadian sehari-hari dengan nilai yang sama.</p><p>Pilihan A, B, dan C memang sering terjadi, tetapi tidak berhubungan dengan mendahulukan orang yang lebih membutuhkan.</p>"
+    },
+    {
+      "id": "bisd-relevansi-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menilai perbuatan tokoh yang layak ditiru",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-puskesmas",
+      "pertanyaan": "<p>Perbuatan Nia yang layak ditiru dalam kehidupan sehari-hari adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>mengambil nomor antrean di meja depan</p>",
+          "mis": "mis-bisd-relevansi-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>memberitahukan keadaan kakek kepada ibunya</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>berdiri menunggu di dekat pintu ruang tunggu</p>",
+          "mis": "mis-bisd-relevansi-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>menunggu sampai nomornya dipanggil petugas</p>",
+          "mis": "mis-bisd-relevansi-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Nia memperhatikan sekelilingnya, lalu memberitahukan kakek yang berdiri kepada ibunya. Dari situlah kakek itu akhirnya mendapat tempat duduk.</p><p>Pilihan A, C, dan D memang dilakukan Nia, tetapi ketiganya hanya kegiatan biasa saat mengantre, bukan perbuatan yang menolong orang lain.</p>"
+    },
+    {
+      "id": "bisd-relevansi-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Memilih kebiasaan sehari-hari yang sesuai anjuran teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-air",
+      "pertanyaan": "<p>Kebiasaan di rumah yang sesuai dengan isi teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>menampung air cucian beras untuk menyiram tanaman</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>mencuci sepeda setiap pagi memakai air selang</p>",
+          "mis": "mis-bisd-relevansi-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>membiarkan keran menetes agar bak selalu penuh</p>",
+          "mis": "mis-bisd-relevansi-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>menyiram tanaman pada siang hari yang terik</p>",
+          "mis": "mis-bisd-relevansi-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Teks menganjurkan menampung air bekas cucian beras karena air itu masih dapat dipakai menyiram tanaman.</p><p>Pilihan C dan D justru kebalikan dari anjuran teks: keran menetes membuang belasan liter air, dan menyiram pada siang hari membuat air cepat menguap.</p>"
+    },
+    {
+      "id": "bisd-relevansi-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menilai alasan yang mendukung anjuran dalam teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-relevansi-air",
+      "pertanyaan": "<p>Alasan yang mendukung anjuran menyiram tanaman pada sore hari adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>tanaman lebih cepat tumbuh bila disiram sore hari</p>",
+          "mis": "mis-bisd-relevansi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>petugas kebersihan lebih senggang pada sore hari</p>",
+          "mis": "mis-bisd-relevansi-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>air tidak cepat menguap sehingga tidak terbuang</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>tanah menjadi lebih gembur bila disiram sore hari</p>",
+          "mis": "mis-bisd-relevansi-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks menyebut alasannya langsung: “Pada waktu itu air tidak cepat menguap.” Alasan itu sejalan dengan tujuan teks, yaitu menghemat air.</p><p>Pilihan lain terdengar masuk akal, tetapi tidak menjelaskan penghematan air dan tidak disebutkan di dalam teks.</p>"
+    },
+    {
+      "id": "bisd-relevansi-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menilai pengalaman pribadi yang sejalan dengan isi teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-air",
+      "pertanyaan": "<p>Pengalaman berikut yang paling sesuai dengan pesan teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rani membeli air minum kemasan setiap jam istirahat.</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Dito mengisi bak mandi hingga airnya meluap.</p>",
+          "mis": "mis-bisd-relevansi-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sari mencuci piring dengan keran terbuka terus.</p>",
+          "mis": "mis-bisd-relevansi-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Andi melaporkan keran kelas yang menetes kepada penjaga.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Teks menyebut keran menetes membuang air belasan liter setiap hari. Melaporkan keran yang menetes berarti ikut mencegah air terbuang.</p><p>Pilihan B dan C berlawanan dengan anjuran teks, sedangkan pilihan A berhubungan dengan air minum, bukan dengan penghematan air.</p>"
+    },
+    {
+      "id": "bisd-relevansi-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menghubungkan peristiwa cerita dengan kegiatan di lingkungan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-listrik",
+      "pertanyaan": "<p>Kejadian pada cerita tersebut paling sesuai dengan kegiatan sehari-hari berikut, yaitu ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>lomba kebersihan antarkelas menjelang hari besar</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>kerja bakti warga membersihkan saluran air</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>rapat pemilihan ketua RT di balai desa</p>",
+          "mis": "mis-bisd-relevansi-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>arisan bulanan ibu-ibu di rumah tetangga</p>",
+          "mis": "mis-bisd-relevansi-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Warga berkumpul untuk menyelesaikan satu masalah bersama, yaitu dahan yang menimpa kabel listrik. Kerja bakti membersihkan saluran air memiliki bentuk yang sama: pekerjaan bersama demi kepentingan bersama.</p><p>Pilihan A, C, dan D sama-sama kegiatan bersama, tetapi bukan usaha mengatasi masalah yang mendesak.</p>"
+    },
+    {
+      "id": "bisd-relevansi-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar penerapan pesan teks pada perbuatan tokoh",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-relevansi-listrik",
+      "pertanyaan": "<p>Perbuatan Adi keesokan harinya menunjukkan bahwa ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>ia menerapkan kebiasaan bekerja bersama di sekolahnya</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>ia ingin dipuji guru karena terlihat rajin bekerja</p>",
+          "mis": "mis-bisd-relevansi-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>ia takut ditegur Pak RT bila tidak ikut membantu</p>",
+          "mis": "mis-bisd-relevansi-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>ia memang biasa membersihkan selokan setiap pagi</p>",
+          "mis": "mis-bisd-relevansi-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Adi mengingat kalimat Pak RT bahwa pekerjaan berat menjadi ringan bila dikerjakan bersama. Keesokan harinya ia mengajak teman-temannya membersihkan selokan kelas.</p><p>Cerita tidak menyebut Adi ingin dipuji, takut ditegur, atau sudah terbiasa melakukannya. Ketiga pilihan itu hanya dugaan dari luar teks.</p>"
+    },
+    {
+      "id": "bisd-relevansi-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Memilah kebiasaan yang sesuai anjuran teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-air",
+      "pertanyaan": "<p>Kebiasaan mana saja yang sesuai dengan anjuran pada teks tersebut?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Mandi memakai gayung.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Mencuci kendaraan dengan selang setiap hari.</p>",
+          "mis": "mis-bisd-relevansi-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Memeriksa pipa air yang bocor.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Mandi memakai gayung dan memeriksa pipa bocor disebut teks sebagai cara ketiga dan cara keempat menghemat air.</p><p>Mencuci kendaraan dengan selang setiap hari justru memakai banyak air dan tidak dianjurkan teks.</p>"
+    },
+    {
+      "id": "bisd-relevansi-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menemukan perbuatan yang menunjukkan kerja sama warga",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-relevansi-listrik",
+      "pertanyaan": "<p>Perbuatan mana saja yang menunjukkan warga saling membantu?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Beberapa bapak membawa gergaji dan tali.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Ibu-ibu menyiapkan teh hangat di pos ronda.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Anak-anak menunggu di dalam rumah.</p>",
+          "mis": "mis-bisd-relevansi-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Membawa gergaji dan tali serta menyiapkan teh hangat adalah dua bentuk bantuan yang berbeda, tetapi keduanya menolong pekerjaan bersama malam itu.</p><p>Anak-anak menunggu di dalam rumah demi keselamatan mereka sendiri, jadi bukan bentuk membantu.</p>"
+    },
+    {
+      "id": "bisd-relevansi-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai kesesuaian contoh sehari-hari dengan peristiwa dalam teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-relevansi-puskesmas",
+      "pertanyaan": "<p>Apa contoh peristiwa sehari-hari yang sejalan dengan kejadian di puskesmas pada cerita tersebut? Tentukan sesuai atau tidak sesuai untuk setiap pernyataan berikut!</p>",
+      "perintah": "Klik pada pilihan Sesuai atau Tidak Sesuai untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "S",
+          "label": "Sesuai"
+        },
+        {
+          "kode": "T",
+          "label": "Tidak Sesuai"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Doni mempersilakan neneknya duduk di kursi ruang tunggu.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Bayu memberi tahu petugas bahwa ada penumpang lansia berdiri.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Sinta menyerobot barisan agar cepat mendapat giliran.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-relevansi-002"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Rita menaruh tasnya di kursi agar tidak diduduki orang lain.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-relevansi-002"
+        }
+      ],
+      "pembahasan": "<p>P1 dan P2 sejalan dengan cerita: keduanya mendahulukan orang yang lebih membutuhkan tempat duduk, seperti yang dilakukan Nia dan pemuda di puskesmas.</p><p>P3 dan P4 berlawanan dengan pesan cerita. Menyerobot barisan mengabaikan giliran orang lain, dan menaruh tas di kursi menghalangi orang yang membutuhkan tempat duduk.</p>"
+    }
+  ]
+}

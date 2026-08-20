@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-kesesuaian-antarunsur",
+    "slug": "bahasa-indonesia-sd-kesesuaian-antarunsur",
+    "title": "Menilai Kesesuaian Antarunsur dan Antarinformasi",
+    "topic_id": "top-bi-sd-evaluasi",
+    "subtopic_id": "st-bi-sd-kesesuaian-antarunsur",
+    "description": "Menilai kesesuaian gambar, warna, dan judul dengan isi teks, memeriksa simpulan terhadap data, serta menemukan kalimat yang tidak padu dalam paragraf.",
+    "summary": "10 soal bergaya TKA untuk menilai apakah unsur dan informasi di dalam teks sudah saling cocok.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menilai fungsi gambar dan warna pada poster",
+      "Memeriksa simpulan terhadap data yang disajikan",
+      "Menemukan kalimat yang tidak padu dalam paragraf",
+      "Menilai kesesuaian judul dengan isi teks"
+    ],
+    "sort_order": 9
+  },
+  "submateri": {
+    "id": "con-bi-sd-kesesuaian-antarunsur",
+    "name": "Kesesuaian gambar, judul, data, dan kalimat dalam satu teks",
+    "description": "Memeriksa apakah setiap unsur teks — gambar, warna, judul, data, dan tiap kalimat — sudah mendukung isi yang sama, lalu menandai bagian yang tidak cocok."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-kesesuaian-poster",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 1, 2, 3, dan 8",
+      "html": "<p><strong>Poster di Depan Kelas</strong></p><p>Sebuah poster baru ditempel di depan kelas enam. Judulnya ditulis besar: “Cuci Tangan Sebelum Makan”. Kata “Cuci Tangan” dicetak dengan warna merah. Kata lainnya berwarna hitam.</p><p>Di bawah judul terdapat enam gambar berurutan. Gambar pertama menunjukkan tangan dibasahi air. Gambar kedua menunjukkan sabun dituang ke telapak. Gambar berikutnya menunjukkan jari-jari digosok bergantian. Gambar terakhir menunjukkan tangan dikeringkan dengan lap bersih.</p><p>Setiap gambar diberi nomor urut. Di bawah nomor ada tulisan pendek. Tulisan itu menjelaskan gerakan pada gambarnya.</p><p>Di sudut kanan bawah ada gambar kuman berwarna hijau. Kuman itu digambar sedang menjauh. Di sebelahnya tertulis “Kuman pergi, tubuh sehat”.</p><p>Bu Guru menjelaskan poster itu pada jam pertama. Anak-anak diminta mencobanya di keran depan kelas. Mereka mempraktikkan langkahnya satu per satu. Bu Guru mengingatkan agar sabun tidak dipakai berlebihan.</p><p>Sejak poster ditempel, antrean di keran menjadi lebih tertib.</p>"
+    },
+    {
+      "id": "psg-bisd-kesesuaian-perpustakaan",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 4, 5, 9, dan 10",
+      "html": "<p><strong>Catatan Kunjungan Perpustakaan</strong></p><p>Perpustakaan SD Melati mencatat jumlah pengunjung setiap hari. Catatan itu ditulis pada papan di dekat pintu. Setiap anak menuliskan namanya sebelum masuk. Petugas menghitung jumlahnya menjelang pulang sekolah.</p><p>Pada hari Senin pengunjungnya 25 anak. Hari Selasa naik menjadi 30 anak. Hari Rabu turun menjadi 18 anak. Hari Kamis kembali naik menjadi 32 anak. Hari Jumat tercatat paling banyak, yaitu 40 anak.</p><p>Hari Rabu menjadi hari dengan pengunjung paling sedikit. Pada hari itu ada latihan pramuka setelah pulang sekolah.</p><p>Hari Jumat perpustakaan mengadakan kegiatan membaca bersama. Kegiatan itu diikuti dua kelas sekaligus.</p><p>Buku cerita paling sering dipinjam. Buku pengetahuan berada di urutan kedua. Buku kamus jarang dipinjam karena hanya boleh dibaca di tempat.</p><p>Petugas perpustakaan menambah rak baru pada akhir bulan. Rak itu diisi buku cerita bergambar. Rak baru diletakkan di dekat jendela. Ruangan pun terasa lebih terang dan nyaman.</p>"
+    },
+    {
+      "id": "psg-bisd-kesesuaian-melati",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 6 dan 7",
+      "html": "<p><strong>Melati di Halaman Sekolah</strong></p><p>Halaman SD Melati ditanami bunga melati. Bunga itu ditanam di sepanjang pagar depan. Warnanya putih dan baunya harum.</p><p>Melati termasuk tanaman yang mudah dirawat. Tanaman ini cukup disiram sekali sehari. Pupuk kandang diberikan sebulan sekali. Ranting yang kering dipangkas agar tunas baru tumbuh. Rumput di sekitarnya juga dicabuti agar tidak berebut air.</p><p>Melati berbunga paling banyak pada musim hujan. Kuncupnya mekar menjelang pagi. Bau harumnya tercium sampai ke ruang guru. Bunga melati juga dipetik untuk mengisi vas di ruang kepala sekolah. Lapangan sekolah akan diperbaiki pada liburan mendatang.</p><p>Anak-anak kelas empat mendapat tugas merawat melati. Mereka menyiram bergiliran setiap pagi. Regu piket mencatat jadwal penyiraman pada buku kecil. Bu Guru memeriksa catatan itu setiap akhir pekan. Regu yang paling rajin mendapat pujian di depan kelas.</p><p>Halaman sekolah pun menjadi lebih asri. Tamu yang datang sering memuji keharumannya.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-kesesuaian-001",
+      "label": "Menilai gambar dan warna hanya sebagai hiasan",
+      "description": "Siswa menganggap gambar, nomor, atau warna pada poster hanya membuat tampilan menarik, tanpa melihat isi yang ingin ditegaskan.",
+      "insight": "Tanyakan apa yang menjadi jelas berkat unsur itu. Warna dan gambar pada teks informasi biasanya dipakai untuk menegaskan isi, bukan sekadar menghias."
+    },
+    {
+      "id": "mis-bisd-kesesuaian-002",
+      "label": "Menerima simpulan yang melebihi datanya",
+      "description": "Siswa menerima simpulan bernada selalu, semua, atau setiap hari, padahal data pada teks tidak menunjukkan pola sekuat itu.",
+      "insight": "Cocokkan simpulan dengan seluruh angka, bukan hanya angka yang paling menonjol. Satu angka yang menyimpang sudah cukup untuk menolak simpulan."
+    },
+    {
+      "id": "mis-bisd-kesesuaian-003",
+      "label": "Menghubungkan dua informasi yang kebetulan berdekatan",
+      "description": "Siswa menganggap dua kalimat saling menjelaskan hanya karena letaknya bersebelahan pada teks.",
+      "insight": "Dua informasi saling mendukung bila yang satu menjelaskan sebab atau bukti bagi yang lain, bukan sekadar berdekatan letaknya."
+    },
+    {
+      "id": "mis-bisd-kesesuaian-004",
+      "label": "Mengira kalimat yang benar pasti padu",
+      "description": "Siswa mempertahankan sebuah kalimat karena isinya benar, padahal kalimat itu membahas hal lain di luar pokok paragrafnya.",
+      "insight": "Kalimat yang benar tetap tidak padu bila tidak membahas pokok yang sedang dibicarakan paragraf tersebut."
+    },
+    {
+      "id": "mis-bisd-kesesuaian-005",
+      "label": "Memilih judul berdasarkan satu kalimat saja",
+      "description": "Siswa memilih judul dari satu kalimat yang menarik perhatian, sehingga judulnya tidak mewakili seluruh isi teks.",
+      "insight": "Judul yang sesuai harus mewakili sebagian besar paragraf. Uji dengan bertanya: apakah setiap paragraf masih cocok dengan judul itu?"
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-kesesuaian-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menilai kesesuaian warna dengan pesan utama teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kesesuaian-poster",
+      "pertanyaan": "<p>Mengapa kata “Cuci Tangan” pada poster dicetak dengan warna merah?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Untuk menonjolkan pesan utama poster itu.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Agar poster terlihat berwarna-warni dan indah.</p>",
+          "mis": "mis-bisd-kesesuaian-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Karena warna merah paling disukai anak-anak.</p>",
+          "mis": "mis-bisd-kesesuaian-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Untuk membedakan judul dari nomor urut gambar.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seluruh isi poster membahas cara mencuci tangan. Kata yang diberi warna berbeda adalah kata yang paling penting, yaitu ajakan mencuci tangan.</p><p>Pilihan B dan C hanya menganggap warna sebagai hiasan, padahal warna itu dipakai untuk menegaskan pesan.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menilai fungsi gambar terhadap isi teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kesesuaian-poster",
+      "pertanyaan": "<p>Apa fungsi enam gambar berurutan pada poster tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Menghias bagian tengah poster agar menarik.</p>",
+          "mis": "mis-bisd-kesesuaian-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Menunjukkan jenis kuman yang ada di tangan.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Menandai jumlah keran yang ada di sekolah.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Menunjukkan urutan langkah mencuci tangan.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Gambar-gambar itu berurutan dari membasahi tangan, menuang sabun, menggosok jari, sampai mengeringkan tangan. Setiap gambar diberi nomor urut dan tulisan penjelas.</p><p>Susunan seperti itu menunjukkan langkah yang harus dikerjakan berurutan, bukan sekadar hiasan.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menilai kesesuaian gambar tambahan dengan isi teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kesesuaian-poster",
+      "pertanyaan": "<p>Apakah gambar kuman yang sedang menjauh sesuai dengan isi poster tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Tidak sesuai, karena kuman tidak terlihat oleh mata.</p>",
+          "mis": "mis-bisd-kesesuaian-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Sesuai, karena menggambarkan hasil mencuci tangan.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sesuai, karena warnanya sama dengan warna sabun.</p>",
+          "mis": "mis-bisd-kesesuaian-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Tidak sesuai, karena poster membahas cara makan.</p>",
+          "mis": "mis-bisd-kesesuaian-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Di sebelah gambar kuman tertulis “Kuman pergi, tubuh sehat”. Gambar kuman yang menjauh menggambarkan akibat baik setelah tangan dicuci, jadi sesuai dengan isi poster.</p><p>Pilihan D keliru karena poster membahas mencuci tangan, bukan tata cara makan.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menilai kesesuaian simpulan dengan data pada teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kesesuaian-perpustakaan",
+      "pertanyaan": "<p>Simpulan yang sesuai dengan catatan tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jumlah pengunjung naik setiap hari sepanjang pekan.</p>",
+          "mis": "mis-bisd-kesesuaian-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Buku kamus menjadi buku yang paling sering dipinjam.</p>",
+          "mis": "mis-bisd-kesesuaian-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pengunjung paling banyak tercatat pada hari Jumat.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Latihan pramuka membuat pengunjung Kamis berkurang.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Angka pengunjung tertinggi adalah 40 anak pada hari Jumat, sesuai kalimat “Hari Jumat tercatat paling banyak”.</p><p>Pilihan A ditolak oleh angka hari Rabu yang justru turun. Pilihan D keliru karena latihan pramuka dihubungkan teks dengan hari Rabu, bukan hari Kamis.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menunjukkan data yang menolak sebuah simpulan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kesesuaian-perpustakaan",
+      "pertanyaan": "<p>Pernyataan “jumlah pengunjung selalu bertambah setiap hari” tidak sesuai dengan catatan tersebut karena ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>pengunjung hari Rabu lebih sedikit daripada hari Selasa</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>pengunjung hari Jumat paling banyak dalam sepekan</p>",
+          "mis": "mis-bisd-kesesuaian-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>buku cerita lebih sering dipinjam daripada kamus</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>perpustakaan menambah rak baru pada akhir bulan</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Untuk menolak kata selalu, cukup ditunjukkan satu hari yang menyimpang. Pengunjung Selasa 30 anak, lalu Rabu turun menjadi 18 anak.</p><p>Pilihan B benar menurut data, tetapi justru tidak menolak pernyataan itu. Pilihan C dan D membahas hal lain.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menemukan kalimat yang tidak padu dalam paragraf",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kesesuaian-melati",
+      "pertanyaan": "<p>Kalimat yang tidak padu pada paragraf ketiga teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kuncupnya mekar menjelang pagi hari.</p>",
+          "mis": "mis-bisd-kesesuaian-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bau harumnya tercium sampai ke ruang guru.</p>",
+          "mis": "mis-bisd-kesesuaian-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bunga melati juga dipetik untuk mengisi vas di ruang kepala sekolah.</p>",
+          "mis": "mis-bisd-kesesuaian-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Lapangan sekolah akan diperbaiki pada liburan mendatang.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paragraf ketiga membahas bunga melati: waktu berbunga, mekarnya kuncup, harumnya, dan pemanfaatannya.</p><p>Kalimat tentang perbaikan lapangan memang mungkin benar, tetapi tidak membahas melati sama sekali. Karena itu kalimat tersebut tidak padu.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menilai kesesuaian judul dengan isi teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kesesuaian-melati",
+      "pertanyaan": "<p>Judul lain yang sesuai untuk teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Cara Membuat Pupuk Kandang</p>",
+          "mis": "mis-bisd-kesesuaian-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Merawat Melati di Sekolah Kami</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kegiatan Regu Piket Kelas Empat</p>",
+          "mis": "mis-bisd-kesesuaian-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rencana Perbaikan Lapangan Sekolah</p>",
+          "mis": "mis-bisd-kesesuaian-005"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Seluruh paragraf membahas melati di halaman sekolah: tempat tanamnya, cara merawatnya, masa berbunganya, dan siapa yang merawat. Judul pada pilihan B mewakili semuanya.</p><p>Pilihan A, C, dan D hanya diambil dari satu kalimat sehingga tidak mewakili isi teks.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Menilai unsur yang membantu pembaca memahami isi teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kesesuaian-poster",
+      "pertanyaan": "<p>Bagian mana saja pada poster yang membantu pembaca mengikuti langkah mencuci tangan?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Warna hijau pada gambar kuman.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Nomor urut pada setiap gambar.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Tulisan pendek di bawah setiap nomor.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Nomor urut menunjukkan langkah mana yang lebih dahulu, sedangkan tulisan pendek menjelaskan gerakan pada tiap gambar. Keduanya membantu pembaca mengikuti langkahnya.</p><p>Warna hijau pada gambar kuman berhubungan dengan akibat mencuci tangan, bukan dengan urutan langkahnya.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menemukan informasi yang saling mendukung dalam teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kesesuaian-perpustakaan",
+      "pertanyaan": "<p>Pasangan informasi mana saja pada teks tersebut yang saling mendukung?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pengunjung Jumat paling banyak dan ada kegiatan membaca bersama.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Buku kamus jarang dipinjam dan rak baru diisi buku cerita.</p>",
+          "mis": "mis-bisd-kesesuaian-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pengunjung Rabu paling sedikit dan ada latihan pramuka.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Kegiatan membaca bersama yang diikuti dua kelas menjelaskan banyaknya pengunjung hari Jumat. Latihan pramuka menjelaskan sedikitnya pengunjung hari Rabu. Keduanya pasangan sebab dan akibat.</p><p>Pada pilihan B, kedua informasi memang ada di dalam teks, tetapi tidak saling menjelaskan.</p>"
+    },
+    {
+      "id": "bisd-kesesuaian-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai kesesuaian pernyataan dengan data pada teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kesesuaian-perpustakaan",
+      "pertanyaan": "<p>Tentukan sesuai atau tidak sesuai untuk setiap pernyataan berikut berdasarkan catatan kunjungan tersebut!</p>",
+      "perintah": "Klik pada pilihan Sesuai atau Tidak Sesuai untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "S",
+          "label": "Sesuai"
+        },
+        {
+          "kode": "T",
+          "label": "Tidak Sesuai"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Pengunjung hari Jumat dua kali lipat pengunjung hari Rabu.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-kesesuaian-002"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Pengunjung hari Kamis lebih banyak daripada hari Senin.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Buku pengetahuan menjadi buku yang paling jarang dipinjam.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-kesesuaian-002"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Selisih pengunjung hari Selasa dan Rabu dua belas anak.</p>",
+          "kategori": "S"
+        }
+      ],
+      "pembahasan": "<p>P1 tidak sesuai: dua kali 18 adalah 36, sedangkan hari Jumat tercatat 40 anak.</p><p>P2 sesuai: Kamis 32 anak, Senin 25 anak.</p><p>P3 tidak sesuai: buku pengetahuan berada di urutan kedua. Yang paling jarang dipinjam adalah buku kamus.</p><p>P4 sesuai: 30 − 18 = 12 anak.</p>"
+    }
+  ]
+}

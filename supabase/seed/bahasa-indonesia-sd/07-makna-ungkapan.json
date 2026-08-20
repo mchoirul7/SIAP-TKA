@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-makna-ungkapan",
+    "slug": "bahasa-indonesia-sd-makna-ungkapan",
+    "title": "Menjelaskan Makna Ungkapan dalam Teks",
+    "topic_id": "top-bi-sd-inferensial",
+    "subtopic_id": "st-bi-sd-makna-ungkapan",
+    "description": "Menjelaskan makna ungkapan seperti ringan tangan, besar kepala, banting tulang, gulung tikar, dan naik daun berdasarkan kalimat tempat ungkapan itu dipakai.",
+    "summary": "10 soal bergaya TKA untuk memahami makna ungkapan dalam cerita, kisah perajin, dan puisi.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menjelaskan makna ungkapan dari konteks kalimat",
+      "Membedakan makna ungkapan dari makna kata demi kata",
+      "Membedakan ungkapan bermakna baik dan bermakna kurang baik",
+      "Menafsirkan ungkapan dalam larik puisi"
+    ],
+    "sort_order": 7
+  },
+  "submateri": {
+    "id": "con-bi-sd-makna-ungkapan",
+    "name": "Makna ungkapan dalam cerita, kisah nyata, dan puisi",
+    "description": "Menentukan makna ungkapan dengan membaca kalimat sebelum dan sesudahnya, bukan dengan mengartikan katanya satu per satu."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-ungkapan-ketuakelas",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, 3, dan 8",
+      "html": "<p><strong>Ketua Kelas Baru</strong></p><p>Pemilihan ketua kelas berlangsung Senin pagi. Dua nama diusulkan teman-teman, yaitu Galih dan Sekar. Keduanya berdiri di depan papan tulis.</p><p>Galih dikenal ringan tangan. Ia sering membantu piket walaupun bukan gilirannya. Sekar pandai berhitung dan rapi menulis. Keduanya sama-sama disukai teman sekelas.</p><p>Pemungutan suara berlangsung tertib. Suara terbanyak akhirnya jatuh kepada Galih. Sekar tersenyum lalu menyalami Galih.</p><p>Setelah terpilih, sikap Galih sempat berubah. Ia mulai memerintah teman-temannya. Ketika ditegur, ia menjawab dengan suara tinggi. “Jangan besar kepala, Lih,” bisik Sekar pelan.</p><p>Suatu pagi kelas kedapatan kotor saat penilaian kebersihan. Bu Guru bertanya siapa yang bertugas hari itu. Anak-anak diam seribu bahasa.</p><p>Galih akhirnya maju ke depan. Ia mengaku lupa mengatur jadwal piket. Bu Guru menasihatinya dengan kepala dingin.</p><p>Sejak hari itu Galih menempel jadwal di papan kelas. Nama petugas ditulis besar-besar agar terbaca. Ia juga ikut menyapu bersama regunya.</p>"
+    },
+    {
+      "id": "psg-bisd-ungkapan-sapu",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 4, 5, dan 9",
+      "html": "<p><strong>Sapu Ijuk Pak Warno</strong></p><p>Pak Warno membuat sapu ijuk di teras rumahnya. Ia mulai bekerja sejak pukul enam pagi. Ijuk diikat, dirapikan, lalu dipasangi gagang bambu. Dalam sehari ia dapat menyelesaikan dua puluh sapu.</p><p>Dahulu Pak Warno berjualan keliling kampung. Ia banting tulang agar anaknya tetap bersekolah. Kakinya menempuh puluhan kilometer setiap pekan.</p><p>Suatu tahun sapu plastik membanjiri pasar. Harganya jauh lebih murah daripada sapu ijuk. Banyak perajin sapu ijuk gulung tikar. Pak Warno pun hampir ikut berhenti.</p><p>Anaknya lalu mengunggah foto sapu itu ke media sosial. Tak disangka, sapu buatan Pak Warno naik daun. Pesanan berdatangan dari luar kota.</p><p>Kini banyak tamu singgah ke rumahnya. Mereka membawa pulang sapu kecil sebagai buah tangan. Pak Warno juga melatih pemuda kampung membuat sapu. Teras rumahnya berubah menjadi tempat belajar bersama.</p><p>“Ijuk itu awet dan ramah lingkungan,” katanya. Ia berharap kerajinan ini tidak punah.</p>"
+    },
+    {
+      "id": "psg-bisd-ungkapan-puisi",
+      "jenis": "puisi",
+      "label": "Puisi untuk soal nomor 6 dan 7",
+      "html": "<p><strong>Tangan Ibu</strong></p><p>Tangan ibu tidak pernah diam<br />Sejak ayam berkokok di ujung kampung<br />Ia membanting tulang tanpa mengeluh<br />Agar dapur kami tetap berasap</p><p>Ketika nilaiku turun<br />Ibu tidak lekas naik darah<br />Ia berbicara dengan kepala dingin<br />Sambil membetulkan letak kerah bajuku</p><p>Bila aku pulang membawa juara<br />Ibu hanya tersenyum tipis<br />“Jangan besar kepala,” katanya<br />“Masih panjang jalan di depanmu”</p><p>Aku menyimpan kata-kata itu<br />Seperti menyimpan buah tangan<br />Dari perjalanan yang belum selesai</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-ungkapan-001",
+      "label": "Mengartikan ungkapan kata demi kata",
+      "description": "Siswa mengartikan ungkapan menurut arti tiap katanya, misalnya besar kepala diartikan berkepala besar atau dapur berasap diartikan dapur penuh asap.",
+      "insight": "Ungkapan mempunyai makna baru yang tidak sama dengan arti kata-katanya. Ujilah pilihanmu dengan memasukkannya ke dalam kalimat aslinya."
+    },
+    {
+      "id": "mis-bisd-ungkapan-002",
+      "label": "Menukar makna ungkapan yang memakai kata sama",
+      "description": "Siswa tertukar antara ungkapan yang memuat kata yang sama, misalnya besar kepala, keras kepala, dan kepala dingin.",
+      "insight": "Satu kata yang sama bisa membentuk ungkapan yang maknanya jauh berbeda. Ingat ungkapannya secara utuh, bukan sepotong."
+    },
+    {
+      "id": "mis-bisd-ungkapan-003",
+      "label": "Menebak makna dari suasana cerita",
+      "description": "Siswa menebak makna ungkapan dari suasana atau perasaan tokoh di sekitarnya, bukan dari kalimat yang memuat ungkapan itu.",
+      "insight": "Bacalah kalimat sebelum dan sesudah ungkapan. Kalimat itulah yang menunjukkan maknanya, bukan suasana ceritanya secara umum."
+    },
+    {
+      "id": "mis-bisd-ungkapan-004",
+      "label": "Menyempitkan makna ungkapan pada satu kejadian",
+      "description": "Siswa menyamakan makna ungkapan dengan satu kejadian tertentu dalam teks, sehingga maknanya menjadi terlalu sempit.",
+      "insight": "Makna ungkapan berlaku umum. Kejadian dalam teks hanya contoh pemakaiannya, bukan artinya."
+    },
+    {
+      "id": "mis-bisd-ungkapan-005",
+      "label": "Menganggap semua ungkapan bermakna baik",
+      "description": "Siswa menganggap setiap ungkapan memuji, padahal sebagian ungkapan justru menyatakan sifat atau keadaan yang kurang baik.",
+      "insight": "Perhatikan bagaimana tokoh lain menanggapinya. Teguran atau bisikan pelan sering menandai ungkapan yang bermakna kurang baik."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-ungkapan-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menjelaskan makna ungkapan dalam teks fiksi",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-ungkapan-ketuakelas",
+      "pertanyaan": "<p>Apa arti ungkapan <strong>ringan tangan</strong> pada cerita tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Mudah marah kepada temannya.</p>",
+          "mis": "mis-bisd-ungkapan-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Malas mengerjakan tugas piket.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Suka menolong orang lain.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Cepat menyelesaikan pekerjaan.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Kalimat sesudahnya menjelaskan: “Ia sering membantu piket walaupun bukan gilirannya.” Perbuatan itu menunjukkan sifat suka menolong.</p><p>Pilihan D mengartikan kata ringan sebagai cepat. Padahal yang ditekankan cerita adalah kesediaannya membantu, bukan kecepatannya.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menjelaskan makna ungkapan yang menyatakan sifat",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-ketuakelas",
+      "pertanyaan": "<p>Apa maksud Sekar ketika berbisik, “Jangan <strong>besar kepala</strong>, Lih”?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jangan menjadi sombong setelah terpilih.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Jangan terlalu banyak berpikir sendiri.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jangan bersikeras mempertahankan pendapat.</p>",
+          "mis": "mis-bisd-ungkapan-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Jangan mudah tersinggung bila ditegur.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Sebelum bisikan itu, Galih mulai memerintah teman-temannya dan menjawab teguran dengan suara tinggi. Sekar mengingatkan agar Galih tidak sombong setelah terpilih.</p><p>Pilihan C adalah arti keras kepala, bukan besar kepala. Keduanya memakai kata kepala, tetapi maknanya berbeda.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menjelaskan makna ungkapan yang menggambarkan keadaan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-ketuakelas",
+      "pertanyaan": "<p>Apa arti <strong>diam seribu bahasa</strong> pada cerita tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Anak-anak tidak mengetahui masalah yang terjadi.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Anak-anak tidak mampu menjawab dalam bahasa lain.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Anak-anak tidak mau mendengarkan penjelasan guru.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Anak-anak sama sekali tidak ada yang berbicara.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Bu Guru bertanya siapa yang bertugas, tetapi tidak seorang pun menjawab. Ungkapan diam seribu bahasa berarti membisu sama sekali.</p><p>Pilihan A menebak dari suasana cerita, padahal Galih ternyata mengetahui persoalannya dan kemudian mengaku.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menjelaskan makna ungkapan tentang kerja keras",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-sapu",
+      "pertanyaan": "<p>Apa arti ungkapan <strong>banting tulang</strong> pada teks tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Bekerja sambil menahan rasa sakit.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bekerja keras tanpa mengenal lelah.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bekerja tanpa menerima upah sedikit pun.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Berjualan keliling dari kampung ke kampung.</p>",
+          "mis": "mis-bisd-ungkapan-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Kalimat sesudahnya menyebut kaki Pak Warno menempuh puluhan kilometer setiap pekan. Ungkapan banting tulang berarti bekerja keras tanpa mengenal lelah.</p><p>Pilihan D hanya menyebut satu contoh perbuatannya di dalam teks, bukan arti ungkapannya.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menjelaskan makna ungkapan tentang keadaan usaha",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-sapu",
+      "pertanyaan": "<p>Apa arti ungkapan <strong>gulung tikar</strong> pada teks tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pindah berjualan ke kota lain.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Berganti barang dagangan.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Berhenti berusaha karena merugi.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Membereskan dagangan setiap sore.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Ungkapan itu muncul setelah sapu plastik membanjiri pasar. Kalimat berikutnya menyebut Pak Warno hampir ikut berhenti. Jadi gulung tikar berarti berhenti berusaha karena merugi.</p><p>Pilihan D mengartikan katanya satu per satu, yaitu menggulung tikar dagangan.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menafsirkan makna ungkapan dalam larik puisi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-puisi",
+      "pertanyaan": "<p>Apa makna larik “Agar <strong>dapur kami tetap berasap</strong>”?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Keluarganya tetap dapat makan setiap hari.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rumahnya selalu ramai dikunjungi tamu.</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ibunya memasak memakai kayu bakar.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Dapurnya dipenuhi asap setiap pagi.</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Larik itu menjelaskan tujuan ibu bekerja keras sejak pagi. Dapur yang berasap menandakan ada yang dimasak, artinya kebutuhan makan keluarga tercukupi.</p><p>Pilihan C dan D mengartikan asap secara harfiah sehingga hubungan dengan kerja keras ibu menjadi hilang.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar makna ungkapan dari sikap tokoh dalam puisi",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-ungkapan-puisi",
+      "pertanyaan": "<p>Larik “Ibu tidak lekas <strong>naik darah</strong>” bermakna ibu tidak ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>cepat memuji anaknya</p>",
+          "mis": "mis-bisd-ungkapan-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>mudah memercayai orang</p>",
+          "mis": "mis-bisd-ungkapan-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>lekas menitikkan air mata</p>",
+          "mis": "mis-bisd-ungkapan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>cepat menjadi marah</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Larik itu muncul saat nilai anaknya turun. Larik berikutnya menyebut ibu berbicara dengan kepala dingin, yaitu dengan tenang. Berarti naik darah bermakna menjadi marah.</p><p>Bila ibu tidak lekas naik darah, ia tidak cepat marah walaupun kecewa.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Memilah ungkapan yang menyatakan sifat terpuji",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-ungkapan-ketuakelas",
+      "pertanyaan": "<p>Ungkapan mana saja pada cerita tersebut yang menyatakan sifat terpuji?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Ringan tangan.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kepala dingin.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Besar kepala.</p>",
+          "mis": "mis-bisd-ungkapan-005"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Ringan tangan berarti suka menolong dan kepala dingin berarti tenang saat menghadapi masalah. Keduanya sifat terpuji.</p><p>Besar kepala berarti sombong. Ungkapan itu dipakai Sekar untuk menegur Galih, jadi maknanya justru kurang baik.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Memilah ungkapan yang menggambarkan keadaan usaha",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-ungkapan-sapu",
+      "pertanyaan": "<p>Ungkapan mana saja pada teks tersebut yang menggambarkan keadaan sebuah usaha?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Buah tangan.</p>",
+          "mis": "mis-bisd-ungkapan-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Gulung tikar.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Naik daun.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Gulung tikar berarti usaha berhenti karena merugi, sedangkan naik daun berarti menjadi terkenal dan banyak dicari. Keduanya menggambarkan keadaan usaha.</p><p>Buah tangan berarti oleh-oleh, yaitu barang yang dibawa pulang tamu, bukan keadaan usaha Pak Warno.</p>"
+    },
+    {
+      "id": "bisd-ungkapan-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai ketepatan makna ungkapan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Setelah membaca ketiga teks di atas, Nadia menuliskan arti beberapa ungkapan di buku catatannya.</p>",
+      "pertanyaan": "<p>Tentukan tepat atau tidak tepat untuk setiap arti yang ditulis Nadia!</p>",
+      "perintah": "Klik pada pilihan Tepat atau Tidak Tepat untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "T",
+          "label": "Tepat"
+        },
+        {
+          "kode": "X",
+          "label": "Tidak Tepat"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Ringan tangan berarti suka menolong.</p>",
+          "kategori": "T"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Buah tangan berarti hasil pemikiran sendiri.</p>",
+          "kategori": "X",
+          "mis": "mis-bisd-ungkapan-002"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Naik daun berarti mulai dikenal banyak orang.</p>",
+          "kategori": "T"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Kepala dingin berarti mudah tersinggung.</p>",
+          "kategori": "X",
+          "mis": "mis-bisd-ungkapan-002"
+        }
+      ],
+      "pembahasan": "<p>P1 dan P3 sudah tepat sesuai pemakaiannya pada teks.</p><p>P2 tidak tepat: buah tangan berarti oleh-oleh. Yang berarti hasil pemikiran adalah buah pikiran.</p><p>P4 tidak tepat: kepala dingin berarti tenang dan sabar. Bu Guru menasihati Galih dengan tenang, bukan dengan tersinggung.</p>"
+    }
+  ]
+}

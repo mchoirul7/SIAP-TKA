@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-objek-kosakata",
+    "slug": "bahasa-indonesia-sd-objek-berdasarkan-kosakata",
+    "title": "Menebak Objek dari Kosakata dalam Teks",
+    "topic_id": "top-bi-sd-tekstual",
+    "subtopic_id": "st-bi-sd-objek-kosakata",
+    "description": "Mengenali benda yang dimaksud penulis dari kata-kata yang menggambarkan bentuk, bahan, bagian, dan kegunaannya, baik pada teks fiksi, teks informasi, maupun puisi.",
+    "summary": "10 soal bergaya TKA untuk mengenali objek dari kosakata yang dipakai dalam cerita, teks informasi, dan puisi.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Mengenali benda dari gambaran bentuk dan bahannya",
+      "Mengenali benda dari kegunaannya dalam teks",
+      "Membedakan dua benda yang digambarkan pada teks yang sama",
+      "Menemukan larik puisi yang menunjuk pada benda tertentu"
+    ],
+    "sort_order": 2
+  },
+  "submateri": {
+    "id": "con-bi-sd-objek-kosakata",
+    "name": "Objek berdasarkan kosakata pada teks fiksi, teks informasi, dan puisi",
+    "description": "Menentukan benda yang dimaksud penulis dengan mengumpulkan kata-kata penciri bentuk, bahan, bagian, dan kegunaan yang tersebar di dalam teks."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-objek-gudang",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, 3, dan 8",
+      "html": "<p><strong>Sore di Gudang Nenek</strong></p><p>Liburan kemarin aku menginap di rumah Nenek. Sore itu Nenek mengajakku ke gudang belakang. Pintunya berderit ketika dibuka.</p><p>Di sudut gudang ada benda kayu memanjang. Bagian tengahnya berlubang seperti perahu kecil. Di sampingnya tergeletak batang kayu sebesar lengan. “Dulu padi ditumbuk di situ,” kata Nenek.</p><p>Aku juga melihat bambu panjang tergantung di dinding. Bambu itu berlubang memanjang di satu sisi. Nenek memukulnya pelan dengan sepotong kayu. Bunyinya nyaring sampai ke halaman. Dulu bunyi itu memanggil warga berkumpul.</p><p>Di rak bawah ada wadah tembaga besar. Bentuknya seperti kerucut terbalik. Nenek biasa memakainya untuk mengukus nasi. Uap panas keluar dari mulutnya yang lebar.</p><p>Yang paling kusuka adalah lampu kecil berbahan kaca. Sumbunya menjulur dari wadah minyak. Nenek menyalakannya saat listrik padam. Nyalanya bergoyang bila ada angin.</p><p>“Barang lama boleh usang,” kata Nenek. “Namun ceritanya tetap hidup.” Aku mengangguk sambil memegang lampu itu.</p>"
+    },
+    {
+      "id": "psg-bisd-objek-pasar",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 4 dan 5",
+      "html": "<p><strong>Alat-Alat di Pasar Pagi</strong></p><p>Pasar pagi selalu ramai sebelum matahari tinggi. Para pedagang memakai alat yang berbeda-beda.</p><p>Pedagang beras memakai alat takar dari kaleng. Kaleng itu diisi beras sampai rata bibirnya. Satu kaleng biasa disebut satu liter.</p><p>Pedagang sayur memakai alat berlengan dua. Di lengan kiri diletakkan barang dagangan. Di lengan kanan diletakkan bandul besi. Lengan akan mendatar bila beratnya sama.</p><p>Pedagang ikan memakai wadah dari anyaman bambu. Wadah itu lebar, bundar, dan tidak dalam. Ikan disusun rapi agar terlihat semua.</p><p>Pedagang buah memakai kantong jala. Kantong itu digantung pada kait besi. Angka pada papan bulat menunjukkan berat buah.</p><p>Pedagang bumbu memakai lumpang kecil dari batu. Bumbu ditumbuk halus di dalamnya. Penumbuknya pendek dan terasa berat di tangan.</p><p>Setiap alat mempunyai kegunaan sendiri. Pembeli merasa yakin bila alat dipakai dengan jujur. Petugas pasar memeriksa alat itu setiap bulan. Pasar pagi biasanya tutup menjelang siang.</p>"
+    },
+    {
+      "id": "psg-bisd-objek-puisi",
+      "jenis": "puisi",
+      "label": "Puisi untuk soal nomor 6, 7, dan 9",
+      "html": "<p><strong>Sahabat Musim Hujan</strong></p><p>Kau terlipat diam di sudut lemari<br />Menunggu langit berubah kelabu<br />Rangkamu ramping dari besi<br />Kainmu terbentang seperti sayap kelelawar</p><p>Bila titik air mulai berjatuhan<br />Aku menggenggam gagangmu erat<br />Kau berdiri di atas kepalaku<br />Menahan yang turun dari langit</p><p>Jalan berubah menjadi cermin panjang<br />Sepatuku basah di tepiannya<br />Namun bahuku tetap kering<br />Karena kau setia di atasku</p><p>Ketika hujan reda<br />Kau kukibaskan pelan-pelan<br />Butir-butir air berhamburan<br />Lalu kau terlipat lagi, menunggu</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-objek-001",
+      "label": "Menebak benda hanya dari satu kata",
+      "description": "Siswa langsung menyimpulkan nama benda begitu menemukan satu kata yang cocok, misalnya kata menumbuk, tanpa memeriksa ciri bentuk dan bahannya.",
+      "insight": "Kumpulkan dulu seluruh cirinya: bahan, bentuk, bagian, dan kegunaan. Nama benda yang tepat harus cocok dengan semua ciri itu, bukan hanya satu."
+    },
+    {
+      "id": "mis-bisd-objek-002",
+      "label": "Tertukar dengan benda lain pada teks yang sama",
+      "description": "Siswa memilih nama benda lain yang juga digambarkan pada teks itu, misalnya menyebut dandang untuk gambaran tampah.",
+      "insight": "Bila satu teks menggambarkan beberapa benda, tandai tiap gambaran pada paragrafnya. Cocokkan pertanyaan dengan paragraf yang tepat."
+    },
+    {
+      "id": "mis-bisd-objek-003",
+      "label": "Menebak dari kebiasaan sendiri, bukan dari teks",
+      "description": "Siswa menjawab dengan benda yang biasa ia pakai di rumah, padahal ciri pada teks menunjuk benda lain.",
+      "insight": "Pengalaman sendiri boleh membantu, tetapi jawabannya harus punya bukti kata di dalam teks."
+    },
+    {
+      "id": "mis-bisd-objek-004",
+      "label": "Mengira kata tentang keadaan sekitar sebagai ciri benda",
+      "description": "Siswa memilih kata yang menggambarkan cuaca atau suasana, misalnya langit kelabu dan titik air, sebagai ciri benda yang ditanyakan.",
+      "insight": "Pisahkan kata yang menggambarkan bendanya sendiri dari kata yang menggambarkan keadaan di sekitarnya."
+    },
+    {
+      "id": "mis-bisd-objek-005",
+      "label": "Mengandalkan judul dan kesan umum teks",
+      "description": "Siswa menjawab berdasarkan judul atau kesan keseluruhan teks, misalnya menjawab hujan karena judulnya menyebut musim hujan.",
+      "insight": "Judul memberi arah, tetapi jawabannya ditentukan larik atau kalimat yang menyebutkan ciri bendanya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-objek-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi objek dari gambaran bentuk dan kegunaannya",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-objek-gudang",
+      "pertanyaan": "<p>Benda kayu memanjang berlubang beserta batang kayu di sampingnya pada cerita tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>cobek dan ulekan</p>",
+          "mis": "mis-bisd-objek-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>lesung dan alu</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>dandang dan tutupnya</p>",
+          "mis": "mis-bisd-objek-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>kentongan dan pemukulnya</p>",
+          "mis": "mis-bisd-objek-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Cirinya: terbuat dari kayu, memanjang, bagian tengahnya berlubang seperti perahu kecil, dan dipakai menumbuk padi. Benda itu bernama lesung, sedangkan batang kayu penumbuknya bernama alu.</p><p>Cobek dan ulekan terbuat dari batu dan berbentuk bundar, jadi tidak cocok dengan ciri kayu memanjang.</p>"
+    },
+    {
+      "id": "bisd-objek-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi objek dari bahan, bentuk, dan bunyinya",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-gudang",
+      "pertanyaan": "<p>Bambu berlubang yang tergantung di dinding gudang itu adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>seruling</p>",
+          "mis": "mis-bisd-objek-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>angklung</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>kentongan</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>bedug</p>",
+          "mis": "mis-bisd-objek-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bambu itu berlubang memanjang di satu sisi, dipukul dengan kayu, dan bunyinya dipakai memanggil warga berkumpul. Benda dengan ciri seperti itu bernama kentongan.</p><p>Seruling ditiup, angklung digoyang, dan bedug terbuat dari kayu besar berlapis kulit. Ketiganya tidak cocok dengan ciri pada teks.</p>"
+    },
+    {
+      "id": "bisd-objek-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi objek dari bahan dan kegunaannya",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-gudang",
+      "pertanyaan": "<p>Wadah tembaga berbentuk kerucut terbalik pada cerita tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>kuali</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>tempayan</p>",
+          "mis": "mis-bisd-objek-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>cerek</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>dandang</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Wadah itu terbuat dari tembaga, berbentuk kerucut terbalik, dan dipakai mengukus nasi sehingga uap panas keluar dari mulutnya. Benda itu bernama dandang.</p><p>Kuali dipakai menggoreng, tempayan menyimpan air, dan cerek merebus air. Ketiganya bukan alat mengukus.</p>"
+    },
+    {
+      "id": "bisd-objek-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi objek dari cara kerjanya pada teks informasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-pasar",
+      "pertanyaan": "<p>Alat yang dipakai pedagang sayur pada teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>neraca dengan bandul besi sebagai anak timbangan</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>timbangan gantung yang berpapan angka</p>",
+          "mis": "mis-bisd-objek-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>takaran kaleng seukuran satu liter</p>",
+          "mis": "mis-bisd-objek-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>wadah anyaman bambu yang lebar dan bundar</p>",
+          "mis": "mis-bisd-objek-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Alat pedagang sayur digambarkan berlengan dua: barang di lengan kiri, bandul besi di lengan kanan, dan lengan mendatar bila beratnya sama. Alat itu adalah neraca dengan anak timbangan.</p><p>Pilihan B dipakai pedagang buah, pilihan C dipakai pedagang beras, dan pilihan D dipakai pedagang ikan.</p>"
+    },
+    {
+      "id": "bisd-objek-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menyebutkan nama objek yang digambarkan teks informasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-pasar",
+      "pertanyaan": "<p>Wadah yang dipakai pedagang ikan pada teks tersebut biasa disebut ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>keranjang tinggi bertutup rapat</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>tampah lebar dari anyaman bambu</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>karung besar dari kain plastik</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>kotak kayu berisi pecahan es</p>",
+          "mis": "mis-bisd-objek-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Teks menyebut wadah itu terbuat dari anyaman bambu, lebar, bundar, dan tidak dalam. Wadah dengan ciri seperti itu bernama tampah.</p><p>Pilihan A, C, dan D adalah wadah yang memang sering dipakai pedagang, tetapi cirinya tidak disebut di dalam teks.</p>"
+    },
+    {
+      "id": "bisd-objek-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi objek yang dibicarakan dalam puisi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-puisi",
+      "pertanyaan": "<p>Benda apa yang dibicarakan pada puisi tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Jas hujan.</p>",
+          "mis": "mis-bisd-objek-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Hujan.</p>",
+          "mis": "mis-bisd-objek-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Payung.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Topi.</p>",
+          "mis": "mis-bisd-objek-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Puisi menyebut benda itu terlipat di sudut lemari, berangka besi ramping, berkain lebar, bergagang, dan berdiri di atas kepala saat hujan. Ciri-ciri itu menunjuk pada payung.</p><p>Jas hujan dipakai di badan dan tidak bergagang. Hujan adalah keadaan yang menyebabkan benda itu dipakai, bukan bendanya.</p>"
+    },
+    {
+      "id": "bisd-objek-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar larik yang menjadi penciri utama objek",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-objek-puisi",
+      "pertanyaan": "<p>Pasangan larik mana yang paling membantu pembaca mengenali benda pada puisi tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>“Menunggu langit berubah kelabu” dan “Bila titik air mulai berjatuhan”.</p>",
+          "mis": "mis-bisd-objek-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>“Jalan berubah menjadi cermin panjang” dan “Sepatuku basah di tepiannya”.</p>",
+          "mis": "mis-bisd-objek-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>“Namun bahuku tetap kering” dan “Ketika hujan reda”.</p>",
+          "mis": "mis-bisd-objek-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>“Kainmu terbentang seperti sayap kelelawar” dan “Aku menggenggam gagangmu erat”.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Kedua larik pada pilihan D menyebut bagian bendanya sendiri, yaitu kain yang terbentang dan gagang yang digenggam. Bagian itulah penciri payung.</p><p>Pilihan A dan B menggambarkan keadaan cuaca dan jalan, sedangkan pilihan C menggambarkan akibat memakainya. Ketiganya tidak menyebut bagian bendanya.</p>"
+    },
+    {
+      "id": "bisd-objek-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Mengelompokkan objek menurut kegunaannya dalam teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-objek-gudang",
+      "pertanyaan": "<p>Benda mana saja di gudang Nenek yang dipakai untuk mengolah atau memasak makanan?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benda kayu memanjang tempat padi ditumbuk.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bambu panjang yang tergantung di dinding.</p>",
+          "mis": "mis-bisd-objek-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Wadah tembaga berbentuk kerucut terbalik.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Lesung dipakai menumbuk padi menjadi beras dan dandang dipakai mengukus nasi. Keduanya berhubungan dengan mengolah makanan.</p><p>Bambu panjang di dinding adalah kentongan. Bunyinya dipakai memanggil warga, bukan untuk mengolah makanan.</p>"
+    },
+    {
+      "id": "bisd-objek-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menalar larik yang menunjukkan keadaan objek",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-objek-puisi",
+      "pertanyaan": "<p>Larik mana saja yang menunjukkan benda itu sedang tidak dipakai?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>“Kau terlipat diam di sudut lemari”.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>“Lalu kau terlipat lagi, menunggu”.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>“Kau berdiri di atas kepalaku”.</p>",
+          "mis": "mis-bisd-objek-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Kata terlipat dan menunggu menunjukkan benda itu tersimpan dan belum dipakai. Larik A menggambarkan keadaan sebelum hujan, larik C sesudah hujan reda.</p><p>Larik B justru menggambarkan saat benda itu sedang dipakai di atas kepala.</p>"
+    },
+    {
+      "id": "bisd-objek-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai kecocokan nama benda dengan gambarannya dalam teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Beni menulis catatan tentang benda-benda pada teks “Sore di Gudang Nenek” dan “Alat-Alat di Pasar Pagi”. Ia memasangkan nama benda dengan gambarannya.</p>",
+      "pertanyaan": "<p>Tentukan sesuai atau tidak sesuai untuk setiap pasangan nama benda dan gambarannya berikut!</p>",
+      "perintah": "Klik pada pilihan Sesuai atau Tidak Sesuai untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "S",
+          "label": "Sesuai"
+        },
+        {
+          "kode": "T",
+          "label": "Tidak Sesuai"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Alu — batang kayu sebesar lengan untuk menumbuk padi.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Kentongan — wadah tembaga berbentuk kerucut terbalik.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-objek-002"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Pelita — alat takar beras seukuran satu liter.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-objek-002"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Tampah — wadah anyaman bambu yang lebar, bundar, dan tidak dalam.</p>",
+          "kategori": "S"
+        }
+      ],
+      "pembahasan": "<p>P1 sesuai: batang kayu sebesar lengan di samping lesung memang alu.</p><p>P2 tidak sesuai: wadah tembaga berbentuk kerucut terbalik adalah dandang. Kentongan terbuat dari bambu.</p><p>P3 tidak sesuai: pelita adalah lampu berbahan bakar minyak. Alat takar beras seukuran satu liter adalah takaran kaleng.</p><p>P4 sesuai: wadah pedagang ikan yang lebar dan tidak dalam adalah tampah.</p>"
+    }
+  ]
+}

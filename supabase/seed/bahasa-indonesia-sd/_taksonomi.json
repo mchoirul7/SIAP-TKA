@@ -1,0 +1,146 @@
+{
+  "mapel": {
+    "id": "sub-bahasa-indonesia-sd",
+    "slug": "bahasa-indonesia-sd",
+    "name": "Bahasa Indonesia SD",
+    "short_name": "Bahasa Indonesia",
+    "level": "SD",
+    "description": "Latihan dan tryout TKA Bahasa Indonesia tingkat SD sesuai matriks asesmen Pusmendik: Pemahaman Tekstual, Pemahaman Inferensial, serta Evaluasi dan Apresiasi. Seluruhnya menguji keterampilan membaca teks informasi dan teks fiksi.",
+    "sort_order": 4
+  },
+
+  "seri": {
+    "id": "series-latihan-tka-bahasa-indonesia-sd",
+    "slug": "latihan-tka-bahasa-indonesia-sd",
+    "title": "Latihan TKA Bahasa Indonesia SD",
+    "description": "Seri latihan diagnostik TKA Bahasa Indonesia SD berdasarkan matriks asesmen Pusmendik. Satu paket untuk satu subkompetensi.",
+    "sort_order": 5
+  },
+
+  "produk": {
+    "id": "prd-latihan-tka-bahasa-indonesia-sd",
+    "slug": "latihan-tka-bahasa-indonesia-sd",
+    "title": "Latihan TKA Bahasa Indonesia SD",
+    "description": "Membuka seluruh paket latihan Bahasa Indonesia SD dalam seri Latihan TKA Bahasa Indonesia SD.",
+    "sort_order": 5
+  },
+
+  "_catatan_capaian": "Capaian mengikuti kolom Kompetensi pada matriks TKA SD dan materi mengikuti kolom Subkompetensi. Satu subkompetensi = satu materi = satu paket latihan. Submateri berisi fokus latihan paketnya, dideklarasikan di dalam berkas paket masing-masing.",
+
+  "capaian": [
+    {
+      "id": "top-bi-sd-tekstual",
+      "slug": "pemahaman-tekstual",
+      "name": "Pemahaman Tekstual",
+      "description": "Memahami informasi yang dikemukakan secara eksplisit, mengelompokkan, menyusun ulang, dan menyajikan kembali informasi dari teks.",
+      "sort_order": 0
+    },
+    {
+      "id": "top-bi-sd-inferensial",
+      "slug": "pemahaman-inferensial",
+      "name": "Pemahaman Inferensial",
+      "description": "Menarik kesimpulan berdasarkan informasi yang tersirat dalam teks.",
+      "sort_order": 1
+    },
+    {
+      "id": "top-bi-sd-evaluasi",
+      "slug": "evaluasi-dan-apresiasi",
+      "name": "Evaluasi dan Apresiasi",
+      "description": "Menilai ide dalam teks serta menanggapinya secara emosional dan estetis dengan mempertimbangkan dampaknya terhadap perasaan, imajinasi, dan penggunaan bahasa oleh penulis.",
+      "sort_order": 2
+    }
+  ],
+
+  "materi": [
+    {
+      "id": "st-bi-sd-kosakata-umum-khusus",
+      "topic_id": "top-bi-sd-tekstual",
+      "slug": "kosakata-umum-dan-khusus",
+      "name": "Kosakata Umum dan Khusus",
+      "description": "Mengidentifikasi penggunaan kosakata umum dan khusus dalam berbagai bidang.",
+      "sort_order": 0
+    },
+    {
+      "id": "st-bi-sd-objek-kosakata",
+      "topic_id": "top-bi-sd-tekstual",
+      "slug": "objek-berdasarkan-kosakata",
+      "name": "Objek Berdasarkan Kosakata",
+      "description": "Mengidentifikasi objek berdasarkan kosakata yang digunakan dalam teks fiksi atau nonfiksi.",
+      "sort_order": 1
+    },
+    {
+      "id": "st-bi-sd-ikhtisar-bagan",
+      "topic_id": "top-bi-sd-tekstual",
+      "slug": "ikhtisar-dan-bagan",
+      "name": "Ikhtisar dan Bagan",
+      "description": "Menyusun kembali informasi dari teks dalam bentuk ikhtisar atau bagan.",
+      "sort_order": 2
+    },
+    {
+      "id": "st-bi-sd-informasi-tersurat",
+      "topic_id": "top-bi-sd-tekstual",
+      "slug": "informasi-tersurat",
+      "name": "Informasi Tersurat",
+      "description": "Mengidentifikasi informasi tersurat dalam teks.",
+      "sort_order": 3
+    },
+    {
+      "id": "st-bi-sd-ide-pokok",
+      "topic_id": "top-bi-sd-inferensial",
+      "slug": "ide-pokok-amanat-dan-nilai",
+      "name": "Ide Pokok, Amanat, dan Nilai",
+      "description": "Menyimpulkan ide pokok, gagasan pendukung, amanat, tokoh, peristiwa, dan/atau nilai-nilai dalam teks.",
+      "sort_order": 4
+    },
+    {
+      "id": "st-bi-sd-perubahan-unsur",
+      "topic_id": "top-bi-sd-inferensial",
+      "slug": "perubahan-objek-karakter-dan-latar",
+      "name": "Perubahan Objek, Karakter, dan Latar",
+      "description": "Menyimpulkan perubahan sederhana pada objek, karakter, dan/atau latar dalam teks fiksi atau nonfiksi.",
+      "sort_order": 5
+    },
+    {
+      "id": "st-bi-sd-makna-ungkapan",
+      "topic_id": "top-bi-sd-inferensial",
+      "slug": "makna-ungkapan",
+      "name": "Makna Ungkapan",
+      "description": "Menjelaskan makna ungkapan yang digunakan dalam teks.",
+      "sort_order": 6
+    },
+    {
+      "id": "st-bi-sd-relevansi-peristiwa",
+      "topic_id": "top-bi-sd-evaluasi",
+      "slug": "relevansi-peristiwa",
+      "name": "Relevansi Peristiwa dengan Kehidupan Sehari-hari",
+      "description": "Menilai relevansi peristiwa dalam teks dengan kehidupan sehari-hari berdasarkan pengalaman atau pengetahuan pribadi.",
+      "sort_order": 7
+    },
+    {
+      "id": "st-bi-sd-kesesuaian-antarunsur",
+      "topic_id": "top-bi-sd-evaluasi",
+      "slug": "kesesuaian-antarunsur",
+      "name": "Kesesuaian Antarunsur dan Antarinformasi",
+      "description": "Menilai kesesuaian antarunsur dan/atau antarinformasi dalam teks.",
+      "sort_order": 8
+    },
+    {
+      "id": "st-bi-sd-respons-emosional",
+      "topic_id": "top-bi-sd-evaluasi",
+      "slug": "respons-emosional",
+      "name": "Respons Emosional terhadap Teks Fiksi",
+      "description": "Menyimpulkan respons emosional terhadap unsur teks fiksi.",
+      "sort_order": 9
+    }
+  ],
+
+  "batasan": {
+    "jenis_teks": "Teks informasi (fakta sederhana berbagai bidang, berskala lokal dan nasional) dan teks fiksi (fantasi atau faktual seperti sejarah dan biografi).",
+    "ciri_teks_fiksi": "Latar konkret, tokoh berkarakter datar, konflik tunggal dengan penyelesaian tertutup, alur maju, sudut pandang orang pertama atau ketiga yang sederhana.",
+    "kosakata": "Kata dasar dan kata berimbuhan, kata konkret, dominan makna denotatif; makna konotatif hanya pada konteks terbatas.",
+    "kalimat": "3–7 kata per kalimat, pola dasar SPOK, struktur bahasa tulis dengan bahasa lisan terbatas.",
+    "wacana": "Kohesi berupa pengacuan, konjungsi antarparagraf penambahan atau penjelasan; panjang teks 150–200 kata, kecuali puisi.",
+    "bentuk_soal": "Pilihan Ganda 4 opsi, PGK MCMA (3 opsi, jawaban benar lebih dari satu), dan PGK Kategori (3 pernyataan, 2 kategori). Nama kategori tidak selalu Benar/Salah.",
+    "isi": "Tidak memuat kekerasan, tokoh nyata yang dinilai negatif, iklan produk, maupun isu yang belum sesuai usia SD."
+  }
+}

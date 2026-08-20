@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-informasi-tersurat",
+    "slug": "bahasa-indonesia-sd-informasi-tersurat",
+    "title": "Menemukan Informasi Tersurat dalam Teks",
+    "topic_id": "top-bi-sd-tekstual",
+    "subtopic_id": "st-bi-sd-informasi-tersurat",
+    "description": "Menemukan siapa, kapan, di mana, berapa, dan apa yang tertulis langsung di dalam fabel, teks sejarah sederhana, dan cerita kegiatan sehari-hari.",
+    "summary": "10 soal bergaya TKA untuk menemukan informasi yang tertulis jelas pada teks fiksi dan teks informasi.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menemukan pelaku dan perbuatannya di dalam teks",
+      "Menemukan waktu, tempat, dan angka yang disebut teks",
+      "Membedakan isi teks dari pengetahuan sendiri",
+      "Memeriksa pernyataan yang mengubah sedikit isi teks"
+    ],
+    "sort_order": 4
+  },
+  "submateri": {
+    "id": "con-bi-sd-informasi-tersurat",
+    "name": "Informasi tersurat pada fabel, teks sejarah sederhana, dan cerita kegiatan",
+    "description": "Menemukan kembali informasi yang tertulis apa adanya di dalam teks serta memeriksa pernyataan yang tampak mirip tetapi mengubah isinya."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-tersurat-semut",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, dan 8",
+      "html": "<p><strong>Semut dan Burung Pipit</strong></p><p>Di tepi sungai kecil hiduplah seekor semut. Namanya Simut. Ia rajin mencari remah makanan setiap pagi.</p><p>Suatu hari Simut berjalan di batang kayu. Angin bertiup kencang dan menggoyang batang itu. Simut terjatuh ke dalam sungai. Ia berusaha berpegang pada sehelai daun kecil.</p><p>Seekor burung pipit melihat kejadian itu dari dahan. Burung itu bernama Pipi. Ia segera memetik daun yang lebar. Daun itu dijatuhkan tepat di dekat Simut. Simut naik ke atas daun lalu terbawa ke tepi.</p><p>Beberapa hari kemudian, Pipi hinggap di semak. Seorang pemburu mengendap-endap membawa jaring. Simut melihat pemburu itu dari balik akar. Ia berlari cepat lalu menggigit kaki pemburu.</p><p>Pemburu itu terkejut dan berteriak keras. Pipi mendengar suara itu lalu terbang menjauh. Pemburu itu pergi sambil menahan sakit di kakinya. Malam harinya keduanya bertemu di dahan rendah.</p><p>“Terima kasih, Simut,” ujar Pipi. “Dulu kau lebih dahulu menolongku,” jawab Simut.</p>"
+    },
+    {
+      "id": "psg-bisd-tersurat-kereta",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 3, 4, 5, dan 10",
+      "html": "<p><strong>Kereta Api Pertama di Indonesia</strong></p><p>Kereta api sudah lama ada di Indonesia. Jalur pertamanya dibangun di Jawa Tengah. Pembangunan itu dimulai pada tahun 1864.</p><p>Pencangkulan pertama dilakukan di Desa Kemijen, Semarang. Pada masa itu wilayah kita masih dijajah Belanda. Pekerjaannya ditangani sebuah perusahaan kereta swasta.</p><p>Jalur pertama menghubungkan Semarang dan Tanggung. Panjangnya kira-kira dua puluh enam kilometer. Jalur itu mulai dipakai pada 10 Agustus 1867.</p><p>Kereta pertama menarik gerbong barang dan gerbong penumpang. Hasil bumi berupa gula dan kopi diangkut ke pelabuhan. Perjalanan menjadi lebih cepat daripada memakai pedati. Pedagang pun tidak perlu menunggu berhari-hari. Barang dagangan sampai di pelabuhan dalam keadaan lebih baik.</p><p>Setelah itu, jalur kereta dibangun di daerah lain. Jalur muncul di Jawa Timur, Jawa Barat, dan Sumatra.</p><p>Sekarang kereta api mengangkut jutaan penumpang setiap tahun. Stasiun tua di Semarang masih berdiri sampai kini. Bangunan itu menjadi tanda awal perjalanan kereta api Indonesia.</p>"
+    },
+    {
+      "id": "psg-bisd-tersurat-layangan",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 6, 7, dan 9",
+      "html": "<p><strong>Lomba Layang-Layang di Lapangan Kampung</strong></p><p>Minggu pagi lapangan kampung penuh anak-anak. Hari itu ada lomba layang-layang. Lomba tersebut diadakan setiap bulan Agustus.</p><p>Panitia membagi peserta menjadi dua kelompok. Kelompok pertama untuk kelas satu sampai kelas tiga. Kelompok kedua untuk kelas empat sampai kelas enam.</p><p>Rangga membawa layang-layang berwarna merah. Layang-layang itu ia buat bersama kakaknya. Kerangkanya dari bambu tipis dan kertas minyak. Ekornya dibuat panjang agar layang-layang tidak oleng. Rangga berlatih menerbangkannya sejak dua pekan lalu.</p><p>Pukul delapan pagi lomba dimulai. Peluit ditiup Pak Lurah sebagai tanda. Sepuluh layang-layang naik hampir bersamaan.</p><p>Angin bertiup dari arah timur. Layang-layang Rangga naik paling tinggi. Namun, benangnya tersangkut dahan pohon. Rangga menarik benang itu perlahan agar tidak putus.</p><p>Juara pertama diraih Bima dari kelas lima. Rangga mendapat juara kedua. Hadiahnya berupa buku tulis dan tas sekolah.</p><p>Pukul sepuluh acara selesai. Anak-anak pulang sambil menenteng layang-layang.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-tersurat-001",
+      "label": "Menjawab dari pengetahuan sendiri, bukan dari teks",
+      "description": "Siswa memilih jawaban yang masuk akal menurut pengalamannya, padahal teks tidak menyebutkan hal itu.",
+      "insight": "Untuk soal informasi tersurat, jawabannya harus dapat ditunjuk kalimatnya. Bila kalimatnya tidak ada, jawaban itu salah walaupun terdengar masuk akal."
+    },
+    {
+      "id": "mis-bisd-tersurat-002",
+      "label": "Tertukar antartokoh atau antarpelaku",
+      "description": "Siswa menukar siapa melakukan apa, misalnya perbuatan Pipi dianggap perbuatan Simut.",
+      "insight": "Bacalah kalimatnya secara utuh dan cari pelakunya di depan kata kerja. Nama yang disebut paling dekat belum tentu pelakunya."
+    },
+    {
+      "id": "mis-bisd-tersurat-003",
+      "label": "Tertukar antarangka dan antarwaktu",
+      "description": "Siswa mengambil angka atau waktu lain yang juga muncul pada teks, misalnya waktu selesai dipakai sebagai waktu mulai.",
+      "insight": "Bila teks memuat beberapa angka, tandai masing-masing dengan keterangannya: mulai, selesai, panjang, atau jumlah."
+    },
+    {
+      "id": "mis-bisd-tersurat-004",
+      "label": "Mengubah sedikit isi teks lalu menganggapnya sama",
+      "description": "Siswa menerima pernyataan yang menambahkan kata hanya, semua, atau selalu, padahal teks tidak membatasi sekeras itu.",
+      "insight": "Perhatikan kata hanya, semua, dan selalu. Satu kata seperti itu bisa membuat pernyataan menjadi tidak sesuai teks."
+    },
+    {
+      "id": "mis-bisd-tersurat-005",
+      "label": "Menganggap simpulan sendiri sebagai informasi tertulis",
+      "description": "Siswa menganggap hal yang ia simpulkan dari teks sebagai kalimat yang tertulis di dalam teks.",
+      "insight": "Bedakan yang tertulis dari yang disimpulkan. Soal informasi tersurat hanya menanyakan yang benar-benar tertulis."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-tersurat-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi pelaku suatu perbuatan dalam teks fiksi",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-tersurat-semut",
+      "pertanyaan": "<p>Siapa yang menjatuhkan daun lebar ke dekat Simut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Simut.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pemburu.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Angin kencang.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pipi.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paragraf ketiga menulis: “Ia segera memetik daun yang lebar. Daun itu dijatuhkan tepat di dekat Simut.” Kata <em>ia</em> menunjuk burung pipit yang bernama Pipi.</p><p>Angin memang disebut pada paragraf kedua, tetapi angin hanya menggoyang batang kayu.</p>"
+    },
+    {
+      "id": "bisd-tersurat-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi perbuatan tokoh yang tertulis dalam teks",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-tersurat-semut",
+      "pertanyaan": "<p>Apa yang dilakukan Simut untuk menolong Pipi?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Menggigit kaki pemburu.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Berteriak memanggil burung lain.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Menjatuhkan daun yang lebar.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Merusak jaring milik pemburu.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Paragraf keempat menulis: “Ia berlari cepat lalu menggigit kaki pemburu.”</p><p>Yang berteriak justru pemburu, dan yang menjatuhkan daun adalah Pipi. Merusak jaring tidak pernah disebut di dalam cerita.</p>"
+    },
+    {
+      "id": "bisd-tersurat-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menemukan keterangan tempat yang tertulis dalam teks informasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-kereta",
+      "pertanyaan": "<p>Di mana pencangkulan pertama pembangunan jalur kereta dilakukan?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Di Tanggung.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Di Desa Kemijen, Semarang.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Di pelabuhan Semarang.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Di Jawa Timur.</p>",
+          "mis": "mis-bisd-tersurat-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Paragraf kedua menulis: “Pencangkulan pertama dilakukan di Desa Kemijen, Semarang.”</p><p>Tanggung adalah ujung jalur pertama, sedangkan Jawa Timur baru dibangun setelah jalur pertama selesai.</p>"
+    },
+    {
+      "id": "bisd-tersurat-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menemukan keterangan waktu yang tertulis dalam teks informasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-kereta",
+      "pertanyaan": "<p>Kapan jalur Semarang–Tanggung mulai dipakai?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pada tahun 1864, saat pembangunannya dimulai.</p>",
+          "mis": "mis-bisd-tersurat-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pada tahun 1865, setelah rel dipasang seluruhnya.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pada 10 Agustus 1867, tiga tahun setelah dibangun.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pada tahun 1870, setelah jalur Sumatra selesai.</p>",
+          "mis": "mis-bisd-tersurat-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Paragraf ketiga menulis: “Jalur itu mulai dipakai pada 10 Agustus 1867.” Pembangunannya sendiri dimulai pada tahun 1864.</p><p>Pilihan A menukar waktu mulai dibangun dengan waktu mulai dipakai. Pilihan B dan D memuat tahun yang tidak disebut teks.</p>"
+    },
+    {
+      "id": "bisd-tersurat-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menemukan rincian barang yang disebut teks informasi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-kereta",
+      "pertanyaan": "<p>Hasil bumi apa yang diangkut kereta pertama ke pelabuhan?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Beras dan jagung.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Teh dan tembakau.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Karet dan kelapa.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Gula dan kopi.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paragraf keempat menulis: “Hasil bumi berupa gula dan kopi diangkut ke pelabuhan.”</p><p>Tiga pilihan lain memang hasil bumi Indonesia, tetapi tidak disebutkan pada teks ini.</p>"
+    },
+    {
+      "id": "bisd-tersurat-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menemukan waktu kegiatan pada teks cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-layangan",
+      "pertanyaan": "<p>Pukul berapa lomba layang-layang dimulai?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pukul delapan pagi.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pukul sembilan pagi.</p>",
+          "mis": "mis-bisd-tersurat-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pukul sepuluh pagi.</p>",
+          "mis": "mis-bisd-tersurat-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Pukul tujuh pagi.</p>",
+          "mis": "mis-bisd-tersurat-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Teks menulis: “Pukul delapan pagi lomba dimulai.”</p><p>Pukul sepuluh adalah waktu acara selesai, sedangkan pukul tujuh dan pukul sembilan tidak disebut sama sekali.</p>"
+    },
+    {
+      "id": "bisd-tersurat-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menemukan peristiwa yang dialami tokoh dalam teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-layangan",
+      "pertanyaan": "<p>Apa yang terjadi pada layang-layang Rangga saat lomba berlangsung?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Benangnya putus tertiup angin timur.</p>",
+          "mis": "mis-bisd-tersurat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Benangnya tersangkut dahan pohon.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kertasnya robek terkena ranting.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Layang-layangnya jatuh ke tengah lapangan.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Teks menulis: “Namun, benangnya tersangkut dahan pohon. Rangga menarik benang itu perlahan agar tidak putus.”</p><p>Jadi benangnya tersangkut, tetapi tidak putus. Pilihan A mengubah isi teks hanya pada satu kata.</p>"
+    },
+    {
+      "id": "bisd-tersurat-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Menemukan beberapa peristiwa tersurat yang dialami tokoh",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-tersurat-semut",
+      "pertanyaan": "<p>Peristiwa apa saja yang dialami Simut menurut cerita tersebut?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Terjatuh ke dalam sungai.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Naik ke atas daun lalu terbawa ke tepi.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Terjerat jaring milik pemburu.</p>",
+          "mis": "mis-bisd-tersurat-001"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Kedua peristiwa itu tertulis pada paragraf kedua dan ketiga: Simut terjatuh ke sungai, lalu naik ke atas daun dan terbawa ke tepi.</p><p>Jaring memang dibawa pemburu, tetapi tidak ada tokoh yang terjerat jaring di dalam cerita.</p>"
+    },
+    {
+      "id": "bisd-tersurat-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Memilah pernyataan yang benar-benar tertulis pada teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-tersurat-layangan",
+      "pertanyaan": "<p>Informasi apa saja tentang lomba tersebut yang tertulis pada teks?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Peserta dibagi menjadi tiga kelompok.</p>",
+          "mis": "mis-bisd-tersurat-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Lomba diadakan setiap bulan Agustus.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Hadiahnya berupa buku tulis dan tas sekolah.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Kalimat “Lomba tersebut diadakan setiap bulan Agustus” dan “Hadiahnya berupa buku tulis dan tas sekolah” tertulis apa adanya pada teks.</p><p>Peserta dibagi menjadi dua kelompok, bukan tiga. Pernyataan A hanya mengubah satu kata, tetapi isinya menjadi tidak sesuai.</p>"
+    },
+    {
+      "id": "bisd-tersurat-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai kesesuaian pernyataan dengan informasi tersurat",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-tersurat-kereta",
+      "pertanyaan": "<p>Rani mencatat beberapa hal setelah membaca teks tersebut. Tentukan sesuai atau tidak sesuai untuk setiap catatannya!</p>",
+      "perintah": "Klik pada pilihan Sesuai atau Tidak Sesuai untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "S",
+          "label": "Sesuai"
+        },
+        {
+          "kode": "T",
+          "label": "Tidak Sesuai"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Panjang jalur pertama kira-kira lima puluh kilometer.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-tersurat-003"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Jalur kereta pertama menghubungkan Semarang dan Tanggung.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Pembangunan jalur pertama dimulai pada tahun 1864.</p>",
+          "kategori": "S"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Kereta pertama hanya mengangkut penumpang.</p>",
+          "kategori": "T",
+          "mis": "mis-bisd-tersurat-004"
+        }
+      ],
+      "pembahasan": "<p>P1 tidak sesuai: teks menyebut panjangnya kira-kira dua puluh enam kilometer.</p><p>P2 sesuai: tertulis pada paragraf ketiga.</p><p>P3 sesuai: tertulis pada paragraf pertama.</p><p>P4 tidak sesuai: kereta pertama menarik gerbong barang dan gerbong penumpang. Kata <em>hanya</em> membuat pernyataan itu menyempit dan keliru.</p>"
+    }
+  ]
+}

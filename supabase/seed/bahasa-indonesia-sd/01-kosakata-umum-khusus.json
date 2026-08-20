@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-kosakata-umum-khusus",
+    "slug": "bahasa-indonesia-sd-kosakata-umum-khusus",
+    "title": "Kosakata Umum dan Khusus dalam Berbagai Bidang",
+    "topic_id": "top-bi-sd-tekstual",
+    "subtopic_id": "st-bi-sd-kosakata-umum-khusus",
+    "description": "Menemukan makna kata khusus bidang pertanian, kesehatan, dan perbengkelan dari konteks kalimat, serta membedakannya dari kata umum yang dipakai sehari-hari.",
+    "summary": "10 soal bergaya TKA untuk mengenali kosakata umum dan khusus pada tiga teks dari bidang yang berbeda.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menebak makna kata khusus dari kalimat di sekitarnya",
+      "Membedakan kata umum dan kata khusus dalam satu teks",
+      "Mengenali kata khusus milik satu bidang pekerjaan",
+      "Memilih kata umum yang mewakili beberapa kata khusus"
+    ],
+    "sort_order": 1
+  },
+  "submateri": {
+    "id": "con-bi-sd-kosakata-umum-khusus",
+    "name": "Kosakata umum dan khusus bidang pertanian, kesehatan, dan perbengkelan",
+    "description": "Menentukan makna kata khusus berdasarkan konteks teks informasi dan teks fiksi, serta memilah kata umum dari kata khusus pada bidang yang sama."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-kosakata-kebun",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 1 s.d. 3",
+      "html": "<p><strong>Kebun Sayur di Belakang Sekolah</strong></p><p>Sekolah kami mempunyai kebun kecil di belakang. Kebun itu dirawat siswa kelas lima. Setiap Jumat pagi, kami bekerja di sana.</p><p>Kegiatan pertama adalah menyemai benih bayam. Benih ditabur di kotak berisi tanah halus. Kotak itu diletakkan di tempat teduh. Setelah tujuh hari, muncul bibit kecil berdaun dua.</p><p>Bibit lalu dipindahkan ke bedeng. Bedeng dibuat memanjang dan sedikit meninggi. Bentuk seperti itu membuat air tidak menggenang. Jarak antarbibit diatur agar daunnya tidak berdesakan.</p><p>Pak Karta, penjaga sekolah, mengajari kami membuat kompos. Bahannya daun kering dan sisa sayur dapur. Bahan itu ditumpuk lalu dibiarkan tiga pekan. Kompos menyuburkan tanah tanpa membeli pupuk pabrik.</p><p>Sebulan kemudian, kami panen bayam pertama. Panen dilakukan pada pagi hari. Daunnya masih segar karena matahari belum terik. Hasilnya dibagikan kepada guru dan penjaga sekolah.</p><p>Kata Pak Karta, kebun butuh perawatan setiap hari. Kami pun membuat jadwal menyiram bergiliran.</p>"
+    },
+    {
+      "id": "psg-bisd-kosakata-posyandu",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 4, 5, dan 8",
+      "html": "<p><strong>Hari Posyandu di Balai Desa</strong></p><p>Setiap tanggal sepuluh, Balai Desa Sukamaju ramai. Hari itu adalah hari posyandu. Ibu-ibu datang membawa anak balita.</p><p>Kegiatan dimulai di meja pertama. Nama anak dicatat pada buku besar. Setelah itu, anak ditimbang di meja kedua. Berat badannya ditulis pada Kartu Menuju Sehat.</p><p>Di meja ketiga, kader mengisi grafik pada kartu itu. Kader adalah warga desa yang membantu petugas kesehatan. Titik-titik pada grafik dihubungkan dengan garis. Garis yang naik menandakan berat badan bertambah.</p><p>Di meja keempat, ibu-ibu mendapat penyuluhan. Petugas menjelaskan menu sehat untuk balita. Menu itu berisi nasi, lauk, sayur, dan buah. Ibu-ibu boleh bertanya tentang makanan anaknya. Pertanyaan mereka dicatat pada buku kegiatan.</p><p>Meja kelima dijaga bidan desa. Di sana anak menerima imunisasi. Bayi juga mendapat vitamin A pada bulan tertentu.</p><p>Bu Rina, bidan desa, selalu mengingatkan satu hal. Balita perlu ditimbang setiap bulan. Dengan begitu, gangguan pertumbuhan diketahui lebih awal.</p>"
+    },
+    {
+      "id": "psg-bisd-kosakata-bengkel",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 6, 7, dan 9",
+      "html": "<p><strong>Sepeda Ayah dan Kunci Pas</strong></p><p>Sore itu aku ikut Ayah ke bengkel Pak Rusdi. Sepeda kami rusak sejak kemarin. Rantainya lepas saat menuruni jalan.</p><p>Pak Rusdi menyambut kami sambil tersenyum. Ia membalik sepeda hingga sadelnya menyentuh lantai. Tangannya cekatan memutar pedal.</p><p>“Rantainya kendur, Pak,” katanya kepada Ayah.</p><p>Pak Rusdi mengambil kunci pas dari kotak kayu. Baut pada roda belakang ia longgarkan. Roda ditarik sedikit ke belakang. Rantai pun kembali tegang.</p><p>Aku memperhatikan pelek roda yang berkilau. Jari-jari roda tersusun rapi seperti benang laba-laba. Pak Rusdi mengetuk jari-jari itu satu per satu. Bunyinya nyaring dan seragam.</p><p>“Kalau ada yang kendur, bunyinya berbeda,” ujarnya kepadaku.</p><p>Setelah itu, ban depan diisi angin. Pentilnya diperiksa dengan air sabun. Tidak ada gelembung yang keluar. Berarti ban tidak bocor. Pak Rusdi lalu melumasi rantai dengan oli. Kain lapnya menghitam oleh sisa oli.</p><p>Ayah membayar ongkos perbaikan. Aku mengayuh sepeda pulang bersama Ayah. Rantainya tidak berbunyi lagi.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-kosakata-001",
+      "label": "Menebak makna kata dari bunyi yang mirip",
+      "description": "Siswa mengira makna sebuah kata sama dengan kata lain yang bunyinya mirip, tanpa memeriksa kalimat tempat kata itu dipakai.",
+      "insight": "Bunyi yang mirip bukan bukti makna yang sama. Bacalah kalimat sebelum dan sesudahnya untuk melihat kata itu dipakai untuk apa."
+    },
+    {
+      "id": "mis-bisd-kosakata-002",
+      "label": "Menukar makna antarkata khusus dalam satu teks",
+      "description": "Siswa memilih arti yang sebenarnya milik kata khusus lain yang muncul pada teks yang sama, misalnya arti pelek diberikan pada pentil.",
+      "insight": "Bila beberapa kata khusus muncul bersama, tandai masing-masing pada kalimatnya. Cocokkan arti dengan kata yang ditanyakan, bukan dengan kata di dekatnya."
+    },
+    {
+      "id": "mis-bisd-kosakata-003",
+      "label": "Menyamakan hasil dengan bahan atau alatnya",
+      "description": "Siswa menyamakan kata khusus dengan bahan pembuatnya atau alat yang dipakai, misalnya kompos dianggap sama dengan sampah.",
+      "insight": "Bahan, alat, dan hasil adalah tiga hal berbeda. Perhatikan kata kerja pada kalimatnya: dibuat dari, dipakai untuk, atau menghasilkan."
+    },
+    {
+      "id": "mis-bisd-kosakata-004",
+      "label": "Menganggap semua kata dalam teks sebagai kata khusus",
+      "description": "Karena teksnya membahas satu bidang, siswa menganggap seluruh katanya kata khusus, termasuk kata sehari-hari seperti kotak, jadwal, atau membayar.",
+      "insight": "Kata khusus hanya dipakai pada bidang tertentu. Kata yang biasa dipakai di mana saja tetap kata umum walaupun muncul di teks bidang tertentu."
+    },
+    {
+      "id": "mis-bisd-kosakata-005",
+      "label": "Memakai arti kamus tanpa melihat konteks",
+      "description": "Siswa memilih arti yang paling sering ia dengar, padahal pada teks itu kata tersebut dipakai untuk hal yang berbeda.",
+      "insight": "Satu kata bisa berbeda arti pada bidang berbeda. Pastikan arti yang dipilih cocok dengan kalimat pada teks."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-kosakata-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi makna kata khusus bidang pertanian dari konteks",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-kosakata-kebun",
+      "pertanyaan": "<p>Makna kata <strong>menyemai</strong> pada teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>menabur benih agar tumbuh menjadi bibit</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>memindahkan bibit ke petak tanah yang lebih luas</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>menyiram tanaman muda setiap pagi</p>",
+          "mis": "mis-bisd-kosakata-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>memetik daun bayam yang masih segar</p>",
+          "mis": "mis-bisd-kosakata-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Pada paragraf kedua tertulis: “Kegiatan pertama adalah menyemai benih bayam. Benih ditabur di kotak berisi tanah halus.” Setelah tujuh hari, benih itu menjadi bibit.</p><p>Jadi menyemai berarti menabur benih sampai tumbuh menjadi bibit.</p><p>Pilihan B adalah langkah berikutnya, yaitu memindahkan bibit ke bedeng. Pilihan D adalah panen. Keduanya kegiatan lain pada teks yang sama.</p>"
+    },
+    {
+      "id": "bisd-kosakata-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi makna kata khusus bidang pertanian dari konteks",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-kosakata-kebun",
+      "pertanyaan": "<p>Kata <strong>bedeng</strong> pada teks tersebut menunjuk pada ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>kotak berisi tanah halus untuk menabur benih</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>petak tanah memanjang yang dibuat agak tinggi</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>tumpukan daun kering yang dibiarkan tiga pekan</p>",
+          "mis": "mis-bisd-kosakata-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>tempat teduh untuk menyimpan bibit bayam</p>",
+          "mis": "mis-bisd-kosakata-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Paragraf ketiga menyebutkan: “Bibit lalu dipindahkan ke bedeng. Bedeng dibuat memanjang dan sedikit meninggi.”</p><p>Jadi bedeng adalah petak tanah memanjang yang dibuat agak tinggi agar air tidak menggenang.</p><p>Pilihan A adalah tempat menyemai, dan pilihan C adalah tumpukan bahan kompos.</p>"
+    },
+    {
+      "id": "bisd-kosakata-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Memilih kata umum yang mewakili kata khusus dalam teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kosakata-kebun",
+      "pertanyaan": "<p>Kata <strong>kompos</strong> pada teks tersebut termasuk kata khusus. Kata umum yang tepat untuk menggantikannya adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>tanah</p>",
+          "mis": "mis-bisd-kosakata-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>benih</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>pupuk</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>sampah</p>",
+          "mis": "mis-bisd-kosakata-003"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks menyebut “Kompos menyuburkan tanah tanpa membeli pupuk pabrik”. Artinya kompos adalah salah satu jenis pupuk.</p><p>Pupuk adalah kata umum, sedangkan kompos adalah kata khusus untuk pupuk dari bahan yang membusuk.</p><p>Pilihan D keliru karena daun kering dan sisa sayur baru bahan pembuatnya, bukan komposnya sendiri.</p>"
+    },
+    {
+      "id": "bisd-kosakata-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi makna kata khusus bidang kesehatan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kosakata-posyandu",
+      "pertanyaan": "<p>Makna kata <strong>imunisasi</strong> pada teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>penimbangan berat badan balita setiap bulan</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>pencatatan pertumbuhan anak pada sebuah kartu</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>pemberian vitamin A kepada bayi setiap bulan</p>",
+          "mis": "mis-bisd-kosakata-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>pemberian vaksin agar tubuh tahan terhadap penyakit</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Imunisasi diberikan bidan di meja kelima. Imunisasi adalah pemberian vaksin supaya tubuh anak tahan terhadap penyakit tertentu.</p><p>Pilihan A terjadi di meja kedua dan pilihan B di meja ketiga. Pilihan C memang disebut teks, tetapi vitamin A bukan imunisasi.</p>"
+    },
+    {
+      "id": "bisd-kosakata-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi makna kata dari kegiatan yang digambarkan teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kosakata-posyandu",
+      "pertanyaan": "<p>Makna kata <strong>penyuluhan</strong> pada teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>pemberian penjelasan agar warga memahami sesuatu</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>pembagian makanan bergizi untuk anak balita</p>",
+          "mis": "mis-bisd-kosakata-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>pemeriksaan kesehatan balita oleh bidan desa</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>pendaftaran nama anak pada buku besar</p>",
+          "mis": "mis-bisd-kosakata-001"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Setelah kata penyuluhan, teks menulis: “Petugas menjelaskan menu sehat untuk balita.” Kegiatannya adalah menjelaskan, bukan membagikan atau memeriksa.</p><p>Jadi penyuluhan berarti pemberian penjelasan agar warga memahami sesuatu.</p><p>Pilihan B keliru karena teks hanya menyebut menunya dijelaskan, bukan dibagikan.</p>"
+    },
+    {
+      "id": "bisd-kosakata-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Mengidentifikasi makna kata khusus bidang perbengkelan dalam teks fiksi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kosakata-bengkel",
+      "pertanyaan": "<p>Makna kata <strong>pelek</strong> pada cerita tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>batang tipis yang menghubungkan poros dengan lingkar roda</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>lingkaran logam pada roda, tempat ban dipasang</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>alat besi untuk melonggarkan dan mengencangkan baut</p>",
+          "mis": "mis-bisd-kosakata-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>lubang kecil pada ban untuk memasukkan angin</p>",
+          "mis": "mis-bisd-kosakata-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Cerita menyebut “pelek roda yang berkilau”, lalu jari-jari roda disebut terpisah pada kalimat berikutnya.</p><p>Pelek adalah lingkaran logam pada roda, tempat ban dipasang.</p><p>Pilihan A adalah jari-jari, pilihan C adalah kunci pas, dan pilihan D adalah pentil. Ketiganya kata khusus lain yang muncul di cerita yang sama.</p>"
+    },
+    {
+      "id": "bisd-kosakata-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar makna satu kata yang dipakai untuk dua benda berbeda",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kosakata-bengkel",
+      "pertanyaan": "<p>Kata <strong>kendur</strong> dipakai Pak Rusdi untuk rantai dan juga untuk jari-jari roda. Apa maksud kata itu pada kedua bagian tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rantai yang kotor dan jari-jari yang berkarat.</p>",
+          "mis": "mis-bisd-kosakata-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Rantai yang putus dan jari-jari yang patah.</p>",
+          "mis": "mis-bisd-kosakata-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rantai yang longgar dan jari-jari yang kurang tegang.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Rantai yang terlalu panjang dan jari-jari yang terlalu pendek.</p>",
+          "mis": "mis-bisd-kosakata-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Setelah rantai disebut kendur, Pak Rusdi menarik roda ke belakang sampai “rantai pun kembali tegang”. Berarti kendur adalah lawan dari tegang, yaitu longgar.</p><p>Pada jari-jari, kendur diketahui dari bunyi ketukan yang berbeda. Jari-jari yang kendur berarti kurang tegang.</p><p>Pilihan B keliru karena rantai hanya lepas, bukan putus, dan tidak ada jari-jari yang patah.</p>"
+    },
+    {
+      "id": "bisd-kosakata-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Memilah kata khusus bidang kesehatan dari kata umum",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-kosakata-posyandu",
+      "pertanyaan": "<p>Kata mana saja pada teks tersebut yang merupakan kata khusus bidang kesehatan?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>imunisasi</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>bidan</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>buku besar</p>",
+          "mis": "mis-bisd-kosakata-004"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Imunisasi dan bidan hanya dipakai pada bidang kesehatan, jadi keduanya kata khusus.</p><p>Buku besar dipakai di banyak tempat, misalnya di koperasi atau di toko, sehingga tetap kata umum walaupun muncul pada teks kesehatan.</p>"
+    },
+    {
+      "id": "bisd-kosakata-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menalar kalimat yang memuat kosakata khusus satu bidang",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-kosakata-bengkel",
+      "pertanyaan": "<p>Kalimat mana saja pada cerita tersebut yang memakai kata khusus bidang perbengkelan?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Ayah membayar ongkos perbaikan.</p>",
+          "mis": "mis-bisd-kosakata-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pak Rusdi mengambil kunci pas dari kotak kayu.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Pentilnya diperiksa dengan air sabun.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Kunci pas dan pentil adalah nama alat dan bagian sepeda yang hanya dipakai di bengkel, jadi keduanya kata khusus.</p><p>Kalimat A hanya memakai kata sehari-hari: membayar, ongkos, dan perbaikan. Kata-kata itu dipakai di banyak bidang lain.</p>"
+    },
+    {
+      "id": "bisd-kosakata-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Mengelompokkan kata menjadi kosakata umum dan kosakata khusus",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "stimulus": "<p>Berikut beberapa kalimat yang diambil dari ketiga teks di atas. Kata yang dicetak tebal akan dikelompokkan menjadi kosakata umum atau kosakata khusus.</p>",
+      "pertanyaan": "<p>Tentukan kosakata umum atau kosakata khusus untuk setiap kata yang dicetak tebal berikut!</p>",
+      "perintah": "Klik pada pilihan Kosakata Umum atau Kosakata Khusus untuk setiap kalimat.",
+      "kategori": [
+        {
+          "kode": "U",
+          "label": "Kosakata Umum"
+        },
+        {
+          "kode": "K",
+          "label": "Kosakata Khusus"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Di meja ketiga, <strong>kader</strong> mengisi grafik pada kartu itu.</p>",
+          "kategori": "K"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Aku memperhatikan <strong>pelek</strong> roda yang berkilau.</p>",
+          "kategori": "K"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Kami pun membuat <strong>jadwal</strong> menyiram bergiliran.</p>",
+          "kategori": "U",
+          "mis": "mis-bisd-kosakata-004"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Hasilnya <strong>dibagikan</strong> kepada guru dan penjaga sekolah.</p>",
+          "kategori": "U",
+          "mis": "mis-bisd-kosakata-004"
+        }
+      ],
+      "pembahasan": "<p>Kader dan pelek hanya dipakai pada bidang tertentu. Kader dipakai di bidang kesehatan masyarakat, pelek di bidang perbengkelan. Keduanya kosakata khusus.</p><p>Jadwal dan dibagikan dipakai di mana saja: di sekolah, di rumah, maupun di kantor. Keduanya tetap kosakata umum walaupun muncul pada teks bidang tertentu.</p>"
+    }
+  ]
+}

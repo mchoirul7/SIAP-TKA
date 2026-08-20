@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-respons-emosional",
+    "slug": "bahasa-indonesia-sd-respons-emosional",
+    "title": "Menyimpulkan Respons Emosional terhadap Teks Fiksi",
+    "topic_id": "top-bi-sd-evaluasi",
+    "subtopic_id": "st-bi-sd-respons-emosional",
+    "description": "Menyimpulkan perasaan yang wajar muncul saat membaca cerita dan puisi, menunjuk bagian teks yang menimbulkannya, serta menolak reaksi yang tidak didukung isi teks.",
+    "summary": "10 soal bergaya TKA untuk menanggapi cerita dan puisi secara emosional dengan bukti dari teksnya.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menyimpulkan perasaan pembaca terhadap bagian cerita",
+      "Menunjuk kalimat yang menimbulkan perasaan tertentu",
+      "Menanggapi kesan yang dibangun larik puisi",
+      "Menolak reaksi yang tidak sesuai akhir cerita"
+    ],
+    "sort_order": 10
+  },
+  "submateri": {
+    "id": "con-bi-sd-respons-emosional",
+    "name": "Respons emosional terhadap cerita dan puisi",
+    "description": "Menyimpulkan perasaan yang wajar dirasakan pembaca terhadap tokoh, peristiwa, dan pilihan kata dalam teks fiksi, disertai bukti kalimat atau lariknya."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-emosi-sepeda",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, dan 8",
+      "html": "<p><strong>Sepeda Tua di Gudang</strong></p><p>Sejak kecil aku sering diantar Kakek ke sekolah. Kakek memakai sepeda tuanya yang berwarna hijau. Boncengannya beralas karung goni yang tebal.</p><p>Setiap pagi Kakek bersiul sepanjang jalan. Ia berhenti di warung untuk membeli dua kue lapis. Satu untukku, satu untuk bekalnya sendiri.</p><p>Tahun lalu Kakek jatuh sakit. Sepeda hijau itu disimpan di gudang. Debu perlahan menutup sadelnya.</p><p>Bulan lalu Kakek pergi untuk selamanya. Rumah terasa sepi setiap pagi. Aku berangkat sekolah dengan langkah pelan.</p><p>Suatu sore aku membuka pintu gudang. Sepeda hijau itu masih berdiri di sudut. Aku mengelap sadelnya dengan kain basah. Debu di rangkanya luruh sedikit demi sedikit. Warna hijaunya kembali terlihat seperti dahulu.</p><p>Ayah datang lalu memasang rantai baru. “Sepeda ini masih kuat,” katanya pelan.</p><p>Keesokan paginya aku mengayuh sepeda itu ke sekolah. Angin pagi menerpa wajahku. Aku seperti mendengar siulan Kakek di belakangku.</p>"
+    },
+    {
+      "id": "psg-bisd-emosi-tenda",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 3, 4, 9, dan 10",
+      "html": "<p><strong>Suara di Balik Tenda</strong></p><p>Malam pertama perkemahan terasa panjang. Aku setenda dengan Fajar dan Bima. Lampu badai kami gantung di tiang tengah. Di luar, api unggun sudah lama padam. Hanya suara jangkrik yang terdengar dari kebun.</p><p>Menjelang tengah malam, terdengar suara gemerisik. Suara itu datang dari balik tenda. Bima menarik selimut sampai dagu.</p><p>“Mungkin hanya angin,” bisik Fajar. Namun, suara itu terdengar lagi dan makin dekat.</p><p>Jantungku berdegup kencang. Aku memegang senter dengan tangan gemetar. Fajar membuka resleting tenda perlahan-lahan.</p><p>Cahaya senter menyapu rumput di luar. Sepasang mata kecil memantulkan cahaya. Kami bertiga menahan napas sejenak. Ternyata seekor kucing kampung sedang mengais bungkus roti. Bulunya basah terkena embun malam.</p><p>Kami bertiga tertawa lega. Bima memberikan sisa rotinya kepada kucing itu. Kucing itu duduk di depan tenda sampai pagi.</p><p>Pagi harinya kami menceritakannya kepada Kak Pembina. “Perkemahan memang penuh kejutan,” katanya sambil tersenyum.</p>"
+    },
+    {
+      "id": "psg-bisd-emosi-puisi",
+      "jenis": "puisi",
+      "label": "Puisi untuk soal nomor 5, 6, dan 7",
+      "html": "<p><strong>Rumah Nenek</strong></p><p>Di ujung jalan berbatu itu<br />Ada rumah kayu berpintu biru<br />Setiap liburan aku ke sana<br />Menghitung ayam di halaman</p><p>Nenek menyambut di depan pintu<br />Tangannya wangi kayu manis<br />Dapurnya selalu hangat<br />Oleh air rebusan jahe</p><p>Kini liburan datang lagi<br />Tetapi aku tinggal jauh di kota<br />Rumah kayu itu masih ada<br />Dalam ingatan yang tak berdebu</p><p>Bila mataku terpejam<br />Aku mendengar deritan pintu biru<br />Dan suara nenek memanggil namaku<br />Dari dapur yang selalu hangat</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-emosi-001",
+      "label": "Menebak perasaan dari satu kata saja",
+      "description": "Siswa menebak perasaan tokoh atau pembaca dari satu kata yang menonjol, misalnya kata gelap atau malam, tanpa melihat kejadiannya.",
+      "insight": "Perasaan disimpulkan dari kejadian dan sikap tokoh, bukan dari satu kata. Bacalah kalimat sebelum dan sesudahnya."
+    },
+    {
+      "id": "mis-bisd-emosi-002",
+      "label": "Memakai kesan seluruh cerita untuk satu bagian",
+      "description": "Siswa memakai perasaan terhadap keseluruhan cerita untuk menjawab pertanyaan tentang satu bagian tertentu.",
+      "insight": "Perhatikan bagian yang ditanyakan. Satu cerita bisa menegangkan di tengah, tetapi melegakan di akhir."
+    },
+    {
+      "id": "mis-bisd-emosi-003",
+      "label": "Memilih reaksi yang tidak didukung akhir cerita",
+      "description": "Siswa memilih reaksi yang tidak sesuai dengan kejadian pada akhir cerita, misalnya sedih padahal ceritanya berakhir menyenangkan.",
+      "insight": "Setiap reaksi harus punya kalimat pendukung. Bila kejadiannya tidak ada di dalam teks, reaksi itu tidak tepat."
+    },
+    {
+      "id": "mis-bisd-emosi-004",
+      "label": "Mengartikan larik puisi secara harfiah",
+      "description": "Siswa mengartikan larik puisi kata demi kata sehingga kesan yang ingin dibangun penyair menjadi hilang.",
+      "insight": "Tanyakan kesan apa yang muncul dari larik itu. Puisi memakai gambaran untuk menyampaikan perasaan."
+    },
+    {
+      "id": "mis-bisd-emosi-005",
+      "label": "Mengira cerita menegangkan pasti berakhir sedih",
+      "description": "Siswa menduga akhir cerita dari suasana di tengah cerita, bukan dari kejadian yang benar-benar ditulis pada akhir teks.",
+      "insight": "Bacalah sampai kalimat terakhir. Ketegangan sering berakhir dengan kelegaan, bahkan dengan tawa."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-emosi-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perasaan pembaca terhadap akhir cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-sepeda",
+      "pertanyaan": "<p>Perasaan apa yang paling mungkin dirasakan pembaca pada bagian akhir cerita tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Takut.</p>",
+          "mis": "mis-bisd-emosi-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Marah.</p>",
+          "mis": "mis-bisd-emosi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Terharu.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kecewa.</p>",
+          "mis": "mis-bisd-emosi-002"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Pada akhir cerita, tokoh aku mengayuh sepeda peninggalan kakeknya dan seolah mendengar siulan Kakek di belakangnya. Bagian itu memadukan rasa kehilangan dengan kenangan yang manis sehingga menimbulkan rasa terharu.</p><p>Tidak ada kejadian yang menakutkan maupun mengecewakan pada bagian tersebut.</p>"
+    },
+    {
+      "id": "bisd-emosi-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menunjuk bagian teks yang menimbulkan perasaan tertentu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-emosi-sepeda",
+      "pertanyaan": "<p>Bagian mana yang paling menimbulkan rasa sedih bagi pembaca?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kakek bersiul sepanjang jalan setiap pagi.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kakek pergi selamanya dan rumah terasa sepi.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ayah memasang rantai baru pada sepeda itu.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Angin pagi menerpa wajah tokoh aku.</p>",
+          "mis": "mis-bisd-emosi-001"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Rasa sedih paling kuat muncul pada paragraf keempat: Kakek meninggal, rumah menjadi sepi, dan tokoh aku berangkat sekolah dengan langkah pelan.</p><p>Pilihan A justru kenangan yang menyenangkan, sedangkan pilihan C dan D berada pada bagian ketika keadaan mulai membaik.</p>"
+    },
+    {
+      "id": "bisd-emosi-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perasaan tokoh pada bagian tertentu",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-tenda",
+      "pertanyaan": "<p>Perasaan apa yang muncul ketika suara gemerisik itu terdengar makin dekat?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Haru.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bosan.</p>",
+          "mis": "mis-bisd-emosi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bangga.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Tegang.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Bima menarik selimut sampai dagu, jantung tokoh aku berdegup kencang, dan tangannya gemetar memegang senter. Ketiganya menggambarkan suasana tegang.</p><p>Rasa haru dan bangga tidak muncul pada bagian ini, sedangkan bosan bertentangan dengan reaksi tubuh para tokoh.</p>"
+    },
+    {
+      "id": "bisd-emosi-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perubahan perasaan tokoh dalam cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-tenda",
+      "pertanyaan": "<p>Bagaimana perasaan ketiga anak setelah mengetahui asal suara itu?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Lega.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kecewa.</p>",
+          "mis": "mis-bisd-emosi-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Ketakutan.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Malu.</p>",
+          "mis": "mis-bisd-emosi-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Teks menulis “Kami bertiga tertawa lega” setelah suara itu ternyata berasal dari seekor kucing kampung. Bima bahkan memberi kucing itu sisa rotinya.</p><p>Ketegangan pada bagian sebelumnya sudah berakhir, jadi pilihan C tidak lagi tepat untuk bagian ini.</p>"
+    },
+    {
+      "id": "bisd-emosi-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan perasaan yang dibangun sebuah puisi",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-puisi",
+      "pertanyaan": "<p>Perasaan apa yang paling kuat tergambar pada puisi tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Gembira.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Takut.</p>",
+          "mis": "mis-bisd-emosi-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Rindu.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kesal.</p>",
+          "mis": "mis-bisd-emosi-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Bait ketiga menyebut penyair kini tinggal jauh di kota, sedangkan rumah nenek hanya ada dalam ingatannya. Bait keempat menghadirkan kembali deritan pintu dan suara nenek saat matanya terpejam.</p><p>Gambaran seperti itu menunjukkan perasaan rindu terhadap nenek dan rumahnya.</p>"
+    },
+    {
+      "id": "bisd-emosi-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menunjuk larik yang paling menimbulkan perasaan tertentu",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-emosi-puisi",
+      "pertanyaan": "<p>Larik mana yang paling menimbulkan rasa rindu bagi pembaca?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>“Ada rumah kayu berpintu biru”.</p>",
+          "mis": "mis-bisd-emosi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>“Dan suara nenek memanggil namaku”.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>“Menghitung ayam di halaman”.</p>",
+          "mis": "mis-bisd-emosi-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>“Tetapi aku tinggal jauh di kota”.</p>",
+          "mis": "mis-bisd-emosi-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Larik itu muncul saat mata penyair terpejam. Suara nenek yang memanggil namanya hanya terdengar dalam ingatan, dan justru itulah yang membuat rasa rindu terasa paling kuat.</p><p>Pilihan A dan C hanya menggambarkan keadaan, sedangkan pilihan D menyebut sebab berjauhan tanpa menghadirkan sosok neneknya.</p>"
+    },
+    {
+      "id": "bisd-emosi-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menanggapi kesan yang dibangun pilihan kata penyair",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-emosi-puisi",
+      "pertanyaan": "<p>Larik “Dalam ingatan yang tak berdebu” menimbulkan kesan bahwa ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>rumah nenek selalu dibersihkan setiap hari</p>",
+          "mis": "mis-bisd-emosi-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>penyair lupa jalan menuju rumah neneknya</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>rumah kayu itu sudah lama dirobohkan</p>",
+          "mis": "mis-bisd-emosi-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>kenangan itu masih jelas dan tidak terlupakan</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Debu biasanya menutupi barang yang lama tidak disentuh. Ingatan yang tak berdebu berarti kenangan itu masih sering diingat sehingga tetap jelas.</p><p>Pilihan A dan C mengartikan kata debu secara harfiah sehingga kesan yang dibangun penyair menjadi hilang.</p>"
+    },
+    {
+      "id": "bisd-emosi-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Menyimpulkan perasaan tokoh pada akhir cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-sepeda",
+      "pertanyaan": "<p>Pernyataan mana saja yang tepat tentang perasaan tokoh aku pada akhir cerita?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Merasa dekat kembali dengan kakeknya.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Merasa senang dapat memakai sepeda kakeknya.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Merasa takut menaiki sepeda tua itu.</p>",
+          "mis": "mis-bisd-emosi-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Tokoh aku membersihkan sepeda itu, mengayuhnya ke sekolah, dan seolah mendengar siulan Kakek. Kedua hal itu menunjukkan rasa senang sekaligus rasa dekat kembali dengan kakeknya.</p><p>Tidak ada kalimat yang menunjukkan ia takut menaiki sepeda tersebut.</p>"
+    },
+    {
+      "id": "bisd-emosi-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menemukan kalimat yang menunjukkan perasaan takut",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-emosi-tenda",
+      "pertanyaan": "<p>Kalimat mana saja yang menunjukkan tokoh aku sedang ketakutan?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kami bertiga tertawa lega.</p>",
+          "mis": "mis-bisd-emosi-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Jantungku berdegup kencang.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Aku memegang senter dengan tangan gemetar.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Jantung berdegup kencang dan tangan gemetar adalah tanda tubuh saat merasa takut. Keduanya terjadi sebelum suara itu diketahui asalnya.</p><p>Tertawa lega terjadi setelah ketakutan berakhir, jadi kalimat itu justru menunjukkan perasaan yang berlawanan.</p>"
+    },
+    {
+      "id": "bisd-emosi-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai reaksi pembaca terhadap akhir cerita",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-emosi-tenda",
+      "pertanyaan": "<p>Salma telah membaca cerita tersebut. Bagaimana reaksi yang wajar dirasakan saat membaca akhir cerita itu? Tentukan benar atau salah untuk setiap pernyataan berikut!</p>",
+      "perintah": "Klik pada pilihan Benar atau Salah untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "B",
+          "label": "Benar"
+        },
+        {
+          "kode": "S",
+          "label": "Salah"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Lega karena suara itu ternyata berasal dari seekor kucing.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Geli karena ketakutan mereka berakhir dengan tawa.</p>",
+          "kategori": "B"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Sedih karena kucing itu pergi meninggalkan tenda mereka.</p>",
+          "kategori": "S",
+          "mis": "mis-bisd-emosi-003"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Kecewa karena Kak Pembina memarahi mereka bertiga.</p>",
+          "kategori": "S",
+          "mis": "mis-bisd-emosi-003"
+        }
+      ],
+      "pembahasan": "<p>P1 dan P2 benar: suara yang menakutkan itu ternyata berasal dari kucing kampung, dan ketiga anak tertawa lega.</p><p>P3 salah karena kucing itu justru duduk di depan tenda sampai pagi. P4 salah karena Kak Pembina menanggapinya sambil tersenyum, bukan memarahi mereka.</p>"
+    }
+  ]
+}

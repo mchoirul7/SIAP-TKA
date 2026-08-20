@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-ide-pokok",
+    "slug": "bahasa-indonesia-sd-ide-pokok-amanat-nilai",
+    "title": "Menyimpulkan Ide Pokok, Amanat, dan Nilai dalam Teks",
+    "topic_id": "top-bi-sd-inferensial",
+    "subtopic_id": "st-bi-sd-ide-pokok",
+    "description": "Menyimpulkan ide pokok paragraf dan seluruh teks, membedakannya dari gagasan pendukung, serta menemukan amanat, sifat tokoh, peristiwa penting, dan nilai dalam cerita.",
+    "summary": "10 soal bergaya TKA untuk menyimpulkan ide pokok, gagasan pendukung, amanat, dan nilai pada teks fiksi maupun teks informasi.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Menentukan ide pokok tiap paragraf",
+      "Membedakan ide pokok dari gagasan pendukung",
+      "Menyimpulkan amanat dan nilai dalam cerita",
+      "Menyimpulkan sifat tokoh dari perbuatannya"
+    ],
+    "sort_order": 5
+  },
+  "submateri": {
+    "id": "con-bi-sd-ide-pokok",
+    "name": "Ide pokok, gagasan pendukung, amanat, tokoh, peristiwa, dan nilai",
+    "description": "Menyimpulkan pikiran utama sebuah paragraf maupun seluruh teks, serta menyimpulkan amanat, sifat tokoh, dan nilai dari rangkaian peristiwa dalam cerita."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-idepokok-kotakpensil",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 1, 2, dan 8",
+      "html": "<p><strong>Kotak Pensil di Bawah Bangku</strong></p><p>Bel istirahat berbunyi nyaring. Anak-anak berhamburan ke halaman sekolah. Rani tinggal sebentar untuk membereskan mejanya.</p><p>Di bawah bangku paling belakang, Rani menemukan kotak pensil. Kotak itu berwarna biru dengan gambar bintang. Isinya pensil, penghapus, dan uang lima ribu rupiah.</p><p>Rani sempat ragu sejenak. Uang itu cukup untuk membeli semangkuk bakso. Namun, ia teringat pesan ibunya. Barang yang bukan milik kita harus dikembalikan.</p><p>Rani membawa kotak itu ke ruang guru. Bu Sinta mencatat temuan itu pada buku. Nama penemunya ikut ditulis di sana. Setelah istirahat, Bu Sinta bertanya di depan kelas. Ia menyebutkan warna dan gambar pada kotak itu.</p><p>Rupanya kotak itu milik Damar. Damar mencarinya sejak pagi tadi. Wajahnya cerah ketika menerima kotaknya kembali.</p><p>“Terima kasih, Rani,” kata Damar. “Uang itu untuk membayar iuran seragam.”</p><p>Rani hanya tersenyum lalu duduk di bangkunya. Ia merasa lega, walaupun tidak jadi membeli bakso.</p>"
+    },
+    {
+      "id": "psg-bisd-idepokok-lebah",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 3, 4, 5, dan 10",
+      "html": "<p><strong>Lebah Kecil, Jasanya Besar</strong></p><p>Lebah sering ditakuti karena sengatnya. Padahal, lebah memberi jasa besar bagi manusia. Tanpa lebah, banyak tanaman sulit berbuah.</p><p>Lebah mencari makan berupa nektar bunga. Saat hinggap, serbuk sari menempel pada kakinya. Serbuk itu terbawa ke bunga berikutnya. Peristiwa tersebut disebut penyerbukan.</p><p>Penyerbukan membuat bunga berubah menjadi buah. Pohon mangga, jambu, dan kopi sangat bergantung pada lebah. Kebun yang sering dikunjungi lebah berbuah lebih lebat. Petani pun dapat memanen buah lebih banyak.</p><p>Sayangnya, jumlah lebah semakin berkurang. Racun hama yang berlebihan ikut membunuh lebah. Bunga liar di tepi ladang juga banyak ditebang. Lebah pun kehilangan tempat mencari makan.</p><p>Ada beberapa cara untuk menjaga lebah. Petani dapat mengurangi racun hama. Warga dapat menanam bunga di halaman rumah. Sarang lebah liar sebaiknya tidak dibakar.</p><p>Menjaga lebah berarti menjaga kebun kita. Kebun yang sehat memberi buah bagi semua orang. Karena itu, lebah tidak perlu ditakuti berlebihan.</p>"
+    },
+    {
+      "id": "psg-bisd-idepokok-bakulkue",
+      "jenis": "fiksi",
+      "label": "Teks untuk soal nomor 6, 7, dan 9",
+      "html": "<p><strong>Bakul Kue Bu Sari</strong></p><p>Setiap pagi Bu Sari berjualan kue di depan sekolah. Bakulnya penuh lemper, risoles, dan kue lapis. Anak-anak biasa membeli sebelum bel berbunyi.</p><p>Pagi itu hujan turun sangat deras. Jalan menuju sekolah tergenang air. Bu Sari tetap datang dengan payung besar.</p><p>Sampai di depan gerbang, kakinya terpeleset. Bakul kuenya terjatuh ke genangan. Sebagian kue basah dan tidak dapat dijual.</p><p>Bu Sari duduk termenung di teras sekolah. Kue yang basah ia pisahkan ke dalam kantong. Sampai siang ia belum menerima uang sama sekali.</p><p>Melihat hal itu, Dimas mengajak teman-temannya berkumpul. Mereka berunding sebentar di dekat tiang bendera. Mereka lalu mengumpulkan uang jajan seadanya. Uang yang terkumpul lima puluh ribu rupiah. Kue yang masih kering mereka beli semua.</p><p>Bu Sari terkejut dan matanya berkaca-kaca. “Terima kasih, Nak,” ucapnya lirih.</p><p>Sejak hari itu, Dimas selalu ingat satu hal. Menolong tidak harus menunggu menjadi orang kaya.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-idepokok-001",
+      "label": "Mengira kalimat pertama selalu ide pokok",
+      "description": "Siswa langsung memilih kalimat pertama paragraf sebagai ide pokok tanpa memeriksa kalimat lain yang dijelaskannya.",
+      "insight": "Ide pokok adalah kalimat yang dijelaskan kalimat-kalimat lain. Letaknya bisa di awal, di tengah, atau di akhir paragraf."
+    },
+    {
+      "id": "mis-bisd-idepokok-002",
+      "label": "Memilih contoh atau rincian sebagai ide pokok",
+      "description": "Siswa memilih kalimat berisi contoh, angka, atau nama sebagai ide pokok karena kalimat itu terasa paling jelas.",
+      "insight": "Contoh dan rincian justru mendukung ide pokok. Tanyakan: kalimat mana yang dijelaskan oleh contoh-contoh ini?"
+    },
+    {
+      "id": "mis-bisd-idepokok-003",
+      "label": "Menyamakan amanat dengan peristiwa yang paling menarik",
+      "description": "Siswa menyebut kejadian paling seru dalam cerita sebagai amanat, padahal amanat berupa pesan untuk pembaca.",
+      "insight": "Amanat berbentuk pesan atau ajakan bagi pembaca, bukan ringkasan kejadian. Tanyakan: apa yang penulis ingin kita lakukan?"
+    },
+    {
+      "id": "mis-bisd-idepokok-004",
+      "label": "Menyimpulkan sifat tokoh dari perbuatan yang tidak berkaitan",
+      "description": "Siswa menilai sifat tokoh dari perbuatan kecil yang tidak berhubungan dengan masalah cerita, misalnya menyebut hemat karena batal jajan.",
+      "insight": "Pilih perbuatan yang menjadi inti cerita. Sifat tokoh disimpulkan dari keputusannya saat menghadapi masalah."
+    },
+    {
+      "id": "mis-bisd-idepokok-005",
+      "label": "Menganggap ide pokok satu paragraf mewakili seluruh teks",
+      "description": "Siswa menjadikan ide pokok salah satu paragraf sebagai ide pokok seluruh teks sehingga cakupannya terlalu sempit.",
+      "insight": "Ide pokok seluruh teks harus mencakup semua paragraf. Periksa apakah setiap paragraf dapat dimasukkan ke dalam kalimat pilihanmu."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-idepokok-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan amanat cerita",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-idepokok-kotakpensil",
+      "pertanyaan": "<p>Apa amanat cerita tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kembalikanlah barang yang bukan milik kita.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Simpanlah barang berharga di tempat yang aman.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Bertanyalah kepada guru bila menghadapi masalah.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Berhematlah agar uang jajan tidak cepat habis.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Seluruh cerita bergerak dari satu keputusan Rani: mengembalikan kotak pensil yang ia temukan, walaupun sempat tergoda uang di dalamnya.</p><p>Pilihan B dan C hanya kejadian pendukung. Pilihan D salah alamat karena Rani batal jajan bukan untuk berhemat, melainkan karena uang itu bukan miliknya.</p>"
+    },
+    {
+      "id": "bisd-idepokok-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan sifat tokoh dari perbuatannya",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-idepokok-kotakpensil",
+      "pertanyaan": "<p>Bagaimana sifat Rani berdasarkan cerita tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Rajin, karena ia membereskan meja setiap hari.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Pemberani, karena ia berbicara di depan kelas.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jujur, karena ia mengembalikan barang temuannya.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Hemat, karena ia tidak jadi membeli bakso.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Rani menemukan kotak berisi uang, sempat ragu, lalu menyerahkannya ke ruang guru. Perbuatan itu menunjukkan sifat jujur.</p><p>Teks tidak menyebut Rani membereskan meja setiap hari, dan yang bertanya di depan kelas adalah Bu Sinta, bukan Rani.</p>"
+    },
+    {
+      "id": "bisd-idepokok-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan ide pokok sebuah paragraf",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-idepokok-lebah",
+      "pertanyaan": "<p>Apa ide pokok paragraf kedua teks tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Lebah sering ditakuti manusia karena sengatnya.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Cara lebah membawa serbuk sari antarbunga.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Jumlah lebah di ladang semakin berkurang.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Petani dapat memanen buah lebih banyak.</p>",
+          "mis": "mis-bisd-idepokok-002"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Paragraf kedua menceritakan lebah mencari nektar, serbuk sari menempel di kakinya, lalu terbawa ke bunga lain. Seluruh kalimatnya menjelaskan cara lebah memindahkan serbuk sari.</p><p>Pilihan A adalah ide paragraf pertama dan pilihan C ide paragraf keempat. Pilihan D adalah akibat yang dibahas paragraf ketiga.</p>"
+    },
+    {
+      "id": "bisd-idepokok-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Menentukan gagasan pendukung dalam paragraf",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-idepokok-lebah",
+      "pertanyaan": "<p>Gagasan pendukung pada paragraf keempat teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Lebah mencari makan berupa nektar bunga.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Penyerbukan membuat bunga berubah menjadi buah.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Warga dapat menanam bunga di halaman rumah.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Racun hama yang berlebihan ikut membunuh lebah.</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Ide pokok paragraf keempat adalah jumlah lebah semakin berkurang. Kalimat tentang racun hama menjelaskan penyebab berkurangnya lebah, jadi kalimat itulah gagasan pendukungnya.</p><p>Pilihan A, B, dan C berada di paragraf lain sehingga tidak mendukung ide pokok paragraf keempat.</p>"
+    },
+    {
+      "id": "bisd-idepokok-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan ide pokok seluruh teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-idepokok-lebah",
+      "pertanyaan": "<p>Ide pokok seluruh teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Lebah berjasa bagi tanaman sehingga perlu dijaga.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Lebah mengumpulkan nektar dari bunga-bunga liar.</p>",
+          "mis": "mis-bisd-idepokok-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Petani sebaiknya berhenti memakai racun hama.</p>",
+          "mis": "mis-bisd-idepokok-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Bunga di halaman rumah membuat kebun terlihat asri.</p>",
+          "mis": "mis-bisd-idepokok-002"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Teks membahas jasa lebah bagi tanaman, ancaman yang membuat lebah berkurang, lalu cara menjaganya. Kalimat pada pilihan A mencakup ketiganya.</p><p>Pilihan B hanya mewakili satu paragraf. Pilihan C terlalu sempit karena teks juga menyebut cara lain, sedangkan pilihan D tidak dibahas teks.</p>"
+    },
+    {
+      "id": "bisd-idepokok-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menyimpulkan nilai yang terkandung dalam cerita",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-idepokok-bakulkue",
+      "pertanyaan": "<p>Nilai apa yang tampak dari perbuatan Dimas dan teman-temannya?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Kejujuran.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kedisiplinan.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Kepedulian.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Kesabaran.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Dimas dan teman-temannya melihat kesulitan Bu Sari, lalu mengumpulkan uang jajan dan membeli kue yang masih kering. Perbuatan itu menunjukkan kepedulian terhadap orang lain.</p><p>Kejujuran, kedisiplinan, dan kesabaran tidak menjadi inti persoalan pada cerita ini.</p>"
+    },
+    {
+      "id": "bisd-idepokok-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menentukan peristiwa yang menjadi awal masalah cerita",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-idepokok-bakulkue",
+      "pertanyaan": "<p>Peristiwa yang menjadi awal masalah pada cerita tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Bu Sari datang ke sekolah membawa payung besar.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Bakul kue Bu Sari terjatuh ke genangan air.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Dimas mengajak teman-temannya berkumpul.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Anak-anak membeli kue sebelum bel berbunyi.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Masalah cerita muncul ketika bakul kue terjatuh sehingga sebagian kue basah dan Bu Sari tidak memperoleh uang.</p><p>Pilihan A dan D adalah keadaan sebelum masalah muncul, sedangkan pilihan C adalah usaha menyelesaikan masalah.</p>"
+    },
+    {
+      "id": "bisd-idepokok-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Menentukan peristiwa yang dialami tokoh tertentu",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-idepokok-kotakpensil",
+      "pertanyaan": "<p>Peristiwa apa saja yang dialami Rani dalam cerita tersebut?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Menemukan kotak pensil di bawah bangku.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kehilangan uang iuran seragam sejak pagi.</p>",
+          "mis": "mis-bisd-idepokok-004"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Membawa kotak pensil itu ke ruang guru.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Rani menemukan kotak pensil, lalu membawanya ke ruang guru. Kedua peristiwa itu dialami Rani.</p><p>Yang kehilangan kotak berisi uang iuran seragam adalah Damar, bukan Rani.</p>"
+    },
+    {
+      "id": "bisd-idepokok-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Menalar amanat yang sesuai dengan isi cerita",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-idepokok-bakulkue",
+      "pertanyaan": "<p>Pernyataan mana saja yang sesuai dengan amanat cerita tersebut?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Menolong dapat dilakukan sesuai kemampuan kita.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Kesulitan orang lain layak kita perhatikan.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Menolong sebaiknya ditunda sampai kita kaya.</p>",
+          "mis": "mis-bisd-idepokok-003"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "B"
+      ],
+      "pembahasan": "<p>Anak-anak hanya mengumpulkan uang jajan seadanya, tetapi bantuan itu berarti bagi Bu Sari. Kalimat penutup cerita menegaskannya: menolong tidak harus menunggu menjadi orang kaya.</p><p>Pernyataan C justru kebalikan dari amanat cerita.</p>"
+    },
+    {
+      "id": "bisd-idepokok-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Memilah ide pokok dan gagasan pendukung",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-idepokok-lebah",
+      "pertanyaan": "<p>Tentukan ide pokok atau gagasan pendukung untuk setiap kalimat berikut sesuai paragrafnya masing-masing!</p>",
+      "perintah": "Klik pada pilihan Ide Pokok atau Gagasan Pendukung untuk setiap kalimat.",
+      "kategori": [
+        {
+          "kode": "I",
+          "label": "Ide Pokok"
+        },
+        {
+          "kode": "G",
+          "label": "Gagasan Pendukung"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Lebah memberi jasa besar bagi manusia.</p>",
+          "kategori": "I"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Pohon mangga, jambu, dan kopi sangat bergantung pada lebah.</p>",
+          "kategori": "G",
+          "mis": "mis-bisd-idepokok-002"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Sarang lebah liar sebaiknya tidak dibakar.</p>",
+          "kategori": "G",
+          "mis": "mis-bisd-idepokok-002"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Ada beberapa cara untuk menjaga lebah.</p>",
+          "kategori": "I"
+        }
+      ],
+      "pembahasan": "<p>P1 dan P4 adalah kalimat yang dijelaskan kalimat-kalimat lain pada paragrafnya, jadi keduanya ide pokok.</p><p>P2 berisi contoh pohon yang bergantung pada lebah, dan P3 berisi salah satu cara menjaga lebah. Keduanya rincian, jadi termasuk gagasan pendukung.</p>"
+    }
+  ]
+}

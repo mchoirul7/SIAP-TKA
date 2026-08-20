@@ -1,0 +1,418 @@
+{
+  "paket": {
+    "id": "pkg-latihan-bisd-ikhtisar-bagan",
+    "slug": "bahasa-indonesia-sd-ikhtisar-dan-bagan",
+    "title": "Menyusun Ulang Isi Teks dalam Ikhtisar dan Bagan",
+    "topic_id": "top-bi-sd-tekstual",
+    "subtopic_id": "st-bi-sd-ikhtisar-bagan",
+    "description": "Menyusun kembali isi teks menjadi bagan pengelompokan, bagan urutan langkah, dan ikhtisar satu kalimat, lalu memeriksa bagian bagan yang keliru.",
+    "summary": "10 soal bergaya TKA untuk memindahkan isi teks ke dalam bagan dan ikhtisar tanpa mengubah maknanya.",
+    "estimated_minutes": 30,
+    "difficulty_range": "dasar–lanjut",
+    "skills": [
+      "Memilih bagan yang sesuai dengan isi teks",
+      "Mengisi cabang bagan dengan contoh yang tepat",
+      "Menyusun langkah kerja menjadi bagan urutan",
+      "Menulis ikhtisar yang mewakili seluruh isi teks"
+    ],
+    "sort_order": 3
+  },
+  "submateri": {
+    "id": "con-bi-sd-ikhtisar-bagan",
+    "name": "Bagan pengelompokan, bagan urutan, dan ikhtisar teks informasi",
+    "description": "Memindahkan isi teks ke dalam bentuk bagan atau ikhtisar dengan menjaga hubungan kelompok–contoh dan urutan langkah tetap seperti pada teks."
+  },
+  "bacaan": [
+    {
+      "id": "psg-bisd-bagan-sampah",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 1, 2, dan 7",
+      "html": "<p><strong>Sampah di Sekitar Kita</strong></p><p>Setiap hari kita menghasilkan sampah. Sampah dapat dibagi menjadi dua kelompok. Kelompok itu adalah sampah organik dan sampah anorganik.</p><p>Sampah organik berasal dari makhluk hidup. Contohnya sisa sayur, kulit buah, dan daun kering. Sampah ini mudah membusuk. Sampah organik dapat diolah menjadi kompos.</p><p>Sampah anorganik tidak berasal dari makhluk hidup. Contohnya botol plastik, kaleng, dan pecahan kaca. Sampah ini sulit membusuk. Sampah anorganik masih dapat didaur ulang.</p><p>Sampah sebaiknya dipisahkan sejak dari rumah. Dua tempat sampah disediakan di dapur. Tempat pertama untuk sampah organik. Tempat kedua untuk sampah anorganik. Warna kedua tempat itu sengaja dibedakan. Dengan begitu, isinya tidak mudah tertukar.</p><p>Di sekolah kami, pemisahan dilakukan setiap hari. Petugas piket membawa sampah organik ke lubang kompos. Sampah anorganik dikumpulkan di bank sampah. Hasil penjualannya menjadi kas kelas.</p><p>Memisahkan sampah tampak sepele. Namun, kebiasaan itu membuat sampah lebih mudah diolah.</p>"
+    },
+    {
+      "id": "psg-bisd-bagan-telur",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 3, 4, dan 8",
+      "html": "<p><strong>Cara Membuat Telur Asin</strong></p><p>Telur asin banyak dijual di pasar. Ternyata, telur asin dapat dibuat sendiri di rumah. Bahannya pun mudah didapat.</p><p>Bahan yang disiapkan adalah telur bebek, garam, abu gosok, dan air. Alat yang dipakai berupa baskom, amplas halus, dan wadah tertutup. Telur bebek dipilih karena kulitnya lebih tebal. Kulit yang tebal membuat telur tidak mudah pecah.</p><p>Langkah pertama, telur bebek dicuci bersih. Telur digosok pelan dengan amplas halus. Penggosokan membuat pori-pori kulit telur terbuka.</p><p>Langkah kedua, garam dicampur dengan abu gosok. Air ditambahkan sedikit demi sedikit. Campuran diaduk sampai menjadi adonan liat.</p><p>Langkah ketiga, telur dibalut adonan. Tebal balutan kira-kira satu sentimeter. Telur lalu disusun di dalam wadah tertutup.</p><p>Langkah keempat, telur disimpan selama dua pekan. Wadah diletakkan di tempat sejuk. Setelah itu, balutan dibersihkan dan telur direbus.</p><p>Telur asin siap disantap bersama nasi hangat. Rasanya gurih dan tidak amis.</p>"
+    },
+    {
+      "id": "psg-bisd-bagan-kelapa",
+      "jenis": "informasi",
+      "label": "Teks untuk soal nomor 5, 6, 9, dan 10",
+      "html": "<p><strong>Pohon Serbaguna dari Pantai</strong></p><p>Pohon kelapa banyak tumbuh di tepi pantai. Batangnya tinggi dan daunnya melambai terkena angin. Hampir semua bagiannya berguna. Karena itu, kelapa disebut pohon serbaguna.</p><p>Daun kelapa yang muda disebut janur. Janur dipakai membuat hiasan dan ketupat. Daun yang tua dianyam menjadi atap gubuk. Tulang daunnya, yaitu lidi, dijadikan sapu. Pelepah daun yang kering dipakai menyalakan tungku.</p><p>Batang kelapa keras dan lurus. Batang itu dipakai membuat jembatan kecil. Batang juga dijadikan tiang rumah dan bangku.</p><p>Buah kelapa mempunyai banyak bagian. Air kelapa muda menjadi minuman segar. Daging buahnya diparut menjadi santan. Tempurungnya dibuat menjadi gayung dan arang. Sabutnya dijadikan keset dan tali.</p><p>Akar kelapa pun berguna. Akarnya berbentuk serabut dan menyebar luas. Akar itu menahan pasir agar tidak longsor.</p><p>Warga pantai merawat pohon kelapa dengan telaten. Pohon itu memberi bahan makanan sekaligus bahan bangunan. Karena itu, warga menanam pohon kelapa baru setiap tahun.</p>"
+    }
+  ],
+  "miskonsepsi": [
+    {
+      "id": "mis-bisd-bagan-001",
+      "label": "Menukar isi antarcabang bagan",
+      "description": "Siswa meletakkan contoh milik satu kelompok ke cabang kelompok lain, misalnya botol plastik dimasukkan ke cabang sampah organik.",
+      "insight": "Sebelum mengisi bagan, tandai kalimat sumbernya. Setiap contoh harus berada di cabang yang kalimatnya menyebutkan contoh itu."
+    },
+    {
+      "id": "mis-bisd-bagan-002",
+      "label": "Menukar kelompok dengan contohnya",
+      "description": "Siswa menaruh nama kelompok pada kotak contoh, atau sebaliknya, sehingga hubungan atas-bawah pada bagan menjadi terbalik.",
+      "insight": "Kotak di atas selalu berisi nama kelompok, kotak di bawahnya berisi anggota atau contohnya."
+    },
+    {
+      "id": "mis-bisd-bagan-003",
+      "label": "Menyusun langkah tidak sesuai urutan teks",
+      "description": "Siswa menyusun bagan langkah menurut kebiasaannya sendiri, bukan menurut urutan yang ditulis pada teks.",
+      "insight": "Cari kata penanda urutan seperti langkah pertama, kedua, lalu, dan setelah itu. Urutan bagan mengikuti penanda tersebut."
+    },
+    {
+      "id": "mis-bisd-bagan-004",
+      "label": "Mencampur alat dengan bahan",
+      "description": "Siswa memasukkan alat ke dalam daftar bahan atau sebaliknya, karena keduanya disebut berdekatan pada teks.",
+      "insight": "Bahan adalah yang habis atau berubah menjadi hasil; alat adalah yang dipakai berulang kali dan tetap utuh."
+    },
+    {
+      "id": "mis-bisd-bagan-005",
+      "label": "Memasukkan pendapat penulis ke dalam bagan fakta",
+      "description": "Siswa memasukkan kalimat pendapat atau ajakan penulis ke dalam bagan yang seharusnya berisi kelompok, contoh, atau langkah.",
+      "insight": "Bagan menampung informasi yang dapat dikelompokkan. Kalimat pendapat, ajakan, dan simpulan penulis tidak punya tempat di dalamnya."
+    }
+  ],
+  "soal": [
+    {
+      "id": "bisd-bagan-001",
+      "no": 1,
+      "tipe": "single",
+      "kompetensi": "Memilih bagan yang sesuai dengan pengelompokan pada teks",
+      "kesulitan": "dasar",
+      "penalaran": "pemahaman",
+      "bacaan_id": "psg-bisd-bagan-sampah",
+      "pertanyaan": "<p>Bagan mana yang sesuai untuk menggambarkan informasi pada teks tersebut?</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Sampah</p><ul><li>Sampah organik: sisa sayur, kulit buah, daun kering; mudah membusuk; diolah menjadi kompos</li></ul>",
+          "mis": "mis-bisd-bagan-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Sampah</p><ul><li>Sampah organik: botol plastik, kaleng, pecahan kaca; sulit membusuk; didaur ulang</li><li>Sampah anorganik: sisa sayur, kulit buah, daun kering; mudah membusuk; diolah menjadi kompos</li></ul>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sampah</p><ul><li>Sampah organik: sisa sayur, kulit buah, daun kering; mudah membusuk; diolah menjadi kompos</li><li>Sampah anorganik: botol plastik, kaleng, pecahan kaca; sulit membusuk; didaur ulang</li></ul>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Sampah</p><ul><li>Mudah membusuk: botol plastik, kaleng, pecahan kaca; dikumpulkan di bank sampah</li><li>Sulit membusuk: sisa sayur, kulit buah, daun kering; diolah menjadi kompos</li></ul>",
+          "mis": "mis-bisd-bagan-001"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks membagi sampah menjadi dua kelompok, lalu menyebut contoh dan cara mengolah tiap kelompok. Bagan C memuat keduanya dengan tepat.</p><p>Bagan A hanya memuat satu kelompok sehingga isinya belum lengkap. Bagan B menukar isi kedua kelompok, sedangkan bagan D memakai ciri sebagai nama kelompok dengan contoh yang tertukar.</p>"
+    },
+    {
+      "id": "bisd-bagan-002",
+      "no": 2,
+      "tipe": "single",
+      "kompetensi": "Melengkapi cabang bagan dengan informasi dari teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-sampah",
+      "pertanyaan": "<p>Perhatikan bagan berikut.</p><p>Sampah anorganik</p><ul><li>Ciri: sulit membusuk</li><li>Contoh: botol plastik, kaleng, pecahan kaca</li><li>Penanganan di sekolah: ….</li></ul><p>Bagian yang rumpang pada bagan tersebut sebaiknya diisi dengan ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>diolah menjadi kompos di lubang belakang</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>dibuang ke tempat sampah di dapur rumah</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>dipisahkan oleh petugas piket setiap hari</p>",
+          "mis": "mis-bisd-bagan-002"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>dikumpulkan di bank sampah lalu dijual</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Paragraf kelima menyebut penanganan sampah anorganik di sekolah: “Sampah anorganik dikumpulkan di bank sampah. Hasil penjualannya menjadi kas kelas.”</p><p>Pilihan A adalah penanganan sampah organik. Pilihan C benar terjadi di sekolah, tetapi berlaku untuk semua sampah, bukan khusus cabang anorganik.</p>"
+    },
+    {
+      "id": "bisd-bagan-003",
+      "no": 3,
+      "tipe": "single",
+      "kompetensi": "Menyusun bagan urutan langkah sesuai teks prosedur",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-telur",
+      "pertanyaan": "<p>Bagan urutan yang tepat untuk pembuatan telur asin pada teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>mencuci dan menggosok telur &rarr; membuat adonan garam &rarr; membalut telur &rarr; menyimpan dua pekan</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>membuat adonan garam &rarr; mencuci dan menggosok telur &rarr; menyimpan dua pekan &rarr; membalut telur</p>",
+          "mis": "mis-bisd-bagan-003"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>mencuci dan menggosok telur &rarr; membalut telur &rarr; membuat adonan garam &rarr; merebus telur</p>",
+          "mis": "mis-bisd-bagan-003"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>membuat adonan garam &rarr; membalut telur &rarr; menggosok telur dengan amplas &rarr; menyimpan dua pekan</p>",
+          "mis": "mis-bisd-bagan-003"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Teks memakai penanda urutan: langkah pertama mencuci dan menggosok telur, langkah kedua membuat adonan garam dan abu gosok, langkah ketiga membalut telur, langkah keempat menyimpannya selama dua pekan.</p><p>Pilihan lain memindahkan langkah ke tempat yang salah, misalnya membalut telur sebelum adonannya dibuat.</p>"
+    },
+    {
+      "id": "bisd-bagan-004",
+      "no": 4,
+      "tipe": "single",
+      "kompetensi": "Memisahkan bahan dan alat saat menyusun bagan",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-telur",
+      "pertanyaan": "<p>Kotak <strong>Bahan</strong> pada bagan pembuatan telur asin sebaiknya berisi ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>baskom, amplas halus, dan wadah tertutup</p>",
+          "mis": "mis-bisd-bagan-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>telur bebek, garam, abu gosok, dan air</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>telur bebek, amplas halus, dan baskom</p>",
+          "mis": "mis-bisd-bagan-004"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>garam, air, dan wadah tertutup</p>",
+          "mis": "mis-bisd-bagan-004"
+        }
+      ],
+      "kunci": "B",
+      "pembahasan": "<p>Teks memisahkan keduanya: bahan berupa telur bebek, garam, abu gosok, dan air; alat berupa baskom, amplas halus, dan wadah tertutup.</p><p>Pilihan A seluruhnya alat. Pilihan C dan D mencampur bahan dengan alat.</p>"
+    },
+    {
+      "id": "bisd-bagan-005",
+      "no": 5,
+      "tipe": "single",
+      "kompetensi": "Menyusun ikhtisar yang mewakili seluruh isi teks",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-kelapa",
+      "pertanyaan": "<p>Ikhtisar yang tepat untuk teks tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Pohon kelapa tumbuh subur di tepi pantai dan akarnya menahan pasir pantai.</p>",
+          "mis": "mis-bisd-bagan-002"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Daun kelapa muda dan daun tua dipakai membuat ketupat, atap gubuk, dan sapu.</p>",
+          "mis": "mis-bisd-bagan-002"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Hampir seluruh bagian pohon kelapa, dari daun hingga akar, dapat dimanfaatkan warga.</p>"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Warga pantai merawat pohon kelapa dengan telaten agar tetap tumbuh dan berbuah.</p>",
+          "mis": "mis-bisd-bagan-005"
+        }
+      ],
+      "kunci": "C",
+      "pembahasan": "<p>Teks membahas kegunaan daun, batang, buah, dan akar. Ikhtisar harus mewakili keempatnya sekaligus.</p><p>Pilihan A dan B hanya mewakili satu bagian saja, sedangkan pilihan D mengangkat kalimat penutup yang bukan isi utama teks.</p>"
+    },
+    {
+      "id": "bisd-bagan-006",
+      "no": 6,
+      "tipe": "single",
+      "kompetensi": "Menemukan bagian bagan yang tidak sesuai isi teks",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-bagan-kelapa",
+      "pertanyaan": "<p>Rani membuat bagan berikut untuk cabang <strong>Buah kelapa</strong>.</p><ul><li>air kelapa &rarr; minuman segar</li><li>daging buah &rarr; santan</li><li>tempurung &rarr; gayung</li><li>sabut &rarr; arang</li></ul><p>Pasangan yang keliru pada bagan tersebut adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>air kelapa &rarr; minuman segar</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>daging buah &rarr; santan</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>tempurung &rarr; gayung</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>sabut &rarr; arang</p>"
+        }
+      ],
+      "kunci": "D",
+      "pembahasan": "<p>Teks menyebut “Tempurungnya dibuat menjadi gayung dan arang. Sabutnya dijadikan keset dan tali.”</p><p>Jadi arang berasal dari tempurung, bukan dari sabut. Pasangan sabut &rarr; arang keliru, sedangkan tiga pasangan lainnya sudah tepat.</p>"
+    },
+    {
+      "id": "bisd-bagan-007",
+      "no": 7,
+      "tipe": "single",
+      "kompetensi": "Menalar informasi yang tidak dapat dimasukkan ke dalam bagan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-bagan-sampah",
+      "pertanyaan": "<p>Bagian teks yang <strong>tidak dapat</strong> dimasukkan ke dalam bagan pengelompokan sampah adalah ….</p>",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Memisahkan sampah tampak sepele.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Sampah organik dapat diolah menjadi kompos.</p>",
+          "mis": "mis-bisd-bagan-005"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Contoh sampah anorganik adalah botol plastik.</p>",
+          "mis": "mis-bisd-bagan-005"
+        },
+        {
+          "kode": "D",
+          "teks": "<p>Sampah anorganik masih dapat didaur ulang.</p>",
+          "mis": "mis-bisd-bagan-005"
+        }
+      ],
+      "kunci": "A",
+      "pembahasan": "<p>Bagan pengelompokan menampung ciri, contoh, dan cara pengolahan tiap kelompok. Pilihan B, C, dan D termasuk ketiganya.</p><p>Kalimat “Memisahkan sampah tampak sepele” adalah pendapat penulis. Kalimat itu tidak menjelaskan kelompok mana pun sehingga tidak punya tempat dalam bagan.</p>"
+    },
+    {
+      "id": "bisd-bagan-008",
+      "no": 8,
+      "tipe": "mcma",
+      "kompetensi": "Memilih isi kotak alat pada bagan teks prosedur",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-telur",
+      "pertanyaan": "<p>Apa saja yang tepat diletakkan pada kotak <strong>Alat</strong> dalam bagan pembuatan telur asin?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Abu gosok.</p>",
+          "mis": "mis-bisd-bagan-004"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Amplas halus.</p>"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Wadah tertutup.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "B",
+        "C"
+      ],
+      "pembahasan": "<p>Teks menyebut alatnya berupa baskom, amplas halus, dan wadah tertutup. Ketiganya dipakai berulang kali dan tetap utuh setelah dipakai.</p><p>Abu gosok dicampur garam menjadi adonan pembalut telur, jadi abu gosok termasuk bahan.</p>"
+    },
+    {
+      "id": "bisd-bagan-009",
+      "no": 9,
+      "tipe": "mcma",
+      "kompetensi": "Mengisi cabang bagan dengan hasil yang tepat",
+      "kesulitan": "menengah",
+      "penalaran": "penerapan",
+      "bacaan_id": "psg-bisd-bagan-kelapa",
+      "pertanyaan": "<p>Apa saja yang tepat diisikan pada cabang <strong>Daun</strong> dalam bagan pohon kelapa?</p>",
+      "perintah": "Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.",
+      "opsi": [
+        {
+          "kode": "A",
+          "teks": "<p>Hiasan dan ketupat dari janur.</p>"
+        },
+        {
+          "kode": "B",
+          "teks": "<p>Tiang rumah dan bangku.</p>",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "kode": "C",
+          "teks": "<p>Sapu dari lidi.</p>"
+        }
+      ],
+      "kunci_ganda": [
+        "A",
+        "C"
+      ],
+      "pembahasan": "<p>Janur adalah daun kelapa yang muda, dan lidi adalah tulang daunnya. Keduanya berada di cabang Daun.</p><p>Tiang rumah dan bangku dibuat dari batang kelapa, jadi tempatnya di cabang Batang.</p>"
+    },
+    {
+      "id": "bisd-bagan-010",
+      "no": 10,
+      "tipe": "category",
+      "kompetensi": "Menilai ketepatan penempatan informasi dalam bagan",
+      "kesulitan": "lanjut",
+      "penalaran": "penalaran",
+      "bacaan_id": "psg-bisd-bagan-kelapa",
+      "pertanyaan": "<p>Doni menyusun bagan pohon kelapa dengan empat cabang: Daun, Batang, Buah, dan Akar. Tentukan tepat atau tidak tepat penempatan berikut!</p>",
+      "perintah": "Klik pada pilihan Tepat atau Tidak Tepat untuk setiap pernyataan.",
+      "kategori": [
+        {
+          "kode": "T",
+          "label": "Tepat"
+        },
+        {
+          "kode": "X",
+          "label": "Tidak Tepat"
+        }
+      ],
+      "pernyataan": [
+        {
+          "id": "p1",
+          "teks": "<p>Sapu lidi diletakkan pada cabang Batang.</p>",
+          "kategori": "X",
+          "mis": "mis-bisd-bagan-001"
+        },
+        {
+          "id": "p2",
+          "teks": "<p>Santan diletakkan pada cabang Buah.</p>",
+          "kategori": "T"
+        },
+        {
+          "id": "p3",
+          "teks": "<p>Jembatan kecil diletakkan pada cabang Batang.</p>",
+          "kategori": "T"
+        },
+        {
+          "id": "p4",
+          "teks": "<p>Keset diletakkan pada cabang Akar.</p>",
+          "kategori": "X",
+          "mis": "mis-bisd-bagan-001"
+        }
+      ],
+      "pembahasan": "<p>P1 tidak tepat: lidi adalah tulang daun, jadi sapu lidi masuk cabang Daun.</p><p>P2 tepat: santan berasal dari daging buah kelapa.</p><p>P3 tepat: teks menyebut batang dipakai membuat jembatan kecil.</p><p>P4 tidak tepat: keset dibuat dari sabut, yaitu bagian buah. Akar hanya disebut sebagai penahan pasir.</p>"
+    }
+  ]
+}
