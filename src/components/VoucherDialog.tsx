@@ -127,6 +127,18 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
             aria-labelledby={titleId}
             className="relative w-full max-w-md rounded-t-xl border border-slate-200 bg-white p-6 shadow-raised sm:rounded-xl"
           >
+            {/* Penutup di pojok, bukan tombol "Batal" sebaris dengan tindakan
+                utama: membatalkan bukan pilihan yang setara dengan menukarkan
+                kode, dan tombol utamanya jadi memakai lebar penuh. */}
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Tutup"
+              className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+            >
+              <Icon name="close" className="h-5 w-5" strokeWidth={2.2} />
+            </button>
+
             {isRedeemed ? (
               <div>
                 <IconBadge name="unlock" tone="emerald" size="lg" />
@@ -138,19 +150,15 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     ? `Paket ${options.packageTitle} sudah terbuka bersama semua tryout dan latihan dalam seri mapel yang sama.`
                     : "Seri mapel dari kode akses ini sudah terbuka di perangkat ini."}
                 </p>
-                <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-                  <Link
-                    href={successHref}
-                    onClick={close}
-                    className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
-                  >
-                    <Icon name="layers" className="h-5 w-5" />
+                {/* "Tutup" tidak diulang di sini: silang di pojok sudah menutup dialog. */}
+                <Link
+                  href={successHref}
+                  onClick={close}
+                  className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
+                >
+                  <Icon name="layers" className="h-5 w-5" />
                   Buka Konten
-                  </Link>
-                  <Button variant="secondary" onClick={close} className="sm:w-auto">
-                    Tutup
-                  </Button>
-                </div>
+                </Link>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
@@ -196,15 +204,10 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                   )}
                 </div>
 
-                <div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">
-                  <Button type="submit" className="sm:flex-1" loading={isSubmitting}>
-                    {isSubmitting ? null : <Icon name="unlock" className="h-5 w-5" />}
-                    Gunakan Kode Akses
-                  </Button>
-                  <Button variant="secondary" onClick={close}>
-                    Batal
-                  </Button>
-                </div>
+                <Button type="submit" className="mt-6 w-full" loading={isSubmitting}>
+                  {isSubmitting ? null : <Icon name="unlock" className="h-5 w-5" />}
+                  Gunakan Kode Akses
+                </Button>
 
                 {/* Jalan keluar bagi yang belum punya kode. Ditaruh di bawah kedua
                     tombol supaya tidak bersaing dengan tindakan utama dialog ini,
