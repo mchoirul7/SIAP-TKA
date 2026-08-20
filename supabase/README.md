@@ -15,6 +15,12 @@ atau product voucher berubah.
 | 4 | `seed/tka-bahasa-indonesia-sma.sql` | 20 soal, 4 capaian, 6 bacaan |
 | 5 | `seed/tka-bahasa-inggris-sma.sql` | 20 soal, 4 capaian, 7 bacaan |
 | 6 | `seed/0004_kode_akses_per_mapel.sql` | kode akses MAT / BIN / BING / ALL |
+| 7 | `seed/tka-matematika-sd.sql` | 23 paket latihan SD, 230 soal, 115 miskonsepsi |
+| 8 | `seed/tka-bahasa-indonesia-sd.sql` | 10 paket latihan SD, 100 soal, 30 bacaan |
+| 9 | `seed/tka-matematika-miskonsepsi.sql` | penanda miskonsepsi 219 soal Matematika SMA |
+| 10 | `seed/tka-bahasa-indonesia-sma-miskonsepsi.sql` | 100 definisi + penanda 129 soal Bahasa Indonesia SMA |
+| 11 | `seed/tka-bahasa-inggris-sma-miskonsepsi.sql` | 90 definisi + penanda 110 soal Bahasa Inggris SMA |
+| 12 | `seed/0005_kode_akses_semua_paket.sql` | 5 kode SEMUA01–SEMUA05, 1000 penukaran, membuka seluruh paket |
 
 Berkas seed berdiri sendiri dan **aman dijalankan berulang** (`on conflict do update`),
 jadi memperbarui satu paket cukup menjalankan ulang berkasnya sendiri.
@@ -42,6 +48,51 @@ done
 Gambar sengaja **tidak** disimpan di Supabase Storage — lihat
 [`docs/supabase-migration.md`](../docs/supabase-migration.md) bagian 2b.
 
+## Paket latihan SD
+
+Paket SD ditulis sendiri, bukan diimpor, jadi berkas SQL-nya dihasilkan skrip lain:
+
+```bash
+node scripts/build-matematika-sd.mjs        # supabase/seed/tka-matematika-sd.sql
+node scripts/build-bahasa-indonesia-sd.mjs  # supabase/seed/tka-bahasa-indonesia-sd.sql
+```
+
+Sumbernya berupa satu berkas JSON per paket di `seed/matematika-sd/` dan
+`seed/bahasa-indonesia-sd/`, ditambah `_taksonomi.json` berisi mapel, seri, produk,
+capaian, dan materi. Jangan menyunting SQL-nya langsung: ubah JSON-nya lalu jalankan
+ulang skripnya.
+
+Kedua skrip menolak menulis SQL bila ada kunci jawaban yang tidak ada di daftar opsi,
+rujukan miskonsepsi atau bacaan yang menggantung, atau paket yang soalnya tidak
+sepuluh. Skrip Bahasa Indonesia juga melaporkan panjang tiap bacaan (kerangka asesmen
+TKA SD: 150–200 kata) dan sebaran huruf kunci.
+
+## Penandaan miskonsepsi
+
+Analisis hasil hanya dapat menyebut pola kesalahan bila tiap pengecoh sudah ditandai
+miskonsepsinya. Paket SD sudah membawa penandanya sejak berkas JSON-nya; paket SMA
+ditandai lewat berkas peta terpisah supaya teks soalnya tidak perlu ditulis ulang:
+
+```bash
+node scripts/generate-misconception-tags.mjs                     # seluruh mapel
+node scripts/generate-misconception-tags.mjs bahasa-inggris-sma   # satu mapel
+```
+
+Sumbernya `seed/<mapel>-miskonsepsi.map.json`, keluarannya `seed/<mapel>-miskonsepsi.sql`.
+Skrip membaca soal yang berlaku dari Supabase, lalu menolak menulis SQL bila ada soal
+atau kunci pilihan yang tidak dikenali, id miskonsepsi yang menggantung, atau kunci
+jawaban yang ikut ditandai — penanda hanya bermakna pada pengecoh.
+
+Peta boleh memuat definisi miskonsepsinya sendiri (`label`, `description`, `insight`).
+Bila ada, definisi itu ikut ditulis sebagai `insert ... on conflict do update`, jadi
+memperbaiki kalimat yang tampil di halaman hasil cukup dengan mengubah petanya lalu
+menjalankan skripnya ulang. Label dan insight ditulis dalam bahasa Indonesia sebagai
+kalimat utuh — keduanya tampil apa adanya pada narasi hasil, yang dibaca siswa dan
+orang tuanya.
+
+Penanda berupa angka berarti `mis-<misGroup>-<angka tiga digit>`. Paket tryout memakai
+id utuh karena satu paketnya mencakup banyak materi.
+
 ## Membuat kode voucher
 
 Kode akses yang dipakai sekarang dibuat lewat `seed/0004_kode_akses_per_mapel.sql`,
@@ -53,6 +104,14 @@ bukan satu per satu. Awalan kodenya menyatakan isinya:
 | `BIN01`–`BIN10` | Bahasa Indonesia SMA |
 | `BING01`–`BING10` | Bahasa Inggris SMA |
 | `ALL01`–`ALL10` | seluruh mata pelajaran yang aktif |
+| `SEMUA01`–`SEMUA05` | seluruh paket, 1000 penukaran per kode |
+
+Kode `SEMUA01`–`SEMUA05` dibuat terpisah lewat `seed/0005_kode_akses_semua_paket.sql`:
+kelimanya membuka seluruh paket dan masing-masing berlaku 1000 penukaran. Berkas itu
+juga melengkapi katalog `products` lebih dahulu — hak akses hanya dapat dijangkau
+voucher bila pasangan mapel+seri punya barisnya di sana, dan pasangan Bahasa Inggris
+SMA × Latihan TKA Bahasa Inggris SMA (9 paket) sebelumnya belum punya, sehingga
+kesembilan paket itu tidak terbuka oleh kode apa pun.
 
 Semuanya sekali pakai (`max_redemptions = 1`). Menambah stok cukup dengan mengubah
 angka pada `generate_series(1, 10)` di berkas itu lalu menjalankannya ulang —

@@ -1,7 +1,7 @@
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { statusBarClass, statusLabel } from "@/lib/format";
+import { statusBarClass, statusLabel, misconceptionLabel } from "@/lib/format";
 import { toneChip } from "@/lib/tone";
 import type { ConceptFocus } from "@/lib/scoring";
 
@@ -114,7 +114,7 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
                     Yang tadi keliru
                   </p>
                   <p className="mt-1 text-[15px] font-semibold leading-relaxed text-ink-900">
-                    {signal.label}
+                    {misconceptionLabel(signal.label)}
                     {signal.count > 1 ? (
                       <span className="ml-1.5 font-normal text-amber-800">
                         (muncul {signal.count}×)

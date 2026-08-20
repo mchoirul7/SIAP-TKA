@@ -1,0 +1,1232 @@
+{
+  "_readme": [
+    "Peta miskonsepsi pengecoh soal Bahasa Inggris SMA.",
+    "Label dan insight ditulis dalam bahasa Indonesia karena yang membaca hasilnya adalah siswa dan orang tuanya.",
+    "Nilai berupa angka berarti mis-<misGroup>-<angka tiga digit>; nilai berupa teks adalah id miskonsepsi utuh.",
+    "Kunci jawaban tidak boleh ditandai. Pada soal kategori, penanda berlaku bila pernyataannya dikelompokkan keliru.",
+    "Jalankan: node scripts/generate-misconception-tags.mjs bahasa-inggris-sma"
+  ],
+  "packages": [
+    {
+      "slug": "bahasa-inggris-explicit-information-classification",
+      "questionPrefix": "tka-eng01-auth-",
+      "misGroup": "eng-exp",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Mencocokkan kata tanpa memeriksa maknanya",
+          "description": "Memilih jawaban karena mengulang kata dari bacaan meskipun keseluruhan pernyataannya tidak didukung.",
+          "insight": "Periksa seluruh isi pilihan, bukan hanya kata yang sama dengan bacaan."
+        },
+        {
+          "n": 2,
+          "label": "Mengambil rincian dari bagian yang berdekatan",
+          "description": "Memilih rincian yang benar tetapi berasal dari kalimat lain sehingga tidak menjawab yang ditanyakan.",
+          "insight": "Cocokkan rincian yang diminta dengan kalimat atau bagian yang tepat."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap sebagian syarat sudah lengkap",
+          "description": "Memakai satu bagian dari syarat yang terdiri atas beberapa bagian dan melewatkan sisanya.",
+          "insight": "Periksa setiap bagian syarat pada pilihan terhadap isi bacaan."
+        },
+        {
+          "n": 4,
+          "label": "Memilih hal yang masuk akal tetapi tidak disebutkan",
+          "description": "Memilih informasi yang terdengar wajar di kehidupan nyata meskipun tidak dinyatakan bacaan.",
+          "insight": "Untuk soal informasi tersurat, jawaban harus punya bukti langsung di dalam bacaan."
+        },
+        {
+          "n": 5,
+          "label": "Mengelompokkan berdasarkan dugaan sendiri",
+          "description": "Mengelompokkan sesuatu memakai pengetahuan luar, bukan kategori yang dijelaskan bacaan.",
+          "insight": "Kelompokkan hanya berdasarkan ciri yang disebutkan bacaan."
+        },
+        {
+          "n": 6,
+          "label": "Keliru membedakan dua kategori yang berdekatan",
+          "description": "Menukar dua kategori karena keduanya memiliki tujuan atau ciri yang mirip.",
+          "insight": "Tentukan lebih dahulu ciri pembeda tiap kategori sebelum mengelompokkan."
+        },
+        {
+          "n": 7,
+          "label": "Menukar pelaku dengan tindakannya",
+          "description": "Menghubungkan tindakan atau tanggung jawab kepada orang atau pihak yang salah.",
+          "insight": "Telusuri siapa yang melakukan setiap tindakan yang disebutkan bacaan."
+        },
+        {
+          "n": 8,
+          "label": "Menukar urutan waktu kejadian",
+          "description": "Tertukar antara yang terjadi sebelum, saat, dan sesudah suatu peristiwa.",
+          "insight": "Gunakan penanda waktu dan kata urutan yang ada di bacaan."
+        },
+        {
+          "n": 9,
+          "label": "Melewatkan kata not, only, dan except",
+          "description": "Melewatkan kata pembatas atau pengecualian sehingga maknanya terbalik.",
+          "insight": "Perhatikan kata pembatas dan kata pertentangan dengan teliti."
+        },
+        {
+          "n": 10,
+          "label": "Menambah pilihan yang hanya berkaitan dengan topik",
+          "description": "Menandai pilihan tambahan karena masih setopik walaupun tidak didukung bacaan.",
+          "insight": "Pada soal jawaban ganda, uji setiap pilihan satu per satu."
+        }
+      ],
+      "questions": {
+        "001": {
+          "A": 6,
+          "C": 9,
+          "D": 9,
+          "E": 7
+        },
+        "002": {
+          "B": 9,
+          "E": 9
+        },
+        "003": {
+          "A": 6,
+          "B": 6,
+          "C": 6
+        },
+        "004": {
+          "A": 6,
+          "C": 4,
+          "D": 7,
+          "E": 6
+        },
+        "005": {
+          "A": 6,
+          "B": 6,
+          "C": 6,
+          "D": 6
+        },
+        "006": {
+          "B": 10,
+          "E": 10
+        },
+        "007": {
+          "A": 6,
+          "B": 6,
+          "C": 6,
+          "D": 6
+        },
+        "008": {
+          "A": 4,
+          "C": 4,
+          "D": 2,
+          "E": 2
+        },
+        "009": {
+          "A": 7,
+          "B": 7,
+          "C": 7,
+          "D": 7
+        },
+        "010": {
+          "B": 9,
+          "D": 9
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-outline-summary",
+      "questionPrefix": "tka-eng02-auth-",
+      "misGroup": "eng-sum",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap rincian kecil sebagai gagasan utama",
+          "description": "Memperlakukan contoh, angka, atau rincian pendukung sebagai gagasan pokok.",
+          "insight": "Bedakan gagasan pokok sebuah bagian dari contoh yang memperjelasnya."
+        },
+        {
+          "n": 2,
+          "label": "Merangkum hanya satu bagian teks",
+          "description": "Meringkas hanya satu paragraf dari teks yang terdiri atas beberapa paragraf.",
+          "insight": "Ringkasan yang baik mewakili keseluruhan teks, bukan satu bagian saja."
+        },
+        {
+          "n": 3,
+          "label": "Menambahkan simpulan sendiri ke dalam ringkasan",
+          "description": "Menambahkan simpulan atau penilaian yang tidak dinyatakan teks.",
+          "insight": "Ringkasan harus setia pada informasi yang dinyatakan teks, tanpa tambahan penilaian."
+        },
+        {
+          "n": 4,
+          "label": "Mengubah urutan langkah atau peristiwa",
+          "description": "Menukar urutan tahap atau peristiwa sehingga susunan teks berubah.",
+          "insight": "Pertahankan urutannya bila teks memang disusun menurut tahapan atau waktu."
+        },
+        {
+          "n": 5,
+          "label": "Mempertahankan terlalu banyak contoh",
+          "description": "Menyimpan banyak contoh tetapi menghilangkan gagasan umum yang diwakilinya.",
+          "insight": "Padatkan contoh menjadi gagasan umum yang diwakilinya."
+        },
+        {
+          "n": 6,
+          "label": "Membalik sebab dengan akibat",
+          "description": "Menukar sebab dengan akibatnya ketika menyusun kerangka atau ringkasan.",
+          "insight": "Telusuri keadaan mana yang menghasilkan akibat mana."
+        },
+        {
+          "n": 7,
+          "label": "Membuat ringkasan lebih luas daripada teksnya",
+          "description": "Menyatakan klaim teks secara lebih luas atau lebih kuat daripada aslinya.",
+          "insight": "Pertahankan batas dan syarat yang disebutkan teks aslinya."
+        },
+        {
+          "n": 8,
+          "label": "Memilih judul, bukan ringkasan",
+          "description": "Memilih label topik yang kabur tanpa pengembangan penting dari teksnya.",
+          "insight": "Ringkasan memerlukan pesan utama beserta pengembangannya, bukan hanya label topik."
+        },
+        {
+          "n": 9,
+          "label": "Menjadikan simpulan akhir sebagai seluruh ringkasan",
+          "description": "Memakai hanya saran atau hasil akhir sebagai keseluruhan ringkasan.",
+          "insight": "Sertakan keadaan atau alasan yang menuntun ke simpulan itu."
+        },
+        {
+          "n": 10,
+          "label": "Menempatkan rincian sederajat dengan bagian utama",
+          "description": "Menempatkan rincian pendukung pada tingkat yang sama dengan bagian utama.",
+          "insight": "Susun bertingkat: gagasan utama lebih dahulu, rinciannya di bawahnya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 7,
+          "C": 1,
+          "D": 3,
+          "E": 10
+        },
+        "002": {
+          "B": 7,
+          "C": 3,
+          "D": 1,
+          "E": 3
+        },
+        "003": {
+          "A": 4,
+          "B": 4,
+          "C": 4,
+          "D": 4
+        },
+        "004": {
+          "B": 5,
+          "E": 7
+        },
+        "005": {
+          "B": 1,
+          "C": 1,
+          "D": 10,
+          "E": 10
+        },
+        "006": {
+          "B": 7,
+          "C": 1,
+          "D": 1,
+          "E": 3
+        },
+        "007": {
+          "A": 10,
+          "B": 10,
+          "C": 10,
+          "D": 10
+        },
+        "008": {
+          "C": 1,
+          "E": 7
+        },
+        "009": {
+          "B": 10,
+          "C": 10,
+          "D": 10,
+          "E": 10
+        },
+        "010": {
+          "B": 2,
+          "C": 9,
+          "D": 2,
+          "E": 9
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-synthesising-information",
+      "questionPrefix": "tka-eng03-auth-",
+      "misGroup": "eng-syn",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menyimpulkan hanya dari satu sumber",
+          "description": "Menjawab soal gabungan dua sumber dengan memakai satu sumber saja.",
+          "insight": "Periksa lebih dahulu sumbangan tiap sumber sebelum menarik simpulan."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap dua pernyataan setopik sudah sepakat",
+          "description": "Menganggap dua pernyataan yang berkaitan menyampaikan klaim yang sama.",
+          "insight": "Bedakan topik yang sama dari kesepakatan isi yang sebenarnya."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap penekanan berbeda sebagai pertentangan",
+          "description": "Menyimpulkan kedua sumber saling bertentangan hanya karena penekanannya berbeda.",
+          "insight": "Dua sumber dapat saling melengkapi meskipun tidak menyatakan hal yang sama."
+        },
+        {
+          "n": 4,
+          "label": "Menghubungkan dua sumber tanpa dasar",
+          "description": "Menambahkan hubungan antarsumber yang tidak ditopang oleh keduanya.",
+          "insight": "Setiap bagian simpulan gabungan harus dapat ditelusuri ke informasi yang diberikan."
+        },
+        {
+          "n": 5,
+          "label": "Melebarkan cakupan simpulan",
+          "description": "Menyatakan simpulan lebih luas atau lebih mutlak daripada isi sumbernya.",
+          "insight": "Pertahankan batas yang dinyatakan sumbernya; jangan menambah kata semua, selalu, atau satu-satunya."
+        },
+        {
+          "n": 6,
+          "label": "Menukar isi antarsumber",
+          "description": "Menyebut informasi berasal dari sumber yang salah atau menukar perannya.",
+          "insight": "Catat informasi mana yang berasal dari sumber mana sebelum menjawab."
+        },
+        {
+          "n": 7,
+          "label": "Membiarkan satu rincian menguasai simpulan",
+          "description": "Menyusun simpulan dari satu rincian yang menonjol saja.",
+          "insight": "Simpulan gabungan harus mewakili gambaran keseluruhan, bukan satu rincian yang menonjol."
+        },
+        {
+          "n": 8,
+          "label": "Memberi saran tanpa syaratnya",
+          "description": "Memberi saran tanpa menyebut keadaan yang membuat saran itu berlaku.",
+          "insight": "Saran perlu menyebut keadaan yang membuat saran itu berlaku."
+        },
+        {
+          "n": 9,
+          "label": "Terjebak kata yang sama pada kedua sumber",
+          "description": "Menganggap dua sumber sepakat karena memakai kata yang sama.",
+          "insight": "Kata yang sama belum berarti maksudnya sama; periksa pernyataan selengkapnya."
+        },
+        {
+          "n": 10,
+          "label": "Mengganti isi sumber dengan pengetahuan sendiri",
+          "description": "Menjawab dengan pengetahuan di luar sumber yang disediakan.",
+          "insight": "Jawaban harus bertumpu pada isi sumber yang diberikan, bukan pengetahuan di luarnya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 4,
+          "C": 5,
+          "D": 7,
+          "E": 8
+        },
+        "002": {
+          "B": 5,
+          "D": 4
+        },
+        "003": {
+          "A": 6,
+          "B": 6,
+          "C": 6,
+          "D": 6
+        },
+        "004": {
+          "B": 5,
+          "C": 4,
+          "D": 7,
+          "E": 8
+        },
+        "005": {
+          "B": 4,
+          "D": 5
+        },
+        "006": {
+          "B": 6,
+          "C": 6,
+          "D": 6,
+          "E": 6
+        },
+        "007": {
+          "B": 8,
+          "C": 4,
+          "D": 7,
+          "E": 5
+        },
+        "008": {
+          "B": 5,
+          "E": 4
+        },
+        "009": {
+          "A": 6,
+          "B": 6,
+          "C": 6,
+          "D": 6
+        },
+        "010": {
+          "B": 4,
+          "C": 5,
+          "D": 6,
+          "E": 10
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-inferential-main-support",
+      "questionPrefix": "tka-eng04-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng04-01",
+          "label": "Menyebut topik, bukan gagasan utamanya",
+          "description": "Memilih topik yang luas, bukan apa yang penulis katakan tentang topik itu.",
+          "insight": "Gagasan utama menyatakan apa yang penulis katakan tentang topiknya, bukan topiknya saja."
+        },
+        {
+          "id": "mis-eng04-02",
+          "label": "Menjadikan satu rincian sebagai gagasan utama",
+          "description": "Menaikkan satu rincian yang benar menjadi gagasan utama teks.",
+          "insight": "Rincian yang benar belum tentu gagasan utama; cari gagasan yang menaungi seluruh teks."
+        },
+        {
+          "id": "mis-eng04-03",
+          "label": "Menyimpulkan lebih kuat daripada buktinya",
+          "description": "Membuat simpulan lebih luas atau lebih tegas daripada bukti yang tersedia.",
+          "insight": "Pertahankan batas buktinya; hindari kata semua, selalu, dan seharusnya bila teks tidak menyatakannya."
+        },
+        {
+          "id": "mis-eng04-04",
+          "label": "Memakai dugaan dari luar teks",
+          "description": "Memakai anggapan dari luar teks, bukan petunjuk yang tersedia di dalamnya.",
+          "insight": "Gunakan petunjuk di dalam teks, bukan hal yang biasa terjadi di luar teks."
+        },
+        {
+          "id": "mis-eng04-05",
+          "label": "Menukar tujuan penulisan dengan isi tulisan",
+          "description": "Menyebut apa yang dibahas teks, bukan alasan teks itu ditulis.",
+          "insight": "Tujuan penulisan menjawab mengapa teks ditulis, bukan apa yang dibahasnya."
+        },
+        {
+          "id": "mis-eng04-06",
+          "label": "Menentukan sasaran pembaca dari topiknya saja",
+          "description": "Menyimpulkan sasaran pembaca hanya dari topik teks.",
+          "insight": "Sasaran pembaca terlihat dari cara teks menjelaskan dan siapa yang dibantunya."
+        },
+        {
+          "id": "mis-eng04-07",
+          "label": "Memilih informasi berkaitan yang tidak memperkuat",
+          "description": "Memilih informasi yang masih berkaitan tetapi tidak memperkuat gagasannya.",
+          "insight": "Bukti pendukung harus membuat gagasannya lebih kuat, bukan hanya setopik."
+        },
+        {
+          "id": "mis-eng04-08",
+          "label": "Memilih rincian yang justru melemahkan",
+          "description": "Memilih rincian yang melemahkan alasan yang sedang dibangun teks.",
+          "insight": "Periksa apakah rincian yang dipilih mendukung atau justru melawan gagasan itu."
+        },
+        {
+          "id": "mis-eng04-09",
+          "label": "Mengubah pesan cerita menjadi aturan mutlak",
+          "description": "Mengubah pesan yang berlaku pada keadaan tertentu menjadi aturan untuk semua keadaan.",
+          "insight": "Pesan cerita berlaku pada keadaannya; hindari mengubahnya menjadi aturan untuk semua hal."
+        },
+        {
+          "id": "mis-eng04-10",
+          "label": "Menyimpulkan dari satu petunjuk saja",
+          "description": "Memakai satu kalimat atau frasa dan mengabaikan bukti lain di dalam teks.",
+          "insight": "Kumpulkan beberapa petunjuk yang searah sebelum menyimpulkan."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng04-03",
+          "C": "mis-eng04-02",
+          "D": "mis-eng04-02",
+          "E": "mis-eng04-10"
+        },
+        "002": {
+          "B": "mis-eng04-07",
+          "C": "mis-eng04-07",
+          "D": "mis-eng04-07",
+          "E": "mis-eng04-07"
+        },
+        "003": {
+          "B": "mis-eng04-03",
+          "C": "mis-eng04-05",
+          "D": "mis-eng04-05",
+          "E": "mis-eng04-03"
+        },
+        "004": {
+          "C": "mis-eng04-07",
+          "E": "mis-eng04-07"
+        },
+        "005": {
+          "B": "mis-eng04-09",
+          "C": "mis-eng04-04",
+          "D": "mis-eng04-04",
+          "E": "mis-eng04-09"
+        },
+        "006": {
+          "B": "mis-eng04-07",
+          "C": "mis-eng04-07",
+          "D": "mis-eng04-07",
+          "E": "mis-eng04-08"
+        },
+        "007": {
+          "B": "mis-eng04-03",
+          "C": "mis-eng04-09",
+          "D": "mis-eng04-10",
+          "E": "mis-eng04-02"
+        },
+        "008": {
+          "D": "mis-eng04-07",
+          "E": "mis-eng04-07"
+        },
+        "009": {
+          "B": "mis-eng04-06",
+          "C": "mis-eng04-06",
+          "D": "mis-eng04-06",
+          "E": "mis-eng04-06"
+        },
+        "010": {
+          "B": "mis-eng04-03",
+          "C": "mis-eng04-02",
+          "D": "mis-eng04-02",
+          "E": "mis-eng04-03"
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-inferential-sequence-comparison",
+      "questionPrefix": "tka-eng05-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng05-01",
+          "label": "Memilih kelanjutan yang mungkin tetapi jauh dari arah teks",
+          "description": "Memilih kelanjutan yang mungkin terjadi tetapi hubungannya lemah dengan arah teks.",
+          "insight": "Pilih kelanjutan yang menyambung arah dan tujuan teks, bukan yang sekadar mungkin terjadi."
+        },
+        {
+          "id": "mis-eng05-02",
+          "label": "Membalik urutan sebab, persiapan, tindakan, dan hasil",
+          "description": "Menukar urutan sebab, persiapan, tindakan, atau hasil dalam rangkaian yang disimpulkan.",
+          "insight": "Telusuri urutan yang dinyatakan teks: apa yang menyiapkan apa, dan apa yang menghasilkan apa."
+        },
+        {
+          "id": "mis-eng05-03",
+          "label": "Memprediksi hal baru yang tidak berhubungan",
+          "description": "Memilih kelanjutan yang memunculkan persoalan yang tidak berkaitan.",
+          "insight": "Kelanjutan harus tetap pada persoalan yang sedang dibahas teks."
+        },
+        {
+          "id": "mis-eng05-04",
+          "label": "Menganggap prediksi yang wajar sebagai kepastian",
+          "description": "Memperlakukan prediksi yang masuk akal sebagai hal yang pasti terjadi.",
+          "insight": "Prediksi tetap berupa kemungkinan; hindari kata pasti, semua, dan langsung."
+        },
+        {
+          "id": "mis-eng05-05",
+          "label": "Membandingkan lewat kemiripan yang sepele",
+          "description": "Memilih kemiripan kecil, bukan perbandingan yang bermakna.",
+          "insight": "Bandingkan hal yang benar-benar penting bagi kedua sisi, bukan kemiripan kecil."
+        },
+        {
+          "id": "mis-eng05-06",
+          "label": "Membuat perbedaan yang tidak dinyatakan teks",
+          "description": "Menyimpulkan perbedaan yang tidak ditopang teks.",
+          "insight": "Perbedaan harus ada buktinya di dalam teks, bukan disimpulkan sendiri."
+        },
+        {
+          "id": "mis-eng05-07",
+          "label": "Menjelaskan satu sisi saja",
+          "description": "Menggambarkan satu hal saja padahal yang diminta membandingkan keduanya.",
+          "insight": "Perbandingan menyebut kedua sisi, bukan menggambarkan satu sisi saja."
+        },
+        {
+          "id": "mis-eng05-08",
+          "label": "Mengubah perbedaan bersyarat menjadi mutlak",
+          "description": "Mengubah perbedaan yang berlaku pada keadaan tertentu menjadi klaim selalu atau tidak pernah.",
+          "insight": "Pertahankan syaratnya; hindari mengubah kadang menjadi selalu atau tidak pernah."
+        },
+        {
+          "id": "mis-eng05-09",
+          "label": "Membiarkan satu detail menentukan seluruh perbandingan",
+          "description": "Memakai satu detail mencolok untuk menyimpulkan seluruh perbandingan.",
+          "insight": "Satu detail mencolok tidak cukup untuk menyimpulkan perbandingan keseluruhan."
+        },
+        {
+          "id": "mis-eng05-10",
+          "label": "Menganggap urutan penyebutan sebagai urutan kejadian",
+          "description": "Menganggap urutan penyebutan dalam teks selalu sama dengan urutan kejadiannya.",
+          "insight": "Urutan penyebutan dalam teks belum tentu urutan kejadiannya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng05-04",
+          "C": "mis-eng05-02",
+          "D": "mis-eng05-03",
+          "E": "mis-eng05-04"
+        },
+        "002": {
+          "B": "mis-eng05-02",
+          "C": "mis-eng05-10",
+          "D": "mis-eng05-02",
+          "E": "mis-eng05-10"
+        },
+        "003": {
+          "B": "mis-eng05-05",
+          "C": "mis-eng05-05",
+          "D": "mis-eng05-06",
+          "E": "mis-eng05-08"
+        },
+        "004": {
+          "C": "mis-eng05-06",
+          "E": "mis-eng05-08"
+        },
+        "005": {
+          "B": "mis-eng05-03",
+          "C": "mis-eng05-04",
+          "D": "mis-eng05-01",
+          "E": "mis-eng05-04"
+        },
+        "006": {
+          "B": "mis-eng05-10",
+          "C": "mis-eng05-06",
+          "D": "mis-eng05-10",
+          "E": "mis-eng05-02"
+        },
+        "007": {
+          "B": "mis-eng05-08",
+          "C": "mis-eng05-08",
+          "D": "mis-eng05-09",
+          "E": "mis-eng05-06"
+        },
+        "008": {
+          "D": "mis-eng05-06",
+          "E": "mis-eng05-05"
+        },
+        "009": {
+          "B": "mis-eng05-08",
+          "C": "mis-eng05-06",
+          "D": "mis-eng05-06",
+          "E": "mis-eng05-08"
+        },
+        "010": {
+          "B": "mis-eng05-03",
+          "C": "mis-eng05-01",
+          "D": "mis-eng05-09",
+          "E": "mis-eng05-01"
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-inferential-cause-character",
+      "questionPrefix": "tka-eng06-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng06-01",
+          "label": "Menganggap dua hal yang terjadi bersamaan sebagai sebab-akibat",
+          "description": "Menganggap dua kejadian yang muncul bersamaan membuktikan yang satu menyebabkan yang lain.",
+          "insight": "Kejadian yang muncul bersamaan belum membuktikan yang satu menyebabkan yang lain."
+        },
+        {
+          "id": "mis-eng06-02",
+          "label": "Menjadikan akibat sebagai penyebabnya",
+          "description": "Memperlakukan hasil sebagai penyebab dari keadaan yang justru menghasilkannya.",
+          "insight": "Telusuri keadaan mana yang lebih dahulu ada dan menghasilkan keadaan berikutnya."
+        },
+        {
+          "id": "mis-eng06-03",
+          "label": "Menganggap satu hal sebagai penyebab tunggal",
+          "description": "Mengabaikan beberapa faktor yang berperan dan memilih satu rincian sebagai penyebab seluruhnya.",
+          "insight": "Periksa apakah ada beberapa faktor yang bersama-sama menimbulkan keadaan itu."
+        },
+        {
+          "id": "mis-eng06-04",
+          "label": "Memakai penyebab dari luar teks",
+          "description": "Memakai penjelasan yang masuk akal tetapi tidak ditopang bacaan.",
+          "insight": "Penyebab yang dipilih harus disebutkan atau ditunjukkan bacaan, bukan dugaan sendiri."
+        },
+        {
+          "id": "mis-eng06-05",
+          "label": "Berhenti pada akibat yang langsung terlihat",
+          "description": "Menyebut akibat langsung tetapi melewatkan akibat lanjutan yang lebih penting.",
+          "insight": "Cari juga akibat lanjutan yang lebih penting, bukan hanya akibat yang langsung terjadi."
+        },
+        {
+          "id": "mis-eng06-06",
+          "label": "Menyimpulkan watak dari satu tindakan",
+          "description": "Menyimpulkan watak tokoh dari satu tindakan tanpa memeriksa pola tindakannya.",
+          "insight": "Periksa pola tindakan tokoh di beberapa bagian sebelum menyimpulkan wataknya."
+        },
+        {
+          "id": "mis-eng06-07",
+          "label": "Menganggap perasaan sesaat sebagai watak",
+          "description": "Menukar perasaan yang muncul sesaat dengan watak yang menetap.",
+          "insight": "Bedakan perasaan yang muncul sesaat dari watak yang menetap."
+        },
+        {
+          "id": "mis-eng06-08",
+          "label": "Menilai tokoh secara mutlak dari bukti terbatas",
+          "description": "Mengubah bukti yang terbatas menjadi penilaian yang mutlak, baik positif maupun negatif.",
+          "insight": "Bukti yang terbatas hanya mendukung simpulan yang terbatas, bukan penilaian mutlak."
+        },
+        {
+          "id": "mis-eng06-09",
+          "label": "Mengikuti ucapan tokoh dan mengabaikan tindakannya",
+          "description": "Menerima ucapan tokoh dan melewatkan bukti tindakan yang lebih kuat atau berlawanan.",
+          "insight": "Bila ucapan dan tindakan tokoh berbeda, tindakannya adalah bukti yang lebih kuat."
+        },
+        {
+          "id": "mis-eng06-10",
+          "label": "Menilai watak hanya dari berhasil atau gagalnya",
+          "description": "Menyimpulkan watak tokoh hanya dari berhasil atau tidaknya hasil akhir.",
+          "insight": "Watak terlihat dari cara tokoh bertindak, bukan dari hasil akhirnya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng06-04",
+          "C": "mis-eng06-03",
+          "D": "mis-eng06-01",
+          "E": "mis-eng06-04"
+        },
+        "002": {
+          "C": "mis-eng06-01",
+          "E": "mis-eng06-02"
+        },
+        "003": {
+          "B": "mis-eng06-08",
+          "C": "mis-eng06-08",
+          "D": "mis-eng06-06",
+          "E": "mis-eng06-07"
+        },
+        "004": {
+          "B": "mis-eng06-06",
+          "C": "mis-eng06-06",
+          "D": "mis-eng06-09",
+          "E": "mis-eng06-09"
+        },
+        "005": {
+          "B": "mis-eng06-04",
+          "C": "mis-eng06-04",
+          "D": "mis-eng06-04",
+          "E": "mis-eng06-03"
+        },
+        "006": {
+          "B": "mis-eng06-04",
+          "C": "mis-eng06-02",
+          "D": "mis-eng06-04",
+          "E": "mis-eng06-03"
+        },
+        "007": {
+          "B": "mis-eng06-08",
+          "C": "mis-eng06-07",
+          "D": "mis-eng06-06",
+          "E": "mis-eng06-09"
+        },
+        "008": {
+          "D": "mis-eng06-06",
+          "E": "mis-eng06-07"
+        },
+        "009": {
+          "B": "mis-eng06-01",
+          "C": "mis-eng06-05",
+          "D": "mis-eng06-04",
+          "E": "mis-eng06-02"
+        },
+        "010": {
+          "B": "mis-eng06-08",
+          "C": "mis-eng06-08",
+          "D": "mis-eng06-02",
+          "E": "mis-eng06-10"
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-predicting-story-outcomes",
+      "questionPrefix": "tka-eng07-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng07-01",
+          "label": "Memilih akhir yang paling dramatis",
+          "description": "Memilih akhir yang paling mengejutkan, bukan yang paling ditopang petunjuk cerita.",
+          "insight": "Pilih akhir yang paling ditopang petunjuk cerita, bukan yang paling mengejutkan."
+        },
+        {
+          "id": "mis-eng07-02",
+          "label": "Memilih akhir yang paling diinginkan",
+          "description": "Memilih akhir yang terasa paling menyenangkan meskipun teks tidak menopangnya.",
+          "insight": "Akhir cerita ditentukan petunjuk teks, bukan oleh apa yang terasa paling menyenangkan."
+        },
+        {
+          "id": "mis-eng07-03",
+          "label": "Memprediksi dari satu petunjuk saja",
+          "description": "Memprediksi dari satu rincian dan mengabaikan jalan cerita secara keseluruhan.",
+          "insight": "Gabungkan beberapa petunjuk dari keseluruhan cerita sebelum memprediksi."
+        },
+        {
+          "id": "mis-eng07-04",
+          "label": "Memprediksi tindakan yang bertentangan dengan watak tokoh",
+          "description": "Memprediksi tindakan yang berlawanan dengan keputusan tokoh sebelumnya.",
+          "insight": "Prediksi harus sejalan dengan keputusan yang sudah diambil tokoh sebelumnya."
+        },
+        {
+          "id": "mis-eng07-05",
+          "label": "Memunculkan kejadian baru yang tidak disiapkan cerita",
+          "description": "Memunculkan orang, aturan, kecelakaan, atau penyelesaian yang tidak dipersiapkan cerita.",
+          "insight": "Jangan menambah tokoh, aturan, atau kebetulan yang tidak dipersiapkan cerita."
+        },
+        {
+          "id": "mis-eng07-06",
+          "label": "Memilih akhir yang tidak menyelesaikan masalah utamanya",
+          "description": "Memilih akhir yang tidak menjawab persoalan pokok yang belum selesai.",
+          "insight": "Akhir cerita harus menjawab persoalan pokok yang belum selesai."
+        },
+        {
+          "id": "mis-eng07-07",
+          "label": "Mengubah kemungkinan menjadi kepastian",
+          "description": "Mengubah hasil yang mungkin terjadi menjadi hasil yang mutlak atau berlebihan.",
+          "insight": "Prediksi tetap berupa kemungkinan; hindari kata selalu, tidak pernah, dan pasti."
+        },
+        {
+          "id": "mis-eng07-08",
+          "label": "Memprediksi tokoh kembali ke keadaan awalnya",
+          "description": "Memprediksi tokoh kembali ke keadaan awal meskipun sudah ada perkembangan.",
+          "insight": "Perkembangan yang sudah terjadi pada tokoh tidak hilang begitu saja."
+        },
+        {
+          "id": "mis-eng07-09",
+          "label": "Menganggap kejadian berikutnya sebagai penyelesaian",
+          "description": "Menganggap kejadian kecil berikutnya sudah menyelesaikan seluruh persoalan.",
+          "insight": "Kejadian kecil berikutnya belum tentu menyelesaikan seluruh persoalan."
+        },
+        {
+          "id": "mis-eng07-10",
+          "label": "Memilih akhir yang memberi ganjaran atau hukuman",
+          "description": "Memilih akhir karena tokoh layak diberi ganjaran atau hukuman, bukan karena buktinya.",
+          "insight": "Akhir cerita mengikuti petunjuk teks, bukan rasa keadilan pembaca."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng07-08",
+          "C": "mis-eng07-01",
+          "D": "mis-eng07-04",
+          "E": "mis-eng07-05"
+        },
+        "002": {
+          "B": "mis-eng07-04",
+          "C": "mis-eng07-08",
+          "D": "mis-eng07-05",
+          "E": "mis-eng07-06"
+        },
+        "003": {
+          "B": "mis-eng07-04",
+          "C": "mis-eng07-05",
+          "D": "mis-eng07-01",
+          "E": "mis-eng07-06"
+        },
+        "004": {
+          "C": "mis-eng07-04",
+          "E": "mis-eng07-07"
+        },
+        "005": {
+          "B": "mis-eng07-07",
+          "C": "mis-eng07-01",
+          "D": "mis-eng07-07",
+          "E": "mis-eng07-06"
+        },
+        "006": {
+          "B": "mis-eng07-07",
+          "C": "mis-eng07-05",
+          "D": "mis-eng07-01",
+          "E": "mis-eng07-05"
+        },
+        "007": {
+          "B": "mis-eng07-06",
+          "C": "mis-eng07-08",
+          "D": "mis-eng07-06",
+          "E": "mis-eng07-01"
+        },
+        "008": {
+          "D": "mis-eng07-04",
+          "E": "mis-eng07-07"
+        },
+        "009": {
+          "B": "mis-eng07-07",
+          "C": "mis-eng07-03",
+          "D": "mis-eng07-07",
+          "E": "mis-eng07-10"
+        },
+        "010": {
+          "B": "mis-eng07-03",
+          "C": "mis-eng07-08",
+          "D": "mis-eng07-03",
+          "E": "mis-eng07-10"
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-evaluation-reality-fact-opinion",
+      "questionPrefix": "tka-eng08-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng08-01",
+          "label": "Menganggap yang mungkin terjadi sudah terbukti",
+          "description": "Memperlakukan kejadian yang masuk akal sebagai fakta yang sudah dipastikan.",
+          "insight": "Kejadian yang wajar belum berarti benar-benar terjadi; cari pernyataan yang menopangnya."
+        },
+        {
+          "id": "mis-eng08-02",
+          "label": "Menganggap yang tidak dikenal pasti mustahil",
+          "description": "Menolak sebuah kejadian hanya karena belum dikenal pembacanya.",
+          "insight": "Sesuatu tidak menjadi mustahil hanya karena belum dikenal pembacanya."
+        },
+        {
+          "id": "mis-eng08-03",
+          "label": "Menganggap teknologi dapat melakukan apa saja",
+          "description": "Menganggap sebuah alat digital dapat bekerja melampaui kemampuan yang dijelaskan bacaan.",
+          "insight": "Batasi kemampuan alat pada yang dijelaskan bacaan."
+        },
+        {
+          "id": "mis-eng08-04",
+          "label": "Menganggap satu detail nyata menjamin seluruh cerita",
+          "description": "Memakai satu detail yang masuk akal untuk membenarkan seluruh isi bacaan.",
+          "insight": "Satu detail yang masuk akal tidak membenarkan seluruh isi bacaan."
+        },
+        {
+          "id": "mis-eng08-05",
+          "label": "Menganggap pendapat sebagai fakta",
+          "description": "Memperlakukan pendapat, penilaian, atau ramalan sebagai informasi yang sudah diperiksa.",
+          "insight": "Pendapat, penilaian, dan ramalan tidak sama dengan informasi yang dapat diperiksa."
+        },
+        {
+          "id": "mis-eng08-06",
+          "label": "Menganggap fakta sebagai pendapat",
+          "description": "Memperlakukan pernyataan yang dapat diukur atau diperiksa sebagai pendapat pribadi.",
+          "insight": "Pernyataan yang dapat diukur atau diperiksa adalah fakta, meskipun terdengar seperti pendapat."
+        },
+        {
+          "id": "mis-eng08-07",
+          "label": "Menganggap pernyataan orang lain otomatis fakta",
+          "description": "Menganggap sesuatu menjadi fakta karena ada orang atau unggahan yang menyatakannya.",
+          "insight": "Sebuah pernyataan tidak menjadi fakta hanya karena seseorang atau sebuah unggahan menyatakannya."
+        },
+        {
+          "id": "mis-eng08-08",
+          "label": "Menganggap angka menjamin kebenaran",
+          "description": "Menganggap klaim yang memuat angka otomatis dapat dipercaya.",
+          "insight": "Angka tetap perlu diperiksa asalnya, cara pengukurannya, dan pembandingnya."
+        },
+        {
+          "id": "mis-eng08-09",
+          "label": "Menyimpulkan terlalu luas dari bukti terbatas",
+          "description": "Memakai bukti yang terbatas untuk simpulan yang berlaku untuk semua.",
+          "insight": "Bukti yang terbatas hanya mendukung simpulan yang terbatas."
+        },
+        {
+          "id": "mis-eng08-10",
+          "label": "Menganggap bahasa yang meyakinkan sebagai bukti",
+          "description": "Memperlakukan kata yang persuasif atau emosional sebagai bukti sebuah klaim.",
+          "insight": "Kata yang persuasif atau emosional bukan bukti; carilah datanya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng08-06",
+          "C": "mis-eng08-02",
+          "D": "mis-eng08-08",
+          "E": "mis-eng08-08"
+        },
+        "002": {
+          "D": "mis-eng08-05",
+          "E": "mis-eng08-05"
+        },
+        "003": {
+          "B": "mis-eng08-03",
+          "C": "mis-eng08-03",
+          "D": "mis-eng08-03",
+          "E": "mis-eng08-03"
+        },
+        "004": {
+          "B": "mis-eng08-02",
+          "C": "mis-eng08-07",
+          "D": "mis-eng08-02",
+          "E": "mis-eng08-03"
+        },
+        "005": {
+          "B": "mis-eng08-06",
+          "C": "mis-eng08-06",
+          "D": "mis-eng08-06",
+          "E": "mis-eng08-06"
+        },
+        "006": {
+          "B": "mis-eng08-09",
+          "C": "mis-eng08-08",
+          "D": "mis-eng08-02",
+          "E": "mis-eng08-04"
+        },
+        "007": {
+          "B": "mis-eng08-03",
+          "C": "mis-eng08-01",
+          "D": "mis-eng08-03",
+          "E": "mis-eng08-03"
+        },
+        "008": {
+          "D": "mis-eng08-07",
+          "E": "mis-eng08-10"
+        },
+        "009": {
+          "B": "mis-eng08-09",
+          "C": "mis-eng08-09",
+          "D": "mis-eng08-09",
+          "E": "mis-eng08-10"
+        },
+        "010": {
+          "B": "mis-eng08-10",
+          "C": "mis-eng08-10",
+          "D": "mis-eng08-08",
+          "E": "mis-eng08-07"
+        }
+      }
+    },
+    {
+      "slug": "bahasa-inggris-evaluation-information-validity",
+      "questionPrefix": "tka-eng09-auth-",
+      "misconceptions": [
+        {
+          "id": "mis-eng09-01",
+          "label": "Menganggap satu sumber terbatas sudah cukup",
+          "description": "Menganggap satu sumber yang terbatas cukup untuk simpulan yang luas.",
+          "insight": "Simpulan yang luas memerlukan lebih dari satu sumber atau lebih dari satu ukuran."
+        },
+        {
+          "id": "mis-eng09-02",
+          "label": "Menerima klaim karena sumbernya terdengar berwibawa",
+          "description": "Menganggap klaim sahih hanya karena nama sumbernya terdengar berwibawa.",
+          "insight": "Nilai isi dan buktinya, bukan seberapa berwibawa nama sumbernya."
+        },
+        {
+          "id": "mis-eng09-03",
+          "label": "Menganggap dua sumber yang sepakat sebagai bukti pasti",
+          "description": "Menganggap kesepakatan antarsumber sebagai bukti pasti meskipun keduanya terbatas.",
+          "insight": "Dua sumber dapat sepakat dan tetap sama-sama memiliki keterbatasan."
+        },
+        {
+          "id": "mis-eng09-04",
+          "label": "Menganggap dua sumber yang berbeda sama-sama salah",
+          "description": "Menganggap laporan yang berbeda membuat kedua sumber tidak berguna.",
+          "insight": "Perbedaan penekanan tidak membuat kedua sumber tidak berguna."
+        },
+        {
+          "id": "mis-eng09-05",
+          "label": "Melewatkan keterangan yang diperlukan untuk membaca angkanya",
+          "description": "Menerima klaim tanpa memperhatikan keterangan yang diperlukan untuk menafsirkannya.",
+          "insight": "Periksa apa yang diukur, siapa yang diukur, dan pembandingnya sebelum menerima angka."
+        },
+        {
+          "id": "mis-eng09-06",
+          "label": "Menganggap data yang lebih banyak selalu lebih baik",
+          "description": "Menganggap jumlah data yang lebih besar otomatis lebih sahih.",
+          "insight": "Banyaknya data tidak menjamin mutunya; cara pengumpulannya juga menentukan."
+        },
+        {
+          "id": "mis-eng09-07",
+          "label": "Menganggap pengalaman satu orang mewakili semua",
+          "description": "Memberlakukan pengalaman satu orang untuk kelompok yang lebih luas.",
+          "insight": "Pengalaman satu orang hanya menggambarkan dirinya, bukan seluruh kelompok."
+        },
+        {
+          "id": "mis-eng09-08",
+          "label": "Menganggap dua perubahan yang bersamaan saling menyebabkan",
+          "description": "Menganggap dua perubahan yang terjadi bersamaan membuktikan yang satu menyebabkan yang lain.",
+          "insight": "Perubahan yang terjadi bersamaan belum membuktikan hubungan sebab-akibat."
+        },
+        {
+          "id": "mis-eng09-09",
+          "label": "Memilih tambahan informasi yang tidak menjawab keraguannya",
+          "description": "Memilih informasi tambahan yang tidak menyentuh bagian yang masih belum pasti.",
+          "insight": "Informasi tambahan berguna bila menjawab bagian yang masih belum pasti."
+        },
+        {
+          "id": "mis-eng09-10",
+          "label": "Membaca simpulan berhati-hati sebagai simpulan mutlak",
+          "description": "Mengabaikan kata pembatas sehingga simpulan yang terbatas dibaca sebagai mutlak.",
+          "insight": "Perhatikan kata mungkin, sebagian, dan cenderung; simpulannya memang dibatasi."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": "mis-eng09-04",
+          "C": "mis-eng09-03",
+          "D": "mis-eng09-06",
+          "E": "mis-eng09-09"
+        },
+        "002": {
+          "B": "mis-eng09-09",
+          "C": "mis-eng09-09",
+          "D": "mis-eng09-02",
+          "E": "mis-eng09-09"
+        },
+        "003": {
+          "B": "mis-eng09-06",
+          "C": "mis-eng09-08",
+          "D": "mis-eng09-02",
+          "E": "mis-eng09-08"
+        },
+        "004": {
+          "D": "mis-eng09-09",
+          "E": "mis-eng09-09"
+        },
+        "005": {
+          "B": "mis-eng09-07",
+          "C": "mis-eng09-03",
+          "D": "mis-eng09-03",
+          "E": "mis-eng09-10"
+        },
+        "006": {
+          "B": "mis-eng09-07",
+          "C": "mis-eng09-06",
+          "D": "mis-eng09-02",
+          "E": "mis-eng09-10"
+        },
+        "007": {
+          "B": "mis-eng09-06",
+          "C": "mis-eng09-10",
+          "D": "mis-eng09-09",
+          "E": "mis-eng09-05"
+        },
+        "008": {
+          "D": "mis-eng09-08",
+          "E": "mis-eng09-02"
+        },
+        "009": {
+          "B": "mis-eng09-08",
+          "C": "mis-eng09-01",
+          "D": "mis-eng09-05",
+          "E": "mis-eng09-10"
+        },
+        "010": {
+          "B": "mis-eng09-05",
+          "C": "mis-eng09-06",
+          "D": "mis-eng09-07",
+          "E": "mis-eng09-01"
+        }
+      }
+    },
+    {
+      "slug": "tka-bahasa-inggris-sma",
+      "questionPrefix": "tka-bahasa-inggris-sma-",
+      "note": "Soal tryout mencakup banyak materi, jadi penandanya memakai id miskonsepsi utuh sesuai materi tiap soal.",
+      "questions": {
+        "001": {
+          "A": "mis-eng-sum-004",
+          "C": "mis-eng-sum-004",
+          "D": "mis-eng-sum-004",
+          "E": "mis-eng-sum-003"
+        },
+        "002": {
+          "B": "mis-eng06-04",
+          "C": "mis-eng06-04",
+          "D": "mis-eng06-06",
+          "E": "mis-eng06-09"
+        },
+        "003": {
+          "A": "mis-eng05-05",
+          "B": "mis-eng05-05",
+          "C": "mis-eng05-06"
+        },
+        "004": {
+          "A": "mis-eng-exp-009",
+          "B": "mis-eng-exp-009",
+          "D": "mis-eng-exp-002",
+          "E": "mis-eng-exp-004"
+        },
+        "005": {
+          "C": "mis-eng04-04",
+          "D": "mis-eng04-02",
+          "E": "mis-eng04-04"
+        },
+        "006": {
+          "A": "mis-eng-exp-006",
+          "B": "mis-eng-exp-006",
+          "C": "mis-eng-exp-006"
+        },
+        "007": {
+          "B": "mis-eng-exp-004",
+          "C": "mis-eng-exp-009",
+          "E": "mis-eng-exp-004"
+        },
+        "008": {
+          "B": "mis-eng04-06",
+          "C": "mis-eng04-06",
+          "D": "mis-eng04-06",
+          "E": "mis-eng04-06"
+        },
+        "009": {
+          "B": "mis-eng-exp-009"
+        },
+        "010": {
+          "A": "mis-eng-exp-004",
+          "C": "mis-eng-exp-002",
+          "D": "mis-eng-exp-006",
+          "E": "mis-eng-exp-004"
+        },
+        "011": {
+          "A": "mis-eng-exp-006",
+          "B": "mis-eng-exp-006",
+          "C": "mis-eng-exp-006"
+        },
+        "012": {
+          "A": "mis-eng04-02",
+          "B": "mis-eng04-01",
+          "D": "mis-eng04-02",
+          "E": "mis-eng04-02"
+        },
+        "013": {
+          "B": "mis-eng04-07",
+          "E": "mis-eng04-07"
+        },
+        "014": {
+          "A": "mis-eng-exp-007",
+          "B": "mis-eng-exp-002",
+          "C": "mis-eng-exp-007",
+          "E": "mis-eng-exp-003"
+        },
+        "015": {
+          "B": "mis-eng06-09",
+          "E": "mis-eng06-06"
+        },
+        "016": {
+          "A": "mis-eng07-03",
+          "B": "mis-eng07-04",
+          "D": "mis-eng07-05",
+          "E": "mis-eng07-05"
+        },
+        "017": {
+          "D": "mis-eng-exp-009",
+          "E": "mis-eng-exp-009"
+        },
+        "018": {
+          "C": "mis-eng04-07",
+          "D": "mis-eng04-07"
+        },
+        "019": {
+          "C": "mis-eng04-07",
+          "D": "mis-eng04-08"
+        },
+        "020": {
+          "B": "mis-eng04-03",
+          "E": "mis-eng04-03"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1395 @@
+{
+  "_readme": [
+    "Peta miskonsepsi pengecoh soal Bahasa Indonesia SMA.",
+    "Setiap paket memuat definisi miskonsepsi yang dipakainya (label, description, insight) dan penanda per pengecoh.",
+    "Nilai berupa angka berarti mis-<misGroup>-<angka tiga digit>; nilai berupa teks adalah id miskonsepsi utuh.",
+    "Kunci jawaban tidak boleh ditandai. Pada soal kategori, penanda berlaku bila pernyataannya dikelompokkan keliru.",
+    "Jalankan: node scripts/generate-misconception-tags.mjs bahasa-indonesia-sma"
+  ],
+  "packages": [
+    {
+      "slug": "bahasa-indonesia-kata-serapan",
+      "questionPrefix": "tka-bi-serapan-auth-",
+      "misGroup": "bi-serapan",
+      "questions": {
+        "001": {
+          "A": 6,
+          "C": 5,
+          "D": 4,
+          "E": 5
+        },
+        "002": {
+          "A": 6,
+          "B": 5,
+          "C": 3
+        },
+        "003": {
+          "C": 4,
+          "E": 6
+        },
+        "004": {
+          "A": 5,
+          "B": 4,
+          "C": 5,
+          "E": 5
+        },
+        "005": {
+          "A": 5,
+          "B": 8,
+          "D": 5,
+          "E": 4
+        },
+        "006": {
+          "A": 5,
+          "B": 12,
+          "C": 8
+        },
+        "007": {
+          "A": 8,
+          "B": 10,
+          "C": 9,
+          "D": 4
+        },
+        "008": {
+          "C": 8,
+          "E": 11
+        },
+        "009": {
+          "A": 8,
+          "B": 11,
+          "D": 8,
+          "E": 11
+        },
+        "010": {
+          "A": 5,
+          "B": 12,
+          "C": 8
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-kosakata-latar-karakter-fenomena",
+      "questionPrefix": "tka-bi-kosakata-auth-",
+      "misGroup": "bi-kosakata",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menyimpulkan hanya dari satu kata",
+          "description": "Menentukan latar, karakter, atau fenomena dari satu kata tanpa memeriksa kata-kata lain di sekitarnya.",
+          "insight": "Gunakan beberapa kata yang muncul bersama, karena satu kata saja dapat menunjuk banyak keadaan."
+        },
+        {
+          "n": 2,
+          "label": "Mencampur latar tempat dengan suasana",
+          "description": "Menganggap kata yang menunjukkan suasana sekaligus menunjukkan lokasi tertentu.",
+          "insight": "Bedakan petunjuk tempat, petunjuk waktu, dan petunjuk suasana; ketiganya sering muncul dalam satu paragraf."
+        },
+        {
+          "n": 3,
+          "label": "Menyimpulkan watak tokoh dari kesan umum",
+          "description": "Memilih sifat tokoh dari kesan sekilas, bukan dari pola ucapan dan tindakannya.",
+          "insight": "Cari bukti berupa pilihan kata, tanggapan, dan tindakan tokoh, bukan kesan sekilas."
+        },
+        {
+          "n": 4,
+          "label": "Menganggap semua istilah teknologi menunjuk hal yang sama",
+          "description": "Menyamakan seluruh kosakata digital sebagai penanda satu fenomena yang sama.",
+          "insight": "Bedakan istilah yang menamai proses, istilah yang menamai risiko, dan istilah yang menamai perilaku pengguna."
+        },
+        {
+          "n": 5,
+          "label": "Tidak mengenali bidang dari kelompok istilahnya",
+          "description": "Tidak menangkap bidang pembicaraan yang ditandai oleh sekelompok istilah khas.",
+          "insight": "Kumpulkan istilah yang berasal dari satu bidang; kelompok itulah yang menunjukkan pokok pembicaraannya."
+        },
+        {
+          "n": 6,
+          "label": "Menukar penyebab dengan keadaan yang tampak",
+          "description": "Memilih penyebab ketika yang ditanyakan keadaan yang tampak, atau sebaliknya.",
+          "insight": "Pisahkan apa yang terjadi, apa penyebabnya, dan apa akibatnya sebelum memilih jawaban."
+        },
+        {
+          "n": 7,
+          "label": "Memilih jawaban dari pengetahuan di luar teks",
+          "description": "Memilih hal yang lazim terjadi di kehidupan nyata meskipun kosakata teks tidak menopangnya.",
+          "insight": "Utamakan kata-kata yang benar-benar dipakai teks, bukan hal yang biasanya terjadi di luar teks."
+        },
+        {
+          "n": 8,
+          "label": "Melewatkan nuansa cara tokoh berbicara",
+          "description": "Tidak menangkap sikap tokoh dari pilihan kata, larangan, keraguan, atau jeda dalam ujarannya.",
+          "insight": "Perhatikan cara sesuatu dikatakan, bukan hanya isi ucapannya secara harfiah."
+        },
+        {
+          "n": 9,
+          "label": "Menganggap istilah kebencanaan sebagai penunjuk tempat",
+          "description": "Menyamakan kosakata kebencanaan atau musim dengan lokasi maupun acara tertentu.",
+          "insight": "Istilah kebencanaan menunjukkan keadaan yang sedang berlangsung, belum tentu lokasi atau kegiatan tertentu."
+        },
+        {
+          "n": 10,
+          "label": "Menganggap satu tindakan sebagai sifat tetap",
+          "description": "Menganggap satu tindakan sesaat cukup membuktikan watak tokoh yang tetap.",
+          "insight": "Watak disimpulkan dari pola tindakan yang berulang, bukan dari satu kejadian saja."
+        }
+      ],
+      "questions": {
+        "001": {
+          "A": 4,
+          "C": 7,
+          "D": 4,
+          "E": 5
+        },
+        "002": {
+          "A": 5,
+          "B": 4,
+          "C": 7
+        },
+        "003": {
+          "C": 4,
+          "E": 5
+        },
+        "004": {
+          "A": 1,
+          "C": 1,
+          "D": 9,
+          "E": 7
+        },
+        "005": {
+          "B": 8,
+          "C": 3,
+          "D": 8,
+          "E": 10
+        },
+        "006": {
+          "B": 10,
+          "E": 8
+        },
+        "007": {
+          "A": 6,
+          "C": 7,
+          "D": 6,
+          "E": 7
+        },
+        "008": {
+          "A": 3,
+          "B": 10,
+          "C": 10
+        },
+        "009": {
+          "A": 5,
+          "C": 5,
+          "D": 6,
+          "E": 1
+        },
+        "010": {
+          "A": 9,
+          "B": 5,
+          "C": 9
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-hubungan-makna-antarkalimat-paragraf",
+      "questionPrefix": "tka-bi-hubungan-auth-",
+      "misGroup": "bi-hubungan",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap urutan waktu sebagai sebab-akibat",
+          "description": "Menganggap bagian yang muncul lebih dahulu otomatis menjadi penyebab bagian sesudahnya.",
+          "insight": "Urutan waktu belum tentu hubungan sebab-akibat. Periksa apakah bagian pertama benar-benar menghasilkan bagian berikutnya."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap contoh sebagai gagasan baru",
+          "description": "Membaca contoh atau ilustrasi sebagai topik yang terpisah dari gagasan sebelumnya.",
+          "insight": "Periksa lebih dahulu apakah bagian kedua hanya mengonkretkan gagasan sebelumnya, bukan menambah topik baru."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap pertentangan berarti pembatalan seluruhnya",
+          "description": "Membaca kalimat atau paragraf yang bertentangan sebagai pembatalan seluruh isi bagian sebelumnya.",
+          "insight": "Pertentangan dapat membatasi atau memberi syarat, tidak selalu meniadakan seluruh pernyataan sebelumnya."
+        },
+        {
+          "n": 4,
+          "label": "Keliru menentukan yang dirujuk kata ganti",
+          "description": "Salah menentukan unsur yang dirujuk kata ini, itu, tersebut, ia, atau kata ganti lain.",
+          "insight": "Kembalikan kata rujukan ke kalimat sebelumnya, lalu uji apakah maknanya masih runtut."
+        },
+        {
+          "n": 5,
+          "label": "Menukar akibat dengan tujuan",
+          "description": "Membaca konsekuensi sebagai tujuan, atau sebaliknya.",
+          "insight": "Bedakan hasil yang terjadi dari sasaran yang hendak dicapai; keduanya ditandai kata penghubung yang berbeda."
+        },
+        {
+          "n": 6,
+          "label": "Menganggap kalimat penjelas hanya mengulang",
+          "description": "Menganggap kalimat atau paragraf penjelas tidak menambah makna apa pun.",
+          "insight": "Cari rincian, mekanisme, atau batasan yang ditambahkan bagian penjelas terhadap bagian sebelumnya."
+        },
+        {
+          "n": 7,
+          "label": "Menyimpulkan sebab-akibat dari keterkaitan biasa",
+          "description": "Menyimpulkan hubungan sebab-akibat padahal teks hanya menunjukkan dua hal yang berkaitan.",
+          "insight": "Hubungan sebab-akibat perlu penanda atau penjelasan mekanisme, tidak cukup dari dua hal yang muncul bersamaan."
+        },
+        {
+          "n": 8,
+          "label": "Mengabaikan kata namun, meskipun, dan tetapi",
+          "description": "Melewatkan penanda yang membatasi simpulan sehingga simpulannya menjadi terlalu jauh.",
+          "insight": "Kata namun, meskipun, dan tetapi membatasi simpulan; kedua sisi hubungannya harus tetap dibaca."
+        },
+        {
+          "n": 9,
+          "label": "Membaca dua kalimat tanpa melihat isi paragrafnya",
+          "description": "Menafsirkan hubungan dua bagian tanpa mempertimbangkan perannya di dalam paragraf.",
+          "insight": "Peran sebuah kalimat ditentukan oleh kedudukannya dalam paragraf, jadi paragrafnya perlu dibaca sebagai satu kesatuan."
+        },
+        {
+          "n": 10,
+          "label": "Menganggap dua hal sejajar sebagai sebab dan akibat",
+          "description": "Membaca dua aspek yang sederajat sebagai hubungan sebab dan akibat.",
+          "insight": "Periksa apakah kedua bagian sebenarnya merupakan cabang dari gagasan yang sama, bukan sebab dan akibat."
+        }
+      ],
+      "questions": {
+        "001": {
+          "A": 2,
+          "C": 1,
+          "D": 6,
+          "E": 5
+        },
+        "002": {
+          "C": 3,
+          "E": 8
+        },
+        "003": {
+          "A": 4,
+          "B": 4,
+          "C": 4
+        },
+        "004": {
+          "A": 2,
+          "C": 3,
+          "D": 9,
+          "E": 8
+        },
+        "005": {
+          "A": 3,
+          "C": 9,
+          "D": 3,
+          "E": 6
+        },
+        "006": {
+          "A": 1,
+          "B": 1,
+          "C": 7
+        },
+        "007": {
+          "B": 3,
+          "C": 9,
+          "D": 6,
+          "E": 3
+        },
+        "008": {
+          "B": 7,
+          "C": 6,
+          "D": 9,
+          "E": 9
+        },
+        "009": {
+          "A": 9,
+          "D": 9
+        },
+        "010": {
+          "A": 9,
+          "B": 9,
+          "C": 6
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-inferensi-ide-pokok-tokoh-konflik-nilai",
+      "questionPrefix": "tka-bi-inferensi-auth-",
+      "misGroup": "bi-inferensi",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap kalimat pertama sebagai ide pokok",
+          "description": "Mengambil kalimat pembuka sebagai ide pokok tanpa memeriksa keseluruhan isi teks.",
+          "insight": "Ide pokok harus menaungi seluruh informasi penting, jadi ujilah dengan bagian akhir teks juga."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap rincian yang menonjol sebagai ide pokok",
+          "description": "Memilih rincian yang paling menarik atau paling mudah diingat sebagai simpulan utama.",
+          "insight": "Bedakan contoh, akibat, dan rincian dari gagasan yang menaungi seluruhnya."
+        },
+        {
+          "n": 3,
+          "label": "Menyimpulkan lebih jauh daripada yang didukung teks",
+          "description": "Menarik simpulan yang mungkin saja terjadi, tetapi tidak ditopang pernyataan dalam teks.",
+          "insight": "Simpulan perlu beberapa bukti yang searah di dalam teks, bukan hanya terasa masuk akal."
+        },
+        {
+          "n": 4,
+          "label": "Menyimpulkan sifat tokoh dari satu tindakan",
+          "description": "Menetapkan watak tokoh berdasarkan satu peristiwa tanpa melihat pola tindakannya.",
+          "insight": "Gabungkan ucapan, tindakan, dan tanggapan tokoh di beberapa bagian sebelum menyimpulkan wataknya."
+        },
+        {
+          "n": 5,
+          "label": "Menganggap setiap peristiwa buruk sebagai konflik",
+          "description": "Menganggap kejadian yang tidak menyenangkan otomatis menjadi konflik utama cerita.",
+          "insight": "Konflik adalah pertentangan tujuan, pilihan, kepentingan, atau perasaan, bukan sekadar kejadian buruk."
+        },
+        {
+          "n": 6,
+          "label": "Menukar pergulatan batin dengan pertentangan dari luar",
+          "description": "Keliru membedakan konflik di dalam diri tokoh dengan pertentangan antartokoh atau dengan keadaan.",
+          "insight": "Periksa sumber pertentangannya: dari dalam diri tokoh atau dari orang dan keadaan di luarnya."
+        },
+        {
+          "n": 7,
+          "label": "Mengenali nilai hanya bila ditulis sebagai nasihat",
+          "description": "Menganggap nilai hanya ada bila teks menyatakannya secara langsung sebagai petuah.",
+          "insight": "Nilai sering tersirat lewat keputusan tokoh dan akibat yang ditanggungnya, bukan lewat kalimat nasihat."
+        },
+        {
+          "n": 8,
+          "label": "Menilai nilai hanya dari hasil akhirnya",
+          "description": "Menilai baik atau buruknya tindakan hanya dari keberhasilan akhir, bukan dari proses dan pilihannya.",
+          "insight": "Perhatikan cara tokoh mengambil keputusan, bukan hanya berhasil atau gagalnya di akhir cerita."
+        },
+        {
+          "n": 9,
+          "label": "Memilih rincian benar yang tidak mendukung simpulannya",
+          "description": "Memilih informasi yang memang ada dalam teks, tetapi tidak berhubungan dengan simpulan yang ditanyakan.",
+          "insight": "Setiap bukti perlu diuji: apakah rincian itu benar-benar menopang gagasan yang sedang ditanyakan."
+        },
+        {
+          "n": 10,
+          "label": "Menentukan latar dari pengetahuan di luar teks",
+          "description": "Menetapkan waktu, tempat, atau suasana berdasarkan dugaan sendiri, bukan petunjuk dalam teks.",
+          "insight": "Gunakan petunjuk waktu, tempat, suasana, dan keadaan sosial yang benar-benar tersirat di dalam teks."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 6,
+          "C": 3,
+          "D": 6,
+          "E": 3
+        },
+        "002": {
+          "B": 3,
+          "E": 3
+        },
+        "003": {
+          "A": 4,
+          "C": 3,
+          "D": 4,
+          "E": 4
+        },
+        "004": {
+          "A": 5,
+          "B": 9,
+          "C": 6
+        },
+        "005": {
+          "A": 3,
+          "B": 7,
+          "D": 8,
+          "E": 3
+        },
+        "006": {
+          "A": 1,
+          "C": 3,
+          "D": 3,
+          "E": 1
+        },
+        "007": {
+          "B": 9,
+          "E": 9
+        },
+        "008": {
+          "A": 2,
+          "B": 9,
+          "C": 3
+        },
+        "009": {
+          "B": 8,
+          "C": 3,
+          "D": 7,
+          "E": 8
+        },
+        "010": {
+          "B": 9,
+          "E": 9
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-kerangka-bagan-teks",
+      "questionPrefix": "tka-bi-kerangka-auth-",
+      "misGroup": "bi-kerangka",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap contoh sebagai bagian utama kerangka",
+          "description": "Memasukkan contoh atau rincian penjelas sebagai cabang utama kerangka.",
+          "insight": "Bedakan informasi inti dari contoh atau ilustrasi yang hanya memperjelasnya."
+        },
+        {
+          "n": 2,
+          "label": "Menukar gagasan utama dengan rinciannya",
+          "description": "Menempatkan rincian sebagai induk dan gagasan umum sebagai cabang.",
+          "insight": "Periksa tingkat keumuman setiap bagian: yang lebih umum menjadi induk, yang lebih khusus menjadi cabang."
+        },
+        {
+          "n": 3,
+          "label": "Menyusun kerangka mengikuti urutan kalimatnya saja",
+          "description": "Menganggap urutan kalimat dalam teks selalu sama dengan urutan logis informasinya.",
+          "insight": "Urutan kalimat tidak selalu sama dengan urutan logis; susunlah berdasarkan hubungan maknanya."
+        },
+        {
+          "n": 4,
+          "label": "Membalik sebab dengan akibat",
+          "description": "Menukar faktor pemicu dengan akibat yang ditimbulkannya.",
+          "insight": "Tanyakan mana yang secara logis terjadi lebih dahulu sebelum menyusun urutannya."
+        },
+        {
+          "n": 5,
+          "label": "Mencampur langkah pengerjaan dengan tujuannya",
+          "description": "Menyamakan langkah pelaksanaan dengan hasil yang hendak dicapai.",
+          "insight": "Pisahkan tindakan, tujuan yang hendak dicapai, dan dampak yang muncul."
+        },
+        {
+          "n": 6,
+          "label": "Menambahkan tahap yang tidak ada di dalam teks",
+          "description": "Memasukkan simpulan atau tahap yang terasa masuk akal tetapi tidak disebutkan teks.",
+          "insight": "Kerangka hanya memuat bagian yang benar-benar disebutkan teks, meskipun tahap lain terasa masuk akal."
+        },
+        {
+          "n": 7,
+          "label": "Memilih bagan rapi yang mengubah hubungan isinya",
+          "description": "Memilih bagan yang tampak teratur padahal hubungan antarinformasinya berubah.",
+          "insight": "Cocokkan setiap panah dan cabang bagan dengan hubungan yang dinyatakan teks."
+        },
+        {
+          "n": 8,
+          "label": "Melewatkan tahap penghubung antara sebab dan akibat",
+          "description": "Melewatkan gagasan perantara yang menghubungkan pemicu dengan dampaknya.",
+          "insight": "Cari tahap perantara yang menjembatani pemicu dengan hasilnya."
+        },
+        {
+          "n": 9,
+          "label": "Menganggap yang terjadi lebih dahulu sebagai penyebab",
+          "description": "Menganggap peristiwa yang muncul lebih awal pasti menjadi penyebab peristiwa berikutnya.",
+          "insight": "Bedakan urutan waktu dari hubungan sebab-akibat."
+        },
+        {
+          "n": 10,
+          "label": "Menyusun kerangka yang terlalu rinci",
+          "description": "Memilih kerangka yang penuh rincian sehingga tidak mewakili keseluruhan teks.",
+          "insight": "Kerangka perlu ringkas tetapi tetap mencakup struktur utama teksnya."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 3,
+          "C": 4,
+          "D": 3,
+          "E": 6
+        },
+        "002": {
+          "A": 2,
+          "B": 5,
+          "C": 1
+        },
+        "003": {
+          "C": 1,
+          "E": 1
+        },
+        "004": {
+          "A": 6,
+          "C": 9,
+          "D": 10,
+          "E": 7
+        },
+        "005": {
+          "C": 5,
+          "E": 6
+        },
+        "006": {
+          "A": 4,
+          "B": 8,
+          "C": 6
+        },
+        "007": {
+          "A": 8,
+          "C": 3,
+          "D": 3,
+          "E": 4
+        },
+        "008": {
+          "A": 10,
+          "C": 9,
+          "D": 1,
+          "E": 10
+        },
+        "009": {
+          "D": 1,
+          "E": 6
+        },
+        "010": {
+          "A": 4,
+          "B": 8,
+          "C": 4
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-ketepatan-kesesuaian-penggunaan-bahasa",
+      "questionPrefix": "tka-bi-bahasa-auth-",
+      "misGroup": "bi-bahasa",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap bahasa formal selalu paling tepat",
+          "description": "Menganggap kata atau susunan yang paling formal selalu paling sesuai.",
+          "insight": "Kesesuaian bahasa ditentukan tujuan tulisan, pembacanya, dan situasinya, bukan tingkat formalitasnya."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap kalimat yang lebih panjang lebih jelas",
+          "description": "Menganggap penambahan kata otomatis membuat kalimat lebih jelas.",
+          "insight": "Kalimat efektif memuat informasi yang cukup tanpa kata berulang; menambah kata belum tentu menambah kejelasan."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap kata bersinonim selalu dapat ditukar",
+          "description": "Menganggap kata yang bersinonim selalu memiliki nuansa dan konteks pemakaian yang sama.",
+          "insight": "Kata bersinonim dapat berbeda nuansa dan pasangan katanya, jadi periksa maknanya di dalam kalimat itu."
+        },
+        {
+          "n": 4,
+          "label": "Menganggap istilah populer selalu tidak baku",
+          "description": "Menganggap istilah yang populer selalu tidak layak dipakai dalam teks informatif.",
+          "insight": "Nilailah kebakuan dan kecocokan kata dengan pembacanya, bukan populer atau tidaknya kata itu."
+        },
+        {
+          "n": 5,
+          "label": "Menganggap bahasa yang lebih teknis lebih berbobot",
+          "description": "Menganggap semakin teknis bahasanya semakin baik untuk semua pembaca.",
+          "insight": "Istilah teknis hanya tepat bila sesuai kebutuhan dan pengetahuan pembacanya."
+        },
+        {
+          "n": 6,
+          "label": "Menganggap kata ganti selalu merujuk kata terdekat",
+          "description": "Menentukan rujukan kata ia, ini, atau tersebut hanya dari kata yang paling dekat.",
+          "insight": "Uji rujukan kata ganti dengan makna seluruh kalimat, bukan dengan jarak katanya."
+        },
+        {
+          "n": 7,
+          "label": "Menganggap semua kata penghubung sama fungsinya",
+          "description": "Menganggap kata penghubung dapat saling menggantikan tanpa mengubah makna.",
+          "insight": "Kenali hubungan yang dibawa setiap penghubung: sebab, akibat, pertentangan, syarat, atau tambahan."
+        },
+        {
+          "n": 8,
+          "label": "Melewatkan kalimat yang dapat ditafsirkan ganda",
+          "description": "Tidak menyadari susunan kalimat yang memungkinkan lebih dari satu tafsiran.",
+          "insight": "Pilih susunan yang membuat pelaku, objek, dan hubungannya jelas tanpa perlu ditebak pembaca."
+        },
+        {
+          "n": 9,
+          "label": "Menganggap kata berlebihan lebih meyakinkan",
+          "description": "Menganggap kata yang dramatis atau melebih-lebihkan selalu memperkuat pesan.",
+          "insight": "Nada tulisan perlu sepadan dengan tujuan dan buktinya; kata yang berlebihan justru mengurangi ketepatan."
+        },
+        {
+          "n": 10,
+          "label": "Memotong informasi penting demi kalimat pendek",
+          "description": "Menghapus unsur yang dibutuhkan pembaca hanya agar kalimatnya lebih pendek.",
+          "insight": "Hemat berarti membuang kata yang berulang, bukan membuang informasi yang dibutuhkan pembaca."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 2,
+          "C": 4,
+          "D": 5,
+          "E": 10
+        },
+        "002": {
+          "C": 5,
+          "E": 2
+        },
+        "003": {
+          "B": 2,
+          "C": 4,
+          "D": 1,
+          "E": 10
+        },
+        "004": {
+          "A": 2,
+          "B": 3,
+          "C": 10
+        },
+        "005": {
+          "B": 9,
+          "C": 9,
+          "D": 9,
+          "E": 5
+        },
+        "006": {
+          "C": 9,
+          "E": 1
+        },
+        "007": {
+          "B": 8,
+          "C": 2,
+          "D": 6,
+          "E": 8
+        },
+        "008": {
+          "A": 6,
+          "B": 6,
+          "C": 8
+        },
+        "009": {
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 10
+        },
+        "010": {
+          "A": 2,
+          "B": 10,
+          "C": 2
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-menilai-keakuratan-kecukupan-informasi",
+      "questionPrefix": "tka-bi-evalinfo-auth-",
+      "misGroup": "bi-evalinfo",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap satu contoh sebagai bukti umum",
+          "description": "Menganggap satu pengalaman atau satu kelompok kecil cukup membuktikan klaim yang berlaku umum.",
+          "insight": "Periksa seberapa luas cakupan buktinya sebelum menerima simpulan yang berlaku untuk semua."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap informasi berangka pasti akurat",
+          "description": "Menganggap informasi benar hanya karena memuat angka atau persentase.",
+          "insight": "Angka perlu diperiksa sumbernya, apa yang dihitung, dan bagaimana pengukurannya dilakukan."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap dua hal yang muncul bersama sebagai sebab-akibat",
+          "description": "Menyimpulkan hubungan sebab-akibat dari dua perubahan yang terjadi bersamaan.",
+          "insight": "Kemunculan bersama belum menjelaskan mekanismenya dan belum menyingkirkan faktor lain."
+        },
+        {
+          "n": 4,
+          "label": "Menganggap klaim cukup kuat karena sumbernya disebut",
+          "description": "Menganggap penyebutan sumber tanpa rincian sudah membuat klaim memadai.",
+          "insight": "Periksa apakah sumber dan datanya benar-benar menopang klaim yang dibuat."
+        },
+        {
+          "n": 5,
+          "label": "Menganggap informasi yang berkaitan sudah cukup",
+          "description": "Menganggap informasi yang berhubungan dengan topik sudah cukup untuk menarik simpulan.",
+          "insight": "Berkaitan dengan topik dan cukup untuk menyimpulkan adalah dua hal yang berbeda."
+        },
+        {
+          "n": 6,
+          "label": "Menganggap kata pasti dan terbukti sebagai bukti kuat",
+          "description": "Menganggap kata pasti, terbukti, atau selalu menandakan klaim yang kuat.",
+          "insight": "Kekuatan klaim harus sebanding dengan buktinya, bukan dengan kata yang dipakai."
+        },
+        {
+          "n": 7,
+          "label": "Menerapkan temuan di luar batas datanya",
+          "description": "Memberlakukan temuan pada orang, waktu, atau keadaan yang tidak tercakup datanya.",
+          "insight": "Perhatikan siapa yang diukur, kapan, di mana, dan bagaimana datanya diperoleh."
+        },
+        {
+          "n": 8,
+          "label": "Memilih rincian menarik yang tidak menolong penilaian",
+          "description": "Memilih rincian yang menarik tetapi tidak membantu menilai klaim utamanya.",
+          "insight": "Utamakan informasi yang benar-benar mengubah kuat atau lemahnya penilaian."
+        },
+        {
+          "n": 9,
+          "label": "Menganggap klaim pasti salah bila buktinya belum lengkap",
+          "description": "Menyimpulkan klaim salah hanya karena teks belum memberi bukti yang memadai.",
+          "insight": "Simpulan yang tepat kadang berupa belum dapat dipastikan, bukan langsung salah."
+        },
+        {
+          "n": 10,
+          "label": "Menganggap pengalaman pribadi setara pemeriksaan",
+          "description": "Menganggap laporan atau pengalaman pribadi sama nilainya dengan pemeriksaan yang sistematis.",
+          "insight": "Bedakan cerita pengalaman sebagai ilustrasi dari bukti yang diperiksa secara sistematis."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 7,
+          "C": 9,
+          "D": 1,
+          "E": 2
+        },
+        "002": {
+          "C": 8,
+          "E": 8
+        },
+        "003": {
+          "A": 9,
+          "B": 7,
+          "C": 5
+        },
+        "004": {
+          "B": 7,
+          "C": 3,
+          "D": 3,
+          "E": 1
+        },
+        "005": {
+          "B": 9,
+          "C": 9,
+          "D": 8,
+          "E": 8
+        },
+        "006": {
+          "C": 6,
+          "E": 10
+        },
+        "007": {
+          "B": 9,
+          "C": 9,
+          "D": 2,
+          "E": 10
+        },
+        "008": {
+          "A": 7,
+          "B": 7,
+          "C": 8
+        },
+        "009": {
+          "B": 5,
+          "C": 7,
+          "D": 7,
+          "E": 10
+        },
+        "010": {
+          "A": 9,
+          "B": 7,
+          "C": 3
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-ketepatan-penggambaran-fiksi",
+      "questionPrefix": "tka-bi-fiksi-auth-",
+      "misGroup": "bi-fiksi",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap sebutan sifat lebih kuat daripada tindakan",
+          "description": "Menganggap penyebutan sifat secara langsung selalu lebih kuat daripada tindakan atau dialog tokoh.",
+          "insight": "Bukti terkuat dalam cerita biasanya tindakan dan ucapan yang konkret, bukan penyebutan sifatnya."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap satu tindakan sebagai sifat tetap",
+          "description": "Menjadikan satu tindakan sebagai watak tokoh yang tetap tanpa melihat keadaannya.",
+          "insight": "Periksa alasan, keadaan, dan pola tindakan tokoh sebelum menyimpulkan wataknya."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap ucapan tokoh sebagai fakta cerita",
+          "description": "Menganggap semua ucapan tokoh merupakan fakta dalam cerita.",
+          "insight": "Ucapan tokoh dapat memuat pendapat, perasaan, atau kepentingannya sendiri, belum tentu fakta cerita."
+        },
+        {
+          "n": 4,
+          "label": "Menganggap setiap nama tempat sudah membangun latar",
+          "description": "Menganggap penyebutan tempat atau benda otomatis membangun latar cerita.",
+          "insight": "Detail latar baru berfungsi bila memberi rasa ruang, waktu, atau suasana kepada pembaca."
+        },
+        {
+          "n": 5,
+          "label": "Menyamakan perasaan satu tokoh dengan suasana adegan",
+          "description": "Menganggap emosi seorang tokoh sama dengan suasana keseluruhan adegan.",
+          "insight": "Suasana dibangun oleh keadaan lingkungan dan tanggapan beberapa unsur adegan, bukan perasaan satu tokoh."
+        },
+        {
+          "n": 6,
+          "label": "Menganggap peristiwa yang berurutan pasti sebab-akibat",
+          "description": "Menganggap dua peristiwa yang terjadi berurutan pasti berhubungan sebab-akibat.",
+          "insight": "Cari petunjuk yang benar-benar menghubungkan tindakan dengan akibatnya."
+        },
+        {
+          "n": 7,
+          "label": "Memilih bagian paling dramatis sebagai bukti",
+          "description": "Memilih bagian yang paling menegangkan meskipun tidak membuktikan hal yang ditanyakan.",
+          "insight": "Pilih bukti yang paling berhubungan dengan hal yang ditanyakan, bukan yang paling menegangkan."
+        },
+        {
+          "n": 8,
+          "label": "Menambahkan motif yang tidak ada petunjuknya",
+          "description": "Menambahkan alasan atau riwayat tokoh yang tidak memiliki petunjuk dalam teks.",
+          "insight": "Tafsiran perlu berhenti pada hal yang masih memiliki petunjuk di dalam teks."
+        },
+        {
+          "n": 9,
+          "label": "Menganggap deskripsi yang lebih panjang lebih tepat",
+          "description": "Menganggap bagian yang lebih panjang otomatis lebih kuat menggambarkan unsur cerita.",
+          "insight": "Ketepatan penggambaran ditentukan mutu dan kaitan detailnya, bukan panjangnya."
+        },
+        {
+          "n": 10,
+          "label": "Hanya menerima yang dinyatakan langsung",
+          "description": "Mengabaikan watak atau suasana yang dibangun secara tidak langsung.",
+          "insight": "Watak dan suasana sering dibangun tidak langsung lewat tindakan, dialog, dan pilihan detail."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 7,
+          "C": 3,
+          "D": 7,
+          "E": 10
+        },
+        "002": {
+          "C": 3,
+          "E": 7
+        },
+        "003": {
+          "B": 4,
+          "C": 4,
+          "D": 5,
+          "E": 1
+        },
+        "004": {
+          "A": 5,
+          "B": 6,
+          "C": 8
+        },
+        "005": {
+          "B": 7,
+          "C": 4,
+          "D": 6,
+          "E": 10
+        },
+        "006": {
+          "C": 7,
+          "E": 4
+        },
+        "007": {
+          "B": 10,
+          "C": 4,
+          "D": 4,
+          "E": 10
+        },
+        "008": {
+          "A": 4,
+          "B": 4,
+          "C": 8
+        },
+        "009": {
+          "B": 10,
+          "C": 5,
+          "D": 6,
+          "E": 3
+        },
+        "010": {
+          "A": 10,
+          "B": 10,
+          "C": 8
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-prediksi-lanjutan-akhir-teks",
+      "questionPrefix": "tka-bi-prediksi-auth-",
+      "misGroup": "bi-prediksi",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menebak dari kemungkinan umum, bukan petunjuk teks",
+          "description": "Memilih kejadian yang mungkin terjadi di kehidupan nyata tetapi tidak disiapkan oleh teks.",
+          "insight": "Prediksi harus bertumpu pada petunjuk khusus di dalam teks, bukan pada hal yang biasanya terjadi."
+        },
+        {
+          "n": 2,
+          "label": "Memilih kelanjutan yang paling dramatis",
+          "description": "Memilih kelanjutan yang paling mengejutkan meskipun tidak menyambung dengan cerita.",
+          "insight": "Utamakan kesinambungan watak, konflik, dan arah teks, bukan kejutannya."
+        },
+        {
+          "n": 3,
+          "label": "Memilih kelanjutan yang hanya mengulang",
+          "description": "Memilih kelanjutan yang mengulang informasi tanpa mengembangkan uraian.",
+          "insight": "Kelanjutan yang baik bergerak dari informasi yang sudah dibangun menuju langkah berikutnya."
+        },
+        {
+          "n": 4,
+          "label": "Mengabaikan perubahan yang sudah terjadi pada tokoh",
+          "description": "Memprediksi tindakan tokoh dari keadaan awalnya dan melewatkan perkembangan yang telah terjadi.",
+          "insight": "Gunakan keadaan tokoh yang paling akhir sebelum bagian yang diprediksi."
+        },
+        {
+          "n": 5,
+          "label": "Membalik arah uraian tanpa dasar",
+          "description": "Memilih lanjutan yang berlawanan dengan pendirian teks tanpa penanda perubahan.",
+          "insight": "Pertahankan arah uraian teks kecuali teks sendiri memberi alasan untuk berbalik."
+        },
+        {
+          "n": 6,
+          "label": "Memilih contoh baru yang tidak menyambung",
+          "description": "Memilih contoh yang masih setema tetapi tidak mengembangkan gagasan sebelumnya.",
+          "insight": "Contoh harus menyambung gagasan yang sedang dikembangkan, bukan sekadar setema."
+        },
+        {
+          "n": 7,
+          "label": "Memutus rantai sebab dan akibat",
+          "description": "Memilih akibat yang tidak mengikuti sebab atau syarat yang sudah dijelaskan teks.",
+          "insight": "Periksa sebab, syarat, dan akibat yang sudah dijelaskan sebelum memilih kelanjutannya."
+        },
+        {
+          "n": 8,
+          "label": "Memilih akhir yang menyelesaikan semuanya sekaligus",
+          "description": "Memilih akhir yang menuntaskan seluruh masalah secara mendadak tanpa persiapan.",
+          "insight": "Akhir cerita perlu sepadan dengan konflik dan petunjuk yang tersedia, bukan tuntas mendadak."
+        },
+        {
+          "n": 9,
+          "label": "Memprediksi dari satu detail yang menonjol",
+          "description": "Menyusun prediksi hanya dari satu detail menarik dan mengabaikan keseluruhan teks.",
+          "insight": "Gabungkan beberapa petunjuk yang searah sebelum menentukan prediksi."
+        },
+        {
+          "n": 10,
+          "label": "Memberi saran yang melampaui isi uraiannya",
+          "description": "Memilih saran yang terdengar benar tetapi tidak diturunkan dari pembahasan teks.",
+          "insight": "Saran harus merupakan lanjutan langsung dari masalah yang sudah dibahas teks."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 10,
+          "C": 6,
+          "D": 5,
+          "E": 1
+        },
+        "002": {
+          "C": 5,
+          "E": 10
+        },
+        "003": {
+          "B": 4,
+          "C": 5,
+          "D": 1,
+          "E": 2
+        },
+        "004": {
+          "A": 4,
+          "B": 9,
+          "C": 4
+        },
+        "005": {
+          "B": 10,
+          "C": 6,
+          "D": 5,
+          "E": 7
+        },
+        "006": {
+          "C": 5,
+          "E": 10
+        },
+        "007": {
+          "B": 8,
+          "C": 4,
+          "D": 2,
+          "E": 2
+        },
+        "008": {
+          "A": 4,
+          "B": 7,
+          "C": 8
+        },
+        "009": {
+          "B": 4,
+          "C": 9,
+          "D": 9,
+          "E": 1
+        },
+        "010": {
+          "A": 3,
+          "B": 6,
+          "C": 6
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-relevansi-peristiwa-kehidupan-sehari-hari",
+      "questionPrefix": "tka-bi-relevansi-auth-",
+      "misGroup": "bi-relevansi",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menganggap dua hal relevan karena bendanya mirip",
+          "description": "Menganggap dua keadaan relevan hanya karena benda, tempat, atau tokohnya serupa.",
+          "insight": "Cari kesamaan masalah, keputusan, atau prinsipnya, bukan kesamaan benda atau tempatnya."
+        },
+        {
+          "n": 2,
+          "label": "Menganggap tema yang sama sudah berarti relevan",
+          "description": "Menganggap keadaan yang bertema sama otomatis menerapkan gagasan yang sama.",
+          "insight": "Tema yang sama belum cukup; periksa apakah masalah dan tindakannya sejalan."
+        },
+        {
+          "n": 3,
+          "label": "Mengubah tindakan yang tepat menjadi aturan mutlak",
+          "description": "Menjadikan tindakan yang tepat pada satu keadaan sebagai aturan untuk semua keadaan.",
+          "insight": "Pertahankan syarat dan batas keadaan yang membuat tindakan itu tepat."
+        },
+        {
+          "n": 4,
+          "label": "Menerapkan cara yang sama pada keadaan yang berbeda",
+          "description": "Menerapkan penyelesaian dari teks meskipun keadaan penting pada situasi baru berbeda.",
+          "insight": "Nilai lebih dahulu apakah keadaan yang membuat tindakan itu tepat masih berlaku."
+        },
+        {
+          "n": 5,
+          "label": "Menganggap penerapan harus sama persis",
+          "description": "Menganggap sebuah tindakan baru relevan hanya bila sama persis dengan peristiwa dalam teks.",
+          "insight": "Relevansi dapat berupa prinsip yang sama meskipun tindakannya berbeda."
+        },
+        {
+          "n": 6,
+          "label": "Menilai relevan atau tidak tanpa bukti dari teks",
+          "description": "Menentukan relevansi berdasarkan pendapat sendiri tanpa menghubungkannya dengan teks.",
+          "insight": "Gunakan peristiwa dan alasan di dalam teks sebagai dasar penilaian."
+        },
+        {
+          "n": 7,
+          "label": "Menganggap hasil yang sama berarti caranya sama",
+          "description": "Menganggap hasil yang serupa membuktikan kedua keadaan memakai prinsip yang sama.",
+          "insight": "Periksa proses pengambilan keputusannya, bukan hanya hasil akhirnya."
+        },
+        {
+          "n": 8,
+          "label": "Menganggap niat baik membuat tindakan selalu tepat",
+          "description": "Menganggap tindakan sudah tepat semata-mata karena tujuannya baik.",
+          "insight": "Tujuan yang baik masih perlu dinilai bersama caranya, risikonya, dan keadaannya."
+        },
+        {
+          "n": 9,
+          "label": "Terpaku pada satu detail sehingga prinsipnya terlewat",
+          "description": "Terpusat pada satu detail sehingga inti peristiwanya tidak terbaca.",
+          "insight": "Tentukan lebih dahulu inti keputusan atau peristiwanya, baru cari padanannya."
+        },
+        {
+          "n": 10,
+          "label": "Memaksakan hubungan antara dua keadaan",
+          "description": "Menghubungkan teks dengan keadaan baru melalui dugaan yang tidak tersedia dalam teks.",
+          "insight": "Jangan menambah syarat baru hanya agar dua keadaan tampak berhubungan."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 5,
+          "C": 1,
+          "D": 3,
+          "E": 4
+        },
+        "002": {
+          "C": 1,
+          "E": 3
+        },
+        "003": {
+          "B": 3,
+          "C": 4,
+          "D": 6,
+          "E": 9
+        },
+        "004": {
+          "A": 5,
+          "B": 4,
+          "C": 3
+        },
+        "005": {
+          "B": 8,
+          "C": 8,
+          "D": 4,
+          "E": 8
+        },
+        "006": {
+          "C": 3,
+          "E": 5
+        },
+        "007": {
+          "B": 4,
+          "C": 1,
+          "D": 10,
+          "E": 7
+        },
+        "008": {
+          "A": 2,
+          "B": 2,
+          "C": 4
+        },
+        "009": {
+          "B": 9,
+          "C": 9,
+          "D": 2,
+          "E": 2
+        },
+        "010": {
+          "A": 2,
+          "B": 5,
+          "C": 7
+        }
+      }
+    },
+    {
+      "slug": "bahasa-indonesia-respons-emosional-sastra",
+      "questionPrefix": "tka-bi-emosi-auth-",
+      "misGroup": "bi-emosi",
+      "misconceptions": [
+        {
+          "n": 1,
+          "label": "Menyamakan perasaan tokoh dengan perasaan pembaca",
+          "description": "Menyamakan perasaan tokoh dengan perasaan yang dibangun teks pada pembacanya.",
+          "insight": "Bedakan keadaan perasaan tokoh dari efek yang dibangun teks pada pembacanya."
+        },
+        {
+          "n": 2,
+          "label": "Menentukan suasana hanya dari satu kata",
+          "description": "Menentukan perasaan yang dibangun teks hanya dari satu kata tanpa melihat perkembangannya.",
+          "insight": "Gunakan rangkaian gambaran, tindakan, dialog, dan perubahan keadaan, bukan satu kata saja."
+        },
+        {
+          "n": 3,
+          "label": "Menganggap hanya boleh ada satu perasaan",
+          "description": "Menganggap sebuah teks hanya dapat membangun satu perasaan tanpa campuran atau pergeseran.",
+          "insight": "Sebuah teks dapat membangun perasaan campuran atau bergeser; pilih yang paling didukung buktinya."
+        },
+        {
+          "n": 4,
+          "label": "Menganggap peristiwa sedih selalu berujung putus asa",
+          "description": "Menganggap peristiwa kehilangan atau kegagalan selalu menghasilkan keputusasaan.",
+          "insight": "Perhatikan apakah teks juga membangun penerimaan, harapan, kehangatan, atau perenungan."
+        },
+        {
+          "n": 5,
+          "label": "Memilih bagian paling mencolok sebagai bukti perasaan",
+          "description": "Memilih detail yang paling mencolok meskipun bukan yang membangun perasaan yang ditanyakan.",
+          "insight": "Pilih bagian yang paling langsung membangun perasaan yang ditanyakan, bukan yang paling mencolok."
+        },
+        {
+          "n": 6,
+          "label": "Menganggap akhir cerita menghapus ketegangan sebelumnya",
+          "description": "Menganggap penyelesaian konflik membuat ketegangan sebelumnya tidak lagi berarti.",
+          "insight": "Perasaan pembaca dapat berubah; telusuri bagian sebelum dan sesudah titik baliknya."
+        },
+        {
+          "n": 7,
+          "label": "Menentukan perasaan tanpa bukti dari teks",
+          "description": "Menentukan perasaan hanya dari pengalaman atau pendapat sendiri tanpa mengaitkannya dengan teks.",
+          "insight": "Penilaian perasaan tetap perlu menunjuk bagian teks yang menjadi dasarnya."
+        },
+        {
+          "n": 8,
+          "label": "Menyamakan lega, tenang, dan gembira",
+          "description": "Menyamakan harapan, lega, tenang, dan gembira sebagai perasaan yang sama.",
+          "insight": "Perhatikan nuansanya: harapan, lega, tenang, dan gembira dibangun oleh keadaan yang berbeda."
+        },
+        {
+          "n": 9,
+          "label": "Membaca dialog drama secara harfiah",
+          "description": "Mengabaikan jeda, tindakan panggung, dan keadaan ketika menilai drama.",
+          "insight": "Dalam drama, perasaan dibangun oleh dialog sekaligus tindakan, jeda, dan keadaan panggungnya."
+        },
+        {
+          "n": 10,
+          "label": "Menganggap gambaran suasana hanya hiasan",
+          "description": "Menganggap gambaran yang menyentuh indera tidak berperan membangun perasaan.",
+          "insight": "Gambaran yang menyentuh indera membentuk kedekatan, kesunyian, kecemasan, atau kehangatan."
+        }
+      ],
+      "questions": {
+        "001": {
+          "B": 7,
+          "C": 2,
+          "D": 3,
+          "E": 5
+        },
+        "002": {
+          "C": 10,
+          "E": 2
+        },
+        "003": {
+          "B": 10,
+          "C": 5,
+          "D": 5,
+          "E": 6
+        },
+        "004": {
+          "A": 6,
+          "B": 8,
+          "C": 7
+        },
+        "005": {
+          "B": 7,
+          "C": 9,
+          "D": 7,
+          "E": 5
+        },
+        "006": {
+          "D": 10,
+          "E": 6
+        },
+        "007": {
+          "B": 4,
+          "C": 7,
+          "D": 2,
+          "E": 5
+        },
+        "008": {
+          "A": 10,
+          "B": 4,
+          "C": 7
+        },
+        "009": {
+          "B": 10,
+          "C": 10,
+          "D": 5,
+          "E": 3
+        },
+        "010": {
+          "A": 9,
+          "B": 8,
+          "C": 7
+        }
+      }
+    },
+    {
+      "slug": "tka-bahasa-indonesia-sma",
+      "questionPrefix": "tka-bahasa-indonesia-sma-",
+      "note": "Soal tryout mencakup banyak materi, jadi penanda memakai id miskonsepsi utuh sesuai materi tiap soal. Soal 011 tidak ditandai karena pilihannya berupa gambar bagan.",
+      "questions": {
+        "001": {
+          "B": "mis-bi-serapan-001",
+          "C": "mis-bi-serapan-001",
+          "D": "mis-bi-serapan-002",
+          "E": "mis-bi-serapan-002"
+        },
+        "002": {
+          "B": "mis-bi-inferensi-002",
+          "C": "mis-bi-inferensi-002",
+          "D": "mis-bi-inferensi-001",
+          "E": "mis-bi-inferensi-003"
+        },
+        "003": {
+          "B": "mis-bi-hubungan-007",
+          "C": "mis-bi-hubungan-007",
+          "D": "mis-bi-hubungan-009"
+        },
+        "004": {
+          "A": "mis-bi-inferensi-003",
+          "B": "mis-bi-hubungan-006",
+          "C": "mis-bi-inferensi-003"
+        },
+        "005": {
+          "A": "mis-bi-inferensi-006",
+          "B": "mis-bi-inferensi-006",
+          "C": "mis-bi-inferensi-003"
+        },
+        "006": {
+          "A": "mis-bi-prediksi-001",
+          "C": "mis-bi-prediksi-003",
+          "E": "mis-bi-prediksi-001"
+        },
+        "007": {
+          "B": "mis-bi-relevansi-002",
+          "C": "mis-bi-relevansi-006",
+          "D": "mis-bi-relevansi-001",
+          "E": "mis-bi-relevansi-002"
+        },
+        "008": {
+          "A": "mis-bi-inferensi-002",
+          "B": "mis-bi-inferensi-009",
+          "C": "mis-bi-inferensi-003",
+          "E": "mis-bi-inferensi-002"
+        },
+        "009": {
+          "A": "mis-bi-hubungan-007",
+          "C": "mis-bi-inferensi-009",
+          "D": "mis-bi-hubungan-009",
+          "E": "mis-bi-evalinfo-007"
+        },
+        "010": {
+          "A": "mis-bi-evalinfo-007",
+          "C": "mis-bi-inferensi-009"
+        },
+        "012": {
+          "A": "mis-bi-hubungan-001",
+          "B": "mis-bi-kerangka-003",
+          "C": "mis-bi-kerangka-002"
+        },
+        "013": {
+          "A": "mis-bi-evalinfo-005",
+          "B": "mis-bi-evalinfo-004",
+          "C": "mis-bi-evalinfo-010"
+        },
+        "014": {
+          "A": "mis-bi-serapan-004",
+          "B": "mis-bi-serapan-009",
+          "D": "mis-bi-serapan-004",
+          "E": "mis-bi-serapan-010"
+        },
+        "015": {
+          "A": "mis-bi-prediksi-007",
+          "B": "mis-bi-prediksi-009",
+          "C": "mis-bi-prediksi-007"
+        },
+        "016": {
+          "A": "mis-bi-fiksi-003",
+          "B": "mis-bi-fiksi-004"
+        },
+        "017": {
+          "A": "mis-bi-serapan-008",
+          "B": "mis-bi-serapan-007",
+          "C": "mis-bi-serapan-002"
+        },
+        "018": {
+          "A": "mis-bi-kerangka-004",
+          "C": "mis-bi-hubungan-002",
+          "D": "mis-bi-hubungan-009",
+          "E": "mis-bi-inferensi-003"
+        },
+        "019": {
+          "A": "mis-bi-prediksi-005",
+          "B": "mis-bi-prediksi-003",
+          "D": "mis-bi-prediksi-005",
+          "E": "mis-bi-prediksi-007"
+        },
+        "020": {
+          "B": "mis-bi-evalinfo-002",
+          "D": "mis-bi-evalinfo-005"
+        }
+      }
+    }
+  ]
+}

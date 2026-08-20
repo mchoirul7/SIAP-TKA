@@ -101,6 +101,7 @@ export function TryoutResultView({
   const narrative = buildTryoutNarrative(analysis, {
     studentName,
     contextName: subjectName,
+    nextPackageTitle: recommendedPackages[0]?.title,
   });
   const total = questions.length || 1;
   const accuracy = Math.round((analysis.correctCount / total) * 100);
@@ -225,9 +226,14 @@ export function TryoutResultView({
               >
                 Ringkasan hasil
               </p>
-              <p className="mt-2 max-w-2xl text-lg leading-[1.7] text-ink-900 sm:text-xl">
-                {narrative.body}
-              </p>
+              {/* Tiap kalimat satu baris: capaian, kelemahan, lalu saran. */}
+              <div className="mt-2 max-w-2xl space-y-2">
+                {narrative.sentences.map((sentence) => (
+                  <p key={sentence} className="text-[17px] leading-[1.7] text-ink-900 sm:text-lg">
+                    {sentence}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>

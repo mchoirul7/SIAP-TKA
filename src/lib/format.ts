@@ -48,6 +48,31 @@ export function formatDate(timestamp: number): string {
   }).format(new Date(timestamp));
 }
 
+/**
+ * Sebagian label miskonsepsi ditulis sebagai capaian yang belum tercapai
+ * ("Keliru: Memahami luas persegi panjang"), sebagian lagi sebagai langkah yang
+ * salah ("Indeks suku bergeser satu"). Awalan "Keliru:" dibuang sebelum
+ * ditampilkan: kartunya sudah berjudul "Yang tadi masih keliru", jadi kata itu
+ * akan terbaca dua kali.
+ */
+const COMPETENCY_PREFIX = /^keliru\s*:\s*/i;
+
+export function isCompetencyMisconception(label: string): boolean {
+  return COMPETENCY_PREFIX.test(label.trim());
+}
+
+/** Label untuk berdiri sendiri sebagai judul kartu. */
+export function misconceptionLabel(label: string): string {
+  const text = label.trim().replace(COMPETENCY_PREFIX, "").trim();
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/** Label untuk menyambung di tengah kalimat, jadi huruf awalnya diturunkan. */
+export function misconceptionLabelInSentence(label: string): string {
+  const text = label.trim().replace(COMPETENCY_PREFIX, "").trim();
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
 export const statusLabel: Record<MasteryStatus, string> = {
   "perlu-diperkuat": "Perlu diperkuat",
   cukup: "Cukup",
