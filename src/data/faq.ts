@@ -1,4 +1,5 @@
-import { shopeeVoucherUrl, site } from "@/lib/site";
+import { accessCodePhoneDisplay } from "@/lib/access-code";
+import { site } from "@/lib/site";
 
 /**
  * Pertanyaan yang benar-benar ditanyakan orang tua sebelum membeli.
@@ -32,7 +33,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: "Bagaimana cara mendapatkan kode akses?",
-    answer: `Kode akses dibeli lewat Shopee di ${shopeeVoucherUrl}. Setelah kode diterima, masukkan lewat tombol "Saya Punya Kode Akses" di halaman ini, dan satu mata pelajaran dalam seri tersebut langsung terbuka beserta tryout, latihan, hasil, dan pembahasannya.`,
+    answer: `Kode akses didapatkan lewat WhatsApp ${accessCodePhoneDisplay}. Tekan "Dapatkan Kode" di dialog kode akses, lalu setelah kode diterima masukkan lewat tombol "Saya Punya Kode Akses" di halaman ini.`,
   },
   {
     question: "Untuk jenjang apa saja?",

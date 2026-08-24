@@ -13,7 +13,6 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import type { AnswerMap, Misconception, PracticePackage, Question } from "@/data/types";
 import {
-  answerParts,
   correctAnswerSummary,
   isAnswered,
   isCorrectAnswer,
@@ -97,7 +96,7 @@ export function ExplanationView({
         className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-800"
       >
         <Icon name="arrow-left" className="h-4 w-4" />
-        Kembali ke paket
+        Kembali ke detail latihan
       </Link>
 
       <p className="eyebrow mt-5 flex items-center gap-1.5">
@@ -117,9 +116,6 @@ export function ExplanationView({
           const answered = isAnswered(question, userAnswer);
           const isRight = isCorrectAnswer(question, userAnswer);
           const view = reviewTone[!answered ? "skipped" : isRight ? "correct" : "wrong"];
-          const parts = answerParts(question, userAnswer);
-          // Soal berbagian: sebagian tepat tetap perlu terlihat, walau nilai soalnya nol.
-          const showParts = parts.total > 1 && !isRight && parts.correct > 0;
           const signals = misconceptionIdsFor(question, userAnswer).flatMap((id) => {
             const found = misconceptionById.get(id);
             return found ? [found] : [];
@@ -144,14 +140,6 @@ export function ExplanationView({
                   Soal {index + 1}
                 </p>
                 <span className="flex flex-wrap items-center gap-2">
-                  {showParts ? (
-                    <span
-                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneChip.amber}`}
-                    >
-                      <Icon name="target" className="h-4 w-4" strokeWidth={2.2} />
-                      {parts.correct} dari {parts.total} bagian tepat
-                    </span>
-                  ) : null}
                   <span
                     className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneChip[view.tone]}`}
                   >
@@ -252,9 +240,9 @@ export function ExplanationView({
           <Icon name="refresh" className="h-5 w-5" />
           Kerjakan Ulang
         </ButtonLink>
-        <ButtonLink href="/latihan" variant="secondary" size="lg">
-          <Icon name="layers" className="h-5 w-5" />
-          Paket Latihan Lain
+        <ButtonLink href={`/latihan/${pkg.slug}`} variant="secondary" size="lg">
+          <Icon name="arrow-left" className="h-5 w-5" />
+          Kembali ke Detail Latihan
         </ButtonLink>
       </div>
     </div>

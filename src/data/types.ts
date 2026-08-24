@@ -174,6 +174,8 @@ export interface PracticePackage extends ContentEntitlement {
   estimatedMinutes: number;
   skills: string[];
   questionIds: string[];
+  /** Tiga latihan awal per mapel dibuka tanpa kode akses. */
+  isFreeAccess?: boolean;
 }
 
 export interface Misconception {

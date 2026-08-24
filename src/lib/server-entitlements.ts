@@ -67,6 +67,8 @@ export async function getServerEntitlementKeys(): Promise<string[]> {
   return parseEntitlementCookieValue(store.get(ENTITLEMENT_COOKIE_NAME)?.value);
 }
 
-export async function hasServerContentAccess(content: ContentEntitlement): Promise<boolean> {
+export async function hasServerContentAccess(
+  content: ContentEntitlement & { isFreeAccess?: boolean },
+): Promise<boolean> {
   return hasContentAccess(content, await getServerEntitlementKeys());
 }

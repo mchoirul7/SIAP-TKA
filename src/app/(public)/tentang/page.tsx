@@ -120,9 +120,9 @@ export default function AboutPage() {
             <Icon name="play" className="h-5 w-5" />
             Lihat Tryout
           </ButtonLink>
-          <ButtonLink href="/latihan" variant="secondary" size="lg">
+          <ButtonLink href="/#katalog-mapel" variant="secondary" size="lg">
             <Icon name="layers" className="h-5 w-5" />
-            Lihat Paket Latihan
+            Pilih Mapel
           </ButtonLink>
         </div>
       </div>

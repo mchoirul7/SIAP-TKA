@@ -55,8 +55,10 @@ interface NarrativeOptions {
   nextPackageTitle?: string;
 }
 
-/** Dua materi dan dua pola saja; selebihnya sudah tampil sebagai kartu di bawah. */
-const WEAK_LIMIT = 2;
+/** Latihan fokus ke pola salah; tryout boleh merangkum sampai tiga materi lemah. */
+const PRACTICE_WEAK_LIMIT = 2;
+const PATTERN_LIMIT = 2;
+const TRYOUT_WEAK_LIMIT = 3;
 
 function joinList(items: string[]): string {
   if (items.length <= 1) return items[0] ?? "";
@@ -69,10 +71,15 @@ function joinPatterns(items: string[]): string {
   return `${items.slice(0, -1).join(", ")} serta ${items[items.length - 1]}`;
 }
 
+function highlight(text: string): string {
+  return `<strong>${text}</strong>`;
+}
+
 /** Tanpa nama yang tercatat, sapaannya tetap sopan: "Ananda" saja. */
 function greeting(studentName: string | undefined): string {
   const name = studentName?.trim();
-  return name ? `Ananda ${name}` : "Ananda";
+  if (!name) return "Ananda";
+  return /^ananda\b/i.test(name) ? name : `Ananda ${name}`;
 }
 
 interface NarrativeInput {
@@ -88,12 +95,12 @@ interface NarrativeInput {
 }
 
 /** Nama materi yang lemah, sudah dipendekkan dan siap disebut dalam kalimat. */
-function weakNamesOf(focus: ConceptFocus[]): string[] {
+function weakNamesOf(focus: ConceptFocus[], limit: number): string[] {
   const names: string[] = [];
   for (const item of focus) {
     const name = materialNameInSentence(item.name);
     if (!names.includes(name)) names.push(name);
-    if (names.length === WEAK_LIMIT) break;
+    if (names.length === limit) break;
   }
   return names;
 }
@@ -145,11 +152,22 @@ function achievementSentence(
  * dikosongkan sehingga tidak ada pengecoh terpilih — kalimatnya berhenti pada
  * nama materinya saja.
  */
-function weaknessSentence(input: NarrativeInput): string | null {
-  const names = input.weakNames.slice(0, WEAK_LIMIT);
-  // Dua nama materi dan dua pola sekaligus membuat kalimatnya terlalu panjang
-  // untuk dibaca sekali jalan; pola yang paling sering muncul saja yang disebut.
-  const top = input.signals.slice(0, names.length > 1 ? 1 : WEAK_LIMIT);
+function practiceWeaknessSentence(input: NarrativeInput): string | null {
+  const top = input.signals.slice(0, PATTERN_LIMIT);
+  const patterns = joinPatterns(top.map((signal) => misconceptionLabelInSentence(signal.label)));
+  if (!patterns) return null;
+
+  return isCompetencyMisconception(top[0].label)
+    ? `Yang belum tercapai pada latihan ini adalah ${patterns}.`
+    : `Pola kesalahan yang terbaca dari jawaban terutama berupa ${patterns}.`;
+}
+
+function weaknessSentence(input: NarrativeInput, weakLimit: number): string | null {
+  const names = input.weakNames.slice(0, weakLimit);
+  const highlightedNames = names.map(highlight);
+  // Beberapa nama materi dan beberapa pola sekaligus membuat kalimatnya terlalu
+  // panjang; bila ada lebih dari satu materi, pola teratas saja yang disebut.
+  const top = input.signals.slice(0, names.length > 1 ? 1 : PATTERN_LIMIT);
   // Nama materi disambung "dan", pola disambung "serta": nama pola sendiri
   // sering memuat kata "dan" ("tangga dam dan hm dilompati").
   const patterns = joinPatterns(top.map((signal) => misconceptionLabelInSentence(signal.label)));
@@ -158,10 +176,10 @@ function weaknessSentence(input: NarrativeInput): string | null {
     const bridge = isCompetencyMisconception(top[0].label)
       ? `; yang belum tercapai adalah ${patterns}`
       : `, dengan pola kesalahan berupa ${patterns}`;
-    return `Kelemahan yang perlu ditingkatkan terutama terdapat pada ${joinList(names)}${bridge}.`;
+    return `Kelemahan yang perlu ditingkatkan terutama terdapat pada ${joinList(highlightedNames)}${bridge}.`;
   }
   if (names.length > 0) {
-    return `Kelemahan yang perlu ditingkatkan terutama terdapat pada ${joinList(names)}.`;
+    return `Kelemahan yang perlu ditingkatkan terutama terdapat pada ${joinList(highlightedNames)}.`;
   }
   if (patterns) {
     return isCompetencyMisconception(top[0].label)
@@ -173,6 +191,7 @@ function weaknessSentence(input: NarrativeInput): string | null {
 
 /** "kedua materi tersebut" hanya benar bila memang ada dua yang disebut. */
 function materialReference(count: number): string {
+  if (count >= 3) return "ketiga materi tersebut";
   return count > 1 ? "kedua materi tersebut" : "materi tersebut";
 }
 
@@ -184,15 +203,19 @@ function materialReference(count: number): string {
  * tidak ada, sarannya mengarah ke paket latihan yang sudah dipilihkan halaman
  * hasil, dan paling akhir ke pembahasan soalnya.
  */
-function adviceSentence(input: NarrativeInput, nextPackageTitle: string | undefined): string {
+function adviceSentence(
+  input: NarrativeInput,
+  nextPackageTitle: string | undefined,
+  referenceOverride?: string,
+): string {
   // Nama lengkapnya sudah disebut pada kalimat pertama; di sini cukup "Ananda".
   const who = "Ananda";
-  const reference = materialReference(input.weakNames.length);
+  const reference = referenceOverride ?? materialReference(input.weakNames.length);
   const prerequisite = input.prerequisite;
 
   if (prerequisite && prerequisite.supports.length > 0) {
     const basis = joinList(prerequisite.supports.map(materialNameInSentence));
-    return `${who} disarankan memperkuat ${materialNameInSentence(prerequisite.name)} lebih dulu, karena materi itu menjadi dasar ${basis}.`;
+    return `${who} disarankan memperkuat ${highlight(materialNameInSentence(prerequisite.name))} lebih dulu, karena materi itu menjadi dasar ${basis}.`;
   }
   if (nextPackageTitle?.trim()) {
     // Judul paket diberi tanda kutip: judulnya sendiri sering memuat kata sambung
@@ -205,9 +228,20 @@ function adviceSentence(input: NarrativeInput, nextPackageTitle: string | undefi
   return `${who} disarankan membaca kembali pembahasan soal yang jawabannya belum tepat.`;
 }
 
-function compose(input: NarrativeInput, options: NarrativeOptions): StudyNarrative {
+function compose(
+  input: NarrativeInput,
+  options: NarrativeOptions,
+  config: {
+    weakLimit: number;
+    weaknessMode: "materials" | "patterns";
+    adviceReference?: string;
+  },
+): StudyNarrative {
   const achievement = achievementSentence(input, options.studentName, options.contextName);
-  const weakness = weaknessSentence(input);
+  const weakness =
+    config.weaknessMode === "patterns"
+      ? practiceWeaknessSentence(input)
+      : weaknessSentence(input, config.weakLimit);
 
   // Tidak ada materi lemah yang terbaca dan nilainya memang tinggi: cukup dipuji.
   if (!weakness && input.score >= MASTERY_THRESHOLD) {
@@ -220,7 +254,7 @@ function compose(input: NarrativeInput, options: NarrativeOptions): StudyNarrati
     };
   }
 
-  const advice = adviceSentence(input, options.nextPackageTitle);
+  const advice = adviceSentence(input, options.nextPackageTitle, config.adviceReference);
   const sentences = weakness ? [achievement, weakness, advice] : [achievement, advice];
   return { sentences, body: sentences.join(" "), isAllClear: false };
 }
@@ -234,10 +268,15 @@ export function buildPracticeNarrative(
       correct: analysis.correctCount,
       total: analysis.totalQuestions,
       score: analysis.score,
-      weakNames: weakNamesOf(analysis.conceptsToReview),
+      weakNames: weakNamesOf(analysis.conceptsToReview, PRACTICE_WEAK_LIMIT),
       signals: analysis.misconceptionSignals,
     },
     options,
+    {
+      weakLimit: PRACTICE_WEAK_LIMIT,
+      weaknessMode: "patterns",
+      adviceReference: "materi latihan ini",
+    },
   );
 }
 
@@ -249,7 +288,10 @@ export function buildTryoutNarrative(
   // Materi prasyarat tidak disebut dua kali: bila ia yang menjadi saran, materi
   // itu dikeluarkan dari daftar kelemahan.
   const focus = analysis.conceptFocus.filter((item) => item.subtopicId !== advice?.subtopicId);
-  const conceptNames = weakNamesOf(focus.length > 0 ? focus : analysis.conceptFocus);
+  const conceptNames = weakNamesOf(
+    focus.length > 0 ? focus : analysis.conceptFocus,
+    TRYOUT_WEAK_LIMIT,
+  );
   // Soal yang belum ditandai konsep tidak muncul di conceptFocus; untuk hasil
   // seperti itu nama materinya diambil dari prioritas per subtopik.
   const weakNames =
@@ -257,7 +299,7 @@ export function buildTryoutNarrative(
       ? conceptNames
       : analysis.priorities
           .filter((item) => item.id !== advice?.subtopicId)
-          .slice(0, WEAK_LIMIT)
+          .slice(0, TRYOUT_WEAK_LIMIT)
           .map((item) => materialNameInSentence(item.name));
 
   return compose(
@@ -270,5 +312,9 @@ export function buildTryoutNarrative(
       prerequisite: advice ? { name: advice.name, supports: advice.supports } : null,
     },
     options,
+    {
+      weakLimit: TRYOUT_WEAK_LIMIT,
+      weaknessMode: "materials",
+    },
   );
 }

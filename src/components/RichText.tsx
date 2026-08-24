@@ -1,3 +1,5 @@
+import { inlineHtml } from "@/lib/markup";
+
 /**
  * Menampilkan isi soal hasil impor yang berbentuk HTML.
  *
@@ -47,15 +49,23 @@ export function RichText({
   html,
   className = "",
   as: Tag = "div",
+  inline = false,
 }: {
   html: string;
   className?: string;
   as?: "div" | "span";
+  /**
+   * Isi dipasang di dalam judul atau di tengah kalimat. Markup bloknya
+   * diratakan lebih dulu supaya tidak ada `<p>` di dalam `<p>`, sementara
+   * gambar rumusnya tetap tampil sebaris teks.
+   */
+  inline?: boolean;
 }) {
+  const source = inline ? inlineHtml(html) : html;
   return (
     <Tag
-      className={["rich-text", className].filter(Boolean).join(" ")}
-      dangerouslySetInnerHTML={{ __html: sanitizeHtml(html) }}
+      className={["rich-text", inline ? "inline" : "", className].filter(Boolean).join(" ")}
+      dangerouslySetInnerHTML={{ __html: sanitizeHtml(source) }}
     />
   );
 }

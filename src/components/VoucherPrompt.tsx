@@ -3,11 +3,10 @@
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { useVoucherDialog } from "@/components/VoucherDialog";
-import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 
 export function VoucherPrompt({
   title = "Sudah punya kode akses?",
-  description = `Masukkan kode untuk membuka tryout, latihan online, hasil, dan pembahasan. Untuk mendapatkan kode akses, hubungi ${accessCodePhoneDisplay}.`,
+  description = "Masukkan kode untuk membuka tryout, latihan online, hasil, dan pembahasan.",
   packageSlug,
   packageTitle,
   buttonLabel = "Masukkan Kode Akses",
@@ -35,15 +34,6 @@ export function VoucherPrompt({
             <Icon name="unlock" className="h-4 w-4" strokeWidth={2.2} />
             {buttonLabel}
           </button>
-          <a
-            href={accessCodeWhatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="ml-0 mt-3 inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-[15px] font-bold text-emerald-800 transition-colors hover:bg-emerald-100 sm:ml-2"
-          >
-            <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
-            Hubungi WhatsApp
-          </a>
         </div>
       </div>
     </div>

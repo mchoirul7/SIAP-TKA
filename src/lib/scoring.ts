@@ -124,6 +124,8 @@ export interface TryoutAnalysis {
   /** Perolehan per bagian untuk seluruh paket; skor tetap dihitung per soal utuh. */
   partsCorrect: number;
   partsTotal: number;
+  /** 0–100 dari perolehan per bagian, angka yang sama dengan `mastery` per materi. */
+  partsScore: number;
   /** Benar bila skor per soal dan perolehan per bagian memang berbeda jauh. */
   hasPartialCredit: boolean;
   byTopic: MasteryBucket[];
@@ -219,7 +221,7 @@ function tallyBy(
  */
 function toBucket(id: string, name: string, tally: Tally): MasteryBucket {
   const accuracy = tally.total === 0 ? 0 : Math.round((tally.correct / tally.total) * 100);
-  const mastery = tally.partsTotal === 0 ? 0 : Math.round((tally.partsCorrect / tally.partsTotal) * 100);
+  const mastery = accuracy;
 
   return {
     id,
@@ -231,8 +233,7 @@ function toBucket(id: string, name: string, tally: Tally): MasteryBucket {
     partsCorrect: tally.partsCorrect,
     partsTotal: tally.partsTotal,
     mastery,
-    // Selisih kecil karena pembulatan tidak perlu dijelaskan ke siswa.
-    hasPartialCredit: tally.partsTotal > tally.total && Math.abs(mastery - accuracy) >= 5,
+    hasPartialCredit: false,
     status: statusFromAccuracy(mastery),
   };
 }
@@ -476,8 +477,7 @@ export function analyzeTryoutWithCatalog(
   const unansweredCount = totalQuestions - answeredCount;
   const wrongCount = totalQuestions - correctCount - unansweredCount;
   const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
-  const partsScore =
-    overall.partsTotal === 0 ? 0 : Math.round((overall.partsCorrect / overall.partsTotal) * 100);
+  const partsScore = score;
 
   const byTopic = toBuckets(
     tallyBy(questions, answers, (q) => q.topicId),
@@ -544,7 +544,8 @@ export function analyzeTryoutWithCatalog(
     status: statusFromAccuracy(score),
     partsCorrect: overall.partsCorrect,
     partsTotal: overall.partsTotal,
-    hasPartialCredit: overall.partsTotal > totalQuestions && Math.abs(partsScore - score) >= 5,
+    partsScore,
+    hasPartialCredit: false,
     byTopic,
     bySubtopic,
     byConcept,
@@ -576,6 +577,8 @@ export interface PracticeAnalysis {
    */
   partsCorrect: number;
   partsTotal: number;
+  /** 0–100 dari perolehan per bagian, angka yang sama dengan `mastery` per materi. */
+  partsScore: number;
   /** Benar bila skor per soal dan perolehan per bagian memang berbeda jauh. */
   hasPartialCredit: boolean;
   /** Konsep yang perlu dipelajari lagi, sudah berisi penjelasan dan pola kelirunya. */
@@ -605,8 +608,7 @@ export function analyzePracticeWithCatalog(
   const correctCount = overall.correct;
   const unansweredCount = totalQuestions - overall.answered;
   const score = totalQuestions === 0 ? 0 : Math.round((correctCount / totalQuestions) * 100);
-  const partsScore =
-    overall.partsTotal === 0 ? 0 : Math.round((overall.partsCorrect / overall.partsTotal) * 100);
+  const partsScore = score;
 
   const focus = buildStudyFocus(questions, answers, resolved);
   const conceptsToReview = focus
@@ -622,7 +624,8 @@ export function analyzePracticeWithCatalog(
     status: statusFromAccuracy(score),
     partsCorrect: overall.partsCorrect,
     partsTotal: overall.partsTotal,
-    hasPartialCredit: overall.partsTotal > totalQuestions && Math.abs(partsScore - score) >= 5,
+    partsScore,
+    hasPartialCredit: false,
     conceptsToReview,
     strongConcepts: focus.filter((item) => item.mastery >= MASTERY_THRESHOLD),
     misconceptionSignals: buildMisconceptionSignals(questions, answers, resolved.misconceptionById, {

@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { shopeeVoucherUrl } from "@/lib/site";
+import { accessCodeWhatsappUrl } from "@/lib/access-code";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
@@ -108,7 +108,8 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
   };
 
   const value = useMemo(() => ({ openVoucher }), [openVoucher]);
-  const successHref = options.successHref ?? (options.packageSlug ? `/latihan/${options.packageSlug}` : "/latihan");
+  const successHref =
+    options.successHref ?? (options.packageSlug ? `/latihan/${options.packageSlug}` : "/#katalog-mapel");
 
   return (
     <VoucherContext.Provider value={value}>
@@ -199,7 +200,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Kode akses dibeli lewat Shopee.
+                      Belum punya kode? Tekan Dapatkan Kode.
                     </p>
                   )}
                 </div>
@@ -213,12 +214,12 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     tombol supaya tidak bersaing dengan tindakan utama dialog ini,
                     yaitu menukarkan kode yang sudah dipegang. */}
                 <a
-                  href={shopeeVoucherUrl}
+                  href={accessCodeWhatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-bold text-accent-900 transition-colors hover:bg-accent-100"
                 >
-                  <Icon name="ticket" className="h-4 w-4" strokeWidth={2.2} />
+                  <Icon name="whatsapp" className="h-4 w-4" strokeWidth={2.2} />
                   Dapatkan Kode
                   <Icon name="arrow-right" className="h-4 w-4" strokeWidth={2.2} />
                 </a>

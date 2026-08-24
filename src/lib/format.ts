@@ -1,4 +1,5 @@
 import type { Difficulty, ReasoningType } from "@/data/types";
+import { withFirstLetter } from "./markup";
 import type { MasteryStatus } from "./scoring";
 
 /** Label penanda soal. Dipakai analisis maupun label diagnostik di halaman soal. */
@@ -54,8 +55,12 @@ export function formatDate(timestamp: number): string {
  * salah ("Indeks suku bergeser satu"). Awalan "Keliru:" dibuang sebelum
  * ditampilkan: kartunya sudah berjudul "Yang tadi masih keliru", jadi kata itu
  * akan terbaca dua kali.
+ *
+ * Awalannya dicari di belakang markup pembuka, karena sebagian label terbawa
+ * pembungkus dari bank soal asalnya ("<p>Keliru: …</p>"). Markupnya dibiarkan
+ * di tempatnya; hanya kata "Keliru:" yang dibuang.
  */
-const COMPETENCY_PREFIX = /^keliru\s*:\s*/i;
+const COMPETENCY_PREFIX = /^((?:\s|<[^>]+>)*)keliru\s*:\s*/i;
 
 export function isCompetencyMisconception(label: string): boolean {
   return COMPETENCY_PREFIX.test(label.trim());
@@ -63,14 +68,14 @@ export function isCompetencyMisconception(label: string): boolean {
 
 /** Label untuk berdiri sendiri sebagai judul kartu. */
 export function misconceptionLabel(label: string): string {
-  const text = label.trim().replace(COMPETENCY_PREFIX, "").trim();
-  return text.charAt(0).toUpperCase() + text.slice(1);
+  const text = label.trim().replace(COMPETENCY_PREFIX, "$1").trim();
+  return withFirstLetter(text, (letter) => letter.toUpperCase());
 }
 
 /** Label untuk menyambung di tengah kalimat, jadi huruf awalnya diturunkan. */
 export function misconceptionLabelInSentence(label: string): string {
-  const text = label.trim().replace(COMPETENCY_PREFIX, "").trim();
-  return text.charAt(0).toLowerCase() + text.slice(1);
+  const text = label.trim().replace(COMPETENCY_PREFIX, "$1").trim();
+  return withFirstLetter(text, (letter) => letter.toLowerCase());
 }
 
 export const statusLabel: Record<MasteryStatus, string> = {

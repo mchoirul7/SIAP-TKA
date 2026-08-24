@@ -16,7 +16,9 @@ export function getUnlockedSeriesKeys(): string[] {
   return readEntitlements().unlockedSeriesKeys;
 }
 
-export function isContentUnlocked(content: ContentEntitlement & { slug?: string }): boolean {
+export function isContentUnlocked(
+  content: ContentEntitlement & { slug?: string; isFreeAccess?: boolean },
+): boolean {
   const entitlements = readEntitlements();
   return (
     hasContentAccess(content, entitlements.unlockedSeriesKeys) ||

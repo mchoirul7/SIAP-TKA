@@ -2,6 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  async redirects() {
+    return [
+      {
+        source: "/latihan",
+        destination: "/",
+        permanent: false,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {

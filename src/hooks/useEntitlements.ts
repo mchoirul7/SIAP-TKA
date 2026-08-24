@@ -40,7 +40,7 @@ export function useEntitlements() {
   }, []);
 
   const isUnlocked = useCallback(
-    (content: ContentEntitlement & { slug: string }) =>
+    (content: ContentEntitlement & { slug: string; isFreeAccess?: boolean }) =>
       hasContentAccess(content, unlockedSeriesKeys) || unlockedSlugs.includes(content.slug),
     [unlockedSeriesKeys, unlockedSlugs],
   );

@@ -33,9 +33,11 @@ export function PracticePackageCard({
   className?: string;
 }) {
   const { mounted, isUnlocked } = useEntitlements();
-  const unlocked = mounted && isUnlocked(pkg);
+  const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const locked = !unlocked;
   const accent = theme?.accent ?? "brand";
+  const packageHref = locked ? `/latihan/${pkg.slug}?akses=1` : `/latihan/${pkg.slug}`;
+  const statusLabel = pkg.isFreeAccess ? "Gratis" : locked ? "Buka Akses" : "Terbuka";
 
   return (
     <article
@@ -54,8 +56,8 @@ export function PracticePackageCard({
         label={order ? `Langkah ${order} · Latihan` : "Latihan"}
         title={pkg.title}
         titleAs="h3"
-        titleHref={`/latihan/${pkg.slug}`}
-        subtitle={locked ? `${pkg.seriesTitle} - dibuka dengan kode akses` : "Latihan online dan pembahasan"}
+        titleHref={packageHref}
+        subtitle={locked ? "Buka dengan kode akses" : "Latihan online dan pembahasan"}
       />
 
       <div className="flex flex-1 flex-col p-4">
@@ -71,7 +73,7 @@ export function PracticePackageCard({
             }`}
           >
             <Icon name={locked ? "lock" : "unlock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
-            {locked ? "Kode Akses" : "Terbuka"}
+            {statusLabel}
           </li>
           {(
             [
@@ -93,11 +95,11 @@ export function PracticePackageCard({
         {/* Tombol menempel di dasar kartu agar deretan kartu tetap sejajar. */}
         <div className="mt-auto pt-4">
           <Link
-            href={`/latihan/${pkg.slug}`}
+            href={packageHref}
             className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold transition-opacity hover:opacity-90 ${toneButton[accent]}`}
           >
             <Icon name={locked ? "lock" : "play"} className="h-4 w-4" strokeWidth={2.2} />
-            {locked ? "Buka Paket" : "Coba Sekarang"}
+            {locked ? "Buka Akses" : "Coba Sekarang"}
           </Link>
         </div>
       </div>

@@ -29,6 +29,8 @@ import { supabase } from "@/lib/supabase";
  * konten terkunci sengaja dynamic agar bisa memeriksa cookie voucher di server.
  */
 
+const FREE_PRACTICE_LIMIT_PER_SUBJECT = 3;
+
 // ------------------------------------------------------------- bentuk baris
 
 interface SubjectRow {
@@ -305,6 +307,36 @@ function toPracticePackage(
     skills: row.skills ?? [],
     questionIds,
   };
+}
+
+function packageTitleKey(pkg: PracticePackage): string {
+  return (pkg.title || pkg.slug).toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function withFreePracticeAccess(packages: PracticePackage[]): PracticePackage[] {
+  const freeTitleKeysBySubject = new Map<string, Set<string>>();
+
+  return packages.map((pkg) => {
+    const subjectKey = pkg.subjectSlug || pkg.subjectId;
+    const titleKey = packageTitleKey(pkg);
+    const freeTitleKeys = freeTitleKeysBySubject.get(subjectKey) ?? new Set<string>();
+
+    if (!freeTitleKeysBySubject.has(subjectKey)) {
+      freeTitleKeysBySubject.set(subjectKey, freeTitleKeys);
+    }
+
+    const isFree =
+      freeTitleKeys.has(titleKey) || freeTitleKeys.size < FREE_PRACTICE_LIMIT_PER_SUBJECT;
+
+    if (isFree) {
+      freeTitleKeys.add(titleKey);
+    }
+
+    return {
+      ...pkg,
+      isFreeAccess: isFree,
+    };
+  });
 }
 
 function packageAccess(
@@ -648,7 +680,7 @@ export async function getPracticePackages(): Promise<PracticePackage[]> {
       packageAccess(row, subjectById, seriesById),
     ),
   );
-  return sortBySubject(packages, (pkg) => pkg.subjectSlug);
+  return withFreePracticeAccess(sortBySubject(packages, (pkg) => pkg.subjectSlug));
 }
 
 export async function getAnalysisCatalog(): Promise<AnalysisCatalog> {

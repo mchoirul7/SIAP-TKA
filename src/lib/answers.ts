@@ -77,9 +77,9 @@ export function isCorrectAnswer(question: Question, answer: AnswerValue | undefi
 /**
  * Kebenaran per bagian sebuah soal.
  *
- * Nilai ujian tetap utuh (lihat `isCorrectAnswer`), tetapi analisis penguasaan
- * perlu tahu *seberapa banyak* yang sudah tepat: pada soal Benar/Salah, dua dari
- * tiga pernyataan yang tepat bukan hal yang sama dengan nol.
+ * Aturan produk: nilai dan analisis sama-sama utuh per soal. Untuk jawaban
+ * ganda dan Benar/Salah, soal baru benar bila semua bagian tepat; benar separuh
+ * tetap dihitung 0.
  */
 export interface AnswerParts {
   /** Banyak bagian yang dinilai pada soal ini. */
@@ -89,35 +89,12 @@ export interface AnswerParts {
 }
 
 /**
- * - `single`   : satu bagian, tepat atau tidak.
- * - `mcma`     : bagiannya sebanyak kunci jawaban. Pengecoh yang ikut dipilih
- *                mengurangi perolehan, supaya mencentang semua pilihan tidak
- *                terbaca sebagai penguasaan.
- * - `category` : satu bagian per pernyataan; pernyataan kosong dihitung keliru.
+ * Semua tipe soal bernilai satu bagian utuh. `mcma` dan `category` tidak punya
+ * nilai parsial: kurang satu pilihan benar, memilih pengecoh, atau salah satu
+ * pernyataan Benar/Salah keliru berarti soal tersebut belum tepat.
  */
 export function answerParts(question: Question, answer: AnswerValue | undefined): AnswerParts {
-  switch (question.type) {
-    case "single":
-      return { total: 1, correct: isCorrectAnswer(question, answer) ? 1 : 0 };
-
-    case "mcma": {
-      const total = Math.max(1, question.correctAnswers.length);
-      if (!answer || answer.type !== "mcma" || answer.keys.length === 0) return { total, correct: 0 };
-      const expected = new Set(question.correctAnswers);
-      const hit = answer.keys.filter((key) => expected.has(key)).length;
-      const miss = answer.keys.filter((key) => !expected.has(key)).length;
-      return { total, correct: Math.max(0, Math.min(total, hit - miss)) };
-    }
-
-    case "category": {
-      const total = Math.max(1, question.statements.length);
-      const assignments = categoryAssignments(answer);
-      const correct = question.statements.filter(
-        (statement) => assignments[statement.id] === statement.correctCategoryKey,
-      ).length;
-      return { total, correct };
-    }
-  }
+  return { total: 1, correct: isCorrectAnswer(question, answer) ? 1 : 0 };
 }
 
 /** Menyalakan atau mematikan satu pilihan pada soal jawaban ganda. */
@@ -152,8 +129,8 @@ export function categoryAssignments(answer: AnswerValue | undefined): Record<str
 
 /**
  * Miskonsepsi yang tersentuh oleh sebuah jawaban. Untuk soal jawaban ganda dan
- * kategori, penilaian dilakukan per bagian sehingga satu soal dapat memunculkan
- * lebih dari satu penanda.
+ * kategori, skor tetap utuh per soal, tetapi penanda pola keliru tetap dibaca
+ * dari tiap pilihan/pernyataan yang salah supaya analisisnya spesifik.
  */
 export function misconceptionIdsFor(
   question: Question,

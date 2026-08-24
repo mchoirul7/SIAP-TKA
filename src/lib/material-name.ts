@@ -16,6 +16,8 @@
  *   "Makna ungkapan dalam cerita, kisah nyata, dan puisi"      -> "Makna ungkapan"
  */
 
+import { hasMarkup, withFirstLetter } from "./markup";
+
 /**
  * Kata yang menandai awal keterangan, bukan inti nama materinya. Dicocokkan
  * dengan spasi di kedua sisi supaya tidak memotong di tengah kata.
@@ -89,6 +91,10 @@ function shortenEnumeration(name: string): string {
 
 /** Nama materi sependek mungkin tanpa menambah kata apa pun. */
 export function shortMaterialName(name: string): string {
+  // Nama yang terbawa markup dari bank soal dibiarkan utuh: pemotongan di sini
+  // bekerja per kata dan dapat memutus tag di tengah. Halaman yang menyebutnya
+  // sudah merender nama itu sebagai HTML.
+  if (hasMarkup(name)) return name.trim();
   const short = shortenEnumeration(cutBeforeTailMarker(cutBeforeSerta(dropParenthetical(name))));
   return short || name.trim();
 }
@@ -102,7 +108,12 @@ export function shortMaterialName(name: string): string {
  * singkatan seperti KPK, FPB, atau AI yang justru salah bila diturunkan.
  */
 export function materialNameInSentence(name: string): string {
-  return shortMaterialName(name)
+  const short = shortMaterialName(name);
+  // Nama bermarkup hanya diturunkan huruf pertamanya; menelusuri kata demi kata
+  // pada teks yang berisi tag justru mengubah tagnya.
+  if (hasMarkup(short)) return withFirstLetter(short, (letter) => letter.toLowerCase());
+
+  return short
     .split(/(\s+)/)
     .map((word) => {
       if (/^\s+$/.test(word)) return word;

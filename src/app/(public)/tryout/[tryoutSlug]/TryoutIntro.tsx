@@ -13,7 +13,6 @@ import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
 import { gradeOptionsFor, resolveGrade } from "@/lib/grade";
 import { useEntitlements } from "@/hooks/useEntitlements";
-import { accessCodePhoneDisplay, accessCodeWhatsappUrl } from "@/lib/access-code";
 import { startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
@@ -196,18 +195,6 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                   <Icon name="ticket" className="h-5 w-5" />
                   Masukkan Kode Akses
                 </Button>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                  Belum punya kode akses? Hubungi {accessCodePhoneDisplay}.
-                </p>
-                <a
-                  href={accessCodeWhatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
-                >
-                  <Icon name="info" className="h-4 w-4" strokeWidth={2.2} />
-                  Hubungi WhatsApp
-                </a>
               </>
             ) : hasUnfinishedAttempt ? (
               <>

@@ -9,6 +9,7 @@ import { QuestionLabels } from "@/components/QuestionLabels";
 import { isAnswered, isCorrectAnswer } from "@/lib/answers";
 import type { QuestionLabel } from "@/lib/question-labels";
 import { ResultStatus } from "@/components/ResultStatus";
+import { RichText } from "@/components/RichText";
 import { ScoreRing } from "@/components/ScoreRing";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -82,7 +83,7 @@ export function TryoutResultView({
               <Icon name="play" className="h-5 w-5" />
               Mulai Simulasi
             </ButtonLink>
-            <ButtonLink href="/latihan" variant="secondary" size="lg">
+            <ButtonLink href={`/mapel/${tryout.subjectSlug}`} variant="secondary" size="lg">
               <Icon name="layers" className="h-5 w-5" />
               Lihat Paket Latihan
             </ButtonLink>
@@ -164,8 +165,10 @@ export function TryoutResultView({
                 pekerjaan yang benar sebagian tidak hilang dari pandangan. */}
             {analysis.hasPartialCredit ? (
               <p className="mt-1.5 text-sm leading-relaxed text-white/80">
-                Dihitung per bagian, {analysis.partsCorrect} dari {analysis.partsTotal} pernyataan
-                dan pilihan sudah tepat.
+                Penguasaan per bagian {analysis.partsScore}%: {analysis.partsCorrect} dari{" "}
+                {analysis.partsTotal} bagian jawaban sudah tepat — tiap soal pilihan ganda satu
+                bagian, tiap pernyataan Benar/Salah satu bagian. Nilai soalnya utuh, jadi soal yang
+                baru benar sebagian belum menambah skor.
               </p>
             ) : null}
             <div className="mt-4">
@@ -230,7 +233,7 @@ export function TryoutResultView({
               <div className="mt-2 max-w-2xl space-y-2">
                 {narrative.sentences.map((sentence) => (
                   <p key={sentence} className="text-[17px] leading-[1.7] text-ink-900 sm:text-lg">
-                    {sentence}
+                    <RichText as="span" inline html={sentence} />
                   </p>
                 ))}
               </div>
@@ -342,7 +345,7 @@ export function TryoutResultView({
           Simulasi boleh diulang kapan saja untuk melihat perubahan setelah latihan.
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/latihan">
+          <ButtonLink href={`/mapel/${tryout.subjectSlug}`}>
             <Icon name="layers" className="h-5 w-5" />
             Lihat Paket Latihan
           </ButtonLink>

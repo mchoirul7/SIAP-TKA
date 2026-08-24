@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { HomeCatalog } from "./HomeCatalog";
 import { HomeSeoSection } from "./HomeSeoSection";
 import { JsonLd } from "@/components/JsonLd";
+import { Icon } from "@/components/ui/Icon";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { homeFaq } from "@/data/faq";
 import { absoluteUrl, faqSchema, jsonLdGraph, ogImage } from "@/lib/seo";
 import { site, siteKeywords } from "@/lib/site";
@@ -69,20 +71,21 @@ export default async function HomePage() {
         harus ada demi urutan tajuk yang benar dan demi kata kunci yang dibaca
         mesin telusur, tetapi tidak boleh mendorong isi produk ke bawah layar.
       */}
-      <div className="container-page pb-10">
+      <div className="container-page pb-8">
         <h1 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-[32px]">
           Latihan Soal TKA & Tryout Online Sesuai Kisi-Kisi
         </h1>
-        <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-600">
-          Siapkan ananda menghadapi Tes Kemampuan Akademik dari rumah — paket soal per mata
-          pelajaran untuk jenjang SD, SMP, dan SMA, tryout dengan tampilan dan suasana seperti ujian TKA sebenarnya, pembahasan
-          di tiap soal, dan rekomendasi latihan berikutnya.
+        <p className="mt-2 text-[15px] leading-relaxed text-slate-600 sm:max-w-none">
+          Paket latihan per materi untuk SD, SMP, dan SMA, dilanjut tryout dengan suasana ujian
+          TKA serta pembahasan setelah pengerjaan.
         </p>
       </div>
 
       <HomeCatalog summaries={summaries} />
 
       <HomeSeoSection />
+
+      <WhatsAppFab />
     </div>
   );
 }

@@ -19,8 +19,8 @@ export function SiteFooter() {
             <Link href="/tryout" className="text-slate-600 hover:text-brand-800">
               Tryout
             </Link>
-            <Link href="/latihan" className="text-slate-600 hover:text-brand-800">
-              Paket Latihan
+            <Link href="/#katalog-mapel" className="text-slate-600 hover:text-brand-800">
+              Pilih Mapel
             </Link>
             <Link href="/tentang" className="text-slate-600 hover:text-brand-800">
               Tentang

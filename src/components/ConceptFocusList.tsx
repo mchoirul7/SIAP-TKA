@@ -1,7 +1,9 @@
+import { RichText } from "@/components/RichText";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { statusBarClass, statusLabel, misconceptionLabel } from "@/lib/format";
+import { plainText } from "@/lib/markup";
 import { toneChip } from "@/lib/tone";
 import type { ConceptFocus } from "@/lib/scoring";
 
@@ -12,6 +14,13 @@ import type { ConceptFocus } from "@/lib/scoring";
  * singkat konsepnya, dan — bila terbaca dari pilihan jawaban — bagian mana yang
  * sering keliru. Semuanya diambil dari katalog konten, bukan dirangkai di sini,
  * supaya bahasanya tetap terkendali oleh tim konten.
+ *
+ * Teks katalognya tidak selalu teks biasa: nama konsep, penjelasan, dan catatan
+ * miskonsepsi dapat terbawa markup dari bank soal asalnya — pembungkus <p>,
+ * penanda <sup>, sampai rumus yang berbentuk gambar. Karena itu semuanya
+ * dirender lewat `RichText`, bukan ditaruh apa adanya sebagai teks; kalau tidak,
+ * tagnya yang justru terbaca siswa. Yang dipasang di dalam judul atau di tengah
+ * kalimat memakai mode `inline`, supaya markup bloknya diratakan lebih dulu.
  */
 
 const statusTone = {
@@ -43,12 +52,17 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
                 </span>
                 <div className="min-w-0">
                   <h3 className="text-[17px] font-extrabold leading-snug tracking-tight text-ink-900">
-                    {concept.name}
+                    <RichText as="span" inline html={concept.name} />
                   </h3>
                   {concept.parentName ? (
                     <p className="mt-0.5 flex items-center gap-1.5 text-sm text-slate-500">
                       <Icon name="layers" className="h-4 w-4 text-slate-400" />
-                      {concept.parentName}
+                      <span>
+                        Cakupan:{" "}
+                        <strong className="font-bold text-slate-700">
+                          <RichText as="span" inline html={concept.parentName} />
+                        </strong>
+                      </span>
                     </p>
                   ) : null}
                 </div>
@@ -63,28 +77,35 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
             </div>
 
             <div className="mt-4">
+              {/* Angka di samping bilah adalah angka yang digambarkan bilah itu, yakni
+                  penguasaan per bagian — bukan ketepatan per soal. Dua ukuran berbeda
+                  pada satu baris membuat bilah yang terisi 22% terbaca "0%". */}
               <p className="flex flex-wrap items-baseline justify-between gap-2 text-sm">
                 <span className="font-semibold text-slate-700">
                   Benar {concept.correct} dari {concept.total} soal
                 </span>
-                <span className="tabular-nums text-slate-500">{concept.accuracy}%</span>
+                <span className="tabular-nums text-slate-500">Penguasaan {concept.mastery}%</span>
               </p>
               <ProgressBar
                 className="mt-2"
                 value={concept.mastery}
                 barClassName={statusBarClass[concept.status]}
-                label={`Penguasaan ${concept.name}`}
+                label={`Penguasaan ${plainText(concept.name)}`}
               />
               {/* Soal Benar/Salah dan jawaban ganda dinilai utuh, tetapi bagian yang
-                  sudah tepat tetap dicatat supaya penguasaan tidak terbaca nol. */}
+                  sudah tepat tetap dicatat supaya penguasaan tidak terbaca nol. Apa yang
+                  dihitung sebagai satu bagian ikut disebut: tanpa itu, "4 dari 18" pada
+                  paket berisi 10 soal terbaca sebagai angka yang tidak nyambung. */}
               {concept.hasPartialCredit ? (
-                <p className="mt-2 text-sm text-slate-600">
-                  Dihitung per bagian,{" "}
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Penguasaan dihitung per bagian:{" "}
                   <span className="font-semibold text-slate-700">
-                    {concept.partsCorrect} dari {concept.partsTotal} pernyataan dan pilihan
+                    {concept.partsCorrect} dari {concept.partsTotal} bagian
                   </span>{" "}
-                  sudah tepat ({concept.mastery}%). Nilai soalnya utuh, jadi soal yang baru benar
-                  sebagian belum terhitung.
+                  sudah tepat ({concept.mastery}%). Satu soal pilihan ganda dihitung satu bagian,
+                  sedangkan pada soal Benar/Salah tiap pernyataannya dan pada soal jawaban ganda
+                  tiap kuncinya dihitung satu bagian sendiri. Nilai soalnya tetap utuh, jadi soal
+                  yang baru benar sebagian belum terhitung benar.
                 </p>
               ) : null}
             </div>
@@ -96,9 +117,10 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
                   <p className="text-xs font-bold uppercase tracking-[0.1em] text-aqua-700">
                     Yang perlu dipelajari
                   </p>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-700">
-                    {concept.description}
-                  </p>
+                  <RichText
+                    className="mt-1 text-[15px] leading-relaxed text-slate-700"
+                    html={concept.description}
+                  />
                 </div>
               </div>
             ) : null}
@@ -113,17 +135,20 @@ export function ConceptFocusList({ concepts }: { concepts: ConceptFocus[] }) {
                   <p className="text-xs font-bold uppercase tracking-[0.1em] text-amber-800">
                     Yang tadi keliru
                   </p>
-                  <p className="mt-1 text-[15px] font-semibold leading-relaxed text-ink-900">
-                    {misconceptionLabel(signal.label)}
+                  {/* Judulnya memakai <div>: label yang terbawa markup dapat berisi
+                      <p> sendiri, dan <p> di dalam <p> bukan HTML yang sah. */}
+                  <div className="mt-1 text-[15px] font-semibold leading-relaxed text-ink-900">
+                    <RichText as="span" inline html={misconceptionLabel(signal.label)} />
                     {signal.count > 1 ? (
                       <span className="ml-1.5 font-normal text-amber-800">
                         (muncul {signal.count}×)
                       </span>
                     ) : null}
-                  </p>
-                  <p className="mt-1 text-[15px] leading-relaxed text-slate-700">
-                    {signal.insight}
-                  </p>
+                  </div>
+                  <RichText
+                    className="mt-1 text-[15px] leading-relaxed text-slate-700"
+                    html={signal.insight}
+                  />
                   {signal.questionNumbers.length > 0 ? (
                     <p className="mt-1.5 text-sm text-amber-900">
                       Terbaca pada soal nomor {signal.questionNumbers.join(", ")}.

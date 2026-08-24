@@ -1,115 +1,158 @@
+import Image from "next/image";
 import Link from "next/link";
-import { CoverArt } from "@/components/CoverArt";
 import { Icon } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
 import { getSubjectTheme } from "@/lib/subject-theme";
-import { toneButton, toneChip, toneTag } from "@/lib/tone";
+import {
+  toneButton,
+  toneIconBox,
+  toneSurface,
+  toneTag,
+  type AccentTone,
+} from "@/lib/tone";
 import type { SubjectSummary } from "@/services/content-service";
 
-/**
- * Kartu mata pelajaran pada halaman depan. Mata pelajaran yang belum berisi soal
- * tetap ditampilkan agar cakupan produk terbaca, tetapi tidak dapat dibuka.
- *
- * Jenjangnya tidak ditulis di kartu: halaman depan sudah mengelompokkan kartu
- * per jenjang, jadi mengulangnya di setiap sampul hanya menambah teks.
- *
- * Warna kartu mengikuti mata pelajarannya — lihat `getSubjectTheme` — sehingga
- * Matematika, Bahasa Indonesia, dan Bahasa Inggris langsung terbedakan sebelum
- * judulnya dibaca.
- */
+const subjectCoverByKeyword: { match: RegExp; src: string }[] = [
+  { match: /matematika|math/, src: "/matematika.png" },
+  { match: /bahasa[-\s]?indonesia|indonesian/, src: "/bahasaindonesia.png" },
+  { match: /bahasa[-\s]?inggris|english/, src: "/bahasainggris.png" },
+];
+
+const coverOverlay: Record<AccentTone, string> = {
+  brand: "from-brand-950/35 via-transparent to-brand-950/10",
+  gold: "from-ink-950/25 via-transparent to-accent-950/10",
+  aqua: "from-ink-950/25 via-transparent to-aqua-950/10",
+  emerald: "from-emerald-950/25 via-transparent to-emerald-950/10",
+  rose: "from-rose-950/25 via-transparent to-rose-950/10",
+  sky: "from-ink-950/25 via-transparent to-aqua-950/10",
+  amber: "from-ink-950/25 via-transparent to-accent-950/10",
+  violet: "from-brand-950/35 via-transparent to-brand-950/10",
+  slate: "from-ink-950/25 via-transparent to-ink-950/10",
+};
+
+function subjectCover(subject: { slug?: string; name?: string }) {
+  const key = `${subject.slug ?? ""} ${subject.name ?? ""}`.toLowerCase();
+  return subjectCoverByKeyword.find((item) => item.match.test(key))?.src;
+}
+
 export function SubjectCard({ summary }: { summary: SubjectSummary }) {
   const { subject, packageCount, tryoutCount, isAvailable } = summary;
   const theme = getSubjectTheme(subject);
+  const coverSrc = subjectCover(subject);
+  const linkLabel = `Buka ${subject.shortName}, ${packageCount} paket latihan, ${tryoutCount} tryout`;
 
-  // Jumlah paket dan tryout tampil sebagai keping di badan kartu, jadi sampul tidak mengulangnya.
-  const coverSubtitle = isAvailable ? "Latihan bertahap dan tryout" : "Sedang disiapkan";
-
-  const body = (
-    <>
-      <CoverArt
-        className="h-36"
-        tone={theme.cover}
-        icon={theme.icon}
-        title={subject.shortName}
-        titleAs="h4"
-        subtitle={coverSubtitle}
-      />
+  const card = (
+    <article
+      className={[
+        "flex h-full flex-col overflow-hidden rounded-lg border bg-white shadow-card transition-all",
+        isAvailable
+          ? "border-slate-200 hover:-translate-y-0.5 hover:shadow-float"
+          : "border-slate-200 opacity-75",
+      ].join(" ")}
+      aria-disabled={isAvailable ? undefined : "true"}
+    >
+      <div
+        className={`relative aspect-[3/2] overflow-hidden ${
+          coverSrc ? "bg-slate-100" : toneSurface[theme.accent]
+        }`}
+      >
+        {coverSrc ? (
+          <Image
+            src={coverSrc}
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+            priority={false}
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <span
+              aria-hidden="true"
+              className={`flex h-14 w-14 items-center justify-center rounded-lg shadow-card ${toneIconBox[theme.accent]}`}
+            >
+              <Icon name={theme.icon} className="h-7 w-7" strokeWidth={2} />
+            </span>
+          </div>
+        )}
+        <div className={`absolute inset-0 bg-gradient-to-br ${coverOverlay[theme.accent]}`} />
+      </div>
 
       <div className="flex flex-1 flex-col p-4">
-        {/* Nama mapel cukup sekali di sampul. Deskripsinya pun sengaja tidak
-            ditampilkan: sampul dan keping di bawah ini sudah menerangkan
-            isinya, dan kartunya jadi lebih ringkas. */}
-        <ul className="flex flex-wrap gap-1.5">
-          <li
-            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
-              isAvailable ? toneChip.emerald : toneChip.slate
-            }`}
-          >
-            <Icon
-              name={isAvailable ? "check" : "hourglass"}
-              className="h-3.5 w-3.5"
-              strokeWidth={2.2}
-            />
-            {isAvailable ? "Tersedia" : "Segera"}
-          </li>
-          {/* Keping bernilai nol tidak ditampilkan: "0 tryout" tidak menambah
-              keterangan apa pun dan justru terbaca sebagai kekurangan. */}
-          {packageCount > 0 ? (
-            <li
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-            >
-              <Icon name="layers" className="h-3.5 w-3.5" />
-              {packageCount} paket
-            </li>
-          ) : null}
-          {tryoutCount > 0 ? (
-            <li
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${toneTag[theme.accent]}`}
-            >
-              <Icon name="flag" className="h-3.5 w-3.5" />
-              {tryoutCount} tryout
-            </li>
-          ) : null}
-        </ul>
-
-        {/* Tombol ditempel ke dasar kartu agar deretan kartu tetap rapi meski isinya berbeda panjang. */}
-        <div className="mt-auto pt-4">
+        <div className="flex items-start gap-3">
           <span
+            aria-hidden="true"
             className={[
-              "inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold",
-              isAvailable ? toneButton[theme.accent] : "bg-slate-100 text-slate-500",
+              "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg shadow-card",
+              isAvailable
+                ? toneIconBox[theme.accent]
+                : "bg-slate-100 text-slate-400 ring-1 ring-inset ring-slate-200",
             ].join(" ")}
           >
-            {isAvailable ? <LinkPending /> : null}
-            <Icon
-              name={isAvailable ? "arrow-right" : "hourglass"}
-              className="h-4 w-4"
-              strokeWidth={2.2}
-            />
-            {isAvailable ? "Lihat Paket Soal" : "Belum Tersedia"}
+            <Icon name={theme.icon} className="h-5 w-5" strokeWidth={2.1} />
           </span>
+
+          <div className="min-w-0 flex-1">
+            <h4 className="break-words text-lg font-extrabold leading-snug text-ink-900">
+              {subject.shortName}
+            </h4>
+            {isAvailable ? (
+              <ul className="mt-2 flex flex-wrap gap-1.5">
+                <li
+                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
+                    toneTag[theme.accent]
+                  }`}
+                >
+                  <Icon name="layers" className="h-3.5 w-3.5" strokeWidth={2.1} />
+                  {packageCount} paket latihan
+                </li>
+                <li
+                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
+                    toneTag[theme.accent]
+                  }`}
+                >
+                  <Icon name="flag" className="h-3.5 w-3.5" strokeWidth={2.1} />
+                  {tryoutCount} tryout
+                </li>
+              </ul>
+            ) : (
+              <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-500">
+                Segera hadir
+              </p>
+            )}
+          </div>
         </div>
+
+        <span
+          aria-hidden="true"
+          className={[
+            "mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg px-4 text-sm font-extrabold transition-opacity",
+            isAvailable
+              ? `${toneButton[theme.accent]} hover:opacity-90`
+              : "bg-slate-100 text-slate-500",
+          ].join(" ")}
+        >
+          {isAvailable ? <LinkPending /> : null}
+          <Icon
+            name={isAvailable ? "arrow-right" : "hourglass"}
+            className="h-4 w-4"
+            strokeWidth={2.2}
+          />
+          {isAvailable ? "Lihat Paket Soal" : "Segera Hadir"}
+        </span>
       </div>
-    </>
+    </article>
   );
 
-  const shell =
-    "flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card";
-
-  if (!isAvailable) {
-    return (
-      <article className={`${shell} opacity-75`} aria-disabled="true">
-        {body}
-      </article>
-    );
-  }
+  if (!isAvailable) return card;
 
   return (
     <Link
       href={`/mapel/${subject.slug}`}
-      className={`${shell} transition-shadow hover:shadow-float`}
+      className="group block h-full"
+      aria-label={linkLabel}
     >
-      {body}
+      {card}
     </Link>
   );
 }

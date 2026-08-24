@@ -1,11 +1,13 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConceptFocusList } from "@/components/ConceptFocusList";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { PracticePackageCard } from "@/components/PracticePackageCard";
 import { ResultStatus } from "@/components/ResultStatus";
+import { RichText } from "@/components/RichText";
 import { ScoreRing } from "@/components/ScoreRing";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -24,6 +26,58 @@ import {
   type PracticeResult,
 } from "@/services/practice-service";
 import { readProfile } from "@/storage/profile-storage";
+
+function packageCoverage(pkg: PracticePackage): string[] {
+  return pkg.subtopicIds?.length ? pkg.subtopicIds : [pkg.subtopicId];
+}
+
+function packageTitleKey(pkg: PracticePackage): string {
+  return (pkg.title || pkg.slug).toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function ResultDropdown({
+  title,
+  subtitle,
+  icon,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  subtitle: string;
+  icon: Parameters<typeof Icon>[0]["name"];
+  children: ReactNode;
+  defaultOpen?: boolean;
+}) {
+  return (
+    <details
+      open={defaultOpen}
+      className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-card"
+    >
+      <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-4 marker:content-none sm:px-5">
+        <span
+          aria-hidden="true"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-100"
+        >
+          <Icon name={icon} className="h-5 w-5" strokeWidth={2.1} />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-base font-extrabold leading-snug text-ink-900">
+            {title}
+          </span>
+          <span className="mt-0.5 block text-sm leading-relaxed text-slate-500">
+            {subtitle}
+          </span>
+        </span>
+        <Icon
+          name="arrow-right"
+          className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-open:rotate-90"
+          strokeWidth={2.2}
+        />
+      </summary>
+      <div className="border-t border-slate-200 px-4 py-4 sm:px-5 sm:py-5">{children}</div>
+    </details>
+  );
+}
 
 export function PracticeResultView({
   pkg,
@@ -97,13 +151,28 @@ export function PracticeResultView({
   const total = questions.length || 1;
   const accuracy = Math.round((analysis.correctCount / total) * 100);
 
-  // Paket yang sedang dikerjakan tidak ikut disarankan; untuk itu sudah ada tombol "Ulangi".
+  const weakSubtopicIds = new Set(
+    analysis.conceptsToReview.map((concept) => concept.subtopicId).filter(Boolean),
+  );
+  const seenRecommendationKeys = new Set<string>();
+  // Rekomendasi hanya tampil bila datanya benar-benar menutup submateri lemah
+  // pada mapel dan jenjang yang sama. Paket saat ini tidak ikut disarankan
+  // karena sudah ada tombol "Ulangi Latihan".
   const recommendedPackages = analysis.recommendedPackageSlugs
     .filter((slug) => slug !== pkg.slug)
     .flatMap((slug) => {
       const found = catalog.practicePackages?.find((item) => item.slug === slug);
       return found ? [found] : [];
-    });
+    })
+    .filter((item) => item.subjectId === pkg.subjectId && item.level === pkg.level)
+    .filter((item) => packageCoverage(item).some((subtopicId) => weakSubtopicIds.has(subtopicId)))
+    .filter((item) => {
+      const key = packageTitleKey(item);
+      if (seenRecommendationKeys.has(key)) return false;
+      seenRecommendationKeys.add(key);
+      return true;
+    })
+    .slice(0, 6);
 
   // Nama materi hanya disebut bila seluruh soal paket ini memang satu materi.
   // `pkg.subtopicId` sendiri mewakili soal pertama saja, dan enam paket Bahasa
@@ -175,8 +244,10 @@ export function PracticeResultView({
                 pekerjaan yang benar sebagian tidak hilang dari pandangan. */}
             {analysis.hasPartialCredit ? (
               <p className="mt-1.5 text-sm leading-relaxed text-white/85">
-                Dihitung per bagian, {analysis.partsCorrect} dari {analysis.partsTotal} pernyataan
-                dan pilihan sudah tepat.
+                Penguasaan per bagian {analysis.partsScore}%: {analysis.partsCorrect} dari{" "}
+                {analysis.partsTotal} bagian jawaban sudah tepat — tiap soal pilihan ganda satu
+                bagian, tiap pernyataan Benar/Salah satu bagian. Nilai soalnya utuh, jadi soal yang
+                baru benar sebagian belum menambah skor.
               </p>
             ) : null}
             <div className="mt-4">
@@ -204,89 +275,70 @@ export function PracticeResultView({
         />
       </section>
 
-      {/* Ringkasan tiga kalimat: hasilnya bagaimana, lemahnya di mana, sebaiknya apa. */}
-      <section className="mt-8">
-        <div
-          className={[
-            "rounded-3xl border p-6 shadow-card sm:p-8",
-            narrative.isAllClear
-              ? "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white"
-              : "border-brand-200 bg-gradient-to-br from-brand-50 to-white",
-          ].join(" ")}
+      <div className="mt-8 space-y-3">
+        <ResultDropdown
+          title="Ringkasan untuk orang tua"
+          subtitle="Hasil utama dan langkah belajar berikutnya."
+          icon={narrative.isAllClear ? "trophy" : "compass"}
+          defaultOpen
         >
-          <div className="flex items-start gap-4">
-            <IconBadge
-              name={narrative.isAllClear ? "trophy" : "compass"}
-              tone={narrative.isAllClear ? "emerald" : "violet"}
-              size="lg"
-            />
-            <div className="min-w-0">
-              <p
-                className={`text-xs font-bold uppercase tracking-[0.12em] ${
-                  narrative.isAllClear ? "text-emerald-700" : "text-brand-700"
-                }`}
-              >
-                Catatan Hasil Latihan
+          <div className="max-w-2xl space-y-2">
+            {narrative.sentences.map((sentence) => (
+              <p key={sentence} className="text-[16px] leading-[1.75] text-ink-900 sm:text-[17px]">
+                <RichText as="span" inline html={sentence} />
               </p>
-              {/* Tiap kalimat satu baris: capaian, kelemahan, lalu saran. */}
-              <div className="mt-2 max-w-2xl space-y-2">
-                {narrative.sentences.map((sentence) => (
-                  <p key={sentence} className="text-[17px] leading-[1.7] text-ink-900 sm:text-lg">
-                    {sentence}
-                  </p>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
+        </ResultDropdown>
 
-      {/* Konsep yang masih lemah: angkanya, penjelasannya, dan pola kelirunya. */}
-      {conceptCards.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-            <IconBadge name="book" tone="sky" size="md" />
-            Konsep yang perlu diperkuat
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-            Diurutkan dari yang paling sedikit benar. Mulai dari nomor satu, ya.
-          </p>
-          <ConceptFocusList concepts={conceptCards} />
-        </section>
-      ) : null}
+        {conceptCards.length > 0 ? (
+          <ResultDropdown
+            title="Bagian yang perlu dibantu lagi"
+            subtitle="Urutan dari bagian yang paling butuh perhatian."
+            icon="book"
+          >
+            <p className="text-[15px] leading-relaxed text-slate-600">
+              Mulai dampingi dari nomor pertama, karena bagian itu yang paling banyak belum tepat.
+            </p>
+            <ConceptFocusList concepts={conceptCards} />
+          </ResultDropdown>
+        ) : null}
 
       {/* Konsep yang sudah kuat, supaya yang lemah terbaca sebagai sebagian — bukan semuanya. */}
       {analysis.strongConcepts.length > 0 ? (
-        <section className="mt-8 rounded-3xl border border-emerald-200 bg-emerald-50/70 p-5 sm:p-6">
-          <h2 className="flex items-center gap-2.5 text-base font-extrabold tracking-tight">
-            <IconBadge name="check" tone="emerald" size="sm" />
-            Konsep yang sudah dikuasai
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2">
+        <ResultDropdown
+          title="Bagian yang sudah cukup aman"
+          subtitle="Materi ini tidak perlu jadi fokus utama sekarang."
+          icon="check"
+        >
+          <ul className="flex flex-wrap gap-2">
             {analysis.strongConcepts.map((concept) => (
               <li
                 key={concept.id}
                 className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200"
               >
                 <Icon name="check" className="h-4 w-4 text-emerald-600" strokeWidth={2.4} />
-                {concept.name}
+                <RichText as="span" inline html={concept.name} />
+                {/* Penguasaan, bukan jumlah soal benar: yang menentukan konsep ini masuk
+                    daftar "sudah dikuasai" memang angka per bagian itu. Menampilkan
+                    "0/2" di sebelah kata "dikuasai" justru saling bertentangan. */}
                 <span className="font-normal tabular-nums text-emerald-700">
-                  {concept.correct}/{concept.total}
+                  {concept.mastery}%
                 </span>
               </li>
             ))}
           </ul>
-        </section>
+        </ResultDropdown>
       ) : null}
 
       {/* Pola keliru yang terbaca dari pengecoh yang dipilih, bukan sekadar benar-salah. */}
       {otherSignals.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-            <IconBadge name="alert" tone="amber" size="md" />
-            Yang tadi masih keliru
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+        <ResultDropdown
+          title="Pola jawaban yang perlu dibenahi"
+          subtitle="Kesalahan yang berulang dari pilihan jawaban anak."
+          icon="alert"
+        >
+          <p className="text-[15px] leading-relaxed text-slate-600">
             Terbaca dari pilihan jawaban yang tadi diambil, bukan hanya dari benar atau salahnya.
           </p>
           <ul className="mt-5 space-y-3">
@@ -295,15 +347,19 @@ export function PracticeResultView({
                 key={signal.id}
                 className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5"
               >
-                <p className="text-[15px] font-semibold leading-relaxed text-ink-900">
-                  {misconceptionLabel(signal.label)}
+                {/* <div>, bukan <p>: label yang terbawa markup dapat berisi <p> sendiri. */}
+                <div className="text-[15px] font-semibold leading-relaxed text-ink-900">
+                  <RichText as="span" inline html={misconceptionLabel(signal.label)} />
                   {signal.count > 1 ? (
                     <span className="ml-1.5 font-normal text-amber-800">
                       (muncul {signal.count}×)
                     </span>
                   ) : null}
-                </p>
-                <p className="mt-1 text-[15px] leading-relaxed text-slate-700">{signal.insight}</p>
+                </div>
+                <RichText
+                  className="mt-1 text-[15px] leading-relaxed text-slate-700"
+                  html={signal.insight}
+                />
                 {signal.questionNumbers.length > 0 ? (
                   <p className="mt-1.5 text-sm text-amber-900">
                     Terbaca pada soal nomor {signal.questionNumbers.join(", ")}.
@@ -312,18 +368,18 @@ export function PracticeResultView({
               </li>
             ))}
           </ul>
-        </section>
+        </ResultDropdown>
       ) : null}
 
       {/* Paket lanjutan untuk konsep yang masih lemah. */}
       {recommendedPackages.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-            <IconBadge name="target" tone="brand" size="md" />
-            Paket yang perlu dicoba
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-            Paket ini melatih konsep yang tadi masih sering keliru.
+        <ResultDropdown
+          title="Latihan berikutnya yang cocok"
+          subtitle="Paket ini sesuai dengan bagian yang tadi masih lemah."
+          icon="target"
+        >
+          <p className="text-[15px] leading-relaxed text-slate-600">
+            Mulai dari paket pertama agar latihan berikutnya lebih terarah.
           </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2">
             {recommendedPackages.map((item, index) => (
@@ -337,18 +393,25 @@ export function PracticeResultView({
               </li>
             ))}
           </ul>
-        </section>
+        </ResultDropdown>
       ) : null}
 
-      <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-        <ButtonLink href={`/latihan/${pkg.slug}/pembahasan`} size="lg">
-          <Icon name="book" className="h-5 w-5" />
-          Lihat Pembahasan
-        </ButtonLink>
-        <Button variant="secondary" size="lg" loading={isPending} onClick={handleRepeat}>
-          {isPending ? null : <Icon name="refresh" className="h-5 w-5" />}
-          Ulangi Latihan
-        </Button>
+        <ResultDropdown
+          title="Pembahasan soal"
+          subtitle="Buka penjelasan jawaban atau ulangi latihan dari awal."
+          icon="book"
+        >
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href={`/latihan/${pkg.slug}/pembahasan`} size="lg">
+              <Icon name="book" className="h-5 w-5" />
+              Lihat Pembahasan
+            </ButtonLink>
+            <Button variant="secondary" size="lg" loading={isPending} onClick={handleRepeat}>
+              {isPending ? null : <Icon name="refresh" className="h-5 w-5" />}
+              Ulangi Latihan
+            </Button>
+          </div>
+        </ResultDropdown>
       </div>
     </div>
   );
