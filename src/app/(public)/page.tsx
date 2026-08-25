@@ -16,7 +16,7 @@ import { getSubjectSummaries } from "@/services/content-service";
 export const metadata: Metadata = {
   title: { absolute: `Latihan Soal TKA & Tryout Online Sesuai Kisi-Kisi — ${site.name}` },
   description:
-    "Latihan soal TKA dan tryout online untuk SD, SMP, dan SMA. Dikerjakan dari rumah, sesuai kisi-kisi terbaru, lengkap dengan pembahasan tiap soal dan analisa materi yang perlu diperkuat.",
+    "Latihan soal TKA dan tryout online untuk SMA/SMK, SD, dan SMP. Dikerjakan dari rumah, sesuai kisi-kisi terbaru, lengkap dengan pembahasan tiap soal dan analisa materi yang perlu diperkuat.",
   keywords: [...siteKeywords],
   alternates: { canonical: absoluteUrl("/") },
   openGraph: {
@@ -76,8 +76,8 @@ export default async function HomePage() {
           Latihan Soal TKA & Tryout Online Sesuai Kisi-Kisi
         </h1>
         <p className="mt-2 text-[15px] leading-relaxed text-slate-600 sm:max-w-none">
-          Paket latihan per materi untuk SD, SMP, dan SMA, dilanjut tryout dengan suasana ujian
-          TKA serta pembahasan setelah pengerjaan.
+          Paket latihan per materi untuk SMA/SMK, SD, dan SMP, dilanjut tryout dengan suasana
+          ujian TKA serta pembahasan setelah pengerjaan.
         </p>
       </div>
 

@@ -75,6 +75,30 @@ function highlight(text: string): string {
   return `<strong>${text}</strong>`;
 }
 
+function questionReference(numbers: number[]): string | null {
+  if (numbers.length === 0) return null;
+  return `soal nomor ${joinList(numbers.map((number) => String(number)))}`;
+}
+
+function questionNumbersFromSignals(signals: MisconceptionSignal[]): number[] {
+  const numbers = new Set<number>();
+  for (const signal of signals) {
+    for (const number of signal.questionNumbers) numbers.add(number);
+  }
+  return [...numbers].sort((a, b) => a - b);
+}
+
+function practiceSignalClause(signal: MisconceptionSignal): string {
+  const kind = signal.count > 1 ? "pola" : "indikasi";
+  const label = highlight(misconceptionLabelInSentence(signal.label));
+  const occurrence = signal.count > 1 ? ` yang muncul ${signal.count} kali` : "";
+  const reference = questionReference(signal.questionNumbers);
+
+  return reference
+    ? `${kind} ${label}${occurrence}, terlihat pada ${highlight(reference)}`
+    : `${kind} ${label}${occurrence}`;
+}
+
 /** Tanpa nama yang tercatat, sapaannya tetap sopan: "Ananda" saja. */
 function greeting(studentName: string | undefined): string {
   const name = studentName?.trim();
@@ -92,6 +116,8 @@ interface NarrativeInput {
   signals: MisconceptionSignal[];
   /** Materi prasyarat yang sebaiknya dikuatkan lebih dulu, bila terbaca. */
   prerequisite?: { name: string; supports: string[] } | null;
+  /** Nomor soal yang paling penting dibuka dulu pada pembahasan. */
+  priorityQuestionNumbers?: number[];
 }
 
 /** Nama materi yang lemah, sudah dipendekkan dan siap disebut dalam kalimat. */
@@ -130,7 +156,7 @@ function achievementSentence(
   const subject = contextPhrase(contextName);
 
   if (input.correct === 0) {
-    return `${who} belum menjawab benar satu pun dari ${input.total} soal yang dikerjakan, sehingga penguasaan ${subject} masih perlu dibangun dari dasar.`;
+    return `${who} ${highlight("belum menjawab benar satu pun")} dari ${input.total} soal yang dikerjakan, sehingga penguasaan ${highlight(subject)} ${highlight("masih perlu dibangun dari dasar")}.`;
   }
 
   const quality =
@@ -140,7 +166,7 @@ function achievementSentence(
         ? "yang cukup"
         : "yang masih perlu diperkuat";
 
-  return `${who} menjawab benar ${input.correct} dari ${input.total} soal yang dikerjakan dan menunjukkan penguasaan ${subject} ${quality}.`;
+  return `${who} menjawab benar ${highlight(`${input.correct} dari ${input.total} soal`)} yang dikerjakan dan menunjukkan penguasaan ${highlight(subject)} ${highlight(quality)}.`;
 }
 
 /**
@@ -154,12 +180,10 @@ function achievementSentence(
  */
 function practiceWeaknessSentence(input: NarrativeInput): string | null {
   const top = input.signals.slice(0, PATTERN_LIMIT);
-  const patterns = joinPatterns(top.map((signal) => misconceptionLabelInSentence(signal.label)));
-  if (!patterns) return null;
+  const findings = joinPatterns(top.map(practiceSignalClause));
+  if (!findings) return null;
 
-  return isCompetencyMisconception(top[0].label)
-    ? `Yang belum tercapai pada latihan ini adalah ${patterns}.`
-    : `Pola kesalahan yang terbaca dari jawaban terutama berupa ${patterns}.`;
+  return `Temuan dari jawaban menunjukkan ${findings}.`;
 }
 
 function weaknessSentence(input: NarrativeInput, weakLimit: number): string | null {
@@ -170,7 +194,9 @@ function weaknessSentence(input: NarrativeInput, weakLimit: number): string | nu
   const top = input.signals.slice(0, names.length > 1 ? 1 : PATTERN_LIMIT);
   // Nama materi disambung "dan", pola disambung "serta": nama pola sendiri
   // sering memuat kata "dan" ("tangga dam dan hm dilompati").
-  const patterns = joinPatterns(top.map((signal) => misconceptionLabelInSentence(signal.label)));
+  const patterns = joinPatterns(
+    top.map((signal) => highlight(misconceptionLabelInSentence(signal.label))),
+  );
 
   if (names.length > 0 && patterns) {
     const bridge = isCompetencyMisconception(top[0].label)
@@ -212,20 +238,24 @@ function adviceSentence(
   const who = "Ananda";
   const reference = referenceOverride ?? materialReference(input.weakNames.length);
   const prerequisite = input.prerequisite;
+  const questionRef = questionReference(input.priorityQuestionNumbers ?? []);
 
   if (prerequisite && prerequisite.supports.length > 0) {
     const basis = joinList(prerequisite.supports.map(materialNameInSentence));
-    return `${who} disarankan memperkuat ${highlight(materialNameInSentence(prerequisite.name))} lebih dulu, karena materi itu menjadi dasar ${basis}.`;
+    return `${who} disarankan memperkuat ${highlight(materialNameInSentence(prerequisite.name))} lebih dulu, karena materi itu menjadi dasar ${highlight(basis)}.`;
+  }
+  if (questionRef) {
+    return `${who} disarankan mulai dari pembahasan ${highlight(questionRef)}, lalu minta Ananda menjelaskan ulang alasannya sebelum mengerjakan ulang latihan.`;
   }
   if (nextPackageTitle?.trim()) {
     // Judul paket diberi tanda kutip: judulnya sendiri sering memuat kata sambung
     // ("Pecahan Senilai lewat Gambar dan Simbol"), sehingga batasnya perlu terlihat.
-    return `${who} disarankan memperkuat ${reference} melalui paket latihan “${nextPackageTitle.trim()}”, lalu membaca kembali pembahasan soal yang jawabannya belum tepat.`;
+    return `${who} disarankan memperkuat ${highlight(reference)} melalui paket latihan ${highlight(nextPackageTitle.trim())}, lalu membaca kembali ${highlight("pembahasan soal")} yang jawabannya belum tepat.`;
   }
   if (input.weakNames.length > 0) {
-    return `${who} disarankan mengulang latihan pada ${reference}, lalu membaca kembali pembahasan soal yang jawabannya belum tepat.`;
+    return `${who} disarankan mengulang latihan pada ${highlight(reference)}, lalu membaca kembali ${highlight("pembahasan soal")} yang jawabannya belum tepat.`;
   }
-  return `${who} disarankan membaca kembali pembahasan soal yang jawabannya belum tepat.`;
+  return `${who} disarankan membaca kembali ${highlight("pembahasan soal")} yang jawabannya belum tepat.`;
 }
 
 function compose(
@@ -246,7 +276,7 @@ function compose(
   // Tidak ada materi lemah yang terbaca dan nilainya memang tinggi: cukup dipuji.
   if (!weakness && input.score >= MASTERY_THRESHOLD) {
     const closing =
-      "Seluruh materi pada latihan ini sudah dikuasai, jadi Ananda dapat lanjut ke materi berikutnya.";
+      `Seluruh materi pada latihan ini ${highlight("sudah dikuasai")}, jadi Ananda dapat ${highlight("lanjut ke materi berikutnya")}.`;
     return {
       sentences: [achievement, closing],
       body: `${achievement} ${closing}`,
@@ -270,6 +300,9 @@ export function buildPracticeNarrative(
       score: analysis.score,
       weakNames: weakNamesOf(analysis.conceptsToReview, PRACTICE_WEAK_LIMIT),
       signals: analysis.misconceptionSignals,
+      priorityQuestionNumbers: questionNumbersFromSignals(
+        analysis.misconceptionSignals.slice(0, PATTERN_LIMIT),
+      ),
     },
     options,
     {

@@ -1,3 +1,6 @@
+"use client";
+
+import { useId, useState } from "react";
 import { SubjectCard } from "@/components/SubjectCard";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
@@ -7,24 +10,14 @@ import type { SubjectSummary } from "@/services/content-service";
 /**
  * Katalog halaman depan.
  *
- * Jenjang bukan penyaring: ketiganya tampil sekaligus, bertingkat dari SMA di
- * atas sampai SD di bawah, karena pengunjung yang membawa dua anak berbeda
- * jenjang tidak perlu berpindah tampilan untuk melihat keduanya. Tanpa penyaring
- * halaman ini pun tidak lagi menyimpan pilihan di perangkat dan tidak lagi perlu
- * berjalan di peramban — seluruh isinya sudah jadi sejak dari peladen.
- *
- * Keterangan jenjang cukup satu kali di kepala tiap tingkat, jadi kartunya tidak
- * mengulanginya lagi. Jenjang yang isinya belum siap tetap ditampilkan supaya
- * cakupan produk terbaca, ditandai keping kelabu, bukan disembunyikan.
+ * Jenjang dibuat bertab supaya pengguna ponsel tidak perlu menggulir melewati
+ * semua tingkat sekolah. Data tetap datang dari server; komponen ini hanya
+ * menyimpan jenjang yang sedang dilihat.
  */
 
-/** Tertinggi lebih dulu: TKA SMA yang paling dekat tenggatnya. */
-const LEVEL_ORDER: EducationLevel[] = ["SMA", "SMP", "SD"];
+/** SMA/SMK dan SD tampil dulu; SMP tetap ada, tetapi ditempatkan terakhir. */
+const LEVEL_ORDER: EducationLevel[] = ["SMA", "SD", "SMP"];
 
-/**
- * Warna keping jenjang. Bukan hiasan: warnanya berbeda supaya mata dapat
- * melompat ke tingkat yang dicari tanpa membaca hurufnya lebih dulu.
- */
 const LEVEL_PILL: Record<EducationLevel, string> = {
   SMA: "bg-brand-700 text-white",
   SMP: "bg-aqua-700 text-white",
@@ -35,6 +28,12 @@ const LEVEL_LABEL: Record<EducationLevel, string> = {
   SMA: "SMA/SMK",
   SMP: "SMP",
   SD: "SD",
+};
+
+const LEVEL_SHORT_NOTE: Record<EducationLevel, string> = {
+  SMA: "Paling siap",
+  SD: "Tersedia",
+  SMP: "Segera",
 };
 
 const SMA_OPTIONAL_SUBJECT: SubjectSummary = {
@@ -63,11 +62,21 @@ function subjectsForLevel(summaries: SubjectSummary[], level: EducationLevel) {
   return hasOptionalSubject ? items : [...items, SMA_OPTIONAL_SUBJECT];
 }
 
+function availableCount(items: SubjectSummary[]): number {
+  return items.filter((item) => item.isAvailable).length;
+}
+
 export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
+  const selectId = useId();
+  const [activeLevel, setActiveLevel] = useState<EducationLevel>(LEVEL_ORDER[0]);
   const groups = LEVEL_ORDER.map((level) => ({
     level,
     items: subjectsForLevel(summaries, level),
   }));
+  const activeGroup = groups.find((group) => group.level === activeLevel) ?? groups[0];
+  const activeItems = activeGroup.items;
+  const activeAvailableCount = availableCount(activeItems);
+  const activeIsEmpty = activeItems.length === 0;
 
   return (
     <div id="katalog-mapel" className="container-page scroll-mt-24 pb-16">
@@ -84,40 +93,115 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
         </div>
       </div>
 
-      {groups.map(({ level, items }, index) => {
-        const isReady = items.length > 0;
+      <div className="mt-5 sm:hidden">
+        <label htmlFor={selectId} className="sr-only">
+          Pilih jenjang
+        </label>
+        <div className="relative">
+          <select
+            id={selectId}
+            value={activeLevel}
+            onChange={(event) => setActiveLevel(event.target.value as EducationLevel)}
+            className="h-12 w-full appearance-none rounded-lg border border-slate-300 bg-white px-4 pr-10 text-base font-extrabold text-ink-900 shadow-card outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+          >
+            {groups.map(({ level, items }) => {
+              const count = availableCount(items);
+              return (
+                <option key={level} value={level}>
+                  {LEVEL_LABEL[level]} - {count > 0 ? `${count} mapel` : "segera"}
+                </option>
+              );
+            })}
+          </select>
+          <Icon
+            name="arrow-right"
+            className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-90 text-slate-500"
+            strokeWidth={2.2}
+          />
+        </div>
+      </div>
 
-        return (
-          <section key={level} className={index === 0 ? "mt-7" : "mt-10"}>
-            <h3 className="flex items-center gap-2">
+      <div
+        role="tablist"
+        aria-label="Pilih jenjang"
+        className="mt-5 hidden grid-cols-3 gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-card sm:grid"
+      >
+        {groups.map(({ level, items }) => {
+          const isActive = level === activeLevel;
+          const count = availableCount(items);
+          const isEmpty = items.length === 0;
+
+          return (
+            <button
+              key={level}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`panel-${level.toLowerCase()}`}
+              id={`tab-${level.toLowerCase()}`}
+              onClick={() => setActiveLevel(level)}
+              className={[
+                "flex h-14 min-w-0 items-center justify-center gap-2 rounded-lg px-3 text-sm font-extrabold transition-colors",
+                isActive
+                  ? LEVEL_PILL[level]
+                  : "text-slate-600 hover:bg-slate-50 hover:text-ink-900",
+              ].join(" ")}
+            >
+              <span className="truncate">{LEVEL_LABEL[level]}</span>
               <span
                 className={[
-                  "inline-flex h-8 items-center rounded-lg px-3 text-sm font-extrabold tracking-wide",
-                  isReady ? LEVEL_PILL[level] : "bg-slate-200 text-slate-500",
+                  "inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-[11px] font-bold",
+                  isActive
+                    ? "bg-white/20 text-current"
+                    : isEmpty
+                      ? "bg-slate-100 text-slate-500"
+                      : "bg-slate-100 text-slate-600",
                 ].join(" ")}
               >
-                {LEVEL_LABEL[level]}
+                {count > 0 ? `${count} mapel` : LEVEL_SHORT_NOTE[level]}
               </span>
-              {!isReady ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500 ring-1 ring-inset ring-slate-200">
-                  <Icon name="hourglass" className="h-3.5 w-3.5" strokeWidth={2.2} />
-                  Segera
-                </span>
-              ) : null}
-            </h3>
+            </button>
+          );
+        })}
+      </div>
 
-            {isReady ? (
-              <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                {items.map((summary) => (
-                  <li key={summary.subject.id}>
-                    <SubjectCard summary={summary} />
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </section>
-        );
-      })}
+      <section
+        id={`panel-${activeLevel.toLowerCase()}`}
+        role="tabpanel"
+        aria-labelledby={`tab-${activeLevel.toLowerCase()}`}
+        className="mt-5"
+      >
+        <h3 className="flex items-center gap-2">
+          <span
+            className={[
+              "inline-flex h-8 items-center rounded-lg px-3 text-sm font-extrabold tracking-wide",
+              activeIsEmpty ? "bg-slate-200 text-slate-500" : LEVEL_PILL[activeLevel],
+            ].join(" ")}
+          >
+            {LEVEL_LABEL[activeLevel]}
+          </span>
+          {activeAvailableCount === 0 ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500 ring-1 ring-inset ring-slate-200">
+              <Icon name="hourglass" className="h-3.5 w-3.5" strokeWidth={2.2} />
+              Segera
+            </span>
+          ) : null}
+        </h3>
+
+        {activeIsEmpty ? (
+          <div className="mt-3 rounded-lg border border-dashed border-slate-300 bg-white p-5 text-sm leading-relaxed text-slate-600">
+            Paket untuk jenjang {LEVEL_LABEL[activeLevel]} sedang disiapkan.
+          </div>
+        ) : (
+          <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {activeItems.map((summary) => (
+              <li key={summary.subject.id}>
+                <SubjectCard summary={summary} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }
