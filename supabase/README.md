@@ -21,6 +21,7 @@ atau product voucher berubah.
 | 10 | `seed/tka-bahasa-indonesia-sma-miskonsepsi.sql` | 100 definisi + penanda 129 soal Bahasa Indonesia SMA |
 | 11 | `seed/tka-bahasa-inggris-sma-miskonsepsi.sql` | 90 definisi + penanda 110 soal Bahasa Inggris SMA |
 | 12 | `seed/0005_kode_akses_semua_paket.sql` | 5 kode SEMUA01–SEMUA05, 1000 penukaran, membuka seluruh paket |
+| 13 | `seed/0006_sinkron_akses_paket_terbit.sql` | sinkron product dan kode global untuk paket terbit baru |
 
 Berkas seed berdiri sendiri dan **aman dijalankan berulang** (`on conflict do update`),
 jadi memperbarui satu paket cukup menjalankan ulang berkasnya sendiri.
@@ -112,6 +113,12 @@ juga melengkapi katalog `products` lebih dahulu — hak akses hanya dapat dijang
 voucher bila pasangan mapel+seri punya barisnya di sana, dan pasangan Bahasa Inggris
 SMA × Latihan TKA Bahasa Inggris SMA (9 paket) sebelumnya belum punya, sehingga
 kesembilan paket itu tidak terbuka oleh kode apa pun.
+
+Setelah paket baru ditambahkan, terutama mapel pilihan SMA/SMP, jalankan
+`seed/0006_sinkron_akses_paket_terbit.sql`. Berkas ini membuat atau mengaktifkan
+`products` untuk setiap pasangan mapel+seri yang punya paket terbit, lalu membangun
+ulang relasi kode global `ALL..` dan `SEMUA..` agar kode lama ikut membuka paket
+baru.
 
 Semuanya sekali pakai (`max_redemptions = 1`). Menambah stok cukup dengan mengubah
 angka pada `generate_series(1, 10)` di berkas itu lalu menjalankannya ulang —

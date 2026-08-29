@@ -36,30 +36,8 @@ const LEVEL_SHORT_NOTE: Record<EducationLevel, string> = {
   SMP: "Segera",
 };
 
-const SMA_OPTIONAL_SUBJECT: SubjectSummary = {
-  subject: {
-    id: "sub-mapel-pilihan-sma-smk",
-    slug: "mapel-pilihan-sma-smk",
-    name: "Mapel Pilihan SMA/SMK",
-    shortName: "Mapel Pilihan",
-    level: "SMA",
-    description: "Mata pelajaran pilihan untuk jenjang SMA/SMK.",
-  },
-  packageCount: 0,
-  tryoutCount: 0,
-  isAvailable: false,
-};
-
 function subjectsForLevel(summaries: SubjectSummary[], level: EducationLevel) {
-  const items = summaries.filter((item) => item.subject.level === level);
-  if (level !== "SMA") return items;
-
-  const hasOptionalSubject = items.some((item) =>
-    /mapel[-\s]?pilihan|mata[-\s]?pelajaran[-\s]?pilihan/i.test(
-      `${item.subject.slug} ${item.subject.name}`,
-    ),
-  );
-  return hasOptionalSubject ? items : [...items, SMA_OPTIONAL_SUBJECT];
+  return summaries.filter((item) => item.subject.level === level);
 }
 
 function availableCount(items: SubjectSummary[]): number {
