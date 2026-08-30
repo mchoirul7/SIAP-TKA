@@ -224,7 +224,7 @@ export function PackageDetail({
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
                     {pkg.isFreeAccess
-                      ? "Tiga latihan awal per mapel bisa dicoba tanpa kode akses."
+                      ? "Latihan pertama per mapel bisa dicoba tanpa kode akses."
                       : "Kode akses seri ini membuka latihan, tryout, hasil, dan pembahasan."}
                   </p>
                 </div>

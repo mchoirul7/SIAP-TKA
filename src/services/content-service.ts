@@ -29,7 +29,7 @@ import { supabase } from "@/lib/supabase";
  * konten terkunci sengaja dynamic agar bisa memeriksa cookie voucher di server.
  */
 
-const FREE_PRACTICE_LIMIT_PER_SUBJECT = 3;
+const FREE_PRACTICE_LIMIT_PER_SUBJECT = 1;
 
 // ------------------------------------------------------------- bentuk baris
 
