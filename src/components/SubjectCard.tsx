@@ -39,7 +39,13 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
   const { subject, packageCount, tryoutCount, isAvailable } = summary;
   const theme = getSubjectTheme(subject);
   const coverSrc = subjectCover(subject);
-  const linkLabel = `Buka ${subject.shortName}, ${packageCount} paket latihan, ${tryoutCount} tryout`;
+  const linkDetails = [
+    packageCount > 0 ? `${packageCount} paket latihan` : null,
+    tryoutCount > 0 ? `${tryoutCount} tryout` : null,
+  ].filter(Boolean);
+  const linkLabel = `Buka ${subject.shortName}${
+    linkDetails.length > 0 ? `, ${linkDetails.join(", ")}` : ""
+  }`;
 
   const card = (
     <article
@@ -98,22 +104,26 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
             </h4>
             {isAvailable ? (
               <ul className="mt-2 flex flex-wrap gap-1.5">
-                <li
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
-                    toneTag[theme.accent]
-                  }`}
-                >
-                  <Icon name="layers" className="h-3.5 w-3.5" strokeWidth={2.1} />
-                  {packageCount} paket latihan
-                </li>
-                <li
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
-                    toneTag[theme.accent]
-                  }`}
-                >
-                  <Icon name="flag" className="h-3.5 w-3.5" strokeWidth={2.1} />
-                  {tryoutCount} tryout
-                </li>
+                {packageCount > 0 ? (
+                  <li
+                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
+                      toneTag[theme.accent]
+                    }`}
+                  >
+                    <Icon name="layers" className="h-3.5 w-3.5" strokeWidth={2.1} />
+                    {packageCount} paket latihan
+                  </li>
+                ) : null}
+                {tryoutCount > 0 ? (
+                  <li
+                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
+                      toneTag[theme.accent]
+                    }`}
+                  >
+                    <Icon name="flag" className="h-3.5 w-3.5" strokeWidth={2.1} />
+                    {tryoutCount} tryout
+                  </li>
+                ) : null}
               </ul>
             ) : (
               <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-500">
