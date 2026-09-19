@@ -1,7 +1,7 @@
 import { homeFaq } from "@/data/faq";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { accessCodeWhatsappUrl } from "@/lib/access-code";
+import { shopeeVoucherUrl } from "@/lib/site";
 
 /**
  * Bagian penjelas di bawah katalog.
@@ -47,7 +47,7 @@ export function HomeSeoSection() {
         </div>
       </section>
 
-      {/* Ajakan penutup: pengguna diarahkan ke admin untuk mendapatkan kode akses. */}
+      {/* Ajakan penutup: pengguna diarahkan ke lapak Shopee untuk membeli kode akses. */}
       <section className="mt-12 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-ink-950 p-7 sm:p-9">
         <h2 className="max-w-xl text-xl font-extrabold tracking-tight text-white sm:text-2xl">
           Mulai persiapan TKA ananda dari rumah hari ini
@@ -57,13 +57,13 @@ export function HomeSeoSection() {
           latihan online, hasil, dan pembahasannya.
         </p>
         <a
-          href={accessCodeWhatsappUrl}
+          href={shopeeVoucherUrl}
           target="_blank"
           rel="noreferrer"
           className="mt-6 inline-flex h-12 items-center gap-2 rounded-xl bg-accent-400 px-6 text-base font-bold text-ink-950 transition-colors hover:bg-accent-300"
         >
-          <Icon name="whatsapp" className="h-5 w-5" strokeWidth={2.2} />
-          Dapatkan Kode Akses
+          <Icon name="ticket" className="h-5 w-5" strokeWidth={2.2} />
+          Dapatkan Kode Akses di Shopee
         </a>
       </section>
     </div>

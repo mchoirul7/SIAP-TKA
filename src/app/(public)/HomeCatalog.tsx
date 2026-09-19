@@ -2,9 +2,17 @@
 
 import { useId, useState } from "react";
 import { SubjectCard } from "@/components/SubjectCard";
+import { SubjectGroupCard } from "@/components/SubjectGroupCard";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import type { EducationLevel } from "@/data/types";
+import {
+  COLLAPSED_GROUP_ORDER,
+  GROUP_DESCRIPTION,
+  GROUP_LABEL,
+  subjectGroupKey,
+  type SubjectGroupKey,
+} from "@/lib/subject-group";
 import type { SubjectSummary } from "@/services/content-service";
 
 /**
@@ -12,7 +20,7 @@ import type { SubjectSummary } from "@/services/content-service";
  *
  * Jenjang dibuat bertab supaya pengguna ponsel tidak perlu menggulir melewati
  * semua tingkat sekolah. Data tetap datang dari server; komponen ini hanya
- * menyimpan jenjang yang sedang dilihat.
+ * menyimpan jenjang yang sedang dilihat dan kelompok mapel mana yang dibuka.
  */
 
 /** SMA/SMK dan SD tampil dulu; SMP tetap ada, tetapi ditempatkan terakhir. */
@@ -30,11 +38,8 @@ const LEVEL_LABEL: Record<EducationLevel, string> = {
   SD: "SD",
 };
 
-const LEVEL_SHORT_NOTE: Record<EducationLevel, string> = {
-  SMA: "Paling siap",
-  SD: "Tersedia",
-  SMP: "Segera",
-};
+/** Hanya tampil bila jenjangnya belum punya mapel sama sekali. */
+const LEVEL_EMPTY_NOTE = "Segera";
 
 function subjectsForLevel(summaries: SubjectSummary[], level: EducationLevel) {
   return summaries.filter((item) => item.subject.level === level);
@@ -44,9 +49,18 @@ function availableCount(items: SubjectSummary[]): number {
   return items.filter((item) => item.isAvailable).length;
 }
 
+/** Nama mapel di dalam kelompok, dipakai sebagai petunjuk isi pada kartunya. */
+function previewNames(items: SubjectSummary[]): string {
+  return items.map((item) => item.subject.shortName).join(" · ");
+}
+
 export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
   const selectId = useId();
+  const panelBaseId = useId();
   const [activeLevel, setActiveLevel] = useState<EducationLevel>(LEVEL_ORDER[0]);
+  // Kelompok yang terbuka disimpan per jenjang: pindah tab mengembalikan katalog
+  // ke keadaan terlipat, supaya jenjang baru selalu dibuka dari yang ringkas.
+  const [openGroups, setOpenGroups] = useState<SubjectGroupKey[]>([]);
   const groups = LEVEL_ORDER.map((level) => ({
     level,
     items: subjectsForLevel(summaries, level),
@@ -55,6 +69,23 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
   const activeItems = activeGroup.items;
   const activeAvailableCount = availableCount(activeItems);
   const activeIsEmpty = activeItems.length === 0;
+
+  const mainItems = activeItems.filter((item) => subjectGroupKey(item.subject) === "utama");
+  const collapsedGroups = COLLAPSED_GROUP_ORDER.map((key) => ({
+    key,
+    items: activeItems.filter((item) => subjectGroupKey(item.subject) === key),
+  })).filter((group) => group.items.length > 0);
+
+  const selectLevel = (level: EducationLevel) => {
+    setActiveLevel(level);
+    setOpenGroups([]);
+  };
+
+  const toggleGroup = (key: SubjectGroupKey) => {
+    setOpenGroups((current) =>
+      current.includes(key) ? current.filter((item) => item !== key) : [...current, key],
+    );
+  };
 
   return (
     <div id="katalog-mapel" className="container-page scroll-mt-24 pb-16">
@@ -79,7 +110,7 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
           <select
             id={selectId}
             value={activeLevel}
-            onChange={(event) => setActiveLevel(event.target.value as EducationLevel)}
+            onChange={(event) => selectLevel(event.target.value as EducationLevel)}
             className="h-12 w-full appearance-none rounded-lg border border-slate-300 bg-white px-4 pr-10 text-base font-extrabold text-ink-900 shadow-card outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
           >
             {groups.map(({ level, items }) => {
@@ -117,7 +148,7 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
               aria-selected={isActive}
               aria-controls={`panel-${level.toLowerCase()}`}
               id={`tab-${level.toLowerCase()}`}
-              onClick={() => setActiveLevel(level)}
+              onClick={() => selectLevel(level)}
               className={[
                 "flex h-14 min-w-0 items-center justify-center gap-2 rounded-lg px-3 text-sm font-extrabold transition-colors",
                 isActive
@@ -136,7 +167,7 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
                       : "bg-slate-100 text-slate-600",
                 ].join(" ")}
               >
-                {count > 0 ? `${count} mapel` : LEVEL_SHORT_NOTE[level]}
+                {count > 0 ? `${count} mapel` : LEVEL_EMPTY_NOTE}
               </span>
             </button>
           );
@@ -171,13 +202,48 @@ export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
             Paket untuk jenjang {LEVEL_LABEL[activeLevel]} sedang disiapkan.
           </div>
         ) : (
-          <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {activeItems.map((summary) => (
-              <li key={summary.subject.id}>
-                <SubjectCard summary={summary} />
-              </li>
-            ))}
-          </ul>
+          <>
+            {mainItems.length > 0 ? (
+              <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {mainItems.map((summary) => (
+                  <li key={summary.subject.id}>
+                    <SubjectCard summary={summary} />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            {collapsedGroups.map(({ key, items }) => {
+              const isOpen = openGroups.includes(key);
+              const panelId = `${panelBaseId}-${key}`;
+
+              return (
+                <div key={key} className="mt-3">
+                  <SubjectGroupCard
+                    title={GROUP_LABEL[key]}
+                    description={GROUP_DESCRIPTION[key]}
+                    preview={previewNames(items)}
+                    count={items.length}
+                    isOpen={isOpen}
+                    onToggle={() => toggleGroup(key)}
+                    panelId={panelId}
+                  />
+                  {isOpen ? (
+                    <ul
+                      id={panelId}
+                      className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3"
+                    >
+                      {items.map((summary) => (
+                        <li key={summary.subject.id}>
+                          <SubjectCard summary={summary} />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              );
+            })}
+          </>
         )}
       </section>
     </div>

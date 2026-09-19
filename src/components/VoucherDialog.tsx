@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { accessCodeWhatsappUrl } from "@/lib/access-code";
+import { shopeeVoucherUrl } from "@/lib/site";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
@@ -200,7 +200,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Belum punya kode? Tekan Dapatkan Kode.
+                      Belum punya kode? Tekan Dapatkan Kode di Shopee.
                     </p>
                   )}
                 </div>
@@ -214,13 +214,13 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     tombol supaya tidak bersaing dengan tindakan utama dialog ini,
                     yaitu menukarkan kode yang sudah dipegang. */}
                 <a
-                  href={accessCodeWhatsappUrl}
+                  href={shopeeVoucherUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-bold text-accent-900 transition-colors hover:bg-accent-100"
                 >
-                  <Icon name="whatsapp" className="h-4 w-4" strokeWidth={2.2} />
-                  Dapatkan Kode
+                  <Icon name="ticket" className="h-4 w-4" strokeWidth={2.2} />
+                  Dapatkan Kode di Shopee
                   <Icon name="arrow-right" className="h-4 w-4" strokeWidth={2.2} />
                 </a>
               </form>

@@ -8,8 +8,17 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://siap-tka-one.verce
   "",
 );
 
-/** Tempat kode voucher dibeli. Dipakai pada pesan berbagi dan data terstruktur. */
-export const shopeeVoucherUrl = "https://shopee.co.id/product/47813351/55316135628/";
+/**
+ * Tempat kode akses dibeli. Satu-satunya tujuan tombol "Dapatkan Kode Akses" di
+ * mana pun ia muncul, juga dipakai pesan berbagi dan data terstruktur.
+ *
+ * Yang ditunjuk adalah lapaknya, bukan satu halaman produk: paketnya kini
+ * terpisah per mapel dan per jenjang, sehingga pembeli perlu memilih sendiri
+ * yang sesuai. Kata kuncinya dibawa di URL supaya daftar yang terbuka sudah
+ * tersaring ke produk Siap TKA One.
+ */
+export const shopeeVoucherUrl =
+  "https://shopee.co.id/siaptkaone?entryPoint=ShopBySearch&searchKeyword=siap%20tka%20one";
 
 /** Nama produk sementara. Ganti di satu tempat ini bila nama final sudah ditentukan. */
 export const site = {
