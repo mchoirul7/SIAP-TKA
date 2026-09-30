@@ -24,9 +24,9 @@ export function ShareButton() {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-brand-200 bg-brand-50 px-3 text-sm font-semibold text-brand-800 transition-colors hover:border-brand-400 hover:bg-brand-100"
+      className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[11px] border border-brand-200 bg-brand-50 px-4 text-sm font-extrabold text-brand-700 transition-colors hover:border-brand-400 hover:bg-brand-100 sm:px-5"
     >
-      <Icon name="share" className="h-4 w-4" strokeWidth={2} />
+      <Icon name="share" className="h-4 w-4" strokeWidth={2.4} />
       <span className="hidden sm:inline">Bagikan</span>
       <span className="sr-only sm:hidden">Bagikan {site.brandName} lewat WhatsApp</span>
     </a>

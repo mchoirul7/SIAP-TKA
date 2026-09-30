@@ -38,7 +38,7 @@ export const site = {
    * orang tua ("soal TKA", "kisi-kisi", "tryout"), bukan penjelasan produk.
    */
   searchDescription:
-    "Latihan soal TKA dan tryout online sesuai kisi-kisi terbaru untuk SD, SMP, dan SMA. Kerjakan dari rumah, lengkap dengan pembahasan tiap soal dan analisa materi yang perlu diperkuat.",
+    "Latihan soal TKA dan tryout online sesuai kisi-kisi terbaru untuk SD/MI, SMP/MTs, dan SMA/MA/SMK sederajat. Kerjakan dari rumah, lengkap dengan pembahasan tiap soal dan analisa materi yang perlu diperkuat.",
 } as const;
 
 /**
@@ -56,9 +56,9 @@ export const siteKeywords = [
   "bank soal TKA",
   "simulasi TKA",
   "persiapan TKA",
-  "TKA SD",
-  "TKA SMP",
-  "TKA SMA",
+  "TKA SD MI",
+  "TKA SMP MTs",
+  "TKA SMA MA SMK sederajat",
   "Tes Kemampuan Akademik",
   "soal TKA dan pembahasan",
   "belajar TKA dari rumah",

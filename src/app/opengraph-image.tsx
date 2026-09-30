@@ -74,7 +74,7 @@ export default function OpengraphImage() {
             color: "#b7f0fc",
           }}
         >
-          SD · SMP · SMA — dikerjakan dari rumah, lengkap dengan pembahasan
+          SD/MI · SMP/MTs · SMA/MA/SMK sederajat
         </div>
 
         {/* Pita bawah: penanda merek, sekaligus mengunci komposisi ke tepi kanvas. */}

@@ -36,7 +36,7 @@ export const COLLAPSED_GROUP_ORDER: Exclude<SubjectGroupKey, "utama">[] = [
 ];
 
 export const GROUP_LABEL: Record<Exclude<SubjectGroupKey, "utama">, string> = {
-  "pilihan-sma": "Mapel Pilihan SMA",
+  "pilihan-sma": "Mapel Pilihan SMA/MA",
   "pilihan-smk": "Mapel Pilihan SMK",
 };
 
