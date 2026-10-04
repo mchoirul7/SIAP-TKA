@@ -6,6 +6,7 @@ import { LinkPending } from "@/components/NavigationProgress";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import type { PracticePackage, Tryout } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { iconForPackage } from "@/lib/content-icons";
 import type { SubjectTheme } from "@/lib/subject-theme";
 import { toneButton, toneChip, toneTag, type AccentTone } from "@/lib/tone";
 
@@ -53,6 +54,7 @@ export function LearningPackageCard({
   const locked = !unlocked;
   const packageHref = locked ? `/latihan/${pkg.slug}?akses=1` : `/latihan/${pkg.slug}`;
   const statusLabel = pkg.isFreeAccess ? "Gratis" : locked ? "Buka Akses" : "Terbuka";
+  const displayIcon = iconForPackage(pkg, icon);
 
   return (
     <article className="rounded-lg border border-slate-200 bg-white px-4 py-4 shadow-card transition-shadow hover:shadow-float">
@@ -61,7 +63,7 @@ export function LearningPackageCard({
           aria-hidden="true"
           className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-ink-50 text-ink-700 ring-1 ring-inset ring-slate-200"
         >
-          <Icon name={icon} className="h-6 w-6" strokeWidth={2} />
+          <Icon name={displayIcon} className="h-6 w-6" strokeWidth={2} />
         </span>
 
         <div className="min-w-0 flex-1">
@@ -131,6 +133,7 @@ export function LearningTryoutCard({
   const { mounted, isUnlocked } = useEntitlements();
   const unlocked = mounted && isUnlocked(tryout);
   const locked = !unlocked;
+  const tryoutIcon = iconForPackage(tryout, "trophy");
 
   return (
     <article className="rounded-lg border border-rose-200 bg-white px-4 py-4 shadow-card transition-shadow hover:shadow-float">
@@ -139,7 +142,7 @@ export function LearningTryoutCard({
           aria-hidden="true"
           className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200"
         >
-          <Icon name="flag" className="h-6 w-6" strokeWidth={2} />
+          <Icon name={tryoutIcon} className="h-6 w-6" strokeWidth={2} />
         </span>
 
         <div className="min-w-0 flex-1">
@@ -216,6 +219,7 @@ export function LearningPackageCompactCard({
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const locked = !unlocked;
   const packageHref = locked ? `/latihan/${pkg.slug}?akses=1` : `/latihan/${pkg.slug}`;
+  const displayIcon = iconForPackage(pkg, icon);
 
   return (
     <article
@@ -237,7 +241,7 @@ export function LearningPackageCompactCard({
             active ? compactActiveIcon[accent] : "bg-slate-50 text-slate-700 ring-slate-200",
           ].join(" ")}
         >
-          <Icon name={icon} className="h-5 w-5" strokeWidth={2} />
+          <Icon name={displayIcon} className="h-5 w-5" strokeWidth={2} />
         </span>
 
         <span className="min-w-0 flex-1">
@@ -276,6 +280,7 @@ export function LearningTryoutCompactCard({
   const { mounted, isUnlocked } = useEntitlements();
   const unlocked = mounted && isUnlocked(tryout);
   const locked = !unlocked;
+  const tryoutIcon = iconForPackage(tryout, "flag");
 
   return (
     <article className={`flex items-center gap-3 rounded-lg border bg-white px-3 py-3 shadow-card transition-shadow hover:shadow-float ${compactActiveBorder[accent]}`}>
@@ -283,7 +288,7 @@ export function LearningTryoutCompactCard({
         aria-hidden="true"
         className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ring-1 ring-inset ${compactActiveIcon[accent]}`}
       >
-        <Icon name="flag" className="h-5 w-5" strokeWidth={2} />
+        <Icon name={tryoutIcon} className="h-5 w-5" strokeWidth={2} />
       </span>
 
       <span className="min-w-0 flex-1">

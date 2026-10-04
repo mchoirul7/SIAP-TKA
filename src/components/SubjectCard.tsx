@@ -1,15 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
+import { iconForSubject } from "@/lib/content-icons";
 import { getSubjectTheme } from "@/lib/subject-theme";
 import type { SubjectSummary } from "@/services/content-service";
-
-const subjectCoverByKeyword: { match: RegExp; src: string }[] = [
-  { match: /matematika|math/, src: "/matematika.png" },
-  { match: /bahasa[-\s]?indonesia|indonesian/, src: "/bahasaindonesia.png" },
-  { match: /bahasa[-\s]?inggris|english/, src: "/bahasainggris.png" },
-];
 
 const tone = {
   brand: {
@@ -50,15 +44,6 @@ const tone = {
   },
 } as const;
 
-function subjectKey(subject: { slug?: string; name?: string }) {
-  return `${subject.slug ?? ""} ${subject.name ?? ""}`.toLowerCase();
-}
-
-function subjectCover(subject: { slug?: string; name?: string }) {
-  const key = subjectKey(subject);
-  return subjectCoverByKeyword.find((item) => item.match.test(key))?.src;
-}
-
 function ctaName(name: string) {
   return name.replace(/^TKA\s+/i, "");
 }
@@ -72,7 +57,7 @@ function levelName(level: SubjectSummary["subject"]["level"]) {
 export function SubjectCard({ summary }: { summary: SubjectSummary }) {
   const { subject, packageCount, tryoutCount, isAvailable } = summary;
   const theme = getSubjectTheme(subject);
-  const coverSrc = subjectCover(subject);
+  const subjectIcon = iconForSubject(subject);
   const colors = tone[theme.accent];
   const linkLabel = `Buka ${subject.shortName}, ${packageCount} paket latihan, ${tryoutCount} tryout`;
 
@@ -86,24 +71,15 @@ export function SubjectCard({ summary }: { summary: SubjectSummary }) {
       ].join(" ")}
       aria-disabled={isAvailable ? undefined : "true"}
     >
-      <div className="relative aspect-[2.36/1] overflow-hidden bg-slate-100">
-        {coverSrc ? (
-          <Image
-            src={coverSrc}
-            alt=""
-            fill
-            sizes="(min-width: 1280px) 31vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover object-center"
-            priority={false}
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-brand-700 to-sky-600 text-white">
-            <Icon name={theme.icon} className="h-14 w-14" strokeWidth={1.8} />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/42 via-transparent to-transparent" />
-        <div className="absolute left-5 top-5 rounded-full bg-white/85 px-4 py-1 text-[12px] font-extrabold text-brand-700 shadow-sm">
-          {levelName(subject.level)}
+      <div className="flex items-center gap-4 bg-gradient-to-br from-brand-50 via-white to-sky-50 p-5">
+        <span className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-[16px] ring-1 ${colors.stat}`}>
+          <Icon name={subjectIcon} className="h-8 w-8" strokeWidth={2.1} />
+        </span>
+        <div className="min-w-0">
+          <h3 className="break-words text-[21px] font-black leading-tight text-ink-900">
+            {subject.shortName}
+          </h3>
+          <p className="mt-1 text-sm font-semibold text-slate-600">{levelName(subject.level)}</p>
         </div>
       </div>
 

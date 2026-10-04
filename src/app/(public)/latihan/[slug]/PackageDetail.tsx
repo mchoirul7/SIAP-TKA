@@ -9,6 +9,7 @@ import { useNavigate } from "@/components/NavigationProgress";
 import { useVoucherDialog } from "@/components/VoucherDialog";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { examPackagesHref } from "@/lib/assessment";
 import { getPracticeAttempt } from "@/services/practice-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 import { readProfile, writeProfile } from "@/storage/profile-storage";
@@ -130,11 +131,11 @@ export function PackageDetail({
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-10">
         <main>
           <Link
-            href={`/mapel/${pkg.subjectSlug}`}
+            href={examPackagesHref(pkg.assessmentType, pkg.semester, { slug: pkg.subjectSlug, level: pkg.level })}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-brand-800"
           >
             <Icon name="arrow-left" className="h-4 w-4" />
-            Kembali ke mapel
+            Kembali ke daftar paket
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-2">

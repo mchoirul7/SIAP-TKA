@@ -12,6 +12,10 @@ export const tryouts: Tryout[] = [
     seriesTitle: "Seri Bulan Kemerdekaan",
     accessKey: "matematika-sd:bulan-kemerdekaan",
     level: "SD",
+    kind: "tryout",
+    assessmentType: "tka",
+    gradeLevel: 6,
+    semester: null,
     variant: "resmi",
     variantLabel: "Paket soal resmi",
     description:

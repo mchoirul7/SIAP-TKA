@@ -1,25 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { CoverArt, type CoverTone } from "@/components/CoverArt";
-import { Icon, type IconName } from "@/components/ui/Icon";
 import { LinkPending } from "@/components/NavigationProgress";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import type { Tryout } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { iconForPackage } from "@/lib/content-icons";
 import { toneChip } from "@/lib/tone";
 
 export function TryoutCard({
   tryout,
-  tone = "ink",
   className = "",
 }: {
   tryout: Tryout;
-  tone?: CoverTone;
   className?: string;
 }) {
   const { mounted, isUnlocked } = useEntitlements();
   const unlocked = mounted && isUnlocked(tryout);
   const locked = !unlocked;
+  const tryoutIcon = iconForPackage(tryout, "trophy");
 
   return (
     <article
@@ -31,19 +30,29 @@ export function TryoutCard({
         .filter(Boolean)
         .join(" ")}
     >
-      <CoverArt
-        className="h-40"
-        tone={tone}
-        label={tryout.variantLabel}
-        title={tryout.title}
-        titleAs="h3"
-        titleHref={`/tryout/${tryout.slug}`}
-        subtitle={locked ? `${tryout.seriesTitle} - dibuka dengan kode akses` : "Tryout dan hasil terbuka"}
-      />
+      <div className="flex items-start gap-3 border-b border-rose-100 bg-gradient-to-br from-rose-50 via-white to-slate-50 p-4">
+        <span
+          aria-hidden="true"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200"
+        >
+          <Icon name={tryoutIcon} className="h-6 w-6" strokeWidth={2.2} />
+        </span>
+        <div className="min-w-0">
+          <p className="text-[11px] font-black uppercase tracking-[0.14em] text-rose-700">
+            {tryout.variantLabel}
+          </p>
+          <h3 className="mt-1 break-words text-[18px] font-black leading-snug text-ink-900">
+            <Link href={`/tryout/${tryout.slug}`} className="hover:text-rose-700">
+              {tryout.title}
+            </Link>
+          </h3>
+          <p className="mt-1 text-xs font-semibold text-slate-500">
+            {locked ? `${tryout.seriesTitle} - dibuka dengan kode akses` : "Tryout dan hasil terbuka"}
+          </p>
+        </div>
+      </div>
 
       <div className="flex flex-1 flex-col p-4">
-        {/* Sama seperti kartu latihan: judulnya cukup sekali di sampul, dan
-            statusnya menjadi keping pertama pada deret keterangan. */}
         <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">{tryout.description}</p>
 
         <ul className="mt-3 flex flex-wrap gap-1.5">
@@ -57,9 +66,21 @@ export function TryoutCard({
           </li>
           {(
             [
-              { icon: "list-check", text: `${tryout.questionIds.length} soal`, tone: "bg-brand-50 text-brand-800 ring-brand-100" },
-              { icon: "hourglass", text: `${tryout.durationMinutes} menit`, tone: "bg-rose-50 text-rose-800 ring-rose-100" },
-              { icon: "cap", text: `Jenjang ${tryout.level}`, tone: "bg-aqua-50 text-aqua-800 ring-aqua-100" },
+              {
+                icon: "list-check",
+                text: `${tryout.questionIds.length} soal`,
+                tone: "bg-brand-50 text-brand-800 ring-brand-100",
+              },
+              {
+                icon: "hourglass",
+                text: `${tryout.durationMinutes} menit`,
+                tone: "bg-rose-50 text-rose-800 ring-rose-100",
+              },
+              {
+                icon: "cap",
+                text: `Jenjang ${tryout.level}`,
+                tone: "bg-aqua-50 text-aqua-800 ring-aqua-100",
+              },
             ] satisfies { icon: IconName; text: string; tone: string }[]
           ).map((tag) => (
             <li

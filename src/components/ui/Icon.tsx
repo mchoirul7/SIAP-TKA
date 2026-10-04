@@ -10,6 +10,9 @@ import type { ReactNode, SVGProps } from "react";
  */
 
 export type IconName =
+  | "home"
+  | "search"
+  | "chevron-down"
   | "check"
   | "close"
   | "minus"
@@ -57,6 +60,19 @@ export type IconName =
   | "leaf";
 
 const paths: Record<IconName, ReactNode> = {
+  home: (
+    <>
+      <path d="M3.8 11.2L12 4.4l8.2 6.8" />
+      <path d="M6.2 10.4v9.2h4.3v-5.2h3v5.2h4.3v-9.2" />
+    </>
+  ),
+  search: (
+    <>
+      <circle cx="10.8" cy="10.8" r="6.8" />
+      <path d="M16 16l4.2 4.2" />
+    </>
+  ),
+  "chevron-down": <path d="M6.4 9.2L12 14.8l5.6-5.6" />,
   check: <path d="M4.5 12.5l5 5L19.5 6.5" />,
   close: <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />,
   minus: <path d="M5.5 12h13" />,

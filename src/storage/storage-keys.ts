@@ -4,6 +4,7 @@ const PREFIX = STORAGE_PREFIX;
 
 export const storageKeys = {
   profile: `${PREFIX}:profile`,
+  studyContext: `${PREFIX}:study-context`,
   entitlements: `${PREFIX}:entitlements`,
   authorMode: `${PREFIX}:mode-penyusun`,
   tryoutAttempt: (tryoutSlug: string) => `${PREFIX}:tryout-attempt:${tryoutSlug}`,

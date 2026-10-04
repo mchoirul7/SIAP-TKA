@@ -1,0 +1,20 @@
+<svg width="180" height="150" viewBox="0 0 180 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cal" x1="42" y1="34" x2="145" y2="134" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE8F4"/>
+      <stop offset="1" stop-color="#D8CCFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="42" y="38" width="105" height="96" rx="12" transform="rotate(5 42 38)" fill="url(#cal)"/>
+  <path d="M47 61L150 70" stroke="#EC4A78" stroke-width="11" stroke-linecap="round"/>
+  <path d="M72 38L74 21M126 43L128 26" stroke="#C92857" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#FFFFFF">
+    <rect x="64" y="79" width="16" height="14" rx="3" transform="rotate(5 64 79)"/>
+    <rect x="90" y="81" width="16" height="14" rx="3" transform="rotate(5 90 81)"/>
+    <rect x="116" y="83" width="16" height="14" rx="3" transform="rotate(5 116 83)"/>
+    <rect x="62" y="105" width="16" height="14" rx="3" transform="rotate(5 62 105)"/>
+    <rect x="88" y="107" width="16" height="14" rx="3" transform="rotate(5 88 107)"/>
+    <rect x="114" y="110" width="16" height="14" rx="3" transform="rotate(5 114 110)"/>
+  </g>
+  <text x="78" y="109" fill="#7A30EA" font-family="Arial, sans-serif" font-size="30" font-weight="900" transform="rotate(5 78 109)">STS</text>
+</svg>

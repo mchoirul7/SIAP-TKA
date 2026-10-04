@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ASSESSMENT_CONFIGS, examTypeHref } from "@/lib/assessment";
 import { absoluteUrl } from "@/lib/seo";
 import { isSubjectReleased } from "@/lib/subject-release";
 import { getPracticePackages, getSubjects, getTryouts } from "@/services/content-service";
@@ -21,6 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: absoluteUrl("/ujian"), lastModified, changeFrequency: "weekly", priority: 0.9 },
+    ...ASSESSMENT_CONFIGS.map((config) => ({
+      url: absoluteUrl(examTypeHref(config.key)),
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     { url: absoluteUrl("/tryout"), lastModified, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/tentang"), lastModified, changeFrequency: "monthly", priority: 0.4 },
   ];

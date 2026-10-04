@@ -1,21 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { LinkPending } from "@/components/NavigationProgress";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { CoverArt, type CoverTone } from "@/components/CoverArt";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { iconForPackage } from "@/lib/content-icons";
 import type { SubjectTheme } from "@/lib/subject-theme";
 import { toneButton, toneChip, toneTag } from "@/lib/tone";
-
-/** Warna sampul dipilih berulang dari daftar ini agar deretan kartu tidak seragam. */
-const tones: CoverTone[] = ["grape", "gold", "aqua", "twilight"];
 
 export function PracticePackageCard({
   pkg,
   note,
   order,
-  toneIndex = 0,
   theme,
   className = "",
 }: {
@@ -24,11 +21,6 @@ export function PracticePackageCard({
   note?: string;
   order?: number;
   toneIndex?: number;
-  /**
-   * Warna mata pelajaran pemilik paket. Bila diisi, kartu memakai warna itu
-   * sehingga sederet paket dari mapel yang sama terbaca sebagai satu kelompok.
-   * Bila dikosongkan, warnanya berganti-ganti mengikuti `toneIndex`.
-   */
   theme?: SubjectTheme;
   className?: string;
 }) {
@@ -36,6 +28,7 @@ export function PracticePackageCard({
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const locked = !unlocked;
   const accent = theme?.accent ?? "brand";
+  const packageIcon = iconForPackage(pkg, theme?.icon ?? "list-check");
   const packageHref = locked ? `/latihan/${pkg.slug}?akses=1` : `/latihan/${pkg.slug}`;
   const statusLabel = pkg.isFreeAccess ? "Gratis" : locked ? "Buka Akses" : "Terbuka";
 
@@ -49,21 +42,29 @@ export function PracticePackageCard({
         .filter(Boolean)
         .join(" ")}
     >
-      <CoverArt
-        className="h-40"
-        tone={theme?.cover ?? tones[toneIndex % tones.length]}
-        icon={theme?.icon}
-        label={order ? `Langkah ${order} · Latihan` : "Latihan"}
-        title={pkg.title}
-        titleAs="h3"
-        titleHref={packageHref}
-        subtitle={locked ? "Buka dengan kode akses" : "Latihan online dan pembahasan"}
-      />
+      <div className="flex items-start gap-3 border-b border-slate-100 bg-gradient-to-br from-white to-slate-50 p-4">
+        <span
+          aria-hidden="true"
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset ${toneTag[accent]}`}
+        >
+          <Icon name={packageIcon} className="h-6 w-6" strokeWidth={2.2} />
+        </span>
+        <div className="min-w-0">
+          <p className="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500">
+            {order ? `Langkah ${order} - Latihan` : "Latihan"}
+          </p>
+          <h3 className="mt-1 break-words text-[18px] font-black leading-snug text-ink-900">
+            <Link href={packageHref} className="hover:text-brand-700">
+              {pkg.title}
+            </Link>
+          </h3>
+          <p className="mt-1 text-xs font-semibold text-slate-500">
+            {locked ? "Buka dengan kode akses" : "Latihan online dan pembahasan"}
+          </p>
+        </div>
+      </div>
 
       <div className="flex flex-1 flex-col p-4">
-        {/* Judulnya sudah terbaca di sampul, jadi badan kartu langsung ke
-            keterangan. Status ikut turun menjadi keping pertama supaya barisnya
-            seragam dan kartunya kehilangan satu baris yang tadinya kosong. */}
         <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">{note ?? pkg.summary}</p>
 
         <ul className="mt-3 flex flex-wrap gap-1.5">
@@ -78,7 +79,7 @@ export function PracticePackageCard({
           {(
             [
               { icon: "list-check", text: `${pkg.questionIds.length} soal` },
-              { icon: "clock", text: `± ${pkg.estimatedMinutes} menit` },
+              { icon: "clock", text: `+/- ${pkg.estimatedMinutes} menit` },
               { icon: "chart", text: pkg.difficultyRange },
             ] satisfies { icon: IconName; text: string }[]
           ).map((tag) => (
@@ -92,12 +93,12 @@ export function PracticePackageCard({
           ))}
         </ul>
 
-        {/* Tombol menempel di dasar kartu agar deretan kartu tetap sejajar. */}
         <div className="mt-auto pt-4">
           <Link
             href={packageHref}
             className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold transition-opacity hover:opacity-90 ${toneButton[accent]}`}
           >
+            <LinkPending />
             <Icon name={locked ? "lock" : "play"} className="h-4 w-4" strokeWidth={2.2} />
             {locked ? "Buka Akses" : "Coba Sekarang"}
           </Link>

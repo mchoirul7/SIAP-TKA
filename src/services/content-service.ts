@@ -1,6 +1,8 @@
 import type {
+  AssessmentType,
   Concept,
   ConceptPrerequisite,
+  ContentEntitlement,
   ContentSeries,
   EducationLevel,
   Misconception,
@@ -11,9 +13,12 @@ import type {
   Subtopic,
   SubtopicPrerequisite,
   Tryout,
+  PackageKind,
   Topic,
 } from "@/data/types";
+import type { ExamScope } from "@/lib/assessment";
 import type { AnalysisCatalog } from "@/lib/scoring";
+import { normalizeSemester, tkaGradeForLevel } from "@/lib/assessment";
 import { sortBySubject } from "@/lib/subject-order";
 import { isSubjectReleased } from "@/lib/subject-release";
 import { supabase } from "@/lib/supabase";
@@ -91,12 +96,15 @@ interface ConceptPrerequisiteRow {
 
 interface PackageRow {
   id: string;
-  kind: "tryout" | "latihan";
+  kind: PackageKind;
   slug: string;
   title: string;
   subject_id: string;
   series_id: string | null;
   level: EducationLevel;
+  assessment_type: AssessmentType | null;
+  grade_level: number | null;
+  semester: number | null;
   description: string | null;
   summary: string | null;
   variant: string | null;
@@ -260,6 +268,7 @@ function toMisconception(row: MisconceptionRow): Misconception {
 }
 
 function toTryout(row: PackageRow, questionIds: string[], access: PackageAccess): Tryout {
+  const assessmentType = row.assessment_type ?? "tka";
   return {
     ...access,
     id: row.id,
@@ -267,6 +276,10 @@ function toTryout(row: PackageRow, questionIds: string[], access: PackageAccess)
     title: row.title,
     subjectId: row.subject_id,
     level: row.level,
+    kind: "tryout",
+    assessmentType,
+    gradeLevel: row.grade_level ?? tkaGradeForLevel(row.level),
+    semester: normalizeSemester(assessmentType, row.semester),
     variant: (row.variant as Tryout["variant"]) ?? "resmi",
     variantLabel: row.variant_label ?? "Paket soal",
     description: row.description ?? "",
@@ -282,6 +295,7 @@ function toPracticePackage(
   questionTaxonomy: Map<string, QuestionTaxonomyRow>,
   access: PackageAccess,
 ): PracticePackage {
+  const assessmentType = row.assessment_type ?? "tka";
   const taxonomy = questionIds
     .map((questionId) => questionTaxonomy.get(questionId))
     .filter((question): question is QuestionTaxonomyRow => Boolean(question));
@@ -296,6 +310,10 @@ function toPracticePackage(
     slug: row.slug,
     title: row.title,
     subjectId: row.subject_id,
+    kind: "latihan",
+    assessmentType,
+    gradeLevel: row.grade_level ?? tkaGradeForLevel(row.level),
+    semester: normalizeSemester(assessmentType, row.semester),
     topicId: firstQuestion?.topic_id ?? row.subject_id,
     subtopicId: firstQuestion?.subtopic_id ?? firstQuestion?.topic_id ?? row.subject_id,
     subtopicIds,
@@ -309,38 +327,42 @@ function toPracticePackage(
   };
 }
 
-function packageTitleKey(pkg: PracticePackage): string {
+function packageTitleKey(pkg: { title: string; slug: string }): string {
   return (pkg.title || pkg.slug).toLowerCase().replace(/\s+/g, " ").trim();
 }
 
+/**
+ * Judul latihan yang dibuka gratis pada satu mapel: beberapa judul pertama
+ * menurut urutan paket. Paket lain berjudul sama ikut gratis.
+ */
+function freePracticeTitleKeys(packagesInOrder: { title: string; slug: string }[]): Set<string> {
+  const keys = new Set<string>();
+  for (const pkg of packagesInOrder) {
+    if (keys.size >= FREE_PRACTICE_LIMIT_PER_SUBJECT) break;
+    keys.add(packageTitleKey(pkg));
+  }
+  return keys;
+}
+
 function withFreePracticeAccess(packages: PracticePackage[]): PracticePackage[] {
-  const freeTitleKeysBySubject = new Map<string, Set<string>>();
-
-  return packages.map((pkg) => {
+  const packagesBySubject = new Map<string, PracticePackage[]>();
+  for (const pkg of packages) {
     const subjectKey = pkg.subjectSlug || pkg.subjectId;
-    const titleKey = packageTitleKey(pkg);
-    const freeTitleKeys = freeTitleKeysBySubject.get(subjectKey) ?? new Set<string>();
+    packagesBySubject.set(subjectKey, [...(packagesBySubject.get(subjectKey) ?? []), pkg]);
+  }
+  const freeKeysBySubject = new Map(
+    [...packagesBySubject].map(([subjectKey, items]) => [subjectKey, freePracticeTitleKeys(items)]),
+  );
 
-    if (!freeTitleKeysBySubject.has(subjectKey)) {
-      freeTitleKeysBySubject.set(subjectKey, freeTitleKeys);
-    }
-
-    const isFree =
-      freeTitleKeys.has(titleKey) || freeTitleKeys.size < FREE_PRACTICE_LIMIT_PER_SUBJECT;
-
-    if (isFree) {
-      freeTitleKeys.add(titleKey);
-    }
-
-    return {
-      ...pkg,
-      isFreeAccess: isFree,
-    };
-  });
+  return packages.map((pkg) => ({
+    ...pkg,
+    isFreeAccess:
+      freeKeysBySubject.get(pkg.subjectSlug || pkg.subjectId)?.has(packageTitleKey(pkg)) ?? false,
+  }));
 }
 
 function packageAccess(
-  row: PackageRow,
+  row: Pick<PackageRow, "subject_id" | "series_id">,
   subjects: Map<string, Subject>,
   series: Map<string, ContentSeries>,
 ): PackageAccess {
@@ -525,7 +547,7 @@ export async function getConceptPrerequisites(): Promise<ConceptPrerequisite[]> 
 }
 
 const PACKAGE_COLUMNS =
-  "id, kind, slug, title, subject_id, series_id, level, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, sort_order";
+  "id, kind, slug, title, subject_id, series_id, level, assessment_type, grade_level, semester, description, summary, variant, variant_label, duration_minutes, estimated_minutes, difficulty_range, skills, instructions, sort_order";
 
 /** Urutan soal ikut `position`, karena urutan adalah bagian dari paketnya. */
 async function questionIdsFor(packageIds: string[]): Promise<Map<string, string[]>> {
@@ -781,6 +803,170 @@ export async function getSubjectSummaries(): Promise<SubjectSummary[]> {
       packageCount,
       tryoutCount,
       isAvailable: tryoutCount > 0 || packageCount > 0,
+    };
+  });
+}
+
+// ------------------------------------------------------------ alur /ujian
+//
+// Penyaringan jenis ujian, jenjang, kelas, semester, dan mapel dikerjakan oleh
+// basis data. Halaman tidak pernah menerima seluruh paket untuk disaring sendiri.
+
+/** Filter yang sama untuk daftar mapel dan daftar paket. */
+function examScopeFilters(scope: ExamScope): [column: string, value: string | number | boolean][] {
+  const filters: [string, string | number | boolean][] = [
+    ["assessment_type", scope.assessmentType],
+    ["level", scope.level],
+    ["grade_level", scope.gradeLevel],
+    ["is_published", true],
+  ];
+  if (scope.semester !== null) filters.push(["semester", scope.semester]);
+  return filters;
+}
+
+export interface ExamSubject {
+  subject: Subject;
+  packageCount: number;
+}
+
+/** Mapel yang benar-benar punya paket terbit untuk lingkup ini, beserta jumlahnya. */
+export async function getExamSubjects(scope: ExamScope): Promise<ExamSubject[]> {
+  const rows = await readAllRows<{ subject_id: string }>("mapel ujian", (from, to) => {
+    let query = supabase.from("packages").select("subject_id", { count: "exact" });
+    for (const [column, value] of examScopeFilters(scope)) query = query.eq(column, value);
+    return query.order("subject_id").order("id").range(from, to);
+  });
+
+  const counts = new Map<string, number>();
+  for (const row of rows) counts.set(row.subject_id, (counts.get(row.subject_id) ?? 0) + 1);
+  if (counts.size === 0) return [];
+
+  const subjectRows = unwrap(
+    await supabase
+      .from("subjects")
+      .select("id, slug, name, short_name, level, description")
+      .in("id", [...counts.keys()])
+      .order("sort_order")
+      .order("id"),
+    "mata pelajaran ujian",
+  ) as SubjectRow[];
+
+  const subjects = subjectRows
+    .map(toSubject)
+    .filter((subject) => isSubjectReleased(subject.slug))
+    .map((subject) => ({ subject, packageCount: counts.get(subject.id) ?? 0 }));
+  return sortBySubject(subjects, (item) => item.subject.slug);
+}
+
+/** Mapel pada jenjang tertentu, dicari dari segmen URL yang jenjangnya sudah dibuang. */
+export async function getSubjectForLevel(
+  slugCandidates: string[],
+  level: EducationLevel,
+): Promise<Subject | null> {
+  const rows = unwrap(
+    await supabase
+      .from("subjects")
+      .select("id, slug, name, short_name, level, description")
+      .eq("level", level)
+      .in("slug", slugCandidates),
+    "mata pelajaran",
+  ) as SubjectRow[];
+  const row = slugCandidates
+    .map((slug) => rows.find((item) => item.slug === slug))
+    .find((item): item is SubjectRow => Boolean(item));
+  return row && isSubjectReleased(row.slug) ? toSubject(row) : null;
+}
+
+export interface ExamPackage extends ContentEntitlement {
+  id: string;
+  slug: string;
+  kind: PackageKind;
+  title: string;
+  summary: string;
+  variantLabel: string;
+  assessmentType: AssessmentType;
+  level: EducationLevel;
+  gradeLevel: number;
+  semester: number | null;
+  questionCount: number;
+  /** Batas waktu tryout, atau perkiraan lama pengerjaan latihan. */
+  minutes: number | null;
+  isFreeAccess: boolean;
+}
+
+interface ExamPackageRow {
+  id: string;
+  kind: PackageKind;
+  slug: string;
+  title: string;
+  subject_id: string;
+  series_id: string | null;
+  level: EducationLevel;
+  assessment_type: AssessmentType;
+  grade_level: number;
+  semester: number | null;
+  summary: string | null;
+  description: string | null;
+  variant_label: string | null;
+  duration_minutes: number | null;
+  estimated_minutes: number | null;
+  package_questions: { count: number }[];
+}
+
+const EXAM_PACKAGE_COLUMNS =
+  "id, kind, slug, title, subject_id, series_id, level, assessment_type, grade_level, semester, summary, description, variant_label, duration_minutes, estimated_minutes, package_questions(count)";
+
+/** Paket satu mapel dalam lingkup ini. Latihan lebih dulu, lalu tryout. */
+export async function getExamPackages(scope: ExamScope, subject: Subject): Promise<ExamPackage[]> {
+  const [rows, freeCandidates, series] = await Promise.all([
+    readAllRows<ExamPackageRow>("paket ujian", (from, to) => {
+      let query = supabase.from("packages").select(EXAM_PACKAGE_COLUMNS, { count: "exact" });
+      for (const [column, value] of examScopeFilters(scope)) query = query.eq(column, value);
+      return query
+        .eq("subject_id", subject.id)
+        .order("kind")
+        .order("sort_order")
+        .order("id")
+        .range(from, to) as unknown as PromiseLike<SupabaseListResult<ExamPackageRow>>;
+    }),
+    // Akses gratis dihitung per mapel di seluruh jenis ujian, sama seperti
+    // halaman detail paket, supaya label kartu tidak berbeda dengan detailnya.
+    readAllRows<{ slug: string; title: string }>("paket gratis", (from, to) =>
+      supabase
+        .from("packages")
+        .select("slug, title", { count: "exact" })
+        .eq("subject_id", subject.id)
+        .eq("kind", "latihan")
+        .eq("is_published", true)
+        .order("sort_order")
+        .order("id")
+        .range(from, to),
+    ),
+    getSeries(),
+  ]);
+  const subjectById = new Map([[subject.id, subject]]);
+  const seriesById = new Map(series.map((item) => [item.id, item]));
+  const freeKeys = freePracticeTitleKeys(freeCandidates);
+
+  return rows.map((row) => {
+    const isTryout = row.kind === "tryout";
+    return {
+      ...packageAccess(row, subjectById, seriesById),
+      id: row.id,
+      slug: row.slug,
+      kind: row.kind,
+      title: row.title,
+      summary: row.summary ?? row.description ?? "",
+      variantLabel: row.variant_label ?? "",
+      assessmentType: row.assessment_type,
+      level: row.level,
+      gradeLevel: row.grade_level,
+      semester: row.semester,
+      questionCount: row.package_questions[0]?.count ?? 0,
+      minutes: isTryout
+        ? (row.duration_minutes ?? null)
+        : (row.estimated_minutes ?? row.duration_minutes ?? null),
+      isFreeAccess: !isTryout && freeKeys.has(packageTitleKey(row)),
     };
   });
 }

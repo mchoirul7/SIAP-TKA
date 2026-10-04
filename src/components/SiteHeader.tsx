@@ -1,58 +1,97 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { ShareButton } from "@/components/ShareButton";
+import { StudyContextDialog } from "@/components/StudyContextDialog";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
-import { useVoucherDialog } from "@/components/VoucherDialog";
+import { useStudyContext } from "@/hooks/useStudyContext";
+import { studyContextShortLabel } from "@/lib/study-context";
 import { site } from "@/lib/site";
 
 const navItems: { href: string; label: string; icon: IconName }[] = [
-  { href: "/", label: "Beranda", icon: "cap" },
-  { href: "/latihan", label: "Latihan Soal", icon: "list-check" },
+  { href: "/", label: "Beranda", icon: "home" },
+  { href: "/ujian", label: "Paket Soal", icon: "list-check" },
   { href: "/tryout", label: "Tryout", icon: "note" },
   { href: "/tentang", label: "FAQ", icon: "help" },
 ];
 
 export function SiteHeader() {
-  const { openVoucher } = useVoucherDialog();
+  const pathname = usePathname();
+  const { context, saveContext } = useStudyContext();
+  const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
+
 
   return (
-    <header className="sticky top-0 z-30 pt-3 sm:pt-4">
-      <div className="container-page">
-        <div className="flex h-16 items-center justify-between gap-5 rounded-[18px] border border-white/80 bg-white/95 px-5 shadow-float backdrop-blur sm:h-[68px] sm:px-8">
-          <Link href="/" className="flex shrink-0 items-center rounded" aria-label={`${site.name} - beranda`}>
-            <Logo className="h-11 sm:h-[54px]" priority decorative />
-          </Link>
+    <>
+      <header className="sticky top-0 z-30 pt-3">
+        <div className="container-page">
+          <div className="flex h-[60px] items-center justify-between gap-2 rounded-[16px] border border-white/80 bg-white/95 px-3 sm:gap-4 shadow-[0_14px_30px_-18px_rgba(18,21,58,0.45)] backdrop-blur sm:px-6">
+            <Link href="/" className="flex h-full shrink-0 items-center rounded" aria-label={`${site.name} - beranda`}>
+              <Logo className="h-[42px] sm:h-[52px]" priority decorative />
+            </Link>
 
-          <nav aria-label="Navigasi utama" className="hidden min-w-0 flex-1 items-center gap-7 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={`${item.href}-${item.label}`}
-                href={item.href}
-                className="inline-flex items-center gap-2 whitespace-nowrap text-[15px] font-semibold text-ink-700 transition-colors hover:text-brand-700"
+            <nav aria-label="Navigasi utama" className="hidden shrink-0 items-center gap-1 lg:flex xl:gap-2">
+              {navItems.map((item) => {
+                const isActive =
+                  item.href === "/" ? pathname === "/" : pathname?.startsWith(item.href);
+                return (
+                  <Link
+                    key={`${item.href}-${item.label}`}
+                    href={item.href}
+                    className={[
+                      "inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-[14px] px-3 text-[14px] font-extrabold transition-colors xl:px-4",
+                      isActive
+                        ? "bg-brand-50 text-brand-700 shadow-[inset_0_0_0_1px_rgba(130,50,255,0.06)]"
+                        : "text-ink-700 hover:bg-slate-50 hover:text-brand-700",
+                    ].join(" ")}
+                  >
+                    <Icon name={item.icon} className="h-[17px] w-[17px]" strokeWidth={2.4} />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="hidden h-10 min-w-[160px] max-w-[320px] flex-1 items-center gap-3 rounded-[11px] border border-sky-100 bg-sky-50/60 px-4 text-sm text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] xl:flex">
+              <Icon name="search" className="h-5 w-5 text-slate-400" strokeWidth={2.1} />
+              <span className="truncate">Cari mata pelajaran atau materi...</span>
+            </div>
+
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+              <ShareButton />
+
+              <button
+                type="button"
+                onClick={() => setIsClassDialogOpen(true)}
+                className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] border border-sky-100 bg-white px-2 text-left sm:gap-3 sm:px-4 shadow-[0_8px_18px_-14px_rgba(18,21,58,0.5)] transition-colors hover:border-brand-200"
               >
-                <Icon name={item.icon} className="h-[18px] w-[18px]" strokeWidth={2.3} />
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-2">
-            <ShareButton />
-
-            <button
-              type="button"
-              onClick={() => openVoucher()}
-              className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[11px] border border-brand-200 bg-white px-4 text-sm font-extrabold text-brand-700 shadow-[0_1px_0_rgba(80,1,218,0.08)] transition-colors hover:border-brand-400 hover:bg-brand-50 sm:px-5"
-            >
-              <Icon name="ticket" className="h-4 w-4" strokeWidth={2.3} />
-              <span className="sm:hidden">Akses</span>
-              <span className="hidden sm:inline">Saya Punya Kode Akses</span>
-            </button>
+                <span className="hidden h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-400 sm:flex text-base font-black text-white">
+                  A
+                </span>
+                <span className="block leading-tight md:min-w-[86px]">
+                  <span className="hidden text-[13px] font-black text-ink-900 md:block">Adit</span>
+                  <span className="block whitespace-nowrap text-[12px] font-black text-ink-900 md:text-[11px] md:font-semibold md:text-slate-500">
+                    {context ? studyContextShortLabel(context) : "Pilih Kelas"}
+                  </span>
+                </span>
+                <Icon name="chevron-down" className="h-4 w-4 text-ink-900" strokeWidth={2.6} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <StudyContextDialog
+        open={isClassDialogOpen}
+        initialContext={context}
+        onClose={() => setIsClassDialogOpen(false)}
+        onApply={(nextContext) => {
+          saveContext(nextContext);
+          setIsClassDialogOpen(false);
+        }}
+      />
+    </>
   );
 }

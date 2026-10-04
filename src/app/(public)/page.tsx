@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeCatalog } from "./HomeCatalog";
+import { ExamTypeShowcase } from "@/components/ujian/ExamTypeShowcase";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { absoluteUrl, jsonLdGraph, ogImage } from "@/lib/seo";
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Halaman depan langsung menampilkan katalog mata pelajaran.
+ * Halaman depan langsung menampilkan pilihan jenis ujian.
  * Tidak ada banner pengantar di atasnya: pengguna dibawa langsung ke isi produk.
  */
 export default async function HomePage() {
@@ -62,7 +62,7 @@ export default async function HomePage() {
         )}
       />
 
-      <HomeCatalog summaries={summaries} />
+      <ExamTypeShowcase />
 
       <WhatsAppFab />
     </div>

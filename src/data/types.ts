@@ -2,6 +2,14 @@ export type EducationLevel = "SD" | "SMP" | "SMA";
 
 export type Difficulty = "dasar" | "menengah" | "lanjut";
 
+export type PackageKind = "latihan" | "tryout";
+
+export type AssessmentType =
+  | "tka"
+  | "ulangan_harian"
+  | "sumatif_tengah_semester"
+  | "sumatif_akhir_semester";
+
 export type ReasoningType = "pemahaman" | "penerapan" | "penalaran";
 
 /**
@@ -145,6 +153,10 @@ export interface Tryout extends ContentEntitlement {
   title: string;
   subjectId: string;
   level: EducationLevel;
+  kind: "tryout";
+  assessmentType: AssessmentType;
+  gradeLevel: number;
+  semester: number | null;
   variant: TryoutVariant;
   /** Penjelasan singkat pembeda antar jenis tryout, ditampilkan pada kartu. */
   variantLabel: string;
@@ -159,6 +171,10 @@ export interface PracticePackage extends ContentEntitlement {
   slug: string;
   title: string;
   subjectId: string;
+  kind: "latihan";
+  assessmentType: AssessmentType;
+  gradeLevel: number;
+  semester: number | null;
   topicId: string;
   subtopicId: string;
   /**

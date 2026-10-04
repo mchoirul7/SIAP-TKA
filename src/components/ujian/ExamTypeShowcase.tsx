@@ -1,278 +1,142 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useState } from "react";
-import { SubjectCard } from "@/components/SubjectCard";
-import { SubjectGroupCard } from "@/components/SubjectGroupCard";
-import { Icon, type IconName } from "@/components/ui/Icon";
-import type { EducationLevel } from "@/data/types";
-import {
-  COLLAPSED_GROUP_ORDER,
-  GROUP_DESCRIPTION,
-  GROUP_LABEL,
-  subjectGroupKey,
-  type SubjectGroupKey,
-} from "@/lib/subject-group";
-import type { SubjectSummary } from "@/services/content-service";
+import Link from "next/link";
+import { LinkPending } from "@/components/NavigationProgress";
+import { Icon } from "@/components/ui/Icon";
+import type { AssessmentType } from "@/data/types";
+import { useStudyContext } from "@/hooks/useStudyContext";
+import { ASSESSMENT_LABEL, examTypeHref } from "@/lib/assessment";
+import { DEFAULT_STUDY_CONTEXT, levelOptionFor } from "@/lib/study-context";
 
-const LEVEL_ORDER: EducationLevel[] = ["SMA", "SD", "SMP"];
-
-const LEVEL_LABEL: Record<EducationLevel, string> = {
-  SMA: "SMA/MA/SMK Sederajat",
-  SMP: "SMP/MTs Sederajat",
-  SD: "SD/MI Sederajat",
+/**
+ * Ilustrasi di `public/beranda/` dipotong dari mockup beranda. Gambar kartu
+ * sudah memuat ikon pojok kiri atas dan lengkung putih badan kartu di bagian
+ * bawahnya, jadi badan kartu disambung langsung di bawah gambar.
+ */
+type HomeExamCard = {
+  type: AssessmentType;
+  title: string;
+  badge: string;
+  description: string;
+  art: string;
+  arrow: string;
 };
 
-const LEVEL_SUBTITLE: Record<EducationLevel, string> = {
-  SMA: "Kelas 10, 11, 12 - Persiapan TKA",
-  SD: "Kelas 1 - 6",
-  SMP: "Kelas 7, 8, 9",
-};
-
-const LEVEL_ICON: Record<EducationLevel, IconName> = {
-  SMA: "cap",
-  SD: "book",
-  SMP: "data",
-};
-
-const steps: { number: number; icon: IconName; title: string; text: string; tone: string }[] = [
-
+const cards: HomeExamCard[] = [
+  {
+    type: "tka",
+    title: ASSESSMENT_LABEL.tka,
+    badge: "Persiapan & latihan",
+    description: "Latihan untuk mempersiapkan Tes Kemampuan Akademik.",
+    art: "/beranda/tka.png",
+    arrow: "bg-[#efe5ff] text-[#6617f4]",
+  },
+  {
+    type: "ulangan_harian",
+    title: ASSESSMENT_LABEL.ulangan_harian,
+    badge: "Latihan materi",
+    description: "Latihan untuk mengukur pemahaman materi yang sedang dipelajari.",
+    art: "/beranda/ulangan-harian.png",
+    arrow: "bg-[#fff0d5] text-[#ec7d00]",
+  },
+  {
+    type: "sumatif_tengah_semester",
+    title: ASSESSMENT_LABEL.sumatif_tengah_semester,
+    badge: "Evaluasi tengah semester",
+    description: "Persiapan penilaian untuk melihat pemahaman ananda sejauh ini.",
+    art: "/beranda/sts.png",
+    arrow: "bg-[#e0f2ff] text-[#1787e8]",
+  },
+  {
+    type: "sumatif_akhir_semester",
+    title: ASSESSMENT_LABEL.sumatif_akhir_semester,
+    badge: "Evaluasi akhir semester",
+    description: "Persiapan penilaian akhir dengan latihan yang sesuai materi.",
+    art: "/beranda/sas.png",
+    arrow: "bg-[#e5f9e9] text-[#15963c]",
+  },
 ];
 
-function subjectsForLevel(summaries: SubjectSummary[], level: EducationLevel) {
-  return summaries.filter((item) => item.subject.level === level);
+function HomeCard({ card }: { card: HomeExamCard }) {
+  return (
+    <Link
+      href={examTypeHref(card.type)}
+      className="group flex h-full flex-col overflow-hidden rounded-[1.6rem] bg-white text-left shadow-[0_24px_60px_-42px_rgba(14,23,64,0.45)] transition-transform hover:-translate-y-1 hover:shadow-[0_34px_70px_-46px_rgba(14,23,64,0.55)]"
+    >
+      <Image
+        src={card.art}
+        alt=""
+        width={383}
+        height={308}
+        sizes="(min-width: 1280px) 24vw, (min-width: 768px) 46vw, 92vw"
+        className="block h-auto w-full"
+      />
+      <div className="-mt-2 flex flex-1 flex-col px-6 pb-6">
+        <h2 className="text-[clamp(1.2rem,1.4vw,1.6rem)] font-black leading-tight tracking-[-0.01em] text-[#080d3f]">
+          {card.title}
+        </h2>
+        <span className={`mt-3 w-fit rounded-full px-3.5 py-1 text-[clamp(0.88rem,1.15vw,1rem)] font-semibold ${card.arrow}`}>
+          {card.badge}
+        </span>
+        <p className="mt-3 max-w-[18rem] text-[clamp(1rem,1.3vw,1.12rem)] font-medium leading-snug text-[#52607c]">
+          {card.description}
+        </p>
+        <span className={`ml-auto mt-auto flex h-14 w-14 items-center justify-center rounded-2xl transition-transform group-hover:translate-x-1 ${card.arrow}`}>
+          <LinkPending />
+          <Icon name="arrow-right" className="h-7 w-7" strokeWidth={2.8} />
+        </span>
+      </div>
+    </Link>
+  );
 }
 
-function availableCount(items: SubjectSummary[]): number {
-  return items.filter((item) => item.isAvailable).length;
-}
-
-function previewNames(items: SubjectSummary[]): string {
-  return items.map((item) => item.subject.shortName).join(" - ");
-}
-
-export function HomeCatalog({ summaries }: { summaries: SubjectSummary[] }) {
-  const panelBaseId = useId();
-  const [activeLevel, setActiveLevel] = useState<EducationLevel>(LEVEL_ORDER[0]);
-  const [openGroups, setOpenGroups] = useState<SubjectGroupKey[]>([]);
-  const [expandedGroups, setExpandedGroups] = useState<SubjectGroupKey[]>([]);
-  const groups = LEVEL_ORDER.map((level) => ({
-    level,
-    items: subjectsForLevel(summaries, level),
-  }));
-  const activeGroup = groups.find((group) => group.level === activeLevel) ?? groups[0];
-  const activeItems = activeGroup.items;
-  const mainItems = activeItems.filter((item) => subjectGroupKey(item.subject) === "utama");
-  const collapsedGroups = COLLAPSED_GROUP_ORDER.map((key) => ({
-    key,
-    items: activeItems.filter((item) => subjectGroupKey(item.subject) === key),
-  })).filter((group) => group.items.length > 0);
-
-  const selectLevel = (level: EducationLevel) => {
-    setActiveLevel(level);
-    setOpenGroups([]);
-    setExpandedGroups([]);
-  };
-
-  const toggleGroup = (key: SubjectGroupKey) => {
-    setOpenGroups((current) => {
-      const isOpen = current.includes(key);
-      if (isOpen) {
-        setExpandedGroups((expanded) => expanded.filter((item) => item !== key));
-        return current.filter((item) => item !== key);
-      }
-      return [...current, key];
-    });
-  };
-
-  const showAllGroupItems = (key: SubjectGroupKey) => {
-    setExpandedGroups((current) => (current.includes(key) ? current : [...current, key]));
-  };
+export function ExamTypeShowcase() {
+  const { context } = useStudyContext();
+  const activeContext = context ?? DEFAULT_STUDY_CONTEXT;
+  const levelLabel = levelOptionFor(activeContext.level).label;
 
   return (
-    <div id="katalog-mapel" className="container-page scroll-mt-24 pb-16">
-      <section className="relative min-h-[178px] overflow-visible">
-        <div className="grid gap-8 xl:grid-cols-[minmax(520px,0.88fr)_minmax(610px,1.04fr)_230px] xl:items-start">
-          <div className="flex items-start gap-6">
-            <span className="mt-2 flex h-14 w-14 shrink-0 items-center justify-center rounded-[16px] bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-[0_14px_28px_-16px_rgba(80,1,218,0.85)] sm:h-[58px] sm:w-[58px]">
-              <Icon name="cap" className="h-7 w-7" strokeWidth={2.2} />
+    <div id="katalog-mapel" className="container-page scroll-mt-24 pb-10 pt-7 sm:pb-12 lg:pt-9">
+      <section className="relative lg:min-h-[19rem] xl:aspect-[1583/320] xl:min-h-0">
+        {/* Hero dipotong dari mockup; balon teksnya dihapus dari gambar dan
+            digambar ulang di sini agar kelasnya mengikuti kelas aktif. */}
+        <div className="pointer-events-none absolute right-[-2.5%] top-[-1.75rem] hidden aspect-[1021/334] w-[64.5%] lg:block">
+          <Image src="/beranda/hero.png" alt="" fill sizes="65vw" className="object-contain" priority />
+          <div className="absolute left-[74%] top-[17%] flex h-[45%] w-[19%] rotate-[-9deg] items-center justify-center rounded-[1.4rem] bg-white text-center text-[clamp(1rem,1.45vw,1.45rem)] font-black leading-tight text-[#0b1245] shadow-[0_16px_35px_-22px_rgba(18,21,58,0.55)]">
+            Semangat
+            <br />
+            belajar,
+            <br />
+            Kelas {activeContext.grade}!
+          </div>
+        </div>
+
+        <div className="relative z-10 max-w-[40rem] pb-8 sm:pt-1 lg:pb-10">
+          <span className="inline-flex h-10 items-center rounded-full bg-[#eadcff] px-5 text-[clamp(1rem,1.3vw,1.15rem)] font-black text-[#6418ed]">
+            {levelLabel} &bull; Kelas {activeContext.grade}
+          </span>
+          <h1 className="mt-6 max-w-[39rem] text-[clamp(2.45rem,4.6vw,4.4rem)] font-black leading-[1.02] tracking-[-0.02em] text-[#080d3f]">
+            Mau belajar
+            <br />
+            apa hari ini,{" "}
+            <span className="bg-gradient-to-r from-[#6818f1] via-[#7a23ff] to-[#8e35ff] bg-clip-text text-transparent">
+              Adit?
             </span>
-            <div className="min-w-0">
-              <p className="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand-600">
-                Mulai Belajar
-              </p>
-              <h1 className="mt-2 text-[36px] font-black leading-[1.04] tracking-tight text-ink-900 sm:text-[46px] lg:whitespace-nowrap lg:text-[48px]">
-                SIAP TKA <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">ONE</span>
-              </h1>
-              <p className="mt-3 max-w-2xl text-[16px] leading-[1.65] text-slate-600 sm:text-[17px]">
-                Pilih mata pelajaran, masuk ke paket latihan sesuai materi, lalu akhiri dengan
-                tryout untuk mengukur kesiapan TKA kamu.
-              </p>
-            </div>
-          </div>
-
-          <ol className="hidden grid-cols-3 gap-7 pt-8 xl:grid">
-            {steps.map((step, index) => (
-              <li key={step.number} className="relative min-w-0">
-                {index > 0 ? (
-                  <Icon
-                    name="arrow-right"
-                    className="absolute -left-6 top-[50px] h-5 w-5 text-slate-300"
-                    strokeWidth={2.8}
-                  />
-                ) : null}
-                <span className="flex items-center justify-center gap-4">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sm font-black text-brand-700">
-                    {step.number}
-                  </span>
-                  <span className={`flex h-[58px] w-[58px] items-center justify-center rounded-full ${step.tone}`}>
-                    <Icon name={step.icon} className="h-7 w-7" strokeWidth={2.2} />
-                  </span>
-                </span>
-                <span className="mx-auto mt-5 block max-w-[150px] text-center">
-                  <span className="block text-[16px] font-black leading-[1.15] text-ink-900">
-                    {step.title}
-                  </span>
-                  <span className="mt-2 block text-[13px] leading-[1.32] text-slate-600">
-                    {step.text}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ol>
-
-          <div className="pointer-events-none absolute -right-2 -top-8 hidden h-[292px] w-[300px] lg:block">
-            <Image
-              src="/hero-student.png"
-              alt=""
-              fill
-              sizes="300px"
-              className="object-contain object-right-top"
-              priority
-            />
-          </div>
+          </h1>
+          <p className="mt-5 max-w-[39rem] text-[clamp(1.1rem,1.45vw,1.4rem)] font-medium leading-snug text-[#56627c]">
+            Pilih jenis penilaian sesuai kebutuhan belajar ananda.
+          </p>
         </div>
       </section>
 
-      <div className="relative z-10 mt-5 grid gap-3 lg:grid-cols-3">
-        {groups.map(({ level, items }) => {
-          const isActive = level === activeLevel;
-          const count = availableCount(items);
-          return (
-            <button
-              key={level}
-              type="button"
-              onClick={() => selectLevel(level)}
-              className={[
-                "group flex h-[74px] items-center gap-4 rounded-[12px] border px-5 text-left shadow-[0_10px_24px_-20px_rgba(12,10,55,0.55)] transition-all",
-                isActive
-                  ? "border-brand-500 bg-gradient-to-r from-brand-700 to-brand-600 text-white shadow-[0_16px_34px_-18px_rgba(80,1,218,0.85)]"
-                  : "border-slate-200 bg-white/95 text-ink-900 hover:border-brand-200 hover:bg-white",
-              ].join(" ")}
-            >
-              <span
-                className={[
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px]",
-                  isActive ? "bg-white/16 text-white" : "bg-sky-50 text-sky-600",
-                ].join(" ")}
-              >
-                <Icon name={LEVEL_ICON[level]} className="h-7 w-7" strokeWidth={2.25} />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="flex items-center gap-3">
-                  <span className="text-[19px] font-black leading-none">{LEVEL_LABEL[level]}</span>
-                  <span
-                    className={[
-                      "rounded-full px-3 py-1 text-xs font-black",
-                      isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600",
-                    ].join(" ")}
-                  >
-                    {count > 0 ? `${count} mapel` : "Segera"}
-                  </span>
-                </span>
-                <span className={["mt-2 block text-sm", isActive ? "text-white/90" : "text-slate-600"].join(" ")}>
-                  {LEVEL_SUBTITLE[level]}
-                </span>
-              </span>
-              <Icon
-                name="arrow-right"
-                className={["h-5 w-5 shrink-0", isActive ? "text-white" : "text-ink-700"].join(" ")}
-                strokeWidth={2.5}
-              />
-            </button>
-          );
-        })}
-      </div>
-
-      <section className="mt-9">
-
-
-        {activeItems.length === 0 ? (
-          <div className="mt-4 rounded-[12px] border border-dashed border-slate-300 bg-white p-6 text-sm leading-relaxed text-slate-600">
-            Paket untuk jenjang {LEVEL_LABEL[activeLevel]} sedang disiapkan.
-          </div>
-        ) : (
-          <>
-            {mainItems.length > 0 ? (
-              <ul className="mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {mainItems.map((summary) => (
-                  <li key={summary.subject.id}>
-                    <SubjectCard summary={summary} />
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
-            {collapsedGroups.map(({ key, items }) => {
-              const isOpen = openGroups.includes(key);
-              const isExpanded = expandedGroups.includes(key);
-              const panelId = `${panelBaseId}-${key}`;
-              const visibleItems = isExpanded ? items : items.slice(0, 3);
-              const hiddenCount = items.length - visibleItems.length;
-
-              return (
-                <div key={key} className="mt-5">
-                  <SubjectGroupCard
-                    title={GROUP_LABEL[key]}
-                    description={GROUP_DESCRIPTION[key]}
-                    preview={previewNames(items)}
-                    count={items.length}
-                    isOpen={isOpen}
-                    onToggle={() => toggleGroup(key)}
-                    panelId={panelId}
-                  />
-                  {isOpen ? (
-                    <>
-                      <ul id={panelId} className="mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                        {visibleItems.map((summary) => (
-                          <li key={summary.subject.id}>
-                            <SubjectCard summary={summary} />
-                          </li>
-                        ))}
-                      </ul>
-                      {hiddenCount > 0 ? (
-                        <div className="mt-5 flex justify-center">
-                          <button
-                            type="button"
-                            onClick={() => showAllGroupItems(key)}
-                            className="inline-flex h-12 items-center justify-center gap-3 rounded-[10px] border border-brand-200 bg-white px-6 text-[15px] font-black text-brand-700 shadow-[0_10px_24px_-22px_rgba(12,10,55,0.6)] transition-colors hover:border-brand-400 hover:bg-brand-50"
-                          >
-                            Lihat selengkapnya
-                            <span className="rounded-full bg-brand-50 px-2.5 py-1 text-xs text-brand-700">
-                              +{hiddenCount} mapel
-                            </span>
-                            <Icon name="arrow-right" className="h-5 w-5 rotate-90" strokeWidth={2.5} />
-                          </button>
-                        </div>
-                      ) : null}
-                    </>
-                  ) : null}
-                </div>
-              );
-            })}
-          </>
-        )}
-      </section>
+      <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {cards.map((card) => (
+          <li key={card.type}>
+            <HomeCard card={card} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
