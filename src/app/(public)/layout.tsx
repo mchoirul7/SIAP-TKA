@@ -1,7 +1,7 @@
-import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { StudyContextGate } from "@/components/StudyContextGate";
 import { VoucherProvider } from "@/components/VoucherDialog";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,7 +18,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <main id="konten" className="flex-1">
           {children}
         </main>
-        <SiteFooter />
+        <WhatsAppFab />
       </div>
     </VoucherProvider>
   );

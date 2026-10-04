@@ -1,12 +1,10 @@
 import { Icon } from "@/components/ui/Icon";
 
 const whatsappPhone = "6285649834654";
-const whatsappMessage =
-  "Halo SIAP TKA One, mohon saya dibantu terkait produk ini untuk kesiapan TKA anak saya";
+const whatsappMessage = "Saya Berminat Mencoba SIAP TKA One bisa dibantu?";
 
-const whatsappHref = `https://web.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent(
-  whatsappMessage,
-)}`;
+/** wa.me membuka aplikasi WhatsApp di ponsel dan WhatsApp Web di desktop. */
+const whatsappHref = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
 
 export function WhatsAppFab() {
   return (

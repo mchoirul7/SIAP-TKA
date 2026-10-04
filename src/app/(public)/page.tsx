@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ExamTypeShowcase } from "@/components/ujian/ExamTypeShowcase";
 import { JsonLd } from "@/components/JsonLd";
-import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { absoluteUrl, jsonLdGraph, ogImage } from "@/lib/seo";
 import { site, siteKeywords } from "@/lib/site";
 import { getSubjectSummaries } from "@/services/content-service";
@@ -63,8 +62,6 @@ export default async function HomePage() {
       />
 
       <ExamTypeShowcase />
-
-      <WhatsAppFab />
     </div>
   );
 }

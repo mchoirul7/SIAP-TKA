@@ -1,28 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ShareButton } from "@/components/ShareButton";
 import { StudyContextDialog } from "@/components/StudyContextDialog";
-import { Icon, type IconName } from "@/components/ui/Icon";
+import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { useStudyContext } from "@/hooks/useStudyContext";
 import { studyContextShortLabel } from "@/lib/study-context";
 import { site } from "@/lib/site";
 
-const navItems: { href: string; label: string; icon: IconName }[] = [
-  { href: "/", label: "Beranda", icon: "home" },
-  { href: "/ujian", label: "Paket Soal", icon: "list-check" },
-  { href: "/tryout", label: "Tryout", icon: "note" },
-  { href: "/tentang", label: "FAQ", icon: "help" },
-];
-
 export function SiteHeader() {
-  const pathname = usePathname();
   const { context, saveContext } = useStudyContext();
   const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
-
 
   return (
     <>
@@ -33,29 +23,7 @@ export function SiteHeader() {
               <Logo className="h-[42px] sm:h-[52px]" priority decorative />
             </Link>
 
-            <nav aria-label="Navigasi utama" className="hidden shrink-0 items-center gap-1 lg:flex xl:gap-2">
-              {navItems.map((item) => {
-                const isActive =
-                  item.href === "/" ? pathname === "/" : pathname?.startsWith(item.href);
-                return (
-                  <Link
-                    key={`${item.href}-${item.label}`}
-                    href={item.href}
-                    className={[
-                      "inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-[14px] px-3 text-[14px] font-extrabold transition-colors xl:px-4",
-                      isActive
-                        ? "bg-brand-50 text-brand-700 shadow-[inset_0_0_0_1px_rgba(130,50,255,0.06)]"
-                        : "text-ink-700 hover:bg-slate-50 hover:text-brand-700",
-                    ].join(" ")}
-                  >
-                    <Icon name={item.icon} className="h-[17px] w-[17px]" strokeWidth={2.4} />
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            <div className="hidden h-10 min-w-[160px] max-w-[320px] flex-1 items-center gap-3 rounded-[11px] border border-sky-100 bg-sky-50/60 px-4 text-sm text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] xl:flex">
+            <div className="hidden h-10 min-w-[160px] max-w-[420px] flex-1 items-center gap-3 rounded-[11px] border border-sky-100 bg-sky-50/60 px-4 text-sm text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] md:flex">
               <Icon name="search" className="h-5 w-5 text-slate-400" strokeWidth={2.1} />
               <span className="truncate">Cari mata pelajaran atau materi...</span>
             </div>

@@ -40,7 +40,7 @@ export function SubjectCard({
       </span>
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-white px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black leading-tight text-ink-900">{name}</span>
-        <span className="mt-1.5 block text-[14px] font-medium leading-snug text-slate-600">{description}</span>
+        <span className="mt-1.5 line-clamp-3 text-[14px] font-medium leading-snug text-slate-600">{description}</span>
         <span className="mt-auto flex flex-wrap items-center justify-between gap-1.5 pt-3">
           {href ? (
             <>

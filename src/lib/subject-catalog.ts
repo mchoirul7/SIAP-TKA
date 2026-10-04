@@ -7,7 +7,7 @@ import { subjectSegment } from "@/lib/assessment";
  * Mapel wajib selalu tampil, walau belum punya paket — kartunya lalu memakai
  * penanda "Belum tersedia" dan tombol request soal. Mapel lain yang punya paket
  * di basis data ikut ditambahkan di belakangnya. Gambar sampul dipotong dari
- * mockup dan dipakai ulang lintas jenjang (lihat `artFor`).
+ * mockup dan dipakai ulang lintas jenjang; SMA punya set sampul sendiri (lihat `artFor`).
  */
 
 export type SubjectTone = "emerald" | "sky" | "orange" | "violet";
@@ -73,15 +73,27 @@ const ART_FALLBACKS: [RegExp, string][] = [
   [/^smk/, "informatika"],
 ];
 
-export function artFor(key: string): string {
+/** Sampul khusus SMA (wajib dan pilihan), dipotong dari set sampul SMA. */
+const SMA_ARTS = [
+  "matematika", "matematika-tingkat-lanjut", "bahasa-indonesia", "bahasa-indonesia-tingkat-lanjut",
+  "bahasa-inggris", "bahasa-inggris-tingkat-lanjut", "bahasa-jerman", "bahasa-prancis", "bahasa-jepang",
+  "bahasa-korea", "bahasa-mandarin", "bahasa-arab", "sejarah", "antropologi", "sosiologi",
+  "biologi", "kimia", "fisika", "ekonomi", "geografi",
+];
+
+export function artFor(key: string, level: EducationLevel): string {
+  if (level === "SMA" && SMA_ARTS.includes(key)) return `/beranda/mapel/sma/${key}.png`;
   const art = COMMON_ARTS.includes(key) || key === "ipas"
     ? key
     : (ART_FALLBACKS.find(([pattern]) => pattern.test(key))?.[1] ?? "bahasa-indonesia");
   return `/beranda/mapel/${art}.png`;
 }
 
+export type SubjectGroup = "wajib" | "pilihan-sma" | "pilihan-smk" | "lainnya";
+
 export interface CatalogSubject {
   key: string;
+  group: SubjectGroup;
   name: string;
   description: string;
   art: string;
@@ -115,9 +127,10 @@ export function buildSubjectCatalog(
     }
     extras.push({
       key: segment,
+      group: segment.startsWith("smk") ? "pilihan-smk" : level === "SMA" ? "pilihan-sma" : "lainnya",
       name: entry?.name ?? item.subject.shortName,
       description: entry?.description ?? item.subject.description ?? "",
-      art: artFor(entry?.key ?? segment),
+      art: artFor(entry?.key ?? segment, level),
       tone: entry?.tone ?? TONES[index % TONES.length],
       subject: item.subject,
       packageCount: item.packageCount,
@@ -129,9 +142,10 @@ export function buildSubjectCatalog(
     const found = byKey.get(key);
     return {
       key,
+      group: "wajib" as const,
       name: entry.name,
       description: entry.description,
-      art: artFor(key),
+      art: artFor(key, level),
       tone: entry.tone,
       subject: found?.subject ?? null,
       packageCount: found?.packageCount ?? 0,
@@ -139,6 +153,20 @@ export function buildSubjectCatalog(
   });
 
   return [...requiredSubjects, ...extras];
+}
+
+const GROUP_TITLES: Record<SubjectGroup, string> = {
+  wajib: "Mapel Wajib",
+  "pilihan-sma": "Mapel Pilihan SMA",
+  "pilihan-smk": "Mapel Pilihan SMK",
+  lainnya: "Mapel Lainnya",
+};
+
+/** Mapel dikelompokkan per section; kelompok kosong dibuang. */
+export function groupSubjectCatalog(items: CatalogSubject[]) {
+  return (Object.keys(GROUP_TITLES) as SubjectGroup[])
+    .map((group) => ({ group, title: GROUP_TITLES[group], items: items.filter((item) => item.group === group) }))
+    .filter((section) => section.items.length > 0);
 }
 
 const WHATSAPP_PHONE = "6285649834654";

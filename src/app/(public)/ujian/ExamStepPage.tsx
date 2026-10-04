@@ -28,7 +28,7 @@ import {
 } from "@/lib/assessment";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getServerStudyContext } from "@/lib/server-study-context";
-import { buildSubjectCatalog, requestSoalHref } from "@/lib/subject-catalog";
+import { buildSubjectCatalog, groupSubjectCatalog, requestSoalHref } from "@/lib/subject-catalog";
 import { levelOptionFor, serializeStudyContext, type StudyContext } from "@/lib/study-context";
 import {
   getExamPackages,
@@ -231,7 +231,9 @@ async function SubjectStep({
 }) {
   const { config, semester } = step;
   const scope = examScopeFor(config.key, context, semester);
-  const subjects = buildSubjectCatalog(scope.level, config.key, await getExamSubjects(scope));
+  const sections = groupSubjectCatalog(
+    buildSubjectCatalog(scope.level, config.key, await getExamSubjects(scope)),
+  );
   const crumbs = breadcrumbFor(step);
   const back = subjectsBack(config, semester);
 
@@ -276,25 +278,41 @@ async function SubjectStep({
           </p>
         </div>
       </section>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-        {subjects.map((item) => (
-          <li key={item.key}>
-            <SubjectCard
-              href={item.subject ? examPackagesHref(config.key, semester, item.subject) : null}
-              requestHref={requestSoalHref({
-                context: scopeShortLabel(scope),
-                assessment: config.title,
-                subject: item.name,
-              })}
-              name={item.name}
-              description={item.description}
-              art={item.art}
-              tone={item.tone}
-              packageCount={item.packageCount}
-            />
-          </li>
-        ))}
-      </ul>
+      {/* Section judul hanya muncul bila ada lebih dari satu kelompok, misalnya SMA/SMK. */}
+      <div className="space-y-10">
+      {sections.map((section) => (
+        <section key={section.group}>
+          {sections.length > 1 ? (
+            <div className="mb-4 flex items-center gap-3">
+              <h2 className="shrink-0 text-[20px] font-black text-ink-900">
+                {section.title}{" "}
+                <span className="text-[15px] font-bold text-slate-400">({section.items.length})</span>
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-brand-200 to-transparent" />
+            </div>
+          ) : null}
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+            {section.items.map((item) => (
+              <li key={item.key}>
+                <SubjectCard
+                  href={item.subject ? examPackagesHref(config.key, semester, item.subject) : null}
+                  requestHref={requestSoalHref({
+                    context: scopeShortLabel(scope),
+                    assessment: config.title,
+                    subject: item.name,
+                  })}
+                  name={item.name}
+                  description={item.description}
+                  art={item.art}
+                  tone={item.tone}
+                  packageCount={item.packageCount}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+      </div>
     </>
   );
 }
