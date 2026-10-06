@@ -13,7 +13,7 @@ import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
 import { gradeOptionsFor, resolveGrade } from "@/lib/grade";
 import { useEntitlements } from "@/hooks/useEntitlements";
-import { startAttempt } from "@/services/tryout-service";
+import { setTryoutSecureMode, startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
 import { readProfile, writeProfile } from "@/storage/profile-storage";
@@ -29,6 +29,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
   const [grade, setGrade] = useState(() => resolveGrade(tryout.level, undefined));
   const [attempt, setAttempt] = useState<TryoutAttempt | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
+  const [secureModeEnabled, setSecureModeEnabled] = useState(false);
 
   useEffect(() => {
     const profile = readProfile();
@@ -36,7 +37,9 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       setName(profile.name);
       setGrade(resolveGrade(tryout.level, profile.grade));
     }
-    setAttempt(getAttempt(tryout.slug));
+    const existing = getAttempt(tryout.slug);
+    setAttempt(existing);
+    if (existing) setSecureModeEnabled(existing.secureModeEnabled);
     setMounted(true);
   }, [tryout.slug, tryout.level]);
 
@@ -62,8 +65,8 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       return;
     }
     persistProfile();
-    startAttempt(tryout);
-    navigate(`/tryout/${tryout.slug}/attempt`);
+    startAttempt(tryout, secureModeEnabled);
+    navigate(`/tryout/${tryout.slug}/attempt?secure=${secureModeEnabled ? "1" : "0"}`);
   };
 
   const handleContinue = () => {
@@ -71,7 +74,8 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       openVoucher(voucherOptions);
       return;
     }
-    navigate(`/tryout/${tryout.slug}/attempt`);
+    setTryoutSecureMode(tryout.slug, secureModeEnabled);
+    navigate(`/tryout/${tryout.slug}/attempt?secure=${secureModeEnabled ? "1" : "0"}`);
   };
 
   const handleRestart = () => {
@@ -80,9 +84,30 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       return;
     }
     persistProfile();
-    startAttempt(tryout);
-    navigate(`/tryout/${tryout.slug}/attempt`);
+    startAttempt(tryout, secureModeEnabled);
+    navigate(`/tryout/${tryout.slug}/attempt?secure=${secureModeEnabled ? "1" : "0"}`);
   };
+
+  const secureModeToggle = (
+    <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-white/80 p-3.5">
+      <input
+        type="checkbox"
+        checked={secureModeEnabled}
+        onChange={(event) => setSecureModeEnabled(event.target.checked)}
+        className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-600"
+      />
+      <span className="min-w-0">
+        <span className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
+          <Icon name="shield-check" className="h-4 w-4 text-brand-700" strokeWidth={2.2} />
+          Secure Exam Mode
+        </span>
+        <span className="mt-1 block text-xs leading-relaxed text-slate-600">
+          Aktifkan layar penuh dan tampilkan toast manual saat terdeteksi pindah tab, browser
+          kehilangan fokus, atau keluar fullscreen.
+        </span>
+      </span>
+    </label>
+  );
 
   return (
     <div className="container-page py-12 sm:py-14">
@@ -206,6 +231,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                   Ada pengerjaan yang belum diselesaikan. Waktu tetap berjalan sejak simulasi
                   dimulai.
                 </p>
+                {secureModeToggle}
                 <div className="mt-6 space-y-2">
                   <Button size="lg" className="w-full" loading={isPending} onClick={handleContinue}>
                     {isPending ? null : <Icon name="play" className="h-5 w-5" />}
@@ -228,6 +254,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                   {attempt?.submittedAt ? formatDate(attempt.submittedAt) : ""}. Hasilnya masih
                   dapat dibuka kapan saja.
                 </p>
+                {secureModeToggle}
                 <div className="mt-6 space-y-2">
                   <Button
                     size="lg"
@@ -295,6 +322,8 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                     </select>
                   </div>
                 </div>
+
+                {secureModeToggle}
 
                 <Button size="lg" className="mt-6 w-full" loading={isPending} onClick={handleStart}>
                   {isPending ? null : <Icon name="play" className="h-5 w-5" />}

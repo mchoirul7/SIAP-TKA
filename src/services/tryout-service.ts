@@ -1,4 +1,5 @@
 import type { AnswerValue, Question, Tryout } from "@/data/types";
+import { createExamSessionId } from "@/lib/secure-exam";
 import { analyzeTryout, type AnalysisCatalog, type TryoutAnalysis } from "@/lib/scoring";
 import {
   clearTryoutAttempt,
@@ -21,10 +22,12 @@ export function getAttempt(tryoutSlug: string): TryoutAttempt | null {
   return readTryoutAttempt(tryoutSlug);
 }
 
-export function startAttempt(tryout: Tryout): TryoutAttempt {
+export function startAttempt(tryout: Tryout, secureModeEnabled = false): TryoutAttempt {
   const attempt: TryoutAttempt = {
     tryoutId: tryout.id,
     tryoutSlug: tryout.slug,
+    examSessionId: createExamSessionId(),
+    secureModeEnabled,
     startedAt: Date.now(),
     submittedAt: null,
     answers: {},
@@ -33,6 +36,21 @@ export function startAttempt(tryout: Tryout): TryoutAttempt {
   };
   writeTryoutAttempt(attempt);
   return attempt;
+}
+
+export function setTryoutSecureMode(
+  tryoutSlug: string,
+  enabled: boolean,
+): TryoutAttempt | null {
+  const attempt = readTryoutAttempt(tryoutSlug);
+  if (!attempt || attempt.submittedAt) return attempt;
+  const next: TryoutAttempt = {
+    ...attempt,
+    secureModeEnabled: enabled,
+    examSessionId: attempt.examSessionId || createExamSessionId(),
+  };
+  writeTryoutAttempt(next);
+  return next;
 }
 
 export function saveAnswer(
@@ -57,23 +75,6 @@ export function toggleMark(tryoutSlug: string, questionId: string): TryoutAttemp
   if (marked.has(questionId)) marked.delete(questionId);
   else marked.add(questionId);
   const next: TryoutAttempt = { ...attempt, markedQuestionIds: [...marked] };
-  writeTryoutAttempt(next);
-  return next;
-}
-
-export type IntegrityEvent = "tabSwitch" | "blur" | "fullscreenExit";
-
-export function recordIntegrityEvent(
-  tryoutSlug: string,
-  event: IntegrityEvent,
-): TryoutAttempt | null {
-  const attempt = readTryoutAttempt(tryoutSlug);
-  if (!attempt || attempt.submittedAt) return attempt;
-  const integrity = { ...attempt.integrity };
-  if (event === "tabSwitch") integrity.tabSwitchCount += 1;
-  if (event === "blur") integrity.blurCount += 1;
-  if (event === "fullscreenExit") integrity.fullscreenExitCount += 1;
-  const next: TryoutAttempt = { ...attempt, integrity };
   writeTryoutAttempt(next);
   return next;
 }

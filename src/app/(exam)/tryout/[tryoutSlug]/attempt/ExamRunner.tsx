@@ -12,10 +12,10 @@ import {
   ExamStatusPill,
   type ExamFontSize,
 } from "@/components/exam/ExamChrome";
+import { SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
-import { Toast } from "@/components/Toast";
 import { Icon } from "@/components/ui/Icon";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
@@ -24,18 +24,24 @@ import { useEntitlements } from "@/hooks/useEntitlements";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { formatExamClock } from "@/lib/format";
 import {
+  getSecureExamDisplay,
+  SECURE_EXAM_CONFIG,
+  SECURE_EXAM_VIOLATION_TYPES,
+  secureExamViolationMessage,
+  secureExamViolationTitle,
+  shouldRecordSecureExamViolation,
+  type SecureExamViolationType,
+} from "@/lib/secure-exam";
+import {
   getAttempt,
-  recordIntegrityEvent,
   saveAnswer,
+  setTryoutSecureMode,
   submitTryout,
   toggleMark,
 } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
 import { readProfile } from "@/storage/profile-storage";
 import { RichText } from "@/components/RichText";
-
-const LEAVE_MESSAGE =
-  "Anda meninggalkan halaman ujian. Untuk hasil yang lebih akurat, kerjakan simulasi secara mandiri.";
 
 export function ExamRunner({
   tryout,
@@ -52,13 +58,18 @@ export function ExamRunner({
   const [status, setStatus] = useState<"loading" | "ready" | "redirecting">("loading");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [now, setNow] = useState(() => Date.now());
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [secureNotice, setSecureNotice] = useState<SecureExamNoticeState | null>(null);
+  const [secureViolationCount, setSecureViolationCount] = useState(0);
   const [fontSize, setFontSize] = useState<ExamFontSize>("sedang");
   const [studentName, setStudentName] = useState("");
   const hasSubmittedRef = useRef(false);
+  const attemptRef = useRef<TryoutAttempt | null>(null);
+  const lastViolationAtRef = useRef<number | null>(null);
+  const secureViolationCountRef = useRef(0);
+  const secureFinishedRef = useRef(false);
 
   const totalSeconds = tryout.durationMinutes * 60;
 
@@ -72,21 +83,34 @@ export function ExamRunner({
       navigate(`/tryout/${tryout.slug}`, { replace: true });
       return;
     }
-    const existing = getAttempt(tryout.slug);
+    const secureParam =
+      typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("secure");
+    const requestedSecureMode =
+      secureParam === "1" ? true : secureParam === "0" ? false : undefined;
+    let existing = getAttempt(tryout.slug);
     if (!existing) {
       setStatus("redirecting");
       navigate(`/tryout/${tryout.slug}`, { replace: true });
       return;
+    }
+    if (requestedSecureMode !== undefined && existing.secureModeEnabled !== requestedSecureMode) {
+      existing = setTryoutSecureMode(tryout.slug, requestedSecureMode);
+      if (!existing) return;
     }
     if (existing.submittedAt) {
       setStatus("redirecting");
       navigate(`/tryout/${tryout.slug}/hasil`, { replace: true });
       return;
     }
+    const profile = readProfile();
     setAttempt(existing);
-    setStudentName(readProfile()?.name ?? "");
+    setStudentName(profile?.name ?? "");
     setStatus("ready");
   }, [mounted, isUnlocked, navigate, tryout, tryout.slug]);
+
+  useEffect(() => {
+    attemptRef.current = attempt;
+  }, [attempt]);
 
   const finish = useCallback(() => {
     if (hasSubmittedRef.current) return;
@@ -94,6 +118,70 @@ export function ExamRunner({
     submitTryout(tryout.slug);
     navigate(`/tryout/${tryout.slug}/hasil`, { replace: true });
   }, [navigate, tryout.slug]);
+
+  const requestFullscreen = useCallback((showPrompt = true) => {
+    if (!SECURE_EXAM_CONFIG.enableFullscreen || typeof document === "undefined") return;
+    if (document.fullscreenElement || !document.documentElement.requestFullscreen) return;
+
+    void document.documentElement.requestFullscreen().catch(() => {
+      if (!showPrompt) return;
+      setSecureNotice({
+        title: "Aktifkan Secure Exam",
+        message:
+          "Browser belum mengizinkan mode layar penuh. Ujian tetap berjalan, tetapi aktifkan kembali layar penuh untuk menjaga mode aman.",
+        fullscreenPrompt: true,
+      });
+    });
+  }, []);
+
+  const recordSecureViolation = useCallback(
+    (type: SecureExamViolationType) => {
+      const currentAttempt = attemptRef.current;
+      const occurredAt = Date.now();
+      if (
+        !currentAttempt?.secureModeEnabled ||
+        currentAttempt.submittedAt ||
+        secureFinishedRef.current
+      ) {
+        return;
+      }
+      if (
+        !shouldRecordSecureExamViolation(
+          lastViolationAtRef.current,
+          occurredAt,
+          SECURE_EXAM_CONFIG.dedupeWindowMs,
+        )
+      ) {
+        return;
+      }
+
+      setIsSubmitOpen(false);
+      setIsNavigatorOpen(false);
+      setIsInfoOpen(false);
+      lastViolationAtRef.current = occurredAt;
+
+      const violationCount = secureViolationCountRef.current + 1;
+      secureViolationCountRef.current = violationCount;
+      setSecureViolationCount(violationCount);
+      const isFinal = violationCount >= SECURE_EXAM_CONFIG.maxViolations;
+      setSecureNotice({
+        title: secureExamViolationTitle(violationCount),
+        message: secureExamViolationMessage(violationCount, type),
+        final: isFinal,
+      });
+
+      if (isFinal) {
+        secureFinishedRef.current = true;
+        hasSubmittedRef.current = true;
+        const submitted = submitTryout(tryout.slug);
+        if (submitted) {
+          attemptRef.current = submitted;
+          setAttempt(submitted);
+        }
+      }
+    },
+    [tryout.slug],
+  );
 
   // -------------------------------------------------------------- timer
   useEffect(() => {
@@ -110,21 +198,36 @@ export function ExamRunner({
     if (remainingSeconds <= 0) finish();
   }, [remainingSeconds, status, attempt, finish]);
 
-  // ------------------------------------------------ integritas ringan
+  // ------------------------------------------------ secure exam mode
   useEffect(() => {
-    if (status !== "ready") return;
+    if (
+      status !== "ready" ||
+      !attempt?.secureModeEnabled ||
+      !SECURE_EXAM_CONFIG.enableFullscreen
+    ) {
+      return;
+    }
+    requestFullscreen(true);
+  }, [attempt?.secureModeEnabled, requestFullscreen, status]);
+
+  useEffect(() => {
+    if (status !== "ready" || !attempt?.secureModeEnabled) return;
 
     const onVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        recordIntegrityEvent(tryout.slug, "tabSwitch");
-      } else {
-        setToastMessage(LEAVE_MESSAGE);
+      if (
+        SECURE_EXAM_CONFIG.detectTabSwitch &&
+        document.visibilityState === "hidden"
+      ) {
+        recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.tabSwitch);
       }
     };
-    const onBlur = () => recordIntegrityEvent(tryout.slug, "blur");
+    const onBlur = () => {
+      if (!SECURE_EXAM_CONFIG.detectWindowBlur) return;
+      recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.windowBlur);
+    };
     const onFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        recordIntegrityEvent(tryout.slug, "fullscreenExit");
+      if (SECURE_EXAM_CONFIG.detectFullscreenExit && !document.fullscreenElement) {
+        recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.exitFullscreen);
       }
     };
 
@@ -136,7 +239,7 @@ export function ExamRunner({
       window.removeEventListener("blur", onBlur);
       document.removeEventListener("fullscreenchange", onFullscreenChange);
     };
-  }, [status, tryout.slug]);
+  }, [attempt?.secureModeEnabled, recordSecureViolation, status]);
 
   // Esc menutup jendela yang sedang terbuka, dimulai dari yang paling atas.
   useEffect(() => {
@@ -173,8 +276,19 @@ export function ExamRunner({
     if (document.fullscreenElement) {
       void document.exitFullscreen().catch(() => undefined);
     } else {
-      void document.documentElement.requestFullscreen?.().catch(() => undefined);
+      requestFullscreen(true);
     }
+  };
+
+  const closeSecureDialog = () => {
+    if (!secureNotice) return;
+    if (secureNotice.final) {
+      navigate(`/tryout/${tryout.slug}/hasil`, { replace: true });
+      return;
+    }
+    const shouldRequestFullscreen = secureNotice.fullscreenPrompt;
+    setSecureNotice(null);
+    if (shouldRequestFullscreen) requestFullscreen(true);
   };
 
   // --------------------------------------------------------- turunan
@@ -193,6 +307,7 @@ export function ExamRunner({
   const answeredCount = navigatorItems.filter((item) => item.answered).length;
   const markedCount = navigatorItems.filter((item) => item.marked).length;
   const question = questions[currentIndex];
+  const secureDisplay = getSecureExamDisplay(secureViolationCount);
 
   if (status !== "ready" || !attempt || !question) {
     return (
@@ -212,13 +327,17 @@ export function ExamRunner({
         tagline="Simulasi TKA"
         headerRight={
           <div className="hidden items-center gap-2 lg:flex">
-            <button
-              type="button"
-              onClick={toggleFullscreen}
-              className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
-            >
-              Layar penuh
-            </button>
+            {attempt.secureModeEnabled ? (
+              <button
+                type="button"
+                onClick={toggleFullscreen}
+                className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {typeof document !== "undefined" && document.fullscreenElement
+                  ? "Keluar layar penuh"
+                  : "Layar penuh"}
+              </button>
+            ) : null}
             <span className="inline-flex h-9 items-center gap-2 rounded-md bg-white/10 px-3 text-sm text-white ring-1 ring-inset ring-white/25">
               {studentName || "Peserta"}
               <Icon name="cap" className="h-4 w-4" strokeWidth={2} />
@@ -230,11 +349,16 @@ export function ExamRunner({
           title={`Soal nomor ${currentIndex + 1}`}
           subtitle={subjectName}
           status={
-            <ExamStatusPill alert={remainingSeconds <= 300}>
-              <span className="sr-only">Sisa waktu </span>
-              <span aria-hidden="true">Sisa Waktu : </span>
-              {formatExamClock(remainingSeconds)}
-            </ExamStatusPill>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <ExamStatusPill alert={remainingSeconds <= 300}>
+                <span className="sr-only">Sisa waktu </span>
+                <span aria-hidden="true">Sisa Waktu : </span>
+                {formatExamClock(remainingSeconds)}
+              </ExamStatusPill>
+              {attempt.secureModeEnabled ? (
+                <SecureExamIndicator display={secureDisplay} violationCount={secureViolationCount} />
+              ) : null}
+            </div>
           }
           infoLabel="Informasi Soal"
           onOpenInfo={() => setIsInfoOpen(true)}
@@ -392,8 +516,45 @@ export function ExamRunner({
         </ExamDialog>
       ) : null}
 
-      <Toast message={toastMessage} onDismiss={() => setToastMessage(null)} />
+      {secureNotice ? <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} /> : null}
     </>
+  );
+}
+
+function SecureExamIndicator({
+  display,
+  violationCount,
+}: {
+  display: ReturnType<typeof getSecureExamDisplay>;
+  violationCount: number;
+}) {
+  const toneClass = {
+    emerald: "border-emerald-300 bg-emerald-50 text-emerald-800",
+    amber: "border-amber-300 bg-amber-50 text-amber-800",
+    orange: "border-orange-300 bg-orange-50 text-orange-800",
+    rose: "border-rose-300 bg-rose-50 text-rose-800",
+  }[display.tone];
+
+  const dotClass = {
+    emerald: "bg-emerald-500",
+    amber: "bg-amber-500",
+    orange: "bg-orange-500",
+    rose: "bg-rose-500",
+  }[display.tone];
+
+  return (
+    <span
+      className={[
+        "inline-flex h-9 shrink-0 items-center gap-2 rounded-full border px-3 text-xs font-semibold tabular-nums sm:text-sm",
+        toneClass,
+      ].join(" ")}
+    >
+      <Icon name="lock" className="h-4 w-4" strokeWidth={2.2} />
+      <span className="hidden sm:inline">Secure Exam</span>
+      <span aria-hidden="true" className={["h-2 w-2 rounded-full", dotClass].join(" ")} />
+      <span>{display.label}</span>
+      <span className="text-current/70">Pelanggaran: {violationCount}</span>
+    </span>
   );
 }
 

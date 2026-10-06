@@ -1,7 +1,9 @@
 import type { AnswerValue, PracticePackage, Question } from "@/data/types";
+import { createExamSessionId } from "@/lib/secure-exam";
 import { analyzePractice, type AnalysisCatalog, type PracticeAnalysis } from "@/lib/scoring";
 import {
   clearPracticeAttempt,
+  emptyIntegrity,
   readPracticeAttempt,
   writePracticeAttempt,
   type PracticeAttempt,
@@ -11,16 +13,31 @@ export function getPracticeAttempt(slug: string): PracticeAttempt | null {
   return readPracticeAttempt(slug);
 }
 
-export function startPracticeAttempt(slug: string): PracticeAttempt | null {
+export function startPracticeAttempt(slug: string, secureModeEnabled = false): PracticeAttempt | null {
   const attempt: PracticeAttempt = {
     packageSlug: slug,
+    examSessionId: createExamSessionId(),
+    secureModeEnabled,
     startedAt: Date.now(),
     finishedAt: null,
     answers: {},
     markedQuestionIds: [],
+    integrity: { ...emptyIntegrity },
   };
   writePracticeAttempt(attempt);
   return attempt;
+}
+
+export function setPracticeSecureMode(slug: string, enabled: boolean): PracticeAttempt | null {
+  const attempt = readPracticeAttempt(slug);
+  if (!attempt || attempt.finishedAt) return attempt;
+  const next: PracticeAttempt = {
+    ...attempt,
+    secureModeEnabled: enabled,
+    examSessionId: attempt.examSessionId || createExamSessionId(),
+  };
+  writePracticeAttempt(next);
+  return next;
 }
 
 /** Tanda ragu-ragu pada latihan, sama seperti pada ujian. */

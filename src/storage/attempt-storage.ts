@@ -1,4 +1,5 @@
 import type { AnswerMap, AnswerValue } from "@/data/types";
+import type { SecureExamViolation } from "@/lib/secure-exam";
 import { readValue, removeValue, writeValue } from "./local-storage";
 import { storageKeys } from "./storage-keys";
 
@@ -26,11 +27,15 @@ export interface IntegrityCounters {
   tabSwitchCount: number;
   blurCount: number;
   fullscreenExitCount: number;
+  violations: SecureExamViolation[];
+  lastViolationAt: number | null;
 }
 
 export interface TryoutAttempt {
   tryoutId: string;
   tryoutSlug: string;
+  examSessionId: string;
+  secureModeEnabled: boolean;
   startedAt: number;
   submittedAt: number | null;
   /** questionId -> jawaban, bentuknya mengikuti tipe soal */
@@ -43,17 +48,22 @@ export interface TryoutAttempt {
 
 export interface PracticeAttempt {
   packageSlug: string;
+  examSessionId: string;
+  secureModeEnabled: boolean;
   startedAt: number;
   finishedAt: number | null;
   answers: AnswerMap;
   /** Menyusul setelah layar latihan memakai tombol ragu-ragu; data lama tidak memuatnya. */
   markedQuestionIds: string[];
+  integrity: IntegrityCounters;
 }
 
 export const emptyIntegrity: IntegrityCounters = {
   tabSwitchCount: 0,
   blurCount: 0,
   fullscreenExitCount: 0,
+  violations: [],
+  lastViolationAt: null,
 };
 
 // ---------------------------------------------------------------- tryout
@@ -63,9 +73,16 @@ export function readTryoutAttempt(tryoutSlug: string): TryoutAttempt | null {
   if (!attempt || typeof attempt.startedAt !== "number") return null;
   return {
     ...attempt,
+    examSessionId: attempt.examSessionId ?? `legacy_${attempt.tryoutSlug}_${attempt.startedAt}`,
+    secureModeEnabled: attempt.secureModeEnabled ?? false,
     answers: normalizeAnswers(attempt.answers),
     markedQuestionIds: attempt.markedQuestionIds ?? [],
-    integrity: { ...emptyIntegrity, ...attempt.integrity },
+    integrity: {
+      ...emptyIntegrity,
+      ...attempt.integrity,
+      violations: attempt.integrity?.violations ?? [],
+      lastViolationAt: attempt.integrity?.lastViolationAt ?? null,
+    },
   };
 }
 
@@ -84,8 +101,16 @@ export function readPracticeAttempt(packageSlug: string): PracticeAttempt | null
   if (!attempt || typeof attempt.startedAt !== "number") return null;
   return {
     ...attempt,
+    examSessionId: attempt.examSessionId ?? `practice_${attempt.packageSlug}_${attempt.startedAt}`,
+    secureModeEnabled: attempt.secureModeEnabled ?? false,
     answers: normalizeAnswers(attempt.answers),
     markedQuestionIds: attempt.markedQuestionIds ?? [],
+    integrity: {
+      ...emptyIntegrity,
+      ...attempt.integrity,
+      violations: attempt.integrity?.violations ?? [],
+      lastViolationAt: attempt.integrity?.lastViolationAt ?? null,
+    },
   };
 }
 

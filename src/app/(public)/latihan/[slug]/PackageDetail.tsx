@@ -62,6 +62,7 @@ export function PackageDetail({
   const [studentName, setStudentName] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
   const [studentNameError, setStudentNameError] = useState<string | null>(null);
+  const [secureModeEnabled, setSecureModeEnabled] = useState(false);
   const autoVoucherOpenedRef = useRef(false);
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const openAccessDialog = useCallback(() => {
@@ -85,6 +86,7 @@ export function PackageDetail({
       const attempt = getPracticeAttempt(pkg.slug);
       setHasStartedAttempt(Boolean(attempt));
       setHasFinishedAttempt(Boolean(attempt?.finishedAt));
+      if (attempt) setSecureModeEnabled(attempt.secureModeEnabled);
     };
     sync();
     return subscribeToStorage(sync);
@@ -106,7 +108,7 @@ export function PackageDetail({
 
   const handleStartPractice = () => {
     if (!persistStudentProfile()) return;
-    navigate(`/latihan/${pkg.slug}/kerjakan`);
+    navigate(`/latihan/${pkg.slug}/kerjakan?secure=${secureModeEnabled ? "1" : "0"}`);
   };
 
   const handleResultClick = () => {
@@ -263,6 +265,25 @@ export function PackageDetail({
                   </p>
                 )}
               </div>
+
+              <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3.5">
+                <input
+                  type="checkbox"
+                  checked={secureModeEnabled}
+                  onChange={(event) => setSecureModeEnabled(event.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-600"
+                />
+                <span className="min-w-0">
+                  <span className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
+                    <Icon name="shield-check" className="h-4 w-4 text-brand-700" strokeWidth={2.2} />
+                    Secure Exam Mode
+                  </span>
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-600">
+                    Aktifkan layar penuh dan catat pindah tab, browser kehilangan fokus, atau keluar
+                    fullscreen selama latihan.
+                  </span>
+                </span>
+              </label>
 
               <div className="mt-5 space-y-2">
                 <Button size="lg" className="w-full" loading={isPending} onClick={handleStartPractice}>

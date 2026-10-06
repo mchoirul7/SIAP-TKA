@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ExamCardHead,
   ExamDialog,
@@ -14,6 +14,7 @@ import {
   ExamStatusPill,
   type ExamFontSize,
 } from "@/components/exam/ExamChrome";
+import { SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
@@ -24,12 +25,23 @@ import { useEntitlements } from "@/hooks/useEntitlements";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { RichText } from "@/components/RichText";
 import {
+  getSecureExamDisplay,
+  SECURE_EXAM_CONFIG,
+  SECURE_EXAM_VIOLATION_TYPES,
+  secureExamViolationMessage,
+  secureExamViolationTitle,
+  shouldRecordSecureExamViolation,
+  type SecureExamViolationType,
+} from "@/lib/secure-exam";
+import {
   finishPractice,
   getPracticeAttempt,
   savePracticeAnswer,
+  setPracticeSecureMode,
   startPracticeAttempt,
   togglePracticeMark,
 } from "@/services/practice-service";
+import type { PracticeAttempt } from "@/storage/attempt-storage";
 
 /**
  * Layar latihan memakai rangka yang sama persis dengan layar ujian
@@ -46,6 +58,7 @@ export function PracticeRunner({
 }) {
   const router = useRouter();
   const { mounted, isUnlocked } = useEntitlements();
+  const [attempt, setAttempt] = useState<PracticeAttempt | null>(null);
   const [answers, setAnswers] = useState<AnswerMap>({});
   const [markedIds, setMarkedIds] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -53,7 +66,13 @@ export function PracticeRunner({
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isFinishOpen, setIsFinishOpen] = useState(false);
+  const [secureNotice, setSecureNotice] = useState<SecureExamNoticeState | null>(null);
+  const [secureViolationCount, setSecureViolationCount] = useState(0);
   const [fontSize, setFontSize] = useState<ExamFontSize>("sedang");
+  const attemptRef = useRef<PracticeAttempt | null>(null);
+  const lastViolationAtRef = useRef<number | null>(null);
+  const secureViolationCountRef = useRef(0);
+  const secureFinishedRef = useRef(false);
 
   usePrefetchQuestionImages(questions, currentIndex);
 
@@ -63,14 +82,29 @@ export function PracticeRunner({
       router.replace(`/latihan/${pkg.slug}`);
       return;
     }
+    const secureParam =
+      typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("secure");
+    const requestedSecureMode =
+      secureParam === "1" ? true : secureParam === "0" ? false : undefined;
     let attempt = getPracticeAttempt(pkg.slug);
     if (!attempt || attempt.finishedAt) {
-      attempt = startPracticeAttempt(pkg.slug);
+      attempt = startPracticeAttempt(pkg.slug, requestedSecureMode ?? false);
+    } else if (
+      requestedSecureMode !== undefined &&
+      attempt.secureModeEnabled !== requestedSecureMode
+    ) {
+      attempt = setPracticeSecureMode(pkg.slug, requestedSecureMode);
     }
+    attemptRef.current = attempt;
+    setAttempt(attempt);
     setAnswers(attempt?.answers ?? {});
     setMarkedIds(attempt?.markedQuestionIds ?? []);
     setReady(true);
   }, [mounted, isUnlocked, pkg, pkg.slug, router]);
+
+  useEffect(() => {
+    attemptRef.current = attempt;
+  }, [attempt]);
 
   // Esc menutup jendela yang sedang terbuka, dimulai dari yang paling atas.
   useEffect(() => {
@@ -85,6 +119,103 @@ export function PracticeRunner({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isFinishOpen, isNavigatorOpen, isInfoOpen]);
 
+  const requestFullscreen = useCallback((showPrompt = true) => {
+    if (!SECURE_EXAM_CONFIG.enableFullscreen || typeof document === "undefined") return;
+    if (document.fullscreenElement || !document.documentElement.requestFullscreen) return;
+
+    void document.documentElement.requestFullscreen().catch(() => {
+      if (!showPrompt) return;
+      setSecureNotice({
+        title: "Aktifkan Secure Exam",
+        message:
+          "Browser belum mengizinkan mode layar penuh. Latihan tetap berjalan, tetapi aktifkan kembali layar penuh untuk menjaga mode aman.",
+        fullscreenPrompt: true,
+      });
+    });
+  }, []);
+
+  const recordSecureViolation = useCallback(
+    (type: SecureExamViolationType) => {
+      const currentAttempt = attemptRef.current;
+      const occurredAt = Date.now();
+      if (!currentAttempt?.secureModeEnabled || currentAttempt.finishedAt || secureFinishedRef.current) {
+        return;
+      }
+      if (
+        !shouldRecordSecureExamViolation(
+          lastViolationAtRef.current,
+          occurredAt,
+          SECURE_EXAM_CONFIG.dedupeWindowMs,
+        )
+      ) {
+        return;
+      }
+
+      setIsFinishOpen(false);
+      setIsNavigatorOpen(false);
+      setIsInfoOpen(false);
+      lastViolationAtRef.current = occurredAt;
+
+      const violationCount = secureViolationCountRef.current + 1;
+      secureViolationCountRef.current = violationCount;
+      setSecureViolationCount(violationCount);
+      const isFinal = violationCount >= SECURE_EXAM_CONFIG.maxViolations;
+      setSecureNotice({
+        title: secureExamViolationTitle(violationCount),
+        message: secureExamViolationMessage(violationCount, type),
+        final: isFinal,
+      });
+
+      if (isFinal) {
+        secureFinishedRef.current = true;
+        const finished = finishPractice(pkg.slug);
+        if (finished) {
+          attemptRef.current = finished;
+          setAttempt(finished);
+          setAnswers(finished.answers);
+          setMarkedIds(finished.markedQuestionIds);
+        }
+      }
+    },
+    [pkg.slug],
+  );
+
+  useEffect(() => {
+    if (!ready || !attempt?.secureModeEnabled || !SECURE_EXAM_CONFIG.enableFullscreen) return;
+    requestFullscreen(true);
+  }, [attempt?.secureModeEnabled, ready, requestFullscreen]);
+
+  useEffect(() => {
+    if (!ready || !attempt?.secureModeEnabled) return;
+
+    const onVisibilityChange = () => {
+      if (
+        SECURE_EXAM_CONFIG.detectTabSwitch &&
+        document.visibilityState === "hidden"
+      ) {
+        recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.tabSwitch);
+      }
+    };
+    const onBlur = () => {
+      if (!SECURE_EXAM_CONFIG.detectWindowBlur) return;
+      recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.windowBlur);
+    };
+    const onFullscreenChange = () => {
+      if (SECURE_EXAM_CONFIG.detectFullscreenExit && !document.fullscreenElement) {
+        recordSecureViolation(SECURE_EXAM_VIOLATION_TYPES.exitFullscreen);
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("blur", onBlur);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("blur", onBlur);
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+    };
+  }, [attempt?.secureModeEnabled, ready, recordSecureViolation]);
+
   const question = questions[currentIndex];
   const navigatorItems = questions.map((item) => ({
     questionId: item.id,
@@ -93,17 +224,22 @@ export function PracticeRunner({
   }));
   const answeredCount = navigatorItems.filter((item) => item.answered).length;
   const markedCount = navigatorItems.filter((item) => item.marked).length;
+  const secureDisplay = getSecureExamDisplay(secureViolationCount);
 
   const handleAnswer = (answer: AnswerValue) => {
     if (!question) return;
     const next = savePracticeAnswer(pkg.slug, question.id, answer);
+    if (next) setAttempt(next);
     setAnswers(next?.answers ?? { ...answers, [question.id]: answer });
   };
 
   const handleToggleMark = () => {
     if (!question) return;
     const next = togglePracticeMark(pkg.slug, question.id);
-    if (next) setMarkedIds(next.markedQuestionIds);
+    if (next) {
+      setAttempt(next);
+      setMarkedIds(next.markedQuestionIds);
+    }
   };
 
   const goTo = (index: number) => {
@@ -113,8 +249,29 @@ export function PracticeRunner({
   };
 
   const handleFinish = () => {
-    finishPractice(pkg.slug);
+    const finished = finishPractice(pkg.slug);
+    if (finished) setAttempt(finished);
     router.push(`/latihan/${pkg.slug}/hasil`);
+  };
+
+  const toggleFullscreen = () => {
+    if (typeof document === "undefined") return;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen().catch(() => undefined);
+    } else {
+      requestFullscreen(true);
+    }
+  };
+
+  const closeSecureDialog = () => {
+    if (!secureNotice) return;
+    if (secureNotice.final) {
+      router.push(`/latihan/${pkg.slug}/hasil`);
+      return;
+    }
+    const shouldRequestFullscreen = secureNotice.fullscreenPrompt;
+    setSecureNotice(null);
+    if (shouldRequestFullscreen) requestFullscreen(true);
   };
 
   if (!ready || !question) {
@@ -134,22 +291,43 @@ export function PracticeRunner({
       <ExamShell
         tagline="Latihan Soal"
         headerRight={
-          <Link
-            href={`/latihan/${pkg.slug}`}
-            className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            <Icon name="close" className="h-4 w-4" />
-            Keluar
-          </Link>
+          <div className="flex items-center gap-2">
+            {attempt?.secureModeEnabled ? (
+              <button
+                type="button"
+                onClick={toggleFullscreen}
+                className="hidden h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white sm:inline-flex"
+              >
+                {typeof document !== "undefined" && document.fullscreenElement
+                  ? "Keluar layar penuh"
+                  : "Layar penuh"}
+              </button>
+            ) : null}
+            <Link
+              href={`/latihan/${pkg.slug}`}
+              className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <Icon name="close" className="h-4 w-4" />
+              Keluar
+            </Link>
+          </div>
         }
       >
         <ExamCardHead
           title={`Soal nomor ${currentIndex + 1}`}
           subtitle={pkg.title}
           status={
-            <ExamStatusPill>
-              {answeredCount}/{questions.length} terjawab
-            </ExamStatusPill>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <ExamStatusPill>
+                {answeredCount}/{questions.length} terjawab
+              </ExamStatusPill>
+              {attempt?.secureModeEnabled ? (
+                <PracticeSecureIndicator
+                  display={secureDisplay}
+                  violationCount={secureViolationCount}
+                />
+              ) : null}
+            </div>
           }
           infoLabel="Informasi Latihan"
           onOpenInfo={() => setIsInfoOpen(true)}
@@ -275,6 +453,45 @@ export function PracticeRunner({
           </p>
         </ExamDialog>
       ) : null}
+
+      {secureNotice ? <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} /> : null}
     </>
+  );
+}
+
+function PracticeSecureIndicator({
+  display,
+  violationCount,
+}: {
+  display: ReturnType<typeof getSecureExamDisplay>;
+  violationCount: number;
+}) {
+  const toneClass = {
+    emerald: "border-emerald-300 bg-emerald-50 text-emerald-800",
+    amber: "border-amber-300 bg-amber-50 text-amber-800",
+    orange: "border-orange-300 bg-orange-50 text-orange-800",
+    rose: "border-rose-300 bg-rose-50 text-rose-800",
+  }[display.tone];
+
+  const dotClass = {
+    emerald: "bg-emerald-500",
+    amber: "bg-amber-500",
+    orange: "bg-orange-500",
+    rose: "bg-rose-500",
+  }[display.tone];
+
+  return (
+    <span
+      className={[
+        "inline-flex h-9 shrink-0 items-center gap-2 rounded-full border px-3 text-xs font-semibold tabular-nums sm:text-sm",
+        toneClass,
+      ].join(" ")}
+    >
+      <Icon name="lock" className="h-4 w-4" strokeWidth={2.2} />
+      <span className="hidden sm:inline">Secure Exam</span>
+      <span aria-hidden="true" className={["h-2 w-2 rounded-full", dotClass].join(" ")} />
+      <span>{display.label}</span>
+      <span className="text-current/70">Pelanggaran: {violationCount}</span>
+    </span>
   );
 }

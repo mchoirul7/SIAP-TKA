@@ -94,7 +94,6 @@ export function TryoutResultView({
   }
 
   const { analysis, attempt, elapsedSeconds } = result;
-  const leftPageCount = attempt.integrity.tabSwitchCount;
   const recommendedPackages = analysis.recommendedPackageSlugs.flatMap((slug) => {
     const pkg = catalog.practicePackages?.find((item) => item.slug === slug);
     return pkg ? [pkg] : [];
@@ -194,16 +193,6 @@ export function TryoutResultView({
           valueClassName="text-xl"
         />
       </section>
-
-      {leftPageCount > 0 ? (
-        <p className="mt-4 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900">
-          <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
-          <span>
-            Halaman ujian tercatat ditinggalkan {leftPageCount} kali. Hasil tetap dihitung penuh;
-            catatan ini hanya membantu menilai seberapa mandiri simulasi dikerjakan.
-          </span>
-        </p>
-      ) : null}
 
       {/* Satu narasi: materi apa yang harus dipelajari lebih dulu. */}
       <section className="mt-8">
