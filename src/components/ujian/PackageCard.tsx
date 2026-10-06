@@ -9,6 +9,15 @@ import { iconForPackage } from "@/lib/content-icons";
 import type { ExamPackage } from "@/services/content-service";
 
 /**
+ * Harga satu paket, sama untuk semua mata pelajaran dan kelas. Latihan TKA
+ * dihargai lebih tinggi daripada latihan ulangan dan sumatif.
+ */
+function priceLabel(pkg: ExamPackage): string {
+  if (pkg.kind === "tryout") return "Rp20.000";
+  return pkg.assessmentType === "tka" ? "Rp5.000" : "Rp2.500";
+}
+
+/**
  * Kartu paket pada daftar /ujian. Tombolnya membawa ke halaman persiapan yang
  * sudah ada (`/latihan/[slug]` atau `/tryout/[slug]`), tempat pengerjaan dimulai.
  */
@@ -78,6 +87,13 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
       </ul>
 
       <div className="mt-auto pt-5">
+        {/* Paket gratis tidak perlu ditunjukkan harganya. */}
+        {!pkg.isFreeAccess ? (
+          <p className="mb-3 flex items-baseline justify-between gap-2">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Harga</span>
+            <span className="text-lg font-black text-brand-700">{priceLabel(pkg)}</span>
+          </p>
+        ) : null}
         <Link
           href={href}
           className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-r from-brand-500 to-brand-700 text-sm font-black text-white shadow-[0_12px_24px_-16px_rgba(80,1,218,0.9)] transition-opacity hover:opacity-90"
