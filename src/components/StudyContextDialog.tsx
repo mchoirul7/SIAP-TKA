@@ -48,15 +48,18 @@ export function StudyContextDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/42 px-4 py-6 backdrop-blur-sm">
-      <div className="w-full max-w-[640px] overflow-hidden rounded-[22px] border border-white/70 bg-white shadow-[0_28px_80px_-34px_rgba(18,21,58,0.75)]">
-        <div className="flex items-start justify-between gap-4 border-b border-sky-100 bg-gradient-to-r from-sky-50 to-brand-50 px-5 py-5 sm:px-6">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-950/42 p-3 backdrop-blur-sm sm:p-6">
+      {/* Tingginya dibatasi layar supaya tombol Terapkan selalu terlihat, termasuk
+          di ponsel pendek atau saat bilah browser memakan tempat. Isinya yang
+          bergulir, bukan tombolnya yang terdorong keluar layar. */}
+      <div className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-[560px] flex-col overflow-hidden rounded-[20px] border border-white/70 bg-white shadow-[0_28px_80px_-34px_rgba(18,21,58,0.75)] sm:max-h-[calc(100dvh-3rem)]">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-sky-100 bg-gradient-to-r from-sky-50 to-brand-50 px-4 py-3 sm:px-6 sm:py-4">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.08em] text-brand-700">
+            <p className="text-[11px] font-black uppercase tracking-[0.08em] text-brand-700 sm:text-xs">
               SIAP TKA ONE
             </p>
-            <h2 className="mt-1 text-[28px] font-black leading-tight text-ink-900">{title}</h2>
-            <p className="mt-2 text-[15px] font-medium leading-relaxed text-slate-600">
+            <h2 className="mt-0.5 text-xl font-black leading-tight text-ink-900 sm:text-2xl">{title}</h2>
+            <p className="mt-1 text-[13px] font-medium leading-snug text-slate-600 sm:text-sm">
               Pilih jenjang dan kelas untuk melihat latihan yang sesuai.
             </p>
           </div>
@@ -64,17 +67,17 @@ export function StudyContextDialog({
             <button
               type="button"
               onClick={onClose}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors hover:border-brand-200 hover:text-brand-700"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors hover:border-brand-200 hover:text-brand-700"
               aria-label="Tutup dialog"
             >
-              <Icon name="close" className="h-5 w-5" strokeWidth={2.5} />
+              <Icon name="close" className="h-4 w-4" strokeWidth={2.5} />
             </button>
           ) : null}
         </div>
 
-        <div className="px-5 py-5 sm:px-6">
-          <p className="text-sm font-black text-ink-900">Pilih Jenjang</p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
+          <p className="text-[13px] font-black text-ink-900">Pilih Jenjang</p>
+          <div className="mt-2 grid grid-cols-3 gap-2">
             {LEVEL_OPTIONS.map((option) => {
               const isActive = option.level === level;
               return (
@@ -83,14 +86,16 @@ export function StudyContextDialog({
                   type="button"
                   onClick={() => selectLevel(option.level)}
                   className={[
-                    "rounded-[14px] border p-4 text-left transition-all",
+                    "rounded-[12px] border px-2 py-2.5 text-center transition-all sm:px-3 sm:py-3",
                     isActive
                       ? "border-brand-300 bg-brand-50 text-brand-800 shadow-[0_12px_24px_-20px_rgba(80,1,218,0.7)]"
                       : "border-slate-200 bg-white text-ink-900 hover:border-sky-200 hover:bg-sky-50",
                   ].join(" ")}
                 >
-                  <span className="block text-[16px] font-black leading-tight">{option.label}</span>
-                  <span className="mt-2 block text-sm font-semibold text-slate-600">
+                  <span className="block text-[13px] font-black leading-tight sm:text-[15px]">
+                    {option.label}
+                  </span>
+                  <span className="mt-1 block text-[11px] font-semibold text-slate-600 sm:text-xs">
                     {option.description}
                   </span>
                 </button>
@@ -98,16 +103,12 @@ export function StudyContextDialog({
             })}
           </div>
 
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <div>
-              <p className="text-sm font-black text-ink-900">Pilih Kelas</p>
-              <p className="mt-1 text-sm font-medium text-slate-500">
-                {levelOptionFor(level).label}
-              </p>
-            </div>
-          </div>
+          <p className="mt-4 text-[13px] font-black text-ink-900">
+            Pilih Kelas{" "}
+            <span className="font-medium text-slate-500">· {levelOptionFor(level).label}</span>
+          </p>
 
-          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="mt-2 grid grid-cols-3 gap-2">
             {grades.map((item) => {
               const isActive = item === grade;
               return (
@@ -116,7 +117,7 @@ export function StudyContextDialog({
                   type="button"
                   onClick={() => setGrade(item)}
                   className={[
-                    "h-12 rounded-[12px] border text-[15px] font-black transition-all",
+                    "h-10 rounded-[10px] border text-sm font-black transition-all",
                     isActive
                       ? "border-brand-400 bg-gradient-to-r from-brand-600 to-brand-700 text-white shadow-[0_14px_24px_-18px_rgba(80,1,218,0.9)]"
                       : "border-slate-200 bg-white text-ink-900 hover:border-brand-200 hover:bg-brand-50",
@@ -127,14 +128,16 @@ export function StudyContextDialog({
               );
             })}
           </div>
+        </div>
 
+        <div className="shrink-0 border-t border-slate-100 px-4 py-3 sm:px-6">
           <button
             type="button"
             onClick={() => onApply({ level, grade })}
-            className="mt-6 inline-flex h-12 w-full items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-brand-600 to-brand-700 text-[16px] font-black text-white shadow-[0_18px_30px_-20px_rgba(80,1,218,0.95)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[12px] bg-gradient-to-r from-brand-600 to-brand-700 text-[15px] font-black text-white shadow-[0_18px_30px_-20px_rgba(80,1,218,0.95)] transition-transform hover:-translate-y-0.5"
           >
             {required ? "Mulai Belajar" : "Terapkan"}
-            <Icon name="arrow-right" className="h-5 w-5" strokeWidth={2.7} />
+            <Icon name="arrow-right" className="h-4 w-4" strokeWidth={2.7} />
           </button>
         </div>
       </div>
