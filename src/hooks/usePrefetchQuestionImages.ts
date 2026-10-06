@@ -12,7 +12,8 @@ import type { Question } from "@/data/types";
  * membuat perpindahan terasa seketika, dan karena gambarnya di-cache lama,
  * unduhan itu hanya terjadi sekali.
  */
-const SRC_PATTERN = /src="(\/soal\/[^"]+)"/g;
+const SRC_PATTERN =
+  /src="(\/soal\/[^"]+|https:\/\/[a-z0-9]+\.supabase\.co\/storage\/v1\/object\/public\/[^"]+)"/g;
 
 function imageSourcesOf(question: Question): string[] {
   const parts: string[] = [question.questionText, question.stimulus ?? ""];

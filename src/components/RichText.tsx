@@ -11,6 +11,17 @@ import { inlineHtml } from "@/lib/markup";
 const ALLOWED_TAGS = new Set(["p", "br", "strong", "em", "sup", "sub", "ul", "ol", "li", "img"]);
 const ALLOWED_IMG_ATTRS = new Set(["src", "alt", "width", "height"]);
 
+/**
+ * Ilustrasi soal yang lebih baru diunggah ke bucket publik Supabase Storage,
+ * bukan ke `public/soal`. Hanya alamat bucket publik yang diterima; sumber luar
+ * lainnya tetap dibuang.
+ */
+const SUPABASE_PUBLIC_STORAGE = /^https:\/\/[a-z0-9]+\.supabase\.co\/storage\/v1\/object\/public\//;
+
+function isAllowedImageSource(src: string): boolean {
+  return (src.startsWith("/") && !src.startsWith("//")) || SUPABASE_PUBLIC_STORAGE.test(src);
+}
+
 function sanitizeAttributes(tag: string, attributes: string): string {
   if (tag !== "img") return "";
 
@@ -18,8 +29,8 @@ function sanitizeAttributes(tag: string, attributes: string): string {
   for (const match of attributes.matchAll(/([a-zA-Z-]+)\s*=\s*"([^"]*)"/g)) {
     const [, name, value] = match;
     if (!ALLOWED_IMG_ATTRS.has(name.toLowerCase())) continue;
-    // Hanya gambar lokal yang diterima; sumber luar diabaikan.
-    if (name.toLowerCase() === "src" && !value.startsWith("/")) return "";
+    // Hanya gambar lokal dan bucket publik Supabase yang diterima.
+    if (name.toLowerCase() === "src" && !isAllowedImageSource(value)) return "";
     kept.push(`${name.toLowerCase()}="${value}"`);
   }
   if (kept.length === 0) return "";
