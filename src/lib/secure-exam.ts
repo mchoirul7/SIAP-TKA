@@ -1,5 +1,4 @@
 export const SECURE_EXAM_CONFIG = {
-  maxViolations: 3,
   enableFullscreen: true,
   detectTabSwitch: true,
   detectWindowBlur: true,
@@ -16,7 +15,7 @@ export const SECURE_EXAM_VIOLATION_TYPES = {
 export type SecureExamViolationType =
   (typeof SECURE_EXAM_VIOLATION_TYPES)[keyof typeof SECURE_EXAM_VIOLATION_TYPES];
 
-export type SecureExamStatus = "safe" | "warning" | "alert" | "finished";
+export type SecureExamStatus = "safe" | "warning" | "alert";
 
 export interface SecureExamViolation {
   id: string;
@@ -61,40 +60,20 @@ export function shouldRecordSecureExamViolation(
   return !lastViolationAt || now - lastViolationAt >= cooldownMs;
 }
 
-export function getSecureExamDisplay(
-  violationCount: number,
-  maxViolations = SECURE_EXAM_CONFIG.maxViolations,
-): SecureExamDisplay {
-  if (violationCount >= maxViolations) {
-    return { status: "finished", label: "Ujian selesai", tone: "rose" };
-  }
+/** Pelanggaran hanya berbuah peringatan; ujian tidak pernah dihentikan. */
+export function getSecureExamDisplay(violationCount: number): SecureExamDisplay {
   if (violationCount >= 2) return { status: "alert", label: "Waspada", tone: "orange" };
   if (violationCount === 1) return { status: "warning", label: "Peringatan", tone: "amber" };
   return { status: "safe", label: "Aman", tone: "emerald" };
 }
 
-export function secureExamViolationTitle(
-  violationCount: number,
-  maxViolations = SECURE_EXAM_CONFIG.maxViolations,
-): string {
-  if (violationCount >= maxViolations) return "Ujian Berakhir";
-  if (violationCount === 2) return "Peringatan Kedua";
-  return "Peringatan";
+export function secureExamViolationTitle(violationCount: number): string {
+  return violationCount <= 1 ? "Peringatan" : `Peringatan ke-${violationCount}`;
 }
 
-export function secureExamViolationMessage(
-  violationCount: number,
-  type: SecureExamViolationType,
-  maxViolations = SECURE_EXAM_CONFIG.maxViolations,
-): string {
-  if (violationCount >= maxViolations) {
-    return "Pelanggaran melebihi batas yang ditentukan. Ujian Anda otomatis selesai.";
-  }
-  if (violationCount === 2) {
-    return "Aktivitas mencurigakan kembali terdeteksi. Pelanggaran ke-2 telah dicatat.";
-  }
+export function secureExamViolationMessage(type: SecureExamViolationType): string {
   if (type === SECURE_EXAM_VIOLATION_TYPES.exitFullscreen) {
-    return "Mode layar penuh telah ditinggalkan. Aktivitas ini tercatat sebagai pelanggaran.";
+    return "Kamu keluar dari layar penuh. Nyalakan lagi layar penuh untuk melanjutkan.";
   }
-  return "Anda terdeteksi meninggalkan halaman ujian. Aktivitas ini telah dicatat.";
+  return "Kamu membuka tab atau aplikasi lain. Tetap di layar ujian, ya.";
 }

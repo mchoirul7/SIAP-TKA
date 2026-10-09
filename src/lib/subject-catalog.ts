@@ -158,21 +158,6 @@ export function buildSubjectCatalog(
   return [...requiredSubjects, ...extras];
 }
 
-/**
- * Harga paket lengkap satu mapel. TKA mulai Rp20.000 dan bertambah Rp5.000 per
- * tryout. Ulangan harian Rp2.500 per paket, dipotong Rp10.000 bila paketnya
- * lebih dari 5. Keduanya tetap dihargai walau paketnya belum ada; jenis lain
- * Rp25.000 dan hanya untuk mapel yang sudah punya paket.
- */
-export function fullPackagePrice(assessmentType: AssessmentType, item: CatalogSubject): number | null {
-  if (assessmentType === "tka") return 20000 + 5000 * item.tryoutCount;
-  if (assessmentType === "ulangan_harian") {
-    const total = 2500 * item.packageCount;
-    return item.packageCount > 5 ? total - 10000 : total;
-  }
-  return item.subject ? 25000 : null;
-}
-
 const GROUP_TITLES: Record<SubjectGroup, string> = {
   wajib: "Mapel Wajib",
   "pilihan-sma": "Mapel Pilihan SMA",
@@ -196,6 +181,46 @@ export function requestSoalHref(details: { context: string; assessment: string; 
     `Kelas: ${details.context}`,
     `Jenis ujian: ${details.assessment}`,
     `Mata pelajaran: ${details.subject}`,
+  ].join("\n");
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+export function buyPackageHref(details: {
+  context: string;
+  assessment: string;
+  subject: string;
+  price: string;
+}): string {
+  const message = [
+    `Halo SIAP TKA ONE, saya berminat beli paket mapel ${details.subject} seharga ${details.price}, mohon dibantu.`,
+    "",
+    `Kelas: ${details.context}`,
+    `Jenis ujian: ${details.assessment}`,
+  ].join("\n");
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+export function buySinglePackageHref(details: {
+  context: string;
+  assessment: string;
+  packageTitle: string;
+  price: string;
+}): string {
+  const message = [
+    `Halo SIAP TKA ONE, saya berminat beli satuan paket "${details.packageTitle}" seharga ${details.price}, mohon dibantu.`,
+    "",
+    `Kelas: ${details.context}`,
+    `Jenis ujian: ${details.assessment}`,
+  ].join("\n");
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+export function customRequestHref(details: { context: string; assessment: string }): string {
+  const message = [
+    "Halo SIAP TKA ONE, saya ingin custom request soal sesuai kebutuhan.",
+    "",
+    `Kelas: ${details.context}`,
+    `Jenis ujian: ${details.assessment}`,
   ].join("\n");
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 }

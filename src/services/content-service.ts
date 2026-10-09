@@ -18,7 +18,7 @@ import type {
 } from "@/data/types";
 import type { ExamScope } from "@/lib/assessment";
 import type { AnalysisCatalog } from "@/lib/scoring";
-import { normalizeSemester, tkaGradeForLevel } from "@/lib/assessment";
+import { normalizeSemester, subjectSegment, tkaGradeForLevel } from "@/lib/assessment";
 import { sortBySubject } from "@/lib/subject-order";
 import { isSubjectReleased } from "@/lib/subject-release";
 import { supabase } from "@/lib/supabase";
@@ -344,6 +344,31 @@ function freePracticeTitleKeys(packagesInOrder: { title: string; slug: string }[
   return keys;
 }
 
+/**
+ * Latihan pertama Matematika di tiap jenis ujian, kelas, dan semester dibuka
+ * gratis sebagai ujicoba, di luar latihan gratis per mapel di atas. Halaman
+ * pilih mapel menautkannya lewat kartu "Ujicoba Gratis".
+ */
+const TRIAL_SUBJECT_SEGMENT = "matematika";
+
+function isTrialSubject(subject: { slug: string; level: EducationLevel }): boolean {
+  return subjectSegment(subject) === TRIAL_SUBJECT_SEGMENT;
+}
+
+/** Id latihan ujicoba; `packagesInOrder` harus urut menurut urutan paket. */
+function trialPackageIds(packagesInOrder: PracticePackage[]): Set<string> {
+  const ids = new Set<string>();
+  const scopes = new Set<string>();
+  for (const pkg of packagesInOrder) {
+    if (!isTrialSubject({ slug: pkg.subjectSlug, level: pkg.level })) continue;
+    const scope = [pkg.subjectId, pkg.assessmentType, pkg.gradeLevel, pkg.semester].join("|");
+    if (scopes.has(scope)) continue;
+    scopes.add(scope);
+    ids.add(pkg.id);
+  }
+  return ids;
+}
+
 function withFreePracticeAccess(packages: PracticePackage[]): PracticePackage[] {
   const packagesBySubject = new Map<string, PracticePackage[]>();
   for (const pkg of packages) {
@@ -354,10 +379,13 @@ function withFreePracticeAccess(packages: PracticePackage[]): PracticePackage[] 
     [...packagesBySubject].map(([subjectKey, items]) => [subjectKey, freePracticeTitleKeys(items)]),
   );
 
+  const trialIds = trialPackageIds(packages);
+
   return packages.map((pkg) => ({
     ...pkg,
     isFreeAccess:
-      freeKeysBySubject.get(pkg.subjectSlug || pkg.subjectId)?.has(packageTitleKey(pkg)) ?? false,
+      trialIds.has(pkg.id) ||
+      (freeKeysBySubject.get(pkg.subjectSlug || pkg.subjectId)?.has(packageTitleKey(pkg)) ?? false),
   }));
 }
 
@@ -956,6 +984,8 @@ export async function getExamPackages(scope: ExamScope, subject: Subject): Promi
   const subjectById = new Map([[subject.id, subject]]);
   const seriesById = new Map(series.map((item) => [item.id, item]));
   const freeKeys = freePracticeTitleKeys(freeCandidates);
+  // Baris sudah urut: latihan lebih dulu, lalu menurut urutan paket.
+  const trialId = isTrialSubject(subject) ? rows.find((row) => row.kind === "latihan")?.id : undefined;
 
   return rows.map((row) => {
     const isTryout = row.kind === "tryout";
@@ -975,7 +1005,7 @@ export async function getExamPackages(scope: ExamScope, subject: Subject): Promi
       minutes: isTryout
         ? (row.duration_minutes ?? null)
         : (row.estimated_minutes ?? row.duration_minutes ?? null),
-      isFreeAccess: !isTryout && freeKeys.has(packageTitleKey(row)),
+      isFreeAccess: !isTryout && (row.id === trialId || freeKeys.has(packageTitleKey(row))),
     };
   });
 }

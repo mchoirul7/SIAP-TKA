@@ -37,10 +37,10 @@ export function SiteHeader() {
                 className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] border border-sky-100 bg-white px-2 text-left sm:gap-3 sm:px-4 shadow-[0_8px_18px_-14px_rgba(18,21,58,0.5)] transition-colors hover:border-brand-200"
               >
                 <span className="hidden h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-400 sm:flex text-base font-black text-white">
-                  A
+                  <Icon name="cap" className="h-5 w-5" strokeWidth={2.2} />
                 </span>
                 <span className="block leading-tight md:min-w-[86px]">
-                  <span className="hidden text-[13px] font-black text-ink-900 md:block">Adit</span>
+                  <span className="hidden text-[13px] font-black text-ink-900 md:block">Ananda</span>
                   <span className="block whitespace-nowrap text-[12px] font-black text-ink-900 md:text-[11px] md:font-semibold md:text-slate-500">
                     {context ? studyContextShortLabel(context) : "Pilih Kelas"}
                   </span>

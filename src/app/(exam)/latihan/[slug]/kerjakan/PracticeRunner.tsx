@@ -14,7 +14,7 @@ import {
   ExamStatusPill,
   type ExamFontSize,
 } from "@/components/exam/ExamChrome";
-import { SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
+import { FullscreenGate, SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
@@ -22,6 +22,7 @@ import { Icon } from "@/components/ui/Icon";
 import type { AnswerMap, AnswerValue, PracticePackage, Question } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { useFullscreenGate } from "@/hooks/useFullscreenGate";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { RichText } from "@/components/RichText";
 import {
@@ -72,7 +73,6 @@ export function PracticeRunner({
   const attemptRef = useRef<PracticeAttempt | null>(null);
   const lastViolationAtRef = useRef<number | null>(null);
   const secureViolationCountRef = useRef(0);
-  const secureFinishedRef = useRef(false);
 
   usePrefetchQuestionImages(questions, currentIndex);
 
@@ -119,26 +119,11 @@ export function PracticeRunner({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isFinishOpen, isNavigatorOpen, isInfoOpen]);
 
-  const requestFullscreen = useCallback((showPrompt = true) => {
-    if (!SECURE_EXAM_CONFIG.enableFullscreen || typeof document === "undefined") return;
-    if (document.fullscreenElement || !document.documentElement.requestFullscreen) return;
-
-    void document.documentElement.requestFullscreen().catch(() => {
-      if (!showPrompt) return;
-      setSecureNotice({
-        title: "Aktifkan Secure Exam",
-        message:
-          "Browser belum mengizinkan mode layar penuh. Latihan tetap berjalan, tetapi aktifkan kembali layar penuh untuk menjaga mode aman.",
-        fullscreenPrompt: true,
-      });
-    });
-  }, []);
-
   const recordSecureViolation = useCallback(
     (type: SecureExamViolationType) => {
       const currentAttempt = attemptRef.current;
       const occurredAt = Date.now();
-      if (!currentAttempt?.secureModeEnabled || currentAttempt.finishedAt || secureFinishedRef.current) {
+      if (!currentAttempt?.secureModeEnabled || currentAttempt.finishedAt) {
         return;
       }
       if (
@@ -159,31 +144,15 @@ export function PracticeRunner({
       const violationCount = secureViolationCountRef.current + 1;
       secureViolationCountRef.current = violationCount;
       setSecureViolationCount(violationCount);
-      const isFinal = violationCount >= SECURE_EXAM_CONFIG.maxViolations;
       setSecureNotice({
         title: secureExamViolationTitle(violationCount),
-        message: secureExamViolationMessage(violationCount, type),
-        final: isFinal,
+        message: secureExamViolationMessage(type),
       });
-
-      if (isFinal) {
-        secureFinishedRef.current = true;
-        const finished = finishPractice(pkg.slug);
-        if (finished) {
-          attemptRef.current = finished;
-          setAttempt(finished);
-          setAnswers(finished.answers);
-          setMarkedIds(finished.markedQuestionIds);
-        }
-      }
     },
-    [pkg.slug],
+    [],
   );
 
-  useEffect(() => {
-    if (!ready || !attempt?.secureModeEnabled || !SECURE_EXAM_CONFIG.enableFullscreen) return;
-    requestFullscreen(true);
-  }, [attempt?.secureModeEnabled, ready, requestFullscreen]);
+  const fullscreenGate = useFullscreenGate(ready && Boolean(attempt?.secureModeEnabled));
 
   useEffect(() => {
     if (!ready || !attempt?.secureModeEnabled) return;
@@ -254,25 +223,7 @@ export function PracticeRunner({
     router.push(`/latihan/${pkg.slug}/hasil`);
   };
 
-  const toggleFullscreen = () => {
-    if (typeof document === "undefined") return;
-    if (document.fullscreenElement) {
-      void document.exitFullscreen().catch(() => undefined);
-    } else {
-      requestFullscreen(true);
-    }
-  };
-
-  const closeSecureDialog = () => {
-    if (!secureNotice) return;
-    if (secureNotice.final) {
-      router.push(`/latihan/${pkg.slug}/hasil`);
-      return;
-    }
-    const shouldRequestFullscreen = secureNotice.fullscreenPrompt;
-    setSecureNotice(null);
-    if (shouldRequestFullscreen) requestFullscreen(true);
-  };
+  const closeSecureDialog = () => setSecureNotice(null);
 
   if (!ready || !question) {
     return (
@@ -292,17 +243,6 @@ export function PracticeRunner({
         tagline="Latihan Soal"
         headerRight={
           <div className="flex items-center gap-2">
-            {attempt?.secureModeEnabled ? (
-              <button
-                type="button"
-                onClick={toggleFullscreen}
-                className="hidden h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white sm:inline-flex"
-              >
-                {typeof document !== "undefined" && document.fullscreenElement
-                  ? "Keluar layar penuh"
-                  : "Layar penuh"}
-              </button>
-            ) : null}
             <Link
               href={`/latihan/${pkg.slug}`}
               className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
@@ -454,7 +394,11 @@ export function PracticeRunner({
         </ExamDialog>
       ) : null}
 
-      {secureNotice ? <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} /> : null}
+      {fullscreenGate.blocked ? (
+        <FullscreenGate onEnter={fullscreenGate.enter} />
+      ) : secureNotice ? (
+        <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} />
+      ) : null}
     </>
   );
 }
@@ -488,10 +432,10 @@ function PracticeSecureIndicator({
       ].join(" ")}
     >
       <Icon name="lock" className="h-4 w-4" strokeWidth={2.2} />
-      <span className="hidden sm:inline">Secure Exam</span>
+      <span className="hidden sm:inline">Mode Fokus</span>
       <span aria-hidden="true" className={["h-2 w-2 rounded-full", dotClass].join(" ")} />
       <span>{display.label}</span>
-      <span className="text-current/70">Pelanggaran: {violationCount}</span>
+      <span className="text-current/70">Peringatan: {violationCount}</span>
     </span>
   );
 }

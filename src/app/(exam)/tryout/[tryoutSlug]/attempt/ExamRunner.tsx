@@ -12,7 +12,7 @@ import {
   ExamStatusPill,
   type ExamFontSize,
 } from "@/components/exam/ExamChrome";
-import { SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
+import { FullscreenGate, SecureExamNotice, type SecureExamNoticeState } from "@/components/exam/SecureExamNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { QuestionBody } from "@/components/QuestionBody";
 import { QuestionNavigator } from "@/components/QuestionNavigator";
@@ -21,6 +21,7 @@ import { useNavigate } from "@/components/NavigationProgress";
 import type { AnswerValue, Question, Tryout } from "@/data/types";
 import { isAnswered } from "@/lib/answers";
 import { useEntitlements } from "@/hooks/useEntitlements";
+import { useFullscreenGate } from "@/hooks/useFullscreenGate";
 import { usePrefetchQuestionImages } from "@/hooks/usePrefetchQuestionImages";
 import { formatExamClock } from "@/lib/format";
 import {
@@ -69,7 +70,6 @@ export function ExamRunner({
   const attemptRef = useRef<TryoutAttempt | null>(null);
   const lastViolationAtRef = useRef<number | null>(null);
   const secureViolationCountRef = useRef(0);
-  const secureFinishedRef = useRef(false);
 
   const totalSeconds = tryout.durationMinutes * 60;
 
@@ -119,32 +119,11 @@ export function ExamRunner({
     navigate(`/tryout/${tryout.slug}/hasil`, { replace: true });
   }, [navigate, tryout.slug]);
 
-  const requestFullscreen = useCallback((showPrompt = true) => {
-    if (!SECURE_EXAM_CONFIG.enableFullscreen || typeof document === "undefined") return;
-    if (document.fullscreenElement || !document.documentElement.requestFullscreen) return;
-
-    void document.documentElement.requestFullscreen().catch(() => {
-      if (!showPrompt) return;
-      setSecureNotice({
-        title: "Aktifkan Secure Exam",
-        message:
-          "Browser belum mengizinkan mode layar penuh. Ujian tetap berjalan, tetapi aktifkan kembali layar penuh untuk menjaga mode aman.",
-        fullscreenPrompt: true,
-      });
-    });
-  }, []);
-
   const recordSecureViolation = useCallback(
     (type: SecureExamViolationType) => {
       const currentAttempt = attemptRef.current;
       const occurredAt = Date.now();
-      if (
-        !currentAttempt?.secureModeEnabled ||
-        currentAttempt.submittedAt ||
-        secureFinishedRef.current
-      ) {
-        return;
-      }
+      if (!currentAttempt?.secureModeEnabled || currentAttempt.submittedAt) return;
       if (
         !shouldRecordSecureExamViolation(
           lastViolationAtRef.current,
@@ -163,24 +142,12 @@ export function ExamRunner({
       const violationCount = secureViolationCountRef.current + 1;
       secureViolationCountRef.current = violationCount;
       setSecureViolationCount(violationCount);
-      const isFinal = violationCount >= SECURE_EXAM_CONFIG.maxViolations;
       setSecureNotice({
         title: secureExamViolationTitle(violationCount),
-        message: secureExamViolationMessage(violationCount, type),
-        final: isFinal,
+        message: secureExamViolationMessage(type),
       });
-
-      if (isFinal) {
-        secureFinishedRef.current = true;
-        hasSubmittedRef.current = true;
-        const submitted = submitTryout(tryout.slug);
-        if (submitted) {
-          attemptRef.current = submitted;
-          setAttempt(submitted);
-        }
-      }
     },
-    [tryout.slug],
+    [],
   );
 
   // -------------------------------------------------------------- timer
@@ -199,16 +166,7 @@ export function ExamRunner({
   }, [remainingSeconds, status, attempt, finish]);
 
   // ------------------------------------------------ secure exam mode
-  useEffect(() => {
-    if (
-      status !== "ready" ||
-      !attempt?.secureModeEnabled ||
-      !SECURE_EXAM_CONFIG.enableFullscreen
-    ) {
-      return;
-    }
-    requestFullscreen(true);
-  }, [attempt?.secureModeEnabled, requestFullscreen, status]);
+  const fullscreenGate = useFullscreenGate(status === "ready" && Boolean(attempt?.secureModeEnabled));
 
   useEffect(() => {
     if (status !== "ready" || !attempt?.secureModeEnabled) return;
@@ -271,25 +229,7 @@ export function ExamRunner({
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const toggleFullscreen = () => {
-    if (typeof document === "undefined") return;
-    if (document.fullscreenElement) {
-      void document.exitFullscreen().catch(() => undefined);
-    } else {
-      requestFullscreen(true);
-    }
-  };
-
-  const closeSecureDialog = () => {
-    if (!secureNotice) return;
-    if (secureNotice.final) {
-      navigate(`/tryout/${tryout.slug}/hasil`, { replace: true });
-      return;
-    }
-    const shouldRequestFullscreen = secureNotice.fullscreenPrompt;
-    setSecureNotice(null);
-    if (shouldRequestFullscreen) requestFullscreen(true);
-  };
+  const closeSecureDialog = () => setSecureNotice(null);
 
   // --------------------------------------------------------- turunan
   const answers = attempt?.answers ?? {};
@@ -327,17 +267,6 @@ export function ExamRunner({
         tagline="Simulasi TKA"
         headerRight={
           <div className="hidden items-center gap-2 lg:flex">
-            {attempt.secureModeEnabled ? (
-              <button
-                type="button"
-                onClick={toggleFullscreen}
-                className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-white/85 ring-1 ring-inset ring-white/30 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                {typeof document !== "undefined" && document.fullscreenElement
-                  ? "Keluar layar penuh"
-                  : "Layar penuh"}
-              </button>
-            ) : null}
             <span className="inline-flex h-9 items-center gap-2 rounded-md bg-white/10 px-3 text-sm text-white ring-1 ring-inset ring-white/25">
               {studentName || "Peserta"}
               <Icon name="cap" className="h-4 w-4" strokeWidth={2} />
@@ -516,7 +445,11 @@ export function ExamRunner({
         </ExamDialog>
       ) : null}
 
-      {secureNotice ? <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} /> : null}
+      {fullscreenGate.blocked ? (
+        <FullscreenGate onEnter={fullscreenGate.enter} note="Waktu ujian tetap berjalan." />
+      ) : secureNotice ? (
+        <SecureExamNotice notice={secureNotice} onClose={closeSecureDialog} />
+      ) : null}
     </>
   );
 }
@@ -550,10 +483,10 @@ function SecureExamIndicator({
       ].join(" ")}
     >
       <Icon name="lock" className="h-4 w-4" strokeWidth={2.2} />
-      <span className="hidden sm:inline">Secure Exam</span>
+      <span className="hidden sm:inline">Mode Fokus</span>
       <span aria-hidden="true" className={["h-2 w-2 rounded-full", dotClass].join(" ")} />
       <span>{display.label}</span>
-      <span className="text-current/70">Pelanggaran: {violationCount}</span>
+      <span className="text-current/70">Peringatan: {violationCount}</span>
     </span>
   );
 }

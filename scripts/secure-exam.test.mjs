@@ -3,7 +3,6 @@ import test from "node:test";
 import {
   createSecureViolation,
   getSecureExamDisplay,
-  SECURE_EXAM_CONFIG,
   SECURE_EXAM_VIOLATION_TYPES,
   secureExamViolationMessage,
   shouldRecordSecureExamViolation,
@@ -29,7 +28,6 @@ function record(state, type, now) {
 
 test("Secure Exam aktif dengan violation awal 0", () => {
   const display = getSecureExamDisplay(0);
-  assert.equal(SECURE_EXAM_CONFIG.maxViolations, 3);
   assert.equal(display.label, "Aman");
 });
 
@@ -41,8 +39,8 @@ test("pindah tab mencatat TAB_SWITCH sebagai violation pertama", () => {
 
 test("kembali ke tab menampilkan pesan peringatan", () => {
   assert.match(
-    secureExamViolationMessage(1, SECURE_EXAM_VIOLATION_TYPES.tabSwitch),
-    /meninggalkan halaman ujian/i,
+    secureExamViolationMessage(SECURE_EXAM_VIOLATION_TYPES.tabSwitch),
+    /tab atau aplikasi lain/i,
   );
 });
 
@@ -57,9 +55,9 @@ test("blur dan visibilitychange berdekatan hanya dihitung satu violation", () =>
   assert.equal(second.violations.length, 1);
 });
 
-test("violation ketiga mengubah status tampilan menjadi selesai", () => {
-  const display = getSecureExamDisplay(3);
-  assert.equal(display.status, "finished");
+test("pelanggaran berapa pun hanya berupa peringatan, ujian tidak dihentikan", () => {
+  const display = getSecureExamDisplay(10);
+  assert.equal(display.status, "alert");
 });
 
 test("jawaban tidak berubah setelah violation", () => {

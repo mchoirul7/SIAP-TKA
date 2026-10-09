@@ -93,7 +93,7 @@ export function PackageDetail({
   }, [pkg.slug]);
 
   const primaryActionLabel =
-    hasStartedAttempt && !hasFinishedAttempt ? "Lanjutkan Latihan" : "Mulai Latihan Online";
+    hasStartedAttempt && !hasFinishedAttempt ? "Mulai Latihan" : "Mulai Latihan Online";
 
   const persistStudentProfile = useCallback((): boolean => {
     const name = studentName.trim();
@@ -276,11 +276,11 @@ export function PackageDetail({
                 <span className="min-w-0">
                   <span className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
                     <Icon name="shield-check" className="h-4 w-4 text-brand-700" strokeWidth={2.2} />
-                    Secure Exam Mode
+                    Mode Ujian Fokus
                   </span>
                   <span className="mt-1 block text-xs leading-relaxed text-slate-600">
-                    Aktifkan layar penuh dan catat pindah tab, browser kehilangan fokus, atau keluar
-                    fullscreen selama latihan.
+                    Layar dibuat penuh agar ananda fokus. Jika ananda membuka tab atau aplikasi lain,
+                    akan muncul peringatan. Soal hanya bisa dikerjakan saat layar penuh menyala.
                   </span>
                 </span>
               </label>

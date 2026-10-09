@@ -99,11 +99,11 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       <span className="min-w-0">
         <span className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
           <Icon name="shield-check" className="h-4 w-4 text-brand-700" strokeWidth={2.2} />
-          Secure Exam Mode
+          Mode Ujian Fokus
         </span>
         <span className="mt-1 block text-xs leading-relaxed text-slate-600">
-          Aktifkan layar penuh dan tampilkan toast manual saat terdeteksi pindah tab, browser
-          kehilangan fokus, atau keluar fullscreen.
+          Layar dibuat penuh agar ananda fokus. Jika ananda membuka tab atau aplikasi lain, akan
+          muncul peringatan. Soal hanya bisa dikerjakan saat layar penuh menyala.
         </span>
       </span>
     </label>

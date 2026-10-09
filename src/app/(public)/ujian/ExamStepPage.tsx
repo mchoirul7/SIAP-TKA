@@ -7,6 +7,7 @@ import type { ExamCrumb } from "@/components/ujian/ExamBreadcrumb";
 import { ExamContextSync } from "@/components/ujian/ExamContextSync";
 import { ExamEmptyState } from "@/components/ujian/ExamEmptyState";
 import { ExamPageHeader } from "@/components/ujian/ExamPageHeader";
+import { CustomRequestCard, TrialCard } from "@/components/ujian/ExamExtraCards";
 import { ExamTypeCard } from "@/components/ujian/ExamTypeCard";
 import { PackageCard } from "@/components/ujian/PackageCard";
 import { SubjectCard } from "@/components/ujian/SubjectCard";
@@ -28,7 +29,14 @@ import {
 } from "@/lib/assessment";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getServerStudyContext } from "@/lib/server-study-context";
-import { buildSubjectCatalog, fullPackagePrice, groupSubjectCatalog, requestSoalHref } from "@/lib/subject-catalog";
+import { formatRupiah, fullPackagePrice, separatePackagesPrice } from "@/lib/pricing";
+import {
+  buildSubjectCatalog,
+  buyPackageHref,
+  customRequestHref,
+  groupSubjectCatalog,
+  requestSoalHref,
+} from "@/lib/subject-catalog";
 import { levelOptionFor, serializeStudyContext, type StudyContext } from "@/lib/study-context";
 import {
   getExamPackages,
@@ -231,9 +239,14 @@ async function SubjectStep({
 }) {
   const { config, semester } = step;
   const scope = examScopeFor(config.key, context, semester);
-  const sections = groupSubjectCatalog(
-    buildSubjectCatalog(scope.level, config.key, await getExamSubjects(scope)),
-  );
+  const catalog = buildSubjectCatalog(scope.level, config.key, await getExamSubjects(scope));
+  const sections = groupSubjectCatalog(catalog);
+  // TKA dan ulangan harian diapit kartu ujicoba gratis dan kartu custom request.
+  const withExtras = config.key === "tka" || config.key === "ulangan_harian";
+  const math = withExtras ? catalog.find((item) => item.key === "matematika" && item.subject) : undefined;
+  const trial = math?.subject
+    ? (await getExamPackages(scope, math.subject)).find((pkg) => pkg.kind === "latihan" && pkg.isFreeAccess)
+    : undefined;
   const crumbs = breadcrumbFor(step);
   const back = subjectsBack(config, semester);
 
@@ -280,7 +293,7 @@ async function SubjectStep({
       </section>
       {/* Section judul hanya muncul bila ada lebih dari satu kelompok, misalnya SMA/SMK. */}
       <div className="space-y-10">
-      {sections.map((section) => (
+      {sections.map((section, sectionIndex) => (
         <section key={section.group}>
           {sections.length > 1 ? (
             <div className="mb-4 flex items-center gap-3">
@@ -292,10 +305,27 @@ async function SubjectStep({
             </div>
           ) : null}
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-            {section.items.map((item) => (
+            {sectionIndex === 0 && trial ? (
+              <li>
+                <TrialCard href={`/latihan/${trial.slug}`} packageTitle={trial.title} />
+              </li>
+            ) : null}
+            {section.items.map((item) => {
+              const price = fullPackagePrice(config.key, item);
+              return (
               <li key={item.key}>
                 <SubjectCard
                   href={item.subject ? examPackagesHref(config.key, semester, item.subject) : null}
+                  buyHref={
+                    item.subject && price
+                      ? buyPackageHref({
+                          context: scopeShortLabel(scope),
+                          assessment: config.title,
+                          subject: item.name,
+                          price: formatRupiah(price),
+                        })
+                      : null
+                  }
                   requestHref={requestSoalHref({
                     context: scopeShortLabel(scope),
                     assessment: config.title,
@@ -306,11 +336,20 @@ async function SubjectStep({
                   art={item.art}
                   tone={item.tone}
                   packageCount={item.packageCount}
-                  price={fullPackagePrice(config.key, item)}
+                  price={price}
+                  originalPrice={separatePackagesPrice(config.key, item)}
                   tryoutCount={config.key === "tka" ? item.tryoutCount : null}
                 />
               </li>
-            ))}
+              );
+            })}
+            {withExtras && sectionIndex === sections.length - 1 ? (
+              <li>
+                <CustomRequestCard
+                  href={customRequestHref({ context: scopeShortLabel(scope), assessment: config.title })}
+                />
+              </li>
+            ) : null}
           </ul>
         </section>
       ))}
@@ -336,6 +375,9 @@ async function PackageStep({
 
   const practice = packages.filter((pkg) => pkg.kind === "latihan");
   const tryouts = packages.filter((pkg) => pkg.kind === "tryout");
+  const counts = { subject, packageCount: packages.length, tryoutCount: tryouts.length };
+  const fullPrice = packages.length > 0 ? fullPackagePrice(config.key, counts) : null;
+  const originalPrice = fullPrice !== null ? separatePackagesPrice(config.key, counts) : null;
 
   return (
     <>
@@ -348,6 +390,21 @@ async function PackageStep({
       />
       {packages.length > 0 ? (
         <>
+          {fullPrice !== null ? (
+            <FullPackageOffer
+              subjectName={subjectName}
+              practiceCount={practice.length}
+              tryoutCount={tryouts.length}
+              price={fullPrice}
+              originalPrice={originalPrice}
+              buyHref={buyPackageHref({
+                context: scopeShortLabel(scope),
+                assessment: config.title,
+                subject: subjectName,
+                price: formatRupiah(fullPrice),
+              })}
+            />
+          ) : null}
           <PackageSection title="Latihan yang tersedia" packages={practice} />
           <PackageSection title="Tryout yang tersedia" packages={tryouts} />
         </>
@@ -361,6 +418,59 @@ async function PackageStep({
         />
       )}
     </>
+  );
+}
+
+/** Penawaran paket lengkap satu mapel: harga coret, harga paket, dan hematnya. */
+function FullPackageOffer({
+  subjectName,
+  practiceCount,
+  tryoutCount,
+  price,
+  originalPrice,
+  buyHref,
+}: {
+  subjectName: string;
+  practiceCount: number;
+  tryoutCount: number;
+  price: number;
+  originalPrice: number | null;
+  buyHref: string;
+}) {
+  const contents = [
+    ...(practiceCount ? [`${practiceCount} latihan`] : []),
+    ...(tryoutCount ? [`${tryoutCount} tryout`] : []),
+  ].join(" + ");
+  return (
+    <section className="mt-6 flex flex-col gap-4 rounded-[16px] bg-gradient-to-r from-[#5b0fd6] to-[#8e35ff] p-5 text-white shadow-[0_18px_34px_-22px_rgba(80,1,218,0.9)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
+      <div className="min-w-0">
+        <p className="text-xs font-black uppercase tracking-[0.12em] text-white/70">Beli per mapel lebih hemat</p>
+        <h2 className="mt-1 text-[20px] font-black leading-tight text-white">Paket Lengkap {subjectName}</h2>
+        <p className="mt-1 text-sm font-semibold text-white/80">Semua paket sekaligus: {contents}</p>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 sm:justify-end">
+        <div className="text-left sm:text-right">
+          {originalPrice !== null ? (
+            <p className="flex items-baseline gap-2 sm:justify-end">
+              <s className="text-sm font-bold text-white/60">{formatRupiah(originalPrice)}</s>
+              <span className="rounded-full bg-amber-300 px-2 py-0.5 text-[12px] font-black text-[#2a1460]">
+                Hemat {formatRupiah(originalPrice - price)}
+              </span>
+            </p>
+          ) : null}
+          <p className="text-[28px] font-black leading-none text-white">{formatRupiah(price)}</p>
+        </div>
+        <a
+          href={buyHref}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white px-6 text-sm font-black text-brand-700 shadow-[0_12px_24px_-16px_rgba(0,0,0,0.6)] transition-opacity hover:opacity-90"
+        >
+          <Icon name="whatsapp" className="h-5 w-5" />
+          Beli Paket Lengkap
+        </a>
+      </div>
+    </section>
   );
 }
 

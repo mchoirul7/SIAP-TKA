@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 383 308" width="383" height="308">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe9c7"/>
+      <stop offset="1" stop-color="#ffd09a"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9a3c"/>
+      <stop offset="1" stop-color="#f06a00"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe066"/>
+      <stop offset="1" stop-color="#f5a300"/>
+    </linearGradient>
+    <linearGradient id="flask" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="ribbonL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="ribbonR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#e11d48"/>
+    </linearGradient>
+  </defs>
+  <rect width="383" height="308" rx="24" fill="url(#bg)"/>
+  <circle cx="330" cy="60" r="90" fill="#fff" opacity=".35"/>
+  <circle cx="40" cy="250" r="80" fill="#ffc078" opacity=".5"/>
+
+  <!-- ikon pojok -->
+  <rect x="26" y="26" width="76" height="76" rx="20" fill="url(#icon)"/>
+  <g stroke="#fff" stroke-width="4" fill="none">
+    <ellipse cx="64" cy="64" rx="24" ry="9"/>
+    <ellipse cx="64" cy="64" rx="24" ry="9" transform="rotate(60 64 64)"/>
+    <ellipse cx="64" cy="64" rx="24" ry="9" transform="rotate(-60 64 64)"/>
+  </g>
+  <circle cx="64" cy="64" r="5" fill="#fff"/>
+
+  <!-- atom besar -->
+  <g stroke="#a855f7" stroke-width="5" fill="none" opacity=".85">
+    <ellipse cx="300" cy="110" rx="50" ry="18"/>
+    <ellipse cx="300" cy="110" rx="50" ry="18" transform="rotate(60 300 110)"/>
+    <ellipse cx="300" cy="110" rx="50" ry="18" transform="rotate(-60 300 110)"/>
+  </g>
+  <circle cx="300" cy="110" r="10" fill="#a855f7"/>
+
+  <!-- labu -->
+  <g transform="translate(70 128)">
+    <path d="M34 0 h28 v34 l30 62 a14 14 0 0 1 -13 20 h-62 a14 14 0 0 1 -13 -20 l30 -62z" fill="#fff" stroke="#bae6fd" stroke-width="4"/>
+    <path d="M18 70 h60 l13 26 a14 14 0 0 1 -13 20 h-62 a14 14 0 0 1 -13 -20z" fill="url(#flask)"/>
+    <rect x="28" y="-6" width="40" height="10" rx="5" fill="#94a3b8"/>
+    <circle cx="36" cy="92" r="5" fill="#fff" opacity=".7"/>
+    <circle cx="56" cy="84" r="3.5" fill="#fff" opacity=".7"/>
+  </g>
+
+  <!-- medali -->
+  <path d="M168 60 l26 70 h-30 l-26 -70z" fill="url(#ribbonL)"/>
+  <path d="M238 60 l-26 70 h30 l26 -70z" fill="url(#ribbonR)"/>
+  <circle cx="203" cy="170" r="54" fill="url(#gold)" stroke="#e08a00" stroke-width="5"/>
+  <circle cx="203" cy="170" r="40" fill="none" stroke="#fff3bf" stroke-width="4"/>
+  <text x="203" y="184" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="34" fill="#b45309">OSN</text>
+
+  <!-- kilau -->
+  <g fill="#fff">
+    <path d="M140 46 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z"/>
+    <path d="M330 200 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
+  </g>
+  <circle cx="290" cy="220" r="6" fill="#f06a00" opacity=".6"/>
+
+  <!-- lengkung badan kartu -->
+  <path d="M0 296 Q0 284 14 284 H369 Q383 284 383 296 V308 H0z" fill="#fff"/>
+</svg>
