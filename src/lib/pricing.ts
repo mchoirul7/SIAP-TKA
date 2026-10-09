@@ -71,14 +71,6 @@ function fixedAllAccessPrice(assessmentType: AssessmentType, level: EducationLev
 /** Lama akses setelah dibeli, untuk semua jenis pembelian. */
 export const ACCESS_MONTHS = 6;
 
-/** Akhir periode promo harga coret, sampai akhir hari itu (WIB). */
-const PROMO_END = new Date("2026-11-03T23:59:59+07:00");
-export const PROMO_END_LABEL = "3 November 2026";
-
-export function isPromoActive(now: Date = new Date()): boolean {
-  return now <= PROMO_END;
-}
-
 /**
  * Harga All-in Akses satu jenis ujian: jumlah harga paket lengkap semua mapel
  * yang sudah dijual pada lingkup itu. Harga coretnya jumlah harga paket
