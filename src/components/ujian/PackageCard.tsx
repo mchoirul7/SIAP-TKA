@@ -9,12 +9,12 @@ import { iconForPackage } from "@/lib/content-icons";
 import type { ExamPackage } from "@/services/content-service";
 
 /**
- * Harga satu paket, sama untuk semua mata pelajaran dan kelas. Latihan TKA
- * dihargai lebih tinggi daripada latihan ulangan dan sumatif.
+ * Harga satu paket. Tryout dan latihan ulangan harian dijual satuan; latihan
+ * lainnya hanya dijual per mapel (lihat kartu mapel), jadi tidak berharga.
  */
-function priceLabel(pkg: ExamPackage): string {
-  if (pkg.kind === "tryout") return "Rp20.000";
-  return pkg.assessmentType === "tka" ? "Rp5.000" : "Rp2.500";
+function priceLabel(pkg: ExamPackage): string | null {
+  if (pkg.kind === "tryout") return "Rp10.000";
+  return pkg.assessmentType === "ulangan_harian" ? "Rp2.500" : null;
 }
 
 /**
@@ -25,6 +25,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
   const { mounted, isUnlocked } = useEntitlements();
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const isTryout = pkg.kind === "tryout";
+  const price = pkg.isFreeAccess ? null : priceLabel(pkg);
   const href = isTryout
     ? `/tryout/${pkg.slug}`
     : unlocked
@@ -88,10 +89,10 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
 
       <div className="mt-auto pt-5">
         {/* Paket gratis tidak perlu ditunjukkan harganya. */}
-        {!pkg.isFreeAccess ? (
+        {price ? (
           <p className="mb-3 flex items-baseline justify-between gap-2">
             <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Harga</span>
-            <span className="text-lg font-black text-brand-700">{priceLabel(pkg)}</span>
+            <span className="text-lg font-black text-brand-700">{price}</span>
           </p>
         ) : null}
         <Link

@@ -28,7 +28,7 @@ import {
 } from "@/lib/assessment";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getServerStudyContext } from "@/lib/server-study-context";
-import { buildSubjectCatalog, groupSubjectCatalog, requestSoalHref } from "@/lib/subject-catalog";
+import { buildSubjectCatalog, fullPackagePrice, groupSubjectCatalog, requestSoalHref } from "@/lib/subject-catalog";
 import { levelOptionFor, serializeStudyContext, type StudyContext } from "@/lib/study-context";
 import {
   getExamPackages,
@@ -306,6 +306,8 @@ async function SubjectStep({
                   art={item.art}
                   tone={item.tone}
                   packageCount={item.packageCount}
+                  price={fullPackagePrice(config.key, item)}
+                  tryoutCount={config.key === "tka" ? item.tryoutCount : null}
                 />
               </li>
             ))}

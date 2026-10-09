@@ -827,18 +827,23 @@ function examScopeFilters(scope: ExamScope): [column: string, value: string | nu
 export interface ExamSubject {
   subject: Subject;
   packageCount: number;
+  tryoutCount: number;
 }
 
 /** Mapel yang benar-benar punya paket terbit untuk lingkup ini, beserta jumlahnya. */
 export async function getExamSubjects(scope: ExamScope): Promise<ExamSubject[]> {
-  const rows = await readAllRows<{ subject_id: string }>("mapel ujian", (from, to) => {
-    let query = supabase.from("packages").select("subject_id", { count: "exact" });
+  const rows = await readAllRows<{ subject_id: string; kind: PackageKind }>("mapel ujian", (from, to) => {
+    let query = supabase.from("packages").select("subject_id, kind", { count: "exact" });
     for (const [column, value] of examScopeFilters(scope)) query = query.eq(column, value);
     return query.order("subject_id").order("id").range(from, to);
   });
 
   const counts = new Map<string, number>();
-  for (const row of rows) counts.set(row.subject_id, (counts.get(row.subject_id) ?? 0) + 1);
+  const tryoutCounts = new Map<string, number>();
+  for (const row of rows) {
+    counts.set(row.subject_id, (counts.get(row.subject_id) ?? 0) + 1);
+    if (row.kind === "tryout") tryoutCounts.set(row.subject_id, (tryoutCounts.get(row.subject_id) ?? 0) + 1);
+  }
   if (counts.size === 0) return [];
 
   const subjectRows = unwrap(
@@ -854,7 +859,11 @@ export async function getExamSubjects(scope: ExamScope): Promise<ExamSubject[]> 
   const subjects = subjectRows
     .map(toSubject)
     .filter((subject) => isSubjectReleased(subject.slug))
-    .map((subject) => ({ subject, packageCount: counts.get(subject.id) ?? 0 }));
+    .map((subject) => ({
+      subject,
+      packageCount: counts.get(subject.id) ?? 0,
+      tryoutCount: tryoutCounts.get(subject.id) ?? 0,
+    }));
   return sortBySubject(subjects, (item) => item.subject.slug);
 }
 

@@ -23,6 +23,8 @@ export function SubjectCard({
   art,
   tone,
   packageCount,
+  price,
+  tryoutCount,
 }: {
   href: string | null;
   requestHref: string;
@@ -31,6 +33,10 @@ export function SubjectCard({
   art: string;
   tone: SubjectTone;
   packageCount: number;
+  /** Harga paket lengkap dalam rupiah; kosong bila tidak dijual. */
+  price: number | null;
+  /** Jumlah tryout, hanya untuk TKA; kosong pada jenis ujian lain. */
+  tryoutCount: number | null;
 }) {
   const colors = toneClass[tone];
   const body = (
@@ -41,11 +47,25 @@ export function SubjectCard({
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-white px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black leading-tight text-ink-900">{name}</span>
         <span className="mt-1.5 line-clamp-3 text-[14px] font-medium leading-snug text-slate-600">{description}</span>
-        <span className="mt-auto flex flex-wrap items-center justify-between gap-1.5 pt-3">
+        {/* Harga satu mapel berisi semua paketnya. */}
+        {price !== null ? (
+          <span className="mt-auto flex items-baseline justify-between gap-2 pt-3">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Harga Paket Lengkap</span>
+            <span className="text-lg font-black text-brand-700">Rp{price.toLocaleString("id-ID")}</span>
+          </span>
+        ) : null}
+        <span className={`flex flex-wrap items-center justify-between gap-1.5 ${price !== null ? "pt-2" : "mt-auto pt-3"}`}>
           {href ? (
             <>
-              <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[12px] font-bold ${colors.pill}`}>
-                {packageCount} paket tersedia
+              <span className="flex flex-wrap gap-1.5">
+                <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[12px] font-bold ${colors.pill}`}>
+                  {packageCount} paket tersedia
+                </span>
+                {tryoutCount !== null ? (
+                  <span className="whitespace-nowrap rounded-full bg-amber-50 px-2.5 py-1 text-[12px] font-bold text-amber-700">
+                    {tryoutCount}x tryout
+                  </span>
+                ) : null}
               </span>
               <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform group-hover:translate-x-0.5 ${colors.arrow}`}>
                 <LinkPending />

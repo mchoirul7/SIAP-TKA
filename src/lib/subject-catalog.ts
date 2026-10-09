@@ -22,13 +22,13 @@ interface CatalogEntry {
 }
 
 const ENTRIES: Record<string, CatalogEntry> = {
-  agama: { key: "agama", name: "Pendidikan Agama dan Budi Pekerti", description: "Nilai-nilai agama dan akhlak mulia.", aliases: ["pendidikan-agama"], tone: "emerald" },
+  agama: { key: "agama", name: "Pendidikan Agama dan Budi Pekerti", description: "Nilai-nilai agama dan akhlak mulia.", aliases: ["pendidikan-agama", "pendidikan-agama-dan-budi-pekerti"], tone: "emerald" },
   pancasila: { key: "pancasila", name: "Pendidikan Pancasila", description: "Nilai-nilai Pancasila dalam kehidupan sehari-hari.", aliases: ["pendidikan-pancasila", "ppkn", "pkn"], tone: "sky" },
   "bahasa-indonesia": { key: "bahasa-indonesia", name: "Bahasa Indonesia", description: "Membaca, menulis, dan memahami teks.", tone: "emerald" },
   matematika: { key: "matematika", name: "Matematika", description: "Bilangan, operasi hitung, dan pemecahan masalah.", tone: "emerald" },
   ipas: { key: "ipas", name: "IPAS", description: "Mengenal makhluk hidup, benda, dan lingkungan sekitar.", tone: "sky" },
-  ipa: { key: "ipa", name: "IPA", description: "Makhluk hidup, materi, energi, dan bumi.", tone: "sky" },
-  ips: { key: "ips", name: "IPS", description: "Manusia, tempat, dan kehidupan bermasyarakat.", tone: "orange" },
+  ipa: { key: "ipa", name: "IPA", description: "Makhluk hidup, materi, energi, dan bumi.", aliases: ["ilmu-pengetahuan-alam"], tone: "sky" },
+  ips: { key: "ips", name: "IPS", description: "Manusia, tempat, dan kehidupan bermasyarakat.", aliases: ["ilmu-pengetahuan-sosial"], tone: "orange" },
   pjok: { key: "pjok", name: "PJOK", description: "Gerak, olahraga, dan hidup sehat.", tone: "orange" },
   "bahasa-inggris": { key: "bahasa-inggris", name: "Bahasa Inggris", description: "Kosakata, percakapan, dan pemahaman teks.", tone: "emerald" },
   "seni-rupa": { key: "seni-rupa", name: "Seni Rupa", description: "Garis, bentuk, warna, dan karya seni.", tone: "sky" },
@@ -36,7 +36,7 @@ const ENTRIES: Record<string, CatalogEntry> = {
   "seni-tari": { key: "seni-tari", name: "Seni Tari", description: "Gerakan, ekspresi, dan budaya daerah.", tone: "violet" },
   "seni-teater": { key: "seni-teater", name: "Seni Teater", description: "Ekspresi, peran, dan pertunjukan.", tone: "violet" },
   informatika: { key: "informatika", name: "Informatika", description: "Berpikir komputasional dan teknologi digital.", tone: "sky" },
-  prakarya: { key: "prakarya", name: "Prakarya", description: "Kreativitas, kerajinan, dan kewirausahaan.", tone: "orange" },
+  prakarya: { key: "prakarya", name: "Prakarya", description: "Kreativitas, kerajinan, dan kewirausahaan.", aliases: ["prakarya-dan-kewirausahaan"], tone: "orange" },
   "bahasa-jawa": { key: "bahasa-jawa", name: "Bahasa Jawa", description: "Bahasa, budaya, dan kearifan lokal.", tone: "violet" },
   sejarah: { key: "sejarah", name: "Sejarah", description: "Peristiwa, tokoh, dan perjalanan bangsa.", tone: "orange" },
   fisika: { key: "fisika", name: "Fisika", description: "Gerak, gaya, energi, dan gejala alam.", tone: "sky" },
@@ -101,6 +101,7 @@ export interface CatalogSubject {
   /** Kosong bila mapel belum punya paket untuk lingkup ini. */
   subject: Subject | null;
   packageCount: number;
+  tryoutCount: number;
 }
 
 function entryForSegment(segment: string): CatalogEntry | undefined {
@@ -112,10 +113,10 @@ const TONES: SubjectTone[] = ["emerald", "sky", "orange", "violet"];
 export function buildSubjectCatalog(
   level: EducationLevel,
   assessmentType: AssessmentType,
-  available: { subject: Subject; packageCount: number }[],
+  available: { subject: Subject; packageCount: number; tryoutCount: number }[],
 ): CatalogSubject[] {
   const required = (assessmentType === "tka" ? REQUIRED_TKA : REQUIRED)[level];
-  const byKey = new Map<string, { subject: Subject; packageCount: number }>();
+  const byKey = new Map<string, { subject: Subject; packageCount: number; tryoutCount: number }>();
   const extras: CatalogSubject[] = [];
 
   available.forEach((item, index) => {
@@ -134,6 +135,7 @@ export function buildSubjectCatalog(
       tone: entry?.tone ?? TONES[index % TONES.length],
       subject: item.subject,
       packageCount: item.packageCount,
+      tryoutCount: item.tryoutCount,
     });
   });
 
@@ -149,10 +151,26 @@ export function buildSubjectCatalog(
       tone: entry.tone,
       subject: found?.subject ?? null,
       packageCount: found?.packageCount ?? 0,
+      tryoutCount: found?.tryoutCount ?? 0,
     };
   });
 
   return [...requiredSubjects, ...extras];
+}
+
+/**
+ * Harga paket lengkap satu mapel. TKA mulai Rp20.000 dan bertambah Rp5.000 per
+ * tryout. Ulangan harian Rp2.500 per paket, dipotong Rp10.000 bila paketnya
+ * lebih dari 5. Keduanya tetap dihargai walau paketnya belum ada; jenis lain
+ * Rp25.000 dan hanya untuk mapel yang sudah punya paket.
+ */
+export function fullPackagePrice(assessmentType: AssessmentType, item: CatalogSubject): number | null {
+  if (assessmentType === "tka") return 20000 + 5000 * item.tryoutCount;
+  if (assessmentType === "ulangan_harian") {
+    const total = 2500 * item.packageCount;
+    return item.packageCount > 5 ? total - 10000 : total;
+  }
+  return item.subject ? 25000 : null;
 }
 
 const GROUP_TITLES: Record<SubjectGroup, string> = {
