@@ -5,7 +5,7 @@ import { subjectSegment } from "@/lib/assessment";
  * Daftar mapel pada halaman pilih mapel /ujian.
  *
  * Mapel wajib selalu tampil, walau belum punya paket — kartunya lalu memakai
- * penanda "Belum tersedia" dan tombol request soal. Mapel lain yang punya paket
+ * penanda "Dalam proses penambahan paket soal". Mapel lain yang punya paket
  * di basis data ikut ditambahkan di belakangnya. Gambar sampul dipotong dari
  * mockup dan dipakai ulang lintas jenjang; SMA punya set sampul sendiri (lihat `artFor`).
  */
@@ -174,17 +174,6 @@ export function groupSubjectCatalog(items: CatalogSubject[]) {
 
 const WHATSAPP_PHONE = "6285649834654";
 
-export function requestSoalHref(details: { context: string; assessment: string; subject: string }): string {
-  const message = [
-    "Halo SIAP TKA ONE, saya ingin request materi soal.",
-    "",
-    `Kelas: ${details.context}`,
-    `Jenis ujian: ${details.assessment}`,
-    `Mata pelajaran: ${details.subject}`,
-  ].join("\n");
-  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
-}
-
 export function buyPackageHref(details: {
   context: string;
   assessment: string;
@@ -193,6 +182,16 @@ export function buyPackageHref(details: {
 }): string {
   const message = [
     `Halo SIAP TKA ONE, saya berminat beli paket mapel ${details.subject} seharga ${details.price}, mohon dibantu.`,
+    "",
+    `Kelas: ${details.context}`,
+    `Jenis ujian: ${details.assessment}`,
+  ].join("\n");
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+export function buyAllAccessHref(details: { context: string; assessment: string; price: string }): string {
+  const message = [
+    `Halo SIAP TKA ONE, saya berminat beli All-in Akses ${details.assessment} seharga ${details.price}, mohon dibantu.`,
     "",
     `Kelas: ${details.context}`,
     `Jenis ujian: ${details.assessment}`,

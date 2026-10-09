@@ -29,13 +29,13 @@ import {
 } from "@/lib/assessment";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getServerStudyContext } from "@/lib/server-study-context";
-import { formatRupiah, fullPackagePrice, separatePackagesPrice } from "@/lib/pricing";
+import { ACCESS_MONTHS, allAccessPrice, formatRupiah, fullPackagePrice, separatePackagesPrice } from "@/lib/pricing";
 import {
   buildSubjectCatalog,
+  buyAllAccessHref,
   buyPackageHref,
   customRequestHref,
   groupSubjectCatalog,
-  requestSoalHref,
 } from "@/lib/subject-catalog";
 import { levelOptionFor, serializeStudyContext, type StudyContext } from "@/lib/study-context";
 import {
@@ -249,6 +249,7 @@ async function SubjectStep({
     : undefined;
   const crumbs = breadcrumbFor(step);
   const back = subjectsBack(config, semester);
+  const allAccess = allAccessPrice(config.key, scope.level, catalog);
 
   return (
     <>
@@ -291,6 +292,24 @@ async function SubjectStep({
           </p>
         </div>
       </section>
+      {/* All-in Akses: semua mapel jenis ujian ini sekaligus, seharga total paket lengkapnya. */}
+      {allAccess ? (
+        <div className="mb-8">
+          <PriceOffer
+            eyebrow={`All-in Akses ${ACCESS_MONTHS} Bulan`}
+            title={`Semua Mapel ${config.title}`}
+            description={`Paket lengkap ${allAccess.subjectCount} mapel sekaligus untuk ${scopeShortLabel(scope)}`}
+            price={allAccess.price}
+            originalPrice={allAccess.originalPrice}
+            buyHref={buyAllAccessHref({
+              context: scopeShortLabel(scope),
+              assessment: config.title,
+              price: formatRupiah(allAccess.price),
+            })}
+            buyLabel="Beli All-in Akses"
+          />
+        </div>
+      ) : null}
       {/* Section judul hanya muncul bila ada lebih dari satu kelompok, misalnya SMA/SMK. */}
       <div className="space-y-10">
       {sections.map((section, sectionIndex) => (
@@ -326,11 +345,6 @@ async function SubjectStep({
                         })
                       : null
                   }
-                  requestHref={requestSoalHref({
-                    context: scopeShortLabel(scope),
-                    assessment: config.title,
-                    subject: item.name,
-                  })}
                   name={item.name}
                   description={item.description}
                   art={item.art}
@@ -442,35 +456,94 @@ function FullPackageOffer({
     ...(tryoutCount ? [`${tryoutCount} tryout`] : []),
   ].join(" + ");
   return (
-    <section className="mt-6 flex flex-col gap-4 rounded-[16px] bg-gradient-to-r from-[#5b0fd6] to-[#8e35ff] p-5 text-white shadow-[0_18px_34px_-22px_rgba(80,1,218,0.9)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
-      <div className="min-w-0">
-        <p className="text-xs font-black uppercase tracking-[0.12em] text-white/70">Beli per mapel lebih hemat</p>
-        <h2 className="mt-1 text-[20px] font-black leading-tight text-white">Paket Lengkap {subjectName}</h2>
-        <p className="mt-1 text-sm font-semibold text-white/80">Semua paket sekaligus: {contents}</p>
-      </div>
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 sm:justify-end">
-        <div className="text-left sm:text-right">
-          {originalPrice !== null ? (
-            <p className="flex items-baseline gap-2 sm:justify-end">
-              <s className="text-sm font-bold text-white/60">{formatRupiah(originalPrice)}</s>
-              <span className="rounded-full bg-amber-300 px-2 py-0.5 text-[12px] font-black text-[#2a1460]">
-                Hemat {formatRupiah(originalPrice - price)}
-              </span>
-            </p>
-          ) : null}
-          <p className="text-[28px] font-black leading-none text-white">{formatRupiah(price)}</p>
+    <PriceOffer
+      eyebrow="Beli per mapel lebih hemat"
+      title={`Paket Lengkap ${subjectName}`}
+      description={`Semua paket sekaligus: ${contents}`}
+      price={price}
+      originalPrice={originalPrice}
+      buyHref={buyHref}
+      buyLabel="Beli Paket Lengkap"
+    />
+  );
+}
+
+/** Banner harga beserta harga coret, hemat, dan tombol beli lewat WhatsApp. */
+function PriceOffer({
+  eyebrow,
+  title,
+  description,
+  price,
+  originalPrice,
+  buyHref,
+  buyLabel,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  price: number;
+  originalPrice: number | null;
+  buyHref: string;
+  buyLabel: string;
+}) {
+  return (
+    <section className="mt-6 rounded-[16px] bg-gradient-to-r from-[#5b0fd6] to-[#8e35ff] p-5 text-white shadow-[0_18px_34px_-22px_rgba(80,1,218,0.9)] sm:p-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <p className="text-xs font-black uppercase tracking-[0.12em] text-white/70">{eyebrow}</p>
+          <h2 className="mt-1 text-[20px] font-black leading-tight text-white">{title}</h2>
+          <p className="mt-1 text-sm font-semibold text-white/80">{description}</p>
         </div>
-        <a
-          href={buyHref}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white px-6 text-sm font-black text-brand-700 shadow-[0_12px_24px_-16px_rgba(0,0,0,0.6)] transition-opacity hover:opacity-90"
-        >
-          <Icon name="whatsapp" className="h-5 w-5" />
-          Beli Paket Lengkap
-        </a>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 sm:justify-end">
+          <div className="text-left sm:text-right">
+            {originalPrice !== null ? (
+              <p className="flex items-baseline gap-2 sm:justify-end">
+                <s className="text-sm font-bold text-white/60">{formatRupiah(originalPrice)}</s>
+                <span className="rounded-full bg-amber-300 px-2 py-0.5 text-[12px] font-black text-[#2a1460]">
+                  Hemat {formatRupiah(originalPrice - price)}
+                </span>
+              </p>
+            ) : null}
+            <p className="text-[28px] font-black leading-none text-white">{formatRupiah(price)}</p>
+            <p className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-0.5 text-[12px] font-black text-white">
+              Akses {ACCESS_MONTHS} bulan
+            </p>
+          </div>
+          <a
+            href={buyHref}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white px-6 text-sm font-black text-brand-700 shadow-[0_12px_24px_-16px_rgba(0,0,0,0.6)] transition-opacity hover:opacity-90"
+          >
+            <Icon name="whatsapp" className="h-5 w-5" />
+            {buyLabel}
+          </a>
+        </div>
       </div>
+      <PriceTerms />
     </section>
+  );
+}
+
+/** Syarat dan ketentuan harga, sama untuk paket satuan, paket lengkap, dan All-in Akses. */
+const PRICE_TERMS = [
+  "Harga berlaku untuk 1 murid (1 akun) per akses.",
+  `Masa akses ${ACCESS_MONTHS} bulan sejak akses diaktifkan. Setelah itu akses berakhir.`,
+  "Satu akses hanya untuk kelas dan jenis ujian yang dibeli, termasuk semesternya bila ada.",
+  "Akses tidak dapat dipindahtangankan atau dipakai bersama oleh murid lain.",
+  "Pembelian dan aktivasi akses dilayani admin lewat WhatsApp.",
+];
+
+function PriceTerms() {
+  return (
+    <details className="mt-4 rounded-[12px] bg-white/10 px-4 py-3 text-white/85">
+      <summary className="cursor-pointer text-[13px] font-black text-white">Syarat dan ketentuan harga</summary>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-[13px] font-semibold">
+        {PRICE_TERMS.map((term) => (
+          <li key={term}>{term}</li>
+        ))}
+      </ul>
+    </details>
   );
 }
 

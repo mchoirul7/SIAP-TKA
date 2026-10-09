@@ -15,12 +15,11 @@ const toneClass: Record<SubjectTone, { pill: string }> = {
 /**
  * Kartu mapel pada alur /ujian. Mapel yang punya paket diberi tombol "Cek
  * Paket" ke daftar paketnya dan "Beli" lewat WhatsApp; yang belum,
- * menampilkan "Belum tersedia" dan tombol request soal.
+ * menampilkan "Dalam proses penambahan paket soal".
  */
 export function SubjectCard({
   href,
   buyHref,
-  requestHref,
   name,
   description,
   art,
@@ -33,7 +32,6 @@ export function SubjectCard({
   href: string | null;
   /** Tautan WhatsApp untuk membeli paket lengkap; kosong bila tidak dijual. */
   buyHref: string | null;
-  requestHref: string;
   name: string;
   description: string;
   art: string;
@@ -99,18 +97,9 @@ export function SubjectCard({
               </span>
             </>
           ) : (
-            <>
-              <span className="whitespace-nowrap rounded-full bg-rose-50 px-2.5 py-1 text-[12px] font-bold text-rose-500">Belum tersedia</span>
-              <a
-                href={requestHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-rose-50 px-2.5 py-1 text-[12px] font-black text-rose-600 transition-colors hover:bg-rose-100"
-              >
-                Request Soal
-                <Icon name="arrow-right" className="h-3.5 w-3.5" strokeWidth={2.8} />
-              </a>
-            </>
+            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[12px] font-bold text-amber-700">
+              Dalam proses penambahan paket soal
+            </span>
           )}
         </span>
       </span>

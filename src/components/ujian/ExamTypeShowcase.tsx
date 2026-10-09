@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinkPending } from "@/components/NavigationProgress";
 import { StudyContextDialog } from "@/components/StudyContextDialog";
 import { Icon } from "@/components/ui/Icon";
 import { useStudyContext } from "@/hooks/useStudyContext";
 import { ASSESSMENT_LABEL, examTypeHref } from "@/lib/assessment";
-import { DEFAULT_STUDY_CONTEXT, levelOptionFor } from "@/lib/study-context";
+import { ACCESS_MONTHS, formatRupiah, isPromoActive, PROMO_END_LABEL } from "@/lib/pricing";
+import { DEFAULT_STUDY_CONTEXT, levelOptionFor, serializeStudyContext } from "@/lib/study-context";
 
 /**
  * Ilustrasi di `public/beranda/` dipotong dari mockup beranda. Gambar kartu
@@ -22,9 +23,17 @@ type HomeExamCard = {
   description: string;
   art: string;
   arrow: string;
+  /** Kunci harga All-in Akses dari `/api/exam/all-access`; kosong bila tidak dijual. */
+  priceKey: AllAccessKey | null;
+  /** Harga mulai dari, bila kartunya mewakili beberapa jenis ujian. */
+  priceFrom?: boolean;
   /** Satu tujuan untuk seluruh kartu, beberapa tombol, atau kosong bila belum tersedia. */
   target: { href: string } | { links: { label: string; href: string }[] } | null;
 };
+
+type AllAccessKey = "tka" | "ulangan_harian" | "sumatif";
+type AllAccessOffer = { price: number; originalPrice: number | null };
+type AllAccessPrices = Record<AllAccessKey, AllAccessOffer | null>;
 
 const cards: HomeExamCard[] = [
   {
@@ -34,6 +43,7 @@ const cards: HomeExamCard[] = [
     description: "Latihan untuk mempersiapkan Tes Kemampuan Akademik.",
     art: "/beranda/tka.png",
     arrow: "bg-[#efe5ff] text-[#6617f4]",
+    priceKey: "tka",
     target: { href: examTypeHref("tka") },
   },
   {
@@ -43,6 +53,7 @@ const cards: HomeExamCard[] = [
     description: "Latihan untuk mengukur pemahaman materi yang sedang dipelajari.",
     art: "/beranda/ulangan-harian.png",
     arrow: "bg-[#fff0d5] text-[#ec7d00]",
+    priceKey: "ulangan_harian",
     target: { href: examTypeHref("ulangan_harian") },
   },
   {
@@ -53,6 +64,8 @@ const cards: HomeExamCard[] = [
     description: "Persiapan penilaian tengah dan akhir semester sesuai materi.",
     art: "/beranda/sas.png",
     arrow: "bg-[#e5f9e9] text-[#15963c]",
+    priceKey: "sumatif",
+    priceFrom: true,
     target: {
       links: [
         { label: "Tengah Semester", href: examTypeHref("sumatif_tengah_semester") },
@@ -67,6 +80,7 @@ const cards: HomeExamCard[] = [
     description: "Latihan soal olimpiade untuk ananda yang suka tantangan.",
     art: "/beranda/osn.svg",
     arrow: "bg-[#fff0d5] text-[#ec7d00]",
+    priceKey: null,
     target: null,
   },
 ];
@@ -75,7 +89,34 @@ const cardClass =
   "group flex h-full flex-col overflow-hidden rounded-[1.6rem] bg-white text-left shadow-[0_24px_60px_-42px_rgba(14,23,64,0.45)]";
 const hoverClass = "transition-transform hover:-translate-y-1 hover:shadow-[0_34px_70px_-46px_rgba(14,23,64,0.55)]";
 
-function HomeCard({ card }: { card: HomeExamCard }) {
+/** Harga All-in Akses, harga coret selama promo, masa akses, dan pembahasan yang sudah termasuk. */
+function AllAccessPrice({ offer, from }: { offer: AllAccessOffer; from: boolean }) {
+  const promo = offer.originalPrice !== null && isPromoActive();
+  return (
+    <span className="mt-3 block rounded-xl bg-[#f6f2ff] px-3 py-2">
+      <span className="flex items-baseline justify-between gap-2">
+        <span className="text-[12px] font-black uppercase tracking-wide text-[#6418ed]">All-in Akses</span>
+        <span className="flex items-baseline gap-1.5 whitespace-nowrap">
+          {promo && offer.originalPrice !== null ? (
+            <s className="text-[12px] font-bold text-slate-400">{formatRupiah(offer.originalPrice)}</s>
+          ) : null}
+          <span className="text-[17px] font-black leading-none text-[#080d3f]">
+            {from ? <span className="text-[12px] font-bold text-slate-500">mulai </span> : null}
+            {formatRupiah(offer.price)}
+          </span>
+        </span>
+      </span>
+      {promo ? (
+        <span className="mt-1 block text-[12px] font-black text-rose-600">Promo sampai {PROMO_END_LABEL}</span>
+      ) : null}
+      <span className="mt-1 block text-[12px] font-semibold text-[#52607c]">
+        Akses {ACCESS_MONTHS} bulan &middot; lengkap dengan pembahasan
+      </span>
+    </span>
+  );
+}
+
+function HomeCard({ card, offer }: { card: HomeExamCard; offer: AllAccessOffer | null }) {
   const { target } = card;
   const body = (
     <>
@@ -105,6 +146,7 @@ function HomeCard({ card }: { card: HomeExamCard }) {
         <p className="mt-2 line-clamp-2 text-[14px] font-medium leading-snug text-[#52607c]">
           {card.description}
         </p>
+        {offer ? <AllAccessPrice offer={offer} from={card.priceFrom ?? false} /> : null}
         {target && "links" in target ? (
           <span className="mt-auto grid grid-cols-2 gap-2 pt-3">
             {target.links.map((link) => (
@@ -143,9 +185,27 @@ function HomeCard({ card }: { card: HomeExamCard }) {
 }
 
 export function ExamTypeShowcase() {
-  const { context, saveContext } = useStudyContext();
+  const { context, isReady, saveContext } = useStudyContext();
   const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
   const activeContext = context ?? DEFAULT_STUDY_CONTEXT;
+  const contextKey = serializeStudyContext(activeContext);
+  const [prices, setPrices] = useState<{ key: string; value: AllAccessPrices } | null>(null);
+
+  // Harga All-in bergantung pada mapel yang punya paket di kelas aktif.
+  useEffect(() => {
+    if (!isReady) return;
+    let cancelled = false;
+    fetch(`/api/exam/all-access?kelas=${encodeURIComponent(contextKey)}`)
+      .then((response) => (response.ok ? (response.json() as Promise<AllAccessPrices>) : null))
+      .then((value) => {
+        if (!cancelled && value) setPrices({ key: contextKey, value });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [isReady, contextKey]);
+  const activePrices = prices?.key === contextKey ? prices.value : null;
   const levelLabel = levelOptionFor(activeContext.level).label;
 
   return (
@@ -186,7 +246,7 @@ export function ExamTypeShowcase() {
             </span>
           </h1>
           <p className="mt-3 max-w-[32rem] text-[clamp(1rem,1.2vw,1.15rem)] font-medium leading-snug text-[#56627c]">
-            SIAP TKA ONE menyediakan pengalaman ujian online untuk Ananda, bisa di laptop atau HP.
+            SIAP TKA ONE menyediakan pengalaman ujian online untuk Ananda, bisa di laptop atau HP, dilengkapi mode aman simulasi ujian anti contek.
           </p>
         </div>
       </section>
@@ -194,7 +254,7 @@ export function ExamTypeShowcase() {
       <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {cards.map((card) => (
           <li key={card.key}>
-            <HomeCard card={card} />
+            <HomeCard card={card} offer={card.priceKey && activePrices ? activePrices[card.priceKey] : null} />
           </li>
         ))}
       </ul>
