@@ -246,7 +246,7 @@ export function ExamTypeShowcase() {
             </span>
           </h1>
           <p className="mt-3 max-w-[32rem] text-[clamp(1rem,1.2vw,1.15rem)] font-medium leading-snug text-[#56627c]">
-            SIAP TKA ONE menyediakan pengalaman ujian online untuk Ananda, bisa di laptop atau HP, dilengkapi mode aman simulasi ujian anti contek.
+            Latihan seru, rasakan ujian sungguhan! Kerjakan dari laptop atau HP dengan mode aman anti contek, lalu pelajari pembahasannya biar makin siap.
           </p>
         </div>
       </section>
