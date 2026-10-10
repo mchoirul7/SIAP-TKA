@@ -239,7 +239,7 @@ async function SubjectStep({
 }) {
   const { config, semester } = step;
   const scope = examScopeFor(config.key, context, semester);
-  const catalog = buildSubjectCatalog(scope.level, config.key, await getExamSubjects(scope));
+  const catalog = buildSubjectCatalog(scope.level, scope.gradeLevel, config.key, await getExamSubjects(scope));
   const sections = groupSubjectCatalog(catalog);
   // TKA dan ulangan harian diapit kartu ujicoba gratis dan kartu custom request.
   const withExtras = config.key === "tka" || config.key === "ulangan_harian";

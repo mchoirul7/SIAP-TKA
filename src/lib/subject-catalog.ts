@@ -4,7 +4,7 @@ import { subjectSegment } from "@/lib/assessment";
 /**
  * Daftar mapel pada halaman pilih mapel /ujian.
  *
- * Mapel wajib selalu tampil, walau belum punya paket — kartunya lalu memakai
+ * Mapel wajib kelas itu selalu tampil, walau belum punya paket — kartunya lalu memakai
  * penanda "Dalam proses penambahan paket soal". Mapel lain yang punya paket
  * di basis data ikut ditambahkan di belakangnya. Gambar sampul dipotong dari
  * mockup dan dipakai ulang lintas jenjang; SMA punya set sampul sendiri (lihat `artFor`).
@@ -49,11 +49,30 @@ const ENTRIES: Record<string, CatalogEntry> = {
 
 const COMMON_ARTS = ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", "bahasa-inggris", "seni-rupa", "seni-musik", "seni-tari", "seni-teater", "informatika", "bahasa-jawa"];
 
-const REQUIRED: Record<EducationLevel, string[]> = {
-  SD: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipas", "pjok", "bahasa-inggris", "seni-rupa", "seni-musik", "seni-tari", "seni-teater", "informatika", "bahasa-jawa"],
-  SMP: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipa", "ips", "bahasa-inggris", "pjok", "informatika", "seni-rupa", "seni-musik", "seni-tari", "seni-teater", "prakarya", "bahasa-jawa"],
-  SMA: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", "informatika", "fisika", "kimia", "biologi", "ekonomi", "geografi", "sosiologi", "seni-rupa", "seni-musik", "seni-tari", "seni-teater", "bahasa-jawa"],
+/** Seni dihitung wajib walau sekolah hanya membuka salah satunya. */
+const ARTS = ["seni-rupa", "seni-musik", "seni-tari", "seni-teater"];
+
+/**
+ * Mapel wajib per fase Kurikulum Merdeka. Fase A (kelas 1-2) belum ada IPAS
+ * dan Bahasa Inggris; IPAS dan Bahasa Inggris masuk mulai Fase B (kelas 3).
+ * SMA Fase E (kelas 10) masih mempelajari IPA dan IPS lengkap serta
+ * Informatika, sedangkan di Fase F (kelas 11-12) mapel itu menjadi pilihan dan
+ * hanya tampil di kelompok pilihan bila sudah punya paket. Bahasa Jawa ikut
+ * sebagai muatan lokal.
+ */
+const REQUIRED_BY_PHASE = {
+  A: ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", ...ARTS, "bahasa-jawa"],
+  BC: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipas", "pjok", "bahasa-inggris", ...ARTS, "bahasa-jawa"],
+  D: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipa", "ips", "bahasa-inggris", "pjok", "informatika", ...ARTS, "prakarya", "bahasa-jawa"],
+  E: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", "informatika", "fisika", "kimia", "biologi", "ekonomi", "geografi", "sosiologi", ...ARTS, "bahasa-jawa"],
+  F: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", ...ARTS, "bahasa-jawa"],
 };
+
+function requiredForGrade(level: EducationLevel, gradeLevel: number): string[] {
+  if (level === "SD") return gradeLevel <= 2 ? REQUIRED_BY_PHASE.A : REQUIRED_BY_PHASE.BC;
+  if (level === "SMP") return REQUIRED_BY_PHASE.D;
+  return gradeLevel <= 10 ? REQUIRED_BY_PHASE.E : REQUIRED_BY_PHASE.F;
+}
 
 /** TKA hanya menguji mapel tertentu, jadi mapel wajibnya lebih sedikit. */
 const REQUIRED_TKA: Record<EducationLevel, string[]> = {
@@ -112,10 +131,11 @@ const TONES: SubjectTone[] = ["emerald", "sky", "orange", "violet"];
 
 export function buildSubjectCatalog(
   level: EducationLevel,
+  gradeLevel: number,
   assessmentType: AssessmentType,
   available: { subject: Subject; packageCount: number; tryoutCount: number }[],
 ): CatalogSubject[] {
-  const required = (assessmentType === "tka" ? REQUIRED_TKA : REQUIRED)[level];
+  const required = assessmentType === "tka" ? REQUIRED_TKA[level] : requiredForGrade(level, gradeLevel);
   const byKey = new Map<string, { subject: Subject; packageCount: number; tryoutCount: number }>();
   const extras: CatalogSubject[] = [];
 
