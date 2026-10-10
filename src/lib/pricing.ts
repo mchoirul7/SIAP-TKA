@@ -8,12 +8,12 @@ import type { AssessmentType, EducationLevel, PackageKind } from "@/data/types";
 /** Harga satu paket bila dibeli satuan. */
 export function packagePrice(kind: PackageKind, assessmentType: AssessmentType): number {
   if (assessmentType === "tka") return kind === "tryout" ? 15000 : 7500;
-  if (assessmentType === "ulangan_harian") return 5000;
+  if (assessmentType === "ulangan_harian") return 2500;
   return kind === "tryout" ? 10000 : 2500;
 }
 
-/** Jumlah paket yang dianggap ada di setiap mapel ulangan harian. */
-const UH_PACKAGES_PER_SUBJECT = 5;
+/** Harga paket lengkap satu mapel ulangan harian, berapa pun jumlah paketnya. */
+const UH_PRICE_PER_SUBJECT = 25000;
 
 /** Harga normal satu mapel ulangan harian, ditampilkan sebagai harga coret. */
 const UH_NORMAL_PRICE_PER_SUBJECT = 50000;
@@ -26,9 +26,8 @@ interface SubjectPackages {
 }
 
 /**
- * Harga paket lengkap satu mapel. Ulangan harian dianggap berisi 5 paket
- * Rp5.000 berapa pun jumlah paketnya, dan tetap dihargai walau paketnya belum
- * ada. TKA Rp75.000 per mapel dan jenis lain Rp25.000, hanya untuk mapel yang
+ * Harga paket lengkap satu mapel. Ulangan harian Rp25.000 berapa pun jumlah
+ * paketnya, dan tetap dihargai walau paketnya belum ada. TKA Rp75.000 per mapel dan jenis lain Rp25.000, hanya untuk mapel yang
  * sudah punya paket.
  */
 export function fullPackagePrice(
@@ -36,7 +35,7 @@ export function fullPackagePrice(
   item: SubjectPackages,
 ): number | null {
   if (assessmentType === "ulangan_harian") {
-    return UH_PACKAGES_PER_SUBJECT * packagePrice("latihan", assessmentType);
+    return UH_PRICE_PER_SUBJECT;
   }
   if (!item.subject) return null;
   if (assessmentType === "tka") return 75000;
@@ -76,9 +75,9 @@ export const ACCESS_MONTHS = 6;
  * yang sudah dijual pada lingkup itu. Harga coretnya jumlah harga paket
  * lengkap tiap mapel, yaitu harga bila mapelnya dibeli satu per satu; ulangan
  * harian memakai harga coret tiap mapelnya.
- * TKA dipatok Rp125.000 untuk SD/SMP dan Rp165.000 untuk SMA, ulangan harian
- * Rp150.000, berapa pun jumlah mapelnya, tetapi tidak pernah lebih mahal
- * daripada total per mapelnya.
+ * TKA dipatok Rp125.000 untuk SD/SMP dan Rp165.000 untuk SMA, berapa pun
+ * jumlah mapelnya, tetapi tidak pernah lebih mahal daripada total per mapelnya.
+ * Ulangan harian selalu Rp150.000.
  */
 export function allAccessPrice(
   assessmentType: AssessmentType,
@@ -100,7 +99,7 @@ export function allAccessPrice(
   }
   if (subjectCount === 0) return null;
   const fixed = fixedAllAccessPrice(assessmentType, level);
-  if (fixed !== null) price = Math.min(fixed, price);
+  if (fixed !== null) price = assessmentType === "ulangan_harian" ? fixed : Math.min(fixed, price);
   return { price, originalPrice: original > price ? original : null, subjectCount };
 }
 

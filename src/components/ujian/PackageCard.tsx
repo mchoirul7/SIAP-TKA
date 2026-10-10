@@ -57,9 +57,9 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
   const { mounted, isUnlocked } = useEntitlements();
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const isTryout = pkg.kind === "tryout";
-  // Latihan ulangan harian tidak menampilkan harga satuan; harganya cukup di kartu mapel.
-  const hidePrice = pkg.isFreeAccess || (pkg.kind === "latihan" && pkg.assessmentType === "ulangan_harian");
-  const price = hidePrice ? null : formatRupiah(packagePrice(pkg.kind, pkg.assessmentType));
+  const price = pkg.isFreeAccess ? null : formatRupiah(packagePrice(pkg.kind, pkg.assessmentType));
+  // Ulangan harian mengingatkan bahwa paket lengkap per mapel lebih murah.
+  const showSubjectHint = price !== null && pkg.assessmentType === "ulangan_harian";
   const href = isTryout
     ? `/tryout/${pkg.slug}`
     : unlocked
@@ -158,6 +158,17 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
       </ul>
 
       <div className="relative mt-auto pt-5">
+        {showSubjectHint ? (
+          <p
+            className={[
+              "mb-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold",
+              isTryout ? "bg-amber-300/15 text-amber-200" : "bg-emerald-50 text-emerald-700",
+            ].join(" ")}
+          >
+            <Icon name="info" className="h-3.5 w-3.5" strokeWidth={2.4} />
+            Lebih murah beli per mapel
+          </p>
+        ) : null}
         {/* Paket gratis tidak perlu ditunjukkan harganya. */}
         {price ? (
           <p className="mb-3 flex items-baseline justify-between gap-2">
