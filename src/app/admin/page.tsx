@@ -8,7 +8,7 @@ interface PageProps {
   searchParams: Promise<{ q?: string; pesan?: string; galat?: string }>;
 }
 
-/** Daftar murid, pencarian kode, dan pembuatan kode murid baru. */
+/** Daftar murid, pencarian, dan pembuatan akun murid oleh admin. */
 export default async function AdminPage({ searchParams }: PageProps) {
   const { q = "", pesan, galat } = await searchParams;
 
@@ -47,8 +47,8 @@ export default async function AdminPage({ searchParams }: PageProps) {
     <div className="space-y-6">
       <Flash message={pesan} error={galat} />
 
-      <Card title="Buat kode murid baru">
-        <form action={createStudentAction} className="grid gap-4 md:grid-cols-[2fr_1fr_1fr_2fr_auto] md:items-end">
+      <Card title="Buat akun murid (bila orang tua minta dibuatkan)">
+        <form action={createStudentAction} className="grid gap-4 md:grid-cols-[2fr_1fr_1fr_1.5fr_1.5fr_auto] md:items-end">
           <label className={labelClass}>
             Nama murid
             <input name="name" required className={`${inputClass} mt-1.5`} placeholder="Nama lengkap" />
@@ -69,8 +69,12 @@ export default async function AdminPage({ searchParams }: PageProps) {
             No. WA orang tua (opsional)
             <input name="parentPhone" className={`${inputClass} mt-1.5`} placeholder="08…" />
           </label>
+          <label className={labelClass}>
+            PIN (kosong = otomatis)
+            <input name="pin" inputMode="numeric" maxLength={6} pattern="\d{6}" className={`${inputClass} mt-1.5 font-mono`} placeholder="6 angka" />
+          </label>
           <button type="submit" className={primaryButton}>
-            Buat Kode
+            Buat Akun
           </button>
         </form>
       </Card>
@@ -79,7 +83,7 @@ export default async function AdminPage({ searchParams }: PageProps) {
         title={q ? `Hasil cari "${q}" (${students.length})` : `Murid terbaru (${students.length})`}
         action={
           <form className="flex gap-2">
-            <input name="q" defaultValue={q} placeholder="Cari kode, nama, atau no. WA" className={`${inputClass} w-64`} />
+            <input name="q" defaultValue={q} placeholder="Cari nama, PIN, atau no. WA" className={`${inputClass} w-64`} />
             <button type="submit" className={primaryButton}>
               Cari
             </button>
@@ -93,7 +97,7 @@ export default async function AdminPage({ searchParams }: PageProps) {
             <table className="w-full min-w-[640px] text-left text-[14px]">
               <thead>
                 <tr className="border-b border-slate-200 text-[12px] font-black uppercase tracking-wide text-slate-500">
-                  <th className="py-2 pr-3">Kode</th>
+                  <th className="py-2 pr-3">PIN</th>
                   <th className="py-2 pr-3">Nama</th>
                   <th className="py-2 pr-3">Kelas</th>
                   <th className="py-2 pr-3">No. WA</th>

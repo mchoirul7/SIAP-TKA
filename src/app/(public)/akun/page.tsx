@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { grantLabels, studentAttemptHistory, studentDevices } from "@/lib/student-account";
 import { getServerStudent, studentAccess } from "@/lib/student-session";
@@ -52,7 +53,7 @@ export default async function AccountPage() {
           </span>
           <h1 className="mt-4 text-[26px] font-black text-ink-900">Akun Murid</h1>
           <p className="mt-2 text-[15px] font-medium text-slate-600">
-            Masuk dengan kode murid untuk melihat paket yang dimiliki, riwayat nilai, dan perangkat yang sedang dipakai.
+            Masuk dengan PIN untuk melihat paket yang dimiliki, riwayat nilai, dan perangkat yang sedang dipakai.
           </p>
           <div className="mt-6">
             <SignInButton />
@@ -81,6 +82,9 @@ export default async function AccountPage() {
           <p className="mt-1 text-sm font-semibold text-white/80">
             {access.student.level} Kelas {access.student.gradeLevel}
           </p>
+          <div className="mt-4">
+            <LogoutButton onDark label="Keluar dari akun" />
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-3 text-center">
           <div className="rounded-[12px] bg-white/15 px-5 py-3">
@@ -95,7 +99,13 @@ export default async function AccountPage() {
       </section>
 
       <section className="rounded-[16px] border border-sky-100 bg-white p-5 shadow-card sm:p-6">
-        <h2 className="text-[20px] font-black text-ink-900">Paket yang dimiliki</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-[20px] font-black text-ink-900">Paket yang dimiliki</h2>
+          <Link href="/latihan-saya" className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-gradient-to-r from-brand-500 to-brand-700 px-4 text-[13px] font-black text-white hover:opacity-90">
+            <Icon name="play" className="h-4 w-4" />
+            Buka Latihan Saya
+          </Link>
+        </div>
         {access.grants.length === 0 ? (
           <p className="mt-3 text-sm font-medium text-slate-500">Belum ada paket aktif. Hubungi admin untuk membeli paket.</p>
         ) : (

@@ -1,24 +1,32 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import type { EducationLevel } from "@/data/types";
 import { isAdmin } from "@/lib/admin-auth";
 import { getAdminStudent, listGrants } from "@/lib/admin-students";
-import { ASSESSMENT_LABEL } from "@/lib/assessment";
 import { formatRupiah } from "@/lib/pricing";
 import { absoluteUrl } from "@/lib/seo";
 import { grantLabels, studentAttemptHistory, studentDevices } from "@/lib/student-account";
-import { getSubjects } from "@/services/content-service";
+import { scopeCatalog, scopeFromParams } from "@/lib/admin-catalog";
 import {
   addGrantAction,
   deleteGrantAction,
   removeDeviceAdminAction,
+  resetPinAction,
   setStudentActiveAction,
 } from "../../actions";
+import { PackagePicker } from "../../PackagePicker";
 import { Card, dangerButton, Flash, formatDateTime, inputClass, labelClass, primaryButton } from "../../ui";
 
 interface PageProps {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ baru?: string; pesan?: string; galat?: string }>;
+  searchParams: Promise<{
+    baru?: string;
+    pesan?: string;
+    galat?: string;
+    ujian?: string;
+    jenjang?: string;
+    kelas?: string;
+    semester?: string;
+  }>;
 }
 
 /** 0812… → 62812… untuk tautan wa.me. */
@@ -27,32 +35,38 @@ function waNumber(phone: string): string {
   return digits.startsWith("0") ? `62${digits.slice(1)}` : digits;
 }
 
-const LEVELS: EducationLevel[] = ["SD", "SMP", "SMA"];
-
 /** Detail satu murid: kode untuk dikirim, grant, perangkat, dan riwayat nilai. */
 export default async function AdminStudentPage({ params, searchParams }: PageProps) {
   if (!(await isAdmin())) redirect("/admin");
   const { id } = await params;
-  const { baru, pesan, galat } = await searchParams;
+  const query = await searchParams;
+  const { baru, pesan, galat } = query;
   const student = await getAdminStudent(id);
   if (!student) notFound();
 
-  const [grants, devices, history, subjects] = await Promise.all([
+  // Pemilih paket langsung menampilkan Ulangan Harian kelas murid ini bila belum dipilih lain.
+  const scope = scopeFromParams(query) ?? {
+    assessmentType: "ulangan_harian" as const,
+    level: student.level,
+    gradeLevel: student.gradeLevel,
+    semester: null,
+  };
+  const [grants, devices, history, catalog] = await Promise.all([
     listGrants(student.id),
     studentDevices(student.id, ""),
     studentAttemptHistory(student.id),
-    getSubjects(),
+    scopeCatalog(scope),
   ]);
   const labels = await grantLabels(grants);
   const now = Date.now();
 
   const waMessage = [
-    `Halo, berikut kode murid SIAP TKA ONE untuk ${student.name}:`,
+    `Halo, berikut PIN akun SIAP TKA ONE untuk ${student.name}:`,
     "",
     `*${student.accessCode}*`,
     "",
-    `Cara masuk: buka ${absoluteUrl("/akun")}, tekan "Masuk dengan Kode Murid", lalu ketik kode di atas.`,
-    "Satu kode bisa dipakai di 2 perangkat. Riwayat nilai bisa dilihat dan diunduh di halaman Akun.",
+    `Cara masuk: buka ${absoluteUrl("/akun")}, tekan "Masuk / Daftar", pilih "Sudah punya akun", lalu ketik PIN di atas.`,
+    "Satu akun bisa dipakai di 2 perangkat. Riwayat nilai bisa dilihat dan diunduh di halaman Akun.",
   ].join("\n");
 
   return (
@@ -60,7 +74,7 @@ export default async function AdminStudentPage({ params, searchParams }: PagePro
       <Link href="/admin" className="text-[13px] font-bold text-brand-700 hover:underline">
         ← Semua murid
       </Link>
-      <Flash message={baru ? "Kode murid dibuat. Kirim kodenya ke orang tua, lalu tambahkan paket yang dibeli." : pesan} error={galat} />
+      <Flash message={baru ? "Akun murid dibuat. Kirim PIN-nya ke orang tua, lalu bukakan paket yang dibeli." : pesan} error={galat} />
 
       <Card
         title={student.name}
@@ -69,16 +83,22 @@ export default async function AdminStudentPage({ params, searchParams }: PagePro
             <input type="hidden" name="studentId" value={student.id} />
             <input type="hidden" name="active" value={student.isActive ? "0" : "1"} />
             <button type="submit" className={student.isActive ? dangerButton : primaryButton}>
-              {student.isActive ? "Nonaktifkan kode" : "Aktifkan kode"}
+              {student.isActive ? "Nonaktifkan akun" : "Aktifkan akun"}
             </button>
           </form>
         }
       >
         <div className="grid gap-5 md:grid-cols-[auto_1fr]">
           <div>
-            <p className="text-[12px] font-black uppercase tracking-wide text-slate-500">Kode murid</p>
+            <p className="text-[12px] font-black uppercase tracking-wide text-slate-500">PIN masuk</p>
             <p className="mt-1 select-all font-mono text-[28px] font-black text-brand-700">{student.accessCode}</p>
-            <p className="mt-1 text-[14px] text-slate-600">
+            <form action={resetPinAction} className="mt-2">
+              <input type="hidden" name="studentId" value={student.id} />
+              <button type="submit" className={dangerButton}>
+                Reset PIN (orang tua lupa)
+              </button>
+            </form>
+            <p className="mt-2 text-[14px] text-slate-600">
               {student.level} Kelas {student.gradeLevel} · {student.parentPhone ?? "tanpa no. WA"} ·{" "}
               {student.isActive ? "Aktif" : "Nonaktif"}
             </p>
@@ -131,90 +151,31 @@ export default async function AdminStudentPage({ params, searchParams }: PagePro
           </ul>
         )}
 
-        <form action={addGrantAction} className="rounded-lg border border-dashed border-slate-300 p-4">
-          <input type="hidden" name="studentId" value={student.id} />
-          <p className="mb-3 text-[14px] font-black text-ink-900">Tambah paket yang dibeli</p>
-          <div className="grid gap-4 md:grid-cols-4">
-            <label className={labelClass}>
-              Jenis pembelian
-              <select name="scope" defaultValue="all_in" className={`${inputClass} mt-1.5`}>
-                <option value="all_in">All-in (semua mapel)</option>
-                <option value="subject">Paket lengkap per mapel</option>
-                <option value="package">Paket satuan</option>
-              </select>
-            </label>
-            <label className={labelClass}>
-              Jenis ujian
-              <select name="assessmentType" defaultValue="ulangan_harian" className={`${inputClass} mt-1.5`}>
-                {Object.entries(ASSESSMENT_LABEL).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className={labelClass}>
-              Jenjang
-              <select name="level" defaultValue={student.level} className={`${inputClass} mt-1.5`}>
-                {LEVELS.map((level) => (
-                  <option key={level}>{level}</option>
-                ))}
-              </select>
-            </label>
-            <label className={labelClass}>
-              Kelas
-              <input name="gradeLevel" type="number" min={1} max={12} defaultValue={student.gradeLevel} className={`${inputClass} mt-1.5`} />
-            </label>
-            <label className={labelClass}>
-              Semester
-              <select name="semester" defaultValue="" className={`${inputClass} mt-1.5`}>
-                <option value="">Semua semester</option>
-                <option value="1">Semester 1</option>
-                <option value="2">Semester 2</option>
-              </select>
-            </label>
-            <label className={labelClass}>
-              Mapel (untuk per mapel)
-              <select name="subjectId" defaultValue="" className={`${inputClass} mt-1.5`}>
-                <option value="">-</option>
-                {LEVELS.map((level) => (
-                  <optgroup key={level} label={level}>
-                    {subjects
-                      .filter((subject) => subject.level === level)
-                      .map((subject) => (
-                        <option key={subject.id} value={subject.id}>
-                          {subject.name}
-                        </option>
-                      ))}
-                  </optgroup>
-                ))}
-              </select>
-            </label>
-            <label className={`${labelClass} md:col-span-2`}>
-              Slug paket (untuk satuan)
-              <input name="packageSlug" placeholder="mis. pkg-uh-sd-k2-matematika-bab-01" className={`${inputClass} mt-1.5 font-mono`} />
-            </label>
-            <label className={labelClass}>
-              Lama akses (bulan)
-              <input name="months" type="number" min={1} max={24} defaultValue={6} className={`${inputClass} mt-1.5`} />
-            </label>
-            <label className={labelClass}>
-              Harga dibayar (Rp)
-              <input name="pricePaid" inputMode="numeric" placeholder="75000" className={`${inputClass} mt-1.5`} />
-            </label>
-            <label className={`${labelClass} md:col-span-2`}>
-              Catatan
-              <input name="note" placeholder="mis. transfer BCA 10/10" className={`${inputClass} mt-1.5`} />
-            </label>
-          </div>
-          <p className="mt-3 text-[12px] text-slate-500">
-            Paket satuan cukup diisi slug-nya; jenis ujian, jenjang, kelas, dan semester diambil otomatis dari paketnya.
-            Slug terlihat di alamat halaman paket, setelah <code>/latihan/</code>.
-          </p>
-          <button type="submit" className={`${primaryButton} mt-4`}>
-            Tambah Grant
-          </button>
-        </form>
+        <div id="tambah-paket" className="rounded-lg border border-dashed border-slate-300 p-4">
+          <p className="mb-3 text-[14px] font-black text-ink-900">Bukakan paket untuk {student.name}</p>
+          <PackagePicker
+            basePath={`/admin/murid/${student.id}`}
+            scope={scope}
+            catalog={catalog}
+            defaultLevel={student.level}
+            defaultGrade={student.gradeLevel}
+            action={addGrantAction}
+            hidden={{ studentId: student.id }}
+            submitLabel="Simpan ke akun murid"
+            extraFields={
+              <>
+                <label className={labelClass}>
+                  Harga dibayar (Rp)
+                  <input name="pricePaid" inputMode="numeric" placeholder="75000" className={`${inputClass} mt-1.5`} />
+                </label>
+                <label className={`${labelClass} md:col-span-2`}>
+                  Catatan
+                  <input name="note" placeholder="mis. transfer BCA 10/10" className={`${inputClass} mt-1.5`} />
+                </label>
+              </>
+            }
+          />
+        </div>
       </Card>
 
       <Card

@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
  * Klien Supabase untuk membaca konten.
  *
  * Dipakai di sisi server. Halaman katalog/detail memakai data ini saat build,
- * sedangkan route konten terkunci membacanya saat request agar cookie voucher
+ * sedangkan route konten terkunci membacanya saat request agar sesi murid
  * dapat diperiksa sebelum soal dikirim.
  *
  * Kuncinya publishable: hanya bisa membaca, dan hanya paket yang sudah terbit

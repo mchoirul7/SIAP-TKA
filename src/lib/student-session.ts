@@ -1,11 +1,13 @@
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 import type { EducationLevel } from "@/data/types";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 /**
- * Satu kode untuk satu murid.
+ * Satu akun untuk satu murid.
  *
- * Kode murid (tabel `students`) adalah "akun" murid. Saat kode dimasukkan,
+ * Orang tua mendaftarkan murid sendiri dengan nama dan PIN 6 angka; PIN itu
+ * disimpan di `students.access_code` dan menjadi kode masuk. Saat PIN dimasukkan,
  * server membuat baris `student_sessions` dan menyimpan id-nya di cookie
  * httpOnly. Id sesi acak dan dicek ke basis data setiap kali dipakai, jadi
  * cookie tidak perlu ditandatangani dan bisa dicabut dengan menghapus barisnya.
@@ -191,6 +193,44 @@ export async function studentCanAccess(studentId: string, packageId: string): Pr
   });
   if (error) throw new Error(`Gagal memeriksa akses murid: ${error.message}`);
   return data === true;
+}
+
+/** Membuat sesi untuk murid ini dan membalas dengan data akunnya beserta cookie sesi. */
+export async function studentSignInResponse(
+  student: StudentRow,
+  userAgent: string | null,
+  message: string,
+): Promise<NextResponse> {
+  const sessionId = await createStudentSession(student.id, userAgent);
+  const access = await studentAccess(student);
+  const response = NextResponse.json({
+    kind: "student",
+    message,
+    student: access.student,
+    unlockedPackageSlugs: access.packageSlugs,
+  });
+  response.cookies.set(STUDENT_COOKIE_NAME, sessionId, studentCookieOptions);
+  return response;
+}
+
+/**
+ * Akun baru dari pendaftaran mandiri orang tua. PIN menjadi kode masuk, jadi
+ * harus unik; kosong bila PIN itu sudah dipakai akun lain.
+ */
+export async function registerStudent(input: {
+  name: string;
+  pin: string;
+  level: EducationLevel;
+  gradeLevel: number;
+}): Promise<StudentRow | null> {
+  const { data, error } = await supabaseAdmin()
+    .from("students")
+    .insert({ access_code: input.pin, name: input.name, level: input.level, grade_level: input.gradeLevel })
+    .select("id, name, level, grade_level, is_active")
+    .single<StudentRow>();
+  if (error?.code === "23505") return null;
+  if (error) throw new Error(`Gagal mendaftarkan murid: ${error.message}`);
+  return data;
 }
 
 export const studentCookieOptions = {

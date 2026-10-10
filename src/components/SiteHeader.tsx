@@ -6,6 +6,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { StudyContextDialog } from "@/components/StudyContextDialog";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
+import { useAccessDialog } from "@/components/AccessDialog";
 import { useStudent } from "@/hooks/useStudent";
 import { useStudyContext } from "@/hooks/useStudyContext";
 import { studyContextShortLabel } from "@/lib/study-context";
@@ -15,6 +16,7 @@ export function SiteHeader() {
   const { context, saveContext } = useStudyContext();
   const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
   const { student } = useStudent();
+  const { openAccess } = useAccessDialog();
 
   return (
     <>
@@ -50,17 +52,26 @@ export function SiteHeader() {
                 <Icon name="chevron-down" className="h-4 w-4 text-ink-900" strokeWidth={2.6} />
               </button>
 
-              {/* Akun murid: riwayat nilai, paket, perangkat, dan tombol keluar. */}
+              {/* Latihan Saya: paket yang sudah dibeli; halaman akun ditautkan dari sana. */}
               {student ? (
                 <Link
-                  href="/akun"
-                  title={`Akun ${student.name}`}
+                  href="/latihan-saya"
+                  title={`Latihan Saya - ${student.name}`}
                   className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90"
                 >
-                  <Icon name="chart" className="h-4 w-4" strokeWidth={2.4} />
-                  <span className="hidden sm:inline">Akun</span>
+                  <Icon name="layers" className="h-4 w-4" strokeWidth={2.4} />
+                  <span className="hidden sm:inline">Latihan Saya</span>
                 </Link>
-              ) : null}
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openAccess({ successHref: "/latihan-saya" })}
+                  className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90"
+                >
+                  <Icon name="unlock" className="h-4 w-4" strokeWidth={2.4} />
+                  <span className="hidden sm:inline">Masuk / Daftar</span>
+                </button>
+              )}
             </div>
           </div>
         </div>

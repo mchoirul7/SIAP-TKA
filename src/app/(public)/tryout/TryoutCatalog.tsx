@@ -51,7 +51,7 @@ export function TryoutCatalog({
                     <div className="flex flex-wrap items-start justify-between gap-4">
                       <div className="max-w-2xl">
                         <div className="flex flex-wrap items-center gap-3">
-                          <Badge tone="voucher">Kode Akses</Badge>
+                          <Badge tone="voucher">Berbayar</Badge>
                           <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
                             <Icon name="cap" className="h-4 w-4 text-brand-600" />
                             {subject?.name ?? ""} &middot; {contextLabel}

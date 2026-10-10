@@ -296,7 +296,7 @@ export function purchaseOptionsFor(pkg: PracticePackage | Tryout, subjectName: s
   };
 }
 
-/** Tujuan umum "beli kode akses" bila paket yang dimaksud belum diketahui. */
+/** Tujuan umum "beli paket" bila paket yang dimaksud belum diketahui. */
 export const buyAccessCodeHref = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
-  "Halo SIAP TKA ONE, saya ingin membeli kode akses, mohon dibantu.",
+  "Halo SIAP TKA ONE, saya ingin membeli paket latihan, mohon dibantu.",
 )}`;

@@ -50,18 +50,18 @@ export const homeFaq: FaqItem[] = [
       "Soal disusun mengikuti kisi-kisi terbaru dan dipetakan sampai ke tingkat subtopik dan konsep. Karena itu hasil pengerjaan tidak berhenti pada angka, tetapi menunjuk bagian materi mana yang masih lemah.",
   },
   {
-    question: "Satu kode akses membuka apa saja?",
+    question: "Bagaimana cara membuat akun murid?",
     answer:
-      "Satu kode akses membuka satu mata pelajaran dalam satu seri, termasuk seluruh tryout, latihan online, hasil, dan pembahasan di dalamnya. Untuk mata pelajaran lain dipakai kode akses yang lain, dan semua kode dapat dimasukkan di perangkat yang sama.",
+      "Tekan Masuk / Daftar, lalu isi nama murid dan buat PIN 6 angka. PIN itu dipakai untuk masuk lagi di HP atau laptop mana pun, dan satu akun bisa dipakai di dua perangkat sekaligus. Semua paket yang dibeli dan riwayat nilai tersimpan di akun itu.",
   },
   {
-    question: "Bagaimana cara mendapatkan kode akses?",
-    answer: `Kode akses dibeli lewat admin ${site.brandName} di WhatsApp. Pilih paket lengkap satu mata pelajaran atau beli satuan paket yang diinginkan, lalu kode yang diterima dimasukkan lewat tombol "Saya Punya Kode Akses".`,
+    question: "Bagaimana cara membeli paket?",
+    answer: `Masuk ke akun murid, buka paket yang diinginkan, lalu pilih paket lengkap satu mata pelajaran atau beli satuan lewat WhatsApp admin ${site.brandName}. Setelah pembayaran, admin membukakan paketnya ke akun dan paket langsung muncul di Latihan Saya.`,
   },
   {
     question: "Apakah setiap paket bisa dicoba dulu sebelum membeli?",
     answer:
-      "Bisa. Pada setiap mata pelajaran yang sudah punya paket latihan, paket pertamanya terbuka tanpa kode akses — lengkap dengan pembahasan dan analisa hasilnya — supaya bentuk soal dan cara kerjanya dapat dilihat sendiri sebelum memutuskan membeli.",
+      "Bisa. Pada setiap mata pelajaran yang sudah punya paket latihan, paket pertamanya terbuka tanpa perlu daftar — lengkap dengan pembahasan dan analisa hasilnya — supaya bentuk soal dan cara kerjanya dapat dilihat sendiri sebelum memutuskan membeli.",
   },
   {
     question: "Apakah perlu memasang aplikasi?",

@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "FAQ",
-  description: `Pertanyaan yang sering ditanyakan tentang ${site.brandName}: isi paket, jenjang, mata pelajaran, kode akses, dan cara mulai latihan TKA.`,
+  description: `Pertanyaan yang sering ditanyakan tentang ${site.brandName}: isi paket, jenjang, mata pelajaran, akun murid, dan cara mulai latihan TKA.`,
   path: "/tentang",
 });
 
@@ -24,7 +24,7 @@ export default function FaqPage() {
           eyebrow="FAQ"
           icon="help"
           title="Pertanyaan yang Sering Ditanyakan"
-          description={`Jawaban singkat tentang isi paket ${site.brandName}, jenjang yang tersedia, kode akses, dan cara mulai belajar.`}
+          description={`Jawaban singkat tentang isi paket ${site.brandName}, jenjang yang tersedia, akun murid, dan cara mulai belajar.`}
         />
 
         <section className="mt-8 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_-24px_rgba(12,10,55,0.45)]">

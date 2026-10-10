@@ -17,7 +17,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <header className="border-b border-slate-200 bg-white">
         <div className="container-page flex h-14 items-center justify-between">
           <Link href="/admin" className="text-[15px] font-black text-ink-900">
-            Siap TKA · Admin Kode Murid
+            Siap TKA · Admin Murid
           </Link>
           {signedIn ? (
             <form action={signOutAdminAction}>

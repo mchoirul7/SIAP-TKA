@@ -47,14 +47,14 @@ export function HomeSeoSection() {
         </div>
       </section>
 
-      {/* Ajakan penutup: pengguna diarahkan ke admin WhatsApp untuk membeli kode akses. */}
+      {/* Ajakan penutup: pengguna diarahkan ke admin WhatsApp untuk membeli paket. */}
       <section className="mt-12 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-ink-950 p-7 sm:p-9">
         <h2 className="max-w-xl text-xl font-extrabold tracking-tight text-white sm:text-2xl">
           Mulai persiapan TKA ananda dari rumah hari ini
         </h2>
         <p className="mt-2.5 max-w-xl text-[15px] leading-relaxed text-brand-100">
-          Satu kode akses membuka satu mata pelajaran dalam satu seri — beserta seluruh tryout,
-          latihan online, hasil, dan pembahasannya.
+          Beli lewat WhatsApp, daftar akun cukup dengan nama dan PIN, dan semua paket yang dibeli tersimpan di akun ananda,
+          lengkap dengan riwayat nilai dan pembahasannya.
         </p>
         <a
           href={buyAccessCodeHref}
@@ -63,7 +63,7 @@ export function HomeSeoSection() {
           className="mt-6 inline-flex h-12 items-center gap-2 rounded-xl bg-accent-400 px-6 text-base font-bold text-ink-950 transition-colors hover:bg-accent-300"
         >
           <Icon name="whatsapp" className="h-5 w-5" strokeWidth={2.2} />
-          Beli Kode Akses lewat WhatsApp
+          Beli Paket lewat WhatsApp
         </a>
       </section>
     </div>

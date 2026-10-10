@@ -1,10 +1,10 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { StudyContextGate } from "@/components/StudyContextGate";
-import { VoucherProvider } from "@/components/VoucherDialog";
+import { AccessProvider } from "@/components/AccessDialog";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <VoucherProvider>
+    <AccessProvider>
       <div className="flex min-h-screen flex-col bg-[#f4f9ff] bg-[radial-gradient(circle_at_8%_4%,rgba(210,232,255,0.72),transparent_24rem),radial-gradient(circle_at_97%_33%,rgba(225,242,255,0.8),transparent_22rem),linear-gradient(180deg,#f7fbff_0%,#eef7ff_58%,#f8fbff_100%)]">
         <a
           href="#konten"
@@ -18,6 +18,6 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           {children}
         </main>
       </div>
-    </VoucherProvider>
+    </AccessProvider>
   );
 }

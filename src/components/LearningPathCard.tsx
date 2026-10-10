@@ -153,7 +153,7 @@ export function LearningTryoutCard({
               )}`}
             >
               <Icon name={locked ? "lock" : "unlock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
-              {locked ? "Kode Akses" : "Terbuka"}
+              {locked ? "Berbayar" : "Terbuka"}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-800 ring-1 ring-inset ring-rose-100">
               <Icon name="trophy" className="h-3.5 w-3.5" />

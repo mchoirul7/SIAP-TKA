@@ -31,7 +31,7 @@ import { supabase } from "@/lib/supabase";
  * server lalu mengopernya sebagai props.
  *
  * Halaman katalog/detail membaca konten saat `next build`. Route yang berisi
- * konten terkunci sengaja dynamic agar bisa memeriksa cookie voucher di server.
+ * konten terkunci sengaja dynamic agar bisa memeriksa sesi murid di server.
  */
 
 const FREE_PRACTICE_LIMIT_PER_SUBJECT = 1;
@@ -140,7 +140,8 @@ interface QuestionRow {
   instruction: string | null;
   explanation: string | null;
   visual_prompt: string | null;
-  options: QuestionOption[] | null;
+  /** Daftar `[{key, text}]` atau objek `{"A": "teks"}`; diseragamkan oleh `toOptions`. */
+  options: unknown;
   correct_answer: string | null;
   correct_answers: string[] | null;
   categories: { key: string; label: string }[] | null;
@@ -413,6 +414,24 @@ function packageAccess(
 }
 
 /**
+ * Opsi jawaban di basis data datang dalam dua bentuk: daftar `[{key, text}]`
+ * dan, pada soal hasil impor yang lebih baru, objek `{"A": "teks", ...}`.
+ * Keduanya diseragamkan menjadi daftar urut kunci supaya layar ujian cukup
+ * mengenal satu bentuk.
+ */
+function toOptions(raw: unknown): QuestionOption[] {
+  if (Array.isArray(raw)) return raw as QuestionOption[];
+  if (!raw || typeof raw !== "object") return [];
+  return Object.entries(raw as Record<string, unknown>)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, value]) =>
+      value && typeof value === "object"
+        ? { ...(value as Partial<QuestionOption>), key, text: String((value as { text?: unknown }).text ?? "") }
+        : { key, text: String(value ?? "") },
+    );
+}
+
+/**
  * Bacaan bersama dipetakan ke `stimulus` supaya layar ujian yang sudah ada dapat
  * menampilkannya tanpa perubahan. Konsekuensinya bacaan yang dipakai beberapa
  * soal ikut tampil berulang di tiap soal — dapat diperbaiki nanti dengan panel
@@ -450,14 +469,14 @@ function toQuestion(row: QuestionRow, passageHtml: Map<string, string>): Questio
     return {
       ...base,
       type: "mcma",
-      options: row.options ?? [],
+      options: toOptions(row.options),
       correctAnswers: row.correct_answers ?? [],
     };
   }
   return {
     ...base,
     type: "single",
-    options: row.options ?? [],
+    options: toOptions(row.options),
     correctAnswer: row.correct_answer ?? "",
   };
 }

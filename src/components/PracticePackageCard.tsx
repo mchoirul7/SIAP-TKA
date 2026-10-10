@@ -59,7 +59,7 @@ export function PracticePackageCard({
             </Link>
           </h3>
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            {locked ? "Buka dengan kode akses" : "Latihan online dan pembahasan"}
+            {locked ? "Masuk dengan PIN akun untuk membuka" : "Latihan online dan pembahasan"}
           </p>
         </div>
       </div>

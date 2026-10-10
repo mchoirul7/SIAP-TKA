@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { StatCard } from "@/components/ui/StatCard";
-import { useVoucherDialog } from "@/components/VoucherDialog";
+import { useAccessDialog } from "@/components/AccessDialog";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
@@ -21,7 +21,7 @@ import { readProfile, writeProfile } from "@/storage/profile-storage";
 
 export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectName: string }) {
   const { navigate, isPending } = useNavigate();
-  const { openVoucher } = useVoucherDialog();
+  const { openAccess } = useAccessDialog();
   const { mounted: entitlementsMounted, isUnlocked } = useEntitlements();
   const [mounted, setMounted] = useState(false);
   const [name, setName] = useState("");
@@ -47,11 +47,9 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
   const hasUnfinishedAttempt = Boolean(attempt && !attempt.submittedAt);
   const hasFinishedAttempt = Boolean(attempt?.submittedAt);
   const unlocked = entitlementsMounted && isUnlocked(tryout);
-  const voucherOptions = {
+  const accessOptions = {
     packageTitle: tryout.title,
     successHref: `/tryout/${tryout.slug}`,
-    requiredAccessKey: tryout.accessKey,
-    requiredLabel: `${subjectName} - ${tryout.seriesTitle}`,
     purchase: purchaseOptionsFor(tryout, subjectName),
   };
 
@@ -59,7 +57,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
 
   const handleStart = () => {
     if (!unlocked) {
-      openVoucher(voucherOptions);
+      openAccess(accessOptions);
       return;
     }
     if (name.trim().length < 2) {
@@ -73,7 +71,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
 
   const handleContinue = () => {
     if (!unlocked) {
-      openVoucher(voucherOptions);
+      openAccess(accessOptions);
       return;
     }
     setTryoutSecureMode(tryout.slug, secureModeEnabled);
@@ -82,7 +80,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
 
   const handleRestart = () => {
     if (!unlocked) {
-      openVoucher(voucherOptions);
+      openAccess(accessOptions);
       return;
     }
     persistProfile();
@@ -124,7 +122,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
           </Link>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Kode Akses</Badge>}
+            {unlocked ? <Badge tone="success">Terbuka</Badge> : <Badge tone="voucher">Berbayar</Badge>}
             <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
               <Icon name="cap" className="h-4 w-4 text-brand-600" />
               {subjectName} · {tryout.seriesTitle} · Jenjang {tryout.level}
@@ -161,7 +159,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
               icon="star"
               tone="emerald"
               label="Akses"
-              value={unlocked ? "Terbuka" : "Kode Akses"}
+              value={unlocked ? "Terbuka" : "Berbayar"}
               valueClassName="text-lg"
             />
           </div>
@@ -206,21 +204,19 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
             ) : !unlocked ? (
               <>
                 <IconBadge name="lock" tone="brand" size="lg" />
-                <p className="eyebrow mt-4">Konten Kode Akses</p>
-                <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                  Masukkan kode akses seri untuk membuka tryout ini.
-                </h2>
+                <p className="eyebrow mt-4">Konten Berbayar</p>
+                <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">Buka tryout ini</h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Satu kode akses membuka semua tryout dan latihan {subjectName} dalam{" "}
-                  {tryout.seriesTitle}.
+                  Masuk atau daftar dengan PIN, lalu beli lewat WhatsApp. Setelah admin membukakannya, tryout {subjectName}{" "}
+                  muncul di Latihan Saya.
                 </p>
                 <Button
                   size="lg"
                   className="mt-6 w-full"
-                  onClick={() => openVoucher(voucherOptions)}
+                  onClick={() => openAccess(accessOptions)}
                 >
-                  <Icon name="ticket" className="h-5 w-5" />
-                  Masukkan Kode Akses
+                  <Icon name="unlock" className="h-5 w-5" />
+                  Buka Akses
                 </Button>
               </>
             ) : hasUnfinishedAttempt ? (

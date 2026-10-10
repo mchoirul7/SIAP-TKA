@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { useNavigate } from "@/components/NavigationProgress";
-import { useVoucherDialog } from "@/components/VoucherDialog";
+import { useAccessDialog } from "@/components/AccessDialog";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { examPackagesHref } from "@/lib/assessment";
@@ -57,24 +57,22 @@ export function PackageDetail({
 }) {
   const { navigate, isPending } = useNavigate();
   const { mounted, isUnlocked } = useEntitlements();
-  const { openVoucher } = useVoucherDialog();
+  const { openAccess } = useAccessDialog();
   const [hasFinishedAttempt, setHasFinishedAttempt] = useState(false);
   const [hasStartedAttempt, setHasStartedAttempt] = useState(false);
   const [studentName, setStudentName] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
   const [studentNameError, setStudentNameError] = useState<string | null>(null);
   const [secureModeEnabled, setSecureModeEnabled] = useState(false);
-  const autoVoucherOpenedRef = useRef(false);
+  const autoAccessOpenedRef = useRef(false);
   const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
   const openAccessDialog = useCallback(() => {
-    openVoucher({
+    openAccess({
       packageSlug: pkg.slug,
       packageTitle: pkg.title,
-      requiredAccessKey: pkg.accessKey,
-      requiredLabel: `${subjectName} - ${pkg.seriesTitle}`,
       purchase: purchaseOptionsFor(pkg, subjectName),
     });
-  }, [openVoucher, pkg, subjectName]);
+  }, [openAccess, pkg, subjectName]);
 
   useEffect(() => {
     const profile = readProfile();
@@ -120,13 +118,13 @@ export function PackageDetail({
   };
 
   useEffect(() => {
-    if (!mounted || unlocked || autoVoucherOpenedRef.current) return;
+    if (!mounted || unlocked || autoAccessOpenedRef.current) return;
     if (typeof window === "undefined") return;
 
     const shouldOpen = new URLSearchParams(window.location.search).get("akses") === "1";
     if (!shouldOpen) return;
 
-    autoVoucherOpenedRef.current = true;
+    autoAccessOpenedRef.current = true;
     openAccessDialog();
   }, [mounted, openAccessDialog, unlocked]);
 
@@ -229,8 +227,8 @@ export function PackageDetail({
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
                     {pkg.isFreeAccess
-                      ? "Latihan pertama per mapel bisa dicoba tanpa kode akses."
-                      : "Kode akses seri ini membuka latihan, tryout, hasil, dan pembahasan."}
+                      ? "Latihan ujicoba bisa dicoba tanpa daftar."
+                      : "Masuk dengan PIN akun untuk membuka paket yang sudah dibeli."}
                   </p>
                 </div>
               </div>
@@ -324,19 +322,19 @@ export function PackageDetail({
                   <Icon name="lock" className="h-5 w-5" strokeWidth={2.1} />
                 </span>
                 <div>
-                  <p className="eyebrow">Kode akses</p>
+                  <p className="eyebrow">Paket berbayar</p>
                   <h2 className="mt-1 text-lg font-extrabold tracking-tight text-ink-900">
                     Buka latihan ini
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                    Satu kode akses membuka semua latihan dan tryout {subjectName} dalam{" "}
-                    {pkg.seriesTitle}.
+                    Masuk atau daftar dengan PIN, lalu beli lewat WhatsApp. Setelah admin membukakannya, paket{" "}
+                    {subjectName} muncul di Latihan Saya.
                   </p>
                 </div>
               </div>
 
               <ul className="mt-5 space-y-2 text-sm text-slate-700">
-                {["Latihan online", "Tryout seri ini", "Pembahasan setiap soal"].map((item) => (
+                {["Latihan online", "Riwayat nilai di akun", "Pembahasan setiap soal"].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <Icon
                       name="check"
@@ -353,7 +351,7 @@ export function PackageDetail({
                 onClick={openAccessDialog}
                 className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-base font-bold text-white transition-opacity hover:opacity-90"
               >
-                <Icon name="ticket" className="h-5 w-5" />
+                <Icon name="unlock" className="h-5 w-5" />
                 Buka Akses
               </button>
 

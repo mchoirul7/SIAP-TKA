@@ -4,19 +4,19 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { AssessmentType, EducationLevel } from "@/data/types";
 import { requireAdmin, signInAdmin, signOutAdmin } from "@/lib/admin-auth";
+import { selectionTargets, type AdminScope, type GrantTargetRow } from "@/lib/admin-catalog";
 import {
-  addGrant,
+  addGrants,
   clearStudentSessions,
   createStudent,
   deleteGrant,
+  resetStudentPin,
   setStudentActive,
-  type AdminGrant,
 } from "@/lib/admin-students";
 import { removeStudentDevice } from "@/lib/student-account";
 
 const LEVELS: EducationLevel[] = ["SD", "SMP", "SMA"];
 const ASSESSMENTS: AssessmentType[] = ["tka", "ulangan_harian", "sumatif_tengah_semester", "sumatif_akhir_semester"];
-const SCOPES: AdminGrant["scope"][] = ["package", "subject", "all_in"];
 
 function text(formData: FormData, name: string): string {
   return String(formData.get(name) ?? "").trim();
@@ -52,38 +52,77 @@ export async function createStudentAction(formData: FormData): Promise<void> {
   const name = text(formData, "name");
   const gradeLevel = optionalInt(formData, "gradeLevel");
   if (!name || !gradeLevel) back("/admin", "Nama dan kelas wajib diisi.", true);
-  const student = await createStudent({
-    name,
+  const pin = text(formData, "pin");
+  if (pin && !/^\d{6}$/.test(pin)) back("/admin", "PIN harus 6 angka, atau kosongkan supaya dibuat otomatis.", true);
+  let studentId: string;
+  try {
+    const student = await createStudent({
+      name,
+      level: pick(text(formData, "level"), LEVELS, "SD"),
+      gradeLevel,
+      parentPhone: text(formData, "parentPhone") || null,
+      pin: pin || null,
+    });
+    studentId = student.id;
+  } catch (error) {
+    back("/admin", errorMessage(error, "Gagal membuat akun murid."), true);
+  }
+  redirect(`/admin/murid/${studentId}?baru=1`);
+}
+
+export async function resetPinAction(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const studentId = text(formData, "studentId");
+  const path = `/admin/murid/${studentId}`;
+  let pin: string;
+  try {
+    pin = await resetStudentPin(studentId);
+  } catch (error) {
+    back(path, errorMessage(error, "Gagal mereset PIN."), true);
+  }
+  back(path, `PIN baru: ${pin}. Kirim ke orang tua; perangkat lama sudah dikeluarkan.`);
+}
+
+/** Pilihan dari PackagePicker: lingkup tersembunyi plus centang All-in, mapel, dan paket. */
+async function pickedTargets(formData: FormData): Promise<GrantTargetRow[]> {
+  const scope: AdminScope = {
+    assessmentType: pick(text(formData, "assessmentType"), ASSESSMENTS, "ulangan_harian"),
     level: pick(text(formData, "level"), LEVELS, "SD"),
-    gradeLevel,
-    parentPhone: text(formData, "parentPhone") || null,
+    gradeLevel: optionalInt(formData, "gradeLevel") ?? 1,
+    semester: optionalInt(formData, "semester"),
+  };
+  return selectionTargets(scope, {
+    allIn: text(formData, "allIn") === "1",
+    subjectIds: formData.getAll("subjectId").map(String).filter(Boolean),
+    packageIds: formData.getAll("packageId").map(String).filter(Boolean),
   });
-  redirect(`/admin/murid/${student.id}?baru=1`);
+}
+
+function months(formData: FormData): number {
+  return optionalInt(formData, "months") ?? 6;
+}
+function errorMessage(error: unknown, fallback: string): string {
+  return error instanceof Error ? error.message : fallback;
 }
 
 export async function addGrantAction(formData: FormData): Promise<void> {
   await requireAdmin();
   const studentId = text(formData, "studentId");
   const path = `/admin/murid/${studentId}`;
+  let count = 0;
   try {
-    await addGrant({
+    count = await addGrants({
       studentId,
-      scope: pick(text(formData, "scope"), SCOPES, "all_in"),
-      assessmentType: pick(text(formData, "assessmentType"), ASSESSMENTS, "ulangan_harian"),
-      level: pick(text(formData, "level"), LEVELS, "SD"),
-      gradeLevel: optionalInt(formData, "gradeLevel") ?? 1,
-      semester: optionalInt(formData, "semester"),
-      subjectId: text(formData, "subjectId") || null,
-      packageSlug: text(formData, "packageSlug") || null,
-      months: optionalInt(formData, "months") ?? 6,
+      targets: await pickedTargets(formData),
+      months: months(formData),
       pricePaid: optionalInt(formData, "pricePaid"),
       note: text(formData, "note") || null,
     });
   } catch (error) {
-    back(path, error instanceof Error ? error.message : "Gagal menambah grant.", true);
+    back(path, errorMessage(error, "Gagal menambah paket."), true);
   }
   revalidatePath(path);
-  back(path, "Grant ditambahkan. Paketnya terbuka saat murid membuka halaman lagi.");
+  back(path, `${count} paket ditambahkan ke akun dan muncul di Latihan Saya murid.`);
 }
 
 export async function deleteGrantAction(formData: FormData): Promise<void> {
@@ -98,7 +137,7 @@ export async function setStudentActiveAction(formData: FormData): Promise<void> 
   const studentId = text(formData, "studentId");
   const active = text(formData, "active") === "1";
   await setStudentActive(studentId, active);
-  back(`/admin/murid/${studentId}`, active ? "Kode murid diaktifkan." : "Kode murid dinonaktifkan dan semua perangkatnya dikeluarkan.");
+  back(`/admin/murid/${studentId}`, active ? "Akun murid diaktifkan." : "Akun murid dinonaktifkan dan semua perangkatnya dikeluarkan.");
 }
 
 export async function removeDeviceAdminAction(formData: FormData): Promise<void> {

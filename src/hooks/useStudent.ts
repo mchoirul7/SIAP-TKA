@@ -5,7 +5,7 @@ import { logoutStudent, syncStudent } from "@/services/entitlement-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 import { readStudent, type StoredStudent } from "@/storage/student-storage";
 
-/** Murid yang sedang masuk dengan kode muridnya di perangkat ini. */
+/** Murid yang sedang masuk dengan PIN akunnya di perangkat ini. */
 export function useStudent() {
   const [student, setStudent] = useState<StoredStudent["student"] | null>(null);
 

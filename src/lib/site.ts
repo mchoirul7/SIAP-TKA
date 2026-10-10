@@ -9,7 +9,7 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://siap-tka-one.verce
 );
 
 /**
- * Lapak resmi di Shopee. Pembelian kode akses kini lewat WhatsApp (lihat
+ * Lapak resmi di Shopee. Pembelian paket kini lewat WhatsApp (lihat
  * `buyAccessCodeHref`); alamat ini tinggal dipakai data terstruktur.
  */
 export const shopeeVoucherUrl =
@@ -24,8 +24,8 @@ export const site = {
   locale: "id_ID",
   tagline: "Platform latihan dan simulasi TKA dari rumah",
   valueProposition:
-    "Akses satu seri mapel, kerjakan tryout dan latihan TKA dari rumah, lalu lihat bagian yang perlu diperkuat.",
-  secondaryMessage: "Satu kode akses membuka satu mapel dalam satu seri.",
+    "Kerjakan tryout dan latihan dari rumah, simpan nilainya di akun, lalu lihat bagian yang perlu diperkuat.",
+  secondaryMessage: "Daftar cukup dengan nama dan PIN, semua paket tersimpan di akun.",
 
   /**
    * Kalimat yang dipakai mesin telusur pada hasil pencarian halaman depan.
@@ -79,6 +79,6 @@ export const shareContent = {
     "✅ Pembahasan lengkap di setiap soal",
     "✅ Analisa hasil: materi mana yang perlu diperkuat lebih dulu",
     "",
-    `🎟️ Lihat paketnya dan dapatkan kode aksesnya di sini: ${site.url}`,
+    `🎟️ Lihat paketnya dan coba gratis di sini: ${site.url}`,
   ].join("\n"),
 } as const;

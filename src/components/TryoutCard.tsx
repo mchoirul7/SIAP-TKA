@@ -47,7 +47,7 @@ export function TryoutCard({
             </Link>
           </h3>
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            {locked ? `${tryout.seriesTitle} - dibuka dengan kode akses` : "Tryout dan hasil terbuka"}
+            {locked ? "Masuk dengan PIN akun untuk membuka" : "Tryout dan hasil terbuka"}
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@ export function TryoutCard({
             }`}
           >
             <Icon name={locked ? "lock" : "unlock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
-            {locked ? "Kode Akses" : "Terbuka"}
+            {locked ? "Berbayar" : "Terbuka"}
           </li>
           {(
             [
