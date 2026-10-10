@@ -67,6 +67,9 @@ export function separatePackagesPrice(
 const EARLY_GRADE_ALL_ACCESS_PRICE = 100000;
 const EARLY_GRADE_MIN_ORIGINAL_PRICE = 175000;
 
+/** Harga coret All-in Akses kelas 3 SD. */
+const GRADE_3_ORIGINAL_PRICE = 200000;
+
 /** Harga All-in Akses yang dipatok per jenjang; kosong bila mengikuti total per mapel. */
 function fixedAllAccessPrice(assessmentType: AssessmentType, level: EducationLevel): number | null {
   if (assessmentType === "tka") return level === "SMA" ? 165000 : 125000;
@@ -116,6 +119,7 @@ export function allAccessPrice(
   }
   const fixed = fixedAllAccessPrice(assessmentType, level);
   if (fixed !== null) price = assessmentType === "ulangan_harian" ? fixed : Math.min(fixed, price);
+  if (level === "SD" && gradeLevel === 3 && assessmentType !== "tka") original = GRADE_3_ORIGINAL_PRICE;
   return { price, originalPrice: original > price ? original : null, subjectCount };
 }
 

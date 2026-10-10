@@ -296,9 +296,18 @@ async function SubjectStep({
       {allAccess ? (
         <div className="mb-8">
           <PriceOffer
-            eyebrow={`All-in Akses ${ACCESS_MONTHS} Bulan`}
-            title={`Semua Mapel ${config.title}`}
-            description={`Paket lengkap ${allAccess.subjectCount} mapel sekaligus untuk ${scopeShortLabel(scope)}`}
+            {...(config.key === "ulangan_harian"
+              ? {
+                  // Ulangan harian tidak dibagi per semester, jadi tegaskan bahwa isinya setahun penuh.
+                  eyebrow: "All-in Akses Seluruh Materi 2 Semester",
+                  title: `Semua Mapel ${config.title} Semester 1 & 2`,
+                  description: `Seluruh materi ${allAccess.subjectCount} mapel untuk ${scopeShortLabel(scope)}, Semester 1 dan Semester 2 sekaligus. Akses ${ACCESS_MONTHS} bulan.`,
+                }
+              : {
+                  eyebrow: `All-in Akses ${ACCESS_MONTHS} Bulan`,
+                  title: `Semua Mapel ${config.title}`,
+                  description: `Paket lengkap ${allAccess.subjectCount} mapel sekaligus untuk ${scopeShortLabel(scope)}`,
+                })}
             price={allAccess.price}
             originalPrice={allAccess.originalPrice}
             buyHref={buyAllAccessHref({
