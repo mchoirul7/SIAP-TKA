@@ -6,6 +6,14 @@ import {
   ENTITLEMENT_COOKIE_NAME,
   parseEntitlementCookieValue,
 } from "@/lib/server-entitlements";
+import {
+  createStudentSession,
+  findStudentByCode,
+  isStudentLoginConfigured,
+  STUDENT_COOKIE_NAME,
+  studentAccess,
+  studentCookieOptions,
+} from "@/lib/student-session";
 import { supabase } from "@/lib/supabase";
 import { normalizeVoucherCode, voucherErrorMessage } from "@/lib/voucher";
 
@@ -22,6 +30,31 @@ function errorCode(message?: string): string {
   return "VOUCHER_INVALID";
 }
 
+/** Masuk dengan kode murid; kosong bila kode ini bukan kode murid. */
+async function loginStudent(code: string, userAgent: string | null): Promise<NextResponse | null> {
+  if (!isStudentLoginConfigured()) return null;
+  try {
+    const student = await findStudentByCode(code);
+    if (!student) return null;
+    const sessionId = await createStudentSession(student.id, userAgent);
+    const access = await studentAccess(student);
+    const response = NextResponse.json({
+      code,
+      kind: "student",
+      message: `Selamat datang, ${access.student.name}.`,
+      student: access.student,
+      grants: access.grants,
+      unlockedSeriesKeys: [],
+      unlockedPackageSlugs: access.packageSlugs,
+    });
+    response.cookies.set(STUDENT_COOKIE_NAME, sessionId, studentCookieOptions);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as { code?: unknown } | null;
   const code = normalizeVoucherCode(typeof body?.code === "string" ? body.code : "");
@@ -32,6 +65,10 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+
+  // Kode murid lebih dulu: satu kotak "Kode Akses" melayani keduanya.
+  const studentResponse = await loginStudent(code, request.headers.get("user-agent"));
+  if (studentResponse) return studentResponse;
 
   const { data, error } = await supabase.rpc("redeem_voucher", { p_code: code });
   if (error) {

@@ -21,6 +21,7 @@ import { buildTryoutNarrative } from "@/lib/narrative";
 import type { AnalysisCatalog } from "@/lib/scoring";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { getTryoutResult, type TryoutResult } from "@/services/tryout-service";
+import { recordAttempt } from "@/services/attempt-record-service";
 import { readProfile } from "@/storage/profile-storage";
 
 export function TryoutResultView({
@@ -56,6 +57,17 @@ export function TryoutResultView({
       return;
     }
     setResult(stored);
+    // Contoh hasil (tombol demo) tidak ikut masuk riwayat akun.
+    if (!stored.attempt.isDemo) {
+      recordAttempt({
+        kind: "tryout",
+        slug: tryout.slug,
+        startedAt: stored.attempt.startedAt,
+        finishedAt: stored.attempt.submittedAt ?? Date.now(),
+        answers: stored.attempt.answers,
+        violations: stored.attempt.integrity.violations.length,
+      });
+    }
     setStudentName(readProfile()?.name ?? "");
     setState("ready");
   }, [mounted, isUnlocked, tryout, tryout.slug, questions, catalog, router]);

@@ -6,6 +6,7 @@ export const storageKeys = {
   profile: `${PREFIX}:profile`,
   studyContext: `${PREFIX}:study-context`,
   entitlements: `${PREFIX}:entitlements`,
+  student: `${PREFIX}:student`,
   authorMode: `${PREFIX}:mode-penyusun`,
   tryoutAttempt: (tryoutSlug: string) => `${PREFIX}:tryout-attempt:${tryoutSlug}`,
   practiceAttempt: (packageSlug: string) => `${PREFIX}:practice-attempt:${packageSlug}`,

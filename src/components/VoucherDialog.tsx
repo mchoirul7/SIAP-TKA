@@ -53,6 +53,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRedeemed, setIsRedeemed] = useState(false);
+  const [studentLogin, setStudentLogin] = useState<{ name: string; unlocksCurrent: boolean } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
 
@@ -61,6 +62,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
     setCode("");
     setError(null);
     setIsRedeemed(false);
+    setStudentLogin(null);
     setIsOpen(true);
   }, []);
 
@@ -93,6 +95,18 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
     setIsSubmitting(false);
     if (!result.ok) {
       setError(result.message);
+      return;
+    }
+
+    // Kode murid selalu berhasil masuk, walau paket yang sedang dilihat belum dibeli.
+    if (result.studentName) {
+      setStudentLogin({
+        name: result.studentName,
+        unlocksCurrent: !options.packageSlug || result.unlockedPackageSlugs.includes(options.packageSlug),
+      });
+      setError(null);
+      setIsRedeemed(true);
+      router.refresh();
       return;
     }
 
@@ -147,7 +161,27 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
               <Icon name="close" className="h-5 w-5" strokeWidth={2.2} />
             </button>
 
-            {isRedeemed ? (
+            {isRedeemed && studentLogin ? (
+              <div>
+                <IconBadge name={studentLogin.unlocksCurrent ? "unlock" : "info"} tone={studentLogin.unlocksCurrent ? "emerald" : "brand"} size="lg" />
+                <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
+                  Selamat datang, {studentLogin.name}!
+                </h2>
+                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+                  {studentLogin.unlocksCurrent
+                    ? "Semua paket yang sudah dibeli terbuka di perangkat ini. Nanti cukup masukkan kode yang sama di perangkat lain."
+                    : `Kode berhasil masuk, tapi ${options.packageTitle ?? "paket ini"} belum termasuk pembelian. Hubungi admin untuk menambahkannya ke kode ini.`}
+                </p>
+                <button
+                  type="button"
+                  onClick={close}
+                  className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
+                >
+                  <Icon name={studentLogin.unlocksCurrent ? "play" : "layers"} className="h-5 w-5" />
+                  {studentLogin.unlocksCurrent ? "Lanjutkan" : "Kembali"}
+                </button>
+              </div>
+            ) : isRedeemed ? (
               <div>
                 <IconBadge name="unlock" tone="emerald" size="lg" />
                 <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">

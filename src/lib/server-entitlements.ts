@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import type { ContentEntitlement } from "@/data/types";
 import { hasContentAccess } from "@/lib/entitlements";
+import { getServerStudent, studentCanAccess } from "@/lib/student-session";
 
 export const ENTITLEMENT_COOKIE_NAME = "siaptka-entitlements";
 export const ENTITLEMENT_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -67,8 +68,19 @@ export async function getServerEntitlementKeys(): Promise<string[]> {
   return parseEntitlementCookieValue(store.get(ENTITLEMENT_COOKIE_NAME)?.value);
 }
 
+/**
+ * Akses konten terkunci: paket gratis, voucher seri di cookie, atau grant milik
+ * murid yang sedang masuk dengan kode muridnya.
+ */
 export async function hasServerContentAccess(
-  content: ContentEntitlement & { isFreeAccess?: boolean },
+  content: ContentEntitlement & { id: string; isFreeAccess?: boolean },
 ): Promise<boolean> {
-  return hasContentAccess(content, await getServerEntitlementKeys());
+  if (hasContentAccess(content, await getServerEntitlementKeys())) return true;
+  try {
+    const student = await getServerStudent();
+    return student ? await studentCanAccess(student.id, content.id) : false;
+  } catch {
+    // Basis data murid tidak terjangkau: tetap tertutup, jangan sampai halaman error.
+    return false;
+  }
 }

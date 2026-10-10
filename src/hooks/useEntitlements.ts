@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ContentEntitlement } from "@/data/types";
 import { contentAccessKey, hasContentAccess } from "@/lib/entitlements";
-import { getUnlockedPackageSlugs, getUnlockedSeriesKeys } from "@/services/entitlement-service";
+import { getUnlockedPackageSlugs, getUnlockedSeriesKeys, syncStudent } from "@/services/entitlement-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 
 /**
@@ -36,7 +36,10 @@ export function useEntitlements() {
     };
     sync();
     setMounted(true);
-    return subscribeToStorage(sync);
+    const unsubscribe = subscribeToStorage(sync);
+    // Akses murid disegarkan dari server; hasilnya masuk lewat peristiwa storage.
+    void syncStudent();
+    return unsubscribe;
   }, []);
 
   const isUnlocked = useCallback(

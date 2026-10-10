@@ -20,6 +20,7 @@ import {
   startPracticeAttempt,
   type PracticeResult,
 } from "@/services/practice-service";
+import { recordAttempt } from "@/services/attempt-record-service";
 import { readProfile } from "@/storage/profile-storage";
 
 export function PracticeResultView({
@@ -50,6 +51,14 @@ export function PracticeResultView({
       return;
     }
     setResult(stored);
+    recordAttempt({
+      kind: "latihan",
+      slug: pkg.slug,
+      startedAt: stored.attempt.startedAt,
+      finishedAt: stored.attempt.finishedAt ?? Date.now(),
+      answers: stored.attempt.answers,
+      violations: stored.attempt.integrity.violations.length,
+    });
     setStudentName(readProfile()?.name ?? "");
     setState("ready");
   }, [mounted, isUnlocked, pkg, pkg.slug, questions, catalog, router]);

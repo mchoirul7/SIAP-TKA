@@ -6,6 +6,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { StudyContextDialog } from "@/components/StudyContextDialog";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
+import { useStudent } from "@/hooks/useStudent";
 import { useStudyContext } from "@/hooks/useStudyContext";
 import { studyContextShortLabel } from "@/lib/study-context";
 import { site } from "@/lib/site";
@@ -13,6 +14,7 @@ import { site } from "@/lib/site";
 export function SiteHeader() {
   const { context, saveContext } = useStudyContext();
   const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
+  const { student } = useStudent();
 
   return (
     <>
@@ -40,13 +42,25 @@ export function SiteHeader() {
                   <Icon name="cap" className="h-5 w-5" strokeWidth={2.2} />
                 </span>
                 <span className="block leading-tight md:min-w-[86px]">
-                  <span className="hidden text-[13px] font-black text-ink-900 md:block">Ananda</span>
+                  <span className="hidden max-w-[140px] truncate text-[13px] font-black text-ink-900 md:block">{student?.name ?? "Ananda"}</span>
                   <span className="block whitespace-nowrap text-[12px] font-black text-ink-900 md:text-[11px] md:font-semibold md:text-slate-500">
                     {context ? studyContextShortLabel(context) : "Pilih Kelas"}
                   </span>
                 </span>
                 <Icon name="chevron-down" className="h-4 w-4 text-ink-900" strokeWidth={2.6} />
               </button>
+
+              {/* Akun murid: riwayat nilai, paket, perangkat, dan tombol keluar. */}
+              {student ? (
+                <Link
+                  href="/akun"
+                  title={`Akun ${student.name}`}
+                  className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90"
+                >
+                  <Icon name="chart" className="h-4 w-4" strokeWidth={2.4} />
+                  <span className="hidden sm:inline">Akun</span>
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
