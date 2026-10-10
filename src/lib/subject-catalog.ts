@@ -34,6 +34,7 @@ const ENTRIES: Record<string, CatalogEntry> = {
   "seni-rupa": { key: "seni-rupa", name: "Seni Rupa", description: "Garis, bentuk, warna, dan karya seni.", tone: "sky" },
   "seni-musik": { key: "seni-musik", name: "Seni Musik", description: "Nada, ritme, dan apresiasi musik.", tone: "orange" },
   "seni-tari": { key: "seni-tari", name: "Seni Tari", description: "Gerakan, ekspresi, dan budaya daerah.", tone: "violet" },
+  "seni-budaya": { key: "seni-budaya", name: "Seni dan Budaya", description: "Karya seni dan budaya di sekitar kita.", aliases: ["seni-dan-budaya"], tone: "violet" },
   "seni-teater": { key: "seni-teater", name: "Seni Teater", description: "Ekspresi, peran, dan pertunjukan.", tone: "violet" },
   informatika: { key: "informatika", name: "Informatika", description: "Berpikir komputasional dan teknologi digital.", tone: "sky" },
   prakarya: { key: "prakarya", name: "Prakarya", description: "Kreativitas, kerajinan, dan kewirausahaan.", aliases: ["prakarya-dan-kewirausahaan"], tone: "orange" },
@@ -49,8 +50,8 @@ const ENTRIES: Record<string, CatalogEntry> = {
 
 const COMMON_ARTS = ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", "bahasa-inggris", "seni-rupa", "seni-musik", "seni-tari", "seni-teater", "informatika", "bahasa-jawa"];
 
-/** Seni dihitung wajib walau sekolah hanya membuka salah satunya. */
-const ARTS = ["seni-rupa", "seni-musik", "seni-tari", "seni-teater"];
+/** Mapel seni disembunyikan dari daftar, walau sudah punya paket. */
+const HIDDEN = ["seni-rupa", "seni-musik", "seni-tari", "seni-teater"];
 
 /**
  * Mapel wajib per fase Kurikulum Merdeka. Fase A (kelas 1-2) belum ada IPAS
@@ -58,17 +59,18 @@ const ARTS = ["seni-rupa", "seni-musik", "seni-tari", "seni-teater"];
  * SMA Fase E (kelas 10) masih mempelajari IPA dan IPS lengkap serta
  * Informatika, sedangkan di Fase F (kelas 11-12) mapel itu menjadi pilihan dan
  * hanya tampil di kelompok pilihan bila sudah punya paket. Bahasa Jawa ikut
- * sebagai muatan lokal.
+ * sebagai muatan lokal. Kelas 2 ditambah Seni dan Budaya.
  */
 const REQUIRED_BY_PHASE = {
-  A: ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", ...ARTS, "bahasa-jawa"],
-  BC: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipas", "pjok", "bahasa-inggris", ...ARTS, "bahasa-jawa"],
-  D: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipa", "ips", "bahasa-inggris", "pjok", "informatika", ...ARTS, "prakarya", "bahasa-jawa"],
-  E: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", "informatika", "fisika", "kimia", "biologi", "ekonomi", "geografi", "sosiologi", ...ARTS, "bahasa-jawa"],
-  F: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", ...ARTS, "bahasa-jawa"],
+  A: ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", "bahasa-jawa"],
+  BC: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipas", "pjok", "bahasa-inggris", "bahasa-jawa"],
+  D: ["agama", "pancasila", "bahasa-indonesia", "matematika", "ipa", "ips", "bahasa-inggris", "pjok", "informatika", "prakarya", "bahasa-jawa"],
+  E: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", "informatika", "fisika", "kimia", "biologi", "ekonomi", "geografi", "sosiologi", "bahasa-jawa"],
+  F: ["agama", "pancasila", "bahasa-indonesia", "matematika", "bahasa-inggris", "pjok", "sejarah", "bahasa-jawa"],
 };
 
 function requiredForGrade(level: EducationLevel, gradeLevel: number): string[] {
+  if (level === "SD" && gradeLevel === 2) return [...REQUIRED_BY_PHASE.A, "seni-budaya"];
   if (level === "SD") return gradeLevel <= 2 ? REQUIRED_BY_PHASE.A : REQUIRED_BY_PHASE.BC;
   if (level === "SMP") return REQUIRED_BY_PHASE.D;
   return gradeLevel <= 10 ? REQUIRED_BY_PHASE.E : REQUIRED_BY_PHASE.F;
@@ -142,6 +144,7 @@ export function buildSubjectCatalog(
   available.forEach((item, index) => {
     const segment = subjectSegment(item.subject);
     const entry = entryForSegment(segment);
+    if (HIDDEN.includes(entry?.key ?? segment)) return;
     if (entry && required.includes(entry.key)) {
       byKey.set(entry.key, item);
       return;

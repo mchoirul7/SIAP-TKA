@@ -249,7 +249,7 @@ async function SubjectStep({
     : undefined;
   const crumbs = breadcrumbFor(step);
   const back = subjectsBack(config, semester);
-  const allAccess = allAccessPrice(config.key, scope.level, catalog);
+  const allAccess = allAccessPrice(config.key, scope.level, scope.gradeLevel, catalog);
 
   return (
     <>
@@ -326,7 +326,7 @@ async function SubjectStep({
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {sectionIndex === 0 && trial ? (
               <li>
-                <TrialCard href={`/latihan/${trial.slug}`} packageTitle={trial.title} />
+                <TrialCard href={`/latihan/${trial.slug}`} />
               </li>
             ) : null}
             {section.items.map((item) => {
