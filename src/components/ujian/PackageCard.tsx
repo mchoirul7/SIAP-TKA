@@ -7,7 +7,7 @@ import { useEntitlements } from "@/hooks/useEntitlements";
 import { ASSESSMENT_LABEL, semesterLabel } from "@/lib/assessment";
 import { iconForPackage } from "@/lib/content-icons";
 import { formatRupiah, packagePrice } from "@/lib/pricing";
-import { buySinglePackageHref } from "@/lib/subject-catalog";
+import { buySinglePackageHref, packageContextLabel } from "@/lib/subject-catalog";
 import type { ExamPackage } from "@/services/content-service";
 
 /** Hiasan kartu tryout: mahkota dan bintang di atas latar gelap. */
@@ -71,7 +71,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
   const buyHref = unlocked
     ? null
     : buySinglePackageHref({
-        context: [pkg.level, `Kelas ${pkg.gradeLevel}`, ...(pkg.semester ? [semesterLabel(pkg.semester)] : [])].join(" "),
+        context: packageContextLabel(pkg),
         assessment: ASSESSMENT_LABEL[pkg.assessmentType],
         packageTitle: pkg.title,
         price: formatRupiah(packagePrice(pkg.kind, pkg.assessmentType)),

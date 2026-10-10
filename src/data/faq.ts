@@ -56,7 +56,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: "Bagaimana cara mendapatkan kode akses?",
-    answer: `Kode akses dibeli di lapak resmi ${site.brandName} di Shopee. Tekan tombol "Dapatkan Kode Akses" di halaman ini untuk membuka lapaknya, pilih paket sesuai jenjang dan mata pelajaran, lalu kode yang diterima dimasukkan lewat tombol "Saya Punya Kode Akses".`,
+    answer: `Kode akses dibeli lewat admin ${site.brandName} di WhatsApp. Pilih paket lengkap satu mata pelajaran atau beli satuan paket yang diinginkan, lalu kode yang diterima dimasukkan lewat tombol "Saya Punya Kode Akses".`,
   },
   {
     question: "Apakah setiap paket bisa dicoba dulu sebelum membeli?",

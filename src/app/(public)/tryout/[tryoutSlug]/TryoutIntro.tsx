@@ -12,6 +12,7 @@ import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
 import { gradeOptionsFor, resolveGrade } from "@/lib/grade";
+import { purchaseOptionsFor } from "@/lib/subject-catalog";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { setTryoutSecureMode, startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
@@ -51,6 +52,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
     successHref: `/tryout/${tryout.slug}`,
     requiredAccessKey: tryout.accessKey,
     requiredLabel: `${subjectName} - ${tryout.seriesTitle}`,
+    purchase: purchaseOptionsFor(tryout, subjectName),
   };
 
   const persistProfile = () => writeProfile({ name: name.trim(), grade });

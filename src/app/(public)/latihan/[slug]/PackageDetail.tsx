@@ -10,6 +10,7 @@ import { useVoucherDialog } from "@/components/VoucherDialog";
 import type { PracticePackage } from "@/data/types";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { examPackagesHref } from "@/lib/assessment";
+import { purchaseOptionsFor } from "@/lib/subject-catalog";
 import { getPracticeAttempt } from "@/services/practice-service";
 import { subscribeToStorage } from "@/storage/local-storage";
 import { readProfile, writeProfile } from "@/storage/profile-storage";
@@ -71,8 +72,9 @@ export function PackageDetail({
       packageTitle: pkg.title,
       requiredAccessKey: pkg.accessKey,
       requiredLabel: `${subjectName} - ${pkg.seriesTitle}`,
+      purchase: purchaseOptionsFor(pkg, subjectName),
     });
-  }, [openVoucher, pkg.accessKey, pkg.seriesTitle, pkg.slug, pkg.title, subjectName]);
+  }, [openVoucher, pkg, subjectName]);
 
   useEffect(() => {
     const profile = readProfile();

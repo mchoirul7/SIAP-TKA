@@ -9,13 +9,8 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://siap-tka-one.verce
 );
 
 /**
- * Tempat kode akses dibeli. Satu-satunya tujuan tombol "Dapatkan Kode Akses" di
- * mana pun ia muncul, juga dipakai pesan berbagi dan data terstruktur.
- *
- * Yang ditunjuk adalah lapaknya, bukan satu halaman produk: paketnya kini
- * terpisah per mapel dan per jenjang, sehingga pembeli perlu memilih sendiri
- * yang sesuai. Kata kuncinya dibawa di URL supaya daftar yang terbuka sudah
- * tersaring ke produk Siap TKA One.
+ * Lapak resmi di Shopee. Pembelian kode akses kini lewat WhatsApp (lihat
+ * `buyAccessCodeHref`); alamat ini tinggal dipakai data terstruktur.
  */
 export const shopeeVoucherUrl =
   "https://shopee.co.id/siaptkaone?entryPoint=ShopBySearch&searchKeyword=siap%20tka%20one";
@@ -70,7 +65,7 @@ export const siteKeywords = [
  *
  * Ditujukan kepada orang tua, bukan kepada siswa: yang membagikan tautan di grup
  * wali murid adalah orang tua, dan yang membeli vouchernya juga mereka. Karena
- * itu penutupnya satu ajakan yang jelas — ambil kode vouchernya di Shopee.
+ * itu penutupnya satu ajakan yang jelas — lihat paketnya di situs.
  */
 export const shareContent = {
   /** WhatsApp memberi cukup ruang untuk memuat daftar isi paket. */
@@ -84,9 +79,6 @@ export const shareContent = {
     "✅ Pembahasan lengkap di setiap soal",
     "✅ Analisa hasil: materi mana yang perlu diperkuat lebih dulu",
     "",
-    `Lihat paketnya di sini: ${site.url}`,
-    "",
-    "🎟️ Dapatkan kode vouchernya sekarang di Shopee:",
-    shopeeVoucherUrl,
+    `🎟️ Lihat paketnya dan dapatkan kode aksesnya di sini: ${site.url}`,
   ].join("\n"),
 } as const;

@@ -14,9 +14,10 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { shopeeVoucherUrl } from "@/lib/site";
+import { formatRupiah } from "@/lib/pricing";
+import { buyAccessCodeHref, type PurchaseOptions } from "@/lib/subject-catalog";
 import { redeemVoucher } from "@/services/entitlement-service";
 
 interface OpenOptions {
@@ -26,6 +27,8 @@ interface OpenOptions {
   successHref?: string;
   requiredAccessKey?: string;
   requiredLabel?: string;
+  /** Pilihan beli lewat WhatsApp; tanpa ini dialog memakai ajakan umum. */
+  purchase?: PurchaseOptions;
 }
 
 interface VoucherContextValue {
@@ -69,7 +72,11 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
       if (event.key === "Escape") close();
     };
     document.addEventListener("keydown", onKeyDown);
-    const timer = window.setTimeout(() => inputRef.current?.focus(), 20);
+    // Di layar sentuh, fokus otomatis memunculkan keyboard yang menutupi
+    // pilihan beli; kursor hanya langsung diletakkan di perangkat bertetikus.
+    const timer = window.matchMedia("(pointer: fine)").matches
+      ? window.setTimeout(() => inputRef.current?.focus(), 20)
+      : undefined;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -116,7 +123,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
       {children}
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
           <div
             className="absolute inset-0 bg-brand-950/40"
             onClick={close}
@@ -126,7 +133,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="relative w-full max-w-md rounded-t-xl border border-slate-200 bg-white p-6 shadow-raised sm:rounded-xl"
+            className="relative max-h-[92vh] max-h-[92dvh] w-full max-w-md overflow-y-auto overscroll-contain rounded-t-2xl border border-slate-200 bg-white px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-5 shadow-raised sm:rounded-2xl sm:p-6"
           >
             {/* Penutup di pojok, bukan tombol "Batal" sebaris dengan tindakan
                 utama: membatalkan bukan pilihan yang setara dengan menukarkan
@@ -163,11 +170,14 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <IconBadge name="ticket" tone="brand" size="lg" />
-                <h2 id={titleId} className="mt-4 text-xl font-extrabold tracking-tight">
+                {/* Ikon disembunyikan di layar kecil supaya pilihan beli lebih cepat terlihat. */}
+                <div className="hidden sm:block">
+                  <IconBadge name="ticket" tone="brand" size="lg" />
+                </div>
+                <h2 id={titleId} className="pr-10 text-lg font-extrabold tracking-tight sm:mt-4 sm:pr-0 sm:text-xl">
                   Masukkan Kode Akses
                 </h2>
-                <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-[15px]">
                   Kode akses membuka satu mata pelajaran dalam satu seri, termasuk tryout,
                   latihan online, hasil, dan pembahasan.
                 </p>
@@ -200,7 +210,7 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                     </p>
                   ) : (
                     <p id="voucher-help" className="mt-2 text-sm text-slate-500">
-                      Belum punya kode? Tekan Dapatkan Kode di Shopee.
+                      Dapatkan kode akses melalui pembelian paket di bawah.
                     </p>
                   )}
                 </div>
@@ -213,21 +223,115 @@ export function VoucherProvider({ children }: { children: ReactNode }) {
                 {/* Jalan keluar bagi yang belum punya kode. Ditaruh di bawah kedua
                     tombol supaya tidak bersaing dengan tindakan utama dialog ini,
                     yaitu menukarkan kode yang sudah dipegang. */}
-                <a
-                  href={shopeeVoucherUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-bold text-accent-900 transition-colors hover:bg-accent-100"
-                >
-                  <Icon name="ticket" className="h-4 w-4" strokeWidth={2.2} />
-                  Dapatkan Kode di Shopee
-                  <Icon name="arrow-right" className="h-4 w-4" strokeWidth={2.2} />
-                </a>
+                <div className="mt-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.1em] text-slate-400">
+                  <span className="h-px flex-1 bg-slate-200" />
+                  Belum punya kode?
+                  <span className="h-px flex-1 bg-slate-200" />
+                </div>
+                <div className="mt-3 space-y-2.5">
+                  {options.purchase ? (
+                    <>
+                      {options.purchase.fullHref && options.purchase.fullPrice !== null ? (
+                        <PurchaseLink
+                          href={options.purchase.fullHref}
+                          variant="featured"
+                          icon="layers"
+                          badge="Paling Hemat"
+                          label={`Paket Lengkap ${options.purchase.subjectName}`}
+                          note="Semua latihan & tryout mapel ini"
+                          price={formatRupiah(options.purchase.fullPrice)}
+                        />
+                      ) : null}
+                      <PurchaseLink
+                        href={options.purchase.singleHref}
+                        variant="plain"
+                        icon="list-check"
+                        label={`Beli Paket Soal ${options.purchase.packageTitle}`}
+                        note="Hanya membuka paket soal ini"
+                        price={formatRupiah(options.purchase.singlePrice)}
+                      />
+                    </>
+                  ) : (
+                    <PurchaseLink
+                      href={buyAccessCodeHref}
+                      variant="featured"
+                      icon="ticket"
+                      label="Beli Kode Akses"
+                      note="Dilayani admin lewat WhatsApp"
+                    />
+                  )}
+                </div>
               </form>
             )}
           </div>
         </div>
       ) : null}
     </VoucherContext.Provider>
+  );
+}
+
+/**
+ * Pilihan beli lewat WhatsApp. Paket lengkap dibuat paling mencolok (kuning
+ * keemasan "ONE") supaya pilihan yang lebih hemat yang pertama dilirik;
+ * beli satuan memakai hijau WhatsApp yang lebih tenang.
+ */
+function PurchaseLink({
+  href,
+  variant,
+  icon,
+  label,
+  note,
+  price,
+  badge,
+}: {
+  href: string;
+  variant: "featured" | "plain";
+  icon: IconName;
+  label: string;
+  note: string;
+  price?: string;
+  badge?: string;
+}) {
+  const featured = variant === "featured";
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`group relative flex min-h-[56px] w-full items-center gap-3 rounded-2xl px-3.5 py-3.5 transition-all hover:-translate-y-0.5 active:translate-y-0 sm:px-4 ${
+        featured
+          ? "bg-gradient-to-r from-accent-300 via-accent-400 to-accent-600 text-ink-950 shadow-[0_8px_20px_-8px_rgba(253,145,1,0.7)] hover:shadow-[0_12px_24px_-8px_rgba(253,145,1,0.8)]"
+          : "border border-emerald-200 bg-emerald-50 text-emerald-950 hover:border-emerald-300 hover:bg-emerald-100"
+      }`}
+    >
+      {badge ? (
+        <span className="absolute -top-2.5 right-4 rounded-full bg-gradient-to-r from-rose-500 to-brand-600 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-white shadow-sm">
+          {badge}
+        </span>
+      ) : null}
+      <span
+        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl sm:h-10 sm:w-10 ${
+          featured ? "bg-white/90 text-accent-700 shadow-sm" : "bg-emerald-500 text-white"
+        }`}
+      >
+        <Icon name={icon} className="h-5 w-5" strokeWidth={2.1} />
+      </span>
+      <span className="min-w-0 flex-1 text-left">
+        <span className="block break-words text-[13px] font-extrabold leading-snug sm:text-sm">{label}</span>
+        <span className={`mt-0.5 block text-[11px] font-semibold leading-snug sm:text-xs ${featured ? "text-ink-800/80" : "text-emerald-700"}`}>
+          {note}
+        </span>
+      </span>
+      {price ? (
+        <span className={`shrink-0 text-[15px] font-black sm:text-base ${featured ? "text-ink-950" : "text-emerald-700"}`}>
+          {price}
+        </span>
+      ) : null}
+      <Icon
+        name="arrow-right"
+        className="hidden h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 min-[380px]:block"
+        strokeWidth={2.4}
+      />
+    </a>
   );
 }

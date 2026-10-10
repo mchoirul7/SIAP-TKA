@@ -1,5 +1,6 @@
-import type { AssessmentType, EducationLevel, Subject } from "@/data/types";
-import { subjectSegment } from "@/lib/assessment";
+import type { AssessmentType, EducationLevel, PracticePackage, Subject, Tryout } from "@/data/types";
+import { ASSESSMENT_LABEL, semesterLabel, subjectSegment } from "@/lib/assessment";
+import { formatRupiah, fullPackagePrice, packagePrice } from "@/lib/pricing";
 
 /**
  * Daftar mapel pada halaman pilih mapel /ujian.
@@ -246,3 +247,54 @@ export function customRequestHref(details: { context: string; assessment: string
   ].join("\n");
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 }
+
+/** Label kelas satu paket untuk pesan WhatsApp, misalnya "SD Kelas 3 Semester 1". */
+export function packageContextLabel(pkg: {
+  level: EducationLevel;
+  gradeLevel: number;
+  semester: number | null;
+}): string {
+  return [pkg.level, `Kelas ${pkg.gradeLevel}`, ...(pkg.semester ? [semesterLabel(pkg.semester)] : [])].join(" ");
+}
+
+export interface PurchaseOptions {
+  subjectName: string;
+  packageTitle: string;
+  fullPrice: number | null;
+  fullHref: string | null;
+  singlePrice: number;
+  singleHref: string;
+}
+
+/**
+ * Dua pilihan beli untuk paket yang terkunci: paket lengkap mapelnya atau
+ * paket ini saja. Keduanya dilayani admin lewat WhatsApp.
+ */
+export function purchaseOptionsFor(pkg: PracticePackage | Tryout, subjectName: string): PurchaseOptions {
+  const context = packageContextLabel(pkg);
+  const assessment = ASSESSMENT_LABEL[pkg.assessmentType];
+  // Paket ini sudah ada, jadi mapelnya pasti punya paket untuk dihargai.
+  const fullPrice = fullPackagePrice(pkg.assessmentType, { subject: true, packageCount: 0, tryoutCount: 0 });
+  const singlePrice = packagePrice(pkg.kind, pkg.assessmentType);
+  return {
+    subjectName,
+    packageTitle: pkg.title,
+    fullPrice,
+    fullHref:
+      fullPrice !== null
+        ? buyPackageHref({ context, assessment, subject: subjectName, price: formatRupiah(fullPrice) })
+        : null,
+    singlePrice,
+    singleHref: buySinglePackageHref({
+      context,
+      assessment,
+      packageTitle: pkg.title,
+      price: formatRupiah(singlePrice),
+    }),
+  };
+}
+
+/** Tujuan umum "beli kode akses" bila paket yang dimaksud belum diketahui. */
+export const buyAccessCodeHref = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
+  "Halo SIAP TKA ONE, saya ingin membeli kode akses, mohon dibantu.",
+)}`;

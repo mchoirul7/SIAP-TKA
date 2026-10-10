@@ -8,8 +8,8 @@ import type { AssessmentType, EducationLevel, PackageKind } from "@/data/types";
 /** Harga satu paket bila dibeli satuan. */
 export function packagePrice(kind: PackageKind, assessmentType: AssessmentType): number {
   if (assessmentType === "tka") return kind === "tryout" ? 15000 : 7500;
-  if (assessmentType === "ulangan_harian") return 2500;
-  return kind === "tryout" ? 10000 : 2500;
+  if (assessmentType === "ulangan_harian") return 5000;
+  return kind === "tryout" ? 10000 : 5000;
 }
 
 /** Harga paket lengkap satu mapel ulangan harian, berapa pun jumlah paketnya. */
