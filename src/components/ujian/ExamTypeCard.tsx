@@ -23,7 +23,7 @@ export function ExamTypeCard({
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col rounded-[14px] border border-sky-100 bg-white p-5 shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-[0_20px_36px_-24px_rgba(80,1,218,0.45)] sm:p-6"
+      className="group flex h-full flex-col rounded-[14px] border border-sky-100 bg-white p-5 shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] card-lift hover:border-brand-200 sm:p-6"
     >
       <span className="flex items-start justify-between gap-4">
         <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[16px] bg-gradient-to-br from-brand-50 to-sky-50 text-brand-700 ring-1 ring-inset ring-brand-100">

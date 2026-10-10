@@ -8,7 +8,7 @@ import { StudyContextDialog } from "@/components/StudyContextDialog";
 import { Icon } from "@/components/ui/Icon";
 import { useStudyContext } from "@/hooks/useStudyContext";
 import { ASSESSMENT_LABEL, examTypeHref } from "@/lib/assessment";
-import { DEFAULT_STUDY_CONTEXT, levelOptionFor } from "@/lib/study-context";
+import { DEFAULT_STUDY_CONTEXT, levelOptionFor, serializeStudyContext } from "@/lib/study-context";
 
 /**
  * Ilustrasi di `public/beranda/` dipotong dari mockup beranda. Gambar kartu
@@ -73,7 +73,7 @@ const cards: HomeExamCard[] = [
 
 const cardClass =
   "group flex h-full flex-col overflow-hidden rounded-[1.6rem] bg-white text-left shadow-[0_24px_60px_-42px_rgba(14,23,64,0.45)]";
-const hoverClass = "transition-transform hover:-translate-y-1 hover:shadow-[0_34px_70px_-46px_rgba(14,23,64,0.55)]";
+const hoverClass = "card-lift";
 
 function HomeCard({ card }: { card: HomeExamCard }) {
   const { target } = card;
@@ -87,7 +87,7 @@ function HomeCard({ card }: { card: HomeExamCard }) {
           fill
           unoptimized={card.art.endsWith(".svg")}
           sizes="(min-width: 1280px) 24vw, (min-width: 768px) 46vw, 92vw"
-          className={`object-cover object-top ${target ? "" : "opacity-80 grayscale-[35%]"}`}
+          className={`card-art object-cover object-top ${target ? "" : "opacity-80 grayscale-[35%]"}`}
         />
         {target ? null : (
           <span className="absolute right-3 top-3 rounded-full bg-[#080d3f] px-3 py-1 text-[12px] font-black uppercase tracking-wide text-white shadow-lg">
@@ -147,20 +147,23 @@ export function ExamTypeShowcase() {
   const [isClassDialogOpen, setIsClassDialogOpen] = useState(false);
   const activeContext = context ?? DEFAULT_STUDY_CONTEXT;
   const levelLabel = levelOptionFor(activeContext.level).label;
+  const contextKey = serializeStudyContext(activeContext);
 
   return (
     <div id="katalog-mapel" className="container-page scroll-mt-24 pb-8 pt-5 sm:pb-10 lg:pt-6">
       <section className="relative lg:min-h-[15rem]">
         {/* Hero dipotong dari mockup; balon teksnya dihapus dari gambar dan
             digambar ulang di sini agar kelasnya mengikuti kelas aktif. */}
-        <div className="pointer-events-none absolute right-[-2.5%] top-[-1.75rem] hidden aspect-[1021/334] w-[56%] lg:block">
+        <div className="pointer-events-none absolute right-[-2.5%] top-[-1.75rem] hidden aspect-[1021/334] w-[56%] lg:block hero-float">
           <Image src="/beranda/hero.png" alt="" fill sizes="65vw" className="object-contain" priority />
           <div className="absolute left-[74%] top-[17%] flex h-[45%] w-[19%] rotate-[-9deg] items-center justify-center rounded-[1.4rem] bg-white text-center text-[clamp(0.9rem,1.25vw,1.25rem)] font-black leading-tight text-[#0b1245] shadow-[0_16px_35px_-22px_rgba(18,21,58,0.55)]">
-            Semangat
-            <br />
-            belajar,
-            <br />
-            Kelas {activeContext.grade}!
+            <span key={contextKey} className="anim-pop">
+              Semangat
+              <br />
+              belajar,
+              <br />
+              Kelas {activeContext.grade}!
+            </span>
           </div>
         </div>
 
@@ -191,7 +194,8 @@ export function ExamTypeShowcase() {
         </div>
       </section>
 
-      <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {/* Kunci kelas aktif memutar ulang gerak kartu setiap jenjang atau kelas diganti. */}
+      <ul key={contextKey} className="anim-stagger grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {cards.map((card) => (
           <li key={card.key}>
             <HomeCard card={card} />

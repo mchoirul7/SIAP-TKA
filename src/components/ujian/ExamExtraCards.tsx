@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 const coverSizes = "(min-width: 1280px) 19vw, (min-width: 1024px) 24vw, (min-width: 640px) 46vw, 92vw";
 
 const cardClass =
-  "group flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ring-1 transition-transform hover:-translate-y-0.5";
+  "group flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ring-1 card-lift";
 
 /**
  * Kartu pertama halaman pilih mapel: latihan ujicoba yang dibuka gratis.
@@ -16,7 +16,7 @@ export function TrialCard({ href }: { href: string }) {
   return (
     <Link href={href} className={`${cardClass} ring-amber-300 hover:ring-amber-400`}>
       <span className="relative block aspect-[460/176] w-full overflow-hidden">
-        <Image src="/beranda/mapel/ujicoba-gratis.svg" alt="" fill unoptimized sizes={coverSizes} className="object-cover" />
+        <Image src="/beranda/mapel/ujicoba-gratis.svg" alt="" fill unoptimized sizes={coverSizes} className="card-art object-cover" />
       </span>
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-gradient-to-b from-amber-50 to-orange-100 px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black uppercase leading-tight text-orange-900">Ujicoba Gratis</span>
@@ -41,7 +41,7 @@ export function CustomRequestCard({ href }: { href: string }) {
   return (
     <a href={href} target="_blank" rel="noreferrer" className={`${cardClass} ring-brand-100 hover:ring-brand-200`}>
       <span className="relative block aspect-[460/176] w-full overflow-hidden">
-        <Image src="/beranda/mapel/custom-request.svg" alt="" fill unoptimized sizes={coverSizes} className="object-cover" />
+        <Image src="/beranda/mapel/custom-request.svg" alt="" fill unoptimized sizes={coverSizes} className="card-art object-cover" />
       </span>
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-white px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black uppercase leading-tight text-ink-900">Custom Request</span>

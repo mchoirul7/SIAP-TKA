@@ -117,7 +117,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
       };
 
   return (
-    <article className={`flex h-full flex-col rounded-[14px] border p-5 ${theme.card}`}>
+    <article className={`card-lift flex h-full flex-col rounded-[14px] border p-5 ${theme.card}`}>
       {isTryout ? (
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[88px]">
           <TryoutBanner />

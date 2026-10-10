@@ -154,10 +154,12 @@ export async function ExamStepPage({ segments }: { segments: string[] }) {
   if (!step) notFound();
 
   const context = await getServerStudyContext();
+  const contextKey = context ? serializeStudyContext(context) : null;
 
   return (
-    <div className="container-page py-10 sm:py-12">
-      <ExamContextSync serverContextKey={context ? serializeStudyContext(context) : null} />
+    // Kunci kelas aktif memasang ulang isinya, jadi kartu bergerak lagi setiap jenjang diganti.
+    <div key={contextKey ?? "none"} className="container-page anim-page py-10 sm:py-12">
+      <ExamContextSync serverContextKey={contextKey} />
       {step.kind === "semesters" ? (
         <SemesterStep config={step.config} />
       ) : !context ? (
@@ -183,7 +185,7 @@ function SemesterStep({ config }: { config: AssessmentConfig }) {
         title={config.title}
         subtitle="Pilih semester terlebih dahulu."
       />
-      <ul className="mt-7 grid gap-4 md:grid-cols-2">
+      <ul className="anim-stagger mt-7 grid gap-4 md:grid-cols-2">
         {SEMESTERS.map((semester) => (
           <li key={semester}>
             <ExamTypeCard
@@ -256,7 +258,7 @@ async function SubjectStep({
       <BreadcrumbJsonLd crumbs={crumbs} path={stepPath(step)} />
       <section className="relative">
         {/* Ilustrasi dipotong dari mockup halaman pilih mapel. */}
-        <div className="pointer-events-none absolute right-[-1%] top-[-1.5rem] hidden aspect-[704/202] w-[55%] lg:block">
+        <div className="pointer-events-none absolute right-[-1%] top-[-1.5rem] hidden aspect-[704/202] w-[55%] lg:block hero-float">
           <Image src="/beranda/mapel-hero.png" alt="" fill sizes="55vw" className="object-contain object-right" priority />
         </div>
         <div className="relative z-10 max-w-[38rem] pb-6">
@@ -332,7 +334,7 @@ async function SubjectStep({
               <span className="h-px flex-1 bg-gradient-to-r from-brand-200 to-transparent" />
             </div>
           ) : null}
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          <ul className="anim-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {sectionIndex === 0 && trial ? (
               <li>
                 <TrialCard href={`/latihan/${trial.slug}`} />
@@ -366,7 +368,8 @@ async function SubjectStep({
               </li>
               );
             })}
-            {withExtras && sectionIndex === sections.length - 1 ? (
+            {/* Custom request menutup daftar utama, tidak ikut ke section mapel lainnya. */}
+            {withExtras && sectionIndex === 0 ? (
               <li>
                 <CustomRequestCard
                   href={customRequestHref({ context: scopeShortLabel(scope), assessment: config.title })}
@@ -496,7 +499,7 @@ function PriceOffer({
   buyLabel: string;
 }) {
   return (
-    <section className="mt-6 rounded-[16px] bg-gradient-to-r from-[#5b0fd6] to-[#8e35ff] p-5 text-white shadow-[0_18px_34px_-22px_rgba(80,1,218,0.9)] sm:p-6">
+    <section className="anim-pop mt-6 rounded-[16px] bg-gradient-to-r from-[#5b0fd6] to-[#8e35ff] p-5 text-white shadow-[0_18px_34px_-22px_rgba(80,1,218,0.9)] sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <p className="text-xs font-black uppercase tracking-[0.12em] text-white/70">{eyebrow}</p>
@@ -563,7 +566,7 @@ function PackageSection({ title, packages }: { title: string; packages: ExamPack
       <h2 className="text-[22px] font-black text-ink-900">
         {title} <span className="text-slate-400">({packages.length})</span>
       </h2>
-      <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className="anim-stagger mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {packages.map((pkg) => (
           <li key={pkg.id}>
             <PackageCard pkg={pkg} />

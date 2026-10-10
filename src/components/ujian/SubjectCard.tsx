@@ -48,7 +48,7 @@ export function SubjectCard({
   const body = (
     <>
       <span className="relative block aspect-[460/176] w-full overflow-hidden">
-        <Image src={art} alt="" fill sizes="(min-width: 1280px) 19vw, (min-width: 1024px) 24vw, (min-width: 640px) 46vw, 92vw" className="object-cover" />
+        <Image src={art} alt="" fill sizes="(min-width: 1280px) 19vw, (min-width: 1024px) 24vw, (min-width: 640px) 46vw, 92vw" className="card-art object-cover" />
       </span>
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-white px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black leading-tight text-ink-900">{name}</span>
@@ -107,7 +107,7 @@ export function SubjectCard({
   );
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ring-1 ring-sky-100">
+    <div className="card-lift flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ring-1 ring-sky-100">
       {body}
     </div>
   );
