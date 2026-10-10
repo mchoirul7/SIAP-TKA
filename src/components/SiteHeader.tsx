@@ -35,38 +35,39 @@ export function SiteHeader() {
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <ShareButton />
 
+              {/* Pemilih kelas: daftar ujian dan mapel mengikuti kelas ini. */}
               <button
                 type="button"
                 onClick={() => setIsClassDialogOpen(true)}
-                className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] border border-sky-100 bg-white px-2 text-left sm:gap-3 sm:px-4 shadow-[0_8px_18px_-14px_rgba(18,21,58,0.5)] transition-colors hover:border-brand-200"
+                aria-label={`Ganti kelas, sekarang ${context ? studyContextShortLabel(context) : "belum dipilih"}`}
+                className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] border border-sky-100 bg-white px-2.5 text-[12px] font-black text-ink-900 shadow-[0_8px_18px_-14px_rgba(18,21,58,0.5)] transition-colors hover:border-brand-200 sm:gap-2 sm:px-3.5 sm:text-[13px]"
               >
-                <span className="hidden h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-400 sm:flex text-base font-black text-white">
-                  <Icon name="cap" className="h-5 w-5" strokeWidth={2.2} />
-                </span>
-                <span className="block leading-tight md:min-w-[86px]">
-                  <span className="hidden max-w-[140px] truncate text-[13px] font-black text-ink-900 md:block">{student?.name ?? "Ananda"}</span>
-                  <span className="block whitespace-nowrap text-[12px] font-black text-ink-900 md:text-[11px] md:font-semibold md:text-slate-500">
-                    {context ? studyContextShortLabel(context) : "Pilih Kelas"}
-                  </span>
-                </span>
-                <Icon name="chevron-down" className="h-4 w-4 text-ink-900" strokeWidth={2.6} />
+                <Icon name="cap" className="hidden h-4 w-4 text-brand-700 sm:block" strokeWidth={2.4} />
+                <span className="whitespace-nowrap">{context ? studyContextShortLabel(context) : "Pilih Kelas"}</span>
+                <Icon name="chevron-down" className="h-4 w-4" strokeWidth={2.6} />
               </button>
 
-              {/* Latihan Saya: paket yang sudah dibeli; halaman akun ditautkan dari sana. */}
+              {/* Kartu akun: nama murid yang masuk membuka halaman Akun (paket, nilai,
+                  perangkat, keluar); tamu mendapat tombol Masuk / Daftar di tempat yang sama. */}
               {student ? (
                 <Link
-                  href="/latihan-saya"
-                  title={`Latihan Saya - ${student.name}`}
-                  className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90"
+                  href="/akun"
+                  title={`Akun ${student.name}`}
+                  className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] border border-brand-100 bg-white pl-1.5 pr-1.5 text-left shadow-[0_8px_18px_-14px_rgba(18,21,58,0.5)] transition-colors hover:border-brand-300 sm:pr-3"
                 >
-                  <Icon name="layers" className="h-4 w-4" strokeWidth={2.4} />
-                  <span className="hidden sm:inline">Latihan Saya</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-[14px] font-black uppercase text-white">
+                    {student.name.trim().charAt(0) || "A"}
+                  </span>
+                  <span className="hidden leading-tight sm:block">
+                    <span className="block max-w-[140px] truncate text-[13px] font-black text-ink-900">{student.name}</span>
+                    <span className="block text-[11px] font-semibold text-brand-700">Lihat akun</span>
+                  </span>
                 </Link>
               ) : (
                 <button
                   type="button"
-                  onClick={() => openAccess({ successHref: "/latihan-saya" })}
-                  className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90"
+                  onClick={() => openAccess()}
+                  className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[12px] bg-gradient-to-r from-brand-500 to-brand-700 px-3 text-[12px] font-black text-white shadow-[0_8px_18px_-12px_rgba(80,1,218,0.8)] transition-opacity hover:opacity-90 sm:px-4 sm:text-[13px]"
                 >
                   <Icon name="unlock" className="h-4 w-4" strokeWidth={2.4} />
                   <span className="hidden sm:inline">Masuk / Daftar</span>

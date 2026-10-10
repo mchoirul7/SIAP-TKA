@@ -51,8 +51,7 @@ export function PracticeResultView({
       return;
     }
     setResult(stored);
-    // Ujicoba gratis tidak perlu login, jadi nilainya juga tidak masuk riwayat akun.
-    if (!pkg.isFreeAccess) recordAttempt({
+    recordAttempt({
       kind: "latihan",
       slug: pkg.slug,
       startedAt: stored.attempt.startedAt,

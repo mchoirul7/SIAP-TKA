@@ -26,16 +26,19 @@ import { loginWithPin, registerStudentAccount } from "@/services/entitlement-ser
 /**
  * Dialog akses paket berbayar.
  *
- * - Belum masuk: tab "Sudah punya akun" (PIN) dan "Daftar baru" (nama + PIN).
+ * - Belum masuk: tab "Daftar baru" (nama + PIN) dan "Sudah punya akun" (PIN),
+ *   dengan alasan daftar di depan: supaya nilai ananda terekam dan bisa dipantau.
  * - Sudah masuk tapi paketnya belum dibeli: pilihan beli lewat WhatsApp. Pesan
  *   WhatsApp menyebut nama akun, lalu admin membukakan paketnya ke akun itu
- *   dan paket muncul di Latihan Saya.
+ *   dan tombol Mulai Latihan pada paket itu menjadi aktif.
  */
 
 interface OpenOptions {
   /** Paket yang sedang dilihat pengguna. */
   packageSlug?: string;
   packageTitle?: string;
+  /** Paket gratis langsung terbuka begitu murid masuk, tanpa pilihan beli. */
+  packageIsFree?: boolean;
   /** Tujuan tombol "Lanjutkan" setelah berhasil masuk. */
   successHref?: string;
   /** Pilihan beli lewat WhatsApp; tanpa ini dialog memakai ajakan umum. */
@@ -109,7 +112,7 @@ export function AccessProvider({ children }: { children: ReactNode }) {
   const finishSignIn = (name: string, unlocked: string[]) => {
     setError(null);
     router.refresh();
-    if (options.packageSlug && !unlocked.includes(options.packageSlug)) {
+    if (options.packageSlug && !options.packageIsFree && !unlocked.includes(options.packageSlug)) {
       setNotice(`Berhasil masuk sebagai ${name}.`);
       return;
     }
@@ -186,16 +189,28 @@ export function AccessProvider({ children }: { children: ReactNode }) {
             {welcome ? (
               <>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Paket yang sudah dibeli ada di Latihan Saya. Di HP atau laptop lain cukup masuk dengan PIN yang sama.
+                  Paket yang sudah dibeli kini terbuka: tombol Mulai Latihan-nya aktif. Di HP atau laptop lain cukup masuk
+                  dengan PIN yang sama.
                 </p>
-                <Link
-                  href={options.successHref ?? "/latihan-saya"}
-                  onClick={close}
-                  className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
-                >
-                  <Icon name="play" className="h-5 w-5" />
-                  Lanjutkan
-                </Link>
+                {options.successHref ? (
+                  <Link
+                    href={options.successHref}
+                    onClick={close}
+                    className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
+                  >
+                    <Icon name="play" className="h-5 w-5" />
+                    Lanjutkan
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={close}
+                    className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
+                  >
+                    <Icon name="play" className="h-5 w-5" />
+                    Lanjutkan
+                  </button>
+                )}
               </>
             ) : student ? (
               <>
@@ -206,13 +221,25 @@ export function AccessProvider({ children }: { children: ReactNode }) {
                 ) : null}
                 <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-[15px]">
                   {options.packageTitle ? `${options.packageTitle} belum ada di akun ${student.name}. ` : ""}
-                  Beli lewat WhatsApp, lalu admin membukakan paketnya ke akun ini. Setelah itu paket muncul di Latihan Saya
+                  Beli lewat WhatsApp, lalu admin membukakan paketnya ke akun ini. Setelah itu tombol Mulai Latihan-nya aktif
                   dan bisa langsung dikerjakan.
                 </p>
                 <PurchaseChoices purchase={options.purchase} accountName={student.name} />
               </>
             ) : (
               <>
+                {/* Alasan daftar disebut di depan: akun dibutuhkan supaya nilai terekam. */}
+                <div className="mt-3 rounded-xl bg-emerald-50 px-3.5 py-3 text-[13px] text-emerald-900">
+                  <p className="font-black">Akun dibutuhkan supaya nilai ananda terekam</p>
+                  <ul className="mt-1.5 space-y-1 font-semibold">
+                    {["Nilai setiap latihan tersimpan otomatis", "Orang tua bisa memantau dan mengunduh riwayatnya", "Lanjutkan di HP atau laptop lain dengan PIN yang sama"].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0" strokeWidth={3} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <div className="mt-4 grid grid-cols-2 gap-1 rounded-xl bg-slate-100 p-1" role="tablist">
                   {(["register", "login"] as const).map((mode) => (
                     <button
@@ -256,10 +283,6 @@ export function AccessProvider({ children }: { children: ReactNode }) {
                   </form>
                 ) : (
                   <form onSubmit={handleRegister}>
-                    <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                      Cukup nama murid dan PIN 6 angka. PIN dipakai untuk masuk lagi di HP atau laptop lain, jadi simpan
-                      baik-baik dan jangan pakai angka mudah seperti 123456 atau tanggal lahir.
-                    </p>
                     <label htmlFor="register-name" className="mt-4 block text-sm font-semibold text-slate-800">
                       Nama murid
                     </label>
@@ -275,26 +298,27 @@ export function AccessProvider({ children }: { children: ReactNode }) {
                       placeholder="Nama lengkap murid"
                       className="mt-2 h-11 w-full rounded-lg border border-slate-300 px-3 text-[15px] text-slate-900 placeholder:text-slate-400"
                     />
-                    <div className="grid grid-cols-2 gap-3">
-                      <PinInput
-                        id="register-pin"
-                        label="Buat PIN"
-                        value={registerPin}
-                        onChange={(next) => {
-                          setRegisterPin(next);
-                          if (error) setError(null);
-                        }}
-                      />
-                      <PinInput
-                        id="register-pin-repeat"
-                        label="Ulangi PIN"
-                        value={registerPinRepeat}
-                        onChange={(next) => {
-                          setRegisterPinRepeat(next);
-                          if (error) setError(null);
-                        }}
-                      />
-                    </div>
+                    <PinInput
+                      id="register-pin"
+                      label="Buat PIN (6 angka)"
+                      value={registerPin}
+                      onChange={(next) => {
+                        setRegisterPin(next);
+                        if (error) setError(null);
+                      }}
+                    />
+                    <PinInput
+                      id="register-pin-repeat"
+                      label="Ulangi PIN"
+                      value={registerPinRepeat}
+                      onChange={(next) => {
+                        setRegisterPinRepeat(next);
+                        if (error) setError(null);
+                      }}
+                    />
+                    <p className="mt-2 text-[12px] leading-relaxed text-slate-500">
+                      Simpan PIN baik-baik. Hindari angka mudah ditebak seperti 123456 atau tanggal lahir.
+                    </p>
                     <p className="mt-3 rounded-lg bg-sky-50 px-3 py-2 text-[13px] font-semibold text-slate-600">
                       Kelas: {studyContext ? studyContextShortLabel(studyContext) : "belum dipilih"} (ikut kelas yang dipilih di
                       menu atas)

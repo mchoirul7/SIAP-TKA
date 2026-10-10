@@ -55,7 +55,9 @@ function TryoutBanner() {
  */
 export function PackageCard({ pkg }: { pkg: ExamPackage }) {
   const { mounted, isUnlocked } = useEntitlements();
-  const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
+  // Semua paket butuh akun; paket gratis tetap tampil aktif dan meminta daftar saat dibuka.
+  const unlocked = mounted && isUnlocked(pkg);
+  const looksActive = unlocked || Boolean(pkg.isFreeAccess);
   const isTryout = pkg.kind === "tryout";
   const price = pkg.isFreeAccess ? null : formatRupiah(packagePrice(pkg.kind, pkg.assessmentType));
   // Ulangan harian mengingatkan bahwa paket lengkap per mapel lebih murah.
@@ -68,7 +70,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
   const statusLabel = pkg.isFreeAccess ? "Gratis" : unlocked ? "Terbuka" : "Premium";
   const cta = isTryout ? "Mulai Ujian" : "Mulai Latihan";
   // Paket terkunci bisa dibeli satuan lewat WhatsApp.
-  const buyHref = unlocked
+  const buyHref = unlocked || pkg.isFreeAccess
     ? null
     : buySinglePackageHref({
         context: packageContextLabel(pkg),
@@ -102,6 +104,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
         priceLabel: "text-indigo-200",
         price: "text-amber-300",
         cta: "bg-gradient-to-r from-amber-300 to-amber-500 text-[#2a1460] shadow-[0_12px_24px_-14px_rgba(245,163,0,0.9)]",
+        ctaLocked: "bg-white/10 text-indigo-300 ring-1 ring-inset ring-white/15",
         buy: "bg-white/10 text-amber-200 ring-1 ring-inset ring-amber-300/40 hover:bg-white/15",
       }
     : {
@@ -113,6 +116,7 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
         priceLabel: "text-slate-500",
         price: "text-brand-700",
         cta: "bg-gradient-to-r from-brand-500 to-brand-700 text-white shadow-[0_12px_24px_-16px_rgba(80,1,218,0.9)]",
+        ctaLocked: "bg-slate-100 text-slate-400 ring-1 ring-inset ring-slate-200",
         buy: "bg-white text-brand-700 ring-1 ring-inset ring-brand-200 hover:bg-brand-50",
       };
 
@@ -130,10 +134,10 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
         <span
           className={[
             "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
-            unlocked ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700",
+            looksActive ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700",
           ].join(" ")}
         >
-          <Icon name={unlocked ? "unlock" : "lock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
+          <Icon name={looksActive ? "unlock" : "lock"} className="h-3.5 w-3.5" strokeWidth={2.2} />
           {statusLabel}
         </span>
       </div>
@@ -176,12 +180,17 @@ export function PackageCard({ pkg }: { pkg: ExamPackage }) {
             <span className={`text-lg font-black ${theme.price}`}>{price}</span>
           </p>
         ) : null}
+        {/* Paket yang belum dibukakan tampil abu-abu bergembok; menekannya membuka
+            halaman paket berikut dialog masuk atau beli, bukan memulai latihan. */}
         <Link
           href={href}
-          className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] text-sm font-black transition-opacity hover:opacity-90 ${theme.cta}`}
+          aria-label={looksActive ? undefined : `${cta} (terkunci, perlu dibeli)`}
+          className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] text-sm font-black transition-opacity ${
+            looksActive ? `hover:opacity-90 ${theme.cta}` : theme.ctaLocked
+          }`}
         >
           <LinkPending />
-          <Icon name={unlocked ? "play" : "lock"} className="h-4 w-4" strokeWidth={2.4} />
+          <Icon name={looksActive ? "play" : "lock"} className="h-4 w-4" strokeWidth={2.4} />
           {cta}
         </Link>
         {buyHref ? (

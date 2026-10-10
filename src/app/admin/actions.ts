@@ -122,7 +122,7 @@ export async function addGrantAction(formData: FormData): Promise<void> {
     back(path, errorMessage(error, "Gagal menambah paket."), true);
   }
   revalidatePath(path);
-  back(path, `${count} paket ditambahkan ke akun dan muncul di Latihan Saya murid.`);
+  back(path, `${count} paket dibukakan ke akun; tombol Mulai Latihan-nya kini aktif untuk murid.`);
 }
 
 export async function deleteGrantAction(formData: FormData): Promise<void> {

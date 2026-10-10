@@ -25,11 +25,12 @@ export function PracticePackageCard({
   className?: string;
 }) {
   const { mounted, isUnlocked } = useEntitlements();
-  const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
-  const locked = !unlocked;
+  // Semua paket butuh akun; paket gratis tetap tampil aktif dan meminta daftar saat dibuka.
+  const unlocked = mounted && isUnlocked(pkg);
+  const locked = !unlocked && !pkg.isFreeAccess;
   const accent = theme?.accent ?? "brand";
   const packageIcon = iconForPackage(pkg, theme?.icon ?? "list-check");
-  const packageHref = locked ? `/latihan/${pkg.slug}?akses=1` : `/latihan/${pkg.slug}`;
+  const packageHref = unlocked ? `/latihan/${pkg.slug}` : `/latihan/${pkg.slug}?akses=1`;
   const statusLabel = pkg.isFreeAccess ? "Gratis" : locked ? "Buka Akses" : "Terbuka";
 
   return (
@@ -59,7 +60,7 @@ export function PracticePackageCard({
             </Link>
           </h3>
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            {locked ? "Masuk dengan PIN akun untuk membuka" : "Latihan online dan pembahasan"}
+            {locked ? "Masuk dengan PIN akun untuk membuka" : unlocked ? "Latihan online dan pembahasan" : "Gratis, cukup daftar akun"}
           </p>
         </div>
       </div>
@@ -96,11 +97,14 @@ export function PracticePackageCard({
         <div className="mt-auto pt-4">
           <Link
             href={packageHref}
-            className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold transition-opacity hover:opacity-90 ${toneButton[accent]}`}
+            aria-label={locked ? "Mulai Latihan (terkunci, perlu dibeli)" : undefined}
+            className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold transition-opacity ${
+              locked ? "bg-slate-100 text-slate-400 ring-1 ring-inset ring-slate-200" : `hover:opacity-90 ${toneButton[accent]}`
+            }`}
           >
             <LinkPending />
             <Icon name={locked ? "lock" : "play"} className="h-4 w-4" strokeWidth={2.2} />
-            {locked ? "Buka Akses" : "Coba Sekarang"}
+            Mulai Latihan
           </Link>
         </div>
       </div>

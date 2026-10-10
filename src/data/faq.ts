@@ -56,12 +56,12 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: "Bagaimana cara membeli paket?",
-    answer: `Masuk ke akun murid, buka paket yang diinginkan, lalu pilih paket lengkap satu mata pelajaran atau beli satuan lewat WhatsApp admin ${site.brandName}. Setelah pembayaran, admin membukakan paketnya ke akun dan paket langsung muncul di Latihan Saya.`,
+    answer: `Masuk ke akun murid, buka paket yang diinginkan, lalu pilih paket lengkap satu mata pelajaran atau beli satuan lewat WhatsApp admin ${site.brandName}. Setelah pembayaran, admin membukakan paketnya ke akun dan paket itu langsung bisa dikerjakan.`,
   },
   {
     question: "Apakah setiap paket bisa dicoba dulu sebelum membeli?",
     answer:
-      "Bisa. Pada setiap mata pelajaran yang sudah punya paket latihan, paket pertamanya terbuka tanpa perlu daftar — lengkap dengan pembahasan dan analisa hasilnya — supaya bentuk soal dan cara kerjanya dapat dilihat sendiri sebelum memutuskan membeli.",
+      "Bisa. Pada setiap mata pelajaran yang sudah punya paket latihan, paket pertamanya gratis, cukup daftar akun dengan nama dan PIN supaya nilainya terekam — lengkap dengan pembahasan dan analisa hasilnya — supaya bentuk soal dan cara kerjanya dapat dilihat sendiri sebelum memutuskan membeli.",
   },
   {
     question: "Apakah perlu memasang aplikasi?",

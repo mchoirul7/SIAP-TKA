@@ -208,7 +208,7 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                 <h2 className="mt-1.5 text-lg font-extrabold tracking-tight">Buka tryout ini</h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                   Masuk atau daftar dengan PIN, lalu beli lewat WhatsApp. Setelah admin membukakannya, tryout {subjectName}{" "}
-                  muncul di Latihan Saya.
+                  langsung bisa dikerjakan.
                 </p>
                 <Button
                   size="lg"

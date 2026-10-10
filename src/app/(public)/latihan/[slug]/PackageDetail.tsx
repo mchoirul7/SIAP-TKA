@@ -65,11 +65,13 @@ export function PackageDetail({
   const [studentNameError, setStudentNameError] = useState<string | null>(null);
   const [secureModeEnabled, setSecureModeEnabled] = useState(false);
   const autoAccessOpenedRef = useRef(false);
-  const unlocked = pkg.isFreeAccess || (mounted && isUnlocked(pkg));
+  // Semua paket, termasuk yang gratis, dikerjakan dari akun supaya nilainya terekam.
+  const unlocked = mounted && isUnlocked(pkg);
   const openAccessDialog = useCallback(() => {
     openAccess({
       packageSlug: pkg.slug,
       packageTitle: pkg.title,
+      packageIsFree: pkg.isFreeAccess,
       purchase: purchaseOptionsFor(pkg, subjectName),
     });
   }, [openAccess, pkg, subjectName]);
@@ -210,7 +212,7 @@ export function PackageDetail({
         </main>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          {!mounted && !pkg.isFreeAccess ? (
+          {!mounted ? (
             <div className="h-56 animate-pulse rounded-lg bg-slate-100" aria-hidden="true" />
           ) : unlocked ? (
             <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-card">
@@ -226,9 +228,7 @@ export function PackageDetail({
                     {pkg.isFreeAccess ? "Paket gratis terbuka" : "Paket sudah terbuka"}
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                    {pkg.isFreeAccess
-                      ? "Latihan ujicoba bisa dicoba tanpa daftar."
-                      : "Masuk dengan PIN akun untuk membuka paket yang sudah dibeli."}
+                    Nilai latihan ini otomatis tersimpan di akun, jadi perkembangan ananda bisa dipantau.
                   </p>
                 </div>
               </div>
@@ -322,19 +322,20 @@ export function PackageDetail({
                   <Icon name="lock" className="h-5 w-5" strokeWidth={2.1} />
                 </span>
                 <div>
-                  <p className="eyebrow">Paket berbayar</p>
+                  <p className="eyebrow">{pkg.isFreeAccess ? "Gratis, cukup daftar" : "Paket berbayar"}</p>
                   <h2 className="mt-1 text-lg font-extrabold tracking-tight text-ink-900">
-                    Buka latihan ini
+                    {pkg.isFreeAccess ? "Daftar dulu untuk mulai" : "Buka latihan ini"}
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                    Masuk atau daftar dengan PIN, lalu beli lewat WhatsApp. Setelah admin membukakannya, paket{" "}
-                    {subjectName} muncul di Latihan Saya.
+                    {pkg.isFreeAccess
+                      ? "Daftar akun cukup dengan nama dan PIN supaya nilai ananda terekam dan bisa dipantau orang tua."
+                      : `Masuk atau daftar dengan PIN, lalu beli lewat WhatsApp. Setelah admin membukakannya, paket ${subjectName} langsung bisa dikerjakan.`}
                   </p>
                 </div>
               </div>
 
               <ul className="mt-5 space-y-2 text-sm text-slate-700">
-                {["Latihan online", "Riwayat nilai di akun", "Pembahasan setiap soal"].map((item) => (
+                {["Nilai tersimpan di akun", "Riwayat bisa dipantau dan diunduh", "Pembahasan setiap soal"].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <Icon
                       name="check"
@@ -352,7 +353,7 @@ export function PackageDetail({
                 className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 px-4 text-base font-bold text-white transition-opacity hover:opacity-90"
               >
                 <Icon name="unlock" className="h-5 w-5" />
-                Buka Akses
+                {pkg.isFreeAccess ? "Daftar / Masuk untuk Mulai" : "Buka Akses"}
               </button>
 
             </div>
