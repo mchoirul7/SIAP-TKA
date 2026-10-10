@@ -29,6 +29,7 @@ import {
 } from "@/lib/assessment";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { getServerStudyContext } from "@/lib/server-study-context";
+import { scopeOwnership, subjectOwnership } from "@/lib/student-ownership";
 import { ACCESS_MONTHS, allAccessPrice, formatRupiah, fullPackagePrice, separatePackagesPrice } from "@/lib/pricing";
 import {
   buildSubjectCatalog,
@@ -251,7 +252,9 @@ async function SubjectStep({
     : undefined;
   const crumbs = breadcrumbFor(step);
   const back = subjectsBack(config, semester);
-  const allAccess = allAccessPrice(config.key, scope.level, scope.gradeLevel, catalog);
+  // Paket yang sudah dimiliki murid: All-in yang sudah dibeli tidak ditawarkan lagi.
+  const ownership = await scopeOwnership(scope);
+  const allAccess = ownership?.allIn ? null : allAccessPrice(config.key, scope.level, scope.gradeLevel, catalog);
 
   return (
     <>
@@ -364,6 +367,7 @@ async function SubjectStep({
                   price={price}
                   originalPrice={separatePackagesPrice(config.key, item)}
                   tryoutCount={config.key === "tka" ? item.tryoutCount : null}
+                  owned={subjectOwnership(ownership, item.subject?.id, item.packageCount)}
                 />
               </li>
               );
@@ -402,7 +406,10 @@ async function PackageStep({
   const practice = packages.filter((pkg) => pkg.kind === "latihan");
   const tryouts = packages.filter((pkg) => pkg.kind === "tryout");
   const counts = { subject, packageCount: packages.length, tryoutCount: tryouts.length };
-  const fullPrice = packages.length > 0 ? fullPackagePrice(config.key, counts) : null;
+  // Mapel yang sudah dimiliki penuh tidak ditawari paket lengkap lagi; yang baru
+  // sebagian tetap ditawari untuk dilengkapi.
+  const owned = subjectOwnership(await scopeOwnership(scope), subject?.id, packages.length);
+  const fullPrice = packages.length > 0 && !owned?.full ? fullPackagePrice(config.key, counts) : null;
   const originalPrice = fullPrice !== null ? separatePackagesPrice(config.key, counts) : null;
 
   return (
@@ -419,6 +426,7 @@ async function PackageStep({
           {fullPrice !== null ? (
             <FullPackageOffer
               subjectName={subjectName}
+              ownedCount={owned?.count ?? 0}
               practiceCount={practice.length}
               tryoutCount={tryouts.length}
               price={fullPrice}
@@ -450,6 +458,7 @@ async function PackageStep({
 /** Penawaran paket lengkap satu mapel: harga coret, harga paket, dan hematnya. */
 function FullPackageOffer({
   subjectName,
+  ownedCount,
   practiceCount,
   tryoutCount,
   price,
@@ -457,6 +466,8 @@ function FullPackageOffer({
   buyHref,
 }: {
   subjectName: string;
+  /** Paket mapel ini yang sudah dimiliki; bila ada, tawarannya menjadi "lengkapi". */
+  ownedCount: number;
   practiceCount: number;
   tryoutCount: number;
   price: number;
@@ -469,8 +480,8 @@ function FullPackageOffer({
   ].join(" + ");
   return (
     <PriceOffer
-      eyebrow="Beli per mapel lebih hemat"
-      title={`Paket Lengkap ${subjectName}`}
+      eyebrow={ownedCount > 0 ? `${ownedCount} paket sudah terbuka` : "Beli per mapel lebih hemat"}
+      title={ownedCount > 0 ? `Lengkapi Paket ${subjectName}` : `Paket Lengkap ${subjectName}`}
       description={`Semua paket sekaligus: ${contents}`}
       price={price}
       originalPrice={originalPrice}

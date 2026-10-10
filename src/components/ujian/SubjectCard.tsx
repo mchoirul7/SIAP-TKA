@@ -28,6 +28,7 @@ export function SubjectCard({
   price,
   originalPrice,
   tryoutCount,
+  owned = null,
 }: {
   href: string | null;
   /** Tautan WhatsApp untuk membeli paket lengkap; kosong bila tidak dijual. */
@@ -43,8 +44,13 @@ export function SubjectCard({
   originalPrice: number | null;
   /** Jumlah tryout, hanya untuk TKA; kosong pada jenis ujian lain. */
   tryoutCount: number | null;
+  /** Paket mapel ini yang sudah dimiliki murid; kosong bila belum ada atau belum masuk. */
+  owned?: { count: number; full: boolean } | null;
 }) {
   const colors = toneClass[tone];
+  // Mapel yang sudah dibeli, walau baru sebagian, tidak ditawari harga lagi di kartu;
+  // tawaran melengkapi muncul di halaman daftar paketnya.
+  const isOwned = Boolean(href && owned && (owned.full || owned.count > 0));
   const body = (
     <>
       <span className="relative block aspect-[460/176] w-full overflow-hidden">
@@ -53,8 +59,13 @@ export function SubjectCard({
       <span className="relative -mt-4 flex flex-1 flex-col rounded-t-[1.1rem] bg-white px-4 pb-4 pt-4">
         <span className="block text-[17px] font-black leading-tight text-ink-900">{name}</span>
         <span className="mt-1.5 line-clamp-3 text-[14px] font-medium leading-snug text-slate-600">{description}</span>
-        {/* Harga satu mapel berisi semua paketnya. */}
-        {price !== null ? (
+        {/* Harga satu mapel berisi semua paketnya; mapel yang sudah dibeli diganti tanda terbuka. */}
+        {isOwned && owned ? (
+          <span className="mt-auto flex items-center justify-end gap-1.5 pt-3 text-[13px] font-black text-emerald-700">
+            <Icon name="unlock" className="h-4 w-4" strokeWidth={2.4} />
+            {owned.full ? "Semua paket terbuka" : `${owned.count} dari ${packageCount} paket terbuka`}
+          </span>
+        ) : price !== null ? (
           <span className="mt-auto flex items-baseline justify-end gap-1.5 whitespace-nowrap pt-3">
             {originalPrice !== null ? (
               <s className="text-[13px] font-bold text-slate-400">{formatRupiah(originalPrice)}</s>
@@ -62,8 +73,25 @@ export function SubjectCard({
             <span className="text-lg font-black text-brand-700">{formatRupiah(price)}</span>
           </span>
         ) : null}
-        <span className={`flex flex-wrap items-center justify-between gap-1.5 ${price !== null ? "pt-2" : "mt-auto pt-3"}`}>
-          {href ? (
+        <span className={`flex flex-wrap items-center justify-between gap-1.5 ${price !== null || isOwned ? "pt-2" : "mt-auto pt-3"}`}>
+          {href && isOwned ? (
+            <>
+              <span className="flex flex-wrap gap-1.5">
+                <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1 text-[12px] font-bold text-emerald-700">
+                  <Icon name="check" className="h-3.5 w-3.5" strokeWidth={2.8} />
+                  {owned?.full ? "Sudah dibeli" : "Sudah dibeli sebagian"}
+                </span>
+              </span>
+              <Link
+                href={href}
+                className="mt-1.5 inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-[10px] bg-gradient-to-r from-emerald-500 to-emerald-600 text-[13px] font-black text-white shadow-[0_10px_20px_-14px_rgba(5,150,105,0.9)] transition-opacity hover:opacity-90"
+              >
+                <LinkPending />
+                <Icon name="play" className="h-4 w-4" strokeWidth={2.4} />
+                Buka Paket
+              </Link>
+            </>
+          ) : href ? (
             <>
               <span className="flex flex-wrap gap-1.5">
                 <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[12px] font-bold ${colors.pill}`}>
@@ -107,7 +135,13 @@ export function SubjectCard({
   );
 
   return (
-    <div className="card-lift flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ring-1 ring-sky-100">
+    <div className={`card-lift relative flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-white shadow-[0_16px_34px_-26px_rgba(18,21,58,0.5)] ${isOwned ? "ring-2 ring-emerald-300" : "ring-1 ring-sky-100"}`}>
+      {isOwned ? (
+        <span className="absolute right-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-white shadow-md">
+          <Icon name="unlock" className="h-3.5 w-3.5" strokeWidth={2.6} />
+          Terbuka
+        </span>
+      ) : null}
       {body}
     </div>
   );
