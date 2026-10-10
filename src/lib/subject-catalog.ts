@@ -60,7 +60,8 @@ const HIDDEN = ["seni-rupa", "seni-musik", "seni-tari", "seni-teater"];
  * SMA Fase E (kelas 10) masih mempelajari IPA dan IPS lengkap serta
  * Informatika, sedangkan di Fase F (kelas 11-12) mapel itu menjadi pilihan dan
  * hanya tampil di kelompok pilihan bila sudah punya paket. Bahasa Jawa ikut
- * sebagai muatan lokal. Kelas 2 ditambah Seni dan Budaya.
+ * sebagai muatan lokal. Kelas 1 ditambah Bahasa Inggris dan kelas 2 ditambah
+ * Seni dan Budaya.
  */
 const REQUIRED_BY_PHASE = {
   A: ["agama", "pancasila", "bahasa-indonesia", "matematika", "pjok", "bahasa-jawa"],
@@ -71,6 +72,7 @@ const REQUIRED_BY_PHASE = {
 };
 
 function requiredForGrade(level: EducationLevel, gradeLevel: number): string[] {
+  if (level === "SD" && gradeLevel === 1) return [...REQUIRED_BY_PHASE.A, "bahasa-inggris"];
   if (level === "SD" && gradeLevel === 2) return [...REQUIRED_BY_PHASE.A, "seni-budaya"];
   if (level === "SD") return gradeLevel <= 2 ? REQUIRED_BY_PHASE.A : REQUIRED_BY_PHASE.BC;
   if (level === "SMP") return REQUIRED_BY_PHASE.D;

@@ -8,15 +8,12 @@ import type { AssessmentType, EducationLevel, PackageKind } from "@/data/types";
 /** Harga satu paket bila dibeli satuan. */
 export function packagePrice(kind: PackageKind, assessmentType: AssessmentType): number {
   if (assessmentType === "tka") return kind === "tryout" ? 15000 : 7500;
-  if (assessmentType === "ulangan_harian") return 5000;
+  if (assessmentType === "ulangan_harian") return 14500;
   return kind === "tryout" ? 10000 : 5000;
 }
 
-/** Harga paket lengkap satu mapel ulangan harian, berapa pun jumlah paketnya. */
-const UH_PRICE_PER_SUBJECT = 25000;
-
-/** Harga normal satu mapel ulangan harian, ditampilkan sebagai harga coret. */
-const UH_NORMAL_PRICE_PER_SUBJECT = 50000;
+/** Harga paket lengkap satu mapel ulangan harian di semua jenjang, berapa pun jumlah paketnya. */
+const UH_PRICE_PER_SUBJECT = 15000;
 
 interface SubjectPackages {
   /** Kosong bila mapel belum punya paket untuk lingkup ini. */
@@ -26,25 +23,23 @@ interface SubjectPackages {
 }
 
 /**
- * Harga paket lengkap satu mapel. Ulangan harian Rp25.000 berapa pun jumlah
- * paketnya, dan tetap dihargai walau paketnya belum ada. TKA Rp75.000 per mapel dan jenis lain Rp25.000, hanya untuk mapel yang
+ * Harga paket lengkap satu mapel. Ulangan harian Rp15.000 di semua jenjang
+ * berapa pun jumlah paketnya, dan tetap dihargai walau paketnya belum ada.
+ * TKA Rp75.000 per mapel dan jenis lain Rp25.000, hanya untuk mapel yang
  * sudah punya paket.
  */
 export function fullPackagePrice(
   assessmentType: AssessmentType,
   item: SubjectPackages,
 ): number | null {
-  if (assessmentType === "ulangan_harian") {
-    return UH_PRICE_PER_SUBJECT;
-  }
+  if (assessmentType === "ulangan_harian") return UH_PRICE_PER_SUBJECT;
   if (!item.subject) return null;
   if (assessmentType === "tka") return 75000;
   return 25000;
 }
 
 /**
- * Harga coret di kartu mapel: total bila semua paketnya dibeli satuan. Ulangan
- * harian paling sedikit memakai harga normalnya, jadi selalu bercoret. Hanya
+ * Harga coret di kartu mapel: total bila semua paketnya dibeli satuan. Hanya
  * dikembalikan bila memang lebih mahal daripada harga paket lengkap.
  */
 export function separatePackagesPrice(
@@ -56,8 +51,7 @@ export function separatePackagesPrice(
   const total =
     item.tryoutCount * packagePrice("tryout", assessmentType) +
     (item.packageCount - item.tryoutCount) * packagePrice("latihan", assessmentType);
-  const strike = assessmentType === "ulangan_harian" ? Math.max(total, UH_NORMAL_PRICE_PER_SUBJECT) : total;
-  return strike > price ? strike : null;
+  return total > price ? total : null;
 }
 
 /**
@@ -67,13 +61,15 @@ export function separatePackagesPrice(
 const EARLY_GRADE_ALL_ACCESS_PRICE = 100000;
 const EARLY_GRADE_MIN_ORIGINAL_PRICE = 175000;
 
+/** Harga All-in Akses ulangan harian di semua jenjang. */
+const UH_ALL_ACCESS_PRICE = 75000;
+
 /** Harga coret All-in Akses kelas 3 SD. */
 const GRADE_3_ORIGINAL_PRICE = 200000;
 
 /** Harga All-in Akses yang dipatok per jenjang; kosong bila mengikuti total per mapel. */
 function fixedAllAccessPrice(assessmentType: AssessmentType, level: EducationLevel): number | null {
   if (assessmentType === "tka") return level === "SMA" ? 165000 : 125000;
-  if (assessmentType === "ulangan_harian") return 150000;
   return null;
 }
 
@@ -87,8 +83,10 @@ export const ACCESS_MONTHS = 6;
  * harian memakai harga coret tiap mapelnya.
  * TKA dipatok Rp125.000 untuk SD/SMP dan Rp165.000 untuk SMA, berapa pun
  * jumlah mapelnya, tetapi tidak pernah lebih mahal daripada total per mapelnya.
- * Ulangan harian selalu Rp150.000. Kelas 1-2 SD selalu Rp100.000 untuk semua
- * jenis ujian, dengan harga coret total harga per mapelnya.
+ * Kelas 1-2 SD selalu Rp100.000 untuk jenis ujian selain TKA, dengan harga
+ * coret total harga per mapelnya. Ulangan harian Rp75.000 di semua jenjang
+ * untuk seluruh mapel kelas itu, dicoret dari Rp15.000 dikali jumlah mapelnya,
+ * dan tidak pernah lebih mahal daripada total itu.
  */
 export function allAccessPrice(
   assessmentType: AssessmentType,
@@ -110,6 +108,13 @@ export function allAccessPrice(
     subjectCount += 1;
   }
   if (subjectCount === 0) return null;
+  if (assessmentType === "ulangan_harian") {
+    // All-in membuka semua mapel kelas itu, termasuk yang paketnya masih disusun,
+    // jadi harga coretnya Rp15.000 dikali seluruh mapel di katalog.
+    const total = items.length * UH_PRICE_PER_SUBJECT;
+    const allIn = Math.min(UH_ALL_ACCESS_PRICE, total);
+    return { price: allIn, originalPrice: total > allIn ? total : null, subjectCount: items.length };
+  }
   if (level === "SD" && gradeLevel <= 2 && assessmentType !== "tka") {
     return {
       price: EARLY_GRADE_ALL_ACCESS_PRICE,
@@ -118,7 +123,7 @@ export function allAccessPrice(
     };
   }
   const fixed = fixedAllAccessPrice(assessmentType, level);
-  if (fixed !== null) price = assessmentType === "ulangan_harian" ? fixed : Math.min(fixed, price);
+  if (fixed !== null) price = Math.min(fixed, price);
   if (level === "SD" && gradeLevel === 3 && assessmentType !== "tka") original = GRADE_3_ORIGINAL_PRICE;
   return { price, originalPrice: original > price ? original : null, subjectCount };
 }
