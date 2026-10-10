@@ -13,7 +13,6 @@ import { examPackagesHref } from "@/lib/assessment";
 import { purchaseOptionsFor } from "@/lib/subject-catalog";
 import { getPracticeAttempt } from "@/services/practice-service";
 import { subscribeToStorage } from "@/storage/local-storage";
-import { readProfile, writeProfile } from "@/storage/profile-storage";
 
 function DetailMetric({
   icon,
@@ -60,9 +59,6 @@ export function PackageDetail({
   const { openAccess } = useAccessDialog();
   const [hasFinishedAttempt, setHasFinishedAttempt] = useState(false);
   const [hasStartedAttempt, setHasStartedAttempt] = useState(false);
-  const [studentName, setStudentName] = useState("");
-  const [studentGrade, setStudentGrade] = useState("");
-  const [studentNameError, setStudentNameError] = useState<string | null>(null);
   const [secureModeEnabled, setSecureModeEnabled] = useState(false);
   const autoAccessOpenedRef = useRef(false);
   // Semua paket, termasuk yang gratis, dikerjakan dari akun supaya nilainya terekam.
@@ -76,12 +72,6 @@ export function PackageDetail({
     });
   }, [openAccess, pkg, subjectName]);
 
-  useEffect(() => {
-    const profile = readProfile();
-    if (!profile) return;
-    setStudentName(profile.name);
-    setStudentGrade(profile.grade);
-  }, []);
 
   useEffect(() => {
     const sync = () => {
@@ -97,26 +87,9 @@ export function PackageDetail({
   const primaryActionLabel =
     hasStartedAttempt && !hasFinishedAttempt ? "Mulai Latihan" : "Mulai Latihan Online";
 
-  const persistStudentProfile = useCallback((): boolean => {
-    const name = studentName.trim();
-    if (name.length < 2) {
-      setStudentNameError("Isi nama siswa agar hasil analisis mudah dikenali.");
-      return false;
-    }
-
-    writeProfile({ name, grade: studentGrade });
-    return true;
-  }, [studentGrade, studentName]);
-
+  // Nama di hasil diambil dari akun murid yang sedang masuk.
   const handleStartPractice = () => {
-    if (!persistStudentProfile()) return;
     navigate(`/latihan/${pkg.slug}/kerjakan?secure=${secureModeEnabled ? "1" : "0"}`);
-  };
-
-  const handleResultClick = () => {
-    if (studentName.trim().length >= 2) {
-      writeProfile({ name: studentName.trim(), grade: studentGrade });
-    }
   };
 
   useEffect(() => {
@@ -233,39 +206,6 @@ export function PackageDetail({
                 </div>
               </div>
 
-              <div className="mt-5">
-                <label htmlFor="practice-student-name" className="block text-sm font-semibold text-slate-800">
-                  Nama siswa
-                </label>
-                <input
-                  id="practice-student-name"
-                  value={studentName}
-                  onChange={(event) => {
-                    setStudentName(event.target.value);
-                    if (studentNameError) setStudentNameError(null);
-                  }}
-                  onBlur={() => {
-                    if (studentName.trim().length >= 2) {
-                      writeProfile({ name: studentName.trim(), grade: studentGrade });
-                    }
-                  }}
-                  placeholder="Contoh: Afrizal"
-                  autoComplete="name"
-                  aria-invalid={studentNameError ? true : undefined}
-                  aria-describedby={studentNameError ? "practice-student-name-error" : undefined}
-                  className="mt-2 h-11 w-full rounded-lg border border-slate-300 px-3 text-[15px] text-slate-900 placeholder:text-slate-400"
-                />
-                {studentNameError ? (
-                  <p id="practice-student-name-error" role="alert" className="mt-2 text-sm text-rose-700">
-                    {studentNameError}
-                  </p>
-                ) : (
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                    Akan tampil di hasil, misalnya Ananda Afrizal atau Ananda Anisa.
-                  </p>
-                )}
-              </div>
-
               <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3.5">
                 <input
                   type="checkbox"
@@ -305,7 +245,6 @@ export function PackageDetail({
                   <Link
                     href={`/latihan/${pkg.slug}/hasil`}
                     className="link-underline font-semibold"
-                    onClick={handleResultClick}
                   >
                     Lihat hasil terakhir
                   </Link>

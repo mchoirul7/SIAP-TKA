@@ -11,38 +11,26 @@ import { useAccessDialog } from "@/components/AccessDialog";
 import { useNavigate } from "@/components/NavigationProgress";
 import type { Tryout } from "@/data/types";
 import { formatDate } from "@/lib/format";
-import { gradeOptionsFor, resolveGrade } from "@/lib/grade";
 import { purchaseOptionsFor } from "@/lib/subject-catalog";
 import { useEntitlements } from "@/hooks/useEntitlements";
 import { setTryoutSecureMode, startAttempt } from "@/services/tryout-service";
 import { getAttempt } from "@/services/tryout-service";
 import type { TryoutAttempt } from "@/storage/attempt-storage";
-import { readProfile, writeProfile } from "@/storage/profile-storage";
 
 export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectName: string }) {
   const { navigate, isPending } = useNavigate();
   const { openAccess } = useAccessDialog();
   const { mounted: entitlementsMounted, isUnlocked } = useEntitlements();
   const [mounted, setMounted] = useState(false);
-  const [name, setName] = useState("");
-  // Daftar kelas mengikuti jenjang paket, bukan daftar tetap.
-  const gradeOptions = gradeOptionsFor(tryout.level);
-  const [grade, setGrade] = useState(() => resolveGrade(tryout.level, undefined));
   const [attempt, setAttempt] = useState<TryoutAttempt | null>(null);
-  const [nameError, setNameError] = useState<string | null>(null);
   const [secureModeEnabled, setSecureModeEnabled] = useState(false);
 
   useEffect(() => {
-    const profile = readProfile();
-    if (profile) {
-      setName(profile.name);
-      setGrade(resolveGrade(tryout.level, profile.grade));
-    }
     const existing = getAttempt(tryout.slug);
     setAttempt(existing);
     if (existing) setSecureModeEnabled(existing.secureModeEnabled);
     setMounted(true);
-  }, [tryout.slug, tryout.level]);
+  }, [tryout.slug]);
 
   const hasUnfinishedAttempt = Boolean(attempt && !attempt.submittedAt);
   const hasFinishedAttempt = Boolean(attempt?.submittedAt);
@@ -53,18 +41,11 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
     purchase: purchaseOptionsFor(tryout, subjectName),
   };
 
-  const persistProfile = () => writeProfile({ name: name.trim(), grade });
-
   const handleStart = () => {
     if (!unlocked) {
       openAccess(accessOptions);
       return;
     }
-    if (name.trim().length < 2) {
-      setNameError("Isi nama terlebih dahulu agar hasil mudah dikenali.");
-      return;
-    }
-    persistProfile();
     startAttempt(tryout, secureModeEnabled);
     navigate(`/tryout/${tryout.slug}/attempt?secure=${secureModeEnabled ? "1" : "0"}`);
   };
@@ -83,7 +64,6 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
       openAccess(accessOptions);
       return;
     }
-    persistProfile();
     startAttempt(tryout, secureModeEnabled);
     navigate(`/tryout/${tryout.slug}/attempt?secure=${secureModeEnabled ? "1" : "0"}`);
   };
@@ -274,52 +254,8 @@ export function TryoutIntro({ tryout, subjectName }: { tryout: Tryout; subjectNa
                 <IconBadge name="cap" tone="brand" size="lg" />
                 <h2 className="mt-4 text-lg font-extrabold tracking-tight">Sebelum mulai</h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-                  Nama dan kelas dipakai untuk menandai hasil di perangkat ini saja.
+                  Nilai tryout ini otomatis tersimpan di akun, jadi perkembangan ananda bisa dipantau.
                 </p>
-
-                <div className="mt-5 space-y-4">
-                  <div>
-                    <label htmlFor="student-name" className="block text-sm font-semibold text-slate-800">
-                      Nama
-                    </label>
-                    <input
-                      id="student-name"
-                      value={name}
-                      onChange={(event) => {
-                        setName(event.target.value);
-                        if (nameError) setNameError(null);
-                      }}
-                      placeholder="Nama siswa"
-                      autoComplete="name"
-                      aria-invalid={nameError ? true : undefined}
-                      aria-describedby={nameError ? "student-name-error" : undefined}
-                      className="mt-2 h-11 w-full rounded-lg border border-slate-300 px-3 text-[15px] text-slate-900 placeholder:text-slate-400"
-                    />
-                    {nameError ? (
-                      <p id="student-name-error" role="alert" className="mt-2 text-sm text-rose-700">
-                        {nameError}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  <div>
-                    <label htmlFor="student-grade" className="block text-sm font-semibold text-slate-800">
-                      Kelas
-                    </label>
-                    <select
-                      id="student-grade"
-                      value={grade}
-                      onChange={(event) => setGrade(event.target.value)}
-                      className="mt-2 h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-[15px] text-slate-900"
-                    >
-                      {gradeOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
 
                 {secureModeToggle}
 

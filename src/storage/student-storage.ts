@@ -1,5 +1,6 @@
 import type { EducationLevel } from "@/data/types";
 import { readValue, removeValue, writeValue } from "./local-storage";
+import { writeProfile } from "./profile-storage";
 import { storageKeys } from "./storage-keys";
 
 /**
@@ -20,6 +21,8 @@ export function readStudent(): StoredStudent | null {
 
 export function writeStudent(student: StoredStudent["student"], packageSlugs: string[]): void {
   writeValue<StoredStudent>(storageKeys.student, { student, packageSlugs, syncedAt: Date.now() });
+  // Nama di hasil latihan ("Ananda ...") diambil dari akun, jadi tidak perlu diketik ulang.
+  writeProfile({ name: student.name, grade: `Kelas ${student.gradeLevel}` });
 }
 
 export function clearStudent(): void {
